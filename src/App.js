@@ -1,17 +1,17 @@
-import * as lottoUtil from './lottoUtil.js';
+import * as Result from './Result.js';
 
 class App {
     async play() {
-        const lottoPay = await lottoUtil.inputLottoPay();
-        lottoUtil.validateLottoPay(lottoPay);
+        const lottoPay = await Result.inputLottoPay();
+        Result.validateLottoPay(lottoPay);
 
-        const lottos = lottoUtil.lottoGenerate(lottoPay / 1000);
-        lottoUtil.printLottoNumbers(lottos);
+        const lottos = Result.lottoGenerate(lottoPay / 1000);
+        Result.printLottoNumbers(lottos);
 
-        const winLotto = await lottoUtil.winLottoGenerate();
+        const winLotto = await Result.winLottoGenerate();
 
-        const rankMap = lottoUtil.runCalculate(lottos, winLotto);
-        lottoUtil.printStatistics(lottoPay, rankMap);
+        const rankMap = Result.runCalculate(lottos, winLotto);
+        Result.printStatistics(lottoPay, rankMap);
     }
 }
 
