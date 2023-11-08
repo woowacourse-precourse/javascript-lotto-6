@@ -20,4 +20,14 @@ class App {
       await this.inputMoney();
     }
   }
+
+  async buyLotto(money) {
+    const lottoes = Lotto.buyAutomaticLotto(money);
+    this.lottoResult.setLottoes(lottoes);
+
+    const numbers = lottoes.map((lotto) => lotto.getNumbers());
+    OutputView.printBuyResult(numbers);
+
+    await this.inputNumbers();
+  }
 }
