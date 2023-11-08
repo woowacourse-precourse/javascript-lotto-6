@@ -10,4 +10,12 @@ calculateResult => 사용자의 로또 번호와 당첨 번호를 비교하여 �
 
 calculateRatio => 당첨 결과에 따른 수익률을 계산하는 함수. 수익률은 소수점 둘째자리에서 반올림
 
-printResult: 로또 번호, 당첨 결과, 수익률을 출력하는 함수.
+printResult=> 로또 번호, 당첨 결과, 수익률을 출력하는 함수.
+
+calss Lotto => Lotto객체를 만드는 클래스
+    프로퍼티:
+        - #number: lotto 넘버를 나타내는 프로퍼티
+    메서드:
+        - #validate: 로또 번호가 6개인지 확인하는 메서드
+        - #compare: 로또 번호를 비교하여 등수를 알려주는 메서드
+        
