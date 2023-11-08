@@ -2,7 +2,7 @@
 
 - [x] (README.md) 기능명세서 작성하기
 - [ ] (README.md) MVC 패턴으로 코드 구조 분할하기
-- [ ] (src/constants) 에러 메세지를 상수 객체로 설정
+- [x] (src/constants) 에러 메세지를 상수 객체로 설정
 - [ ] (src/constants) 입력받을 때 사용할 쿼리를 상수 객체로 설정
 - [ ] (src/constants) 로또 발행과 관련된 메세지를 상수 객체로 설정
 - [ ] (src/constants) 로또 입력개수 조건을 상수 객체로 설정
