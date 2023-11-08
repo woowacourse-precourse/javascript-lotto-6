@@ -1,5 +1,5 @@
 import Lotto from '../Lotto.js';
-import Winner from './Winner.js';
+import Winner from '../models/Winner.js';
 import modifiers from '../utils/modifiers.js';
 
 class WinnerMaker {
@@ -16,7 +16,7 @@ class WinnerMaker {
 
   // 일치 개수 확인
   #checkNumbers(lotto) {
-    const numbers = modifiers.duplicates(
+    const numbers = modifiers.getDuplicates(
       lotto,
       this.#winningLotto.getNumbers(),
     );
