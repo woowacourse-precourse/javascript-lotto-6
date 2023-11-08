@@ -1,12 +1,13 @@
-import { Console } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 
 class User {
   #purchaseAmount;
   constructor(userInputPurchaseAmount) {
     this.#validate(userInputPurchaseAmount);
-    this.#purchaseAmount = userInputPurchaseAmount;
+    this.#purchaseAmount = userInputPurchaseAmount / 1000;
+    this.issuedLottoNumberList = this.issueLottoNumber();
+    this.printissuedLotto();
   }
-
   #validate(numbers) {
     if (numbers % 1000 !== 0) {
       throw new Error('[ERROR] 1000원 단위로 구매 가능합니다.');
@@ -17,10 +18,30 @@ class User {
       );
     }
   }
+  issueLottoNumber() {
+    const numberList = [];
+    for (let i = 0; i < this.#purchaseAmount; i += 1) {
+      numberList.push(
+        Random.pickUniqueNumbersInRange(1, 45, 6).sort(function (a, b) {
+          if (a > b) return 1;
+          if (a === b) return 0;
+          if (a < b) return -1;
+        }),
+      );
+    }
+    return numberList;
+  }
+  printissuedLotto() {
+    Console.print(`\n${this.#purchaseAmount}개를 구매했습니다.`);
+    this.issuedLottoNumberList.forEach((value) => {
+      Console.print(value);
+    });
+  }
 }
 
 export function userInput() {
   const purchaseAmount = Console.readLineAsync('구입금액을 입력해 주세요.\n');
   return purchaseAmount;
 }
+
 export default User;
