@@ -28,7 +28,9 @@ const Validator = class {
   }
 
   static checkIsNaN(number) {
-    if (Number.isNaN(+number)) throw new CustomError(ERROR_MEESAGE.ISNAN_ERROR_MSG);
+    if (Number.isNaN(+number)) {
+      throw new CustomError(ERROR_MEESAGE.ISNAN_ERROR_MSG);
+    }
     return true;
   }
 };
