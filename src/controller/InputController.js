@@ -3,7 +3,7 @@ import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import PurchaseController from './PurchaseController.js';
 import ValidateController from './ValidateController.js';
-import WinController from './WinController.js';
+import WinningController from './WinningController.js';
 
 export default class InputController {
   inputView = new InputView();
@@ -20,7 +20,7 @@ export default class InputController {
     await this.receiveWinningNumbers();
     await this.receiveBonusNumber();
 
-    this.winController = new WinController(
+    this.winController = new WinningController(
       this.#purchaseAmount,
       this.#winningNumbers,
       this.#bonusNumber,

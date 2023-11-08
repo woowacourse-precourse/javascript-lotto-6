@@ -1,7 +1,7 @@
 import { WINNING_AMOUNT, WINNING_MESSAGES } from '../constant.js';
 import OutputView from '../view/OutputView.js';
 
-export default class WinController {
+export default class WinningController {
   outputView = new OutputView();
   #purchaseAmount;
   #winningNumbers;

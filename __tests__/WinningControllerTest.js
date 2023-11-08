@@ -1,4 +1,4 @@
-import WinController from '../src/controller/WinController';
+import WinningController from '../src/controller/WinningController';
 import PurchasedLotto from '../src/model/PurchasedLotto';
 
 describe('당첨 컨트롤러 테스트', () => {
@@ -13,7 +13,7 @@ describe('당첨 컨트롤러 테스트', () => {
     new PurchasedLotto([40, 41, 42, 43, 44, 45]),
   ];
 
-  const controller = new WinController(
+  const controller = new WinningController(
     purchaseAmount,
     winningNumbers,
     bonusNumber,
