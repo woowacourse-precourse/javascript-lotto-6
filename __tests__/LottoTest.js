@@ -14,5 +14,11 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  // 아래에 추가 테스트 작성 가능
+  describe("T-2-1 구입 금액에 따른 로또 발행 테스트", () => {
+    test("입력받은 금액에 따라 적절한 수의 로또가 발행되어야 한다", () => {
+      const amount = 5000;
+      const lottos = Lotto.generateMultipleLottos(amount);
+      expect(lottos).toHaveLength(amount / 1000);
+    });
+  });
 });
