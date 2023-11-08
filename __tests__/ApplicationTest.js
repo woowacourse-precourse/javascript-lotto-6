@@ -114,6 +114,15 @@ describe("로또 테스트", () => {
     );
   });
 
+  test("구입금액이 0 이하인 경우 테스트", () => {
+    const app = new App();
+
+    const invalidPurchasePrice = "-1000";
+    expect(() => app.checkValidationInputPrice(invalidPurchasePrice)).toThrow(
+      "[ERROR] 구입금액을 올바르게 입력해 주세요."
+    );
+  });
+
   test("보너스 입력 예외 테스트 1", async () => {
     // given
     const logSpy = getLogSpy();
