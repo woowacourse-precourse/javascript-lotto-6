@@ -1,5 +1,5 @@
 import { LOTTO_RULES } from '../../constants/lottoGame.js';
-import Lotto from '../lotto.module.js';
+import Lotto from '../../Lotto.js';
 
 /**
  * @param {object} randomNumberGenerator - 랜덤 숫자 생성기
