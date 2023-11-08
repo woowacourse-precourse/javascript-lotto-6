@@ -12,11 +12,11 @@ class LottoPrize {
   }
 
   calculatePrize(matchLottoCount, isBonusMatch) {
-    if (matchLottoCount.length === 6) this.#addPrize(1);
-    if (matchLottoCount.length === 5 && isBonusMatch) this.#addPrize(2);
-    if (matchLottoCount.length === 5 && !isBonusMatch) this.#addPrize(3);
-    if (matchLottoCount.length === 4) this.#addPrize(4);
-    if (matchLottoCount.length === 3) this.#addPrize(5);
+    if (matchLottoCount === 6) this.#addPrize(1);
+    if (matchLottoCount === 5 && isBonusMatch) this.#addPrize(2);
+    if (matchLottoCount === 5 && !isBonusMatch) this.#addPrize(3);
+    if (matchLottoCount === 4) this.#addPrize(4);
+    if (matchLottoCount === 3) this.#addPrize(5);
   }
 
   #addPrize(prizeNumber) {

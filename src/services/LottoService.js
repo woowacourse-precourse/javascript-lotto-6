@@ -65,7 +65,7 @@ class LottoService {
     this.getLottos().forEach((lotto) => {
       const matchLottoCount = lotto.filter((number) =>
         winningNumbers.includes(number),
-      );
+      ).length;
       const isBonusMatch = lotto.includes(bonusNumber);
       lottoPrize.calculatePrize(matchLottoCount, isBonusMatch);
     });
