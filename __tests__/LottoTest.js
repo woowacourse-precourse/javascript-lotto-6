@@ -75,4 +75,42 @@ describe('당첨 로또 클래스 테스트', () => {
       winningLotto.setBonusNumber(input);
     }).toThrow('[ERROR]');
   });
+
+  test.each([
+    {
+      numbers: ['1', '2', '3', '4', '5', '6'],
+      result: 2000000000,
+    },
+    {
+      numbers: ['1', '2', '3', '4', '5', '7'],
+      result: 30000000,
+    },
+    {
+      numbers: ['1', '2', '3', '4', '5', '8'],
+      result: 1500000,
+    },
+    {
+      numbers: ['1', '2', '3', '4', '8', '9'],
+      result: 50000,
+    },
+    {
+      numbers: ['1', '2', '3', '8', '9', '10'],
+      result: 5000,
+    },
+    {
+      numbers: ['1', '2', '8', '9', '10', '11'],
+      result: 0,
+    },
+  ])('당첨 통계 계산', (input) => {
+    const winningNumbers = ['1', '2', '3', '4', '5', '6'];
+    const bonusNumber = '7';
+    const winningLotto = new WinningLotto(winningNumbers);
+    winningLotto.setBonusNumber(bonusNumber);
+
+    const { numbers, result } = input;
+    const lotto = new Lotto(numbers);
+
+    const lottoResult = winningLotto.calculate(lottos);
+    expect(lottoResult).toBe(result);
+  });
 });
