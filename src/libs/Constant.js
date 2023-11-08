@@ -19,6 +19,8 @@ export const ERROR_MESSAGE = {
   DUPLICATE: "[ERROR] 로또 번호는 중복되지 않은 숫자로 이루어져야 합니다.",
   RANGE: "[ERROR] 로또 번호의 범위는 1~45입니다.",
   ALREADY_INCLUDE: "[ERROR] 보너스 번호가 이미 당첨 번호에 포함되어 있습니다.",
+  BONUS_NUMBER: "[ERROR] 보너스 번호는 숫자여야 합니다.",
+  BONUS_RANGE: "[ERROR] 보너스 번호의 범위는 1~45입니다.",
 };
 
 export const WINNING_MESSAGE = {

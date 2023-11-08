@@ -1,16 +1,21 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
-const Lotto = require("./Lotto,js");
-const validation = require("./libs/Validation.js");
+import { Console, Random } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
+import Validation from "./libs/Validation.js";
 
 class PublishedLottos {
   constructor(money) {
+    this.validate(money);
     this.count = money / 1000;
     this.list = [];
-    this.publishedLotto(this.lottoCount);
+    this.publish();
+  }
+
+  validate(money) {
+    Validation.checkMoney(money);
   }
 
   publish() {
-    for (let n = 0; n < lottoCount; n++) {
+    for (let n = 0; n < this.count; n++) {
       const newLotto = this.createNewLotto();
       this.list.push(newLotto);
     }
@@ -18,7 +23,6 @@ class PublishedLottos {
 
   createNewLotto() {
     const newNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-    validation.checkNumberList(newNumbers);
 
     return new Lotto(newNumbers);
   }
@@ -38,10 +42,10 @@ class PublishedLottos {
       lottoResultList.push(lotto.getResult(winningNumbers, bonusNumber));
     });
 
-    return lottoResultList.filter((result) => result);
+    return lottoResultList.filter((result) => result <= 5);
   }
 
-  printWinningHisotry() {
+  printWinningHistory() {
     const winningHistoryList = [
       "3개 일치 (5,000원)",
       "4개 일치 (50,000원)",

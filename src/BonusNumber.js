@@ -1,9 +1,19 @@
-const validation = require("./libs/Validation.js");
+import Validation from "./libs/Validation.js";
+import Error from "./libs/Error.js";
 
 class BonusNumber {
-  constructor(bonusNumber) {
+  constructor(bonusNumber, winningNumbers) {
+    this.Validation(bonusNumber, winningNumbers);
     this.value = bonusNumber;
+  }
+
+  validation(bonusNumber, winningNumbers) {
+    try {
+      Validation.checkBonusNumber(bonusNumber, winningNumbers);
+    } catch (error) {
+      Error(error.message);
+    }
   }
 }
 
-module.exports = BonusNumber;
+export default BonusNumber;

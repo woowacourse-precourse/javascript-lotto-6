@@ -1,7 +1,7 @@
-const { Console } = require("@woowacourse/mission-utils");
+import { Console } from "@woowacourse/mission-utils";
 
 const Error = (errorMessage) => {
   Console.print(errorMessage);
 };
 
-module.exports = Error;
+export default Error;

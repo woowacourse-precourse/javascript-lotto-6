@@ -1,11 +1,6 @@
-import {
-  ERROR_MESSAGE,
-  BONUS_NUMBER,
-  PURCHASE_MONEY,
-  LOTTO,
-} from "./constants.js";
+import { ERROR_MESSAGE, LOTTO } from "./Constant.js";
 
-const validation = {
+const Validation = {
   checkMoney(money) {
     if (isNaN(money)) throw new Error(ERROR_MESSAGE.NUMBER);
 
@@ -21,17 +16,9 @@ const validation = {
     if ([...new Set(numbers)].length !== LOTTO.NUMBERS_COUNT)
       throw new Error(ERROR_MESSAGE.DUPLICATE);
 
-    if (!this.checkNumbersRange(numbers)) throw new Error(ERROR_MESSAGE.RANGE);
+    if (!checkNumbersRange(numbers)) throw new Error(ERROR_MESSAGE.RANGE);
 
-    if (!this.checkNumbersType(numbers)) throw new Error(ERROR_MESSAGE.NUMBER);
-  },
-
-  checkNumbersRange(numbers) {
-    return numbers.every((num) => num > LOTTO.MAX && num < LOTTO.MIN);
-  },
-
-  checkNumbersRange(numbers) {
-    return numbers.every((num) => !isNaN(num));
+    if (!checkNumbersType(numbers)) throw new Error(ERROR_MESSAGE.NUMBER);
   },
 
   checkBonusNumber(num, winningNumbers) {
@@ -45,4 +32,12 @@ const validation = {
   },
 };
 
-module.exports = validation;
+const checkNumbersRange = (numbers) => {
+  return numbers.every((num) => num <= 45 && num >= 1);
+};
+
+const checkNumbersType = (numbers) => {
+  return numbers.every((num) => !isNaN(num));
+};
+
+module.exports = Validation;
