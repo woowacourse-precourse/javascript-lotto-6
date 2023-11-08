@@ -1,4 +1,4 @@
-import Assert from "../src/utils/Assert";
+import Assert from "../src/core/Assert";
 import {
   BonusNumberError,
   PurchaseValueError,
