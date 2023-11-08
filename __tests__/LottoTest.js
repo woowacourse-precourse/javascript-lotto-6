@@ -55,7 +55,7 @@ describe('로또 클래스 테스트', () => {
     });
   });
 
-  // // getReturn
+  // // getProfitRate
   test('총 수익을 구하는 메서드 테스트', () => {
     const amount = 2000;
     const game = new Game(amount);
@@ -68,8 +68,9 @@ describe('로또 클래스 테스트', () => {
       [RANK[1]]: { winningCount: 0, reward: REWARDS[1], matchCount: 6 },
     };
 
-    const output = 55000;
+    const totalReward = 55000;
+    const output = (totalReward / amount) * 100;
 
-    expect(game.getReturn()).toEqual(55000);
+    expect(game.getProfitRate()).toEqual(output);
   });
 });
