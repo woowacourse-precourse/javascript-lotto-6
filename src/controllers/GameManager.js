@@ -11,7 +11,7 @@ const GameManager = {
 
     await this.drawLottos(lottos);
 
-    await this.manageStatics(cost);
+    this.manageStatics(cost);
   },
 
   async issueLottos() {
@@ -57,7 +57,7 @@ const GameManager = {
     lottoList.forEach((lotto) => this.judgePrize(lotto, numbers, bonusNumber));
   },
 
-  async manageStatics(cost) {
+  manageStatics(cost) {
     const totalProfit = this.calculateTotalProfit();
     const profitRatio = this.calculateProfitRatio(cost, totalProfit);
 
@@ -66,10 +66,10 @@ const GameManager = {
 
   judgePrize(lotto, numberList, bonusNumber) {
     const prize = new Set(
-      [...lotto].filter((number) => numberList.includes(number))
+      numberList.filter((number) => lotto.includes(Number(number)))
     ).size;
 
-    winningResults.reverse().forEach((result, index) => {
+    winningResults.forEach((result, index) => {
       if (prize === PLACE[index]) {
         if (index !== 1 || lotto.includes(bonusNumber)) {
           winningResults[index].ticket += 1;
