@@ -20,7 +20,7 @@ class MatchLottoNumber {
   compare(numbers, lotto) {
     let sameNumberCount = 0;
     numbers.forEach((number) => {
-      if (lotto.includes(number)) {
+      if (lotto.includes(Number(number))) {
         sameNumberCount++;
       }
     });
@@ -41,7 +41,7 @@ class MatchLottoNumber {
       case 3:
         return 5;
       default:
-        break;
+        return 0;
     }
   }
 }

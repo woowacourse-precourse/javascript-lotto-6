@@ -67,9 +67,11 @@ class Money {
 
   rankingMoney(ranks) {
     ranks.forEach((rank) => {
-      if (Number.isNaN(Number(rank))) return;
-      this.#winningMoney += this.winnings(rank);
-      this.rankingCountsArray(rank);
+      if (!Number.isNaN(Number(this.winnings(rank)))) {
+        this.#winningMoney += this.winnings(rank);
+        this.rankingCountsArray(rank);
+      }
+      return;
     });
   }
 }
