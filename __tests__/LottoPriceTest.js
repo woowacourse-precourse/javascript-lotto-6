@@ -18,4 +18,10 @@ describe('구입 금액 테스트', () => {
       Validations.isPlus(lottoPrice);
     }).toThrow('[ERROR] 양수만 입력해 주세요.');
   });
+
+  test.each([['1500', '1200', '200001']])('1000원 단위인지', lottoPrice => {
+    expect(() => {
+      Validations.isThousandUnit(lottoPrice);
+    }).toThrow('[ERROR] 1000원 단위로만 입력해주세요.');
+  });
 });
