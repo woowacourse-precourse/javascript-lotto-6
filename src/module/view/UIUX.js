@@ -40,7 +40,6 @@ class UIUX {
 
   printLotto() {
     for (let i = 0; i < this.#bunchOfLotto.length; i += 1) {
-      //MissionUtils.Console.print(this.#bunchOfLotto[i].numbers);
       MissionUtils.Console.print(`[${this.#bunchOfLotto[i].numbers.join(', ')}]`)
     }
   }
