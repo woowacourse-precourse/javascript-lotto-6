@@ -10,6 +10,9 @@ class App {
 
     const winningNumbers = await game.getInputLoop(game.getWinningNumber);
 
+    const bonusNumber = await game.getInputLoop(game.getBonusNumber, [winningNumbers]);
+
+
 
   }
 }
