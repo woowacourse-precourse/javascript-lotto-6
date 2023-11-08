@@ -3,7 +3,6 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
-
   MissionUtils.Console.readLineAsync.mockImplementation(() => {
     const input = inputs.shift();
 
@@ -11,12 +10,14 @@ const mockQuestions = (inputs) => {
   });
 };
 
-const mockRandoms = (numbers) => {
+const mockRandoms = (setOfNumbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickUniqueNumbersInRange);
+  setOfNumbers.forEach((numbers) => {
+    MissionUtils.Random.pickUniqueNumbersInRange.mockReturnValueOnce(numbers);
+  });
 };
+
+
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -95,4 +96,3 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 });
-
