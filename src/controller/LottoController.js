@@ -29,10 +29,6 @@ class LottoController {
   }
 
   async createLotto() {
-    // this.#lottos = Array.from(
-    //   { length: this.#lottoCount },
-    //   () => new Lotto(randomNumber.createUniqueNumbers().sort((a, b) => a - b)),
-    // );
     const numbers = [];
     for (let i = 0; i < this.#lottoCount; i += 1) {
       const lotto = randomNumber.createUniqueNumbers();
@@ -40,6 +36,10 @@ class LottoController {
       numbers.push(sortedLotto);
     }
     this.#lottos = numbers.map((lotto) => new Lotto(lotto));
+  }
+
+  getLottos() {
+    return this.#lottos;
   }
 }
 export default LottoController;

@@ -8,6 +8,15 @@ class WinningController {
 
   #bonusNumber;
 
+  #winning;
+
+  #lottos;
+
+  constructor(lottos) {
+    this.#winning = new Winning();
+    this.#lottos = lottos;
+  }
+
   async inputLottoNumbers() {
     const winning = (await Input.readWinningNumbers()).split(',');
     const bonus = await Input.readBonusNumber();
@@ -19,24 +28,52 @@ class WinningController {
       Output.printErrorMessage(err.message);
       await this.inputNumbers();
     }
-    this.#winningNumber = winning;
-    this.#bonusNumber = bonus;
+    this.#winningNumber = winning.map(Number);
+    this.#bonusNumber = Number(bonus);
   }
 
-  async produceStatistics() {
+  async result() {
     Output.printStatistic();
+    this.#lottos.forEach((lotto) => {
+      this.produceStatistics(lotto.getNumbers());
+    });
+    Output.printWinningResult(this.#winning.getWinningResult());
   }
 
-  calculateRank() {
-    const winning = new Winning();
-    if (this.#isFirstRank()) {
-      winning.setWinningResult();
+  async produceStatistics(lottoNumbers) {
+    const matchCount = this.#matchWinningNumber(lottoNumbers);
+    const rank = this.calculateRank(matchCount, lottoNumbers);
+    if (rank !== 'fail') {
+      this.#winning.setWinningResult(rank);
     }
   }
 
-  #isFirstRank(lottoNumbers) {
-    return this.#winningNumber.every((number) => lottoNumbers.includes(number));
+  calculateRank(matchCount, lottoNumbers) {
+    switch (matchCount) {
+      case 6:
+        return 'first';
+      case 5:
+        if (this.#matchBonusNumber(lottoNumbers)) return 'second';
+        return 'third';
+      case 4:
+        return 'fourth';
+      case 3:
+        return 'fifth';
+      default:
+        return 'fail';
+    }
   }
 
+  #matchWinningNumber(lottoNumbers) {
+    let matchCount = 0;
+    lottoNumbers.forEach((number) => {
+      if (this.#winningNumber.includes(number)) matchCount += 1;
+    });
+    return matchCount;
+  }
+
+  #matchBonusNumber(lottoNumbers) {
+    return lottoNumbers.includes(this.#bonusNumber);
+  }
 }
 export default WinningController;
