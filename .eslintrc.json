@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["prettier"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-var": "error",
+    "max-depth": ["error", 2],
+    "max-lines-per-function": ["error", 15],
+    "no-console": "warn"
+  }
+}
