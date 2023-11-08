@@ -19,11 +19,6 @@ describe('WinningCalculator 클래스 테스트', () => {
     [7, 8, 9, 10, 11, 12],
   ];
 
-  const winningCalculator = new WinningCalculator(
-    totalWinningNumbers,
-    issuedLotto,
-  );
-
   test.each([
     [[1, 2, 3, 4, 5, 6], 6],
     [[1, 2, 3, 4, 5, 7], 5],
@@ -31,12 +26,35 @@ describe('WinningCalculator 클래스 테스트', () => {
   ])(
     '당첨 번호와 일치하는 수의 개수만큼 반환해야 한다.',
     (inputs, expected) => {
+      const winningCalculator = new WinningCalculator(
+        totalWinningNumbers,
+        issuedLotto,
+      );
+
       const matchedCount = winningCalculator.calculateMatchNumbers(
         totalWinningNumbers.get(NUMBER_OPTIONS.winningName),
         inputs,
       );
 
       expect(matchedCount).toBe(expected);
+    },
+  );
+
+  test.each([[3], [4], [0]])(
+    '일치하는 수에 따라 등수를 반환하는지 테스트',
+    (inputs) => {
+      const winningCalculator = new WinningCalculator(
+        totalWinningNumbers,
+        issuedLotto,
+      );
+
+      winningCalculator.runCompilingWinner(inputs);
+
+      expect(
+        winningCalculator.winnerList.get(
+          STATISTICS_STANDARD.matchCountRank.get(inputs),
+        ),
+      ).toBe(1);
     },
   );
 });
