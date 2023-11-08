@@ -1,12 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 
-const Input = {
-	askUser: async (question) => {
+class Input {
+	static async askUser(question) {
 		const reply = await Console.readLineAsync(question);
 		return reply;
-	},
+	}
 
-	askUserUntilValid: async (question, validatorCallBack = () => true) => {
+	static async askUserUntilValid(question, validatorCallBack = () => true) {
 		let reply = await Input.askUser(question);
 		try {
 			validatorCallBack(reply);
@@ -18,6 +18,6 @@ const Input = {
 		}
 
 		return reply;
-	},
-};
+	}
+}
 export default Input;
