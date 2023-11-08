@@ -51,4 +51,5 @@ export const CONFIG = Object.freeze({
     '4등': 4,
     '5등': 3,
   },
+  jackpotLength: 5,
 });

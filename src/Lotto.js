@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../constants/constants';
+import { CONFIG, ERROR_MESSAGE } from '../constants/constants';
 
 class Lotto {
   #numbers;
@@ -9,7 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== CONFIG.lottoLength) {
       throw new Error(ERROR_MESSAGE.lotto.length);
     }
 
@@ -21,11 +21,16 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.lotto.notInt);
     }
 
-    if (numbers.some((number) => number < 1 || number > 45)) {
+    if (
+      numbers.some(
+        (number) =>
+          number < CONFIG.range.minNumber || number > CONFIG.range.maxNumber,
+      )
+    ) {
       throw new Error(ERROR_MESSAGE.lotto.notRange);
     }
 
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== CONFIG.lottoLength) {
       throw new Error(ERROR_MESSAGE.lotto.notDifferent);
     }
   }

@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/constants';
+import { CONFIG, ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/constants';
 import Lotto from './Lotto';
 
 class WinningBonus {
@@ -30,7 +30,10 @@ class WinningBonus {
       throw new Error(ERROR_MESSAGE.bonus.notInt);
     }
 
-    if (bonusNumber < 1 || bonusNumber > 45) {
+    if (
+      bonusNumber < CONFIG.range.minNumber ||
+      bonusNumber > CONFIG.range.maxNumber
+    ) {
       throw new Error(ERROR_MESSAGE.bonus.notRange);
     }
 

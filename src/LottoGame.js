@@ -6,7 +6,7 @@ import WinningBonus from './WinningBonus';
 
 class LottoGame {
   #tickets = [];
-  #results = new Array(5).fill(0);
+  #results = new Array(CONFIG.jackpotLength).fill(0);
 
   async run() {
     await this.#inputPrice();
@@ -19,7 +19,7 @@ class LottoGame {
   }
 
   async #buyLotto(price) {
-    for (let i = 0; i < price / 1000; i += 1) {
+    for (let i = 0; i < price / CONFIG.price; i += 1) {
       const lottoNumber = this.#generateRandomLottoNumbers();
       const lotto = new Lotto(lottoNumber);
       Console.print(`[${lotto.getLottoNumbers().join(', ')}]`);
