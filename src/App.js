@@ -67,8 +67,8 @@ class App {
 
   /** Lotto 클래스로 티켓 생성 */
   generateLotto() {
-    const lottoNumbers = this.getRandomNumbers();
-    return new Lotto(lottoNumbers);
+    const lottoTicket = this.getRandomNumber();
+    return new Lotto(lottoTicket);
   }
 
   /** 당첨 번호 받기 */
