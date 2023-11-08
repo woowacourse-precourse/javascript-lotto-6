@@ -262,7 +262,7 @@
     <th>설명</th>
   </tr>
   <tr>
-    <td><code>static</code>DIGIT</td>
+    <td><code>static</code>DECIMAL_POINT</td>
     <td>계산할 결과의 자릿수입니다.</td>
   </tr>
 </table>

@@ -18,7 +18,7 @@ class Calculator {
    * 반올림될 소숫점 자릿수입니다.
    * @readonly
    */
-  static DIGIT = 1;
+  static DECIMAL_POINT = 1;
 
   /**
    * @returns {Calculator} 계산기입니다.
@@ -41,7 +41,7 @@ class Calculator {
 
     return Number.isInteger(earningRate)
       ? earningRate
-      : Number(earningRate.toFixed(Calculator.DIGIT));
+      : Number(earningRate.toFixed(Calculator.DECIMAL_POINT));
   }
 
   #validateEarningRate(income, rewards) {

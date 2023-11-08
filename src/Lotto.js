@@ -54,7 +54,7 @@ class Lotto {
 
   /**
    * 로또의 numbers를 반환합니다.
-   * @returns {LottoNumber[]} 로또의 numbers입니다.
+   * @returns {number[]} 로또의 numbers입니다.
    */
   getNumbers() {
     return Array.from(this.#numbers, (v) => v.getNumber());
