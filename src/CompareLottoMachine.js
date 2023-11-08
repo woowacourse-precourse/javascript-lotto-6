@@ -10,12 +10,18 @@ class CompareLottoMachine {
   }
 
   compareLottoNumbers(lottos) {
-    const matchedLottos = lottos.map((lotto) => {
-      return [this.#countMatchedNumbers(lotto), this.#isBonusNumber(lotto)];
-    });
-
-    const result = this.#formatMatchedNumbers(this.#filterMatchedNumbers(matchedLottos));
+    const matchedLottos = this.#getMatchedLottos(lottos);
+    const filterdMatchedNumbers = this.#filterMatchedNumbers(matchedLottos);
+    const result = this.#formatMatchedNumbers(filterdMatchedNumbers);
     return result;
+  }
+
+  #splitedNumbers(numbers) {
+    return numbers.split(',').map((number) => Number(number));
+  }
+
+  #getMatchedLottos(lottos) {
+    return lottos.map((lotto) => [this.#countMatchedNumbers(lotto), this.#isBonusNumber(lotto)]);
   }
 
   #filterMatchedNumbers(matchedLottos) {
@@ -46,20 +52,16 @@ class CompareLottoMachine {
     return result;
   }
 
-  #splitedNumbers(numbers) {
-    return numbers.split(',').map((number) => Number(number));
-  }
-
-  #countMatchedNumbers(lotto) {
+  #countMatchedNumbers(lottos) {
     const result = this.#winningNumbers.reduce((totalMatchedCount, winningNumber) => {
-      return lotto.includes(winningNumber) ? totalMatchedCount + 1 : totalMatchedCount;
+      return lottos.includes(winningNumber) ? totalMatchedCount + 1 : totalMatchedCount;
     }, 0);
 
     return result;
   }
 
-  #isBonusNumber(lotto) {
-    return lotto.includes(this.#bonusNumber);
+  #isBonusNumber(lottos) {
+    return lottos.includes(this.#bonusNumber);
   }
 }
 

@@ -3,7 +3,7 @@ import lottoRandomNumberGenerator from './util/lottoRandomNumberGenerator.js';
 import { LOTTO_PRICE_UNIT } from './constants/constant.js';
 
 class LottoMachine {
-  generateLotto(lottoPrice) {
+  generateLottos(lottoPrice) {
     const lottoQuantity = this.#calculateQuantity(lottoPrice);
     const lottos = Array.from({ length: lottoQuantity }, () => {
       return this.#generateSingleLotto();

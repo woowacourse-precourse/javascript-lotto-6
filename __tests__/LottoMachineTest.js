@@ -1,8 +1,8 @@
-import LottoMacine from '../src/LottoMachine.js';
+import LottoMachine from '../src/LottoMachine.js';
 import { LOTTO_NUMBER } from '../src/constants/constant.js';
 import lottoRandomNumberGenerator from '../src/util/lottoRandomNumberGenerator.js';
 
-describe('lottoMachine.generateLotto 테스트', () => {
+describe('lottoMachine.generateLottos 테스트', () => {
   test.each([
     ['3000', 3],
     ['12000', 12],
@@ -10,10 +10,10 @@ describe('lottoMachine.generateLotto 테스트', () => {
     ['152000', 152],
   ])('금액에 맞게 로또 개수를 계산하는 테스트', (input, expected) => {
     //given
-    const lottoMacine = new LottoMacine();
+    const lottoMachine = new LottoMachine();
 
     // when
-    const result = lottoMacine.generateLotto(input);
+    const result = lottoMachine.generateLottos(input);
 
     // then
     expect(result).toHaveLength(expected);

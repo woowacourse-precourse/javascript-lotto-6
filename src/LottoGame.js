@@ -11,7 +11,7 @@ class LottoGame {
   }
 
   purchace(lottoPrice) {
-    const lottos = this.#lottoMachine.generateLotto(lottoPrice);
+    const lottos = this.#lottoMachine.generateLottos(lottoPrice);
     this.#user = new User(lottoPrice, lottos);
 
     return lottos;
