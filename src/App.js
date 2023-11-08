@@ -3,6 +3,7 @@ import Input from './Input.js';
 import Lotto from './Lotto.js';
 import WinningLotto from './WinningLotto.js';
 import Output from './Output.js';
+import PurchaseAmount from './PurchaseAmount.js';
 
 const CURRENCY_UNIT = 1000;
 const FIRST_PRIZE = 2000000000;
@@ -31,7 +32,10 @@ class App {
   }
 
   async play() {
-    await this.start();
+    const inputPurchaseAmount = await this.start();
+    const purchaseAmount = inputPurchaseAmount.getPurchaseAmount();
+
+    this.myLottoList = this.createMyLottoList(purchaseAmount);
 
     this.output.printMyLottoList(this.purchaseCount, this.myLottoList);
 
@@ -59,20 +63,15 @@ class App {
   }
 
   async start() {
-    const inputPurchaseAmount = await this.input.askPurchaseAmount();
-    const parsedPurchaseAmount = Number(inputPurchaseAmount);
-
-    this.validateAskPurchaseAmount(parsedPurchaseAmount);
-    this.myLottoList = this.createMyLottoList(parsedPurchaseAmount);
-  }
-
-  validateAskPurchaseAmount(purchaseAmount) {
-    if (Number.isNaN(purchaseAmount) || purchaseAmount === 0) {
-      throw new Error('[ERROR] 입력된 값을 확인해주세요.');
-    }
-
-    if (purchaseAmount % CURRENCY_UNIT) {
-      throw new Error('[ERROR] 1,000원 단위로 입력해주세요.');
+    let inputPurchaseAmount;
+    while (true) {
+      try {
+        inputPurchaseAmount = await this.input.askPurchaseAmount();
+        return new PurchaseAmount(inputPurchaseAmount);
+        break;
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   }
 
