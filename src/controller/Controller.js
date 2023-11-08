@@ -21,9 +21,10 @@ class Controller {
 
   async startLottoGame() {
     await this.#purchaseLotto();
-    await this.#drawWinNumbers();
-    await this.#drawBonusNumber();
-    this.#processLottoResults();
+    await this.#getValidWinLotto();
+    await this.#getValidBonusNumber();
+    this.#calculateLottoRank();
+    this.#drawLottoResult();
   }
 
   async #purchaseLotto() {
@@ -36,19 +37,22 @@ class Controller {
     }
   }
 
-  async #drawWinNumbers() {
+  async #getValidWinLotto() {
     try {
       await this.#ticketBooth.receiveWinNumbers();
     } catch (error) {
-      await this.#handleErrorAndRetry(error, this.#drawWinNumbers.bind(this));
+      await this.#handleErrorAndRetry(error, this.#getValidWinLotto.bind(this));
     }
   }
 
-  async #drawBonusNumber() {
+  async #getValidBonusNumber() {
     try {
       await this.#ticketBooth.receiveBonusNumber();
     } catch (error) {
-      await this.#handleErrorAndRetry(error, this.#drawBonusNumber.bind(this));
+      await this.#handleErrorAndRetry(
+        error,
+        this.#getValidBonusNumber.bind(this)
+      );
     }
   }
 
@@ -57,10 +61,13 @@ class Controller {
     await retryProcess();
   }
 
-  #processLottoResults() {
+  #calculateLottoRank() {
     const winLotto = new WinLotto(this.#ticketBooth.getWinNumbers());
     const matchedNumberList = this.#lottoBundle.populateWinResult(winLotto);
     this.#analyzer.countWinningRank(matchedNumberList);
+  }
+
+  #drawLottoResult() {
     this.#announcer.printResult(this.#analyzer);
   }
 }
