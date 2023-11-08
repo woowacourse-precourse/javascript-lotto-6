@@ -63,9 +63,38 @@ class App {
       else
         hasBonusNum.push(false);
     });
-    
+
     return this.countLottoRank({matchScore, hasBonusNum});
   }
+
+  countLottoRank({matchScore, hasBonusNum}) {
+    const rank = [0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < matchScore.length; i++) {
+      if (matchScore[i] === 6) rank[1] += 1;
+      else if (matchScore[i] === 5 && hasBonusNum[i]) {
+        rank[2] += 1;
+      } else if (matchScore[i] === 5 && !hasBonusNum[i]) {
+        rank[3] += 1;
+      } else if (matchScore[i] === 4) {
+        rank[4] += 1;
+      } else if (matchScore[i] === 3) {
+        rank[5] += 1;
+      }
+    }
+    return this.calculateWinnings(rank);
+  }
+
+  calculateWinnings(rank) {
+    let totalWin = 0;
+    totalWin += rank[1] * LOTTO.FIRST_PRIZE;
+    totalWin += rank[2] * LOTTO.SECOND_PRIZE;
+    totalWin += rank[3] * LOTTO.THIRD_PRIZE;
+    totalWin += rank[4] * LOTTO.FOURTH_PRIZE;
+    totalWin += rank[5] * LOTTO.FIFTH_PRIZE;
+    return this.calculateRateOfReturn({rank, totalWin});
+  }
+
+
 }
 
 export default App;
