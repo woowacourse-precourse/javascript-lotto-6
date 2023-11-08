@@ -45,7 +45,7 @@ class App {
 
     this.myLottoList.forEach((myLotto) => {
       const count = myLotto.getWinningCount(winningLottoNumbers);
-      myLotto.getWinningResult(
+      myLotto.checkWinningResult(
         count,
         Number(inputBonusLotto),
         this.winningResult
