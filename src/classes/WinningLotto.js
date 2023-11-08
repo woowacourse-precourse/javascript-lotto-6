@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Validation from "./validation.js";
+import Validation from "./Validation.js";
 
 const Console = MissionUtils.Console;
 

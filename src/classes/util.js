@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js";
-import Validation from "./validation.js";
+import Validation from "./Validation.js";
 import WinningLotto from "./WinningLotto.js";
 
 const Console = MissionUtils.Console;
@@ -28,7 +28,9 @@ class Util {
   }
 
   static getLottoArray(purchaseNumber) {
-    return Array(purchaseNumber).fill().map(() => Lotto.createNumber());
+    return Array(purchaseNumber)
+      .fill()
+      .map(() => Lotto.createNumber());
   }
 
   static getLottoClasses(purchaseNumber) {
@@ -78,7 +80,6 @@ class Util {
   static rate(totalPrize, investMoney) {
     return ((totalPrize / investMoney) * 100).toFixed(1);
   }
-
 }
 
 export default Util;

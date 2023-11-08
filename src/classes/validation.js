@@ -6,7 +6,7 @@ class Validation {
     if (userMoney % 1000) {
       throw new Error("[ERROR] 1000원 단위로 입금해주세요.");
     }
-    if (userMoney < 1000 ) {
+    if (userMoney < 1000) {
       throw new Error("[ERROR] 1000원 이상 입금해주세요.");
     }
   }

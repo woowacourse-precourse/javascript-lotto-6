@@ -1,5 +1,4 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Validation from "./classes/validation.js";
 
 const Random = MissionUtils.Random;
 const Console = MissionUtils.Console;
@@ -56,6 +55,5 @@ class Lotto {
     }
   }
 }
-
 
 export default Lotto;

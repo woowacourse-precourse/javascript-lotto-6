@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Util from "./classes/util.js";
+import Util from "./classes/Util.js";
 
 const Console = MissionUtils.Console;
 

@@ -1,4 +1,4 @@
-import Validation from "../src/classes/validation.js";
+import Validation from "../src/classes/Validation.js";
 
 describe("구매 금액 입력 유효성 검사 테스트", () => {
   test("구매 금액이 공백이면 에러발생시키는 테스트", () => {
@@ -53,31 +53,39 @@ describe("당첨 번호 입력 유효성 검사 테스트", () => {
 });
 
 describe("보너스 번호 유효성 검사 테스트", () => {
-    test("보너스 번호가 당첨번호가 똑같은 경우 에러를 발생시키는 테스트", () =>{
-        const winningNumber = [1,2,3,4,5,6];
-        const bonusNumber = 6;
+  test("보너스 번호가 당첨번호가 똑같은 경우 에러를 발생시키는 테스트", () => {
+    const winningNumber = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 6;
 
-        expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow("[ERROR]");
-    });
+    expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow(
+      "[ERROR]"
+    );
+  });
 
-    test("보너스 번호가 문자열일 경우 에러를 발생시키는 테스트", () => {
-        const winningNumber = [1,2,3,4,5,6];
-        const bonusNumber = "j";
-        
-        expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow("[ERROR]");
-    });
+  test("보너스 번호가 문자열일 경우 에러를 발생시키는 테스트", () => {
+    const winningNumber = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = "j";
 
-    test("보너스 번호가 공백일 경우 에러를 발생시키는 테스트", () => {
-        const winningNumber = [1,2,3,4,5,6];
-        const bonusNumber = "";
-        
-        expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow("[ERROR]");
-    });
+    expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow(
+      "[ERROR]"
+    );
+  });
 
-    test("보너스 번호가  1~45 내의 숫자가 아닐 경우 에러를 발생시키는 테스트", () => {
-        const winningNumber = [1,2,3,4,5,6];
-        const bonusNumber = 50;
-        
-        expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow("[ERROR]");
-    });
+  test("보너스 번호가 공백일 경우 에러를 발생시키는 테스트", () => {
+    const winningNumber = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = "";
+
+    expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow(
+      "[ERROR]"
+    );
+  });
+
+  test("보너스 번호가  1~45 내의 숫자가 아닐 경우 에러를 발생시키는 테스트", () => {
+    const winningNumber = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 50;
+
+    expect(() => Validation.bonusNumber(winningNumber, bonusNumber)).toThrow(
+      "[ERROR]"
+    );
+  });
 });
