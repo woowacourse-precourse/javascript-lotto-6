@@ -29,7 +29,11 @@ class App {
     const lottoCount = money / 1000;
     const lottos = [];
     for (let i = 0; i < lottoCount; i++) {
-      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)
+      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
+        1,
+        45,
+        6
+      );
       lottos.push(randomNumbers);
     }
     return lottos;
@@ -123,8 +127,8 @@ class App {
 
   // 총 당첨 내역 출력
     // 결과 합산
-  computeTotalResult(lottos, winningNumbers, bonusNubmer) {
-    const result = { "1등": 0, "2등": 0, "3등": 0, "4등": 0, "5등": 0, "꽝": 0};
+  computeTotalResult(lottos) {
+    const result = { "1등": 0, "2등": 0, "3등": 0, "4등": 0, "5등": 0, 꽝: 0 };
     for (const lotto of lottos) {
       const rank = this.computeRank(lotto, winningNumbers, bonusNubmer);
       result[rank]++;
@@ -144,14 +148,19 @@ class App {
   }
 
   // 수익률 계산
-  
-  computeProfit(result,money){
-    const totalPrize = result["5등"]*5000 + result["4등"]*50000 + result["3등"]*1500000 + result["2등"]*30000000 + result["1등"]*2000000000;
-    const profit = (totalPrize/money*100).toFixed(1);
-    return profit;  
+
+  computeProfit(result, money) {
+    const totalPrize =
+      result["5등"] * 5000 +
+      result["4등"] * 50000 +
+      result["3등"] * 1500000 +
+      result["2등"] * 30000000 +
+      result["1등"] * 2000000000;
+    const profit = ((totalPrize / money) * 100).toFixed(1);
+    return profit;
   }
-  
-  printProfit(profit){
+
+  printProfit(profit) {
     MissionUtils.Console.print(`총 수익률은 ${profit}%입니다.`);
   }
   }
