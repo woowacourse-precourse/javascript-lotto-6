@@ -1,23 +1,18 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-import {
-  PICK_NUMBERS,
-  RANGE,
-  ZERO,
-  WINNING_RANK,
-  WINNING_RANK_COUNT,
-} from '../constants/lotto/numbers';
-import validationUtils from '../services/utils/validation';
+import { WINNING_RANK, WINNING_RANK_COUNT } from './constants/lotto';
+import { ZERO } from './constants/validate';
+import validationUtils from './services/utils/validation';
 
 const validateWinningNumber = (winningNumber) => {
-  validationUtils.isArray(winningNumber);
-  validationUtils.isArrayValueTypeNumber(winningNumber);
+  validationUtils.isArrayToThrow(winningNumber);
+  validationUtils.isArrayValueTypeNumberToThrow(winningNumber);
   validationUtils.checkArrayDuplicate(winningNumber);
 };
 
 const validationBonusNumber = (bonusNumber) => {
-  validationUtils.isInteger(bonusNumber);
+  validationUtils.isIntegerToThrow(bonusNumber);
   validationUtils.checkRange(bonusNumber);
 };
+
 class Lotto {
   #numbers;
 
@@ -26,26 +21,18 @@ class Lotto {
    */
   constructor(numbers) {
     this.#numbers = numbers;
-    this.#validateNumberCount();
+    this.#validate(numbers);
     validationUtils.checkArrayDuplicate(numbers);
   }
 
-  #validateNumberCount() {
-    if (this.#numbers.length !== PICK_NUMBERS) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
+  getNumbers() {
+    return this.#numbers;
   }
 
-  /**
-   * 무작위 로또 번호를 반환한다
-   * @returns {number[]} - 무작위로 선별된 6자리 로또 번호
-   */
-  static drawLottoNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(
-      RANGE.smallNumber,
-      RANGE.largestNumber,
-      PICK_NUMBERS,
-    );
+  #validate(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
   }
 
   /**
