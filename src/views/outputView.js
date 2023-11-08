@@ -21,6 +21,10 @@ const outputView = {
       view.print(message);
     };
   },
+
+  printTotalResult(totalResult, totalPrice) {
+    const message = OUTPUT_MESSAGE.TOTAL_RESULT(totalResult, totalPrice);
+  }
 }
 
 export default outputView;

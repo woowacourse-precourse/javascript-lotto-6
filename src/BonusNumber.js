@@ -1,32 +1,26 @@
-import validator from "./utils/validator";
-import { ERROR_MESSAGE } from "../src/constants/message"
-import { LOTTO } from "./constants/api";
+import { LOTTO } from './constants/api';
+import { ERROR_MESSAGE } from '../src/constants/message';
+import validator from './utils/validator';
 
 class BonusNumber {
-  #bonusNumber;
-
-  constructor(bonusNumber, winningNumbers) {
-    this.#bonusNumber = bonusNumber;
+  constructor(bonusNumberInput, winningNumbers) {
+    this.bonusNumber = bonusNumberInput;
     this.#validate(winningNumbers);
   }
 
   #validate(winningNumbers) {
-    const gatheredNumbers = [...winningNumbers, this.#bonusNumber];
+    const gatheredNumbers = [this.bonusNumber, ...winningNumbers];
     if(validator.isDuplicate(gatheredNumbers)) {
       throw new Error(ERROR_MESSAGE.DUPLICATE_NUMBER);
     }
 
-    if (!validator.isPositiveInteger(this.#bonusNumber)) {
+    if (!validator.isPositiveInteger(this.bonusNumber)) {
       throw new Error(ERROR_MESSAGE.ONLY_NUMBER);
     }
 
-    if (!validator.isNumberInRange(LOTTO.MIN_NUMBER_IN_RANGE, LOTTO.MAX_NUMBER_IN_RANGE, this.#bonusNumber)) {
+    if (!validator.isNumberInRange(LOTTO.MIN_NUMBER_IN_RANGE, LOTTO.MAX_NUMBER_IN_RANGE, this.bonusNumber)) {
       throw new Error(ERROR_MESSAGE.OUT_OF_RANGE(LOTTO.MIN_NUMBER_IN_RANGE, LOTTO.MAX_NUMBER_IN_RANGE));
     }
-  }
-
-  getNumber() {
-    return this.#bonusNumber;
   }
 }
 

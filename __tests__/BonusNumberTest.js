@@ -1,4 +1,4 @@
-import BonusNumber from "../src/BonusNumber"
+import BonusNumber from "../src/BonusNumber";
 import { LOTTO } from "../src/constants/api";
 import { ERROR_MESSAGE } from "../src/constants/message"
 
@@ -10,7 +10,7 @@ describe('BonusNumber 테스트', () => {
     };
 
     expect(() => {
-      const bonusNumber = new BonusNumber(input.bonusNumber, input.winningNumber);
+      new BonusNumber(input.bonusNumber, input.winningNumber);
     }).toThrow(ERROR_MESSAGE.DUPLICATE_NUMBER);
   });
 
@@ -21,7 +21,7 @@ describe('BonusNumber 테스트', () => {
     };
 
     expect(() => {
-      const bonusNumber = new BonusNumber(input.bonusNumber, input.winningNumber);
+      new BonusNumber(input.bonusNumber, input.winningNumber);
     }).toThrow(ERROR_MESSAGE.ONLY_NUMBER);
   });
 
@@ -32,7 +32,7 @@ describe('BonusNumber 테스트', () => {
     };
     
     expect(() => {
-      const bonusNumber = new BonusNumber(input.bonusNumber, input.winningNumber);
+      new BonusNumber(input.bonusNumber, input.winningNumber);
     }).toThrow(ERROR_MESSAGE.OUT_OF_RANGE(LOTTO.MIN_NUMBER_IN_RANGE, LOTTO.MAX_NUMBER_IN_RANGE));
   });
 
@@ -43,7 +43,7 @@ describe('BonusNumber 테스트', () => {
     };
 
     const bonusNumber = new BonusNumber(input.bonusNumber, input.winningNumber);
-    const result = bonusNumber.getNumber();
+    const result = bonusNumber.bonusNumber;
 
     expect(result).toBe(input.bonusNumber);
   })

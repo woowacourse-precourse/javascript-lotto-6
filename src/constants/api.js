@@ -8,4 +8,18 @@ export const LOTTO = Object.freeze({
   MIN_NUMBER_IN_RANGE: 1,
   MAX_NUMBER_IN_RANGE: 45,
   POINT_TO_DIVIDE_INPUTS: ',',
+
+  FAILED_LOTTO_KEY: 'failed',
+  MATCHES_3_KEY: 'matches3',
+  MATCHES_4_KEY: 'matches4',
+  MATCHES_5_KEY: 'matches5',
+  MATCHES_5_BONUS_KEY: 'matches5Bonus',
+  MATCHES_6_KEY: 'matches6',
+  TOTAL_PRICE_KEY: 'totalPrice',
+
+  MATCHES_3_PRICE: 5000,
+  MATCHES_4_PRICE: 50000,
+  MATCHES_5_PRICE: 1500000,
+  MATCHES_5_BONUS_PRICE: 30000000,
+  MATCHES_6_PRICE: 2000000000,
 });

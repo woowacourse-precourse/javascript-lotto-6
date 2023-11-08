@@ -42,4 +42,15 @@ export const OUTPUT_MESSAGE = Object.freeze({
 
     return lottosOutput(lottos);
   },
+  TOTAL_RESULT(result, purchaseAmount) {
+    const rate = Math.round(result.get(LOTTO.TOTAL_PRICE_KEY) / purchaseAmount * 10) / 10;
+    return `당첨 통계
+    ---
+    3개 일치 (${converter.numberToDisplayFormatString(LOTTO.MATCHES_3_PRICE)}) - ${result.get(LOTTO.MATCHES_3_KEY)}개
+    4개 일치 (${converter.numberToDisplayFormatString(LOTTO.MATCHES_4_PRICE)}) - ${result.get(LOTTO.MATCHES_4_KEY)}개
+    5개 일치 (${converter.numberToDisplayFormatString(LOTTO.MATCHES_5_PRICE)}) - ${result.get(LOTTO.MATCHES_5_KEY)}개
+    5개 일치, 보너스 볼 일치 (${converter.numberToDisplayFormatString(LOTTO.MATCHES_5_BONUS_PRICE)}) - ${result.get(LOTTO.MATCHES_5_BONUS_KEY)}개
+    6개 일치 (${converter.numberToDisplayFormatString(LOTTO.MATCHES_6_PRICE)}) - ${result.get(LOTTO.MATCHES_6_KEY)}개
+    총 수익률은 ${rate}%입니다.`;
+  },
 });

@@ -6,7 +6,7 @@ import outputView from './views/outputView';
 class App {
   #player;
   #winningNumbers;
-  #bonusNumber;
+  #winningBounsNumber;
 
   constructor() {}
 
@@ -15,6 +15,7 @@ class App {
     this.buyLottos();
     await this.getWinningNumbers();
     await this.getBonusNumber();
+    this.printResult();
   }
 
   async getPurchaseAmount() {
@@ -35,7 +36,16 @@ class App {
 
   async getBonusNumber() {
     const bonusNumberInput = await this.#player.setBonusNumber();
-    this.#bonusNumber = new BonusNumber(bonusNumberInput, this.#winningNumbers);
+    this.#winningBounsNumber = new BonusNumber(bonusNumberInput, this.#winningNumbers);
+  }
+
+  printResult() {
+    const totalResult = Lotto.calcTotalResult(
+      this.#player.lottoNumbers,
+      this.#winningNumbers,
+      this.#winningBounsNumber
+    );
+    outputView.printTotalResult(totalResult, this.#player.purchaseAmount);
   }
 };
 
