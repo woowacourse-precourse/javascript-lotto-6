@@ -1,4 +1,5 @@
-import Validator from './utils/Validator';
+import { Console } from '@woowacourse/mission-utils';
+import Validator from './utils/Validator.js';
 
 class Lotto {
   #numbers;
@@ -9,8 +10,12 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validator.validateLottoLength(numbers);
-    Validator.validateLottoDuplicate(numbers);
+    try {
+      Validator.validateLottoLength(numbers);
+      Validator.validateLottoDuplicate(numbers);
+    } catch (error) {
+      Console.print(error);
+    }
   }
 
   sortAscending() {
