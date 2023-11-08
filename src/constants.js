@@ -51,11 +51,15 @@ export const WINNING_RESULT_DEFAULT = TEMP;
 /**
  * 최소 당첨 횟수
  */
-export const MIN_WINNING = Math.min(Object.values(WINNING_RANKS));
+export const MIN_WINNING = Math.min(
+  ...Object.keys(WINNING_RANKS).map((value) => parseInt(value))
+);
 /**
  * 최대 당첨 횟수
  */
-export const MAX_WINNING = Math.max(Object.values(WINNING_RANKS));
+export const MAX_WINNING = Math.max(
+  ...Object.keys(WINNING_RANKS).map((value) => parseInt(value))
+);
 
 /**
  * 등수에 따른 일치 번호 문구
