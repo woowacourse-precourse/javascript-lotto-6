@@ -12,21 +12,46 @@ export class LottoGame {
   }
 
   async buyLottos() {
-    const cash = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
-    this.playerLottos = this.lottoMachine.buyLottos(Number(cash));
+    while (true) {
+      try {
+        const cash = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.');
+        this.playerLottos = this.lottoMachine.buyLottos(Number(cash));
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   async winLottos() {
-    const winningNumbers = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.');
-    this.winningNumbers = new Lotto(
-      winningNumbers.split(',').map((number) => Number(number)),
-    ).numbers;
+    while (true) {
+      try {
+        const winningNumbers = await MissionUtils.Console.readLineAsync(
+          '당첨 번호를 입력해 주세요.',
+        );
+        this.winningNumbers = new Lotto(
+          winningNumbers.split(',').map((number) => Number(number)),
+        ).numbers;
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   async isBonusNumber() {
-    const bonusNumber = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.');
-    this.#bonusNumberValidate(bonusNumber.split(','));
-    this.bonusNumber = Number(bonusNumber);
+    while (true) {
+      try {
+        const bonusNumber = await MissionUtils.Console.readLineAsync(
+          '보너스 번호를 입력해 주세요.',
+        );
+        this.#bonusNumberValidate(bonusNumber.split(','));
+        this.bonusNumber = Number(bonusNumber);
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
+    }
   }
 
   #bonusNumberValidate(number) {

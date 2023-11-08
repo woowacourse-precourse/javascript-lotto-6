@@ -6,11 +6,10 @@ export class CashCount {
 
   constructor(cash) {
     this.#count = 0;
-    this.#validate(cash);
+    this.#validate(Number(cash));
   }
 
   #validate(cash) {
-    MissionUtils.Console.print(cash);
     if (isNaN(cash)) {
       throw new Error('[ERROR] 숫자가 아닙니다.');
     }
