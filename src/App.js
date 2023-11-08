@@ -1,8 +1,12 @@
+import LottoGame from "./game/LottoGame.js";
 import Validator from "./utils/Validator.js";
 import Input from "./utils/Input.js";
+import Output from "./utils/Output.js";
+
 class App {
   async play() {
     const purchaseAmount = await this.#getValidatedPurchaseAmout();
+    lottoGame.createLottos();
     const winningNumber = await this.#getValidatedWinningNumber();
     const bonusNumber = await this.#getValidatedBonusNumber(winningNumber);
   }
@@ -38,6 +42,16 @@ class App {
       Output.printError(e.message);
       return this.#getValidatedBonusNumber(winningNumber);
     }
+  }
+
+  printPurchaseComplete(lottoGame) {
+    Output.printCountOfLotto(lottoGame.countOfLotto);
+    Output.printLotto(lottoGame.lottos);
+  }
+
+  printLottoGameResult(results, profit) {
+    Output.printResult(results);
+    Output.printProfit(profit);
   }
 }
 
