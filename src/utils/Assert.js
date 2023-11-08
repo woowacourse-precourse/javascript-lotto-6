@@ -23,18 +23,14 @@ export default class Assert {
   }
 
   /**
-   * @param {string} winningNumberString
+   * @param {number[]} winningNumbers
    */
-  assertWinningNumber(winningNumberString) {
-    const winningNumbers = this.#extractWiningNumbersFrom(winningNumberString);
-
+  assertWinningNumber(winningNumbers) {
     if (this.#isExactWinningNumberAmount(winningNumbers))
       throw new WinningNumberError(WinningNumberError.TYPE_NOT_AMOUNT_6);
 
     winningNumbers.forEach((winningNumber) => {
-      if (!this.#isPositiveFiniteInteger(winningNumber))
-        throw new WinningNumberError(WinningNumberError.TYPE_OUT_OF_RANGE);
-      if (!this.#isInRange(winningNumber))
+      if (!this.#isValidLottoNumber(winningNumber))
         throw new WinningNumberError(WinningNumberError.TYPE_OUT_OF_RANGE);
     });
 
@@ -44,15 +40,10 @@ export default class Assert {
 
   /**
    *
-   * @param {string} str
-   * @returns {number[]}
+   * @param {number} bonusNumber
+   * @param {number[]} winningNumbers
    */
-  #extractWiningNumbersFrom(str) {
-    return str
-      .split(",")
-      .map((token) => token.trim())
-      .map((token) => parseInt(token));
-  }
+  assertBounsNumber(bonusNumber, winningNumbers) {}
 
   /**
    *
@@ -62,6 +53,17 @@ export default class Assert {
   #hasAllUniqueArgumentsIn(arr) {
     const uniqueArr = new Set(arr);
     return arr.length === uniqueArr.size;
+  }
+
+  /**
+   *
+   * @param {number} number
+   * @returns {boolean}
+   */
+  #isValidLottoNumber(number) {
+    if (!this.#isPositiveFiniteInteger(number)) return false;
+    if (!this.#isInRange(number)) return false;
+    return true;
   }
 
   /**
