@@ -69,16 +69,11 @@ class Lotto {
     return number;
   };
 
-  matchedNumbers = (winningNumbers, bonusNumber) => {
+  compareNumbers = (winningNumbers, bonusNumber) => {
     const matchedNumbers = this.#numbers.filter((number) =>
       winningNumbers.includes(number)
     );
     const matchedBonusNumber = matchedNumbers.includes(bonusNumber);
-
-    return { matchedNumbers, matchedBonusNumber };
-  };
-
-  compareNumbers = (matchedNumbers, matchedBonusNumber) => {
     let matched = [0, 0, 0, 0, 0];
     const matchedCount = matchedNumbers.length;
 

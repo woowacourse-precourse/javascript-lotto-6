@@ -52,14 +52,7 @@ class App {
     const matchedCounts = [];
 
     for (const lotto of this.lottos) {
-      const { matchedNumbers, matchedBonusNumber } = lotto.matchedNumbers(
-        winningNumbers,
-        bonusNumber
-      );
-      const matchedCount = lotto.compareNumbers(
-        matchedNumbers,
-        matchedBonusNumber
-      );
+      const matchedCount = lotto.compareNumbers(winningNumbers, bonusNumber);
       matchedCounts.push(matchedCount);
     }
     this.printWinningStatistics(matchedCounts);
