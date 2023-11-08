@@ -130,7 +130,7 @@ class App {
       bonus: 30000000,
       all: 2000000000,
     };
-    Console.print(results);
+
     const totalPrize = Object.keys(results).reduce((sum, key) => {
       return sum + results[key] * prizePerResult[key];
     }, 0);
