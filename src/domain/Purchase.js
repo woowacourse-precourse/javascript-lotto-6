@@ -13,12 +13,20 @@ class Purchase {
     print(PURCHASE_AMOUNT_INPUT_REQUEST);
   }
 
-  #validate(input) {
-    if (!Number(input)) {
+  validateIsNumber(input) {
+    if (isNaN(input)) {
       throw new Error(TYPE_ERROR);
-    } else if (+input === 0) {
+    }
+  }
+
+  validateIsZero(input) {
+    if (+input === 0) {
       throw new Error(MIN_INPUT_ERROR);
-    } else if (+input % PURCHASE_AMOUNT_UNIT !== 0) {
+    }
+  }
+
+  validateIsCorrectUnit(input) {
+    if (+input % PURCHASE_AMOUNT_UNIT !== 0) {
       throw new Error(UNIT_ERROR);
     }
   }
@@ -27,7 +35,9 @@ class Purchase {
     while (true) {
       try {
         const input = await Console.readLineAsync("");
-        this.#validate(input);
+        this.validateIsNumber(input);
+        this.validateIsZero(input);
+        this.validateIsCorrectUnit(input);
         return +input;
       } catch (error) {
         Console.print(error.message);
