@@ -28,12 +28,9 @@ class User {
     }
 
     setLottoNumbers() {
-        Console.print(`\n${this.#numberOfPurchases}개를 구매했습니다.`);
-        
         for (let i = 0; i < this.#numberOfPurchases; i++) {
             const randomNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
             this.#lottoNumbers.push(randomNumber);
-            Console.print(randomNumber);
         }
     }
 
@@ -43,6 +40,10 @@ class User {
 
     getPurchaseAmount() {
         return this.#purchaseAmount;
+    }
+
+    getNumberOfPurchases() {
+        return this.#numberOfPurchases;
     }
 }
 

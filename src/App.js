@@ -18,10 +18,14 @@ class App {
     const money = await this.#userView.inputPurchaseAmount();
     this.#user = new User(money);
     this.#user.setLottoNumbers();
+    this.#userView.printUserLottoNumbers(this.#user.getNumberOfPurchases(), this.#user.getLottoNumbers());
 
-    const winningNumbers = this.#userView.inputWinningNumbers();
+    // lotto
+    const winningNumbers = (await this.#userView.inputWinningNumbers()).split(',');
     this.#lotto = new Lotto(winningNumbers);
-    const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해주세요.\n');
+    const bonusNumber = await this.#userView.inputBonusNumber();
+    this.#lotto.validateBonusNumber(bonusNumber);
+
     const userLottoNumbers = this.#user.getLottoNumbers(winningNumbers);
     const results = this.#lotto.calculateLottoResult(userLottoNumbers, winningNumbers.map(Number), bonusNumber);
     this.#lotto.printLottoResult(results);

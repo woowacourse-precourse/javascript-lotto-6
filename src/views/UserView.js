@@ -9,4 +9,15 @@ export default class UserView {
     async inputWinningNumbers() {
         return await Console.readLineAsync('\n당첨 번호를 입력해주세요.\n');
     }
+
+    printUserLottoNumbers(numberOfPurchases, lottoNumbers) {
+        Console.print(`\n${numberOfPurchases}개를 구매했습니다.`);
+        lottoNumbers.forEach(number => {
+            Console.print(number);
+        });
+    }
+
+    async inputBonusNumber() {
+        return await Console.readLineAsync('\n보너스 번호를 입력해주세요.\n');
+    }
 }
