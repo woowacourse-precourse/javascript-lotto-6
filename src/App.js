@@ -24,11 +24,11 @@ class App {
     };
   }
 
-  countLotto(price) {
+  #countLotto(price) {
     return price / 1000;
   }
 
-  createLotto() {
+  #createLotto() {
     const lottos = [];
     for (let i = 0; i < this.#count; i++) {
       const lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
@@ -38,7 +38,7 @@ class App {
     return lottos;
   }
 
-  updateResult(answer, bonus) {
+  #updateResult(answer, bonus) {
     this.#lottos.forEach((lotto) => {
       const result = new Lotto(lotto);
       const key = result.compareLotto(answer, bonus);
@@ -48,7 +48,7 @@ class App {
     });
   }
 
-  calcReturn(purchase) {
+  #calcReturn(purchase) {
     const prize = Object.keys(this.#results).reduce(
       (total, key) => total + this.#results[key] * key,
       0
@@ -60,10 +60,10 @@ class App {
     const price = await Input.getLottoPrice();
     Print.printNewLine();
 
-    this.#count = this.countLotto(price);
+    this.#count = this.#countLotto(price);
     Print.printPurchase(this.#count);
 
-    this.#lottos = this.createLotto();
+    this.#lottos = this.#createLotto();
     this.#lottos.forEach((lotto) => Print.printArray(lotto));
     Print.printNewLine();
 
@@ -73,10 +73,10 @@ class App {
     const bonusNumber = await Input.getLottoBonusNumber(answerNumbers);
     Print.printNewLine();
 
-    this.updateResult(answerNumbers, bonusNumber);
+    this.#updateResult(answerNumbers, bonusNumber);
     Print.printResults(this.#results);
 
-    const returnRate = this.calcReturn(price);
+    const returnRate = this.#calcReturn(price);
     Print.printReturnRate(returnRate);
   }
 }
