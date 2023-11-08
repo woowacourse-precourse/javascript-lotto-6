@@ -56,7 +56,7 @@ describe('로또 주관사 테스트', () => {
     );
   });
 
-  it('1000 단위의 수이고, 중복이 아닐 시엔 입력 값을 리턴', async () => {
+  it('1-45 사이의 수이고, 중복이 아닐 시엔 입력 값을 리턴', async () => {
     // given
     const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
     const bonusInput = 7;
