@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import Computer from '../src/Domain/Computer';
+import Computer from '../src/Domain/Computer.js';
 
 describe('Computer 테스트', () => {
   test('입력된 수 만큼 6자리 배열 반복 생성', () => {

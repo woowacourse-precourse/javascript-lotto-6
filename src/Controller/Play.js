@@ -14,6 +14,7 @@ class PlayLottery {
       await this.compareUserWith(await this.create.RandomLottery());
     } catch (error) {
       Print.output(error.message);
+      // await this.draw(); // 에러 시 다시 해당 시점부터 재실행 (이따 기능 추가 커밋때 살릴 것)
     }
   }
 

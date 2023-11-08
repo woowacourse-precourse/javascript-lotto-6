@@ -1,25 +1,41 @@
+import {
+  validateNumberLength,
+  checkValidateNumbers,
+} from '../Utils/validation.js';
+
 class User {
   #amount;
 
   constructor(amount) {
+    this.#validateAmount(amount);
     this.#amount = amount;
   }
 
-  #convertToNumber(array) {
-    const result = array.map((el) => Number(el));
-
-    return result;
+  #validateAmount(amount) {
+    if (amount % 1000 > 0) {
+      throw new Error('[ERROR] 1000원 단위로 입력하세요.');
+    }
   }
 
-  async getLotteryInput(lotteryInput) {
+  getLotteryNumber(lotteryInput) {
     const inputArr = this.#divdeEach(lotteryInput);
-    const result = this.#convertToNumber(inputArr);
+    validateNumberLength(inputArr);
 
-    return result;
+    return this.#convertToNumber(inputArr);
   }
 
   #divdeEach(input) {
     return input.split(',');
+  }
+
+  #convertToNumber(array) {
+    const result = array.map((el) => {
+      checkValidateNumbers(el);
+
+      return Number(el);
+    });
+
+    return result;
   }
 
   getNumberofPurchase() {
