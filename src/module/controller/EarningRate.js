@@ -2,6 +2,7 @@ class EarningRate {
   #score;
   #addedScore;
   #money;
+
   constructor(score, money) {
     this.#score = score;
     this.#money = money;
@@ -10,6 +11,7 @@ class EarningRate {
   #addEarnedScore() {
     const data = ['three', 'four', 'five', 'bonus', 'six'];
     const money = [5000, 50000, 1500000, 30000000, 2000000000];
+
     this.#addedScore = 0;
 
     for (let i = 0; i < data.length; i += 1) {
@@ -19,6 +21,7 @@ class EarningRate {
 
   calEarningRate() {
     this.#addEarnedScore();
+
     return Number.parseFloat((this.#addedScore / this.#money) * 100).toFixed(1);
   }
 }
