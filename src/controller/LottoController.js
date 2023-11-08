@@ -39,6 +39,7 @@ const LottoController = {
     const lottoAnswerInput = await InputView.readLottoAnswer();
     const parsedLottoAnwerInput = LottoNumbersParser.parse(lottoAnswerInput);
     const answerLotto = new Lotto(parsedLottoAnwerInput);
+    OutputView.printBlankLine();
 
     return answerLotto;
   },
