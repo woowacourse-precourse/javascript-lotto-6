@@ -57,7 +57,7 @@ class App {
   }
 
   printLottos() {
-    print(`${cost / 1000}개를 구매했습니다.`);
+    print(`${this.#cost / 1000}개를 구매했습니다.`);
     this.#lottos.forEach((lotto) => {
       print(`[${lotto.getNumbers().join(', ')}]`);
     });
@@ -65,21 +65,22 @@ class App {
 
   async play() {
     this.#cost = await this.getInput(inputStep.cost.prompt, 'cost');
-    this.createLotto(cost);
+    this.createLotto(this.#cost);
     this.printLottos();
 
-    let winnerNumbers = await this.getInput(inputStep.winnerNumbers.prompt, 'prizeNumber');
-    this.#prizeNumber = winnerNumbers.split(',').map((elem) => Number(elem));
+    const prizeNumberString = await this.getInput(inputStep.winnerNumbers.prompt, 'prizeNumber');
+    this.#prizeNumber = prizeNumberString.split(',').map((elem) => Number(elem));
 
-    let bonusNumber = await this.getInput(inputStep.bonusNumber.prompt, 'bonusNumber');
-    bonusNumber = Number(bonusNumber);
+    const bonusString = await this.getInput(inputStep.bonusNumber.prompt, 'bonusNumber');
+    this.#bonusNumber = Number(bonusString);
 
     print(PROMPT.prize);
     print(PROMPT.dividingLine);
 
-    const computer = new Computer(this.#prizeNumber, bonusNumber, cost);
+    const computer = new Computer(this.#prizeNumber, this.#bonusNumber, this.#cost);
     computer.setPrizeResult(this.#lottos);
     const reuslt = computer.getPrizeResult();
+
     rank.reverse().forEach((elem) => {
       print(
         `${prize[elem].standard} (${prize[elem].money.toLocaleString()}원) - ${reuslt[elem]}개`,
