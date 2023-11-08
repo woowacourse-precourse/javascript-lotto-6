@@ -5,27 +5,27 @@ import Util from "./classes/util.js";
 const Console = MissionUtils.Console;
 
 class App {
-  async purchaseNumber() {
+  static async purchaseNumber() {
     const userMoney = await Util.validateUserMoney();
     const purchaseNumber = Util.getPurchaseNumber(userMoney);
     Console.print(purchaseNumber + "개를 구매했습니다.");
     return purchaseNumber;
   }
 
-  lottoClassesArray(purchaseNumber) {
+  static lottoClassesArray(purchaseNumber) {
     const lottoClasses = Util.getLottoClasses(purchaseNumber);
     lottoClasses.forEach((lottoClass) => lottoClass.printNumber());
     return lottoClasses;
   }
 
-  async WinningLotto() {
+  static async WinningLotto() {
     const winningNumbers = await WinningLotto.getWinningNumbers();
     const bonusNumber = await WinningLotto.getBonusNumber(winningNumbers);
 
     return new WinningLotto(winningNumbers, bonusNumber);
   }
 
-  getLottosCount(lottoclasses, winningNumberClass) {
+  static getLottosCount(lottoclasses, winningNumberClass) {
     lottoclasses.forEach((lottoClass) =>
       lottoClass.compareNumber(winningNumberClass.number)
     );
@@ -34,7 +34,7 @@ class App {
     );
   }
 
-  getRank(lottosClasses) {
+  static getRank(lottosClasses) {
     const rank = {};
     rank.first = lottosClasses.filter((element) => element.COUNT === 6).length;
     rank.second = lottosClasses.filter(
@@ -48,7 +48,7 @@ class App {
     return rank;
   }
 
-  printResult(rank) {
+  static printResult(rank) {
     Console.print("3개 일치 (5,000원) - " + rank.fifth + "개");
     Console.print("4개 일치 (50,000원) - " + rank.fourth + "개");
     Console.print("5개 일치 (1,500,000원) - " + rank.third + "개");
@@ -58,7 +58,7 @@ class App {
     Console.print("6개 일치 (2,000,000,000원) - " + rank.first + "개");
   }
 
-  totalPrize(rank) {
+  static totalPrize(rank) {
     return (
       rank.first * 2000000000 +
       rank.second * 30000000 +
@@ -69,13 +69,13 @@ class App {
   }
 
   async play() {
-    const purchaseNumber = await this.purchaseNumber();
-    const lottoClasses = this.lottoClassesArray(purchaseNumber);
-    const winningNumberClass = await this.WinningLotto();
-    this.getLottosCount(lottoClasses, winningNumberClass);
-    const rank = this.getRank(lottoClasses);
-    this.printResult(rank);
-    const total = this.totalPrize(rank);
+    const purchaseNumber = await App.purchaseNumber();
+    const lottoClasses = App.lottoClassesArray(purchaseNumber);
+    const winningNumberClass = await App.WinningLotto();
+    App.getLottosCount(lottoClasses, winningNumberClass);
+    const rank = App.getRank(lottoClasses);
+    App.printResult(rank);
+    const total = App.totalPrize(rank);
     const money = lottoClasses.length * 1000;
     const rate = ((total / money) * 100).toFixed(1);
     Console.print("총 수익률은 " + rate + "%입니다.");
