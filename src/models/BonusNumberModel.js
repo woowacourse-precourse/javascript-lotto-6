@@ -12,7 +12,7 @@ class BonusNumberModel {
   constructor(number, correctNumberModel) {
     this.#correctNumberModel = correctNumberModel;
     this.#validate(number);
-    this.#number = number;
+    this.#number = +number;
   }
 
   // prettier-ignore
