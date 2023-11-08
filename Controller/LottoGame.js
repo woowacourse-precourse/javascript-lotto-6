@@ -1,10 +1,11 @@
 import View from '../View/View.js';
 import Lotto from '../src/Lotto.js';
-import createRandomNumbers from '../utils/RandomNumber.js';
 import BonusNumber from '../Models/BonusNumber.js';
 import LottoResult from './domain/LottoResult.js';
 import { Console } from '@woowacourse/mission-utils';
 import PurchaseMoney from '../Models/PurchaseMoney.js';
+import PurchasedNumbers from '../Models/PurchasedNumbers.js';
+import { PURCHASE_PRICE } from '../modules/constant.js';
 
 class LottoGame {
   #view = new View();
@@ -25,16 +26,14 @@ class LottoGame {
   }
 
   getPurchasedAmount(insertedMoney) {
-    const amount = insertedMoney / 1000;
+    const amount = insertedMoney / PURCHASE_PRICE;
     this.#view.printAmount(amount);
 
     return amount;
   }
 
   getPurchasedNumbers(amount) {
-    const purchasedNumbers = Array.from({ length: amount }, () =>
-      createRandomNumbers(1, 45, 6)
-    );
+    const purchasedNumbers = new PurchasedNumbers(amount).getNumbers();
     this.#view.printPurchasedNumbers(purchasedNumbers);
     this.#view.printNewLine();
 
@@ -69,7 +68,7 @@ class LottoGame {
     }
   }
 
-  endGame(purchasedNumbers, lottoNumber, bonusNumber, amount) {
+  calculateGameResult(purchasedNumbers, lottoNumber, bonusNumber, amount) {
     const winResultBoard = LottoResult.calculateResultBoard(
       purchasedNumbers,
       lottoNumber,
@@ -78,7 +77,7 @@ class LottoGame {
 
     const profitPercent = LottoResult.calculateProfit(amount, winResultBoard);
 
-    this.#view.printWinResult(profitPercent, winResultBoard);
+    return { winResultBoard, profitPercent };
   }
 
   async play() {
@@ -87,7 +86,13 @@ class LottoGame {
     const purchasedNumbers = this.getPurchasedNumbers(amount);
     const lottoNumber = await this.createLottoNumber();
     const bonusNumber = await this.createBonusNumber();
-    this.endGame(purchasedNumbers, lottoNumber, bonusNumber, amount);
+    const { winResultBoard, profitPercent } = this.calculateGameResult(
+      purchasedNumbers,
+      lottoNumber,
+      bonusNumber,
+      amount
+    );
+    this.#view.printWinResult(profitPercent, winResultBoard);
   }
 }
 
