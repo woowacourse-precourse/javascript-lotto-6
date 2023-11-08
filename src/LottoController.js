@@ -40,8 +40,8 @@ class LottoController {
     return true;
   }
 
-  getLottoCount() {
-    this.#lottoCount = Number(this.#budget) / Constant.UNIT_PRICE;
+  getLottoCount(input = this.#budget) {
+    this.#lottoCount = Number(input) / Constant.UNIT_PRICE;
     View.output(`\n${this.#lottoCount}${InfoMsg.SHOW_LOTTO_COUNT}`);
   }
 
@@ -63,7 +63,8 @@ class LottoController {
   async askWinningNum() {
     while (true) {
       const input = await View.input(InfoMsg.ASK_LOTTO_NUM);
-      const isValid = this.validateWinningNum(input);
+      const removedSpace = input.replace(Constant.REGEX_SPACE, "");
+      const isValid = this.validateWinningNum(removedSpace);
 
       if (isValid === true) {
         break;
@@ -72,14 +73,13 @@ class LottoController {
   }
 
   validateWinningNum(input) {
-    let winningNum;
     try {
-      winningNum = new Lotto(input);
+      const lotto = new Lotto(input);
+      this.winningNum = lotto.returnNumbers();
     } catch (err) {
       View.output(err);
       return false;
     }
-    this.winningNum = winningNum;
     return true;
   }
 }
