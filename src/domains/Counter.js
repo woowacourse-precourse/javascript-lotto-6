@@ -1,5 +1,5 @@
 import LOTTO_CONSTANT from '../constants/lotto.js';
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 class Counter {

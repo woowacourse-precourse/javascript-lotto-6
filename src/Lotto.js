@@ -1,6 +1,6 @@
-import CustomError from '../errors/CustomError.js';
-import { ERROR_MESSAGES } from '../constants/messages.js';
-import LOTTO_CONSTANT from '../constants/lotto.js';
+import CustomError from './errors/CustomError.js';
+import { ERROR_MESSAGES } from './constants/messages.js';
+import LOTTO_CONSTANT from './constants/lotto.js';
 
 class Lotto {
   #numbers;

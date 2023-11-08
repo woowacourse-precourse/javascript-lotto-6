@@ -1,4 +1,4 @@
-import Lotto from '../../src/domains/Lotto';
+import Lotto from '../src/Lotto';
 
 const ERROR_PREFIX = '[ERROR]';
 
