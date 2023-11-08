@@ -14,6 +14,8 @@ export const OUTPUT_MESSAGE = Object.freeze({
 	matchingStatics: '\n당첨 통계',
 	hypen: '-',
 	HYPEN_COUNT: 3,
+	rateOfReturn: '총 수익률은',
+	percent: '% 입니다.',
 });
 
 export const MATCHING_RANK = Object.freeze({

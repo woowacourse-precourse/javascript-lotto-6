@@ -23,6 +23,8 @@ class LottoController {
 		this.getResult();
 
 		outputView.printMatchingStatics(this.#statics.getProceed());
+
+		outputView.printRateOfReturn(this.calculateRateOfReturn().toFixed(1));
 	}
 
 	async initializeLotto() {
@@ -71,7 +73,6 @@ class LottoController {
 		this.bonusNumberMatching();
 		this.getTotalMatchingStatics();
 		this.addProceed();
-		console.log(this.calculateRateOfReturn().toFixed(1));
 	}
 
 	initializeStatics() {

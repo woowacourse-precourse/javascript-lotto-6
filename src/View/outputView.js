@@ -33,6 +33,10 @@ const outputView = {
 			)}개`
 		);
 	},
+
+	printRateOfReturn(number) {
+		Console.print(`${OUTPUT_MESSAGE.rateOfReturn} ${number}${OUTPUT_MESSAGE.percent}`);
+	},
 };
 
 export default outputView;
