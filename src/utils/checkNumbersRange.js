@@ -1,3 +1,5 @@
+import { LOTTO_RANGE_REGEX } from '../constants.js';
+
 export default function checkNumbersRange(numbers) {
-  return numbers.every((item) => /^([1-9]|[1-3][0-9]|4[0-5])$/.test(item));
+  return numbers.every((item) => LOTTO_RANGE_REGEX.test(item));
 }
