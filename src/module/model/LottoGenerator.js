@@ -12,7 +12,7 @@ class LottoGenerator {
     let lotto;
 
     for (let i = 0; i < count; i += 1) {
-      lotto = new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6));
+      lotto = new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
       this.#lottoList.push(lotto);
     }
   }
