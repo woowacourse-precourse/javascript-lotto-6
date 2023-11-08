@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+
 class App {
   constructor() {
     this.winningNumbers = [];
@@ -19,7 +20,6 @@ class App {
     return money;
   }
 
-  // 예외처리
   validateMoney(money) {
     if (isNaN(money)) {
       MissionUtils.Console.print("[ERROR] 숫자만 입력해주세요.\n");
@@ -28,7 +28,6 @@ class App {
     } else return true;
   }
 
-  // 로또 발행
   publishLotto(money) {
     const lottoCount = money / 1000;
     const lottos = [];
@@ -42,10 +41,14 @@ class App {
     }
     return lottos;
   }
-  // 구매한 로또 수량 및 번호 출력
+
   printLottos(lottos) {
     MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
-  // 당첨 번호 입력받기
+    for (const lotto of lottos) {
+      MissionUtils.Console.print(`[${lotto.join(", ")}]`);
+    }
+  }
+
   async inputNumbers() {
     let numbers;
     let isValidated = false;
@@ -59,7 +62,6 @@ class App {
     this.winningNumbers = numbers;
   }
 
-  // 당첨 번호 예외처리
   validateNumbers(numbers) {
     if (numbers.length !== 6) {
       MissionUtils.Console.print("[ERROR] 6개의 숫자를 입력해주세요.\n");
@@ -72,7 +74,6 @@ class App {
     } else return true;
   }
 
-  // 보너스 번호 입력받기
   async inputBonusNumber() {
     let bonusNumber;
     let isValidated = false;
@@ -94,8 +95,7 @@ class App {
       MissionUtils.Console.print("[ERROR] 1~45 사이의 숫자를 입력해주세요.\n");
     } else if (winningNumbers.includes(bonusNumber)) {
       MissionUtils.Console.print("[ERROR] 당첨 번호와 중복될 수 없습니다.\n");
-    }
-    else return true;
+    } else return true;
   }
 
   countMatchingNumbers(lotto) {
@@ -126,8 +126,6 @@ class App {
     }
   }
 
-  // 총 당첨 내역 출력
-    // 결과 합산
   computeTotalResult(lottos) {
     const result = { "1등": 0, "2등": 0, "3등": 0, "4등": 0, "5등": 0, 꽝: 0 };
     for (const lotto of lottos) {
@@ -141,7 +139,6 @@ class App {
     return result;
   }
 
-    // 출력
   printResult(result) {
     MissionUtils.Console.print(`
 당첨 통계\n---
@@ -151,8 +148,6 @@ class App {
 5개 일치, 보너스 볼 일치 (30,000,000원) - ${result["2등"]}개
 6개 일치 (2,000,000,000원) - ${result["1등"]}개`);
   }
-
-  // 수익률 계산
 
   computeProfit(result, money) {
     const totalPrize =
