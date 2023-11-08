@@ -1,3 +1,5 @@
+import { RULES } from "../constants/index.js";
+
 export const purchaseAmountValidation = Object.freeze({
   // [ ] 숫자가 아닌 경우 (common)
   // [ ] 구입금액 <= 0원인 경우
@@ -12,7 +14,7 @@ export const purchaseAmountValidation = Object.freeze({
   isDivisibleByOneThousand: Object.freeze({
     errorMessage: `1000원으로 나누어 떨어지지 않습니다.`,
     isInvalid: (purchaseAmount) => {
-      return (purchaseAmount % 1000 !== 0);
+      return (purchaseAmount % RULES.lottoPrice !== 0);
     }
   }),
 

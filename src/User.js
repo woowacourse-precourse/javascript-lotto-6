@@ -9,4 +9,16 @@ export default class User {
   async promptPurchaseAmount() {
     return await Console.readLineAsync(GAME_MESSAGE.purchaseAmount);
   }
+
+  printLottosCount(lottos) {
+    Console.print(`\n${lottos.length}개를 구매했습니다.`);
+  }
+
+  printLottos(lottos) {
+    let result = '';
+    lottos.forEach(lotto => {
+      result += `[${lotto.join(', ')}]\n`;
+    })
+    Console.print(result);
+  }
 }
