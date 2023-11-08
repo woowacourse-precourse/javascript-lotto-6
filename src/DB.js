@@ -10,6 +10,16 @@ const STAGES = Object.freeze({
   EXIT: 7,
 });
 
+const RESULT= Object.freeze({
+  NUM_3: [3, 0],
+  NUM_4: [4, 1],
+  NUM_5: [5, 2],
+  NUM_5_BONUS: [7, 3],
+  NUM_6: [6, 4],
+});
+
+const REWARD = [ 5000, 50000 , 1500000, 30000000, 2000000000];
+
 const TEXTVIEW = Object.freeze({
   REQUEST_MONEYINPUT: '구입금액을 입력해 주세요.\n',
   LOTTO_AMOUNT: '개를 구매했습니다.',
@@ -34,7 +44,10 @@ const INITIAL_VALUES = Object.freeze({
   NUM: 0,
   ARR: [],
   OBJECT: {},
+  RESULT_ARR: [0,0,0,0,0,0],
 });
+
+
 
 class Data {
   static instance;
@@ -49,6 +62,8 @@ class Data {
 
   #moneyInput = INITIAL_VALUES.NUM;
 
+  #result = INITIAL_VALUES.RESULT_ARR;
+
   resetData() {
     this.#moneyInput = INITIAL_VALUES.NUM;
     this.#lottoBonus = INITIAL_VALUES.NUM;
@@ -56,6 +71,35 @@ class Data {
     this.#lottoCnt = INITIAL_VALUES.NUM;
     this.#lottoWin = INITIAL_VALUES.OBJECT;
   }
+
+  get result() {
+    return this.#result;
+  }
+
+  set result(value) {
+    this.#result = value;
+  }
+
+  resultAdd(idx){
+    if(idx === null)return;
+    this.#result[idx] += 1;
+  }
+
+  resultPercent(){
+    let sum = 0;
+    for(let i = 0; i < this.#result.length - 1; i += 1){
+      sum += this.#result[i] * REWARD[i];
+    }
+    sum = sum * 100 / this.#moneyInput;
+  
+    let formattedSum = sum.toFixed(1);
+    
+
+    formattedSum = formattedSum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    
+    this.#result[5] = formattedSum;
+  }
+  
 
   get moneyInput() {
     return this.#moneyInput;
@@ -114,5 +158,5 @@ class Data {
 const db = new Data();
 
 export {
-  TEXTVIEW, db as Data, STAGES, INITIAL_VALUES, CONST_VALUE,
+  TEXTVIEW, db as Data, STAGES, INITIAL_VALUES, CONST_VALUE, RESULT,
 };

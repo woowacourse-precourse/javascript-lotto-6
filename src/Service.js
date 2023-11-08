@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { CONST_VALUE, STAGES, Data } from './DB.js';
+import { CONST_VALUE, STAGES, Data, RESULT} from './DB.js';
 import Lotto from './Lotto.js';
 
 const methodForService = {
@@ -12,6 +12,43 @@ const methodForService = {
     );
     return numbers;
   },
+
+  setCntResult: async function writeLottoWinResult(num, arr) {
+    if(num === RESULT.NUM_5[0]){
+      const containsBonus = arr.includes(Data.lottoBonus);
+      if(containsBonus){
+        return RESULT.NUM_5_BONUS[1];
+      }
+      return RESULT.NUM_5[1];
+    }
+    if(num === RESULT.NUM_3[0]){
+      return RESULT.NUM_3[1];
+    }
+    if(num === RESULT.NUM_4[0]){
+      return RESULT.NUM_4[1];
+    }
+    if(num === RESULT.NUM_6[0]){
+      return RESULT.NUM_6[1];
+    }
+    return null;
+    
+  },
+
+  checkResult: async  function lottoWinCheck(idx) {
+
+    const winArr = Data.lottoWin.getNumArr();
+    const chckLotto = Data.lottoBuy[idx].getNumArr();
+    const numSet = new Set(winArr.concat(chckLotto));
+    
+    const chkNum = CONST_VALUE.LOTTO_LENGTH + CONST_VALUE.LOTTO_LENGTH - numSet.size;
+    const idxSet = await methodForService.setCntResult(chkNum, chckLotto);
+    Data.resultAdd(idxSet);
+  },
+
+  percentChk: async function calculPercent() {
+    Data.resultPercent();
+  }
+
 };
 
 const stageService = {
@@ -32,6 +69,12 @@ const stageService = {
   stage4Service: async function setBonusNum(num) {
     Data.lottoBonus = num;
   },
+  stage5Service: async function makeResult( ) {
+    for(let i = 0 ;i < Data.lottoBuy.length ; i += 1){
+      await methodForService.checkResult(i);
+    }
+    await methodForService.percentChk();
+  }
 };
 
 class Service {
@@ -57,6 +100,9 @@ class Service {
         break;
       case STAGES.NUM_4:
         await stageService.stage4Service(value);
+        break;
+      case STAGES.NUM_5:
+        await stageService.stage5Service();
         break;
       default:
         break;

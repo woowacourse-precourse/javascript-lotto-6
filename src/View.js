@@ -71,7 +71,7 @@ class PlayView {
       return tmp;
     },
     stage2View: async function showLottoListView() {
-      MissionUtils.Console.print(String(`${Data.lottoCnt}${TEXTVIEW.LOTTO_AMOUNT}`));
+      MissionUtils.Console.print(`${Data.lottoCnt}${TEXTVIEW.LOTTO_AMOUNT}`);
       Data.lottoBuy.forEach( (lotto) =>{
         MissionUtils.Console.print(`[${lotto.getNumbers()}]`);
       })
@@ -87,7 +87,8 @@ class PlayView {
       return tmp;
     },
     stage5View: async function requestWinNumbers() {
-      MissionUtils.Console.print(`${TEXTVIEW.RESULT([1, 0, 0, 0, 0, 62.5])}`);
+      await controller.switchStage(STAGES.NUM_5);
+      MissionUtils.Console.print(`${TEXTVIEW.RESULT(Data.result)}`);
       return STAGES.EXIT;
     },
   };

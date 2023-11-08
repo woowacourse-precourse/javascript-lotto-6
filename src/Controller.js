@@ -83,6 +83,9 @@ const stageController = {
     const bonusPasInt = errorController.bonusNumValidate(bonusNum);
     await serviceInst.switchStage(STAGES.NUM_4, bonusPasInt);
   },
+  stage5Controller: async function makeResult() {
+    await serviceInst.switchStage(STAGES.NUM_5, null);
+  }
 };
 
 class Controller {
@@ -112,6 +115,9 @@ class Controller {
         case STAGES.NUM_4:
           await stageController.stage4Controller();
           return STAGES.NUM_5;
+        case STAGES.NUM_5:
+          await stageController.stage5Controller();
+          return STAGES.EXIT;
         default:
       }
     } catch (e) {
