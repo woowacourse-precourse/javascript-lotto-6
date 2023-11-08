@@ -55,7 +55,7 @@ describe('로또 클래스 테스트', () => {
 });
 
 describe('당첨 로또 클래스 테스트', () => {
-  const { FIRST, SECOND, THIRD, FOURTH, FIFTH } = LOTTO.WIN;
+  const { FIRST, SECOND, THIRD, FOURTH, FIFTH, NONE } = LOTTO.WIN;
   const winningNumbers = ['1', '2', '3', '4', '5', '6'];
   const bonusNumber = '7';
   const winningLotto = new WinningLotto(winningNumbers);
@@ -83,27 +83,27 @@ describe('당첨 로또 클래스 테스트', () => {
   test.each([
     {
       numbers: ['1', '2', '3', '4', '5', '6'],
-      result: 2000000000,
+      result: FIRST,
     },
     {
       numbers: ['1', '2', '3', '4', '5', '7'],
-      result: 30000000,
+      result: SECOND,
     },
     {
       numbers: ['1', '2', '3', '4', '5', '8'],
-      result: 1500000,
+      result: THIRD,
     },
     {
       numbers: ['1', '2', '3', '4', '8', '9'],
-      result: 50000,
+      result: FOURTH,
     },
     {
       numbers: ['1', '2', '3', '8', '9', '10'],
-      result: 5000,
+      result: FIFTH,
     },
     {
       numbers: ['1', '2', '8', '9', '10', '11'],
-      result: 0,
+      result: NONE,
     },
   ])('당첨 금액 계산 테스트', (input) => {
     const { numbers, result } = input;
