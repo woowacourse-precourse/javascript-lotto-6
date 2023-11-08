@@ -139,6 +139,10 @@ class LottoGame {
     );
     LottoGameOutput.showFirstStatistics(firstCount);
   }
+
+  end() {
+    return this;
+  }
 }
 
 export default LottoGame;

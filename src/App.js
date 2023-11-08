@@ -16,6 +16,7 @@ class App {
     this.#lottoGame.compareLottoTicketsWin();
     this.#lottoGame.calculateReturnRate();
     this.#lottoGame.showLottoWinStatistics();
+    this.#lottoGame.end();
   }
 }
 
