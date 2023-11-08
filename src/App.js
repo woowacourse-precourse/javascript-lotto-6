@@ -15,6 +15,8 @@ class App {
 
     const checker = new LottoChecker(tickets, winningNumbers);
     const matches = checker.getMatches();
+    LottoPrinter.printStaticsHeadLine();
+    LottoPrinter.printStaticsSeperator();
     LottoPrinter.printMatches(matches);
     const returnRate = LottoCalculator.getReturnRate(
       checker.revenue,

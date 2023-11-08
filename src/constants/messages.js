@@ -15,6 +15,7 @@ const messages = {
     invalidAmount: '[ERROR] 금액은 1000 단위의 숫자여야 합니다.',
     invalidCount: '[ERROR] 로또 번호는 6개여야 합니다.',
     invalidNumber: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
+    duplicate: '[ERROR] 숫자는 중복해서 입력할 수 없습니다.',
   },
 };
 
