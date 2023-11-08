@@ -1,17 +1,22 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { ERROR, LOTTO } from '../config.js';
-import { isPositiveInteger } from '../utils.js';
+import { LOTTO } from '../constant/index.js';
+import { LottoValidation } from './index.js';
+
+const {
+  RANGE: { START, END },
+  COUNT,
+  PRICE,
+} = LOTTO;
 
 class Lotto {
   static generateLottoNumbers() {
-    const { RANGE, COUNT } = LOTTO;
-    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(RANGE.START, RANGE.END, COUNT);
+    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(START, END, COUNT);
 
     return lottoNumbers.sort((a, b) => a - b);
   }
 
   static createLottos(inputAmount) {
-    const lottoCount = inputAmount / LOTTO.PRICE;
+    const lottoCount = inputAmount / PRICE;
     return Array.from({ length: lottoCount }, () => new Lotto(Lotto.generateLottoNumbers()));
   }
 
@@ -23,30 +28,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO.COUNT) {
-      throw new Error(ERROR.IS_NOT_LOTTO_LENGTH);
-    }
-    if (!this.#isPositiveInteger(numbers)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
-    if (this.#isDuplicated(numbers)) {
-      throw new Error(ERROR.IS_DUPLICATED);
-    }
-    if (this.#isRangeInvalid(numbers)) throw new Error(ERROR.IS_NOT_IN_LOTTO_RANGE);
-  }
-
-  #isDuplicated(numbers) {
-    const set = new Set(numbers);
-
-    return set.size !== numbers.length;
-  }
-
-  #isPositiveInteger(numbers) {
-    return numbers.every(isPositiveInteger);
-  }
-
-  #isRangeInvalid(numbers) {
-    const { START, END } = LOTTO.RANGE;
-
-    return numbers.some((number) => number < START || number > END);
+    LottoValidation.lotto(numbers);
   }
 
   // TODO: 추가 기능 구현
