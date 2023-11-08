@@ -38,23 +38,39 @@ class Lotto {
     }, 
   ];
 
-  constructor(numbers, bonusNumber) {
-    this.#validate(numbers, bonusNumber);
+  constructor(numbers) { // 배열로 들어온것
+    this.#validate(numbers);
     this.#numbers = numbers.sort((a, b) => a-b, 0);
-    this.#bonusNumber = bonusNumber;
   }
   
-  #validate(splited, bonusNumber) {
+  #validate(numbers) {
     const inspector = new Inspector();
-    if (splited.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== 6) {
+      throw new Error("[ERROR] 길이가 6이어야 합니다.");
     }
-
-    const ableWinnerLotto = splited ? inspector.getIsAble(splited) : null;
-    inspector.getIsDuplicate(ableWinnerLotto, bonusNumber);
+    const filtererd = numbers.filter(number => {
+      return numbers.indexOf(number) !== numbers.lastIndexOf(number);
+    })
+    if (filtererd.length !== 0) {
+      throw new Error("[ERROR] 중복되지 않아야 합니다.");
+    }
+    inspector.getIsAble(numbers);
   }
 
   // TODO: 추가 기능 구현
+  setBonusNumber (bonusNumber) {
+    const filtered = this.#numbers.filter(v => v === bonusNumber);
+    if (filtered.length !== 0){
+      throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.");
+    } else if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 보너스 번호는 1보다 크고 45보다 작아야 합니다.")
+    } else {
+      this.#bonusNumber = bonusNumber;
+    }
+  }
+
+
+  
   getCompareCount (lottoNumber) {
     let count = 0;
     this.#numbers.forEach(number => {

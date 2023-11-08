@@ -1,3 +1,5 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
+
 class Inspector {
   // 구입금액
   containNumberOnly (number) {
@@ -5,7 +7,7 @@ class Inspector {
     if (number.match(regExpNumber)) {
       return true;
     } else {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.") ;
+      MissionUtils.Console.print("[ERROR] 로또 번호는 6개여야 합니다.") ;
     };
   }
 
@@ -13,7 +15,7 @@ class Inspector {
     if (number % 1000 === 0) {
       return true;
     } else {
-      throw new Error("[ERROR] 구입금액은 1000으로 나누어떨어져야 합니다.") ;
+      MissionUtils.Console.print("[ERROR] 구입금액은 1000으로 나누어떨어져야 합니다.") ;
     }
   }
 
@@ -27,22 +29,22 @@ class Inspector {
 
   getIsValid (string) {
     if (string === '') {
-      throw new Error("[ERROR] 로또 번호는 1,2,3,4,5,6 와 같은 구조로 이루어져야 합니다.");
+      MissionUtils.Console.print("[ERROR] 로또 번호는 1,2,3,4,5,6 와 같은 구조로 이루어져야 합니다.");
     };
   }
 
   getIsInRange (number) {
     if(number < 1 || number > 45) {
-      throw new Error('[ERROR] 로또 번호는 1에서 45 사이의 숫자여야 합니다.');
+      MissionUtils.Console.print('[ERROR] 로또 번호는 1에서 45 사이의 숫자여야 합니다.');
     };
   }
 
   getIsAble (splited) {
-    return splited.map((stringNumber) => {
-      this.getIsValid(stringNumber);
-      this.containNumberOnly(stringNumber);
-      this.getIsInRange(Number(stringNumber));
-      return stringNumber;
+    return splited.map((number) => {
+      this.getIsValid(number.toString());
+      this.containNumberOnly(number.toString());
+      this.getIsInRange(number);
+      return number;
     });
   }
 
@@ -53,7 +55,7 @@ class Inspector {
       .filter(number => number === Number(bonus))
       .length;
     if (duplicatedCount !== 0) {
-      throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중독되지 않아야 합니다.');
+      MissionUtils.Console.print('[ERROR] 보너스 번호는 당첨 번호와 중독되지 않아야 합니다.');
     } else if (duplicatedCount === 0) {
       return true;
     }
