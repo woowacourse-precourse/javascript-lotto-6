@@ -41,6 +41,19 @@ class LottoService {
         }
     }
 
+    validateBonusNumber(bonusNumber) {
+        try{
+            if(Number.isNaN(bonusNumber)) throw Error("[ERROR] 보너스 번호는 숫자 형식이어야 합니다.");
+            if(bonusNumber < 1 || bonusNumber > 45) throw Error("[ERROR] 보너스 숫자의 범위는 1 ~ 45 사이여야 합니다.");
+            if(!Number.isInteger(bonusNumber)) throw Error("[ERROR] 보너스 번호는 정수 형식이어야 합니다.");
+            if(this.numbers.includes(bonusNumber)) throw Error("[ERROR] 보너스 번호는 로또 번호와 중복되면 안됩니다.");
+            return true;
+        }catch(e){
+            Console.print(`${e}`);
+            return false;
+        }
+    }
+
     buyLotto(money) {
         const amount = Math.floor(money / 1000);
         Console.print(`${amount}개를 구매했습니다.`);
