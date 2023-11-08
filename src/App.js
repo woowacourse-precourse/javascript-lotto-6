@@ -63,6 +63,18 @@ class App {
     return this.calculateMatches(matches, bonuses);
   }
 
+  async calculateScore(lotto, answers){
+    let match = 0;
+    let bonus = false;
+    answers.forEach((answer) => {
+      if (lotto.includes(answer)){
+        match += 1;}
+    })
+    if (lotto.includes(answers[-1])){
+      bonus = true;
+    }
+    return {match, bonus};
+  }
 }
 
 export default App;
