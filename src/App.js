@@ -63,15 +63,10 @@ class App {
 
     //로또들 당첨액 출력
     const total_profit_rate = (check_winning_price() / price) * 100;
-    // MissionUtils.Console.print(
-    //   `총 수익률은 ${(check_winning_price() / price) * 100}%입니다.`
-    // );
     MissionUtils.Console.print(
-      Number.isInteger(total_profit_rate)
-        ? `총 수익률은 ${total_profit_rate}%입니다.`
-        : `총 수익률은 ${total_profit_rate
-            .toFixed(2)
-            .replace(/\.?0+$/, "")}%입니다.`
+      `총 수익률은 ${total_profit_rate
+        .toFixed(2)
+        .replace(/\.?0+$/, "")}%입니다.`
     );
 
     function check_winning_price() {
@@ -140,10 +135,10 @@ class App {
     }
 
     // 랜덤로또 생산
-    function produce_ticket(ticket) {
-      MissionUtils.Console.print(`${ticket}개를 구매했습니다.`);
+    function produce_ticket(ticket_count) {
+      MissionUtils.Console.print(`${ticket_count}개를 구매했습니다.`);
       let tickets = [];
-      for (let i = 0; i < ticket; i++) {
+      for (let i = 0; i < ticket_count; i++) {
         tickets.push(new Lotto());
       }
       return tickets;

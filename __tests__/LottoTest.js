@@ -198,3 +198,9 @@ describe("예외 테스트..", () => {
     }
   });
 });
+describe("소수점 이하 검사", () => {
+  const numbers = [62.5, 33.333333, 20, 22.229, 33.299];
+  numbers.forEach((number) => {
+    console.log(number.toFixed(2).replace(/\.?0+$/, ""));
+  });
+});
