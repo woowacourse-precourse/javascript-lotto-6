@@ -7,7 +7,9 @@ class App {
     const TICKETS = this.createUniqueRandomNums(COUNT);
     const WINNINGNUMS = await this.getWinningNum();
     const BONUS = await this.getBonusNum();
-    this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
+    const WINLOG = this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
+    this.printWinningStatistics(WINLOG);
+    this.calculateProfit(COUNT, TICKETS);
   }
 
   // 사용자로부터 구입금액을 입력 받는 메서드
@@ -76,7 +78,7 @@ class App {
       }
     });
 
-    this.printWinningStatistics(WINLOG);
+    return WINLOG;
   }
 
 
@@ -101,8 +103,19 @@ class App {
     }
   }
 
-  // calculateProfit
   // 총 수익률을 계산해주는 메서드
+  calculateProfit(COUNT ,WINLOG) {
+    const PRICE = COUNT * 1000;
+    const prizeList = [5000, 50000, 1500000, 2000000000, 30000000];
+    let sum = 0;
+    for(let i = 0; i<WINLOG.length; i++){
+      sum += (WINLOG[i] * prizeList[i])
+    }
+
+    const profit = ((sum - PRICE) / PRICE) * 100;
+    const roundedProfit = Math.round(profit * 100) / 100;
+    Console.print(`총 수익률은 ${roundedProfit}%입니다.`)
+  }
 }
 
 export default App;
