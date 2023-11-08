@@ -2,7 +2,6 @@ import View from '../View/View.js';
 import Lotto from '../Model/Lotto.js';
 import { Random } from '@woowacourse/mission-utils';
 import Constant from '../Constants/Constant.js';
-import { validateBonusNumber, validateGoalNumber } from '../Validator/Validate.js';
 
 class LottoController {
   #view;
@@ -17,7 +16,7 @@ class LottoController {
     this.#view.printCountOfLotto(countOfLotto);
     const lottoArray = this.#getLottoNumber(countOfLotto);
     this.#view.printLottoNumbers(lottoArray);
-    const goalLotto = await this.#view.getGoalNumber();
+    const goalLotto = await this.#getGoalLotto();
     const bonusNumber = await this.#view.getBonusNumber(goalLotto.getNumbers());
     const correctArray = goalLotto.calculateCorrectNumber(lottoArray, bonusNumber);
     const resultArray = this.#calculateResult(correctArray);
@@ -36,6 +35,17 @@ class LottoController {
       lottoArray.push(lotto);
     }
     return lottoArray;
+  }
+
+  async #getGoalLotto() {
+    try {
+      const lotto = new Lotto(await this.#view.getGoalNumber());
+      return lotto;
+    } catch (error) {
+      this.#view.printMessage(error);
+      const newLotto = await this.#getGoalLotto();
+      return newLotto;
+    }
   }
 
   #getRandomNumber() {

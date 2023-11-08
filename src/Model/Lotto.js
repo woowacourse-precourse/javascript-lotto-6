@@ -1,12 +1,22 @@
+import { validateLotto } from '../Validator/Validate.js';
+import { Console } from '@woowacourse/mission-utils';
 class Lotto {
   #numbers;
 
   constructor(numbers) {
+    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
   getNumbers() {
     return this.#numbers.sort((a, b) => a - b);
+  }
+
+  #validate(numbers) {
+    const [check, message] = validateLotto(numbers.sort((a, b) => a - b));
+    if (check) {
+      throw new Error(message);
+    }
   }
 
   calculateCorrectNumber(lottoArray, bonusNumber) {

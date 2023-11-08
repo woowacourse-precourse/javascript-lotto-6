@@ -34,7 +34,7 @@ const isAllNumberInRangeInArray = (input) => {
   return input.some((n) => !(n >= Constant.MIN_RANDOM_NUMBER && n <= Constant.MAX_RANDOM_NUMBER));
 };
 
-const validateGoalNumber = (numbers) => {
+const validateLotto = (numbers) => {
   if (isAllNumberInArray(numbers)) return [true, ERROR_MESSAGE.INPUT_NUMBER];
   if (isAllNumberInRangeInArray(numbers)) return [true, ERROR_MESSAGE.NOT_IN_RANGE];
   if (isCorrectLength(numbers)) return [true, ERROR_MESSAGE.WRONG_LENGTH];
@@ -56,4 +56,4 @@ const validateBonusNumber = (bonusNumber, goalLotto) => {
   return [false, ''];
 };
 
-export { validatePurchaseAmount, validateGoalNumber, validateBonusNumber };
+export { validatePurchaseAmount, validateLotto, validateBonusNumber };

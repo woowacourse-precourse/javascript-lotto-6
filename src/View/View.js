@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lotto from '../Model/Lotto.js';
 import { SYSTEM_MESSAGE, resultMessage } from '../Constants/Message.js';
-import { validateBonusNumber, validateGoalNumber, validatePurchaseAmount } from '../Validator/Validate.js';
+import { validateBonusNumber, validatePurchaseAmount } from '../Validator/Validate.js';
 
 const View = {
   async getPurchaseAmount() {
@@ -17,13 +17,7 @@ const View = {
 
   async getGoalNumber() {
     const goalNumber = await Console.readLineAsync(SYSTEM_MESSAGE.INPUT_GOAL_NUMBER);
-    const goalLotto = new Lotto(goalNumber.split(',').map(Number));
-    const [check, message] = validateGoalNumber(goalLotto.getNumbers().sort((a, b) => a - b));
-    if (check) {
-      Console.print(message);
-      const newGoalLotto = await this.getGoalNumber();
-      return newGoalLotto;
-    }
+    const goalLotto = goalNumber.split(',').map(Number);
     return goalLotto;
   },
 
@@ -49,6 +43,10 @@ const View = {
 
   printResult(resultArray, rateOfReturn) {
     Console.print(resultMessage(resultArray, (rateOfReturn.toFixed(2) * 100) / 100));
+  },
+
+  printMessage(message) {
+    Console.print(message);
   },
 };
 
