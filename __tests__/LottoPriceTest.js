@@ -1,4 +1,4 @@
-import Validations from '../src/Validations';
+import Validations from '../src/Validations.js';
 
 describe('구입 금액 테스트', () => {
   test.each([['10 00', ' 2000 ', ' 30 000']])('공백이 없는지', lottoPrice => {
