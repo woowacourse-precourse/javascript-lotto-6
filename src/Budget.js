@@ -3,6 +3,8 @@ import { Console } from "@woowacourse/mission-utils";
 class Budget {
   #lottery_num;
 
+  budget = 0;
+
   constructor(budget) {
     this.#validate(budget);
     this.#lottery_num = this.calcLotteryNumbers(budget);
@@ -13,14 +15,18 @@ class Budget {
     this.validateBudgetUnit(budget);
   }
 
-  static async getBudget() {
+  static async inputBudget() {
     try {
-      const budget = await Console.readLineAsync("구입금액을 입력해주세요.\n");
-      return new Budget(Number(budget));
+      this.budget = await Console.readLineAsync("구입금액을 입력해주세요.\n");
+      return new Budget(Number(this.budget));
     } catch (error) {
       Console.print(error.message);
-      return this.getBudget();
+      return this.inputBudget();
     }
+  }
+
+  static getBudget() {
+    return this.budget;
   }
 
   validateBudgetType(budget) {

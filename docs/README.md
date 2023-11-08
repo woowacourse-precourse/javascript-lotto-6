@@ -77,7 +77,7 @@ e.g. [ERROR] 숫자가 잘못된 형식입니다.
 
   - [x] 당첨 통계를 계산한다. Game#calcWinningStatistics()
 
-  - [] 수익률을 계산한다. Game#calcProfit()
+  - [x] 수익률을 계산한다. Game#calcProfit()
 
   - [x] 당첨 번호와 로또 번호중 일치하는 번호의 수를 계산한다. Game#countMatchingNumbers()
 

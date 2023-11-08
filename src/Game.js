@@ -12,8 +12,14 @@ class Game {
 
   #matchingNumbers = [];
 
+  #outcome = 0;
+
   constructor(lotteryNumbers) {
     this.createLotto(lotteryNumbers);
+  }
+
+  getOutcome() {
+    return this.#outcome;
   }
 
   calcWinningStatistics() {
@@ -21,16 +27,17 @@ class Game {
     const matchingNumbers = this.#matchingNumbers;
 
     const statistics = {
-      3: { prize: "5,000원", count: 0 },
-      4: { prize: "50,000원", count: 0 },
-      5: { prize: "1,500,000원", count: 0 },
-      5.1: { prize: "30,000,000원", count: 0 },
-      6: { prize: "2,000,000,000원", count: 0 },
+      3: { prize: "5,000원", count: 0, reward: 5000 },
+      4: { prize: "50,000원", count: 0, reward: 50000 },
+      5: { prize: "1,500,000원", count: 0, reward: 1500000 },
+      5.1: { prize: "30,000,000원", count: 0, reward: 30000000 },
+      6: { prize: "2,000,000,000원", count: 0, reward: 2000000000 },
     };
 
     matchingNumbers.forEach((count) => {
       if (count in statistics) {
         statistics[count].count += 1;
+        this.#outcome += statistics[count].reward;
       }
     });
 
@@ -45,6 +52,7 @@ class Game {
         message = `5개 일치, 보너스 볼 일치 (30,000,000원) - ${
           this.#bonusCount
         }개`;
+        this.#outcome += this.#bonusCount * 30000000;
       }
       Console.print(message);
     }
