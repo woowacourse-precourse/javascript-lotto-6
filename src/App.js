@@ -50,8 +50,13 @@ class App {
 
   async getBonusLotto(winning) {
     const bonusNumber = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-    const bonus = new Bonus(bonusNumber, winning);
-    if(bonus) return bonus;
+    try {
+      const bonus = new Bonus(bonusNumber, winning);
+      if(bonus) return bonus;
+    } catch(error) {
+      console.error(error.message);
+      this.getBonusLotto(winning);
+    }
   }
 
   async getWinningLotto() {
