@@ -1,14 +1,14 @@
 import LottoTickets from './LottoTickets';
-import BonusNumber from './BonusNumber'
-import Input from './view/Input';
-import Output from './view/Output';
+import BonusNumber from './BonusNumber';
+import Input from './View/Input';
+import Output from './View/Output';
 import Lotto from './Lotto';
 
 class App {
-  #money
-  #lottos
-  #bonusNumber
-  #winningNumbers
+  #money;
+  #lottos;
+  #bonusNumber;
+  #winningNumbers;
 
   constructor() {
     this.#money = 0;
@@ -22,20 +22,20 @@ class App {
   async play() {
     await this.requestPurchaseAmounts();
     await this.requestWinningNumbers();
-     await this.requestBonusNumber();
-     this.requestResult();
+    await this.requestBonusNumber();
+    this.requestResult();
   }
 
-  async requestPurchaseAmounts() {    
+  async requestPurchaseAmounts() {
     try {
       const INPUT = await this.input.getPurchaseAmount();
-      
+
       this.lottos = new LottoTickets(String(INPUT));
-      this.#money = this.lottos.returnMoney()
+      this.#money = this.lottos.returnMoney();
 
       this.#lottos = this.lottos.publishTickets();
     } catch (error) {
-      this.output.printError(error.message)
+      this.output.printError(error.message);
       await this.requestPurchaseAmounts();
     }
   }
@@ -47,7 +47,7 @@ class App {
       this.lotto = new Lotto(String(INPUT));
       this.#winningNumbers = this.lotto.returnWinningNumbers();
     } catch (error) {
-      this.output.printError(error.message)
+      this.output.printError(error.message);
       await this.requestWinningNumbers();
     }
   }
@@ -56,21 +56,25 @@ class App {
     try {
       const INPUT = await this.input.getBonusNumber();
 
-      this.bonus = new BonusNumber(String(INPUT), this.#winningNumbers)
-      this.#bonusNumber = this.bonus.returnValue();
+      const bonus = new BonusNumber(String(INPUT), this.#winningNumbers);
+      this.#bonusNumber = bonus.returnValue();
     } catch (error) {
-      this.output.printError(error.message)
+      this.output.printError(error.message);
+      await this.requestBonusNumber();
     }
   }
 
   requestResult() {
     this.lotto = new Lotto(this.#winningNumbers);
-    const STATS = this.lotto.calculateWinningStats(this.#lottos, [...this.#winningNumbers, this.#bonusNumber]);
-    const profits = this.lotto.getProfits(STATS)
-    const rate = this.lotto.calculateRate(profits, this.#money)
-    console.log(`rate: ${rate}`)
-    
-    this.output.printStats(STATS)
+    const STATS = this.lotto.calculateWinningStats(
+      this.#lottos,
+      this.#winningNumbers,
+      this.#bonusNumber
+    );
+    const profits = this.lotto.getProfits(STATS);
+    const rate = this.lotto.calculateRate(profits, this.#money);
+
+    this.output.printStats(STATS);
     this.output.printRate(rate);
   }
 }

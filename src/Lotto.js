@@ -21,21 +21,24 @@ class Lotto {
     return this.#numbers;
   }
 
-  calculateWinningStats(lottos, numbers) {
+  calculateWinningStats(lottos, winningNubers, bonusNumbers) {
     const STATS = [0, 0, 0, 0, 0];
 
     lottos.forEach((lotto) => {
-      const TOTAL = numbers.filter((el) => lotto.includes(el));
-      const TOTAL_MATCHES = TOTAL.length;
+      const MATCHES = winningNubers.filter((el) => lotto.includes(el));
+      const MATCH_COUNT = MATCHES.length;
+      const BONUS_MATCH = lotto.includes(bonusNumbers);
 
-      if (
-        TOTAL_MATCHES === 6 ||
-        (TOTAL_MATCHES === 5 && TOTAL.includes(numbers[numbers.length - 1]))
-      ) {
-        STATS[TOTAL_MATCHES - 2] += 1;
-      }
-      if ([3, 4, 5].includes(TOTAL_MATCHES)) {
-        STATS[TOTAL_MATCHES - 3] += 1;
+      if (MATCH_COUNT === 6) {
+        STATS[4] += 1;
+      } else if (MATCH_COUNT === 5 && BONUS_MATCH) {
+        STATS[3] += 1;
+      } else if (MATCH_COUNT === 5) {
+        STATS[2] += 1;
+      } else if (MATCH_COUNT === 4) {
+        STATS[1] += 1;
+      } else if (MATCH_COUNT === 3) {
+        STATS[0] += 1;
       }
     });
 

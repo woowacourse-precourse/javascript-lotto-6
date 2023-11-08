@@ -1,19 +1,19 @@
-import Validator from "./validator/Validator";
+import Validator from './validator/Validator';
 
 class BonusNumber {
-  #bonusNumber
+  #bonusNumber;
 
   constructor(bonus, numbers) {
-    this.#validate(bonus, numbers)
+    this.#validate(bonus, numbers);
     this.#bonusNumber = bonus;
   }
 
-  #validate (bonus, numbers) {
-    Validator.isBonusNumberValid(String(bonus), numbers)
+  #validate(bonus, numbers) {
+    Validator.isBonusNumberValid(String(bonus), numbers);
   }
 
   returnValue() {
-    return Number(this.#bonusNumber)
+    return Number(this.#bonusNumber);
   }
 }
 

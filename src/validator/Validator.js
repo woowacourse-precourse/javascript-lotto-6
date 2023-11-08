@@ -6,20 +6,20 @@ import {
   BONUS_NUMBER_ERROR_MESSAGE,
   WINNING_NUMBERS_ERROR_MESSAGE
 } from '../constants/constants';
-import CustomError from '../view/CustomError';
+import CustomError from '../View/CustomError';
 
 class Validator {
   static isMoneyValid(input) {
     const NUMERIC_MONEY = Number(input);
-    console.log(input);
+
+    if (isNaN(NUMERIC_MONEY)) {
+      throw new CustomError(COMMON_ERROR_MESSAGE.onlyNumber);
+    }
 
     if (NUMERIC_MONEY < UNIT) {
       throw new CustomError(PURCHASE_AMOUNT_ERROR_MESSAGE.underThousand);
     }
 
-    if (isNaN(NUMERIC_MONEY)) {
-      throw new CustomError(COMMON_ERROR_MESSAGE.onlyNumber);
-    }
     if (NUMERIC_MONEY % UNIT) {
       throw new CustomError(PURCHASE_AMOUNT_ERROR_MESSAGE.wrongUnit);
     }
@@ -27,7 +27,7 @@ class Validator {
 
   static isNumbersValid(input) {
     const WINNINGS = String(input).split(',').map(Number);
-    const MY_NUMBERS = WINNINGS.sort((a, b) => a + b).join('');
+    const MY_NUMBERS = WINNINGS.sort((a, b) => a - b).join('');
     const REMOVE_DUPLICATE_NUMBERS = [...new Set(WINNINGS)]
       .sort((a, b) => a + b)
       .join('');
