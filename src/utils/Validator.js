@@ -1,4 +1,5 @@
 import ERROR_MESSAGE from "../Constant/ErrorMessage";
+import RangeTest from "./RangeTest";
 
 const Validator = {
     InputPurchaseAmount(purchaseAmount) {
@@ -15,7 +16,7 @@ const Validator = {
         throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT_ZERO);
 
     },
-    
+
     lottoNumber(numbers) {
       const number = numbers.join("");
       if (number.replace(/\d/g, "").length > 0)
