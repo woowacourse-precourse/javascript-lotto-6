@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 const inputValidators = {
   validatePayment(payment) {
     if (!/^\d+$/.test(payment)) {

@@ -1,7 +1,7 @@
 import inputValidators from '../src/inputValidators.js'
 
 describe('구입 금액에 대한 예외처리', () =>{
-  test.each([["천원"],["1million"]])('구입 금액은 숫자여야 한다.',
+  test.each([["천원"],["1million"],["1000j"]])('구입 금액은 숫자여야 한다.',
    async (input) => {
     expect(() => {
       inputValidators.validatePayment(input);
