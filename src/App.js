@@ -3,7 +3,6 @@ import * as Util from "./Util";
 import { Lotto } from "./Lotto.js";
 
 class App {
-  randomNumbers;
   lottoArray;
   purchaseAmount;
   basedAmount;
@@ -16,7 +15,6 @@ class App {
   constructor() {
     this.basedAmount = 1000;
     this.totalPrice = 0;
-    this.randomNumbers = Array.from({length: 45}, (_, i) => i + 1);;
     this.lottoArray = new Array();
     this.winningCounts = new Array(6).fill(0);
     this.prizeMoney = [0, 2000000000, 30000000, 1500000, 50000, 5000];
@@ -27,6 +25,7 @@ class App {
     this.createLottoArray();
     this.printLottoNumbers();
     this.enterWinningNumbers();
+    this.printWinningResults();
   }
 
   async enterPurchaseAmount() {
@@ -37,8 +36,8 @@ class App {
 
   createLottoArray() {
     for (let i = 0 ; i < this.purchaseAmount ; i += 1) {
-      Random.shuffle(this.randomNumbers)
-      this.lottoArray.push(new Lotto(array.slice(0, 6)));
+      let randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      this.lottoArray.push(new Lotto(randomNumbers));
     }
   }
 
@@ -53,7 +52,7 @@ class App {
   }
 
   async enterWinningNumbers() {
-    this.winningNumbers = await Console.readLineAsync("당첨 번호를 입력해 주세요.").split(",");
+    this.winningNumbers = (await Console.readLineAsync("당첨 번호를 입력해 주세요.")).split(",");
     this.winningBonusNumber = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
     Util.validateLottoNumbers(this.winningNumbers, this.winningBonusNumber);
   }
