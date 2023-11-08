@@ -81,6 +81,27 @@ class LottoGame {
   }
 
 
+  calculateProfitRate = (rankCount, totalMoney) => {
+    const prizeMoney = {
+      "1": 2000000000,
+      "2": 30000000,
+      "3": 1500000,
+      "4": 50000,
+      "5": 5000
+    };
+
+    let totalIncome = 0;
+
+    for (const rank in rankCount) {
+      totalIncome += prizeMoney[rank] * rankCount[rank];
+    }
+
+    const profit = totalIncome - totalMoney;
+    const profitRate = (profit / totalMoney) * 100;
+
+    return Math.round(profitRate * 100) / 100;
+  };
+
 }
 
 export default LottoGame;
