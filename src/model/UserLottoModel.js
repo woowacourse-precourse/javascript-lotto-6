@@ -40,8 +40,8 @@ class UserLottoModel {
   }
 
   setAmount(amount) {
-    this.#isNotAmountUnit(amount);
     this.#isNotEnoughAmount(amount);
+    this.#isNotAmountUnit(amount);
     this.#amount = amount;
     this.#userLottos = this.#generateLotto();
   }
