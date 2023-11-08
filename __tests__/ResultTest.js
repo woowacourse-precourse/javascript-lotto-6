@@ -3,15 +3,15 @@ import Result from '../src/model/Result.js';
 
 describe('Result 클래스 테스트', () => {
   let result;
-  const lottos = [
+  const LOTTOS = [
     [1, 2, 3, 4, 5, 6],
     [1, 2, 3, 4, 5, 7],
   ];
-  const winLotto = [1, 2, 3, 4, 5, 6];
-  const bonusLotto = 7;
+  const WIN_LOTTO = [1, 2, 3, 4, 5, 6];
+  const BONUS_LOTTO = 7;
 
   beforeEach(() => {
-    result = new Result(lottos, winLotto, bonusLotto);
+    result = new Result(LOTTOS, WIN_LOTTO, BONUS_LOTTO);
   });
 
   test('로또 당첨 1등 1개, 2등 1개일 경우 총 당첨액을 반환한다.', () => {

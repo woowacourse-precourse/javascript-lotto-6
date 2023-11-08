@@ -1,7 +1,7 @@
 import { ERROR } from '../src/constant/constant.js';
 import WinLotto from '../src/model/WinLotto.js';
 
-describe('정답 로또 클래스 테스트', () => {
+describe('정답 로또 (WinLotto) 클래스 테스트', () => {
   let winLotto;
   beforeEach(() => (winLotto = new WinLotto([1, 2, 3, 4, 5, 6])));
 
