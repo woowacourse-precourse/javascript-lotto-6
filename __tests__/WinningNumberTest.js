@@ -39,4 +39,10 @@ describe("당첨 번호 클래스 테스트", () => {
       new WinningNumber(winningNumberString);
     }).toThrow(PRIZE.ERROR.WINING_NUMBER_DUPLICATE);
   });
+
+  test("당첨 번호를 배열로 반환한다", () => {
+    const winningNumberString = "1,2,3,4,5,6";
+    const result = new WinningNumber(winningNumberString).numberArray;
+    expect(result).toEqual([1, 2, 3, 4, 5, 6]);
+  });
 });

@@ -7,7 +7,8 @@ class WinningNumber {
 
   constructor(winningNumberString) {
     this.#validateWinningNumber(winningNumberString);
-    this.#winningNumberArray = winningNumberString.split(",").map(Number);
+    this.#winningNumberArray =
+      this.#splitStringToNumberArrayByComma(winningNumberString);
   }
 
   #validateWinningNumberArray(array) {
@@ -31,6 +32,10 @@ class WinningNumber {
     const array = string.split(",");
 
     this.#validateWinningNumberArray(array);
+  }
+
+  #splitStringToNumberArrayByComma(string) {
+    return string.split(",").map(Number);
   }
 
   get numberArray() {
