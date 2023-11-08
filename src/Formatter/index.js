@@ -1,9 +1,9 @@
 import {
-  LANG,
   MESSAGE,
   MATCH,
   SYMBOLS,
   REWARD_MESSAGE,
+  LANG,
 } from '../constants/index.js';
 
 class Formatter {
@@ -17,10 +17,15 @@ class Formatter {
     ].join(SYMBOLS.lineBreak);
   }
 
-  static formatResult(ranks, revenu) {
-    const results = this.formatStatistics(ranks) + SYMBOLS.lineBreak;
-    const localRevenue = revenu.toLocaleString(LANG.korea);
-    return `${results}${MESSAGE.result}${localRevenue}${SYMBOLS.percent}입니다.`;
+  static formatRevenue(revenue) {
+    const [integer, decimal] = revenue.split(SYMBOLS.point).map(Number);
+    return [integer.toLocaleString(LANG.korea), decimal].join(SYMBOLS.point);
+  }
+
+  static formatResult(ranks, revenue) {
+    const statistics = this.formatStatistics(ranks) + SYMBOLS.lineBreak;
+    const formattedRevenue = this.formatRevenue(revenue);
+    return `${statistics}${MESSAGE.result}${formattedRevenue}${SYMBOLS.percent}입니다.`;
   }
 
   static toNumbers(numbers) {

@@ -61,8 +61,8 @@ class LottoMachine {
 
   makeResult() {
     const ranks = this.#calculator.calculateRanks();
-    const revenu = this.#calculator.calculateRevenue(this.#purchaseAmount);
-    return Formatter.formatResult(ranks, Number(revenu));
+    const revenue = this.#calculator.calculateRevenue(this.#purchaseAmount);
+    return Formatter.formatResult(ranks, revenue);
   }
 }
 

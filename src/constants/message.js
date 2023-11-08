@@ -9,6 +9,7 @@ export const SYMBOLS = {
   percent: '%',
   openSquareBracket: '[',
   closeSquareBracket: ']',
+  point: '.',
 };
 
 export const LANG = {
