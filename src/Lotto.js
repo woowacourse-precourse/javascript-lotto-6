@@ -1,4 +1,5 @@
-import { MAX_LOTTO_NUMBER, MIN_LOTTO_NUMBER, MESSAGES, LOTTO_NUMBERS_COUNT } from "./constants.js";
+import { MESSAGES } from "./constants.js";
+import LottoNumberValidator from "./LottoNumberValidator.js";
 
 class Lotto {
   #numbers;
@@ -9,33 +10,17 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO_NUMBERS_COUNT) {
+    if (!LottoNumberValidator.checkNumbersCount(numbers)) {
       throw new Error(MESSAGES.lottoNumbersCountError);
     }
 
-    if (!this.#checkAllLottoNumbersInRange(numbers)) {
+    if (!LottoNumberValidator.checkAllNumbersInRange(numbers)) {
       throw new Error(MESSAGES.lottoNumberRangeError);
     }
 
-    if (!this.#checkAllNumbersUnique(numbers)) {
+    if (!LottoNumberValidator.checkAllNumbersUnique(numbers)) {
       throw new Error(MESSAGES.duplicatedLottoNumberError);
     }
-  }
-
-  #checkLottoNumberInRange(lottoNumber) {
-    return MIN_LOTTO_NUMBER <= lottoNumber && lottoNumber <= MAX_LOTTO_NUMBER;
-  }
-
-  #checkAllLottoNumbersInRange(numbers) {
-    const isAllNumbersInRange = numbers.every(this.#checkLottoNumberInRange);
-
-    return isAllNumbersInRange;
-  }
-
-  #checkAllNumbersUnique(numbers) {
-    const uniqueNumbers = [...new Set(numbers)];
-
-    return uniqueNumbers.length === numbers.length;
   }
 
   getNumbers() {
