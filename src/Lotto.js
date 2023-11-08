@@ -1,18 +1,30 @@
+import { Random } from '@woowacourse/mission-utils';
+import LottoResult from './LottoResult';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.#sortAscending();
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    if (numbers.length !== 6) throw new Error('[ERROR]');
+
+    if (numbers.length !== new Set(numbers).size) throw new Error('[ERROR]');
   }
 
-  // TODO: 추가 기능 구현
+  #sortAscending() {
+    const sortedLottoNumbers = this.#numbers.sort((number1, number2) => (number1 = number2));
+
+    this.#numbers = sortedLottoNumbers;
+  }
+
+  getLottoNumbersString() {
+    return `[${this.#numbers.join(', ')}]`;
+  }
 }
 
 export default Lotto;
