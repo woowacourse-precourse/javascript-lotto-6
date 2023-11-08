@@ -1,4 +1,4 @@
-import { PRIZE } from "./constant/NUMBER.js";
+import { PRIZE, INITIAL } from "./constant/NUMBER.js";
 import { Input } from "./Input.js";
 import { Output } from "./Output.js";
 import PurchasePrice from "./PurchasePrice.js";
@@ -7,12 +7,26 @@ import BonusNumber from "./BonusNumber.js";
 import Game from "./Game.js";
 
 class App {
-  purchasePrice = 0;
+  purchasePrice = INITIAL;
   lotto = [];
-  bonusNumber = 0;
+  bonusNumber = INITIAL;
 
   constructor() {
     this.game = new Game();
+  }
+
+  async play() {
+    await this.getPurchasePrice();
+    Output.showPurchaseSize(this.purchasePrice);
+
+    const drawingLotto = await this.game.drawLotto(this.purchasePrice);
+    Output.drawLotto(drawingLotto);
+    Output.enter();
+
+    await this.getLottoNumbers();
+    await this.getBonusNumber();
+
+    this.performGame(drawingLotto);
   }
 
   async getPurchasePrice() {
@@ -48,22 +62,8 @@ class App {
     }
   }
 
-  async play() {
-    await this.getPurchasePrice();
-    await Output.showPurchaseSize(this.purchasePrice);
-
-    const drawingLotto = await this.game.drawLotto(this.purchasePrice);
-    await Output.drawLotto(drawingLotto);
-    await Output.enter();
-
-    await this.getLottoNumbers();
-    await this.getBonusNumber();
-
-    this.performGame(drawingLotto);
-  }
-
-  async performGame(drawingLotto) {
-    const matchingResults = this.game.calculateAllLottoMatches(
+  performGame(drawingLotto) {
+    const matchingResults = this.game.countAllLottoMatches(
       this.lotto,
       drawingLotto,
       this.bonusNumber
@@ -75,7 +75,7 @@ class App {
       this.purchasePrice
     );
 
-    await Output.winningReport(matchingResults, earningRate);
+    Output.winningReport(matchingResults, earningRate);
   }
 }
 
