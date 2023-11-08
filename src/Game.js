@@ -10,13 +10,23 @@ class Game {
   #bonusNumber;
   #gameResult;
 
+  constructor() {
+    this.#gameResult = {
+      three: INITIAL_RESULT_VALUE,
+      four: INITIAL_RESULT_VALUE,
+      five: INITIAL_RESULT_VALUE,
+      bonus: INITIAL_RESULT_VALUE,
+      six: INITIAL_RESULT_VALUE
+    };
+  }
+
   async play() {
     this.#pricePaid = await this.#setPrice();
     this.#setLottos();
     this.printLottos();
     this.#winningNumbers = await this.#setWinningNumbers();
     this.#bonusNumber = await this.#setBonusNumber();
-    this.#gameResult = this.#setGameResult();
+    this.#setGameResult();
     this.printResult();
   }
 
@@ -66,22 +76,14 @@ class Game {
   }
 
   #setGameResult() {
-    const result = {
-      three: INITIAL_RESULT_VALUE,
-      four: INITIAL_RESULT_VALUE,
-      five: INITIAL_RESULT_VALUE,
-      bonus: INITIAL_RESULT_VALUE,
-      six: INITIAL_RESULT_VALUE
-    };
     this.#boughtLottos.forEach((lotto) => {
       const draw = lotto.compareTo(this.#winningNumbers, this.#bonusNumber);
-      if (draw === RESULT.THREE) result.three++;
-      if (draw === RESULT.FOUR) result.four++;
-      if (draw === RESULT.FIVE) result.five++;
-      if (draw === RESULT.BONUS) result.bonus++;
-      if (draw === RESULT.SIX) result.six++;
+      if (draw === RESULT.THREE) this.#gameResult.three++;
+      if (draw === RESULT.FOUR) this.#gameResult.four++;
+      if (draw === RESULT.FIVE) this.#gameResult.five++;
+      if (draw === RESULT.BONUS) this.#gameResult.bonus++;
+      if (draw === RESULT.SIX) this.#gameResult.six++;
     })
-    return result;
   }
 
   printLottos() {
