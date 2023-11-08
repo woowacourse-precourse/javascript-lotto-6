@@ -1,4 +1,4 @@
-import ERROR from './constants/Error';
+import ERROR from './constants/Error.js';
 
 const Validate = {
   checkPurchaseAmount(price) {
