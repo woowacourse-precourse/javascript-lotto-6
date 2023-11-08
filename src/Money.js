@@ -8,10 +8,11 @@ class Money {
   }
 
   validate(buyMoney) {
-    const regexr = /^\d+$/;
-    if (regexr.test(buyMoney) === false)
+    if (isNaN(buyMoney) === true)
       throw new Error(ERROR_MESSAGE.BUY_MONEY_NOT_NUM);
-    else if (buyMoney % 1000 != 0) {
+    else if (buyMoney % 1000 != 0)
+      throw new Error(ERROR_MESSAGE.BUY_MONEY_1000);
+    else if (buyMoney < 0) {
       throw new Error(ERROR_MESSAGE.BUY_MONEY_1000);
     }
   }

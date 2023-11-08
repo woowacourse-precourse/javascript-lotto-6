@@ -15,6 +15,7 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.RANDOM_NUM_SIX);
     }
     if (duplicate.size != numbers.length)
+      //중첩된 숫자가 있는 경우 예외처리
       throw new Error(ERROR_MESSAGE.RANDOM_NUM_DUPLICATE);
 
     numbers.map((e) => {

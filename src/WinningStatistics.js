@@ -18,7 +18,7 @@ class winningStatistics {
       const winning = e.filter((num) => this.winningNum.includes(num));
       const bonus = e.includes(this.bonusNum);
 
-      this.result.push(winning.length);
+      this.result.push(winning.length); //당첨 개수 result에 push
       this.winningBonusNum.push(bonus);
     });
   }
