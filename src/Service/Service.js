@@ -1,3 +1,5 @@
+import { LOTTOSET } from '../Constant/SETTING.js';
+
 export default class Service {
   #myLotto;
 
@@ -16,10 +18,16 @@ export default class Service {
 
   compareNumber(quickPick) {
     const intersection = quickPick.filter((num) => this.#winNumber.getCommonWinNum().includes(num));
-    if (intersection.length === 5 && quickPick.includes(this.#winNumber.getBonusWinNum())) {
+    if (
+      intersection.length === LOTTOSET.bonusCnt &&
+      quickPick.includes(this.#winNumber.getBonusWinNum())
+    ) {
       this.#myLotto.setWinCount(-intersection.length);
     }
-    if (!(intersection.length === 5 && quickPick.includes(this.#winNumber.getBonusWinNum()))) {
+    if (
+      intersection.length !== LOTTOSET.bonusCnt ||
+      !quickPick.includes(this.#winNumber.getBonusWinNum())
+    ) {
       this.#myLotto.setWinCount(intersection.length);
     }
   }
