@@ -17,10 +17,7 @@ class LottoMachine {
 
   issueLotto(price) {
     const lottoBundle = [];
-    if (!Validation.isProperPurchaseAmount(price)) {
-      throw new Error(ERROR_MESSAGE.purchase_amount);
-    }
-
+    Validation.isProperPurchaseAmount(price);
     const purchaseNumber = price / LOTTO_PRICE;
     while (lottoBundle.length < purchaseNumber) {
       lottoBundle.push(new Lotto(this.#makeLottoNumber()));

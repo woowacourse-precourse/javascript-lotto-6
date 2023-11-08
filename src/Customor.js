@@ -7,21 +7,18 @@ class Customer {
   #lottoBundle;
 
   async buyLotto() {
-    let money;
+    const lottoMachine = new LottoMachine();
     while (true) {
       try {
-        money = await LottoView.getUserInput(ENTER_MESSAGE.purchase_amount);
-        if (!Validation.isProperPurchaseAmount(money)) {
-          throw new Error(ERROR_MESSAGE.purchase_amount);
-        }
+        this.#money = await LottoView.getUserInput(
+          ENTER_MESSAGE.purchase_amount
+        );
+        this.#lottoBundle = lottoMachine.issueLotto(this.#money);
         break;
-      } catch {
-        LottoView.printMessage(ERROR_MESSAGE.purchase_amount);
+      } catch (error) {
+        LottoView.printMessage(error.message);
       }
     }
-    this.#money = money;
-    const lottoMachine = new LottoMachine();
-    this.#lottoBundle = lottoMachine.issueLotto(this.#money);
     LottoView.printLottoBundle(this.#lottoBundle);
   }
 

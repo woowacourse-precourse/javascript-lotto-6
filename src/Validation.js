@@ -3,6 +3,7 @@ import {
   LOTTO_RANGE_MIN,
   LOTTO_RANGE_MAX,
 } from './constants/gameinfo.js';
+import { ERROR_MESSAGE } from './constants/message.js';
 class Validation {
   static hasDuplication([...numbers]) {
     const set = new Set(numbers);
@@ -23,12 +24,13 @@ class Validation {
 
   static isProperPurchaseAmount(price) {
     const purchaseAmount = Number(price);
+
     if (purchaseAmount < LOTTO_PRICE) {
-      return false;
+      throw new Error(ERROR_MESSAGE.min_purchase_amount);
     }
 
     if (purchaseAmount % LOTTO_PRICE !== 0) {
-      return false;
+      throw new Error(ERROR_MESSAGE.cant_divide_purchase_amount);
     }
 
     return true;

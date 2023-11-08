@@ -27,11 +27,19 @@ describe('Validation.hasProperRange', () => {
 });
 
 describe('Validation.isProperPurchaseAmount', () => {
-  test('구입 금액이 1000원보다 작은 경우 false이다.', () => {
-    expect(Validation.isProperPurchaseAmount(999)).toBe(false);
-    expect(Validation.isProperPurchaseAmount(1)).toBe(false);
-    expect(Validation.isProperPurchaseAmount(0)).toBe(false);
-    expect(Validation.isProperPurchaseAmount(-1)).toBe(false);
+  test('구입 금액이 1000원보다 작은 경우 에러를 리턴한다.', () => {
+    expect(() => {
+      Validation.isProperPurchaseAmount(999);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      Validation.isProperPurchaseAmount(1);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      Validation.isProperPurchaseAmount(0);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      Validation.isProperPurchaseAmount(-1);
+    }).toThrow('[ERROR]');
   });
 
   test('구입 금액이 1000보다 크고 1000으로 나누어 떨어지면 true이다.', () => {
@@ -40,9 +48,15 @@ describe('Validation.isProperPurchaseAmount', () => {
     expect(Validation.isProperPurchaseAmount(3000)).toBe(true);
   });
 
-  test('구입 금액이 1000보다 크지만 1000으로 나누어 떨어지지 않으면 false이다.', () => {
-    expect(Validation.isProperPurchaseAmount(12300)).toBe(false);
-    expect(Validation.isProperPurchaseAmount(2010)).toBe(false);
-    expect(Validation.isProperPurchaseAmount(3001)).toBe(false);
+  test('구입 금액이 1000보다 크지만 1000으로 나누어 떨어지지 않으면 에러를 리턴한다.', () => {
+    expect(() => {
+      Validation.isProperPurchaseAmount(12300);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      Validation.isProperPurchaseAmount(2010);
+    }).toThrow('[ERROR]');
+    expect(() => {
+      Validation.isProperPurchaseAmount(3001);
+    }).toThrow('[ERROR]');
   });
 });
