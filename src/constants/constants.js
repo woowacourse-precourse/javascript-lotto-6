@@ -6,6 +6,13 @@ export const INPUT_MESSAGE = {
 
 export const OUTPUT_MESSAGE = {
     printPurchaseNumber : (count) => `\n${count}개 구매했습니다.`,
+    printWinningStatistics : "\n당첨 통계\n---\n",
+    printFifth : (count) => `3개 일치 (5,000원) - ${count}개\n`,
+    printFourth : (count) => `4개 일치 (50,000원) - ${count}개\n`,
+    printThird : (count) => `5개 일치 (1,500,000원) - ${count}개\n`,
+    printSecond : (count) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개\n`,
+    printFirst : (count) => `6개 일치 (2,000,000,000원) - ${count}개\n`,
+    printRateReturn : (rate) => `총 수익률은 ${rate}%입니다.`,
 };
 
 export const ERROR_MESSAGE = {
@@ -15,5 +22,5 @@ export const ERROR_MESSAGE = {
     lottoDuplicatedError : "[ERROR] 로또 번호는 중복될 수 없습니다.",
     lottoRangeError : "[ERROR] 로또 번호의 범위는 1~45 폐구간 입니다.",
     lottoTypeError : "[ERROR] 로또 번호는 자연수입니다.",
-    bonusLengthError : "[ERROR] 보너스 번호는 1개여야 합니다."
+    bonusLengthError : "[ERROR] 보너스 번호는 1개여야 합니다.",
 };
