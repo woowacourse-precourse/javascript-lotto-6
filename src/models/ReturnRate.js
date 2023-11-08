@@ -3,14 +3,13 @@ import { LOTTO } from '../utils/constants.js';
 class ReturnRate {
   #returnRate;
 
-  constructor(lottoCount, lottoTicketResult) {
-    this.#calcaulteLottoRate(lottoCount, lottoTicketResult);
+  constructor(purchaseAmount, lottoTicketResult) {
+    this.#calcaulteLottoRate(purchaseAmount, lottoTicketResult);
   }
 
-  #calcaulteLottoRate(lottoCount, lottoTicketResult) {
+  #calcaulteLottoRate(purchaseAmount, lottoTicketResult) {
     const totalWinningMoney = this.#calcaulteWinning(lottoTicketResult);
-    let returnRate =
-      (totalWinningMoney / (lottoCount * LOTTO.AMOUNT_UNIT)) * 100;
+    let returnRate = (totalWinningMoney / purchaseAmount) * 100;
     returnRate = this.#roundRate(returnRate);
     this.#returnRate = returnRate;
   }

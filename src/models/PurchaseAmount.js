@@ -24,8 +24,8 @@ class PurchaseAmount {
     }
   }
 
-  getLottoCount() {
-    return this.#amount / LOTTO.AMOUNT_UNIT;
+  getPurchaseAmount() {
+    return this.#amount;
   }
 }
 

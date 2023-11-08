@@ -6,6 +6,7 @@ import WinningNumber from '../models/WinnigNumber.js';
 import BonusNumber from '../models/BonusNumber.js';
 import LottoTicketResult from '../models/LottoTicketResult.js';
 import ReturnRate from '../models/ReturnRate.js';
+import { LOTTO } from '../utils/constants.js';
 
 class LottoController {
   constructor(inputView, outputView) {
@@ -14,7 +15,8 @@ class LottoController {
   }
 
   async start() {
-    const lottoCount = await this.#setLottoCount();
+    const purchaseAmount = await this.#setPurchaseAmount();
+    const lottoCount = this.#setLottoCount(purchaseAmount);
     const lottoTicket = this.#setLottoTicket(lottoCount);
     this.outputView.printLottoCount(lottoCount);
     this.outputView.printLotto(lottoTicket);
@@ -26,21 +28,25 @@ class LottoController {
       bonusNumber
     );
     this.outputView.printLottoResult(lottoTicketResult);
-    const returnRate = this.#setReturnRate(lottoCount, lottoTicketResult);
+    const returnRate = this.#setReturnRate(purchaseAmount, lottoTicketResult);
     this.outputView.printReturnRate(returnRate);
   }
 
-  async #setLottoCount() {
+  async #setPurchaseAmount() {
     while (true) {
       let purchaseAmountInput;
       try {
         purchaseAmountInput = await this.inputView.getPurchaseAmount();
         const purchaseAmount = new PurchaseAmount(purchaseAmountInput);
-        return purchaseAmount.getLottoCount();
+        return purchaseAmount.getPurchaseAmount();
       } catch (error) {
         this.outputView.printError(error.message);
       }
     }
+  }
+
+  #setLottoCount(purchaseAmount) {
+    return purchaseAmount / LOTTO.AMOUNT_UNIT;
   }
 
   #setLottoTicket(lottoCount) {
@@ -91,8 +97,8 @@ class LottoController {
     return lottoTicketResult.getLottoTicketResult();
   }
 
-  #setReturnRate(lottoCount, lottoTicketResult) {
-    const returnRate = new ReturnRate(lottoCount, lottoTicketResult);
+  #setReturnRate(purchaseAmount, lottoTicketResult) {
+    const returnRate = new ReturnRate(purchaseAmount, lottoTicketResult);
     return returnRate.getReturnRate();
   }
 }
