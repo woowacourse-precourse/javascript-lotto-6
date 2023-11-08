@@ -16,12 +16,9 @@ class Model {
     return Array(MAXpurchasableAmount).fill(null).map(() => {
       return new Lotto(Random.pickUniqueNumbersInRange(
         Statics.lotto.condition.low, Statics.lotto.condition.high, Statics.lotto.condition.digit
-      ).sort((a, b) => a - b)
-      )
+      ).sort((a, b) => a - b))
     })
   }
-  
-  getLottos(){return this.#lottos}
 }
 
 export default Model;

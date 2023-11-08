@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils"
 import Statics from "../static/Statics.js"
 
-class Input {
+class InputView {
   static async inputPurchaseBudget() {
 		return await Console.readLineAsync(Statics.message.input.purchaseBudget);
 	}
@@ -15,4 +15,4 @@ class Input {
   } 
 }
 
-export default Input
+export default InputView

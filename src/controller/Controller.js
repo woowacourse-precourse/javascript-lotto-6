@@ -1,6 +1,7 @@
 import Model from "../model/Model.js";
 
-import Input from "../view/Input.js";
+import InputView from "../view/InputView.js";
+import OutputView from "../view/OutputView.js";
 
 import Validator from "../validator/Validator.js";
 
@@ -16,6 +17,7 @@ class Controller {
     do {
       try {
         this.#model = new Model(await this.getPurchaseBudget());
+        OutputView
       } catch (error) {
         
       }
@@ -23,7 +25,7 @@ class Controller {
   }
 
   async getPurchaseBudget() {
-    const purchaseBudget = await Input.inputPurchaseBudget();
+    const purchaseBudget = await InputView.inputPurchaseBudget();
     Validator.validatePurchaseBudget(purchaseBudget);
     return Number(purchaseBudget);
   }

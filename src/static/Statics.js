@@ -20,9 +20,12 @@ const Statics = {
       isOutOfRange: '[ERROR] 로또 숫자가 범위를 초과했습니다.',
       isUnNatural: '[ERROR] 로또 숫자가 잘못된 형식입니다.'
     },
-    print: {
+    output: {
+      printMAXpurchasableAmount: MAXpurchasableAmount => `${MAXpurchasableAmount}개를 구입했습니다.`,
+      printArrayAsString: array => `[${array.join(', ')}]`,
+      
+    },
 
-    }
   }
 }
 
