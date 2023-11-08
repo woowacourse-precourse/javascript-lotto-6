@@ -7,8 +7,12 @@ const LottoTypeConversion = {
     return winningNumbers.split(',');
   },
 
-  parseNumbers(numbers) {
+  Numbers(numbers) {
     return numbers.map((number) => Number(number));
+  },
+  
+  NumberCommas(str) {
+    return Number(str).toLocaleString();
   }
 }
 
