@@ -1,4 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { MissionUtils, Random } from '@woowacourse/mission-utils';
 
 class Lotto {
   #numbers;
@@ -25,7 +25,7 @@ class Lotto {
   }
 
   async getBonusNumber(lottoNumber) {
-    const INPUT = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.');
+    const INPUT = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
     this.validateBonusNumber(INPUT);
     this.validateBonusDuplicate(INPUT, lottoNumber);
     return Number(INPUT);
