@@ -98,6 +98,6 @@ describe('LottoService 테스트', () => {
     lottoService.setWinningNumbers(input);
     lottoService.setBonusNumber(7);
 
-    expect(lottoService.getLottoTotalReturns()).toBe('2000000.0');
+    expect(lottoService.getLottoTotalReturns()).toBe('200000000.0');
   });
 });
