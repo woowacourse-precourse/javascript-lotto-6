@@ -12,6 +12,30 @@ class WinnigStatistics {
     this.#bonusNumber = bonusNumber;
     this.compareLottos(buyerLottos);
   }
+
+  compareLottos(buyerLottos) {
+    buyerLottos.forEach((buyerLotto) => {
+      const lottoNumbers = buyerLotto.getNumbers();
+      const [matchCount, matchBonus] = this.countMatchNumber(lottoNumbers);
+
+      this.addCountToResult(matchCount, matchBonus);
+    });
+  }
+
+  countMatchNumber(lottoNumbers) {
+    let matchCount = 0;
+    let matchBonus = false;
+
+    lottoNumbers.forEach((number) => {
+      if (this.#winningNumbers.includes(number)) matchCount += 1;
+    });
+
+    if (matchCount === 5) {
+      if (lottoNumbers.includes(this.#bonusNumber)) matchBonus = true;
+    }
+
+    return [matchCount, matchBonus];
+  }
 }
 
 export default WinnigStatistics;
