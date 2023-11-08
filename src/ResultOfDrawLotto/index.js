@@ -15,9 +15,6 @@ class ResultOfDrawLotto {
     };
   }
 
-  /**
-   * @returns {{ matchSix: number, matchFiveAndBonus: number, matchFive: number, matchFour: number, matchThree: number }}
-   */
   getResult() {
     return { ...this.#result };
   }

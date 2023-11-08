@@ -12,12 +12,12 @@ class App {
   }
 
   async play() {
-    await this.issueLottoes();
+    await this.#issueLottoes();
     await this.#generateWinningLotto();
     this.#drawLottoes();
   }
 
-  async issueLottoes() {
+  async #issueLottoes() {
     try {
       const amountToPurchase =
         await this.#lottoInterface.readAmountToPurchase();
@@ -25,7 +25,7 @@ class App {
       this.#lottoInterface.printPurchasedLottoes(lottoes);
     } catch (error) {
       this.#lottoInterface.printError(error.message);
-      await this.issueLottoes();
+      await this.#issueLottoes();
     }
   }
 

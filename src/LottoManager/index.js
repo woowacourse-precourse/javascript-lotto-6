@@ -28,15 +28,6 @@ class LottoManager {
   #resultOfDrawLotto;
 
   /**
-   * @description 당첨 로또 생성
-   * @param {number[]} numbers
-   * @param {number} bonusNumber
-   */
-  generateWinningLotto(numbers, bonusNumber) {
-    this.#winningLotto = new WinningLotto(numbers, bonusNumber);
-  }
-
-  /**
    * @description 로또 발급
    * @param {number} amountToPurchase
    * @returns {Lotto[]}
@@ -51,6 +42,15 @@ class LottoManager {
     this.#generateLottoes(numberOfLottoTickets);
 
     return [...this.#lottoes];
+  }
+
+  /**
+   * @description 당첨 로또 생성
+   * @param {number[]} numbers
+   * @param {number} bonusNumber
+   */
+  generateWinningLotto(numbers, bonusNumber) {
+    this.#winningLotto = new WinningLotto(numbers, bonusNumber);
   }
 
   /**

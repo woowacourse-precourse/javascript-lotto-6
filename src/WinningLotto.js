@@ -19,6 +19,9 @@ class WinningLotto extends Lotto {
     this.#bonusNumber = bonusNumber;
   }
 
+  /**
+   * @returns {number}
+   */
   getBonusNumber() {
     return this.#bonusNumber;
   }
