@@ -36,7 +36,7 @@ class Inputview {
     async readBonusNumber(winningnumbers) {
         try {
             const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-            return WinningLotto.validate_bonus(winningnumbers, bonusNumber);
+            return WinningLotto.validate_bonus(winningnumbers, parseInt(bonusNumber));
         } catch (error) {
             Console.print(error.message);
             return this.readBonusNumber(winningnumbers); 

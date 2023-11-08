@@ -1,5 +1,5 @@
 import ErrorMessage from "../constant/ErrorMessage.js";
-
+import { Console } from "@woowacourse/mission-utils";
 class WinningLotto{
     #winningnumbers;
 
