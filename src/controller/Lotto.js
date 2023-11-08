@@ -1,6 +1,8 @@
 import { WINNING_ERROR } from "../constants/errorMessage.js";
 import BonusInput from "../view/input/BonusInput.js";
 
+const { error } = WINNING_ERROR;
+
 class Lotto {
   #numbers;
 
@@ -10,7 +12,6 @@ class Lotto {
   }
 
   #validate(numbers) {
-    const { error } = WINNING_ERROR;
     if (new Set(numbers).size !== numbers.length) {
       throw new Error(`${error}`);
     }
