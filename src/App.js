@@ -15,7 +15,7 @@ class App {
         const bonusNumber = await this.getBonusNumber(winningNumber);
         Console.print(bonusNumber);
         const winningArr = this.calculateWinningArr(winningNumber,bonusNumber,lottoArr);
-        Console.print(this.renderLottoResultAndProfit(winningArr,purchaseAmount))
+        Console.print(this.renderLottoResultAndProfit(winningArr, purchaseAmount));
     }
 
     async getPurchaseAmount() {
@@ -31,11 +31,14 @@ class App {
     }
 
     isValidPurchaseAmount(input) {
+        const errMessage = "[ERROR] 숫자가 잘못된 형식입니다.";
         if (isNaN(input)) {
-            throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+            Console.print(errMessage);
+            throw new Error(errMessage);
         }
         if (input % 1000 !== 0) {
-            throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+            Console.print(errMessage);
+            throw new Error(errMessage);
         }
     }
 
@@ -78,12 +81,15 @@ class App {
 
     isValidWinningNumber(input) {
         const inputArr = input.split(",");
+        const errMessage = "[ERROR] 숫자가 잘못된 형식입니다.";
         if (inputArr.length !== 6) {
-            throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+            Console.print(errMessage)
+            throw new Error(errMessage);
         }
 
         if (!isValidRangeArr(inputArr)) {
-            throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+            Console.print(errMessage)
+            throw new Error(errMessage);
         }
     }
 
@@ -102,9 +108,11 @@ class App {
     isValidBonusNumber(input, winningNumber) {
         const winningNumArr = winningNumber.split(",");
         if (!isValidRange(input)) {
+            Console.print("[ERROR] 숫자가 잘못된 형식입니다.")
             throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
         }
         if (winningNumArr.includes(input)) {
+            Console.print("[ERROR] 당첨번호와 중복된 번호입니다.")
             throw new Error("[ERROR] 당첨번호와 중복된 번호입니다.");
         }
     }
