@@ -290,7 +290,7 @@
 
 # 🔍 클래스 다이어그램
 
-![](https://github.com/cobocho/javascript-lotto-6/assets/99083803/ee67d1fd-16e7-417e-8c0a-4080dbd6f7eb)
+![](https://github.com/cobocho/javascript-lotto-6/assets/99083803/e69cfbc5-d0c0-42c5-8636-a35781be28a9)
 
 # 🚦 순서도
 
