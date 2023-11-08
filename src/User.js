@@ -3,6 +3,10 @@ import { Console } from '@woowacourse/mission-utils';
 class User {
   async inputLottoPurchaseAmount() {
     const purchaseAmount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+
+    if (parseInt(purchaseAmount) % 1000 !== 0) {
+      throw new Error("[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다.");
+    }
     return parseInt(purchaseAmount) / 1000;
   }
 
