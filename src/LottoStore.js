@@ -22,6 +22,23 @@ class LottoStore {
 
     return numbers;
   }
+
+  printLottos(lottos) {
+    Console.print(`${lottos.length}개를 구매했습니다.`);
+
+    lottos.forEach((lotto) => {
+      const lottoNumbers = lotto.getNumbers();
+      const stringArray = this.convertToStringArray(lottoNumbers);
+
+      Console.print(stringArray);
+    });
+  }
+
+  convertToStringArray(lottoNumbers) {
+    const string = lottoNumbers.join(", ");
+
+    return `[${string}]`;
+  }
 }
 
 export default LottoStore;
