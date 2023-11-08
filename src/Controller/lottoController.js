@@ -12,6 +12,14 @@ class LottoController {
   }
 
   async lottoGame() {
+    const purchaseAmount = await this.getValidPurchaseAmount();
+    this.createAndPrintLottoInfo(purchaseAmount);
+
+    const [inputWinningNumbers, inputBonusNumber] = await this.getInputWinningNumbersAndBonusNumber();
+    this.calculateAndPrintResults(purchaseAmount, inputWinningNumbers, inputBonusNumber);
+  }
+
+  async getValidPurchaseAmount() {
     let purchaseAmount;
     while (true) {
       try {
@@ -24,24 +32,30 @@ class LottoController {
         this.output.printErrorMesage(error.message);
       }
     }
+    return purchaseAmount;
+  }
+
+  createAndPrintLottoInfo(purchaseAmount) {
     this.lottos.createLottos(purchaseAmount);
     this.output.printPurchaseQuantity(this.lottos.getLottoQuantity());
     this.output.printLottoTickets(this.lottos.getLottoTickets());
+  }
 
+  async getInputWinningNumbersAndBonusNumber() {
     const inputWinningNumbers = await this.input.getWinningNumbers();
     const inputBonusNumber = await this.input.getBonusNumber();
+    return [inputWinningNumbers, inputBonusNumber];
+  }
 
-    this.calculate = new Calculate(
-      this.lottos,
-      inputWinningNumbers,
-      inputBonusNumber
-    );
+  calculateAndPrintResults(purchaseAmount, inputWinningNumbers, inputBonusNumber) {
+    this.calculate = new Calculate(this.lottos, inputWinningNumbers, inputBonusNumber);
     this.calculate.caculateResults();
     this.calculate.calculateProfitRate(purchaseAmount);
     this.output.printWinningResult(this.calculate.getResults());
     this.output.printProfitRate(this.calculate.getProfitRate());
   }
 }
+
 
 export default LottoController;
 
