@@ -75,6 +75,16 @@ class LottoManager {
       }
     }, defaultResult);
   }
+
+  printResult() {
+    const result = this.#result;
+
+    Console.print(`3개 일치 (${LottoResult.CASE_3.prize.toLocaleString('ko-KR')}원) - ${result.case3}개`);
+    Console.print(`4개 일치 (${LottoResult.CASE_4.prize.toLocaleString('ko-KR')}원) - ${result.case4}개`);
+    Console.print(`5개 일치 (${LottoResult.CASE_5.prize.toLocaleString('ko-KR')}원) - ${result.case5}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (${LottoResult.CASE_5_BONUS.prize.toLocaleString('ko-KR')}원) - ${result.case5Bonus}개`);
+    Console.print(`6개 일치 (${LottoResult.CASE_6.prize.toLocaleString('ko-KR')}원) - ${result.case6}개`);
+  }
 }
 
 export default LottoManager;
