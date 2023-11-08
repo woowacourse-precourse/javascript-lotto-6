@@ -1,4 +1,4 @@
-import { BonusNumberValidate, CashValidate } from '../src/Validate.js';
+import { BonusNumberValidate, CashValidate } from '../src/Validate/Validate.js';
 
 describe('보너스 번호 검증 테스트', () => {
   const winningNumbers = [1, 2, 3, 4, 5, 6];

@@ -1,4 +1,4 @@
-import { LottoStatistics } from '../src/LottoStatistics.js';
+import { LottoStatistics } from '../src/Domain/LottoStatistics.js';
 
 describe('로또 통계 클래스 테스트', () => {
   const playerLottos = [[1, 2, 3, 11, 15, 16]];

@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { LottoMachine } from '../src/LottoMachine.js';
+import { LottoMachine } from '../src/Domain/LottoMachine.js';
 
 describe('LottoMachine 클래스 테스트', () => {
   test('로또를 구매하고 배열로 반환한다.', () => {
