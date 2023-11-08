@@ -33,6 +33,10 @@ class Lotto {
     });  
   }
 
+  get validate() {
+    return this.#validate;
+  }
+
   static generateNumbers() {
     const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
     return numbers.sort((a, b) => a - b); 

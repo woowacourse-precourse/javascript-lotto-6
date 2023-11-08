@@ -10,7 +10,7 @@ class InputManager {
     cleanInput(input) {
         return input.replace(/\s+/g, '').replace(/,/g, '');
     }
-
+    
     validateAmount(amount) {
         const numericAmount = Number(amount);
 
