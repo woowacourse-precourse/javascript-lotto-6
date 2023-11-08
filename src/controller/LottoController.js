@@ -1,4 +1,4 @@
-import { NOTICE_MESSAGES, ERROR_MESSAGES } from '../constants/messages.js';
+import { NOTICE_MESSAGES } from '../constants/messages.js';
 import LottoModel from '../model/LottoModel.js';
 import OutputView from '../views/OutputView.js';
 import UserInput from '../views/UserInput.js';
@@ -16,6 +16,8 @@ class LottoController {
     this.outputView.printLottos(this.lottoModel.randomNumbers);
     await this.inputluckyNumbers();
     await this.inputBonusNumber();
+    this.lottoModel.calculateTotalMatchCount();
+
     this.outputView.print(this.lottoModel.matchCount);
   }
 
