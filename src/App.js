@@ -7,11 +7,6 @@ import {
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
   LOTTO_PRICE,
-  THREE_MATCH_PRICE,
-  FOUR_MATCH_PRICE,
-  FIVE_MATCH_PRICE,
-  FIVE_AND_BONUS_MATCH_PRICE,
-  SIX_MATCH_PRICE,
 } from "./constant/lotto.js";
 
 class App {
@@ -58,7 +53,7 @@ class App {
     });
 
     await this.retryUntilSuccess(async () => {
-      this.winningNumbers = this.lottoResultChecker.convertToArr(
+      this.winningNumbers = this.convertToArr(
         await this.lottoResultChecker.inputWinningLottoNum()
       );
       new Lotto(this.winningNumbers);
@@ -82,10 +77,20 @@ class App {
       this.includedbonusArr
     );
 
-    this.totalProfit = this.calculateTotalProfit();
-    this.profitRate = this.calculateProfitRate();
-    this.roundedProfitRate = this.roundProfitRate(this.profitRate);
-    this.printResult();
+    this.totalProfit = this.lottoResultChecker.calculateTotalProfit(
+      this.matchingCountsResult
+    );
+    this.profitRate = this.lottoResultChecker.calculateProfitRate(
+      this.totalProfit,
+      this.purchasePrice
+    );
+    this.roundedProfitRate = this.lottoResultChecker.roundProfitRate(
+      this.profitRate
+    );
+    this.lottoResultChecker.printResult(
+      this.matchingCountsResult,
+      this.roundedProfitRate
+    );
   }
 
   async getPurchasePrice() {
@@ -103,7 +108,9 @@ class App {
       throw new Error("[ERROR] 구입금액을 올바르게 입력해 주세요.");
     }
   }
-
+  convertToArr(inputNum) {
+    return inputNum.split(",").map((element) => Number(element));
+  }
   async inputBonusNumber() {
     return await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
   }
@@ -133,36 +140,6 @@ class App {
     return randomArrs.map((randomArr) =>
       randomArr.getNumbers().includes(this.bonusNumber) ? 1 : 0
     );
-  }
-  calculateTotalProfit() {
-    const totalProfit =
-      THREE_MATCH_PRICE * this.matchingCountsResult.three +
-      FOUR_MATCH_PRICE * this.matchingCountsResult.four +
-      FIVE_MATCH_PRICE * this.matchingCountsResult.five +
-      FIVE_AND_BONUS_MATCH_PRICE * this.matchingCountsResult.fiveAndBonus +
-      SIX_MATCH_PRICE * this.matchingCountsResult.six;
-    return totalProfit;
-  }
-  roundProfitRate(profitRate) {
-    return profitRate.toFixed(1);
-  }
-  calculateProfitRate() {
-    return (this.totalProfit / this.purchasePrice) * 100;
-  }
-  printResult() {
-    Console.print("당첨 통계\n---");
-    Console.print(`3개 일치 (5,000원) - ${this.matchingCountsResult.three}개`);
-    Console.print(`4개 일치 (50,000원) - ${this.matchingCountsResult.four}개`);
-    Console.print(
-      `5개 일치 (1,500,000원) - ${this.matchingCountsResult.five}개`
-    );
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.matchingCountsResult.fiveAndBonus}개`
-    );
-    Console.print(
-      `6개 일치 (2,000,000,000원) - ${this.matchingCountsResult.six}개`
-    );
-    Console.print(`총 수익률은 ${this.roundedProfitRate}%입니다.`);
   }
 }
 export default App;
