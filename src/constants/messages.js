@@ -11,3 +11,9 @@ export const MESSAGES = Object.freeze({
   SIX_SAME: (count) => `6개 일치 (2,000,000,000원) - ${count}개`,
   PROFIT_RATE: (value) => `총 수익률은 ${value}%입니다.`,
 });
+
+const ERROR_PREFIX = "[ERROR]";
+export const ERROR_MESSAGE = Object.freeze({
+  INVALID_AMOUNT: `${ERROR_PREFIX} 구입 금액이 1,000원 단위가 아닙니다.`,
+  DUPLICATED_LOTTO: `${ERROR_PREFIX} 당첨 번호가 중복 되었습니다.`,
+});

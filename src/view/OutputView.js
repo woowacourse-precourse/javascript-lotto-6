@@ -6,6 +6,7 @@ export default class OutputView {
     Console.print(MESSAGES.PURCHASE_RESULT(purchaseCount));
 
     lottoArray.forEach((lottoNumber) => {
+      lottoNumber.sort((a, b) => a - b);
       const stringLottoNumber = "[" + lottoNumber.join(", ") + "]";
       Console.print(stringLottoNumber);
     });
