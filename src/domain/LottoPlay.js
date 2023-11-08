@@ -1,11 +1,11 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 
-import Lotto from "./Lotto.js";
-import { validateBonusNum, validateLottoPrice } from "./utility/validation.js";
-import { LOTTO_RULES } from "./constants/constants.js";
-import { calculateProfit, findMatchingNums } from "./utility/results.js";
-import ConsoleInput from "./view/ConsoleInput.js";
-import ConsoleOutput from "./view/ConsoleOutput.js";
+import Lotto from "../Lotto.js";
+import { validateBonusNum, validateLottoPrice } from "../utility/validation.js";
+import { LOTTO_RULES } from "../constants/constants.js";
+import { calculateProfit, findMatchingNums } from "../utility/results.js";
+import ConsoleInput from "../view/ConsoleInput.js";
+import ConsoleOutput from "../view/ConsoleOutput.js";
 class LottoPlay {
   #lottoPrice;
   #result;
@@ -27,11 +27,11 @@ class LottoPlay {
     const bonusNum = await this.inputBonus();
 
     //   로또 번호에 중복된 숫자가 있는지 체크하는 유효성 검사 함수
-    Console.print("당첨 통계");
-    Console.print("---");
+    this.#output.print("당첨 통계");
+    this.#output.print("---");
     findMatchingNums(this.lottos, this.#result, bonusNum);
     const profitMsg = calculateProfit(this.#lottoPrice);
-    Console.print(`총 수익률은 ${profitMsg}%입니다.`);
+    this.#output.print(`총 수익률은 ${profitMsg}%입니다.`);
   }
 
   async inputLottoPrice() {
