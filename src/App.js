@@ -27,6 +27,27 @@ class App {
   isValidPurchaseAmount(amount) {
     return !isNaN(amount) && parseInt(amount, 10) % 1000 === 0;
   }
+
+  calculateNumberOfLottos(purchaseAmount) {
+    return purchaseAmount / 1000;
+  }
+
+  generateLottoNumbers() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+  }
+
+  purchaseLottos(numberOfLottos) {
+    for (let i = 0; i < numberOfLottos; i++) {
+      this.lottoList.push(new Lotto(this.generateLottoNumbers()));
+    }
+  }
+
+  printPurchasedLottos() {
+    this.lottoList.forEach((lotto) => {
+      const lottoNumbers = JSON.stringify(lotto.getNumbers());
+      MissionUtils.Console.print(lottoNumbers);
+    });
+  }
 }
 
 export default App;
