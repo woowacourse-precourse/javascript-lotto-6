@@ -20,10 +20,8 @@ class App {
     
     this.makeRandomNumbers();
 
-    const numRangePattern = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/;
-    const winningNumsList = await this.getWinningNumbers(numRangePattern);
-
-    const bonus = await this.getBonus(winningNumsList, numRangePattern);
+    const winningNumsList = await this.getWinningNumbers();
+    const bonus = await this.getBonus(winningNumsList);
     this.checkWinningResults(this.userMoney, winningNumsList, bonus);
   }
 
@@ -71,7 +69,7 @@ class App {
     }
   }
 
-  async getWinningNumbers(numRangePattern) {
+  async getWinningNumbers() {
     let winningNumsList;
 
     try {
@@ -86,7 +84,7 @@ class App {
       return winningNumsList;
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
-      return await this.getWinningNumbers(numRangePattern);
+      return await this.getWinningNumbers();
     }
   };
 
@@ -111,20 +109,20 @@ class App {
   };
   
 
-  async getBonus(winningNumsList, numRangePattern) {
+  async getBonus(winningNumsList) {
     try {
       const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
 
       if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
         throw new Error(ERROR_MESSAGE.INPUT_ERROR)
       }
-      if (!numRangePattern.test(Number(inputBonus))) {
+      if (!this.pattern.test(Number(inputBonus))) {
         throw new Error(ERROR_MESSAGE.INPUT_ERROR)
       }
       return Number(inputBonus);
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
-      await this.getBonus(winningNumsList, numRangePattern);
+      await this.getBonus(winningNumsList);
     }
   };
 
