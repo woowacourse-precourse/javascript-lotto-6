@@ -1,5 +1,7 @@
 import LOTTO from '../constants/AboutLotto.js';
+import ERROR_MESSAGE from '../constants/ErrorMessage.js';
 import Utils from '../utils/Utils.js';
+import Validation from '../utils/Validation.js';
 
 class LottoShop {
   #winningNumber;
@@ -23,28 +25,17 @@ class LottoShop {
 
   #validateWinningNumber(winningNumberString) {
     const winningNumberArray = [...new Set(winningNumberString.split(','))];
-    if (
-      winningNumberArray.length !== 6 ||
-      isNaN(winningNumberArray.join('')) ||
-      !winningNumberArray.every(
-        (number) =>
-          Number(number) >= LOTTO.MIN_NUMBER &&
-          Number(number) <= LOTTO.MAX_NUMBER
-      )
-    ) {
-      throw new Error('[ERROR] 당첨번호가 잘못된 형식입니다.');
+    if (Validation.winningNumber(winningNumberArray)) {
+      throw new Error(ERROR_MESSAGE.INVALID_WINNING_NUMBER);
     }
   }
 
   #validateBonusNumber(bonusNumber) {
     if (
-      /\s/g.test(bonusNumber) ||
-      isNaN(bonusNumber) ||
-      Number(bonusNumber) < LOTTO.MIN_NUMBER ||
-      Number(bonusNumber) > LOTTO.MAX_NUMBER ||
+      Validation.bonusNumber(bonusNumber) ||
       this.#winningNumber.includes(Number(bonusNumber))
     ) {
-      throw new Error('[ERROR] 보너스번호가 잘못된 형식입니다.');
+      throw new Error(ERROR_MESSAGE.INVALID_BONUS_NUMBER);
     }
   }
 
@@ -57,7 +48,7 @@ class LottoShop {
 
   addResultSecondPlace(lottos) {
     if (this.#bonusNumber === undefined) {
-      throw new Error('[ERROR] 보너스 번호를 입력해주세요');
+      throw new Error(ERROR_MESSAGE.GIVE_BONUS_NUMBER);
     }
     lottos.forEach((lotto) => {
       if (
@@ -69,7 +60,7 @@ class LottoShop {
 
   addResultThirdPlace(lottos) {
     if (this.#bonusNumber === undefined) {
-      throw new Error('[ERROR] 보너스 번호를 입력해주세요');
+      throw new Error(ERROR_MESSAGE.GIVE_BONUS_NUMBER);
     }
     lottos.forEach((lotto) => {
       if (
@@ -105,13 +96,13 @@ class LottoShop {
 
   returnProfitRate(money) {
     if (this.#result === undefined)
-      throw new Error('[ERROR] 결과를 먼저 확인해주세요');
+      throw new Error(ERROR_MESSAGE.CHECK_RESULT_FIRST);
     return (
-      ((this.#result[0] * 200000000 +
-        this.#result[1] * 30000000 +
-        this.#result[2] * 1500000 +
-        this.#result[3] * 50000 +
-        this.#result[4] * 5000) /
+      ((this.#result[0] * LOTTO.FIRST_PLACE_PRIZE_MONEY +
+        this.#result[1] * LOTTO.SECOND_PLACE_PRIZE_MONEY +
+        this.#result[2] * LOTTO.THIRD_PLACE_PRIZE_MONEY +
+        this.#result[3] * LOTTO.FORTH_PLACE_PRIZE_MONEY +
+        this.#result[4] * LOTTO.FIFTH_PLACE_PRIZE_MONEY) /
         money) *
       100
     ).toFixed(1);

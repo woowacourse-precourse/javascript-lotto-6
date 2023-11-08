@@ -8,7 +8,7 @@ class OutputView {
   static printPurchaseNumber(lottoAmount, lottoArray) {
     Console.print(OUTPUT_MESSAGE.PRINT_ENTER);
     Console.print(
-      lottoAmount.toString() + OUTPUT_MESSAGE.PRINT_PURCHASED_NUMBER
+      OUTPUT_MESSAGE.PRINT_PURCHASED_NUMBER(lottoAmount.toString())
     );
     lottoArray.forEach((lotto) => {
       Console.print(`[${lotto.join(', ')}]`);

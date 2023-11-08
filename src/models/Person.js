@@ -1,3 +1,6 @@
+import ERROR_MESSAGE from '../constants/ErrorMessage.js';
+import Validation from '../utils/Validation.js';
+
 class Person {
   #money;
 
@@ -9,16 +12,8 @@ class Person {
   }
 
   #validate(money) {
-    if (
-      isNaN(money) ||
-      money[0] === '0' ||
-      /\s/g.test(money) ||
-      money[0] === '-' ||
-      Number(money) < 1000
-    ) {
-      throw new Error(
-        '[ERROR] 구매 금액은 최소 1000이상의 양의 정수여야 합니다.'
-      );
+    if (Validation.money(money)) {
+      throw new Error(ERROR_MESSAGE.INVALID_MONEY);
     }
   }
 

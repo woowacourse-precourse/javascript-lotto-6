@@ -1,4 +1,5 @@
-import LOTTO from './constants/AboutLotto.js';
+import ERROR_MESSAGE from './constants/ErrorMessage.js';
+import Validation from './utils/Validation.js';
 
 class Lotto {
   #numbers;
@@ -10,32 +11,28 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR_MESSAGE.LOTTO_LENGTH);
     }
-    this.#validateString(numbers);
-    this.#validateMinMax(numbers);
+    this.#validateStringContained(numbers);
+    this.#validateInRange(numbers);
     this.#validateOverlap(numbers);
   }
 
   #validateOverlap(numbers) {
-    if ([...new Set(numbers)].length !== 6) {
-      throw new Error('[ERROR] 로또 번호에 중복된 숫자가 있을 수 없습니다.');
+    if (Validation.overlap(numbers)) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NO_OVERLAP);
     }
   }
 
-  #validateString(numbers) {
-    if (isNaN(numbers.join(''))) {
-      throw new Error('[ERROR] 로또 번호에 문자가 있을 수 없습니다.');
+  #validateStringContained(numbers) {
+    if (Validation.stringContained(numbers)) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NO_STRING);
     }
   }
 
-  #validateMinMax(numbers) {
-    if (
-      !numbers.every(
-        (number) => number >= LOTTO.MIN_NUMBER && number <= LOTTO.MAX_NUMBER
-      )
-    ) {
-      throw new Error('[ERROR] 로또 번호는 1이상 45이하의 정수입니다..');
+  #validateInRange(numbers) {
+    if (Validation.inRange(numbers)) {
+      throw new Error(ERROR_MESSAGE.LOTTO_IN_RANGE);
     }
   }
 

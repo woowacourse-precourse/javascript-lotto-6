@@ -1,5 +1,5 @@
 const OUTPUT_MESSAGE = Object.freeze({
-  PRINT_PURCHASED_NUMBER: '개를 구매했습니다.',
+  PRINT_PURCHASED_NUMBER: (number) => `${number}개를 구매했습니다.`,
 
   PRINT_WINNING_LOG: '당첨 통계',
 
