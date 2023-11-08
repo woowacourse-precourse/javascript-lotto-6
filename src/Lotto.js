@@ -21,7 +21,18 @@ class Lotto {
     Console.print(`[${this.#numbers.join(", ")}]`);
   }
 
-  // TODO: 추가 기능 구현
+  getCorrectNumberCount(numbers, bonusNumber) {
+    const result = [0, 0];
+    for (let i = 0; i < 6; i++) {
+      if (this.#numbers.includes(numbers[i])) {
+        result[0]++;
+      }
+    }
+    if (this.#numbers.includes(bonusNumber)) {
+      result[1]++;
+    }
+    return result;
+  }
 }
 
 export default Lotto;

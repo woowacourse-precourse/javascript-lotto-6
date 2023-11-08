@@ -1,13 +1,32 @@
-import { getMoney, makeLottos, getUserLottoInput } from "./Game.js";
-
+import {
+  getMoney,
+  makeLottos,
+  getWinLottoInput,
+  getResult,
+  getWinLottoBonusInput,
+  getStatistics,
+} from "./Game.js";
+import { Console, Random } from "@woowacourse/mission-utils";
 class App {
   constructor() {
     this.money = 0;
+    this.lottos = [];
+    this.winLottoInput = [];
+    this.winLottoBonusInput = 0;
+    this.totalResult = [0, 0];
   }
   async play() {
     this.money = await getMoney();
-    makeLottos(this.money);
-    getUserLottoInput();
+    const lottoCnt = this.money / 1000;
+    this.lottos = makeLottos(lottoCnt);
+    this.winLottoInput = await getWinLottoInput();
+    this.winLottoBonusInput = await getWinLottoBonusInput(this.winLottoInput);
+    this.totalResult = getResult(
+      this.lottos,
+      this.winLottoInput,
+      this.winLottoBonusInput
+    );
+    getStatistics(this.money, this.totalResult);
   }
 }
 
