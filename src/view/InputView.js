@@ -7,6 +7,13 @@ class InputView {
     );
     return purchaseAmount;
   }
+
+  async readLottoNumbers() {
+    const lottoNumbers = await Console.readLineAsync(
+      "당첨 번호를 입력해 주세요."
+    );
+    return lottoNumbers;
+  }
 }
 
 export default InputView;

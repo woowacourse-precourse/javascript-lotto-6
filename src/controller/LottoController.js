@@ -30,6 +30,11 @@ class LottoController {
     this.#outputView.printPurchaseAmount(purchaseAmount / 1000);
     const result = this.#lotto.lottoResults(purchaseAmount / 1000);
     this.#outputView.printLottoResult(result);
+    await this.#receiveLottoNumbers();
+  }
+
+  async #receiveLottoNumbers() {
+    const lottoNumbers = this.#inputView.readLottoNumbers();
   }
 }
 
