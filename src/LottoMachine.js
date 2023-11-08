@@ -2,14 +2,17 @@ import Lotto from './Lotto';
 import Money from './Money';
 import Validator from './utils/vaildators';
 import { CONSTANT } from './constants';
+import WinningNumber from './WinningNumber';
 
 class LottoMachine {
   #lottos;
   #money;
+  #winningNumber;
 
   constructor(lottos = [], money = null) {
     this.#lottos = lottos;
     this.#money = money;
+    this.#winningNumber = new WinningNumber();
   }
 
   getPurchaseCount() {
@@ -24,8 +27,12 @@ class LottoMachine {
     return lotto;
   }
 
-  insertMoney(money) {
+  setMoney(money) {
     this.#money = new Money(money);
+  }
+
+  setWinningNumbers(winningNumbers) {
+    this.#winningNumber.setWinningNumbers(winningNumbers);
   }
 
   issueLottos() {

@@ -13,6 +13,7 @@ class App {
     await this.#requestUserMoney();
     this.#lottoMachine.issueLottos();
     this.#printLottos();
+    await this.#requestWinningNumbers();
   }
 
   async #requestUserMoney() {
@@ -21,7 +22,7 @@ class App {
     while (!isVaildMoney) {
       try {
         const money = await InputView.getMoney();
-        this.#lottoMachine.insertMoney(money);
+        this.#lottoMachine.setMoney(money);
         isVaildMoney = true;
       } catch (errorMessage) {
         OutputView.printError(errorMessage);
@@ -36,6 +37,20 @@ class App {
     for (let i = 0; i < purchaseCount; i++) {
       const lotto = this.#lottoMachine.getLotto(i);
       OutputView.printLotto(lotto);
+    }
+  }
+
+  async #requestWinningNumbers() {
+    let isVaildWinningNumber = false;
+
+    while (!isVaildMoney) {
+      try {
+        const winningNumbers = await InputView.getWinningNumber();
+        this.#lottoMachine.setWinningNumbers(winningNumbers);
+        isVaildWinningNumber = true;
+      } catch (errorMessage) {
+        OutputView.printError(errorMessage);
+      }
     }
   }
 }

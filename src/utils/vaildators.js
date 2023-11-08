@@ -46,6 +46,12 @@ class Validator {
       throw printError(ERROR.INVALID_INDEX);
     }
   }
+
+  static isOutOfRange(num) {
+    if (num < CONSTANT.MIN_VALUE || CONSTANT.MAX_VALUE < num) {
+      throw printError(ERROR.INVALID_RANGE);
+    }
+  }
 }
 
 export default Validator;

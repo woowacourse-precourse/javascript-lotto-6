@@ -13,6 +13,7 @@ class OutputView {
 
   static printLotto(lotto) {
     const lottoNumbers = lotto.join(', ');
+
     Console.print(`[${lottoNumbers}]`);
   }
 }
