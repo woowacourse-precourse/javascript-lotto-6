@@ -93,6 +93,38 @@ function calculateWinningResult() {
     this.winningResult[rank]++;
   }
 }
+function getMatchCount(lotto) {
+  let count = 0;
+  for (const number of lotto.getNumbers()) {
+    if (this.winningNumbers.includes(number)) {
+      count++;
+    }
+  }
+  return count;
+}
+function isBonusMatch(lotto) {
+  return lotto.getNumbers().includes(this.bonusNumber);
+}
+function getRank(matchCount, isBonusMatch) {
+  if (matchCount === 6) {
+    return 1;
+  }
+  if (matchCount === 5 && isBonusMatch) {
+    return 2;
+  }
+  if (matchCount === 5) {
+    return 3;
+  }
+  if (matchCount === 4) {
+    return 4;
+  }
+  if (matchCount === 3) {
+    return 5;
+  }
+  return 6;
+}
+
+
 
 
 
