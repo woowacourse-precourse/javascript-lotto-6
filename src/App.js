@@ -98,9 +98,9 @@ class App {
     }
   };
 
-  checkNumsRange(winningNumsList) {
-    for (let i = 0; i < winningNumsList.length; i++) {
-      if (!this.pattern.test(winningNumsList[i])) {
+  checkNumsRange(list) {
+    for (let i = 0; i < list.length; i++) {
+      if (!this.pattern.test(list[i])) {
         throw new Error(ERROR_MESSAGE.INPUT_ERROR)
       }
     }
@@ -113,13 +113,12 @@ class App {
       
       this.checkInputIsNull(inputBonus);
       this.checkInputIsNaN(inputBonus);
-      
+      this.checkNumsRange(Number(inputBonus));
+
       if (winningNumsList.includes(Number(inputBonus))) {
         throw new Error(ERROR_MESSAGE.INPUT_ERROR)
       }
-      if (!this.pattern.test(Number(inputBonus))) {
-        throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-      }
+      
       return Number(inputBonus);
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
