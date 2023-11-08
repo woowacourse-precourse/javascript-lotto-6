@@ -1,43 +1,77 @@
-import { ERROR_MESSAGE, LOTTO } from "./Constant.js";
+import { ERROR } from "./Constant.js";
 
-const Validation = {
-  checkMoney(money) {
-    if (isNaN(money)) throw new Error(ERROR_MESSAGE.NUMBER);
+class Validation {
+  validateInputMoney(money) {
+    if (this.isNotNumber(money)) {
+      throw new Error(ERROR.NOT_NUMBER);
+    }
+    if (this.isNotUnitOfPrice(money)) {
+      throw new Error(ERROR.NOT_UNIT_OF_PRICE);
+    }
+    return true;
+  }
 
-    if (money < 1000) throw new Error(ERROR_MESSAGE.MIN_MONEY);
+  checkLottoNum(numbers) {
+    if (this.isNotLottoNumberCount(numbers)) {
+      throw new Error(ERROR.NOT_VALID_NUMBER_COUNT);
+    }
+    numbers.forEach((num) => {
+      if (this.isNotRangeOfNumber(num)) {
+        throw new Error(ERROR.NOT_RANGE_OF_NUMBER);
+      }
+    });
+    if (this.isDuplicate(numbers)) {
+      throw new Error(ERROR.DUPLICATE_NUMBER);
+    }
+  }
 
-    if (money % 1000 !== 0) throw new Error(ERROR_MESSAGE.DIVISION);
-  },
+  checkUserNum(userNumber) {
+    if (this.isNotUserNumberFormat(userNumber)) {
+      throw new Error(ERROR.NOT_FORMAT_OF_USER_NUMBER);
+    }
+  }
 
-  checkNumberList(numbers) {
-    if (numbers.length !== LOTTO.NUMBERS_COUNT)
-      throw new Error(ERROR_MESSAGE.NOT_SIX);
+  checkUserBonusNum(userNumber, bonusNumber) {
+    if (this.isNotNumber(bonusNumber)) {
+      throw new Error(ERROR.NOT_NUMBER);
+    }
+    if (this.isNotRangeOfNumber(bonusNumber)) {
+      throw new Error(ERROR.NOT_RANGE_OF_NUMBER);
+    }
+    if (this.isExistInUserNumber(userNumber, bonusNumber)) {
+      throw new Error(ERROR.EXIST_IN_USER_NUMBER);
+    }
+  }
 
-    if ([...new Set(numbers)].length !== LOTTO.NUMBERS_COUNT)
-      throw new Error(ERROR_MESSAGE.DUPLICATE);
+  isNotNumber(value) {
+    const valid = /^[0-9]+$/;
+    return !valid.test(value);
+  }
 
-    if (!checkNumbersRange(numbers)) throw new Error(ERROR_MESSAGE.RANGE);
+  isNotUnitOfPrice(money) {
+    return Boolean(money % 1000) || money === 0;
+  }
 
-    if (!checkNumbersType(numbers)) throw new Error(ERROR_MESSAGE.NUMBER);
-  },
+  isNotLottoNumberCount(numbers) {
+    return numbers.length !== 6;
+  }
 
-  checkBonusNumber(num, winningNumbers) {
-    if (winningNumbers.includes(num))
-      throw new Error(ERROR_MESSAGE.ALREADY_INCLUDE);
+  isNotRangeOfNumber(value) {
+    return Number(value) < 1 || Number(value) > 45;
+  }
 
-    if (isNaN(num)) throw new Error(ERROR_MESSAGE.BONUS_NUMBER);
+  isDuplicate(numbers) {
+    return new Set(numbers).size !== numbers.length;
+  }
 
-    if (num > LOTTO.MAX || num < LOTTO.MIN)
-      throw new Error(ERROR_MESSAGE.BONUS_RANGE);
-  },
-};
+  isNotUserNumberFormat(userNumber) {
+    const valid = /^[0-9]+(,[0-9]+)+$/;
+    return !valid.test(userNumber);
+  }
 
-const checkNumbersRange = (numbers) => {
-  return numbers.every((num) => num <= 45 && num >= 1);
-};
+  isExistInUserNumber(userNumber, bonusNumber) {
+    return userNumber.includes(Number(bonusNumber));
+  }
+}
 
-const checkNumbersType = (numbers) => {
-  return numbers.every((num) => !isNaN(num));
-};
-
-module.exports = Validation;
+export default Validation;
