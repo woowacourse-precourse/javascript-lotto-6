@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-
+import { WINNING_AMOUNT } from './constants/Constant';
 class Result {
   constructor(amount) {
     this.six = 0;
@@ -43,11 +43,11 @@ class Result {
 
   printRateOfReturn() {
     const profit =
-      this.six * 200000000 +
-      this.fiveAndBonus * 30000000 +
-      this.five * 1500000 +
-      this.four * 50000 +
-      this.three * 5000;
+      this.six * WINNING_AMOUNT.firstPlace +
+      this.fiveAndBonus * WINNING_AMOUNT.secondPlace +
+      this.five * WINNING_AMOUNT.thirdPlace +
+      this.four * WINNING_AMOUNT.fourthPlace +
+      this.three * WINNING_AMOUNT.fifthPlace;
     const rateOfReturn = (profit / this.amount) * 100;
     const resultOfReturn = `총 수익률은 ${rateOfReturn.toFixed(2).replace(/\.?0+$/, '')}%입니다.`;
 

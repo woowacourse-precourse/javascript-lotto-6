@@ -15,3 +15,11 @@ export const ERROR = Object.freeze({
   checkInteger: '[ERROR] 로또 번호는 정수여야 합니다.',
   differentNumber: '[ERROR] 로또 번호는 서로다른 숫자여야 합니다.',
 });
+
+export const WINNING_AMOUNT = Object.freeze({
+  firstPlace: 200000000,
+  secondPlace: 30000000,
+  thirdPlace: 1500000,
+  fourthPlace: 50000,
+  fifthPlace: 5000,
+});
