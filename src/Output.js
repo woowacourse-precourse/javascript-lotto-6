@@ -10,7 +10,9 @@ class Output {
   printMyLottoList(purchaseCount, myLottoList) {
     Console.print(`${purchaseCount}개를 구매했습니다.`);
 
-    myLottoList.forEach((lotto) => Console.print(`[${lotto.getNumbers()}]`));
+    myLottoList.forEach((lotto) => {
+      Console.print(JSON.stringify(lotto.getNumbers()).replaceAll(',', ', '));
+    });
   }
 
   printWinningResult({ first, second, third, fourth, fifth }) {
