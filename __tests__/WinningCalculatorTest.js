@@ -40,7 +40,7 @@ describe('WinningCalculator 클래스 테스트', () => {
     },
   );
 
-  test.each([[3], [4], [0]])(
+  test.each([[3], [4], [5]])(
     '일치하는 수에 따라 등수를 반환하는지 테스트',
     (inputs) => {
       const winningCalculator = new WinningCalculator(
@@ -55,6 +55,31 @@ describe('WinningCalculator 클래스 테스트', () => {
           STATISTICS_STANDARD.matchCountRank.get(inputs),
         ),
       ).toBe(1);
+    },
+  );
+
+  test.each([
+    [[3, true], undefined],
+    [[4, true], undefined],
+    [[0, false], undefined],
+    [[5, true], 1],
+    [[5, false], undefined],
+  ])(
+    '보너스 수의 일치여부를 판별하여 2등을 체크하는지 테스트',
+    (inputs, expected) => {
+      const winningCalculator = new WinningCalculator(
+        totalWinningNumbers,
+        issuedLotto,
+      );
+
+      const matchCount = inputs[0];
+      const isWinningBonus = inputs[1];
+      winningCalculator.runCompileBonusWinner(matchCount, isWinningBonus);
+
+      const rankList = STATISTICS_STANDARD.matchCountRank;
+      const bonusRank = rankList.get(NUMBER_OPTIONS.bonusName);
+
+      expect(winningCalculator.winnerList.get(bonusRank)).toBe(expected);
     },
   );
 });
