@@ -1,3 +1,5 @@
+import message from './utils/message.js';
+
 class Lotto {
   // winning lotto
   #numbers;
@@ -10,15 +12,15 @@ class Lotto {
   #validate(numbers) {
     const changeSet = [...new Set(numbers)];
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(message.ERROR_MUST_BE_SIX_LENGTH);
     } else if (changeSet.length !== numbers.length) {
-      throw new Error('[ERROR] 중복된 값이 있습니다.');
+      throw new Error(message.ERROR_CAN_NOT_BE_DUPLICATED);
     }
     numbers.forEach((number) => {
       if (/[^0-9]/g.test(number)) {
-        throw new Error('[ERROR] 숫자를 입력해 주세요.');
+        throw new Error(message.ERROR_ONLY_NUMBER);
       } else if (number <= 0 || number > 45) {
-        throw new Error('[ERROR] 1 ~ 45 사이의 숫자여야 합니다.');
+        throw new Error(message.ERROR_NUMBER_RANGE_1_TO_45);
       }
     });
   }

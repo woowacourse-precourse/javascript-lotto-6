@@ -1,4 +1,5 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
+import message from '../utils/message.js';
 
 class IssuedLotto {
   #list;
@@ -13,17 +14,17 @@ class IssuedLotto {
 
   #validate(count) {
     if (/[^0-9]/g.test(count)) {
-      throw new Error('[ERROR] 1000원 이상의 숫자를 입력해 주세요.');
+      throw new Error(message.ERROR_MUST_BE_NUMBER_OVER_1000);
     } else if (count < 1000) {
-      throw new Error('[ERROR] 1000원 이상의 숫자를 입력해 주세요');
+      throw new Error(message.ERROR_MUST_BE_NUMBER_OVER_1000);
     } else if (count % 1000 !== 0) {
-      throw new Error('[ERROR] 1,000단위로 입력해 주세요');
+      throw new Error(message.ERROR_MUST_BE_UNIT_OF_1000);
     }
   }
 
   createLottos() {
     for (let i = 0; i < this.#count; i += 1) {
-      const lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
       this.#list.push(lotto);
     }
   }
