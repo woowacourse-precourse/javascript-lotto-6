@@ -6,15 +6,34 @@ import Lotto from './Lotto.js';
 import WinningStatistics from './WinningStatistics.js';
 import BonusNum from './BonusNum.js';
 class App {
-  async checkBuyMoney() {
-    while (1) {
-      try {
-        const buyMoney = await this.inputNum();
-        this.Money = new Money(buyMoney);
-        return buyMoney;
-      } catch {}
+  async inputNum(output) {
+    const input = await Console.readLineAsync(output);
+    return input;
+  }
+  async getBuyMoney() {
+    try {
+      this.buyMoney = await this.inputNum(INPUT_MESSAGE.INPUT_BUY_MONEY);
+      this.Money = new Money(this.buyMoney);
+    } catch {
+      return this.getBuyMoney();
+    }
+    this.createLottos();
+  }
+  createLottos() {
+    this.Lottos = new Lottos(this.buyMoney);
+    this.Lottos.printNumOfLottos();
+    this.Lottos.printCreatedLottos();
+  }
+  async inputWinningNum() {
+    try {
+      const winningNum = await this.inputNum(INPUT_MESSAGE.INPUT_WINNINGNUM);
+      this.winningNum = this.modifyWinningNum(winningNum);
+      new Lotto(this.winningNum);
+    } catch {
+      return this.inputWinningNum();
     }
   }
+
   modifyWinningNum(winningNum) {
     winningNum = winningNum.split(',');
     winningNum.map((e, i) => {
@@ -22,42 +41,18 @@ class App {
     });
     return winningNum;
   }
-  async inputWinningNum() {
-    while (1) {
-      try {
-        let winningNum = await Console.readLineAsync(
-          INPUT_MESSAGE.INPUT_WINNINGNUM
-        );
-        winningNum = this.modifyWinningNum(winningNum);
-        this.Lotto = new Lotto(winningNum);
-        return winningNum;
-      } catch {}
-    }
-    return winningNum;
-  }
+
   async inputBonusNum() {
-    while (1) {
-      try {
-        let bonusNum = await Console.readLineAsync(
-          INPUT_MESSAGE.INPUT_BONUSNUM
-        );
-        bonusNum = parseInt(bonusNum);
-        this.BonusNum = new BonusNum(bonusNum, this.winningNum);
-        return bonusNum;
-      } catch {}
+    try {
+      const bonusNum = await this.inputNum(INPUT_MESSAGE.INPUT_BONUSNUM);
+      this.bonusNum = parseInt(bonusNum);
+      new BonusNum(bonusNum, this.winningNum);
+    } catch {
+      return this.inputBonusNum();
     }
   }
-  async inputNum() {
-    const buyMoney = await Console.readLineAsync(INPUT_MESSAGE.INPUT_BUY_MONEY);
-    return buyMoney;
-  }
-  async play() {
-    this.buyMoney = await this.checkBuyMoney();
-    this.Lottos = new Lottos(this.buyMoney);
-    this.Lottos.printNumOfLottos();
-    this.Lottos.printCreatedLottos();
-    this.winningNum = await this.inputWinningNum();
-    this.bonusNum = await this.inputBonusNum();
+
+  printWinningStatistics() {
     this.winningStatistics = new WinningStatistics(
       this.Lottos.createdLottos,
       this.bonusNum,
@@ -65,6 +60,12 @@ class App {
       this.buyMoney
     );
     this.winningStatistics.printResult();
+  }
+  async play() {
+    await this.getBuyMoney();
+    await this.inputWinningNum();
+    await this.inputBonusNum();
+    await this.printWinningStatistics();
   }
 }
 
