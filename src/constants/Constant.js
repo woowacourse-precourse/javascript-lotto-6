@@ -24,4 +24,11 @@ const PRIZE = Object.freeze({
   PRIZE_SIX: 2000000000,
 });
 
-export { MESSAGE_INPUT, MESSAGE_OUTPUT, PRIZE };
+const ERROR_MESSAGE = Object.freeze({
+  PRICE_UNIT: "[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.",
+  PRICE_NUMBER: "[ERROR] 구입 금액은 숫자로 입력해주세요.",
+  LOTTO_UNIT: "[ERROR] 로또 번호는 1 ~ 45 사이로 입력해 주세요.",
+  LOTTO_INPUT: "[ERROR] 당첨 번호 입력 시 중복되지 않는 숫자로 입력해주세요.",
+});
+
+export { MESSAGE_INPUT, MESSAGE_OUTPUT, PRIZE, ERROR_MESSAGE };

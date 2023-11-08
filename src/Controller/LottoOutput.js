@@ -35,9 +35,8 @@ class LottoOutput {
       ).length;
 
       let IS_BONUS = false;
-      if (this.lottoNumArr[i].includes(bonusNum)) {
-        IS_BONUS = true;
-      }
+      if (this.lottoNumArr[i].includes(bonusNum)) IS_BONUS = true;
+
       this.matchWinCnt(winningCount, IS_BONUS);
     }
   }
