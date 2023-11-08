@@ -12,6 +12,11 @@ class App {
 
     const bonusNumber = await game.getInputLoop(game.getBonusNumber, [winningNumbers]);
 
+    const winInfoAry = [0, 0, 0, 0, 0, 0, 0];
+    lottoAry.forEach((lotto) => {
+      const rank = lotto.calculateLottoRank(winningNumbers, bonusNumber);
+      winInfoAry[rank]++;
+    });
 
 
   }
