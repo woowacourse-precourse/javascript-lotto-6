@@ -21,11 +21,11 @@ export const Output = {
     Console.print(LOTTO_STAT(PRIZE, matchingCount) + EARNING_RATE(rate));
   },
 
-  showEnter() {
+  enter() {
     Console.print(GAME_INFO.ENTER);
   },
 
-  showError(error) {
+  error(error) {
     Console.print(error.message);
   },
 };

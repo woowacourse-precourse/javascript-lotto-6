@@ -18,10 +18,10 @@ class App {
   async getPurchasePrice() {
     try {
       this.purchasePrice = await Input.purchasePrice();
-      Output.showEnter();
+      Output.enter();
       return new PurchasePrice(this.purchasePrice);
     } catch (error) {
-      Output.showError(error);
+      Output.error(error);
       return this.getPurchasePrice();
     }
   }
@@ -29,10 +29,10 @@ class App {
   async getLottoNumbers() {
     try {
       this.lotto = await Input.lotto();
-      Output.showEnter();
+      Output.enter();
       return new Lotto(this.lotto);
     } catch (error) {
-      Output.showError(error);
+      Output.error(error);
       return this.getLottoNumbers();
     }
   }
@@ -40,10 +40,10 @@ class App {
   async getBonusNumber() {
     try {
       this.bonusNumber = await Input.bonusNumber();
-      Output.showEnter();
+      Output.enter();
       return new BonusNumber(this.bonusNumber);
     } catch (error) {
-      Output.showError(error);
+      Output.error(error);
       return this.getBonusNumber();
     }
   }
@@ -54,7 +54,7 @@ class App {
 
     const drawingLotto = await this.game.drawLotto(this.purchasePrice);
     await Output.drawLotto(drawingLotto);
-    await Output.showEnter();
+    await Output.enter();
 
     await this.getLottoNumbers();
     await this.getBonusNumber();
