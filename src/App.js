@@ -7,12 +7,12 @@ import LottoMachine from './domains/LottoMachine.js';
 import LottoDrawChecker from './domains/LottoDrawChecker.js';
 import LottoReward from './domains/LottoReward.js';
 import ValidUserInputs from './validator/ValidUserInputs.js';
+import LottoGame from './domains/LottoGame.js';
 
 class App {
   #inputReader;
   #promptPrinter;
   #randomNumberGenerator;
-  #lottoMachine;
   #validUserInput;
 
   constructor() {
@@ -22,10 +22,6 @@ class App {
       LOTTO.NUMBER_RANGE.MIN,
       LOTTO.NUMBER_RANGE.MAX,
       LOTTO.NUMBER_COUNT,
-    );
-    this.#lottoMachine = new LottoMachine(
-      LOTTO.SELLING_PRICE,
-      this.#randomNumberGenerator,
     );
     this.#validUserInput = new ValidUserInputs();
   }
@@ -69,32 +65,27 @@ class App {
   }
 
   #excuteProcess() {
-    const lottoList = this.#lottoMachine
-      .purchase(this.#validUserInput.purchasePrice)
-      .map((lotto) => lotto.getNumbers());
-    const lottoDrawChecker = new LottoDrawChecker(
-      this.#validUserInput.winningNumbers,
-      this.#validUserInput.bonusNumber,
+    const lottoMachine = new LottoMachine(
+      LOTTO.SELLING_PRICE,
+      this.#randomNumberGenerator,
     );
-    const drawResult = lottoDrawChecker.getDrawResult(lottoList);
-    const reward = new LottoReward(
-      drawResult,
-      this.#validUserInput.purchasePrice,
-    );
-    const profitRate = reward.calculrateProfitRate();
+    const lottoGame = new LottoGame(this.#validUserInput, lottoMachine);
+    const lottoList = lottoGame.publishLottoList();
+    const drawDetails = lottoGame.calculateDrawDetails(lottoList);
+    const profitRate = lottoGame.calculateProfitRate(drawDetails);
 
-    this.#processResult({ lottoList, drawResult, profitRate });
+    this.#processResult({ lottoList, drawDetails, profitRate });
   }
 
   #processResult(
-    { lottoList, profitRate, drawResult },
+    { lottoList, profitRate, drawDetails },
     _0 = paramType(lottoList, Array),
-    _1 = paramType(drawResult, Object),
+    _1 = paramType(drawDetails, Object),
     _2 = paramType(profitRate, 'string'),
   ) {
     this.#promptPrinter.purchaseCount([...lottoList].length);
     this.#promptPrinter.purchaseLottoInfo(lottoList);
-    this.#promptPrinter.drawResult(drawResult);
+    this.#promptPrinter.drawResult(drawDetails);
     this.#promptPrinter.profitRate(profitRate);
   }
 }
