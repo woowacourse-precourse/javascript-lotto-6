@@ -4,6 +4,7 @@ class App {
   async play() {
     const lottoSeller = new LottoMachine();
     await lottoSeller.sell();
+    lottoSeller.announceResult();
   }
 }
 

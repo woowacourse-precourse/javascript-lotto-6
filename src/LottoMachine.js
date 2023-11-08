@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { USER_INPUT, ANNOUNCEMENT, ERROR } from './message.js';
-import { LOTTO_PRICE } from './constant.js';
+import { LOTTO_PRICE, RANKING, PRIZE } from './constant.js';
 import Lotto from './Lotto.js';
 
 export default class LottoMachine {
@@ -10,6 +10,13 @@ export default class LottoMachine {
 
   constructor() {
     this.lottos = [];
+    this.winningDetails = {
+      first: 0,
+      second: 0,
+      third: 0,
+      fourth: 0,
+      fifth: 0,
+    };
   }
 
   async sell() {
@@ -25,6 +32,15 @@ export default class LottoMachine {
 
     await this.#setWinningNumbers();
     await this.#setBonusNumber();
+  }
+
+  announceResult() {
+    this.#aggregateRank();
+    const rateOfReturn = this.#calculateRateOfReturn();
+
+    MissionUtils.Console.print(
+      ANNOUNCEMENT.winningStatistics(this.winningDetails, rateOfReturn)
+    );
   }
 
   async #receiveMoney() {
@@ -110,5 +126,47 @@ export default class LottoMachine {
     }
     this.#validateNumber(inputNumber);
     this.#bonusNumber = +inputNumber;
+  }
+
+  #aggregateRank() {
+    this.lottos.forEach((lotto) => {
+      const ranking = lotto.checkResult(
+        this.#winningNumbers,
+        this.#bonusNumber
+      );
+
+      switch (ranking) {
+        case RANKING.first:
+          this.winningDetails.first++;
+          break;
+        case RANKING.second:
+          this.winningDetails.second++;
+          break;
+        case RANKING.third:
+          this.winningDetails.third++;
+          break;
+        case RANKING.fourth:
+          this.winningDetails.fourth++;
+          break;
+        case RANKING.fifth:
+          this.winningDetails.fifth++;
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
+  #calculateRateOfReturn() {
+    const prize =
+      PRIZE.first * this.winningDetails.first +
+      PRIZE.second * this.winningDetails.second +
+      PRIZE.third * this.winningDetails.third +
+      PRIZE.fourth * this.winningDetails.fourth +
+      PRIZE.fifth * this.winningDetails.fifth;
+
+    const rateOfReturn = (prize / this.#purchaseAmount).toFixed(1);
+
+    return rateOfReturn;
   }
 }
