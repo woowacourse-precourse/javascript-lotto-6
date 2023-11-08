@@ -4,9 +4,10 @@ export const ERROR_MESSAGE = {
   NOT_INTEGER: '[ERROR] 정수만 입력 가능합니다. ',
   NOT_IN_RANGE: '[ERROR] 1 ~ 45 사이 숫자만 입력 가능합니다. ',
   NUMBER_OF_ELEMENTS_ERROR: '[ERROR] 로또볼 숫자는 6개 입력되어야합니다.',
-  WINNING_BALL_INPUT_ERROR: '[ERROR] 로또볼 숫자가 6개 입력되어야합니다.',
-  BONUS_WINNING_NUMBERS_DUPLICATED:
-    '당첨 번호에 있는 숫자는 보너스 번호로 선택될 수 없습니다. ',
+  NO_DUPLICATED_BONUS_NUMBERS:
+    '[ERROR] 당첨 번호에 있는 숫자는 보너스 번호로 선택될 수 없습니다.',
+  NO_DUPLICATED_NUMBERS:
+    '[ERROR] 모든 로또 번호는 중복 없이 한번씩만 나와야합니다.',
 };
 
 export const INPUT_MESSAGE = {

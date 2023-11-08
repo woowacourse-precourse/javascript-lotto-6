@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { hasDuplicates, numberWithCommas } from './utils.js';
+import { ERROR_MESSAGE } from '../constants/index.js';
 
 class Lotto {
   #numbers = [];
@@ -46,13 +47,14 @@ class Lotto {
 
   #validateDuplication(numbers) {
     if (hasDuplicates(numbers)) {
-      throw new Error('[ERROR]');
+      throw new Error(ERROR_MESSAGE.NO_DUPLICATED_NUMBERS);
     }
   }
 
   #validateNumberOfElements(numbers) {
-    if (numbers.length > 6) {
-      throw new Error('[ERROR]');
+    const NUMBER_OF_ELEMENTS = 6;
+    if (numbers.length !== NUMBER_OF_ELEMENTS) {
+      throw new Error(ERROR_MESSAGE.NUMBER_OF_ELEMENTS_ERROR);
     }
   }
 
