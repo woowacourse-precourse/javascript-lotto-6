@@ -1,3 +1,5 @@
+import { MissionUtils, Random, Console } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers; // 로또 번호 배열을 숨김 필드로 사용
 
