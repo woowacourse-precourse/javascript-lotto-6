@@ -9,10 +9,6 @@ class Ranking {
     this.#initRanks();
   }
 
-  getRanks() {
-    return this.#ranks
-  }
-
   calculateRanking(matchedCount, isBonusMatched) {
     Object.entries(RANKING).forEach(([key, rank]) => {
       if (rank.match === matchedCount && rank.bonus === isBonusMatched) {
@@ -20,6 +16,10 @@ class Ranking {
         this.#ranks.set(key, existingValue + 1);
       }
     });
+  }
+
+  getRanks() {
+    return this.#ranks
   }
 
   #initRanks() {
