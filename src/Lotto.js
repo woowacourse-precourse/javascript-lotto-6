@@ -29,10 +29,6 @@ class Lotto {
   }
 
   #validateNumberCase(number) {
-    if (number.trim() === '') {
-      throw new Error(ERROR_MESSAGE.notNumberException);
-    }
-
     if (Number.isNaN(Number(number))) {
       throw new Error(ERROR_MESSAGE.notNumberException);
     }
