@@ -20,3 +20,11 @@ export const ERROR_MESSAGE = {
   WRONG_LENGTH: "잘못된 숫자 개수입니다.",
   OVERLAPPED_VALUE: "중복된 값이 있습니다.",
 };
+
+export const WIN_PRIZE = {
+  first: 2000000000,
+  second: 30000000,
+  third: 1500000,
+  fourth: 50000,
+  fifth: 5000,
+};

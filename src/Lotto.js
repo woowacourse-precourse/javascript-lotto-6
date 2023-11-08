@@ -1,14 +1,14 @@
 import { Console } from "@woowacourse/mission-utils";
 import LottoError from "./LottoError.js";
+import { LOTTO_PICK } from "./constant.js";
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#sortAscend(numbers);
+    this.#sortAscending(numbers);
     this.#numbers = numbers;
-    Console.print(this.#numbers);
   }
 
   #validate(numbers) {
@@ -17,9 +17,31 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
-  #sortAscend(numbers){
-    numbers.sort((a, b) => a - b);
+  printConsole(){
+    Console.print(this.#numbers);
+  }
+
+  #sortAscending(numbers){
+    numbers.sort((prev, next) => prev - next);
+  }
+
+  checkWin(winNumbers, bonusNumber){
+    let winStatus = {
+      main : 0,
+      bonus: false,
+    };
+    // 당첨번호 하나하나씩을 돌면서 이 로또에 번호가 있는지 확인
+    winNumbers.forEach((number) => {
+      if (this.#numbers.includes(number)){
+        winStatus.main += 1;
+      }
+    })
+    // 당첨번호와 5개가 일치한다면, 보너스번호 포함여부 확인
+    if (winStatus.main === LOTTO_PICK.DRAW_UNITS - 1){
+      winStatus.bonus = this.#numbers.includes(bonusNumber);
+    }
+
+    return winStatus;
   }
 }
 
