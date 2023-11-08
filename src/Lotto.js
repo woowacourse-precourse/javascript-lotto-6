@@ -34,7 +34,6 @@ class Lotto {
   printLottos = () => {
     this.sortAscending();
     Console.print(`[${this.#numbers.join(", ")}]`);
-    console.log(this.#numbers);
   };
 }
 
