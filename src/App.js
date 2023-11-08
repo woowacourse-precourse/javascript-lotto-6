@@ -21,7 +21,9 @@ const inputStep = {
 
 class App {
   #lottos;
+  #cost;
   #prizeNumber;
+  #bonusNumber;
 
   checkValidation(inputValue, checkList) {
     const inValidObject = checkList.find((elem) => !elem.check(inputValue, this.#prizeNumber));
@@ -57,8 +59,8 @@ class App {
   async play() {
     const cost = await this.getInput(inputStep.cost.prompt, 'cost');
     this.createLotto(cost);
-    print(`${cost / 1000}개를 구매했습니다.`);
 
+    print(`${cost / 1000}개를 구매했습니다.`);
     this.#lottos.forEach((lotto) => {
       print(`[${lotto.getNumbers().join(', ')}]`);
     });
