@@ -32,11 +32,11 @@ const RESPONSE = {
 };
 const STATISTICS = {
 	RESULT_IS: '\n당첨 통계\n\n---',
-	THREE_SAME: (amount) => `3개 일치 (5,000원) - ${amount}개 출력`,
-	FOUR_SAME: (amount) => `4개 일치 (50,000원) - ${amount}개 출력`,
-	FIVE_SAME: (amount) => `5개 일치 (1,500,000원) - ${amount}개  출력`,
-	SIX_SAME: (amount) => `6개 일치 (2,000,000,000원) - ${amount}개  출력`,
-	BONUS: (amount) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${amount}개  출력`,
+	THREE_SAME: (amount) => `3개 일치 (5,000원) - ${amount}개`,
+	FOUR_SAME: (amount) => `4개 일치 (50,000원) - ${amount}개`,
+	FIVE_SAME: (amount) => `5개 일치 (1,500,000원) - ${amount}개`,
+	SIX_SAME: (amount) => `6개 일치 (2,000,000,000원) - ${amount}개`,
+	BONUS: (amount) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${amount}개`,
 };
 
 const ERROR = {
