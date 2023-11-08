@@ -11,8 +11,8 @@ class App {
     const userMoney = await money.userMoney();
     const lottoCount = parseInt(userMoney / 1000, 10);
     Console.print(`\n${lottoCount}${GAME_MESSAGES.COUNT_LOTTO}`);
-    // let lottos = this.generateLottoNumber(lottoCount);
-    // this.getWinningNumbers(lottos);
+    let lottos = this.generateLottoNumber(lottoCount);
+    this.getWinningNumbers(lottos);
   }
 
   async getWinningNumbers(lottos) {
@@ -22,8 +22,13 @@ class App {
     let winningNumberArray = winningNumber
       .split(",")
       .map((x) => parseInt(x, 10));
-    let winning = new Lotto(winningNumberArray);
-    this.getBonusNumber(lottos, winning);
+
+    try {
+      const winning = new Lotto(winningNumberArray);
+      this.getBonusNumber(lottos, winning);
+    } catch (error) {
+      Console.print(`${error.message}`);
+    }
   }
 
   async getBonusNumber(lottos, winning) {
@@ -103,25 +108,32 @@ class App {
   }
 
   generateLottoNumber(lottoCount) {
-    let lottos = [lottoCount];
+    const lottos = [];
+
     for (let i = 0; i < lottoCount; i += 1) {
-      lottos[i] = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const lottoNumbers = this.generateUniqueLottoNumbers();
+      lottos.push(lottoNumbers);
     }
 
-    for (let i = 0; i < lottos.length; i += 1) {
-      lottos[i].sort((a, b) => {
-        return a - b;
-      });
-    }
     this.printLottoNumbers(lottos);
     return lottos;
   }
 
+  generateUniqueLottoNumbers() {
+    const lottoNumbers = new Set();
+
+    while (lottoNumbers.size < 6) {
+      const randomNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+      randomNumber.forEach((num) => lottoNumbers.add(num));
+    }
+
+    return Array.from(lottoNumbers).sort((a, b) => a - b);
+  }
+
   printLottoNumbers(lottos) {
-    lottos.map((lotto) => {
+    lottos.forEach((lotto) => {
       Console.print(`[${lotto.join(", ")}]`);
     });
-    Console.print("\n");
   }
 }
 
