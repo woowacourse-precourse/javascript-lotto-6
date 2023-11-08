@@ -10,7 +10,7 @@ class LottoController {
 
   async run() {
     await this.#setUser();
-    this.#user.buyLottos();
+    this.#user.purchaseLottos();
 
     this.#getUserLottos();
 

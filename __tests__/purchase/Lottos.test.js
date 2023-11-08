@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import Lottos from '../../src/buy/Lottos.js';
+import Lottos from '../../src/purchase/Lottos.js';
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
@@ -8,7 +8,7 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickUniqueNumbersInRange);
 };
 
-describe('buy/lottos : 다수 로또 번호 반환값 테스트', () => {
+describe('purchase/lottos : 다수 로또 번호 반환값 테스트', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
   })

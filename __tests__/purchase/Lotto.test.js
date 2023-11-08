@@ -1,4 +1,4 @@
-import Lotto from '../../src/buy/Lotto.js';
+import Lotto from '../../src/purchase/Lotto.js';
 import {
   LottoLengthError,
   LottoRangeError,
@@ -6,7 +6,7 @@ import {
   LottoDuplicatedError
 } from '../../src/error/CustomErrors.js';
 
-describe('buy/lotto : 생성 lotto 번호 유효성 검사 테스트', () => {
+describe('purchase/lotto : 생성 lotto 번호 유효성 검사 테스트', () => {
   test.each([
     [[0, 1, 2, 3, 4, 5]],
     [[0, 6, 2, 47, 4, 2]],
@@ -43,7 +43,7 @@ describe('buy/lotto : 생성 lotto 번호 유효성 검사 테스트', () => {
   });
 });
 
-describe('buy/lotto : 로또 번호 반환값 테스트', () => {
+describe('purchase/lotto : 로또 번호 반환값 테스트', () => {
   test.each([
     [[1, 2, 3, 4, 5, 6]],
     [[5, 10, 15, 20, 25, 30]],

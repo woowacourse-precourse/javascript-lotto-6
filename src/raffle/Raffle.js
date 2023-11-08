@@ -16,4 +16,12 @@ export default class Raffle {
     }
     this.#bonus = new Bonus(bonus);
   }
+
+  getNumbers() {
+    return this.#numbers.get();
+  }
+
+  getBonus() {
+    return this.#bonus.get()
+  }
 }

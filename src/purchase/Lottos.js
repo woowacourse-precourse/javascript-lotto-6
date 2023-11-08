@@ -25,6 +25,15 @@ export default class Lottos {
   get() {
     const lottoNumbers = [];
     this.#lottos.forEach((lotto) => {
+      lottoNumbers.push(lotto.get());
+    });
+
+    return lottoNumbers;
+  }
+
+  print() {
+    const lottoNumbers = [];
+    this.#lottos.forEach((lotto) => {
       lottoNumbers.push(Utils.numberArrayToString(lotto.get()));
     });
 

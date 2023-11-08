@@ -32,4 +32,8 @@ export default class RaffleController {
       }
     }
   }
+
+  getRaffle() {
+    return this.#raffleService.getRaffle();
+  }
 }

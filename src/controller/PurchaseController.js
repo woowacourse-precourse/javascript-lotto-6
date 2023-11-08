@@ -1,19 +1,19 @@
 import MESSAGES from '../constants/Messages.js';
-import BuyService from '../service/BuyService.js';
+import PurchaseService from '../service/PurchaseService.js';
 import View from '../utils/View.js';
 
-export default class BuyController {
-  #buyService;
+export default class PurchaseController {
+  #purchaseService;
 
   constructor() {
-    this.#buyService = new BuyService();
+    this.#purchaseService = new PurchaseService();
   }
 
-  async buyLotto() {
+  async purchaseLotto() {
     while (true) {
       const balance = await View.getInputByQuestion(MESSAGES.inputBalance);
       try {
-        this.#buyService.buyLotto(balance);
+        this.#purchaseService.purchaseLotto(balance);
         break;
       } catch (error) {
         View.printOutput(error.message);
@@ -22,11 +22,15 @@ export default class BuyController {
   }
 
   printLottos() {
-    const amount = this.#buyService.getAmount();
+    const amount = this.#purchaseService.getAmount();
     View.printOutput(`\n${amount}${MESSAGES.outputLottoAmount}`);
-    const lottos = this.#buyService.getLottos();
+    const lottos = this.#purchaseService.printLottos();
     lottos.forEach(lotto => {
       View.printOutput(lotto);
     });
+  }
+
+  getLottos() {
+    return this.#purchaseService.getLottos();
   }
 }

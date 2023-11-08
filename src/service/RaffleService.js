@@ -9,4 +9,7 @@ export default class RaffleService {
   raffleBonus(bonus) {
     this.#raffle.addBonus(bonus);
   }
+  getRaffle() {
+    return { 'numbers': this.#raffle.getNumbers(), 'bonus': this.#raffle.getBonus() };
+  }
 }
