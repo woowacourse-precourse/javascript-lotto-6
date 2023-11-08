@@ -32,10 +32,25 @@ class App {
 		do {
 			try {
 				input = await Console.readLineAsync(promptMessage);
-				console.log(typeof input);
 				if (validateFunc) {
 					validateFunc(input);
 				}
+				break;
+			} catch (error) {
+				Console.print(error.message);
+			}
+		} while (true);
+		return input;
+	}
+
+	async createWinningNumber(promptMessage, validateFunc) {
+		let input;
+		do {
+			try {
+				input = (await Console.readLineAsync(promptMessage))
+					.split(',')
+					.map((str) => Number(str.trim()));
+				input.forEach((item) => validateFunc(item));
 				break;
 			} catch (error) {
 				Console.print(error.message);
@@ -62,29 +77,10 @@ class App {
 
 		this.printMyLotto(TOTAL_LOTTO);
 
-		let WINNING_NUMBERS_LIST;
-		let isValid;
-
-		while (!isValid) {
-			try {
-				const WINNING_NUMBERS_INPUT = await Console.readLineAsync(
-					PLZ_INPUT_WINNING_NUMBER_MESSAGE,
-				);
-
-				const inputList = WINNING_NUMBERS_INPUT.split(',').map((str) =>
-					Number(str.trim()),
-				);
-
-				for (let item of inputList) {
-					ErrorCheck.inputNumberCheck(item);
-				}
-
-				WINNING_NUMBERS_LIST = inputList;
-				isValid = true;
-			} catch (error) {
-				Console.print(error.message);
-			}
-		}
+		const WINNING_NUMBERS_LIST = await this.createWinningNumber(
+			PLZ_INPUT_WINNING_NUMBER_MESSAGE,
+			ErrorCheck.inputNumberCheck,
+		);
 
 		const WINNING_NUMBERS = new Lotto(WINNING_NUMBERS_LIST);
 
