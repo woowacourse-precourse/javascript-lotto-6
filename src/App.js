@@ -9,6 +9,7 @@ class App {
     this.#controller.printLottoNumbers();
     await this.#controller.getWinningNumbers();
     await this.#controller.getBonusNumber();
+    this.#controller.calculateMatchCount();
     this.#controller.printResult();
   }
 }

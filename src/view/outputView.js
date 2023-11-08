@@ -13,6 +13,10 @@ const outputView = {
   printTitle() {
     MissionUtils.Console.print(OUTPUT_MESSAGE.TITLE);
   },
+
+  printResult(rank, resultCount) {
+    MissionUtils.Console.print(`${OUTPUT_MESSAGE[rank]}${resultCount}개`);
+  },
 };
 
 export default outputView;
