@@ -33,7 +33,7 @@ class Validator {
   }
 
   static remainderNotZero(purchaseAmount) {
-    if (purchaseAmount % CONSTANTS.purchaseAmount.amountDivisor !== 0)
+    if (purchaseAmount % CONSTANTS.purchaseAmount.amountDivisor !== CONSTANTS.number.zero)
       throw new Error(ERROR.message.remainderNotZero);
   }
 
@@ -52,7 +52,7 @@ class Validator {
   }
 
   static negativeNumber(purchaseAmount) {
-    if (purchaseAmount < 0) throw new Error(ERROR.message.negativeNumber);
+    if (purchaseAmount < CONSTANTS.number.zero) throw new Error(ERROR.message.negativeNumber);
   }
 
   static invalidSeparator(numbers) {

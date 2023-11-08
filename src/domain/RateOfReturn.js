@@ -17,7 +17,10 @@ class RateOfReturn {
 
     const finalValue =
       Number(purchaseAmount) + returns.reduce((acc, currentReturn) => acc + currentReturn);
-    const rateOfReturn = (((finalValue - purchaseAmount) / purchaseAmount) * 100).toFixed(1);
+    const rateOfReturn = (
+      ((finalValue - purchaseAmount) / purchaseAmount) *
+      CONSTANTS.number.percentage
+    ).toFixed(1);
 
     return `${rateOfReturn}%`;
   }

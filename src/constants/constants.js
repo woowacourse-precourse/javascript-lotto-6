@@ -7,6 +7,7 @@ const number = Object.freeze({
   count: 6,
   min: 1,
   max: 45,
+  percentage: 100,
 });
 
 const match = Object.freeze({
