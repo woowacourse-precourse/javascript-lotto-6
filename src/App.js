@@ -109,17 +109,21 @@ class App {
     };
 
     lottos.forEach(lotto => {
-      const matchCount = this.getMatchCount(lotto, winningNumbers);
-      const isBonusMatch = lotto.includes(bonusNumber);
-
-      if (matchCount === 5 && isBonusMatch) {
-        statistics['5+1'].count++;
-      } else if (statistics[matchCount]) {
-        statistics[matchCount].count++;
-      }
+      this.updateStatistics(lotto, winningNumbers, bonusNumber, statistics);
     });
 
     return statistics;
+  }
+
+  updateStatistics(lotto, winningNumbers, bonusNumber, statistics) {
+    const matchCount = this.getMatchCount(lotto, winningNumbers);
+    const isBonusMatch = lotto.includes(bonusNumber);
+
+    if (matchCount === 5 && isBonusMatch) {
+      statistics['5+1'].count++;
+    } else if (statistics[matchCount]) {
+      statistics[matchCount].count++;
+    }
   }
 
   getMatchCount(lotto, winningNumbers) {
