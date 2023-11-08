@@ -1,3 +1,5 @@
+import {Console} from '@woowacourse/mission-utils';
+
 /**
  * @typedef {Object} LottoInfo
  * @property {number} rank - 등수
@@ -52,6 +54,12 @@ class App {
    * @param {function(): Promise<T>} callback
    * @return {Promise<T>} */
   async getUserInput(callback) {
+    try {
+      return await callback();
+    } catch (e) {
+      Console.print(e.message);
+      return await this.getUserInput(callback);
+    }
   }
 
 
