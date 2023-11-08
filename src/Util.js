@@ -28,6 +28,9 @@ export function validateLottoNumbers(numbers,bonusNumber) {
     if (bonusNumber < 1 || bonusNumber > 45) {
         throw new Error("[ERROR] 보너스 당첨 번호는 1~45 사이의 번호여야 합니다.")
     }
+    if (numbers.includes(bonusNumber)) {
+        throw new Error("[ERROR] 보너스 당첨 번호는 기존 6개 로또 번호와 달라야 합니다.")
+    }
 }
 
 export function create2DArray(rows, columns) {
