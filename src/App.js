@@ -5,21 +5,21 @@ class App {
   answer;
   lottos;
   bonus;
-  three;
-  four;
-  five;
-  fivePlusOne;
-  six;
+  threeLottoCorrect;
+  fourLottoCorrect;
+  fiveLottoCorrect;
+  fivePlusOneLottoCorrect;
+  sixLottoCorrect;
 
   constructor() {
     this.answer = [];
     this.lottos = [];
     this.bonus = null;
-    this.three = 0;
-    this.four = 0;
-    this.five = 0;
-    this.fivePlusOne = 0;
-    this.six = 0;
+    this.threeLottoCorrect = 0;
+    this.fourLottoCorrect = 0;
+    this.fiveLottoCorrect = 0;
+    this.fivePlusOneLottoCorrect = 0;
+    this.sixLottoCorrect = 0;
   }
 
   async play() {
@@ -47,11 +47,11 @@ class App {
     //수익률 결과 발표 실행
     this.calProfitRate(
       price,
-      this.three,
-      this.four,
-      this.five,
-      this.fivePlusOne,
-      this.six
+      this.threeLottoCorrect,
+      this.fourLottoCorrect,
+      this.fiveLottoCorrect,
+      this.fivePlusOneLottoCorrect,
+      this.sixLottoCorrect
     );
   }
 
@@ -98,39 +98,54 @@ class App {
       }
 
       if (count === 3) {
-        this.three++;
+        this.threeLottoCorrect++;
       } else if (count === 4) {
-        this.four++;
+        this.fourLottoCorrect++;
       } else if (count === 5) {
         if (lotto.numbers.includes(this.bonus)) {
-          this.fivePlusOne++;
+          this.fivePlusOneLottoCorrect++;
         } else {
-          this.five++;
+          this.fiveLottoCorrect++;
         }
       } else if (count === 6) {
-        this.six++;
+        this.sixLottoCorrect++;
       }
     }
 
     MissionUtils.Console.print("당첨 통계");
     MissionUtils.Console.print("---");
-    MissionUtils.Console.print(`3개 일치 (5,000원) - ${this.three}개`);
-    MissionUtils.Console.print(`4개 일치 (50,000원) - ${this.four}개`);
-    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${this.five}개`);
     MissionUtils.Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.fivePlusOne}개`
+      `3개 일치 (5,000원) - ${this.threeLottoCorrect}개`
     );
-    MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${this.six}개`);
+    MissionUtils.Console.print(
+      `4개 일치 (50,000원) - ${this.fourLottoCorrect}개`
+    );
+    MissionUtils.Console.print(
+      `5개 일치 (1,500,000원) - ${this.fiveLottoCorrect}개`
+    );
+    MissionUtils.Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.fivePlusOneLottoCorrect}개`
+    );
+    MissionUtils.Console.print(
+      `6개 일치 (2,000,000,000원) - ${this.sixLottoCorrect}개`
+    );
   }
 
   //수익률 계산 함수
-  calProfitRate(price, three, four, five, fivePlusOne, six) {
+  calProfitRate(
+    price,
+    threeLottoCorrect,
+    fourLottoCorrect,
+    fiveLottoCorrect,
+    fivePlusOneLottoCorrect,
+    sixLottoCorrect
+  ) {
     const prizeResult =
-      5000 * three +
-      50000 * four +
-      1500000 * five +
-      300000000 * fivePlusOne +
-      2000000000 * six;
+      5000 * threeLottoCorrect +
+      50000 * fourLottoCorrect +
+      1500000 * fiveLottoCorrect +
+      300000000 * fivePlusOneLottoCorrect +
+      2000000000 * sixLottoCorrect;
     const ProfitRate = (prizeResult / price) * 100;
     MissionUtils.Console.print(`총 수익률은 ${ProfitRate}% 입니다.`);
   }
