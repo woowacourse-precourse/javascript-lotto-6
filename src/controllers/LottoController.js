@@ -36,6 +36,7 @@ class LottoController {
     this.#lottosModel.setCorrectNumbersModel(this.#correctNumbersModel)
 
     await this.getAndCheckBonusNumber(this.#correctNumbersModel.getNumbers())
+    this.#lottosModel.setBonusNumberModel(this.#bonusNumberModel)
     
   }
 
