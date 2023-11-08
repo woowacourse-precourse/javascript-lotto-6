@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE, INPUT_MESSAGE, LOTTO_NUMBER } from '../Utils/constants.js';
 class Input {
   constructor() {
     this.lottoNumbers = [];
@@ -6,16 +7,16 @@ class Input {
 
   async userPurchase() {
     try {
-      Console.print('구입금액을 입력해 주세요.');
+      Console.print(INPUT_MESSAGE.PURCHASE_AMOUNT);
       const input = await Console.readLineAsync('');
       const purchaseAmount = parseInt(input);
 
-      if (isNaN(purchaseAmount) || purchaseAmount <= 0 || purchaseAmount % 1000 !== 0) {
-        throw new Error("[ERROR] 올바른 구입금액을 입력해 주세요 (1,000원 단위, 양수).");
+      if (isNaN(purchaseAmount) || purchaseAmount <= LOTTO_NUMBER.INITNUM || purchaseAmount % LOTTO_NUMBER.MIN_PURCHASE !== LOTTO_NUMBER.INITNUM) {
+        throw new Error(ERROR_MESSAGE.USER_INPUT_PURCHASE);
       }
 
-      if (input.split('').some(char => !'0123456789'.includes(char))) {
-        throw new Error("[ERROR] 구입금액은 숫자만 입력할 수 있습니다.");
+      if (input.split('').some(char => !LOTTO_NUMBER.CONDITION_NUM.includes(char))) {
+        throw new Error(ERROR_MESSAGE.USER_INPUT_ONLYNUM);
       }
       return input;
     } catch (error) {
@@ -26,10 +27,10 @@ class Input {
 
   async userNumber() {
     try {
-      Console.print(`\n당첨 번호를 입력해 주세요.`);
+      Console.print(INPUT_MESSAGE.WINNING_NUMBER);
       const lottoNumbers = await Console.readLineAsync('');
       if (!/^\d+(,\d+){5}$/.test(lottoNumbers)) {
-        throw new Error('[ERROR] 올바른 로또 번호를 입력해 주세요 (1부터 45까지의 숫자, 쉼표로 구분된 6개 숫자).');
+        throw new Error(ERROR_MESSAGE.USER_INPUT_NUMBERS);
       }
       this.lottoNumbers = lottoNumbers.split(',').map(num => parseInt(num.trim()));
       this.checkForDuplicates(this.lottoNumbers);
@@ -43,16 +44,16 @@ class Input {
 
   async userBonusNumber() {
     try {
-      Console.print(`\n보너스 번호를 입력해 주세요.`);
+      Console.print(INPUT_MESSAGE.BONUS_NUMBER);
       const input = await Console.readLineAsync('');
       const bonusNumber = parseInt(input);
-      if (isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
-        throw new Error('[ERROR]올바른 보너스 번호를 입력해 주세요 (1부터 45까지의 숫자).');
+      if (isNaN(bonusNumber) || bonusNumber < LOTTO_NUMBER.CONDITION_MIN || bonusNumber > LOTTO_NUMBER.CONDITION_MAX) {
+        throw new Error(ERROR_MESSAGE.USER_INPUT_BONUSE);
       }
       const allNumbers = [...this.lottoNumbers, bonusNumber];
       this.checkForDuplicates(allNumbers);
-      if (!/^\d+$/.test(input) || parseInt(input) < 1 || parseInt(input) > 45) {
-        throw new Error('[ERROR] 숫자만 입력할 수 있습니다.');
+      if (!/^\d+$/.test(input) || parseInt(input) < LOTTO_NUMBER.CONDITION_MIN || parseInt(input) > LOTTO_NUMBER.CONDITION_MAX) {
+        throw new Error(ERROR_MESSAGE.USER_INPUT_ONLYNUM);
       }
       return bonusNumber;
     } catch (error) {
@@ -64,7 +65,7 @@ class Input {
   checkForDuplicates(numbers) {
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== numbers.length) {
-      throw new Error('[ERROR]로또 번호에 중복된 숫자가 있습니다.');
+      throw new Error(ERROR_MESSAGE.USER_INPUT_DUPLICATE);
     }
   }
 }

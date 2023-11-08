@@ -1,10 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import Input from '../View/UserInput.js';
 import Output from '../View/ComputerOutput.js';
+import { LOTTO_NUMBER, OUTPUT_MESSAGE } from '../Utils/constants.js';
 
 class Controller {
   constructor() {
-    this.purchaseAmount = 0;
+    this.purchaseAmount = LOTTO_NUMBER.INITNUM;
     this.lottoNumbers = [];
     this.lottoBonusNumber = [];
     this.lottoTickets = [];
@@ -22,8 +23,8 @@ class Controller {
   gameResult() {
     const matchingCounts = Output.compareTickets(this.lottoTickets, this.lottoNumbers, this.lottoBonusNumber);
 
-    Console.print('\n당첨 통계');
-    Console.print('---');
+    Console.print(OUTPUT_MESSAGE.WINNING_STATISTICS);
+    Console.print(OUTPUT_MESSAGE.WINNING_LINE);
 
     const totalPrize = Output.calculatePrizes(matchingCounts);
     Output.calculateEarnings(totalPrize, this.purchaseAmount);

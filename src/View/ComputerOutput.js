@@ -1,9 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
+import { LOTTO_NUMBER, OUTPUT_MESSAGE, PRIZE } from '../Utils/constants.js';
 class Output {
 
   static ticketPrint(purchaseAmount) {
-    const numOfTickets = purchaseAmount / 1000;
+    const numOfTickets = purchaseAmount / LOTTO_NUMBER.MIN_PURCHASE;
     const lottoTickets = [];
 
     for (let i = 0; i < numOfTickets; i++) {
@@ -29,8 +30,8 @@ class Output {
   }
 
   static calculatePrizes(matchingCounts) {
-    const prizes = [0, 5000, 50000, 1500000, 30000000, 2000000000];
-    let totalPrize = 0;
+    const prizes = [PRIZE.NONE, PRIZE.RANK_ONE, PRIZE.RANK_TWO, PRIZE.RANK_THREE, PRIZE.RANK_TWO, PRIZE.RANK_ONE];
+    let totalPrize = PRIZE.NONE;
 
     const printMatchingCount = (matchedCount, prizeIndex) => {
       const matchingCount = matchingCounts.filter(ticket => ticket.matchedCount === matchedCount).length;
@@ -38,21 +39,21 @@ class Output {
       totalPrize += prizes[prizeIndex] * matchingCount;
     };
 
-    printMatchingCount(3, 1);
-    printMatchingCount(4, 2);
-    printMatchingCount(5, 3);
+    printMatchingCount(PRIZE.MATCHING_COUNT_THREE, PRIZE.MATCHING_COUNT_ONE);
+    printMatchingCount(PRIZE.MATCHING_COUNT_FOUR, PRIZE.MATCHING_COUNT_TWO);
+    printMatchingCount(PRIZE.MATCHING_COUNT_FIVE, PRIZE.MATCHING_COUNT_THREE);
 
-    const matchingCount5WithBonus = matchingCounts.filter(ticket => ticket.matchedCount === 5 && ticket.hasBonusNumber).length;
+    const matchingCount5WithBonus = matchingCounts.filter(ticket => ticket.matchedCount === PRIZE.MATCHING_COUNT_FIVE && ticket.hasBonusNumber).length;
     Console.print(`5개 일치, 보너스 볼 일치 (${prizes[4].toLocaleString()}원) - ${matchingCount5WithBonus}개`);
-    totalPrize += prizes[4] * matchingCount5WithBonus;
+    totalPrize += prizes[PRIZE.MATCHING_COUNT_FOUR] * matchingCount5WithBonus;
 
-    printMatchingCount(6, 5);
+    printMatchingCount(PRIZE.MATCHING_COUNT_SIX, PRIZE.MATCHING_COUNT_FIVE);
 
     return totalPrize;
   }
 
   static calculateEarnings(totalPrize, purchaseAmount) {
-    const earnings = (totalPrize / +purchaseAmount) * 100;
+    const earnings = (totalPrize / +purchaseAmount) * PRIZE.EARNINGS_CONDITION;
     Console.print(`총 수익률은 ${earnings.toFixed(1)}%입니다.`);
   }
 

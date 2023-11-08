@@ -1,4 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE, LOTTO_NUMBER } from './Utils/constants.js';
 class Lotto {
   #numbers;
 
@@ -8,16 +9,16 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== LOTTO_NUMBER.CONDITION_LENGTH) {
+      throw new Error(ERROR_MESSAGE.USER_INPUT_LENGTH);
     }
     const uniqueNumbers = new Set(numbers);
     if (uniqueNumbers.size !== numbers.length) {
-      throw new Error("[ERROR]로또 번호에 중복된 숫자가 있습니다.");
+      throw new Error(ERROR_MESSAGE.USER_INPUT_DUPLICATE);
     }
 
-    if (numbers.some(number => number < 1 || number > 45)) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45까지의 숫자여야 합니다.");
+    if (numbers.some(number => number < LOTTO_NUMBER.CONDITION_MIN || number > LOTTO_NUMBER.CONDITION_MAX)) {
+      throw new Error(ERROR_MESSAGE.USER_INPUT_NUMBERS);
     }
   }
 
@@ -25,8 +26,8 @@ class Lotto {
 
   static createRandomNumbers() {
     const uniqueNumbers = new Set();
-    while (uniqueNumbers.size < 6) {
-      uniqueNumbers.add(Random.pickNumberInRange(1, 45));
+    while (uniqueNumbers.size < LOTTO_NUMBER.CONDITION_LENGTH) {
+      uniqueNumbers.add(Random.pickNumberInRange(LOTTO_NUMBER.CONDITION_MIN, LOTTO_NUMBER.CONDITION_MAX));
     }
     return Array.from(uniqueNumbers);
   }
@@ -36,7 +37,7 @@ class Lotto {
   }
 
   static generateBonusNumber(numbers) {
-    const remainingNumbers = Array.from({ length: 45 }, (_, index) => index + 1).filter(number => !numbers.includes(number));
+    const remainingNumbers = Array.from({ length: LOTTO_NUMBER.CONDITION_MAX }, (_, index) => index + LOTTO_NUMBER.CONDITION_MIN).filter(number => !numbers.includes(number));
     const randomIndex = Math.floor(Math.random() * remainingNumbers.length);
     const bonusNumber = remainingNumbers[randomIndex];
 
