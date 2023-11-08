@@ -1,5 +1,6 @@
 import Lotto from './Lotto.js';
 import { Validator } from '../utility/validation.js';
+import { pickUniqueNumbersInRange } from '../utility/random.js';
 import { print, getAndValidateInput } from '../utility/console.js';
 import {
   LOTTO_CONSTANT,
@@ -46,6 +47,10 @@ class LottoStore {
 
     this.#publishCount = this.#money / LOTTO_CONSTANT.minPrice;
     this.#printPublishCount();
+  }
+
+  getMoney() {
+    return this.#money;
   }
 
   #printPublishCount() {
