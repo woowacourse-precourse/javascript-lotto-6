@@ -8,14 +8,15 @@ class WinningLotto extends Lotto {
   constructor({ numbers, bonusNumber }) {
     super(numbers);
 
-    this.#validate(bonusNumber);
+    this.#validates(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }
 
-  #validate(bonusNumber) {
+  #validates(bonusNumber) {
     this.validateOutOfRange(bonusNumber);
     if (this.includeNumber(bonusNumber)) {
-      throw CustomError.lottoValidateError(ERROR_MESSAGE.notUniqueNumbers);
+
+      throw CustomError.lottoValidateError(ERROR_MESSAGE.notUniqueBonusNumber);
     }
   }
 

@@ -6,12 +6,12 @@ import WinningLotto from './domain/WinningLotto';
 
 class LottoService {
   sellLotto(purchaseAmount) {
-    this.validatePurchaseAmount(purchaseAmount);
+    this.#validatePurchaseAmount(purchaseAmount);
     const quantitiy = Math.floor(purchaseAmount / LOTTO.price);
     return [this.#generateLotto(quantitiy), quantitiy];
   }
 
-  validatePurchaseAmount(purchaseAmount) {
+  #validatePurchaseAmount(purchaseAmount) {
     if (!/^\d000$/.test(String(purchaseAmount))) {
       throw CustomError.userInputError(ERROR_MESSAGE.invalidAmountError);
     }
@@ -40,7 +40,8 @@ class LottoService {
   getWinningLotto(winningNumbers, bonusNumber) {
     this.#validateLottoNumbers(winningNumbers);
     this.#validateBonusNumber(bonusNumber);
-    this.#generateWinningLotto(winningNumbers, bonusNumber);
+    console.log(winningNumbers,bonusNumber)
+    return this.#generateWinningLotto(winningNumbers, bonusNumber);
   }
 
   #validateLottoNumbers(winningNumbers) {
@@ -50,15 +51,15 @@ class LottoService {
   }
 
   #validateBonusNumber(bonusNumber) {
-    if (Number(bonusNumber)) {
+    if (!Number(bonusNumber)) {
       throw CustomError.lottoValidateError(
-        ERROR_MESSAGE.invalidInputBonusNumber,
+          ERROR_MESSAGE.invalidInputBonusNumber,
       );
     }
   }
 
   #generateWinningLotto(winningNumbers, bonusNumber) {
-    return new WinningLotto(winningNumbers, bonusNumber);
+    return new WinningLotto({ numbers: winningNumbers, bonusNumber });
   }
 }
 
