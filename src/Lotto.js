@@ -1,3 +1,5 @@
+import * as NUMBER from './constant/Number.js';
+
 class Lotto {
   #numbers;
 
@@ -6,13 +8,19 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+  #validate(num) {
+    if (num.length !== NUMBER.LOTTO_COUNT) {
+      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    }
+    const set = new Set(num);
+    if (num.length != set.size) {
+      throw new Error('[ERROR] 로또 번호가 중복됩니다.');
     }
   }
 
-  // TODO: 추가 기능 구현
+  result() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
