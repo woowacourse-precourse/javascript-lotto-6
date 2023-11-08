@@ -51,3 +51,11 @@ export const isDuplicatedWithWinningNumber = (input, winningNumbers) => {
 export const isArrayType = (input) => {
   return Array.isArray(input);
 };
+
+export const isNumeric = (input) => {
+  return typeof input === 'number';
+};
+
+export const isAllNumeric = (numbers) => {
+  return numbers.every((number) => isNumeric(number));
+};
