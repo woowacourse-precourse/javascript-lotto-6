@@ -78,7 +78,7 @@ class Lotto {
       rankResultArray[4] += 1;
     }
     if (sameNumCnt === 5) {
-      rankResultArray = this.checkSecondRank(rankResultArray, sameNumCnt, bonus, tickets);
+      rankResultArray = this.checkSecondRank(rankResultArray, bonus, tickets);
     }
     if (sameNumCnt === 4) {
       rankResultArray[1] += 1;
@@ -90,7 +90,7 @@ class Lotto {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  checkSecondRank(resultArray, sameNumCnt, bonus, tickets) {
+  checkSecondRank(resultArray, bonus, tickets) {
     const rankResultArray = resultArray;
     if (tickets.includes(bonus)) {
       rankResultArray[3] += 1;
