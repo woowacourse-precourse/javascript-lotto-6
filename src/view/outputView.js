@@ -2,6 +2,10 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../constants/message.js';
 
 const outputView = {
+  printError(error) {
+    MissionUtils.Console.print(error);
+  },
+
   printPurchaseSummary(count) {
     MissionUtils.Console.print(`\n${count}${OUTPUT_MESSAGE.PURCHASE_SUMMARY}`);
   },

@@ -25,11 +25,16 @@ class LottoController {
   }
 
   async getPurchaseAmount() {
-    const input = await inputView.purchaseAmount();
-    validation.validatePurchaseAmount(input);
-    const count = input / 1000;
-    this.count = count;
-    this.#LottoModel = new LottoModel(count);
+    try {
+      const input = await inputView.purchaseAmount();
+      validation.validatePurchaseAmount(input);
+      const count = input / 1000;
+      this.count = count;
+      this.#LottoModel = new LottoModel(count);
+    } catch (error) {
+      outputView.printError(error.message);
+      await this.getPurchaseAmount();
+    }
   }
 
   printLottoNumbers() {
@@ -40,18 +45,28 @@ class LottoController {
   }
 
   async getWinningNumbers() {
-    const input = await inputView.winningNumbers();
-    validation.validateWinningNumbers(input);
-    const numbers = input.split(',').map(Number);
-    this.#Lotto = new Lotto(numbers);
-    this.winningNumbers = this.#Lotto.getWinningNumbers();
+    try {
+      const input = await inputView.winningNumbers();
+      validation.validateWinningNumbers(input);
+      const numbers = input.split(',').map(Number);
+      this.#Lotto = new Lotto(numbers);
+      this.winningNumbers = this.#Lotto.getWinningNumbers();
+    } catch (error) {
+      outputView.printError(error.message);
+      await this.getWinningNumbers();
+    }
   }
 
   async getBonusNumber() {
-    const input = await inputView.bonusNumber();
-    const parsedInput = parseInt(input, 10);
-    validation.validateBonusNumber(parsedInput, this.winningNumbers);
-    this.bonusNumber = parsedInput;
+    try {
+      const input = await inputView.bonusNumber();
+      const parsedInput = parseInt(input, 10);
+      validation.validateBonusNumber(parsedInput, this.winningNumbers);
+      this.bonusNumber = parsedInput;
+    } catch (error) {
+      outputView.printError(error.message);
+      await this.getBonusNumber();
+    }
   }
 
   calculateMatchCount() {
