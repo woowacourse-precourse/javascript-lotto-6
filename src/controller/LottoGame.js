@@ -91,8 +91,3 @@ class LottoGame {
 }
 
 export default LottoGame;
-
-// LottoGame.process();
-
-// const a = new LottoGame();
-// a.process();
