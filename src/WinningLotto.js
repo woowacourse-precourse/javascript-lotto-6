@@ -1,5 +1,6 @@
 import Lotto from './Lotto.js';
 import { ERROR, LOTTO } from './config.js';
+import { isPositiveInteger } from './utils.js';
 
 const { WIN } = LOTTO;
 const { FIRST, SECOND, THIRD, FOURTH, FIFTH, NONE } = WIN;
@@ -9,6 +10,7 @@ export default class WinningLotto extends Lotto {
   #validateBonusNumber(bonusNumber) {
     const { START, END } = LOTTO.RANGE;
 
+    if (!isPositiveInteger(bonusNumber)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
     if (bonusNumber < START || bonusNumber > END) throw new Error(ERROR.IS_NOT_IN_LOTTO_RANGE);
     if (this.getNumbers().includes(bonusNumber)) throw new Error(ERROR.IS_DUPLICATED);
   }
@@ -21,7 +23,7 @@ export default class WinningLotto extends Lotto {
   }
   setBonusNumber(bonusNumber) {
     this.#validateBonusNumber(bonusNumber);
-    this.#bonusNumber = bonusNumber;
+    this.#bonusNumber = Number(bonusNumber);
   }
 
   getStatistics(lottos) {

@@ -22,13 +22,16 @@ export default class Input {
       Console.print(e.message);
       amount = await Input.amountToBuy();
     }
-    return amount;
+    return Number(amount);
   }
   static async winningNumbers() {
     let winningLotto;
     try {
       let winningNumbers = await Input.readTrimmedLineAsync(MESSAGE.WINNING_NUMBER);
-      winningNumbers = winningNumbers.split(WINNING_NUMBER_DELIMITER).filter((number) => !isEmpty(number));
+      winningNumbers = winningNumbers
+        .split(WINNING_NUMBER_DELIMITER)
+        .filter((number) => !isEmpty(number))
+        .map((number) => Number(number));
       winningLotto = new WinningLotto(winningNumbers);
     } catch (e) {
       Console.print(e.message);

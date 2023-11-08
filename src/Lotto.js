@@ -7,7 +7,7 @@ class Lotto {
     const { RANGE, COUNT } = LOTTO;
     const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(RANGE.START, RANGE.END, COUNT);
 
-    return lottoNumbers.sort((a, b) => a - b).map((number) => String(number));
+    return lottoNumbers.sort((a, b) => a - b);
   }
 
   static createLottos(inputAmount) {
@@ -26,10 +26,10 @@ class Lotto {
     if (numbers.length !== LOTTO.COUNT) {
       throw new Error(ERROR.IS_NOT_LOTTO_LENGTH);
     }
+    if (!this.#isPositiveInteger(numbers)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
     if (this.#isDuplicated(numbers)) {
       throw new Error(ERROR.IS_DUPLICATED);
     }
-    if (!this.#isPositiveInteger(numbers)) throw new Error(ERROR.IS_NOT_POSITIVE_INTEGER);
     if (this.#isRangeInvalid(numbers)) throw new Error(ERROR.IS_NOT_IN_LOTTO_RANGE);
   }
 
