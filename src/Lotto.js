@@ -6,12 +6,12 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.Error = new InputError();
     this.#numbers = numbers;
+    this.#validate(numbers);
   }
 
   #validate(numbers) {
-    this.Error = new InputError();
     this.Error.validateLottoInput(numbers);
   }
 
