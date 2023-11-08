@@ -1,8 +1,10 @@
 import { Console, Random } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 
 class App {
   async play() {
-    this.inputAmount();
+    await this.inputAmount();
+    const [numbers, bonus] = await this.inputWinningNumber();
   }
 
   async inputAmount() {
@@ -31,6 +33,25 @@ class App {
 
       Console.print('[' + ascLotto + ']');
     }
+  }
+
+  async inputWinningNumber() {
+    const inputMainNumber = await Console.readLineAsync(
+      '\n당첨 번호를 입력해 주세요.\n'
+    );
+
+    const winning = inputMainNumber.split(',').map(Number);
+    const winningLotto = new Lotto(winning);
+
+    const inputSubNumber = await Console.readLineAsync(
+      '\n보너스 번호를 입력해 주세요.\n'
+    );
+
+    const bonus = Number(inputSubNumber);
+
+    winningLotto.checkBonusNumber(Number(bonus));
+
+    return [winning, bonus];
   }
 }
 
