@@ -4,7 +4,7 @@ import { PLACE } from '../constants/numbers.js';
 
 const outputView = {
   lottos(lottos) {
-    // this.newLine();
+    this.newLine();
     Console.print(`${lottos.length}${OUTPUT_MSG.LOTTOS}`);
     for (let i = 0; i < lottos.length; i += 1) {
       const lotto = `[${lottos[i].getLottoNumbers().join(', ')}]`;

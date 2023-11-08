@@ -37,7 +37,7 @@ class LottoSimulator {
 
   async setWinnerNumbers() {
     try {
-      // outputView.newLine();
+      outputView.newLine();
       const winnerNumbers = await inputView.winnerNumbers();
       this.#winners.setWinnerNumbers(winnerNumbers);
     } catch (e) {
@@ -48,7 +48,7 @@ class LottoSimulator {
 
   async setBonusNumber() {
     try {
-      // outputView.newLine();
+      outputView.newLine();
       const bonusNumber = await inputView.bonusNumber();
       this.#winners.setBonusNumber(bonusNumber);
     } catch (e) {
@@ -58,7 +58,7 @@ class LottoSimulator {
   }
 
   checkLottoResult() {
-    // outputView.newLine();
+    outputView.newLine();
     this.#winners.countPrize(this.#lottoBundle.getLottos());
     outputView.lottoResult(this.#winners.getPrize());
 
