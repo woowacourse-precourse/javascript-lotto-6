@@ -4,13 +4,22 @@ import { Random } from '@woowacourse/mission-utils';
 const ASC = (a, b) => a - b;
 
 // TODO: 상수화
-const lotto_prize = [
-  { rank: 1, match: 6, prize: 2000000000 },
-  { rank: 2, match: 5, bonusMatch: true, prize: 30000000 },
-  { rank: 3, match: 5, prize: 1500000 },
-  { rank: 4, match: 4, prize: 50000 },
-  { rank: 5, match: 3, prize: 5000 }
-]
+const prize_conditions = [
+  { rank: 1, match: 6 },
+  { rank: 2, match: 5, bonusMatch: true },
+  { rank: 3, match: 5 },
+  { rank: 4, match: 4 },
+  { rank: 5, match: 3 }
+];
+
+const prize_amount = {
+  1: 2000000000,
+  2: 30000000,
+  3: 1500000,
+  4: 50000,
+  5: 5000,
+  0: 0
+}
 
 class LottoGame {
 
@@ -28,6 +37,12 @@ class LottoGame {
 
   /** @type {number} : 보너스 번호 */
   #bonusNumber = null;
+
+  /** @type {object} : 등수 별 당첨 수 */
+  #prizeStats = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+  /** @type {number} : 총 당첨금액 */
+  #totalPrizeAmount = 0;
 
   /** @type {number} : 수익률(%) */
   #earningsRate = null;
@@ -54,12 +69,13 @@ class LottoGame {
     // }
   }
 
-  /** 각 티켓을 당첨번호와 비교하여 "일치개수", "보너스번호일치여부"를 계산한다. */
+  /** 각 티켓을 당첨번호와 비교하여 당청 등수를 계산한다. */
   evaluateTickets() {
     this.#tickets.forEach((ticket) => {
       ticket.setMatch(this.#countMatchingNumbers(ticket));
       ticket.setBonusMatch(this.#hasBonusNumber(ticket));
       ticket.setPrizeRank(this.#determinePrizeRank(ticket));
+      this.#prizeStats[ticket.getPrizeRank()] += 1;
     });
   }
 
@@ -89,7 +105,7 @@ class LottoGame {
    * @returns {number} 당첨 등수 (0 : 낙첨)
    */
   #determinePrizeRank(ticket) {
-    for (const prize of lotto_prize) {
+    for (const prize of prize_conditions) {
       if (this.#isPrizeMatch(ticket, prize)) {
         return prize.rank;
       }
@@ -107,6 +123,20 @@ class LottoGame {
     const numberMatchs = ticket.getMatch() === prize.match;
     const bonusMatch = prize.bonusMatch === true ? ticket.getBonusMatch() : true;
     return numberMatchs && bonusMatch;
+  }
+
+  /** 총 당첨 금액을 계산한다. */
+  calculateTotalPrizeAmount() {
+    let totalPrizeAmount = 0;
+    this.#tickets.forEach((ticket) => {
+      totalPrizeAmount += prize_amount[ticket.getPrizeRank()];
+    });
+    this.#totalPrizeAmount = totalPrizeAmount
+  }
+
+  /** 수익률을 계산한다. */
+  calculateEarningsRate() {
+    this.#earningsRate = 100 * this.#totalPrizeAmount / this.#purchaseAmount;
   }
 
   /** @param {number} 구입 금액 */
@@ -142,6 +172,14 @@ class LottoGame {
   /** @returns {number} 당첨 번호 */
   getBonusNumber() {
     return this.#bonusNumber;
+  }
+
+  getPrizeStats() {
+    return this.#prizeStats;
+  }
+
+  getEarningsRate() {
+    return this.#earningsRate;
   }
 }
 

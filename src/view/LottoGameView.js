@@ -55,14 +55,20 @@ class LottoGameView {
   }
 
   /**
-   * 
+   * "[${n1}, ${n2}, ${n3}, ${n4}, ${n5}, ${n6}]"
    * @param {Array<Lotto>} tickets 구입한 티켓 배열
    */
   displayTickets(tickets) {
     tickets.forEach((ticket) => {
-      // TODO: 상수 사용
+      // TODO: 상수 사용, 쉼표 후 공백
       Console.print(`[${ticket.getNumbers()}]`);
     });
+  }
+
+  displayPrizeStats(prizeStats, earningsRate) {
+    // TODO: 상수 사용
+    Console.print('당첨 통계');
+    Console.print('---');
   }
 }
 

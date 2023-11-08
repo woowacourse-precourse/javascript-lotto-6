@@ -100,12 +100,16 @@ class LottoGameController {
 	/** 게임 결과 분석 로직을 담당한다. */
 	#handleAnalyzeResult() {
 		this.#lottoGame.evaluateTickets();
-		// TODO: 수익률
+		this.#lottoGame.calculateTotalPrizeAmount();
+		this.#lottoGame.calculateEarningsRate();
 	}
 
 	/** 게임 결과 출력 로직을 담당한다. */
 	#handleDisplayResult() {
-		// TODO: 결과 및 수익률 출력
+		this.#view.displayPrizeStats(
+			this.#lottoGame.getPrizeStats(),
+			this.#lottoGame.getEarningsRate()
+		)
 	}
 }
 
