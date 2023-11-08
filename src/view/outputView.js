@@ -7,8 +7,13 @@ import {
 } from "../constants/constants.js";
 
 class OutputView {
+
+  static showEmptyLine() {
+    Console.print('');
+  }
   
   static showLottoNumbers (lottoTickets) {
+    this.showEmptyLine();
     Console.print(MESSAGE.LOTTO_TICKET(lottoTickets.length));
 
     lottoTickets.forEach((lotto) => {
@@ -17,6 +22,7 @@ class OutputView {
   };
   
   static showLottoResult(result) {
+    this.showEmptyLine();
     Console.print(MESSAGE.LOTTO_RESULT);
     
     for (const KEY in result) {
