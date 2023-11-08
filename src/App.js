@@ -117,7 +117,7 @@ class App {
       return sum_of_result;
     }
 
-    //숫자 확인 함수
+    //유효성 확인 함수
     function check_number_format(input) {
       if (isNaN(input)) {
         throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
