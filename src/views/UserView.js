@@ -13,7 +13,7 @@ export default class UserView {
     printUserLottoNumbers(numberOfPurchases, lottoNumbers) {
         Console.print(`\n${numberOfPurchases}개를 구매했습니다.`);
         lottoNumbers.forEach(number => {
-            Console.print(number);
+            Console.print(JSON.stringify(number).replace(/,/g, ', '));
         });
     }
 

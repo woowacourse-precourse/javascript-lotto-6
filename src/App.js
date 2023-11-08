@@ -26,11 +26,16 @@ class App {
     const bonusNumber = await this.#userView.inputBonusNumber();
     this.#lotto.validateBonusNumber(bonusNumber);
 
-    const userLottoNumbers = this.#user.getLottoNumbers(winningNumbers);
-    const results = this.#lotto.calculateLottoResult(userLottoNumbers, winningNumbers.map(Number), bonusNumber);
+    const results = this.#lotto.calculateLottoResult(
+      this.#user.getLottoNumbers(winningNumbers), 
+      winningNumbers.map(Number), 
+      bonusNumber
+    );
+
     this.#lotto.printLottoResult(results);
 
     const earnings = this.#lotto.calculateEarningsRate(results);
+    
     this.#lotto.printEarningsRate(earnings, this.#user.getPurchaseAmount());
   }
 }
