@@ -55,7 +55,7 @@ e.g. [ERROR] 숫자가 잘못된 형식입니다.
 
 ## 기능 목록
 
-- [] 로또 구입 금액을 입력받는다. Budget#getBudget()
+- [x] 로또 구입 금액을 입력받는다. Budget#getBudget()
 
   - [x] 로또 구입 금액의 유효성을 판단한다. Budget#validate()
 

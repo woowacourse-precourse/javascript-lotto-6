@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Budget {
   #lottery_num;
 
@@ -11,10 +13,18 @@ class Budget {
     this.validateBudgetUnit(budget);
   }
 
-  validateBudgetType(budget) {
-    const numericBudget = parseFloat(budget);
+  static async getBudget() {
+    try {
+      const budget = await Console.readLineAsync("구입금액을 입력해주세요.\n");
+      return new Budget(Number(budget));
+    } catch (error) {
+      Console.print(error.message);
+      return this.getBudget();
+    }
+  }
 
-    if (Number.isNaN(numericBudget)) {
+  validateBudgetType(budget) {
+    if (Number.isNaN(budget) || !/^\d+$/.test(budget)) {
       throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
     }
   }
