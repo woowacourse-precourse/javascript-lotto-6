@@ -1,18 +1,75 @@
+import { Random } from "@woowacourse/mission-utils";
+import Validation from "./Validation";
+
 class Lotto {
+  /**@type {number[]} */
   #numbers;
 
+  /**
+   * @constructor
+   * @param {number[]} numbers
+   */
   constructor(numbers) {
-    this.#validate(numbers);
+    Validation.validateLottoNumbers(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  /**
+   * @returns {number[]}
+   */
+  static pickRandomNumbers() {
+    return Random.pickUniqueNumbersInRange(...[1, 45], 6).sort((a, b) => a - b);
   }
 
-  // TODO: 추가 기능 구현
+  /**
+   * @param {number} money
+   * @returns {Lotto[]}
+   */
+  static buyAutomaticLotto(money) {
+    Validation.validateMoney(money);
+    return new Array(Math.floor(money / 1000))
+      .fill(0)
+      .map(() => new Lotto(Lotto.pickRandomNumbers()));
+  }
+  /**
+   * @param {number[]} numbers
+   * @returns {number}
+   */
+  getMatchNumberCount(numbers) {
+    return numbers.reduce((count, number) => {
+      if (this.#numbers.includes(number)) {
+        return count + 1;
+      }
+      return count;
+    }, 0);
+  }
+
+  /**
+   * @param {number[]} numbers
+   * @param {number} bonus
+   * @returns {number}
+   */
+  getRank(numbers, bonus) {
+    const match = this.getMatchNumberCount(numbers);
+
+    if (match <= 2) {
+      return 0;
+    }
+    if (match === 6) {
+      return 1;
+    }
+    if (match === 5 && this.#numbers.includes(bonus)) {
+      return 2;
+    }
+    return 6 - match + 2;
+  }
+
+  /**
+   * @returns {number[]}
+   */
+  getNumbers() {
+    return Object.freeze(this.#numbers);
+  }
 }
 
 export default Lotto;
