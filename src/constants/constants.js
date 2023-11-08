@@ -1,6 +1,7 @@
 export const ERROR = Object.freeze({
   INVALID_LOTTO_LENGTH: '6자리 숫자가 아닙니다.',
   DUPLICATE_NUMBER: '중복된 숫자가 존재합니다.',
+  DUPLICATE_BONUS_NUMBER: '당첨 번호에 이미 이 값이 존재합니다.',
   INVALID_NUMBER: '숫자가 아닙니다.',
   INVALID_INTEGER: '정수가 아닙니다.',
   INVALID_INDEX: '잘못된 인덱스에 접근했습니다.',
@@ -19,5 +20,6 @@ export const CONSTANT = Object.freeze({
 export const CONSOLE_MESSAGE = Object.freeze({
   INPUT_MONEY: '구입금액을 입력해 주세요.',
   INPUT_WINNING_NUMBER: '당첨 번호를 입력해 주세요.',
+  INPUT_BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
   PURCHASED_MESSAGE: '개를 구매했습니다.',
 });

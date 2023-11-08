@@ -23,6 +23,15 @@ class InputView {
 
     return winningNumber;
   }
+
+  static async getBonusNumber() {
+    const stringBounsNumber = await Console.readLineAsync(
+      CONSOLE_MESSAGE.INPUT_BONUS_NUMBER,
+    );
+
+    const bonusNumber = Number(stringBounsNumber);
+    return bonusNumber;
+  }
 }
 
 export default InputView;

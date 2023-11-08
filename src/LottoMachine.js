@@ -35,6 +35,10 @@ class LottoMachine {
     this.#winningNumber.setWinningNumbers(winningNumbers);
   }
 
+  setBonusNumber(bonusNumber) {
+    this.#winningNumber.setBonusNumber(bonusNumber);
+  }
+
   issueLottos() {
     const purchaseCount = this.#money.getPurchaseCount();
 

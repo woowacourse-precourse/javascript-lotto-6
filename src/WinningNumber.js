@@ -15,7 +15,14 @@ class WinningNumber {
     }
   }
 
-  #validateBonusNumber(bonusNumber) {}
+  #validateBonusNumber(bonusNumber) {
+    const copyWinningNumbers = this.getWinningNumber();
+
+    Validator.isNaN(bonusNumber);
+    Validator.isDouble(bonusNumber);
+    Validator.isOutOfRange(bonusNumber);
+    Validator.isUniqueBonusNumber(bonusNumber, copyWinningNumbers);
+  }
 
   setWinningNumbers(winningNumbers) {
     this.#validateWinningNumber(winningNumbers);
@@ -32,7 +39,7 @@ class WinningNumber {
   }
 
   getBonusNumber() {
-    return [...this.#bonusNumber];
+    return this.#bonusNumber;
   }
 }
 

@@ -14,6 +14,7 @@ class App {
     this.#lottoMachine.issueLottos();
     this.#printLottos();
     await this.#requestWinningNumbers();
+    await this.#requestBonusNumbers();
   }
 
   async #requestUserMoney() {
@@ -43,11 +44,25 @@ class App {
   async #requestWinningNumbers() {
     let isVaildWinningNumber = false;
 
-    while (!isVaildMoney) {
+    while (!isVaildWinningNumber) {
       try {
         const winningNumbers = await InputView.getWinningNumber();
         this.#lottoMachine.setWinningNumbers(winningNumbers);
         isVaildWinningNumber = true;
+      } catch (errorMessage) {
+        OutputView.printError(errorMessage);
+      }
+    }
+  }
+
+  async #requestBonusNumbers() {
+    let isVaildBonusNumber = false;
+
+    while (!isVaildBonusNumber) {
+      try {
+        const bonusNumber = await InputView.getBonusNumber();
+        this.#lottoMachine.setBonusNumber(bonusNumber);
+        isVaildBonusNumber = true;
       } catch (errorMessage) {
         OutputView.printError(errorMessage);
       }

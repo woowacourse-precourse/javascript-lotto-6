@@ -52,6 +52,14 @@ class Validator {
       throw printError(ERROR.INVALID_RANGE);
     }
   }
+
+  static isUniqueBonusNumber(bonusNumber, winningNumbers) {
+    const hasNumber = winningNumbers.includes(bonusNumber);
+
+    if (hasNumber) {
+      throw printError(ERROR.DUPLICATE_BONUS_NUMBER);
+    }
+  }
 }
 
 export default Validator;
