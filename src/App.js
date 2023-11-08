@@ -5,7 +5,7 @@ import {
   isValidLottoBonusNumberInput,
 } from './utils/validation.js';
 import { pickRandomLottoNumbers } from './utils/random.js';
-import InputView from './view/inputView.js';
+import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
 import { UNIT, WINNINGS } from './constants.js';
