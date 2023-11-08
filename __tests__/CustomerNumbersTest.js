@@ -26,5 +26,19 @@ describe('사용자 로또 번호 목록 테스트', () => {
     });
   });
 
+  test.each([
+    [[1, 2, 3, 4, 5, 6, 56]],
+    [[60, 59, 58, 57]],
+    [[ 0, 3, 5]],
+  ])('1~45 사이의 숫자가 맞는지', lottoNumbers => {
+    mockRandoms(lottoNumbers);
+
+    LottoGameController.generateCustomerNumbers(lottoNumbers).
+      forEach((lottoNumber) => {
+      expect(() => {
+        lottoNumber.forEach((number) => { Validations.isInRange(number) });
+      }).toThrow('[ERROR] 1~45 사이의 숫자만 입력해주세요.');
+    });
+  });
 });
 
