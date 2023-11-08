@@ -2,7 +2,7 @@ import { PRICE, RANGE } from "../constant/NUMBER.js";
 
 export const validateNumber = {
   isDividePrice(number) {
-    return number % PRICE === 0;
+    return !(number % PRICE);
   },
 
   isBiggerThanPrice(number) {
