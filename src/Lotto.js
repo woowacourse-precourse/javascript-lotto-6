@@ -6,6 +6,7 @@ class Lotto {
   numberPurchased;
   randomLottoNumbers;
   isValidWinningNumber;
+  isValidBonusNumber;
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -71,7 +72,7 @@ class Lotto {
         ); //1,2,3,4,5,6
         this.isValidWinningNumber = winningNumber.split(","); //['1','2','3','4','5','6']
         this.exceptionHandlingCommaSix();
-        this.exceptionHandling45();
+        this.exceptionHandling45Winning();
         isValidInput = true;
       } catch (error) {
         console.error(error.message);
@@ -87,11 +88,44 @@ class Lotto {
     }
   }
 
-  exceptionHandling45() {
+  exceptionHandling45Winning() {
     for (let i = 0; i < this.isValidWinningNumber.length; i++) {
       if (this.isValidWinningNumber[i] > 45) {
         throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
       }
+    }
+  }
+
+  async enterBonusNumber() {
+    let isValidInput = false;
+    while (!isValidInput) {
+      try {
+        const bonusNumber = await MissionUtils.Console.readLineAsync(
+          "보너스 번호를 입력해 주세요.(1~45까지 중 숫자 1개 입력.)"
+        ); //7
+        this.isValidBonusNumber = bonusNumber.toString();
+        this.exceptionHandlingDuplicateValue();
+        this.exceptionHandling45Bonus();
+        isValidInput = true;
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+  }
+
+  exceptionHandlingDuplicateValue() {
+    for (let i = 0; i < this.isValidWinningNumber.length; i++) {
+      if (this.isValidWinningNumber[i] === this.isValidBonusNumber) {
+        throw new Error(
+          "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다."
+        );
+      }
+    }
+  }
+
+  exceptionHandling45Bonus() {
+    if (this.isValidBonusNumber > 45) {
+      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
     }
   }
 
@@ -100,6 +134,7 @@ class Lotto {
     MissionUtils.Console.print(`${this.numberPurchased}개를 구매했습니다.`);
     MissionUtils.Console.print(this.lottoNumArrMultiplynumberPurchased());
     await this.enterWinningNumber();
+    await this.enterBonusNumber();
   }
 }
 export default Lotto;
