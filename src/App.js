@@ -29,20 +29,16 @@ class App {
   }
 
   static async buyLotto() {
-    let result;
-
     try {
       const buyingPrice = await InputView.readNumber(INPUT.BUYING_PRICE);
       Validator.validateBuyingPrice(buyingPrice);
       const lottos = LottoShop.issueLottoTickets(buyingPrice);
 
-      result = { lottos, buyingPrice };
+      return { lottos, buyingPrice };
     } catch (e) {
       OutputView.print(e.message);
-      result = await App.buyLotto();
+      return await App.buyLotto();
     }
-
-    return result;
   }
 
   static async drawLottoBalls() {
@@ -56,33 +52,25 @@ class App {
   }
 
   static async getWinningNumbers() {
-    let result;
-
     try {
       const winningNumbers = await InputView.readNumbers(INPUT.WINNING_NUMBERS);
       Validator.validateLottoNumbers(winningNumbers);
-      result = winningNumbers;
+      return winningNumbers;
     } catch (e) {
       OutputView.print(e.message);
-      result = await App.getWinningNumbers();
+      return await App.getWinningNumbers();
     }
-
-    return result;
   }
 
   static async getBonusNumber(winningNumbers) {
-    let result;
-
     try {
       const bonusNumber = await InputView.readNumber(INPUT.BONUS_NUMBERS);
       Validator.validateBonusNumber(bonusNumber, winningNumbers);
-      result = bonusNumber;
+      return bonusNumber;
     } catch (e) {
       OutputView.print(e.message);
-      result = await App.getBonusNumber([...winningNumbers]);
+      return await App.getBonusNumber([...winningNumbers]);
     }
-
-    return result;
   }
 
   static checkLottoResult(lottoBalls, lottoTickets) {
