@@ -4,9 +4,11 @@ import LottoValidator from './LottoValidator.js';
 
 class InputHandler {
   #numOfLottos;
+  #winningNumbers;
 
   constructor() {
     this.#numOfLottos = 0;
+    this.#winningNumbers = [];
   }
 
   async #getUserInput(promptMessage, validateFunction) {
@@ -33,6 +35,14 @@ class InputHandler {
     Console.print(INPUT_MESSAGES.PURCHASED_LOTTOS(this.#numOfLottos));
 
     return this.#numOfLottos;
+  }
+
+  async inputWinningNumbers() {
+    this.#winningNumbers = await Console.readLineAsync(
+      INPUT_MESSAGES.INPUT_WINNING_NUMBERS
+    );
+
+    return this.#winningNumbers;
   }
 }
 

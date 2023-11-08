@@ -8,6 +8,7 @@ export const LOTTO_GAME = Object.freeze({
 export const INPUT_MESSAGES = Object.freeze({
   INPUT_AMOUNT: '구입금액을 입력해 주세요.\n',
   PURCHASED_LOTTOS: (num) => `\n${num}개를 구매했습니다.`,
+  INPUT_WINNING_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
 });
 
 export const ERROR_MESSAGES = Object.freeze({
