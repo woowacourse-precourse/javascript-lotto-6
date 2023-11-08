@@ -19,4 +19,7 @@ export const ERROR_MESSAGES = {
   UNCORRECT_INPUT: "[ERROR] 잘못된 입력입니다.",
   CANT_USE_SAME_NUMBER: "[ERROR] 중복된 숫자는 사용할 수 없습니다.",
   USE_SIX_NUMBERS: "[ERROR] 로또 번호는 6개여야 합니다.",
+  USE_NUMBER_IN_RANGE: "[ERROR] 입력 가능한 범위는 1~45 입니다.",
+  USE_VALID_NUMBER:
+    "[ERROR] 범위를 벗어나지 않고 중복이 없는 숫자를 입력해 주세요.",
 };

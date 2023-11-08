@@ -42,14 +42,14 @@ export class Input {
     const winningNumbers = numbers.split(",").map(Number);
 
     if (new Set(winningNumbers).size !== 6) {
-      throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
+      throw new Error(ERROR_MESSAGES.CANT_USE_SAME_NUMBER);
     }
 
     winningNumbers.forEach((num) => {
       if (num <= 0 || num > 45) {
-        throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
+        throw new Error(ERROR_MESSAGES.USE_NUMBER_IN_RANGE);
       } else if (Number.isNaN(num)) {
-        throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
+        throw new Error(ERROR_MESSAGES.NOT_A_NUMBER);
       }
     });
   }
@@ -63,7 +63,7 @@ export class Input {
       Number.isNaN(bonusNumber) ||
       winningNumbers.includes(bonusNumber)
     ) {
-      throw new Error(ERROR_MESSAGES.UNCORRECT_INPUT);
+      throw new Error(ERROR_MESSAGES.USE_VALID_NUMBER);
     }
   }
 
