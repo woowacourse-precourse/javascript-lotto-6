@@ -32,7 +32,7 @@ class Controller {
   async inputWinNumber() {
     while (true) {
       try {
-        const WIN_NUMS = (await this.View.input(INPUT.win)).trim();
+        const WIN_NUMS = await this.View.input(INPUT.win);
         this.setWinNumber(WIN_NUMS);
         return;
       } catch (error) {
@@ -68,9 +68,8 @@ class Controller {
 
   validatePay(money) {
     if (String(money).includes('.')) throw new Error(ERROR.invalidValue);
-    if (isNaN(money)) throw new Error(ERROR.invalidValue); // 가격 : 숫자 아님
+    if (isNaN(money) || money <= 0) throw new Error(ERROR.invalidValue); // 가격 : 숫자 아님 호ㄱ은 0이하
     if (money % UNIT !== 0) throw new Error(ERROR.invalidUnit); // 가격 : UNIT 단위가 아님
-    if (money <= 0) throw new Error(ERROR.invalidValue); // 가격 : 0이하
   }
 
   generateRandomLottoArrays() {
@@ -80,13 +79,13 @@ class Controller {
   }
 
   setWinNumber(winNums) {
-    if (String(winNums).includes('.')) throw new Error(ERROR.invalidValue);
+    this.validateDot(winNums);
     const mapToInt = winNums.split(',').map(item => Number(item));
     this.Lotto = new Lotto(mapToInt);
   }
 
   setBonusNum(bonus) {
-    if (String(bonus).includes('.')) throw new Error(ERROR.invalidValue);
+    this.validateDot(bonus);
     this.validateBonus(this.Lotto.getWinNumber, Number(bonus));
     this.bonus = Number(bonus);
   }
@@ -95,6 +94,10 @@ class Controller {
     if (winNums.includes(bonus)) throw new Error(ERROR.duplicate); // 보너스 : 중복 검사
     if (isNaN(bonus)) throw new Error(ERROR.invalidValue); // 보너스 : 값 타입 검사
     if (1 > bonus || 45 < bonus) throw new Error(ERROR.outOfRange); // 보너스 : 값 검사
+  }
+
+  validateDot(string) {
+    if (String(string).includes('.')) throw new Error(ERROR.invalidValue);
   }
 
   evaluate(users, bonus) {
