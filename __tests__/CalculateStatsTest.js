@@ -30,4 +30,14 @@ describe('CalculateStats', () => {
     calculateStats.stats = { 3: 1, 4: 0, 5: 0, '5b': 0, 6: 0 };
     expect(calculateStats.calculateTotalPrize(calculateStats.stats)).toBe(5000);
   });
+
+  test('calculateEarningsRate는 수익률이 무한대인 경우 "Infinity%"를 반환해야한다', () => {
+    calculateStats.stats = { 3: 1, 4: 0, 5: 0, '5b': 0, 6: 0 };
+    expect(calculateStats.calculateEarningsRate(0)).toBe('Infinity%');
+  });
+
+  test('calculateTotalPrize는 0인 경우 0을 반환해야한다', () => {
+    calculateStats.stats = { 3: 0, 4: 0, 5: 0, '5b': 0, 6: 0 };
+    expect(calculateStats.calculateTotalPrize(calculateStats.stats)).toBe(0);
+  });
 });
