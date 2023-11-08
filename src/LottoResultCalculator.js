@@ -18,7 +18,6 @@ class LottoResultCalculator {
     this.#bonusNumber = bonusNumber;
 
     this.#calculateResults();
-    this.#printResults();
   }
 
   #validate(userLottos, winningNumbers, bonusNumber) {
@@ -73,7 +72,7 @@ class LottoResultCalculator {
     });
   }
 
-  #printResults() {
+  printResults() {
     Console.print('\n당첨 통계\n---');
 
     Console.print(
