@@ -11,7 +11,7 @@ export default class LottoPurchase {
     this.#count = LottoPurchase.#calculateLottoCount(money);
   }
 
-  generateLottos() {
+  getLottos() {
     return [...Array(this.#count).keys()].map(
       () => new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6))
     );
