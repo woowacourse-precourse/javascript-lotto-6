@@ -1,9 +1,9 @@
 const lottoRanking = {
-  FIRST: { rank: 1, price: 2000000000, count: 0 },
-  SECOND: { rank: 2, price: 30000000, count: 0 },
-  THIRD: { rank: 3, price: 1500000, count: 0 },
-  FOURTH: { rank: 4, price: 50000, count: 0 },
-  FIFTH: { rank: 5, price: 5000, count: 0 },
+  FIRST: { price: 2000000000, count: 0 },
+  SECOND: { price: 30000000, count: 0 },
+  THIRD: { price: 1500000, count: 0 },
+  FOURTH: { price: 50000, count: 0 },
+  FIFTH: { price: 5000, count: 0 },
 
   initializeRanking() {
     this.FIRST.count = 0;

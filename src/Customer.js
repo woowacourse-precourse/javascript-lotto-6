@@ -1,5 +1,6 @@
 import Lotto from './Lotto.js';
 import lottoRanking from './lottoRanking.js';
+import { MESSAGES, CONSTANTS } from './constants.js';
 import { Console } from "@woowacourse/mission-utils";
 
 class Customer {
@@ -7,7 +8,7 @@ class Customer {
 
   constructor(payment) {
     this.#payment = payment;
-    this.cntLottoTicekts = this.#payment / 1000;
+    this.cntLottoTicekts = this.#payment / CONSTANTS.ONE_THOUSAND;
     this.lottoList = [];
   } 
 
@@ -20,7 +21,7 @@ class Customer {
   }
 
   printLottoTickets() {
-    Console.print(`${this.cntLottoTicekts}개를 구매했습니다.`);
+    Console.print(`${this.cntLottoTicekts}${MESSAGES.TICKETS_PURCHASED}`);
 
     this.lottoList.forEach((lotto) => {
       Console.print(`[${lotto.getNumbers().join(', ')}]`);
@@ -28,11 +29,11 @@ class Customer {
   }
 
   calculateProfitRate() {
-    return lottoRanking.calculateTotalPrice() / this.#payment * 100;
+    return lottoRanking.calculateTotalPrice() / this.#payment * CONSTANTS.PERCENTAGE_FACTOR;
   }
 
   printResult(profitRate) {
-    Console.print("당첨 통계");
+    Console.print(`${MESSAGES.RESULT}`);
     Console.print(`  
     3개 일치 (5,000원) - ${lottoRanking.FIFTH.count}개
     4개 일치 (50,000원) - ${lottoRanking.FOURTH.count}개

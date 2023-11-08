@@ -1,47 +1,47 @@
-import { Console } from "@woowacourse/mission-utils";
+import { ERROR, CONSTANTS } from "./constants";
 
 const inputValidators = {
   validatePayment(payment) {
     if (!/^\d+$/.test(payment)) {
-      throw new Error("[ERROR] 유효한 입력 형식이 아닙니다.");
+      throw new Error(`${ERROR.PAYMENT_NOT_A_NUMBER}`);
     }
 
-    if (payment % 1000 !== 0){
-      throw new Error("[ERROR] 1,000원 단위로 입력해주세요.");
+    if (payment % CONSTANTS.ONE_THOUSAND !== 0){
+      throw new Error(`${ERROR.PAYMENT_NOT_IN_THOUSANDS}`);
     }
     
     if (/^0/.test(payment)) {
-      throw new Error("[ERROR] 유효한 숫자 형식이 아닙니다.");
+      throw new Error(`${ERROR.PAYMENT_STARTS_WITH_ZERO}`);
     }
   },
 
   validateWinningNumbers(winnigNumbers) {
-    if (winnigNumbers.length !== 6) {
-      throw new Error("[ERROR] 6개의 번호를 쉼표(,)를 기준으로 구분해주세요.");
+    if (winnigNumbers.length !== CONSTANTS.LOTTO_NUMBER_LENGTH) {
+      throw new Error(`${ERROR.WINNING_NUMBERS_INVALID_LENGTH}`);
     }
 
     if (!winnigNumbers.every((number) => this.isInRange(number))) {
-      throw new Error("[ERROR] 1~45 자리의 정수로 입력해주세요.");
+      throw new Error(`${ERROR.WINNING_NUMBERS_INVALID_RANGE}`);
     }
 
     if (this.isDuplicated(winnigNumbers)) {
-      throw new Error("[ERROR] 중복된 번호가 있습니다.");
+      throw new Error(`${ERROR.WINNING_NUMBERS_DUPLICATED}`);
     }
   },
 
   validateBonusNumber(bonusNumber, winnigNumbers) {
     if (!this.isInRange(bonusNumber)) {
-      throw new Error("[ERROR] 1~45 자리의 정수로 입력해주세요.");
+      throw new Error(`${ERROR.BONUS_NUMBER_INVALID_RANGE}`);
     }
 
     const totalNumbers = [...winnigNumbers, bonusNumber];
     if (this.isDuplicated(totalNumbers)) {
-      throw new Error("[ERROR] 당첨 번호와 중복된 번호가 있습니다.");
+      throw new Error(`${ERROR.BONUS_NUMBER_DUPLICATED}`);
     }
   },
 
   isInRange(number) {
-    return number === parseInt(number) && number >= 1 && number <= 45;
+    return number === parseInt(number) && number >= CONSTANTS.MIN_LOTTO_NUMBER && number <= CONSTANTS.MAX_LOTTO_NUMBER;
   },
 
   isDuplicated(numberlist) {

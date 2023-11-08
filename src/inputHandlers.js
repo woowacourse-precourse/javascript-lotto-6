@@ -1,3 +1,4 @@
+import { ERROR, MESSAGES } from './constants.js';
 import inputValidators from './inputValidators.js';
 import { Console } from '@woowacourse/mission-utils';
 
@@ -7,13 +8,13 @@ const inputHandlers = {
     while (true) {
       try {
         paymentStr = await Console.readLineAsync(
-          "구입금액을 입력해 주세요.",
+          `${MESSAGES.PAYMENT_INPUT}`,
         );
         const paymentNum = Number(paymentStr);
         inputValidators.validatePayment(paymentNum);  
         return paymentNum;
       } catch (error) {
-        Console.print("[ERROR] 입력 오류");
+        Console.print(`${ERROR.INPUT_ERROR}`);
       }
     }
   },
@@ -23,13 +24,13 @@ const inputHandlers = {
     while (true) {
       try {
         winnigNumbersStr = await Console.readLineAsync(
-          "당첨 번호를 입력해 주세요.",
+          `${MESSAGES.WINNING_NUMBERS_INPUT}`,
         );
         const winningNumbersList = winnigNumbersStr.split(",").map(Number);
         inputValidators.validateWinningNumbers(winningNumbersList);
         return winningNumbersList;
       } catch (error) {
-        Console.print("[ERROR] 입력 오류");
+        Console.print(`${ERROR.INPUT_ERROR}`);
       }
     }
   },
@@ -39,13 +40,13 @@ const inputHandlers = {
     while (true) {
       try {
         bonusNumberStr = await Console.readLineAsync(
-          "보너스 번호를 입력해 주세요.",
+          `${MESSAGES.BONUS_NUMBER_INPUT}`,
         );
         const bonusNumber = Number(bonusNumberStr);
         inputValidators.validateBonusNumber(bonusNumber, winnigNumbers);
         return bonusNumber;
       } catch (error) {
-        Console.print("[ERROR] 입력 오류");
+        Console.print(`${ERROR.INPUT_ERROR}`);
       }
     }
   }

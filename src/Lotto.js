@@ -1,4 +1,5 @@
 import lottoRanking from "./lottoRanking";
+import { ERROR, CONSTANTS } from "./constants";
 import { Random } from "@woowacourse/mission-utils";
 
 class Lotto {
@@ -11,17 +12,17 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== CONSTANTS.LOTTO_NUMBER_LENGTH) {
+      throw new Error(`${ERROR.LOTTO_NUMBERS_INVALID_LENGTH}`);
     }
 
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error("[ERROR] 로또 번호는 중복될 수 없습니다.");
+      throw new Error(`${ERROR.LOTTO_NUMBERS_DUPLICATED}`);
     }
   }
 
   #setLottoNumbers() {
-    const randomNumbers = Random.pickUniqueNumbersInRange(1,45,6);
+    const randomNumbers = Random.pickUniqueNumbersInRange(CONSTANTS.MIN_LOTTO_NUMBER, CONSTANTS.MAX_LOTTO_NUMBER, CONSTANTS.LOTTO_NUMBER_LENGTH);
     return randomNumbers;
   }
 
@@ -43,27 +44,27 @@ class Lotto {
       bonus = true;
     }
     
-    return this.modifyRankingCount(matchCount, bonus);
+    this.modifyRankingCount(matchCount, bonus);
   }
 
   modifyRankingCount(matchCount, bonus) {
     switch(matchCount) {
       case 3: 
         lottoRanking.FIFTH.count++;
-        return 5;
+        break;
       case 4:
         lottoRanking.FOURTH.count++;
-        return 4;
+        break;
       case 5:
         if (bonus) {
           lottoRanking.SECOND.count++;
-          return 2;
+          break;
         }
         lottoRanking.THIRD.count++;
-        return 3;
+        break;
       case 6:
         lottoRanking.FIRST.count++;
-        return 1;
+        break;
     }
   }
 
