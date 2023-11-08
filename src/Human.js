@@ -10,8 +10,10 @@ export async function getPayment() {
     payment < 0 ||
     !Number.isInteger(Number(payment) / 1000)
   ) {
-    throw new Error("[ERROR] 1000원 단위로 입력해주세요");
+    MissionUtils.Console.print("[ERROR] 1000원 단위로 입력해주세요");
+    await getPayment();
   }
+
   return payment / 1000;
 }
 

@@ -13,7 +13,7 @@ class App {
 
     // const testLotto = new Lotto([1, 2, 3, 4, 5, 6, 7]);
     // const testLotto2 = new Lotto([1, 2, 3, 4, 5, 5]);
-    const theLotto = new Lotto(lottoNumber, null);
+    // const theLotto = new Lotto(lottoNumber, null);
     const bonusNumber = await MissionUtils.Console.readLineAsync(
       "\n보너스 번호를 입력해 주세요.\n",
     );

@@ -17,6 +17,7 @@ class Lotto {
     // 질문: 왜 split 으로 하면 통과가 안됨? 제스트 떄문에 인풋이 스트링으로 안보여서임?
 
     let numbersArray = [];
+
     if (typeof numbers === "string") {
       numbersArray = numbers.split(",").map(Number);
     } else {
