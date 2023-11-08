@@ -19,11 +19,9 @@ class App {
 
   async play() {
     const buyLotto = new BuyLotto(CONSTANT_VALUE.lottoPrice, CONSTANT_VALUE.dailyLimitPrice);
-
     const lottoNumbers = await buyLotto.start();
 
     const winningNumbers = await this.generateWinningNumbers();
-
     const lotto = new Lotto(winningNumbers);
     const bonusNumber = await this.generateBonusNumber();
 
