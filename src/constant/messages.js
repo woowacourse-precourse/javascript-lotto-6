@@ -1,7 +1,7 @@
 export const INPUT_MESSEGE = Object.freeze({
   purchase: '구입금액을 입력해 주세요.\n',
   winning: '\n당첨 번호를 입력해 주세요.\n',
-  bonus: '보너스 번호를 입력해 주세요.\n',
+  bonus: '\n보너스 번호를 입력해 주세요.\n',
 });
 
 export const ERROR_MESSEGE = Object.freeze({
