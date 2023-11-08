@@ -27,29 +27,38 @@ class DrawController {
     return LottoNumberValidator.checkAllNumbersUnique(numbers);
   }
 
-  static processWinningNumbersText(text) {
+  static normalizeWinningNumbersText(text) {
     if (!DrawController.checkOnlyAllowedWinningNumbers(text)) {
       throw new Error(MESSAGES.winningNumberNotAllowedCharacterError);
     }
 
-    const textNumbers = text
+    const normalizedText = text
       .split(",")
       .map((text) => text.trim())
       .filter((text) => text.length > 0);
 
+    return normalizedText;
+  }
+
+  static normalizeWinningNumbers(textNumbers) {
     if (!DrawController.checkWinningNumbersCount(textNumbers)) {
       throw new Error(MESSAGES.winningNumbersCountError);
     }
 
     const numbers = textNumbers.map((number) => parseInt(number));
-
     if (!DrawController.checkWinningNumbersInRange(numbers)) {
       throw new Error(MESSAGES.winningNumberRangeError);
     }
-
     if (!DrawController.checkWinningNumbersUnique(numbers)) {
       throw new Error(MESSAGES.duplicatedWinningNumbersError);
     }
+
+    return numbers;
+  }
+
+  static processWinningNumbersText(text) {
+    const textNumbers = DrawController.normalizeWinningNumbersText(text);
+    const numbers = DrawController.normalizeWinningNumbers(textNumbers);
 
     return numbers;
   }
