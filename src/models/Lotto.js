@@ -24,9 +24,6 @@ class Lotto {
         throw new Error(EXCEPTION_MESSAGE.lottoNumberFormat);
       }
     });
-    if (!numbers.every((number, index) => index === 0 || number > numbers[index - 1])) {
-      throw new Error(EXCEPTION_MESSAGE.lottoNumberIsNotSorted);
-    }
   }
 
   // TODO: 추가 기능 구현
