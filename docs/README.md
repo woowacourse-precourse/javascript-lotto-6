@@ -475,28 +475,23 @@ Lotto 객체
 
 `Get.lottoBoard()`로 만들어진 배열
 
-### `lottoReturnRatio(resultArray, numberOfLotto)`
+### `lottoReturnRatio(resultArray)`
 
-- `Get.resultArray()`에서 얻어지는 `resultArray`에 의한 로또 수익률을 반환
+- `Get.resultArray()`에서 얻어지는 `resultArray`에 의한 로또 수익률을 백분률로 반환
 
 ```jsx
 const returnRatio = lottoReturnRatio([0,0,0,0,0,0,1,3,0,0,0,0,0],4);
 ```
 
-**매개변수**
+### `sumOfArray(array)`
 
-`'매개변수'`
+- `array` 내에 있는 요소의 합을 반환
 
-'매개변수 설명'
+```jsx
+const sum = Get.sumOfArray([1,2,3]);
+```
 
-**반환**
-
-'반환 값'
-
-**예외**
-
-'예외 경우'
-
+## `ErrorCheck``
 
 구현해야할 기능
 - [x] 구입 금액 입력

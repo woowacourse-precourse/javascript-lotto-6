@@ -14,8 +14,8 @@ const {
 } = CONSTANTS;
 
 class ErrorCheck {
-  static purchasePrice(inputString, lottoPrice) {
-    ErrorCheck.positiveIntegerString(inputString);
+  static purchasePrice(string, lottoPrice) {
+    ErrorCheck.positiveIntegerString(string);
     ErrorCheck.multiplesInPositive(Number(inputString), lottoPrice);
   }
 
