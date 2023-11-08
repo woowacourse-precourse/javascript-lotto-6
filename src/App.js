@@ -32,7 +32,7 @@ class App {
     );
 
     if (isNaN(bonusNumber)) throw new Error(ERROR_MESSAGES.IS_BONUS_NUMBER);
-    if (winning.getNumber().includes(parseInt(bonusNumber,10)))
+    if (winning.getNumber().includes(parseInt(bonusNumber, 10)))
       throw new Error(ERROR_MESSAGES.IS_BONUS_DUPLICATION);
     if (
       bonusNumber < LOTTO_MESSAGES.MIN_LOTTO_NUMBER ||
@@ -40,7 +40,53 @@ class App {
     )
       throw new Error(ERROR_MESSAGES.IS_BONUS_RANGE);
     let winningNumber = winning.getNumber();
-    Console.print(`${winningNumber}, ${bonusNumber}, ${lottos}`);
+    this.winningLotto(winningNumber, bonusNumber, lottos);
+  }
+
+  winningLotto(winningNumber, bonusNumber, lottos) {
+    const winningResultArray = new Array(6).fill(0);
+    lottos.map((lotto) => {
+      winningResultArray[
+        this.isCorrectNumber(winningNumber, bonusNumber, lotto)
+      ] += 1;
+    });
+
+    Console.print(GAME_MESSAGES.WINNING_STATISTICS);
+    this.printWinningResult(winningResultArray);
+  }
+
+  printWinningResult(winningResultArray) {
+    Console.print(
+      `${LOTTO_MESSAGES.COINCIDE_THREE_NUMBER}${winningResultArray[5]}개`,
+    );
+    Console.print(
+      `${LOTTO_MESSAGES.COINCIDE_FOUR_NUMBER}${winningResultArray[4]}개`,
+    );
+    Console.print(
+      `${LOTTO_MESSAGES.COINCIDE_FIVE_NUMBER}${winningResultArray[3]}개`,
+    );
+    Console.print(
+      `${LOTTO_MESSAGES.COINCIDE_FIVE_BONUS_NUMBER}${winningResultArray[2]}개`,
+    );
+    Console.print(
+      `${LOTTO_MESSAGES.COINCIDE_SIX_NUMBER}${winningResultArray[1]}개`,
+    );
+  }
+
+  isCorrectNumber(winningNumber, bonusNumber, lotto) {
+    let count = winningNumber.filter((x) => lotto.includes(x)).length;
+
+    if (count === LOTTO_MESSAGES.SIX_CORRECT) return 1;
+    if (count === LOTTO_MESSAGES.FIVE_CORRECT && lotto.includes(bonusNumber))
+      return 2;
+    if (count === LOTTO_MESSAGES.FIVE_CORRECT) return 3;
+    if (
+      count === LOTTO_MESSAGES.FOUR_CORRECT ||
+      count === LOTTO_MESSAGES.THREE_CORRECT
+    )
+      return 8 - count;
+
+    return 0;
   }
 
   generateLottoNumber(lottoCount) {
