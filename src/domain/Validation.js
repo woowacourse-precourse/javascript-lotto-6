@@ -17,6 +17,15 @@ class Validation {
     }
   }
 
+  validateLotto() {
+    if (!this.#isCheckDigit()) {
+      throw new Error(ERROR_MESSAGE.DIGIT);
+    }
+    if (this.#isCheckDuplicate()) {
+      throw new Error(ERROR_MESSAGE.DUPLICATE);
+    }
+  }
+
   #isCheckNumber() {
     return !Number.isNaN(Number(this.#number));
   }
@@ -26,7 +35,12 @@ class Validation {
   }
 
   #isCheckDigit() {
-    return /^[1-45]+$/.test(this.#number);
+    return this.#number.every(
+      (num) =>
+        Number.isInteger(num) &&
+        num >= CONSTRAINTS.MIN_LOTTO_NUMBER &&
+        num <= CONSTRAINTS.MAX_LOTTO_NUMBER,
+    );
   }
 
   #isCheckDuplicate() {
