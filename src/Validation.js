@@ -36,10 +36,10 @@ const Validation = {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개입니다.");
     }
-    if (this.isDuplicate(numbers)) {
+    if (Validation.isDuplicate(numbers)) {
       throw new Error("[ERROR] 로또 번호는 6개입니다.");
     }
-    numbers.forEach((number) => this.validateLottoNumber(number));
+    numbers.forEach((number) => Validation.validateLottoNumber(number));
   },
 
   /**
@@ -52,12 +52,10 @@ const Validation = {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개입니다.");
     }
-    if (this.isDuplicate(concattedNumber)) {
+    if (Validation.isDuplicate(concattedNumber)) {
       throw new Error("[ERROR] 로또 번호는 6개입니다.");
     }
-    concattedNumber.forEach((number) =>
-      Validation.validateLottoNumbers(number)
-    );
+    concattedNumber.forEach((number) => Validation.validateLottoNumber(number));
   },
 
   /**

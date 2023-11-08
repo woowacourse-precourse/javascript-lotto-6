@@ -1,6 +1,6 @@
-import LottoResult from "../src/LottoResult.js";
-import Lotto from "../src/Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "../src/Lotto.js";
+import LottoResult from "../src/LottoResult.js";
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
@@ -14,8 +14,8 @@ describe("LottoResult 클래스 테스트", () => {
   test("로또 당첨 번호의 개수가 6개가 아니면 예외가 발생한다.", () => {
     expect(() => {
       new LottoResult().setWinningNumber(
-        new Array(6 + 1).fill(0).map((value, index) => index + 1),
-        6 + 2
+        new Array(7).fill(0).map((value, index) => index + 1),
+        8
       );
     }).toThrow("[ERROR]");
   });
@@ -44,14 +44,14 @@ describe("LottoResult 클래스 테스트", () => {
       [2, 3, 4, 5, 6, 8],
       [8, 10, 11, 12, 13, 14],
     ];
+
     const winningNumber = [1, 2, 3, 4, 5, 6];
     const bonus = 8;
     const result = [1, 1, 2, 1, 1, 0];
-    const LottoResult = new LottoResult();
-
-    LottoResult.setLottoes(numbers.map((number) => new Lotto(number)));
-    LottoResult.setWinningNumber(winningNumber, bonus);
-    expect(LottoResult.getResult()).toEqual(result);
+    const lottoResult = new LottoResult();
+    lottoResult.setLottoes(numbers.map((number) => new Lotto(number)));
+    lottoResult.setWinningNumber(winningNumber, bonus);
+    expect(lottoResult.getResult()).toEqual(result);
   });
 
   test("추첨 후 수익률 계산", () => {
@@ -71,7 +71,7 @@ describe("LottoResult 클래스 테스트", () => {
     lottoResult.setLottoes(numbers.map((number) => new Lotto(number)));
     lottoResult.setWinningNumber(winningNumber, bonus);
 
-    expect(lottoResult.getProfitWithResult(lottoResult.getResult())).toEqual({
+    expect(LottoResult.getProfitWithResult(lottoResult.getResult())).toEqual({
       prize: 5000,
       profit: 62.5,
     });

@@ -11,7 +11,7 @@ class Lotto {
    */
 
   constructor(numbers) {
-    Validation.validateLottoNumbers(number);
+    Validation.validateLottoNumbers(numbers);
     this.#numbers = numbers;
   }
 
