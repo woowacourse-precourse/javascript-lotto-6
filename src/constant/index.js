@@ -61,3 +61,7 @@ export const ERROR = Object.freeze({
 
 export const FIXED_POINT = 1;
 export const RATE = 100;
+
+export const WINNING_NUMBER_DELIMITER = ',';
+
+export const REGEX_POSITIVE_INTEGER = /^[0-9]*$/;
