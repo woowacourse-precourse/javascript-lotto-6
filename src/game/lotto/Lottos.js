@@ -31,7 +31,7 @@ export class Lottos {
   }
 
   print() {
-    Print(`${this.#count}개를 구매했습니다.`);
+    Print(`\n${this.#count}개를 구매했습니다.`);
 
     this.#list.forEach((lotto) => Print(getArrayLikeString(sortAscending(lotto.getNumbers()))));
   }

@@ -26,13 +26,13 @@ export class User {
   }
 
   async inputWinningNumbers() {
-    const numbers = await Input.readMultipleValues('당첨 번호를 입력해 주세요.');
+    const numbers = await Input.readMultipleValues('\n당첨 번호를 입력해 주세요.');
 
     await this.#setWinningNumbers(numbers);
   }
 
   async inputBonusNumber() {
-    const number = await Input.readInteger('보너스 번호를 입력해 주세요.');
+    const number = await Input.readInteger('\n보너스 번호를 입력해 주세요.');
 
     await this.#setBonusNumber(number);
   }
