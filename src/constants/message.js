@@ -20,3 +20,20 @@ export const ERROR_MESSAGE = Object.freeze({
     return `${ERROR_PREFIX} ${maxValue}보다 작은 숫자를 입력해야 합니다.`;
   },
 });
+
+export const OUTPUT_MESSAGE = Object.freeze({
+  LOTTOS_COUNT(count) {
+    return `${count}개를 구매했습니다.`;
+  },
+  LOTTO_NUMBERS(lottos) {
+    const lottoNumbersToString = (lottoNumbers) => {
+      return `[${lottoNumbers.join(', ')}]`;
+    }
+
+    const lottosOutput = lottos
+      .map(lottoNumbersToString)
+      .join('\n');
+
+    return lottosOutput;
+  },
+});

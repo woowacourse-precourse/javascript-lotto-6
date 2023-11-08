@@ -1,3 +1,6 @@
+import { LOTTO } from "./constants/api";
+import random from "./utils/random";
+
 class Lotto {
   #numbers;
 
@@ -12,7 +15,21 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  static generateNumbers() {
+    const numbers = random.generateNumbers(
+      LOTTO.MIN_NUMBER_IN_RANGE,
+      LOTTO.MAX_NUMBER_IN_RANGE,
+      LOTTO.NUMBER_CHOICES_PER_TICKET
+    );
+
+    return numbers;
+  }
+
+  static getHowManyLottoCanBuy(purchaseAmount) {
+    const result = purchaseAmount / LOTTO.PRICE;
+
+    return result;
+  }
 }
 
 export default Lotto;
