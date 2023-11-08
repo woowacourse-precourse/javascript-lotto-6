@@ -1,12 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
-import InputError from "./InputError.js";
 
 class InputPrompter {
-  constructor(promptMessage, isValid, errorMessage) {
+  constructor(promptMessage, validate) {
     this.promptMessage = promptMessage;
-    this.validate = (input) => {
-      if (!isValid(input)) throw new InputError(errorMessage);
-    };
+    this.validate = validate;
   }
 
   async collect() {
@@ -14,6 +11,7 @@ class InputPrompter {
     let isValid = false;
 
     while (!isValid) {
+      // eslint-disable-next-line no-await-in-loop
       input = await Console.readLineAsync(this.promptMessage);
       isValid = this.#checkValidity(input);
     }
@@ -32,7 +30,7 @@ class InputPrompter {
   }
 
   static #handleError(error) {
-    if (error instanceof InputError) Console.print(error.message);
+    if (error) Console.print(error.message);
     else throw error;
   }
 }
