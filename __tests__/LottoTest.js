@@ -15,4 +15,27 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("로또 번호가 1부터 45 사이의 범위를 벗어나면 예외가 발생한다.", () => {
+    const outOfRangeNumbers = [0, 46, 47, 50, 100];
+    outOfRangeNumbers.forEach((number) => {
+      expect(() => {
+        new Lotto([1, 2, 3, 4, 5, number]);
+      }).toThrow("[ERROR]");
+    });
+  });
+
+  test("로또 번호가 음수이면 예외가 발생한다.", () => {
+    const outOfRangeNumbers = [-13, 46, 47, 50, 100];
+    outOfRangeNumbers.forEach((number) => {
+      expect(() => {
+        new Lotto([1, 2, 3, 4, 5, number]);
+      }).toThrow("[ERROR]");
+    });
+  });
+
+  test("로또 번호 개수가 6개 미만이면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4]);
+    }).toThrow("[ERROR]");
+  });
 });
