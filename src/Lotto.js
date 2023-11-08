@@ -24,12 +24,14 @@ export class Lotto {
     }
   }
 
+  //메소드 : 로또 번호를 오름차순으로 정렬하고, 올바른 형식으로 포맷한다
   printAllLottoNum() {
     let arr = this.#numbers.sort((a, b) => a - b);
     let formatted_arr = `[${arr.join(", ")}]`;
     MissionUtils.Console.print(formatted_arr);
   }
 
+  //메소드 : 로또 당첨 번호와 몇개가 일치하는 지 센다
   countWin(arr) {
     let win = 0;
     for (let i = 0; i < 6; i++) {
@@ -40,6 +42,7 @@ export class Lotto {
     return win;
   }
 
+  //메소드 : 보너스 번호가 로또 당첨 번호에 해당되는지 그 여부를 확인한다
   isBonus(bonus) {
     if (this.#numbers.includes(bonus)) {
       return true;

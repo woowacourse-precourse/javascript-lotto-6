@@ -7,9 +7,9 @@ class App {
     let lotto_price = await this.getIncomeAndCheck();
     let lotto_num = lotto_price / 1000;
 
-    const lottoArray = new LottoRandom(lotto_num);
-
     MissionUtils.Console.print(`${lotto_num}개를 구매했습니다.`);
+
+    const lottoArray = new LottoRandom(lotto_num);
     lottoArray.printLottoSet();
 
     let real_num = await this.getRealLottoNumber();
@@ -42,6 +42,7 @@ class App {
     return income_num;
   }
 
+  //함수 : 로또 당첨 번호를 입력 받는다
   async getRealLottoNumber() {
     let real_number, real_number_arr;
     while (true) {
@@ -50,9 +51,9 @@ class App {
       );
       real_number_arr = real_number.split(",");
       real_number_arr = real_number_arr.map((e) => Number(e));
+
       try {
         new Lotto(real_number_arr);
-
         break;
       } catch (error) {
         MissionUtils.Console.print(this.error);
@@ -61,15 +62,16 @@ class App {
     return real_number_arr;
   }
 
-  printReturnRate(prize, PAYMENT) {
-    let PRIZE =
+  //함수 : 수익률을 계산하여 출력한다
+  printReturnRate(prize, num) {
+    let all_prize =
       prize[0] * 5000 +
       prize[1] * 50000 +
       prize[2] * 1500000 +
       prize[3] * 30000000 +
       prize[4] * 2000000000;
-    let RATE_RETURN = ((100 * PRIZE) / PAYMENT).toFixed(1);
-    MissionUtils.Console.print(`총 수익률은 ${RATE_RETURN}%입니다.`);
+    let rate = ((100 * all_prize) / num).toFixed(1);
+    MissionUtils.Console.print(`총 수익률은 ${rate}%입니다.`);
   }
 }
 
