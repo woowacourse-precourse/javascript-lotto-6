@@ -55,3 +55,25 @@ describe('입력 금액 유효성 검사', () => {
     }
   });
 });
+
+describe('로또 번호 생성 및 당첨 번호 입력', () => {
+  test('로또 번호가 6개인 경우', () => {
+    const validInput = [1, 2, 46, 100, 0, 12];
+    expect(validateLength(validInput)).toBe(true);
+  });
+  test('로또 번호가 6개가 아닌 경우', () => {
+    const invalidInput = [
+      [1, 2, 46, 100, 0, 12, 1],
+      [1, 2, 3],
+      [1, 2, 3, 4],
+      [3],
+    ];
+    try {
+      invalidInput.forEach((lotto) => {
+        expect(validateLength(lotto)).toBe(true);
+      });
+    } catch (error) {
+      expect(error).toEqual(ERROR_MESSAGE.INVALID_LOTTO_LENGTH);
+    }
+  });
+});
