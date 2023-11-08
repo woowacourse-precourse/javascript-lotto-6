@@ -6,7 +6,7 @@ const printMessage = (message) => Console.print(message);
 const readLineAsync = async (message) => (await Console.readLineAsync(message)).trim()
 
 const throwError = (message) => {
-  throw new Error(`${ERROR.header} ${message}`);
+  throw new Error(`${ERROR.header}${message}`);
 };
 
 const generateRandomNumber = (min, max, count) => {
