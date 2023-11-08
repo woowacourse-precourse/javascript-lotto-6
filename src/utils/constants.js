@@ -18,4 +18,7 @@ export const ERROR_MESSAGES = Object.freeze({
   INVALID_AMOUNT_TYPE: '구입 금액은 숫자를 입력해주세요.',
   INVALID_NUMBER_COUNT: '로또 번호는 6개여야 합니다.',
   DUPLICATE_NUMBERS: '로또 번호는 중복될 수 없습니다.',
+  INVALID_BONUS_NUMBER_TYPE: '보너스 번호는 숫자여야 합니다.',
+  INVALID_BONUS_NUMBER_RANGE: '보너스 번호는 1~45 사이의 정수여야 합니다.',
+  DUPLICATE_BONUS_NUMBER: '보너스 번호는 당첨 번호와 중복될 수 없습니다.',
 });

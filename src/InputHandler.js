@@ -54,10 +54,11 @@ class InputHandler {
   }
 
   async inputBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(
-      INPUT_MESSAGES.INPUT_BONUS_NUMBER
+    const bonusNumber = Number(
+      await this.#getUserInput(INPUT_MESSAGES.INPUT_BONUS_NUMBER, (input) =>
+        LottoValidator.validateBonusNumber(this.#winningNumbers, Number(input))
+      )
     );
-
     this.#bonusNumber = bonusNumber;
 
     return this.#bonusNumber;

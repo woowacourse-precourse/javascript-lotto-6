@@ -46,5 +46,22 @@ class LottoValidator {
       LottoValidator.throwError(ERROR_MESSAGES.DUPLICATE_NUMBERS);
     }
   }
+
+  static validateBonusNumber(numbers, number) {
+    LottoValidator.validateIsNaN(
+      number,
+      ERROR_MESSAGES.INVALID_BONUS_NUMBER_TYPE
+    );
+
+    LottoValidator.validateLottoNumber(
+      number,
+      ERROR_MESSAGES.INVALID_BONUS_NUMBER_RANGE
+    );
+
+    const unique = new Set(numbers);
+    if (unique.has(String(number))) {
+      LottoValidator.throwError(ERROR_MESSAGES.DUPLICATE_BONUS_NUMBER);
+    }
+  }
 }
 export default LottoValidator;
