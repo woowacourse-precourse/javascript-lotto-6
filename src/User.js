@@ -24,6 +24,17 @@ class User {
     const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
     return bonusNumber;
   }
+
+  printAllLottoResult(allLottoResult) {
+    let result = '\n당첨 통계\n---\n';
+
+    Object.values(allLottoResult).forEach(value => {
+      const {rankingDetail, reward, count} = value;
+      result += `${rankingDetail.theNumberOfMatches}개 일치${rankingDetail.haveBonusNumber?', 보너스 볼 일치':''} (${reward.toLocaleString('ko-KR')}) - ${count}개\n`;
+    });
+
+    Console.print(result);
+  }
 }
 
 export default User;

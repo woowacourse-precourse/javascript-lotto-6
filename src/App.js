@@ -3,28 +3,12 @@ import Lotto from './Lotto.js';
 import { Console, Random } from '@woowacourse/mission-utils';
 
 const allLottoResult = {
-  Ranking1: {
+  Ranking5: {
     rankingDetail: {
-      theNumberOfMatches: 6,
+      theNumberOfMatches: 3,
       haveBonusNumber: false
     },
-    reward: 2000000000,
-    count: 0
-  },
-  Ranking2: {
-    rankingDetail: {
-      theNumberOfMatches: 5,
-      haveBonusNumber: true
-    },
-    reward: 30000000,
-    count: 0
-  },
-  Ranking3: {
-    rankingDetail: {
-      theNumberOfMatches: 5,
-      haveBonusNumber: false
-    },
-    reward: 1500000,
+    reward: 5000,
     count: 0
   },
   Ranking4: {
@@ -35,14 +19,30 @@ const allLottoResult = {
     reward: 50000,
     count: 0
   },
-  Ranking5: {
+  Ranking3: {
     rankingDetail: {
-      theNumberOfMatches: 3,
+      theNumberOfMatches: 5,
       haveBonusNumber: false
     },
-    reward: 5000,
+    reward: 1500000,
     count: 0
   },
+  Ranking2: {
+    rankingDetail: {
+      theNumberOfMatches: 5,
+      haveBonusNumber: true
+    },
+    reward: 30000000,
+    count: 0
+  },
+  Ranking1: {
+    rankingDetail: {
+      theNumberOfMatches: 6,
+      haveBonusNumber: false
+    },
+    reward: 2000000000,
+    count: 0
+  }
 }
 
 class App {
@@ -107,7 +107,7 @@ class App {
     const lottoWinningNumber = await user.inputLottoWinningNumber();
     const lottoBonusNumber = await user.inputLottoBonusNumber();
     const lottoResult = this.checkAllLottoResult(lottos, lottoWinningNumber, lottoBonusNumber);
-
+    user.printAllLottoResult(lottoResult);
   }
 }
 
