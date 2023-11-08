@@ -4,25 +4,22 @@ class Money {
   payedMoney;
   lottoCount;
   LOTTO_PRICE = 1000;
-
-  init = async () => {
-    await this.getPayedMoney();
+  constructor(payedMoney) {
+    this.validateMoney(payedMoney);
+    this.payedMoney = payedMoney;
     this.calLottoCount();
-    this.printCalLottoCount();
-  };
-  getPayedMoney = async () => {
-    try {
-      this.payedMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
-      let exception = new ExceptionList();
-      exception.noInputError(this.payedMoney);
-      exception.isNaNError(this.payedMoney);
-      exception.isZeroError(this.payedMoney);
-      exception.notThousandError(this.payedMoney);
-      
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      await this.getPayedMoney(); 
-    }
+  }
+
+  
+  validateMoney = (payedMoney) => {
+    let exception = new ExceptionList();
+    exception.noInputError(payedMoney);
+    exception.isZeroError(payedMoney);
+    // exception.notThousandError(payedMoney);
+    // exeption.isNaNError(payedMoney);
+    // if (payedMoney==='') {
+    //   throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    // }
   };
   calLottoCount = async () => {
     this.lottoCount = this.payedMoney / this.LOTTO_PRICE;
