@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "../src/Lotto.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -91,7 +92,7 @@ describe('printLottoCounts 메서드 테스트', () => {
     //when
     const app = new App();
     const purchaseAmount = await app.getPurchaseAmount();
-    app.printLottoCounts(purchaseAmount);정
+    app.printLottoCounts(purchaseAmount);
 
     //then
     expect(logSpy).toHaveBeenCalledWith("13개를 구매했습니다.");
@@ -135,5 +136,21 @@ describe('createUniqueRandomNums 메서드 테스트', () => {
       const sortedLotto = [...lotto].sort((a, b) => a - b);
       expect(lotto).toEqual(sortedLotto);
     });
+  });
+});
+
+describe('printLottoNums 메서드 테스트', () => {
+  test('printLottoNums 메서드는 생성된 로또의 번호를 출력해야한다.', async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    // when
+    const app = new App();
+    const lotto = new Lotto([8, 21, 23, 41, 42, 43]);
+    app.printLottoNums(lotto);
+
+    // then
+    expect(logSpy).toHaveBeenCalledTimes(1);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[8, 21, 23, 41, 42, 43]"));
   });
 });
