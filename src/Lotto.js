@@ -27,7 +27,7 @@ class Lotto {
     return foundItem !== undefined ? true : false;
   }
   hasSpecialCharacter(arr) {
-    const specialCharacter = /[^A-Za-z0-9\s]/;
+    const specialCharacter = /[^A-Za-z가-힣0-9\s]/;
     const foundItem = arr.find((v) => specialCharacter.test(v));
     return foundItem !== undefined ? true : false;
   }

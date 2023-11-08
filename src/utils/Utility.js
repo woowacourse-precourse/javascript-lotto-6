@@ -19,6 +19,9 @@ class Utility {
   getWinningLotto() {
     return this.winningLotto.getWinningLotto();
   }
+  getBonusLotto(mainLottoArr) {
+    return this.winningLotto.getBonusLotto(mainLottoArr);
+  }
   compareNumbers(myLottos, winningArr) {
     return this.winningLotto.compareNumbers(myLottos, winningArr);
   }

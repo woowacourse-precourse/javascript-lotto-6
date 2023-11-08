@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { CONSOLE_MESSAGE } from "../Constants.js";
 import Lotto from "../Lotto.js";
+import Bonus from "../Bonus.js";
 class WinningLotto {
   async getWinningLotto() {
     let mainLotto = "";
@@ -18,11 +19,26 @@ class WinningLotto {
         Console.print(error.message);
       }
     }
-    const bonusLotto = await Console.readLineAsync(
-      CONSOLE_MESSAGE.BONUS_LOTTO_INPUT + "\n"
-    );
-    return [mainLottoArr, Number(bonusLotto)];
+    return mainLottoArr;
   }
+
+  async getBonusLotto(mainLottoArr) {
+    let bonusLotto = "";
+    while (true) {
+      try {
+        bonusLotto = await Console.readLineAsync(
+          CONSOLE_MESSAGE.BONUS_LOTTO_INPUT + "\n"
+        );
+        new Bonus([mainLottoArr, bonusLotto]);
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+
+    return Number(bonusLotto);
+  }
+
   compareNumbers(myLottos, winningArr) {
     const mainLotto = winningArr[0];
     const bonusLotto = winningArr[1];

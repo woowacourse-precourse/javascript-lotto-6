@@ -9,7 +9,9 @@ class App {
       const lottoStr = lotto.join(", ");
       Console.print("[" + lottoStr + "]");
     });
-    const winningLottoArr = await util.getWinningLotto();
+    const mainLottoArr = await util.getWinningLotto();
+    const bonusLotto = await util.getBonusLotto(mainLottoArr);
+    const winningLottoArr = [mainLottoArr, bonusLotto];
     const sameNumbers = util.compareNumbers(myLottoArr, winningLottoArr);
     const places = util.statisticsOfWinningLotto(sameNumbers);
     const rateOfReturn = util.rateOfReturn(places, purchaseQuantity);
