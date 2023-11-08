@@ -41,7 +41,7 @@ describe("Assert 클래스 테스트", () => {
   });
 
   test("당첨 번호 입력 검증: 6개로 나누어지지 않음", () => {
-    const inputs = ["1,2,3,4,5", "1,2,3,4,5,6", "", "1 2 3 4 5 6"];
+    const inputs = ["1,2,3,4,5", "1,2,3,4,5,6,7", "", "1 2 3 4 5 6"];
 
     inputs.forEach((input) => {
       expect(() => assert.assertWinningNumber(input)).toThrow(
@@ -51,7 +51,13 @@ describe("Assert 클래스 테스트", () => {
   });
 
   test("당첨 번호 입력 검증: 유효한 숫자 범위가 아님", () => {
-    const inputs = ["a,1,2,3,4,5", ",,,,,", "0,1,2,3,4,5", "1,2,3,4,5,46"];
+    const inputs = [
+      "a,1,2,3,4,5",
+      ",,,,,",
+      "0,1,2,3,4,5",
+      "1,2,3,4,5,46",
+      "1.0,2.0,3,4,5,6",
+    ];
 
     inputs.forEach((input) => {
       expect(() => assert.assertWinningNumber(input)).toThrow(
