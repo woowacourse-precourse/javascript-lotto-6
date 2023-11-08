@@ -9,7 +9,7 @@ class LottoDataProcessor {
     this.#purchaseAmount = Number(purchaseAmount);
     this.#validate(this.#purchaseAmount);
     this.#lottoResults = [];
-    this.#lottoResults(purchaseAmount / 1000);
+    this.#generateLottoResults(purchaseAmount / 1000);
   }
 
   #validate() {
