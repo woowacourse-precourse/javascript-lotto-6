@@ -2,11 +2,14 @@ import inputView from '../view/inputView.js';
 import outputView from '../view/outputview.js';
 import MyWallet from '../Model/MyWallet.js';
 import MyLotto from '../Model/MyLotto.js';
+import WinNumber from '../Model/WinNumber.js';
 
 export default class Controller {
   #myWallet;
 
   #myLotto;
+
+  #winNumber;
 
   constructor() {
     this.#myWallet = new MyWallet();
@@ -21,7 +24,7 @@ export default class Controller {
   }
 
   handleLottoCount(input) {
-    this.#myLotto.setlottoCount(input);
+    this.#myLotto.setLottoCount(input);
     outputView.printLottoCount(this.#myLotto.getLottoCount());
 
     return this.handleQuickPicks();
@@ -29,5 +32,22 @@ export default class Controller {
 
   handleQuickPicks() {
     outputView.printQuickPicks(this.#myLotto.getQuickPicks());
+
+    return this.handleCommonWinNum();
+  }
+
+  async handleCommonWinNum() {
+    const input = await inputView.readCommonWinNum();
+    this.#winNumber = new WinNumber();
+    this.#winNumber.setCommonNum(input);
+
+    return this.handleBonusWinNum();
+  }
+
+  async handleBonusWinNum() {
+    const input = await inputView.readBonusWinNum();
+    this.#winNumber.setBonusNum(input);
+
+    return console.log(this.#winNumber.getCommonNum(), this.#winNumber.getBonusNum());
   }
 }

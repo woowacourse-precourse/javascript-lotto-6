@@ -1,4 +1,5 @@
 import randomLotto from './utils/randomLotto.js';
+import { MONEYSET } from '../Constant/SETTING.js';
 
 export default class MyLotto {
   #lottoCount;
@@ -9,8 +10,8 @@ export default class MyLotto {
     this.#quickPicks = [];
   }
 
-  setlottoCount(input) {
-    this.#lottoCount = Number(input.slice(0, -3));
+  setLottoCount(input) {
+    this.#lottoCount = Number(input.slice(MONEYSET.moneySlice.start, MONEYSET.moneySlice.end));
 
     return this.#setQuickPicks();
   }

@@ -4,6 +4,9 @@ export const LOTTOSET = Object.freeze({
   numCnt: 6,
 });
 
-export const MOCKSET = Object.freeze({
-  mockData: 0,
+export const MONEYSET = Object.freeze({
+  moneySlice: {
+    start: 0,
+    end: -3,
+  },
 });
