@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES as ERROR } from "../constant/ErrorMessages";
+import { ERROR_MESSAGES as ERROR } from "../constant/ErrorMessages.js";
 
 const BonusNumberValidation = {
 

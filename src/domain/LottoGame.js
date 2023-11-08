@@ -1,5 +1,6 @@
 import Lotto from "../model/Lotto.js";
 import { Random } from '@woowacourse/mission-utils';
+import { LOTTO_GAME_OPTIONS as OPT } from "../constant/Options.js";
 
 const ASC = (a, b) => a - b;
 
@@ -49,8 +50,7 @@ class LottoGame {
 
   /** 구입 금액에 따른 구입 가능 수량을 계산하여 저장한다. */
   calculatePurchaseQuantity() {
-    // TODO: 상수 사용
-    this.#purchaseQuantity = this.#purchaseAmount / 1000;
+    this.#purchaseQuantity = this.#purchaseAmount / OPT.price;
   }
 
   /** 랜덤 번호를 가진 로또 티켓을 구입 수량만큼 생성한다. */
@@ -63,10 +63,10 @@ class LottoGame {
     this.#tickets.push(new Lotto([1, 2, 3, 8, 8, 8]));
     this.#tickets.push(new Lotto([1, 2, 8, 8, 8, 8]));
     // for (let i = 0; i < this.#purchaseQuantity; i++) {
-    //   // TODO: 상수 사용
-    //   const numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(ASC);
+    //   const numbers = Random.pickUniqueNumbersInRange(
+    //     OPT.min_number, OPT.max_number, lotto_number_count
+    //   ).sort(ASC);
     //   this.#tickets.push(new Lotto(numbers));
-    // }
   }
 
   /** 각 티켓을 당첨번호와 비교하여 당청 등수를 계산한다. */

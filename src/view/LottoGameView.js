@@ -1,12 +1,18 @@
 import Lotto from '../model/Lotto.js';
+import { MESSAGES as MSG } from '../constant/Messages.js';
+import { LOTTO_GAME_OPTIONS as OPT } from '../constant/Options.js';
 import { Console } from '@woowacourse/mission-utils';
+import {
+  FormatString,
+  FormatNumberRound,
+  FormatNumberWithCommas
+} from '../utility/Format.js';
 
 class LottoGameView {
 
   /** 빈 줄을 출력한다. */
   breakLine() {
-    // TODO: 상수 사용
-    Console.print('');
+    Console.print(MSG.null);
   }
 
   /**
@@ -17,8 +23,7 @@ class LottoGameView {
     // TEST:
     return '5000';
 
-    // TODO: Message 추가
-    return await Console.readLineAsync();
+    return await Console.readLineAsync(MSG.prompt_purchase_amount);
   }
 
   /**
@@ -29,8 +34,7 @@ class LottoGameView {
     // TEST:
     return '1,2,3,4,5,6';
 
-    // TODO: Message 추가
-    return await Console.readLineAsync();
+    return await Console.readLineAsync(MSG.prompt_winning_numbers);
   }
 
   /**
@@ -41,8 +45,7 @@ class LottoGameView {
     // TEST:
     return '7';
 
-    // TODO: Message 추가
-    return await Console.readLineAsync();
+    return await Console.readLineAsync(MSG.prompt_bonus_number);
   }
 
   /**
@@ -50,7 +53,6 @@ class LottoGameView {
    * @param {number} purchaseQuantity 구입 수량
    */
   displayPurchaseQuantity(purchaseQuantity) {
-    // TODO: 상수 사용
     Console.print(`${purchaseQuantity}개를 구매했습니다.`);
   }
 
@@ -60,15 +62,30 @@ class LottoGameView {
    */
   displayTickets(tickets) {
     tickets.forEach((ticket) => {
-      // TODO: 상수 사용, 쉼표 후 공백
-      Console.print(`[${ticket.getNumbers()}]`);
+      Console.print(FormatString(
+        MSG.lotto_numbers_f,
+        ticket.getNumbers()
+      ));
     });
   }
 
+  /**
+   * 
+   * @param {object} prizeStats 등수 별 당첨 횟수
+   * @param {number} earningsRate 수익률(%)
+   */
   displayPrizeStats(prizeStats, earningsRate) {
-    // TODO: 상수 사용
-    Console.print('당첨 통계');
-    Console.print('---');
+    Console.print(MSG.winning_stats);
+    Console.print(MSG.winning_stats_separator);
+    // TODO: 당첨통계
+    Console.print(FormatString(
+      MSG.total_profit_rate_f,
+      [FormatNumberWithCommas(
+        FormatNumberRound(
+          earningsRate,
+          OPT.rounding_precision)
+      )]
+    ));
   }
 }
 
