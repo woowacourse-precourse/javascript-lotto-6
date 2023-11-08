@@ -1,4 +1,5 @@
-export const LOTTO = {
+// 당첨 enum 으로 표현
+export const LOTTO = Object.freeze({
   PRICE: 1000,
   RANGE: {
     START: 1,
@@ -13,7 +14,7 @@ export const LOTTO = {
     FIFTH: 5000,
     NONE: 0,
   },
-};
+});
 
 export const ERROR = Object.freeze({
   IS_EMPTY: '[ERROR] 값을 입력해주세요.\n',

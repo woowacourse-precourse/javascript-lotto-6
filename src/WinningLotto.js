@@ -1,6 +1,8 @@
 import Lotto from './Lotto.js';
 import { ERROR, LOTTO } from './config.js';
 
+const { WIN } = LOTTO;
+const { FIRST, SECOND, THIRD, FOURTH, FIFTH, NONE } = WIN;
 export default class WinningLotto extends Lotto {
   #bonusNumber;
 
@@ -22,10 +24,22 @@ export default class WinningLotto extends Lotto {
     this.#bonusNumber = bonusNumber;
   }
 
-  calculate(lotto) {
-    const { WIN } = LOTTO;
-    const { FIRST, SECOND, THIRD, FOURTH, FIFTH, NONE } = WIN;
+  getStatistics(lottos) {
+    const statistics = {
+      [FIRST]: 0,
+      [SECOND]: 0,
+      [THIRD]: 0,
+      [FOURTH]: 0,
+      [FIFTH]: 0,
+    };
+    lottos.forEach((lotto) => {
+      const rank = this.calculate(lotto);
+      if (rank !== NONE) statistics[rank] += 1;
+    });
 
+    return statistics;
+  }
+  calculate(lotto) {
     const matchCount = this.#getMatchCountWithoutBonusNumber(lotto);
     const isBonusNumberMatched = this.#isMatchBonusNumber(lotto);
 
@@ -34,6 +48,7 @@ export default class WinningLotto extends Lotto {
     if (matchCount === 5) return THIRD;
     if (matchCount === 4) return FOURTH;
     if (matchCount === 3) return FIFTH;
+
     return NONE;
   }
 }
