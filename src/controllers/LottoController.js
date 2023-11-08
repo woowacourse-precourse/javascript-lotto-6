@@ -90,7 +90,7 @@ class LottoController {
 
     this.#statistics = new LottoStatistics(matchingResult);
     this.#statistics.printLottoStatistics();
-    this.#statistics.printRateOfReturn(this.#myLotto.getPurchaseAmount());
+    this.#statistics.printRateOfReturn();
   }
 }
 

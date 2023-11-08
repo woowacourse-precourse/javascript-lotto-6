@@ -1,5 +1,6 @@
 import { MATCHING_COUNT, WINNING_AMOUNT } from '../constants/WinningAmount';
 import OutputView from '../views/OutputView';
+import NUMBER from '../constants/Number';
 
 class LottoStatistics {
   #matchingResult;
@@ -45,8 +46,9 @@ class LottoStatistics {
     OutputView.printResultStatistics(this.#lottoStatistics);
   }
 
-  printRateOfReturn(purchaseAmout) {
-    const rate = ((this.#winningAmount / purchaseAmout) * 100).toFixed(1);
+  printRateOfReturn() {
+    const purchaseAmount = this.#matchingResult.length * NUMBER.PURCHASE_AMOUNT_UNIT;
+    const rate = ((this.#winningAmount / purchaseAmount) * 100).toFixed(1);
     OutputView.printTotalRate(rate);
   }
 }
