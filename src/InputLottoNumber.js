@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { GAME_MESSAGE } from './Constants.js';
+import { GAME_MESSAGE, ERROR_MESSAGE } from './Constants.js';
 import Lotto from './Lotto.js';
 import CompareLotto from './CompareLotto.js';
 import Validator from './Validator.js';
@@ -16,11 +16,13 @@ class InputLottoNumber extends CompareLotto {
     const inputWinningNumber = await Console.readLineAsync(
       GAME_MESSAGE.inputNumber,
     );
-
+    if (!inputWinningNumber.includes(',')) {
+      throw new Error(ERROR_MESSAGE.commaError);
+    }
     this.winningNumber = inputWinningNumber.split(',').map(Number);
+
     try {
       const lotto = new Lotto(this.winningNumber);
-
       this.inputBonusNumber(this.winningNumber);
     } catch (error) {
       Console.print(error.message);
@@ -37,7 +39,6 @@ class InputLottoNumber extends CompareLotto {
 
     try {
       Validator.bonusNumber(bonusNumber, winningNumber);
-
       super.compareLottoNumber();
     } catch (error) {
       Console.print(error.message);

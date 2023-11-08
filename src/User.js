@@ -37,7 +37,7 @@ class User {
     });
 
     this.userLotto.forEach(numbers => {
-      Console.print(numbers);
+      Console.print(`[${numbers.join(', ')}]`);
     });
   }
 

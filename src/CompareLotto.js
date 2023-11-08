@@ -4,7 +4,7 @@ import { GAME_MESSAGE, GAME_NUMBER } from './Constants.js';
 class CompareLotto {
   constructor(user) {
     this.user = user;
-    this.matchingLotto = [0, 0, 0, 0, 0];
+    this.matchingLotto = Array.from({ length: 5 }).fill(0);
   }
 
   compareLottoNumber() {
@@ -46,19 +46,14 @@ class CompareLotto {
   }
 
   resultLotto() {
-    const resultMessege = [
-      '3개 일치 (5,000원) -',
-      '4개 일치 (50,000원) -',
-      '5개 일치 (1,500,000원) -',
-      '5개 일치, 보너스 볼 일치 (30,000,000원) -',
-      '6개 일치 (2,000,000,000원) -',
-    ];
-
     Console.print(GAME_MESSAGE.resultLotto);
-
-    this.matchingLotto.forEach((count, index) => {
-      Console.print(`${resultMessege[index]} ${count}개`);
-    });
+    Console.print(`3개 일치 (5,000원) - ${this.matchingLotto[0]}개`);
+    Console.print(`4개 일치 (50,000원) - ${this.matchingLotto[1]}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${this.matchingLotto[2]}개`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.matchingLotto[3]}개`,
+    );
+    Console.print(`6개 일치 (2,000,000,000원) - ${this.matchingLotto[4]}개`);
 
     this.totalProfit();
   }

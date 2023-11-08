@@ -1,6 +1,5 @@
 import User from './User.js';
 import InputLottoNumber from './InputLottoNumber.js';
-import CompareLotto from './CompareLotto.js';
 
 class App {
   async play() {
@@ -8,7 +7,7 @@ class App {
     await user.inputPurchaseAmount();
 
     const inputLottoNumber = new InputLottoNumber(user);
-    inputLottoNumber.inputWinningNumber();
+    await inputLottoNumber.inputWinningNumber();
   }
 }
 

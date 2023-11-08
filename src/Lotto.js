@@ -15,9 +15,6 @@ class Lotto {
     if (numbers.some(number => number < 1 || number > 45)) {
       throw new Error(ERROR_MESSAGE.rangeError);
     }
-    if (!numbers.toString().includes(',')) {
-      throw new Error(ERROR_MESSAGE.commaError);
-    }
     if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.lottoLengthError);
     }
