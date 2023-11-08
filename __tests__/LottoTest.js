@@ -55,3 +55,55 @@ describe('로또 매칭 숫자 계산 기능 테스트', () => {
     expect(lotto.calculateMatchNumber(winningNumbers)).toEqual(0);
   });
 });
+
+describe('로또 등수 계산 기능 테스트', () => {
+  const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+
+  test('로또 번호가 6개 매칭될 때, 1등을 반환한다.', () => {
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+    expect(lotto.calculateLottoResult(winningNumbers, bonusNumber)).toEqual('1');
+  });
+
+  test('로또 번호가 5개 매칭되고 보너스 번호와 매칭될 때, 2등을 반환한다.', () => {
+    const winningNumbers = [1, 2, 3, 4, 5, 7];
+    const bonusNumber = 6;
+    expect(lotto.calculateLottoResult(winningNumbers, bonusNumber)).toEqual('2');
+  });
+
+  test('로또 번호가 5개 매칭될 때, 3등을 반환한다.', () => {
+    const winningNumbers = [1, 2, 3, 4, 5, 8];
+    const bonusNumber = 7;
+    expect(lotto.calculateLottoResult(winningNumbers, bonusNumber)).toEqual('3');
+  });
+
+  test('로또 번호가 4개 매칭될 때, 4등을 반환한다.', () => {
+    const winningNumbers = [1, 2, 3, 4, 8, 9];
+    const bonusNumber = 7;
+    expect(lotto.calculateLottoResult(winningNumbers, bonusNumber)).toEqual('4');
+  });
+
+  test('로또 번호가 3개 매칭될 때, 5등을 반환한다.', () => {
+    const winningNumbers = [1, 2, 3, 8, 9, 10];
+    const bonusNumber = 7;
+    expect(lotto.calculateLottoResult(winningNumbers, bonusNumber)).toEqual('5');
+  });
+
+  test('로또 번호가 2개 매칭될 때, 0등을 반환한다.', () => {
+    const winningNumbers = [1, 2, 8, 9, 10, 11];
+    const bonusNumber = 7;
+    expect(lotto.calculateLottoResult(winningNumbers, bonusNumber)).toEqual('0');
+  });
+
+  test('로또 번호가 1개 매칭될 때, 0등을 반환한다.', () => {
+    const winningNumbers = [1, 8, 9, 10, 11, 12];
+    const bonusNumber = 7;
+    expect(lotto.calculateLottoResult(winningNumbers, bonusNumber)).toEqual('0');
+  });
+
+  test('로또 번호가 0개 매칭될 때, 0등을 반환한다.', () => {
+    const winningNumbers = [8, 9, 10, 11, 12, 13];
+    const bonusNumber = 7;
+    expect(lotto.calculateLottoResult(winningNumbers, bonusNumber)).toEqual('0');
+  });
+});
