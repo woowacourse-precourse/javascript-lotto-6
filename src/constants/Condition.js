@@ -1,3 +1,5 @@
+export const USER_MONEY_CONDITION = 0;
+
 export const LOTTO_PURCHASE_UNIT = 1000;
 
 export const LOTTO_NUMBER = {

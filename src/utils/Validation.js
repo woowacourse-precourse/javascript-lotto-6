@@ -1,5 +1,5 @@
 import { INPUT_ERROR } from '../constants/Messages.js';
-import { LOTTO_PURCHASE_UNIT, LOTTO_NUMBER } from '../constants/Condition.js';
+import { USER_MONEY_CONDITION, LOTTO_PURCHASE_UNIT, LOTTO_NUMBER } from '../constants/Condition.js';
 
 class Validation {
   static validateInputEmpty(input) {
@@ -15,7 +15,7 @@ class Validation {
   }
 
   static validateInputZeroOrLess(input) {
-    if (input <= 0) {
+    if (input <= USER_MONEY_CONDITION) {
       throw new Error(INPUT_ERROR.zero_or_less);
     }
   }
