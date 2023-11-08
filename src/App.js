@@ -1,37 +1,42 @@
 import { Console, Random } from "@woowacourse/mission-utils";
+
 import Lotto from "./Lotto.js";
 import LottoManagement from "./LottoManagement.js";
 import LottoResultChecker from "./LottoResultChecker.js";
-const lottoPrice = 1000;
+const LOTTO_PRICE = 1000;
+
 class App {
   constructor() {
     this.lottoManagement = new LottoManagement();
     this.lottoResultChecker = new LottoResultChecker();
   }
 
-  async play() {
+  async retryUntilSuccess(asyncFunc) {
     while (1) {
       try {
-        this.inputPurchasePrice = await this.getPurchasePrice();
-
-        this.purchasePrice = this.convertToNum(this.inputPurchasePrice);
-
-        this.checkValidationInputPrice(this.purchasePrice);
-
+        await asyncFunc();
         break;
-      } catch (error) {
-        Console.print(error.message);
+      } catch (e) {
+        Console.print(e.message);
       }
     }
+  }
 
-    const lottoCount = Number(this.purchasePrice / lottoPrice);
+  async play() {
+    await this.retryUntilSuccess(async () => {
+      this.inputPurchasePrice = await this.getPurchasePrice();
 
-    try {
+      this.purchasePrice = this.convertToNum(this.inputPurchasePrice);
+
+      this.checkValidationInputPrice(this.purchasePrice);
+    });
+
+    const lottoCount = Number(this.purchasePrice / LOTTO_PRICE);
+
+    await this.retryUntilSuccess(async () => {
       this.generatedLottoNumbers =
         this.lottoManagement.getLottoArray(lottoCount);
-    } catch (error) {
-      Console.print(error.message);
-    }
+    });
 
     const generatedLottoNumbersArr = this.generatedLottoNumbers.map((lotto) =>
       lotto.getNumbers()
@@ -43,31 +48,18 @@ class App {
       lotto.print();
     });
 
-    while (1) {
+    await this.retryUntilSuccess(async () => {
       this.winningNumbers = this.lottoResultChecker.convertToArr(
         await this.lottoResultChecker.inputWinningLottoNum()
       );
+      new Lotto(this.winningNumbers);
+    });
 
-      try {
-        new Lotto(this.winningNumbers);
-
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
-
-    while (1) {
+    await this.retryUntilSuccess(async () => {
       this.bonusNumber = this.convertToNum(await this.inputBonusNumber());
 
-      try {
-        this.checkValidateInputBonus(this.bonusNumber);
-
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
+      this.checkValidateInputBonus(this.bonusNumber);
+    });
 
     this.includedbonusArr = this.countBonuses(this.generatedLottoNumbers);
 
@@ -75,11 +67,13 @@ class App {
       this.winningNumbers,
       generatedLottoNumbersArr
     );
+
     this.matchingCountsResult = this.lottoResultChecker.getMatchingCounts(
       this.matchingCounts,
       this.includedbonusArr,
       generatedLottoNumbersArr
     );
+
     this.totalProfit = this.calculateTotalProfit();
     this.profitRate = this.calculateProfitRate();
     this.roundedProfitRate = this.roundProfitRate(this.profitRate);
@@ -101,6 +95,7 @@ class App {
       throw new Error("[ERROR] 구입금액을 올바르게 입력해 주세요.");
     }
   }
+
   async inputBonusNumber() {
     return await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
   }
