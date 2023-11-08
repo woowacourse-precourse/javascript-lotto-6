@@ -23,6 +23,8 @@ const NUMBER = Object.freeze({
   PERCENTAGE: 100,
   DECIMAL: 10,
   TWO_DECIMAL_POINT: 2,
+  SECOND_PRIZE: 5,
+  MIN_NUM_TO_WIN: 2,
 });
 
 export { MATCHED, NUMBER };

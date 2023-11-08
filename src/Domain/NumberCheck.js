@@ -27,7 +27,7 @@ class CheckNumber {
     if (sameNum.length === 5 && num.includes(this.#convertToNumber(bonus))) {
       return MATCHED.NUMBER_COUNT['2nd'];
     }
-    if (sameNum.length === 5 || sameNum.length > 2) {
+    if (sameNum.length === 5 || sameNum.length > NUMBER.MIN_NUM_TO_WIN) {
       return MATCHED.NUMBER_COUNT[sameNum.length];
     }
 
@@ -65,7 +65,7 @@ class CheckNumber {
 
   #PaidAmount() {
     const { randomNum } = this.#numbers;
-    const amount = randomNum.length * 1000; // 지불 금액값
+    const amount = randomNum.length * NUMBER.LOTTERY_PRICE; // 지불 금액값
 
     return amount;
   }
