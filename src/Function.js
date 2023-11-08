@@ -20,10 +20,6 @@ export async function literationNumbers() {
     }
   }
 
-  await numbers.forEach((number) => {
-    Number(number);
-  });
-
   return numbers;
 }
 

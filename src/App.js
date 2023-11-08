@@ -7,7 +7,6 @@ import {
   INPUT_BONUS_MESSAGE,
   INPUT_RANGE_ERROR_MESSAGE,
   INCLUDE_BONUS_ERROR_MESSAGE,
-  INPUT_NUMBER_ERROR_MESSAGE,
   MONEYS,
   NUMS,
   THREE_MATCH_MONEY,
@@ -18,7 +17,6 @@ import {
 } from "./Constants.js";
 
 import User from "./User.js";
-import Lotto from "./Lotto.js";
 
 class App {
   async inputNumber() {

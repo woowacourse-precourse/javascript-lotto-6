@@ -15,6 +15,11 @@ class Lotto {
   }
 
   validate(numbers) {
+    const set = new Set(numbers);
+    if (numbers.length !== set.size) {
+      throw new Error(INPUT_DUPLICATE_ERROR_MESSAGE);
+    }
+
     if (numbers.length !== PICK_NUMBER) {
       throw new Error(INPUT_NUMBER_ERROR_MESSAGE);
     }
@@ -24,14 +29,7 @@ class Lotto {
         throw new Error(INPUT_RANGE_ERROR_MESSAGE);
       }
     });
-
-    const set = new Set(numbers);
-    if (numbers.length !== set.size) {
-      throw new Error(INPUT_DUPLICATE_ERROR_MESSAGE);
-    }
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;

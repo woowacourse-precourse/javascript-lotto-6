@@ -8,6 +8,10 @@ class Match {
   }
 
   matching(CORRECT, numbers, BONUS) {
+    CORRECT.forEach((numbers, i) => {
+      CORRECT[i] = Number(numbers);
+    });
+
     numbers.forEach((number) => {
       if (CORRECT.includes(number)) {
         this.match++;
