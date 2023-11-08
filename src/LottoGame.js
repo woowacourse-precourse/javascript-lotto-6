@@ -36,7 +36,7 @@ class LottoGame {
       '\n' + tickets.length + Messages.PURCHASED_TICKET_PRINT
     );
     for (let ticket of tickets) {
-      MissionUtils.Console.print(ticket);
+      MissionUtils.Console.print(`[${ticket.join(', ')}]`);
     }
   };
 
