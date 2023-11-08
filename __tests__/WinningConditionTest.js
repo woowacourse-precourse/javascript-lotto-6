@@ -14,7 +14,7 @@ describe('WinningCondition 클래스 테스트', () => {
 
 		// then
 		expect(condition.checkWin(5, 0)).toBe(true);
-		expect(condition.checkWin(5, 1)).toBe(false);
+		expect(condition.checkWin(5, 1)).toBe(true);
 		expect(condition.checkWin(4, 0)).toBe(false);
 	});
 	test('일치 개수, 보너스 개수를 입력받아 조건에 맞으면 당첨금을 반환한다.', () => {

@@ -14,12 +14,12 @@ describe('WinningLottoCounter 클래스 테스트', () => {
 
 		// when
 		const counter = new WinningLotoCounter();
-		counter.countWinningLottos(lottoList, '1,2,3,4,5,6', '7');
-		const winningLottoList = counter.getWinningLotoList();
+		counter.countWinningLottos(lottoList, '1,2,3,10,11,12', '7');
+		const winningLottoList = counter.getWinningLottoList();
 
 		// then
 		expect(winningLottoList.map((statisticObj) => statisticObj.count)).toEqual([
-			1, 0, 1, 1, 1,
+			2, 1, 0, 0, 1,
 		]);
 	});
 });
