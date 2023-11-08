@@ -154,3 +154,53 @@ describe('printLottoNums 메서드 테스트', () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[8, 21, 23, 41, 42, 43]"));
   });
 });
+
+describe('getWinningNum 메서드 테스트', () => {
+  test('getWinningNum 메서드는 띄어쓰기가 포함된 입력값이 들어올 경우, ERROR를 throw 해야한다.', async () => {
+    // given
+    const inputWithSpaces = ["1, 2, 3, 4, 5, 6"];
+
+    mockQuestions(inputWithSpaces);
+
+    //when
+    const app = new App();
+    let error;
+    try {
+      const winningNum = await app.getWinningNum();
+    } catch (err) {
+      error = err;
+    }
+
+    //then
+    expect(error).toBeDefined();
+    expect(error.message).toEqual("[ERROR] 띄어쓰기 대신 쉼표로만 입력해주세요.");
+  });
+
+  test('getWinningNum 메서드는 사용자가 입력한 당첨번호를 리턴해야한다.', async () => {
+    // given
+    const input = ["1,2,3,4,5,6"];
+
+    mockQuestions(input);
+
+    //when
+    const app = new App();
+    const winningNum = await app.getWinningNum();
+
+    //then
+    expect(winningNum).toEqual([1,2,3,4,5,6]);
+  });
+
+  test('getWinningNum 메서드는 사용자가 입력한 당첨번호를 오름차순으로 정렬해야한다.', async () => {
+    // given
+    const input = ["1,3,2,4,5,6"];
+
+    mockQuestions(input);
+
+    //when
+    const app = new App();
+    const winningNum = await app.getWinningNum();
+
+    //then
+    expect(winningNum).toEqual([1,2,3,4,5,6]);
+  });
+});
