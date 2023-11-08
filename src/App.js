@@ -5,6 +5,7 @@ import {
 } from './utils.js';
 import User from './User.js';
 import Lotto from './Lotto.js';
+import LottoGame from './LottoGame.js';
 
 class App {
   async play() {
@@ -15,6 +16,11 @@ class App {
     const bonusNumber = await inputUserBonusNumber();
     console.log(bonusNumber); // TODO 디버깅용
     const lotto = new Lotto(userWinningNumberInput, bonusNumber);
+    const lottoGame = new LottoGame(
+      user.issuedLottoNumberList,
+      lotto.getNumbers(),
+      lotto.getBonusNumber(),
+    );
   }
 }
 

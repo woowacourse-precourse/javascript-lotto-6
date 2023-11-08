@@ -28,6 +28,14 @@ class Lotto {
       throw new Error('[ERROR] 보너스 번호는 1부터 45사이의 숫자여야 합니다.');
     }
   }
+
+  getNumbers() {
+    return this.#numbers;
+  }
+
+  getBonusNumber() {
+    return this.bonusNumber;
+  }
   // TODO: 추가 기능 구현
 }
 
