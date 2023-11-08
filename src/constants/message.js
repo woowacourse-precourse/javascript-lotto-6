@@ -7,7 +7,7 @@ import {
 export const REQUEST_MESSAGE = {
   PURCHASE_PRICE: '구입금액을 입력해 주세요.\n',
   WINNING_NUMBERS: '당첨 번호를 입력해 주세요.\n',
-  BONUS_NUMBER: '보너스 번호를 입력해 주세요.\n',
+  BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 };
 
 export const ERROR_MESSAGE = {
@@ -58,8 +58,4 @@ export const ERROR_MESSAGE = {
       HAVE_INVALID_INPUT_WITHOUT_NUMBER_TYPE: `양의 정수(과학적 기수법 금지)만 입력해주세요 ex) ${LOTTO.NUMBER_RANGE.MIN}`,
     },
   },
-};
-
-export const PRINT_MESSSAGE = {
-  PURCHASE_LOTTO_COUNT_MASSAGE: (count) => `${count}개를 구매했습니다.`,
 };

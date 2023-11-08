@@ -1,13 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import paramType from '../lib/paramType/src/paramType.js';
 import { UserInputError } from '../errors/UserInputErrors.js';
-import { PRINT_MESSSAGE } from '../constants/message.js';
 import LottoReward from '../domains/LottoReward.js';
 import krwCurrencyAsWonFormat from '../utils/krwCurrencyAsWonFormat.js';
 import { GRADE, MATCHED_COUNT } from '../constants/lotto.js';
 
 export default class PromptPrinter {
-  BONUS_NUMBER_CORRECT_GRADE = '2';
   static GRADE_CORRECT_COUNT = {
     [GRADE.FIRST]: MATCHED_COUNT.SIX,
     [GRADE.SECOND]: MATCHED_COUNT.FIVE_WITH_BONUS,
@@ -21,7 +19,7 @@ export default class PromptPrinter {
   }
 
   purchaseCount(lottoCount, _ = paramType(lottoCount, 'number')) {
-    this.#onPrint(PRINT_MESSSAGE.PURCHASE_LOTTO_COUNT_MASSAGE(lottoCount));
+    this.#onPrint(this.#purchaseCountMessageTemplete(lottoCount));
   }
 
   purchaseLottoInfo(lottoList, _ = paramType(lottoList, Array)) {
@@ -36,8 +34,13 @@ export default class PromptPrinter {
 
   drawResult(result, _ = paramType(result, Object)) {
     const drawDetailsHTML = Object.entries(result).reduce(
-      (drawDetailsString, [grade, count]) => {
-        const gradeMessage = this.#getLottoGradeMessageTemplete(grade, count);
+      (drawDetailsString, [grade, count], idx, currentArray) => {
+        const gradeMessage = this.#drawResultMessageTemplete({
+          grade,
+          count,
+          idx,
+          lastIdx: currentArray.length - 1,
+        });
         return (drawDetailsString += gradeMessage);
       },
       '',
@@ -47,23 +50,59 @@ export default class PromptPrinter {
   }
 
   profitRate(profitRate, _ = paramType(profitRate, 'string')) {
-    this.#onPrint(`총 수익률은 ${profitRate}%입니다.`);
+    const profitRateMessage = this.#profitRateMessageTemplete(profitRate);
+
+    this.#onPrint(profitRateMessage);
   }
 
-  #getLottoGradeMessageTemplete(grade, count) {
-    if (grade === this.BONUS_NUMBER_CORRECT_GRADE) {
-      return `${PromptPrinter.GRADE_CORRECT_COUNT[grade]}개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개\n`;
-    }
-
-    return `${
-      PromptPrinter.GRADE_CORRECT_COUNT[grade]
-    }개 일치 (${krwCurrencyAsWonFormat(
-      LottoReward.GRADE_PRIZE[grade],
-    )}) - ${count}개\n`;
+  #purchaseCountMessageTemplete(count, _ = paramType(count, 'number')) {
+    return `\n${count}개를 구매했습니다.`;
   }
 
   #lottoTemplete(lotto, _ = paramType(lotto, Array)) {
     return `[${[...lotto].join(', ')}]`;
+  }
+
+  #drawResultMessageTemplete(
+    { grade, count, idx, lastIdx },
+    _0 = paramType(grade, 'string'),
+    _1 = paramType(count, 'number'),
+    _2 = paramType(idx, 'number'),
+    _3 = paramType(lastIdx, 'number'),
+  ) {
+    if (this.#isSecondGradeWithBonusNumber(grade)) {
+      return `${PromptPrinter.GRADE_CORRECT_COUNT[grade]}개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개\n`;
+    }
+
+    return `${this.#insertLineAlignOnlyFirstIndex(idx)}${
+      PromptPrinter.GRADE_CORRECT_COUNT[grade]
+    }개 일치 (${krwCurrencyAsWonFormat(
+      LottoReward.GRADE_PRIZE[grade],
+    )}) - ${count}개${this.#insertLineAlignNotLastIndex(idx, lastIdx)}`;
+  }
+
+  #profitRateMessageTemplete(profitRate, _ = paramType(profitRate, 'string')) {
+    return `총 수익률은 ${profitRate}%입니다.`;
+  }
+
+  #isSecondGradeWithBonusNumber(grade, _ = paramType(grade, 'string')) {
+    return grade === String(GRADE.SECOND);
+  }
+
+  #insertLineAlignOnlyFirstIndex(idx, _ = paramType(idx, 'number')) {
+    const START_INDEX = 0;
+    if (idx === START_INDEX) return '\n';
+    return '';
+  }
+
+  #insertLineAlignNotLastIndex(
+    idx,
+    lastIdx,
+    _0 = paramType(idx, 'number'),
+    _1 = paramType(lastIdx, 'number'),
+  ) {
+    if (idx === lastIdx) return '';
+    return '\n';
   }
 
   #onPrint(message, _ = paramType(message, 'string')) {
