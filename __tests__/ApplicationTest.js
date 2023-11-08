@@ -140,6 +140,10 @@ const mockQuestions = (inputs) => {
         test("보너스 번호가 1-45 사이가 아닌 경우 예외 테스트", async () => {
             await runMoneyException("46")
         })
+
+        test("보너스 번호를 입력하지 않은 경우 예외 테스트", async () => {
+            await runMoneyException()
+        })
     
     });
 

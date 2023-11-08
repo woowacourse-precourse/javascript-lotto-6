@@ -30,4 +30,10 @@ describe("로또 클래스 테스트", () => {
         new Lotto([46, 2, 3, 4, 5, 5]);
         }).toThrow("[ERROR]");
     });
+
+    test("로또 번호를 입력하지 않은 경우 예외가 발생한다.", () => {
+        expect(() => {
+        new Lotto();
+        }).toThrow("[ERROR]");
+    });
 });

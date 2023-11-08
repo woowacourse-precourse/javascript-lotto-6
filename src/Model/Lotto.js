@@ -2,6 +2,8 @@ class Lotto {
   #numbers
 
   constructor(numbers) {
+    if(numbers === undefined) throw new Error('[ERROR] 로또 번호를 입력해야 합니다.')
+
     this.#validate(numbers)
     this.#numbers = numbers
   }
