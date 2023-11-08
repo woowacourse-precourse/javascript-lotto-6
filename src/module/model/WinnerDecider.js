@@ -1,8 +1,6 @@
-import WinNumber from "./WinNumber.js";
-import LottoGenerator from "./LottoGenerator.js";
-
 class WinnerDecider {
   #winNumber;
+  #bonus;
   #lottoList;
   #score = {
     zero: 0,
@@ -13,33 +11,33 @@ class WinnerDecider {
     six: 0,
   };
 
-  constructor(winNumber, lottoGenerator) {
+  constructor(winNumber, bonus, lottoList) {
     this.#winNumber = winNumber;
-    this.#lottoList = lottoGenerator.lottoList;
-    this.#decideWinner();
+    this.#bonus = bonus;
+    this.#lottoList = lottoList;
+    this.#countAllMatchedNumber();
   }
 
-  #decideWinner() {
-    let matchedNumberCount, matchedBonus;
+  #countAllMatchedNumber() {
+    let count = 0, bonus = 0;
 
-    for (let i = 0; i < this.#lottoList.length; i += 1) {
-      matchedNumberCount = this.#matchNumber(this.#lottoList[i].numbers);
-      matchedBonus = this.#matchBonus(this.#lottoList[i].numbers);
-      this.#checkWinner(matchedNumberCount, matchedBonus);
+    for(let i = 0; i < this.#lottoList.length; i += 1) {
+      count = this.#countMatchedNumber(i);
+      bonus = this.#matchBonus(this.#lottoList[i].numbers);
+      this.#checkWinner(count, bonus);
     }
   }
 
-  #matchNumber(lotto) {
+  #countMatchedNumber(i) {
     let count = 0;
-    for (let i = 0; i < 6; i += 1) {
-      if (lotto.includes(this.#winNumber.numbers[i])) count += 1;
-    }
-
+    this.#lottoList[i].numbers.forEach((e) => {
+      if(this.#winNumber.includes(e)) count += 1;
+    })
     return count;
   }
 
   #matchBonus(lotto) {
-    return lotto.includes(this.#winNumber.bonusNumber) ? 1 : 0;
+    return lotto.includes(this.#bonus) ? 1 : 0;
   }
 
   #checkWinner(number, bonus) {
