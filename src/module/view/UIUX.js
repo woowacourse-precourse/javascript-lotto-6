@@ -23,7 +23,6 @@ class UIUX {
       this.#money = money;
     } catch (e) {
       MissionUtils.Console.print(e.message);
-
       await this.inputMoney();
     }
   }
@@ -40,7 +39,7 @@ class UIUX {
 
   printLotto() {
     for (let i = 0; i < this.#bunchOfLotto.length; i += 1) {
-      MissionUtils.Console.print(`[${this.#bunchOfLotto[i].numbers.join(', ')}]`)
+      MissionUtils.Console.print(`[${this.#bunchOfLotto[i].numbers.join(', ')}]`);
     }
   }
 
@@ -49,14 +48,13 @@ class UIUX {
       let number = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
 
       this.#number = number.split(',');
-
       this.#number = this.#number.map((e) => Number(e));
 
       const winNumber = new WinNumber(this.#number);
+
       this.#number = winNumber.numbers;
     } catch (e) {
       MissionUtils.Console.print(e.message);
-
       await this.inputNumber();
     }
   }
@@ -64,13 +62,13 @@ class UIUX {
   async inputBonusNumber() {
     try {
       this.#bonus = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
-
       this.#bonus = Number(this.#bonus);
 
       const bonus = new Bonus(this.#bonus);
+
       this.#bonus = bonus.bonusNumber;
 
-      if(this.#number.includes(this.#bonus)) throw new Error('[Error] 보너스 번호는 당첨 번호와 같을 수 없습니다.');
+      if (this.#number.includes(this.#bonus)) throw new Error('[Error] 보너스 번호는 당첨 번호와 같을 수 없습니다.');
     } catch (e) {
       MissionUtils.Console.print(e.message);
 
