@@ -32,15 +32,19 @@ class App {
   }
 
   async getLottoCount() {
-    try {
+    let validMoney = false;
+    while (!validMoney) {
       this.Output.printPurchaseAmonut();
-      this.money = await this.Input.amountInput();
-      this.Validate.DivisibleBy1000(this.money);
-      this.amonut = this.money / 1000;
-      this.generateLotto();
-    } catch (error) {
-      Console.print(error.message);
+      try {
+        this.money = await this.Input.amountInput();
+        this.Validate.DivisibleBy1000(this.money);
+        this.amonut = this.money / 1000;
+        validMoney = true;
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
+    return this.generateLotto();
   }
 
   async generateLotto() {
@@ -55,13 +59,16 @@ class App {
 
   async winningNumber() {
     this.Output.printWinnerNumber();
-    const inputNum = await this.Input.winningNumbersInput();
-    try {
-      const lotto = new Lotto(inputNum.split(","));
-      this.winningNumbers = inputNum.split(",").map(Number);
-    } catch (error) {
-      Console.print(error.message)
-      return; 
+    let inputNum;
+    while (true) {
+      try {
+        inputNum = await this.Input.winningNumbersInput();
+        const lotto = new Lotto(inputNum.split(","));
+        this.winningNumbers = inputNum.split(",").map(Number);
+        break; 
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
     this.winningBonusNumber();
   }
@@ -110,9 +117,9 @@ class App {
       Sum += this.totalObjectSum(key,value)
     });
 
-    Sum = (Sum/this.money).toFixed(2) * 100
-
-    this.Output.printYieldCalculation(Sum);
+    const result = (Sum / this.money) * 100
+  
+    this.Output.printYieldCalculation(result.toFixed(1));
   }
 
   totalObjectSum(key, value) {
