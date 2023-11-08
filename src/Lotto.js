@@ -13,7 +13,9 @@ class Lotto {
 
   #validate(numbers) {
     const inputValidator = new InputValidator();
-    inputValidator.validateNumber(numbers);
+
+    const NUMBER_STRING = numbers.toString();
+    inputValidator.validateNumber(NUMBER_STRING);
 
     // if (numbers.length !== 6) {
     //   throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
