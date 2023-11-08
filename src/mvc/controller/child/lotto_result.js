@@ -12,7 +12,7 @@ class LottoResultManage {
     this.#bonusNum = BONUS_NUM;
   }
 
-  calculateLottoResult() {
+  async calculateLottoResult() {
     this.#winningNum = this.#winningNum.map(Number);
     this.#bonusNum = Number(this.#bonusNum);
     const RESULT = new CalculateLottoResult(this.#randomLotto, this.#winningNum, this.#bonusNum);

@@ -22,22 +22,22 @@ class InputNumManage {
   async #inputWinningNum() {
     this.#winningNum = await userInput(Question.winningNum());
     this.#winningNum = this.#winningNum.split(',');
-    this.#checkWinningNum();
+    await this.#checkWinningNum();
   }
 
   async #checkWinningNum() {
     try {
       new Lotto(this.#winningNum);
-      this.#inputBonusNum();
+      await this.#inputBonusNum();
     } catch (error) {
       printError(error);
-      await this.inputWinningNum();
+      await this.#inputWinningNum();
     }
   }
 
   async #inputBonusNum() {
     this.#bonusNum = await userInput(Question.bonusNum());
-    this.#checkBonusNum();
+    await this.#checkBonusNum();
   }
 
   async #checkBonusNum() {

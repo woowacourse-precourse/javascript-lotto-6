@@ -27,7 +27,7 @@ class RandomLottoManage {
       this.#printRandomLotto(AMOUNT);
     } catch (error) {
       printError(error);
-      await this.inputPurchaseAmount();
+      await this.#inputPurchaseAmount();
     }
   }
 
