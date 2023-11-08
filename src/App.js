@@ -22,9 +22,16 @@ class App {
   // 구매한 로또 수량 및 번호 출력
   printLottos(lottos) {
     MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
-    for (let i=0; i<lottos.length; i++) {
-      MissionUtils.Console.print(lottos[i])
-    }
+  // 당첨 번호 입력받기
+  async inputNumbers() {
+    const inputString = await MissionUtils.Console.readLineAsync(
+      "당첨 번호를 입력해주세요.\n"
+    );
+    const numbers = inputString
+      .split(",")
+      .map((number) => Number(number.trim()));
+    return numbers;
+  }
   }
 }
 
