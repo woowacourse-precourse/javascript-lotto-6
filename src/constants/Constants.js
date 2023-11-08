@@ -5,6 +5,7 @@ export const LottoConstants = {
 };
 
 export const LottoPrizes = {
+  NOT_EQUAL: 0,
   THREE_EQUAL: 5000,
   FOUR_EQUAL: 50000,
   FIVE_EQUAL: 1500000,

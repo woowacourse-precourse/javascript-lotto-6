@@ -41,6 +41,8 @@ class Generator {
           : LottoPrizes.FIVE_EQUAL;
       case 6:
         return LottoPrizes.SIX_EQUAL;
+      default:
+        return LottoPrizes.NOT_EQUAL;
     }
   }
 }
