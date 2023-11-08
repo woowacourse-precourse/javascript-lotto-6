@@ -12,7 +12,7 @@ class Rank {
   }
 
   initRank() {
-    this.#rank = Array(4).fill(0);
+    this.#rank = Array(5).fill(0);
     this.calculateRank();
   }
 

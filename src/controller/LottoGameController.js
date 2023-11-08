@@ -5,6 +5,7 @@ import Lottos from "../model/Lottos.js";
 import Lotto from "../model/Lotto.js";
 import BonusNumber from "../model/BonusNumber.js";
 import Rank from "../model/Rank.js";
+import { Rewards } from "../static/Constant.js";
 class LottoGameController {
   #lottoTickets;
   #winningLotto;
@@ -27,7 +28,7 @@ class LottoGameController {
       InputValidator.purchaseAmount(amount);
       this.setLottoTicket(amount);
     } catch (error) {
-      OutputView.printErrorMessage(error);
+      OutputView.printErrorMessage(error.message);
       const input = await InputView.purchaseAmount();
       await this.handlePurchaseAmountError(input);
     }
@@ -59,7 +60,7 @@ class LottoGameController {
       this.#winningLotto = new Lotto(numbers);
       this.readBonusNumber();
     } catch (error) {
-      OutputView.printErrorMessage(error);
+      OutputView.printErrorMessage(error.message);
       const input = await InputView.lottoWinningNumber();
       await this.handleWinningNumberError(input);
     }
@@ -81,7 +82,7 @@ class LottoGameController {
       );
       this.showLottoWinningStatistics();
     } catch (error) {
-      OutputView.printErrorMessage(error);
+      OutputView.printErrorMessage(error.message);
       const input = await InputView.lottoBonusNumber();
       await this.handleBonusNumberError(input);
     }
@@ -89,7 +90,17 @@ class LottoGameController {
 
   showLottoWinningStatistics() {
     const rank = this.#rank.getRank();
-    OutputView.printLottoWinningStatistics(rank);
+    const proift = this.getLottoProfit(rank).toFixed(1);
+    OutputView.printLottoWinningStatistics(rank, proift);
+  }
+
+  getLottoProfit(rank) {
+    const principal = 1000 * this.#lottoTickets.getCount();
+    let profit = 0;
+    for (let i = 0; i < 5; i++) {
+      profit += rank[i] * Rewards[i];
+    }
+    return (profit / principal) * 100;
   }
 }
 

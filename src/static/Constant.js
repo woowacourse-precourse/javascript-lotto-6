@@ -3,6 +3,7 @@ const Message = Object.freeze({
   LOTTO_TICKET: "개를 구매했습니다.",
   LOTTO_WINNING_NUMBER: "\n당첨 번호를 입력해 주세요.\n",
   LOTTO_BONUS_NUMBER: "\n보너스 번호를 입력해 주세요.\n",
+  LOTTO_RESULT: "\n당첨 통계\n---",
 });
 
 const ErrorMessage = Object.freeze({
@@ -16,4 +17,14 @@ const ErrorMessage = Object.freeze({
   USER_LENGTH_ERROR: "[ERROR] ",
 });
 
-export { Message, ErrorMessage };
+const RewardsMessage = [
+  "6개 일치 (2,000,000,000원) - ",
+  "5개 일치, 보너스 볼 일치(30,000,000원) - ",
+  "5개 일치 (1,500,000원) - ",
+  "4개 일치 (50,000원) - ",
+  "3개 일치 (5,000원) - ",
+];
+
+const Rewards = [2000000000, 30000000, 15000000, 50000, 5000];
+
+export { Message, ErrorMessage, RewardsMessage, Rewards };
