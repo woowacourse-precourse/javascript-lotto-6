@@ -1,4 +1,4 @@
-import { RANK, RANK_MESSAGE, REWARD } from '../constants/index.js';
+import { NUMBER, RANK, RANK_MESSAGE, REWARD } from '../constants/index.js';
 
 class Calculator {
   #lottos;
@@ -40,7 +40,7 @@ class Calculator {
       const rank = this.#getRank(lotto.getLotto());
 
       if (rank !== RANK_MESSAGE.none) {
-        ranks[rank] += 1;
+        ranks[rank] += NUMBER.one;
       }
     });
     return ranks;
@@ -52,7 +52,9 @@ class Calculator {
       (acc, [rank, count]) => acc + count * REWARD[rank],
       0,
     );
-    return (revenue / purchaseAmount).toFixed(1);
+    return ((revenue / purchaseAmount) * NUMBER.percentage).toFixed(
+      NUMBER.decimalPoint,
+    );
   }
 }
 
