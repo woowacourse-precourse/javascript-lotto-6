@@ -45,8 +45,16 @@ class App {
     const numbers = await MissionUtils.Console.readLineAsync(
       "\n당첨번호를 입력해 주세요.\n"
     );
-    // TODO: 당첨번호 예외처리
+
     this.winningNumber = numbers.split(",").map(Number);
+
+    for (const num of this.winningNumber) {
+      if (!(num >= 1 && num <= 45))
+        throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 숫자여야합니다.");
+    }
+
+    if (this.winningNumber.length !== 6)
+      throw new Error("[ERROR] 당첨 번호는 6개여야합니다.");
   }
 
   async enterBosunNumber() {
