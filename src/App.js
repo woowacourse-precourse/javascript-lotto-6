@@ -10,7 +10,7 @@ class App {
     this.money = 0;
     this.countOfLottos = 0;
     this.myLottos = [];
-    this.winningLotto = [];
+    this.winningLotto;
     this.bonusNumber = 0;
     this.lottoResult = new LottoResult();
   }
@@ -18,10 +18,8 @@ class App {
     [this.money, this.countOfLottos] = await this.userInput.getInputMoney();
     MissionUtils.Console.print(MESSAGE.numberOfLottos(this.countOfLottos));
     
-    while(this.countOfLottos--){
-      this.myLottos.push(Lotto.makeLotto());
-    }
-    this.myLottos.forEach((lotto) => MissionUtils.Console.print(`[${[...lotto.getLotto()].join(", ")}]`));
+    this.myLottos = Lotto.makeLottos(this.countOfLottos);
+    this.myLottos.forEach((lotto) => MissionUtils.Console.print(`[${[...lotto.getLottoNumber()].join(", ")}]`));
 
     this.winningLotto = await this.userInput.getInputWinningNumbers();
     this.bonusNumber = await this.userInput.getInputBonusNumber();

@@ -24,8 +24,7 @@ class UserInput{
     while(true){
       try{
         const inputNumbers = (await MissionUtils.Console.readLineAsync(MESSAGE.winningNumbers)).split(',').map((element) => Number(element));
-        const lotto = new Lotto(inputNumbers);
-        this.#winningNumbers = lotto.getLotto();
+        this.#winningNumbers = new Lotto(inputNumbers);
         return this.#winningNumbers;
       } catch(error){
         MissionUtils.Console.print(error.message);

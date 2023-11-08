@@ -27,16 +27,21 @@ class Lotto {
     }
   }
 
-  static makeLotto(){
-    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
-    return new Lotto(numbers);
+  static makeLottos(countOfLottos){
+    const lottos = [];
+    while(countOfLottos--){
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+      lottos.push(new Lotto(numbers));
+    }
+    return lottos;
   }
 
-  getLotto(){
+  getLottoNumber(){
     return this.#numbers;
   }
 
-  checkLottoWinning(winningNumbers, bonusNumber){
+  checkLottoWinning(winningLotto, bonusNumber){
+    const winningNumbers = winningLotto.getLottoNumber();
     let count = 0, bonus = 0;
     for(let i = 0; i < LOTTO_CONSTANTS.numberCount; i++){
       if(winningNumbers.includes(this.#numbers[i])){
