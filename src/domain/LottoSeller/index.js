@@ -16,11 +16,16 @@ export class LottoSeller {
   }
 
   async sellLotto() {
-    const paidAmount = Number(await InputView.readLine(MESSAGES.BUY));
-    this.#validatePaidAmount(paidAmount);
-    const amount = this.#calculateLottoAmount(paidAmount);
-    OutputView.print(MESSAGES.BUY.RESULT(amount));
-    return this.#issueLottos(amount);
+    try {
+      const paidAmount = Number(await InputView.readLine(MESSAGES.BUY));
+      this.#validatePaidAmount(paidAmount);
+      const amount = this.#calculateLottoAmount(paidAmount);
+      OutputView.print(MESSAGES.BUY.RESULT(amount));
+      return this.#issueLottos(amount);
+    } catch (error) {
+      OutputView.print(error.message);
+      await this.sellLotto();
+    }
   }
 
   #validateLottoPrice(lottoPrice) {
