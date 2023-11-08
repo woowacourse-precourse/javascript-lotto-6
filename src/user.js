@@ -2,7 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto";
 
 function isNumber(input) {
-  return typeof input === "number" && !isNaN(input);
+  return typeof input === "number" && !isNaN(+input);
 }
 
 function isLottoNumber(input) {
@@ -15,7 +15,7 @@ export async function userPriceInput() {
         const price = await MissionUtils.Console.readLineAsync(
           "구입금액을 입력해 주세요.\n"
         );
-        if (!sNumber(price)) {
+        if (!isNumber(price)) {
           throw new Error("[ERROR] 잘못된 형식입니다. 숫자를 입력해주세요.");
         }
         const cnt = price / 1000;

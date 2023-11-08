@@ -14,7 +14,7 @@ class App {
     printLottoNumber(lottos);
     const winNumbers = await userWinningInput();
     const bonusNumber = await userBonusInput();
-    const winList = checkAllLottos(lottos, winNumbers.getNumber(), bonusNumber.getNumber());
+    const winList = checkAllLottos(lottos, winNumbers.getNumbers(), bonusNumber.getNumber());
     printWinningList(winList);
     printROI(winList, count);
   }

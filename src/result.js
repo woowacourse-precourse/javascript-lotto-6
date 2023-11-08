@@ -20,6 +20,6 @@ export function printROI(winList, count) {
   count = (count * 1000) / 100;
   const result = winnings / count;
   MissionUtils.Console.print(
-    "총 수익률은 ${Number(result.toFixed(2))%입니다.\n}"
+    `총 수익률은 ${Number(result.toFixed(2))}%입니다.\n`
   );
 }

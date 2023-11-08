@@ -18,14 +18,14 @@ function generateRandomNumbers(len) {
   const randomList = new Set();
   while (randomList.size < len) {
     const randomNumber = MissionUtils.Random.pickNumberInRange(1, 45);
-    randomList.push(randomNumber);
+    randomList.add(randomNumber);
   }
-  return randomList.sort();
+  return [...randomList].sort();
 }
 
 export function checkAllLottos(lottos, winNumbers, bonusNumber) {
   const winList = [0, 0, 0, 0, 0];
-  lottos.foreach((l) => {
+  lottos.forEach((l) => {
     const idx = checkWinning(l.getNumbers(), winNumbers, bonusNumber);
     winList[idx] = winList[idx] + 1;
   });
@@ -50,6 +50,6 @@ export function checkWinning(userNumber, winNumber, bonusNumber) {
   const matching = userNumber.filter((e) => {
     winNumber.includes(e);
   });
-  bonus = winNumber.includes(bonusNumber);
+  const bonus = winNumber.includes(bonusNumber);
   return mappingCount(matching.length, bonus);
 }
