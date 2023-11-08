@@ -95,6 +95,7 @@ class App {
       Console.print(`[${lotto.join(", ")}]`);
     });
   }
+
   buyLottos() {
     this.buyLotto = new BuyLotto(this.lottoCount);
     this.buyLotto.buyLottos();

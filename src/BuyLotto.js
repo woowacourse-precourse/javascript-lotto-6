@@ -28,6 +28,7 @@ class BuyLotto {
     for (let i = 0; i < this.getLottoCount; i++) {
       lotto.push(this.buyOneLotto());
     }
+
     this.#boughtLotto = lotto;
   }
 }

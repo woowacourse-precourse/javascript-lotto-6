@@ -22,6 +22,7 @@ class BonusLotto {
 
     return true;
   }
+
   get getBonusNumbers() {
     return this.#bonusNumbers;
   }

@@ -22,7 +22,6 @@ class Lotto {
     if (numbers.some((number) => number < MIN || number > MAX)) {
       throw new Error(ERRORMESSAGES.LOTTO_NUMBER_RANGE);
     }
-
     return true;
   }
 
