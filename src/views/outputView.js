@@ -8,7 +8,13 @@ const OutputView = {
   },
 
   printLottoList(user) {
-    user.getLotto().forEach((lotto) => Console.print(lotto.getLottoNumber()));
+    user
+      .getLotto()
+      .forEach((lotto) =>
+        Console.print(
+          `${WORD.OPENBRANCKET}${lotto.getLottoNumber()}${WORD.CLOSEBRANCKET}`
+        )
+      );
   },
 
   printRaffleStatistic(statisticList) {

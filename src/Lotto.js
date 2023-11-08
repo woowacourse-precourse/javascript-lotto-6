@@ -16,7 +16,7 @@ class Lotto {
   }
 
   getLottoNumber() {
-    return this.#numbers;
+    return this.#numbers.join(`${WORD.DELIMITER} `);
   }
 
   raffleNumber(lottoNumber, bonusNumber) {

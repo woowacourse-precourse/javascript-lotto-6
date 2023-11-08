@@ -7,6 +7,8 @@ const WORD = Object.freeze({
   PICKNUMBER: 6,
   NOTING: "nothing",
   BONUSCONDITION: 6,
+  OPENBRANCKET: "[",
+  CLOSEBRANCKET: "]",
 });
 
 export default WORD;
