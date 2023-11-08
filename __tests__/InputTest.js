@@ -22,4 +22,24 @@ describe("Input 클래스 테스트", () => {
     expect(logSpy).toHaveBeenCalledTimes(4);
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
+
+  test("당첨 번호 입력 테스트: 예외 상황이 생겨도 프로그램이 종료되지 않는가?", async () => {
+    const inputs = [
+      "1,2,3",
+      "1,2,3,4,5,6,7",
+      "",
+      "1,2,3,4,5,",
+      "0,1,2,4",
+      "1,2,3,4,5,6",
+    ];
+    const logSpy = getLogSpy();
+
+    mockQuestions(inputs);
+
+    const value = await input.askWinningNumbers();
+
+    expect(value).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(logSpy).toHaveBeenCalledTimes(5);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+  });
 });
