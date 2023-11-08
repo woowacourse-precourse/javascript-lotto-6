@@ -29,13 +29,15 @@ const OutputView = {
   },
 
   printWinningResult(winningResultList) {
-    winningResultList.forEach((result) =>
-      Console.print(
-        `${result.history} (${result.price.toLocaleString()}원) - ${
-          result.ticket
-        }개`
-      )
-    );
+    winningResultList
+      .reverse()
+      .forEach((result) =>
+        Console.print(
+          `${result.history} (${result.price.toLocaleString()}원) - ${
+            result.ticket
+          }개`
+        )
+      );
   },
 
   printProfitRatio(profitRatio) {
