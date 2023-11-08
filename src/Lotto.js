@@ -5,12 +5,13 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    // try {
+    try {
+      Console.print(Array.isArray(numbers));
       this.#validate(numbers);
       this.#numbers = numbers;
-    // } catch(error) {
-    //   Console.print(error.message);
-    // }
+    } catch(error) {
+      Console.print(error.message);
+    }
   }
 
   async start(validPrice, lottoNumSets) { 
@@ -44,12 +45,12 @@ class Lotto {
       return this.#numbers;
     let validNumbers = 0;
     while(validNumbers === 0 && this.#numbers === undefined) {
-      // try {
+      try {
         let sixNum = await Console.readLineAsync("당첨 번호를 다시 입력해 주세요.\n");
         validNumbers = this.#validate(sixNum);
-      // } catch(error) {
-      //   Console.print(error.message);
-      // }
+      } catch(error) {
+        Console.print(error.message);
+      }
     }
     return validNumbers;
   };
@@ -57,12 +58,12 @@ class Lotto {
   getBonusNum = async (sixNum) => {
     let validBonusNum = 0;
     while(validBonusNum === 0) {
-      // try {
+      try {
         let bonusNum = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
         validBonusNum = this.validateBonusNum(sixNum, bonusNum);
-      // } catch(error) {
-      //   Console.print(error.message);
-      // }
+      } catch(error) {
+        Console.print(error.message);
+      }
     }
     return validBonusNum;
   };
