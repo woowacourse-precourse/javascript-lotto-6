@@ -1,8 +1,8 @@
 import { Random } from "@woowacourse/mission-utils";
-import Lotto from "../Lotto"
+import Lotto from "../Lotto";
 
 export default class GenerateLottoNumbers {
-  static getLottos(counts) {
+  getLottos(counts) {
     const lottos = [];
     for (let count = 0; count < counts; count++) {
       const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
