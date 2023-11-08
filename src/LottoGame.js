@@ -1,8 +1,8 @@
-import INPUT from './Input.js'
-import OUTPUT from './Output.js';
+import INPUT from './View/Input.js'
+import OUTPUT from './View/Output.js';
 import COMPUTER from './Computer.js';
-import AppError from './AppError.js';
-import LottoError from './LottoError.js';
+import AppError from './Contents/AppError.js';
+import LottoError from './Contents/LottoError.js';
 import CALCULATE from './Calculate.js';
 import { Console } from '@woowacourse/mission-utils';
 

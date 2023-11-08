@@ -1,5 +1,5 @@
-import AppError from './AppError.js';
-import LOTTOERROR from './LottoError.js';
+import AppError from './Contents/AppError.js';
+import LOTTOERROR from './Contents/LottoError.js';
 
 class Validate {
   validateAmount(input) {
