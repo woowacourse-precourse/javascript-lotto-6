@@ -8,7 +8,7 @@ class Lotto {
     this.#validate(numbers);
     this.#sortLotto(numbers);
     this.#numbers = numbers;
-    this.#printLotto(this.#numbers);
+    this.#printLotto(numbers);
   }
 
   #validate(numbers) {
@@ -24,7 +24,7 @@ class Lotto {
       throw new Error(ERROR.NOT_DUPLICATE);
     }
 
-    if (numbers.some((el) => el > LOTTO_MAX || el < LOTTO_MIN)) {
+    if (numbers.some((el) => el > GAME.LOTTO_MAX || el < GAME.LOTTO_MIN)) {
       throw new Error(ERROR.RANGE);
     }
   }
@@ -32,8 +32,14 @@ class Lotto {
   #sortLotto(numbers) {
     return numbers.sort((a, b) => a - b);
   }
+
   #printLotto(numbers) {
-    Console.print(numbers);
+    const formattedString = '[' + numbers.join(', ') + ']';
+    Console.print(formattedString);
+  }
+
+  get numbers() {
+    return this.#numbers;
   }
 }
 

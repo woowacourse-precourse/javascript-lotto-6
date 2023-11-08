@@ -6,7 +6,7 @@ function checkBonus(bonus) {
         throw new Error(ERROR.RANGE);
     }
 
-    if (!isNaN(bonus)) {
+    if (isNaN(bonus)) {
         throw new Error(ERROR.IS_NAN);
     }
 }

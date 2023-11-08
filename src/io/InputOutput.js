@@ -21,7 +21,7 @@ const lottoOutput = {
         Console.print(GAME_MESSAGE.RESULT_HEADER);
     },    
     printResultRate(rate) {
-        Console.print(`${GAME_MESSAGE.RESULTRATE} ${rate}${GAME_MESSAGE.RESULTSUFFIX}`);
+        Console.print(`${GAME_MESSAGE.RESULT_RATE} ${rate}${GAME_MESSAGE.RESULT_SUFFIX}`);
     },
     printLine() {
         Console.print('');
