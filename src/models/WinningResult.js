@@ -1,4 +1,4 @@
-import { LOTTO_SETTING } from '../constants/Setting.js';
+import { LOTTO_SETTING, PRIZE_NAME } from '../constants/Setting.js';
 
 class WinningResult {
   #boughtPrice;
@@ -9,20 +9,16 @@ class WinningResult {
   constructor(boughtAmount) {
     this.#boughtPrice = boughtAmount * LOTTO_SETTING.pricePerLotto;
     this.#result = {
-      firstPrize: 0,
-      secondPrize: 0,
-      thirdPrize: 0,
-      fourthPrize: 0,
-      fifthPrize: 0,
+      [PRIZE_NAME.first]: 0,
+      [PRIZE_NAME.second]: 0,
+      [PRIZE_NAME.third]: 0,
+      [PRIZE_NAME.fourth]: 0,
+      [PRIZE_NAME.fifth]: 0,
     };
   }
 
-  addPrizeToResult(place) {
-    if (place === 1) this.#result['firstPrize'] += 1;
-    if (place === 2) this.#result['secondPrize'] += 1;
-    if (place === 3) this.#result['thirdPrize'] += 1;
-    if (place === 4) this.#result['fourthPrize'] += 1;
-    if (place === 5) this.#result['fifthPrize'] += 1;
+  addPrizeToResult(prizeName) {
+    this.#result[prizeName] += 1;
   }
   #setPrizeAmount() {}
   #setProfitRate() {}

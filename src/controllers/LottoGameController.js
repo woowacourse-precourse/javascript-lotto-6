@@ -1,4 +1,4 @@
-import { LOTTO_SETTING, WINNING_CRETERIA } from '../constants/Setting.js';
+import { LOTTO_SETTING, PRIZE_NAME, WINNING_CRETERIA } from '../constants/Setting.js';
 import { Random } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView.js';
 import InputValidator from '../validators/InputValidator.js';
@@ -16,6 +16,7 @@ class LottoGameController {
     await this.#setBonusNumber(winningNumber);
 
     const lottoGameResult = this.#createLotteryResult(lottoList, winningNumber);
+    console.log(lottoGameResult.getResult());
   }
 
   async #getLotto() {
@@ -94,13 +95,14 @@ class LottoGameController {
   }
 
   #setLottoPrize(result, matchingNumbers, isIncludingBonusNumber) {
-    if (matchingNumbers === WINNING_CRETERIA.firstPrize) result.addPrizeToResult(1);
+    if (matchingNumbers === WINNING_CRETERIA.firstPrize) result.addPrizeToResult(PRIZE_NAME.first);
     if (matchingNumbers === WINNING_CRETERIA.secondPrize && isIncludingBonusNumber)
-      result.addPrizeToResult(2);
+      result.addPrizeToResult(PRIZE_NAME.second);
     if (matchingNumbers === WINNING_CRETERIA.thirdPrize && !isIncludingBonusNumber)
-      result.addPrizeToResult(3);
-    if (matchingNumbers === WINNING_CRETERIA.fourthPrize) result.addPrizeToResult(4);
-    if (matchingNumbers === WINNING_CRETERIA.fifthPrize) result.addPrizeToResult(5);
+      result.addPrizeToResult(PRIZE_NAME.third);
+    if (matchingNumbers === WINNING_CRETERIA.fourthPrize)
+      result.addPrizeToResult(PRIZE_NAME.fourth);
+    if (matchingNumbers === WINNING_CRETERIA.fifthPrize) result.addPrizeToResult(PRIZE_NAME.fifth);
   }
 }
 
