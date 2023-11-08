@@ -1,10 +1,10 @@
 import InfoMsg from "./utils/InfoMsg.js";
-import BudgetValidator from "./utils/BudgetValidator.js";
 import Constant from "./utils/Constant.js";
 import View from "./View/View.js";
 import LottoNumGenerator from "./utils/LottoNumGenerator.js";
 import Lotto from "./Lotto.js";
 import BonusNum from "./BonusNum.js";
+import Validator from "./utils/Validator.js";
 
 class LottoController {
   #budget;
@@ -34,9 +34,9 @@ class LottoController {
 
   validateBudget(input) {
     try {
-      BudgetValidator.isNum(input);
-      BudgetValidator.minIsUnitPrice(input);
-      BudgetValidator.divisibleByUnitPrice(input);
+      Validator.isNum(input);
+      Validator.budgetMin(input);
+      Validator.budgetDivisibleByUnit(input);
     } catch (err) {
       return err;
     }
@@ -76,9 +76,10 @@ class LottoController {
     }
   }
 
-  validateWinningNum(input) {
+  validateWinningNum(str) {
     try {
-      const lotto = new Lotto(input);
+      Validator.isLottoNumSeperatedByComma(str);
+      const lotto = new Lotto(str.split(","));
       this.winningNum = lotto.returnNumbers();
     } catch (err) {
       View.output(err);

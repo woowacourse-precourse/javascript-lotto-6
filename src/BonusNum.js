@@ -1,3 +1,5 @@
+import Validator from "./utils/Validator.js";
+
 class BonusNum {
   #num;
 
@@ -7,9 +9,7 @@ class BonusNum {
   }
 
   #validate(input) {
-    if (isNaN(Number(input))) {
-      throw new Error("[ERROR]숫자를 입력해 주세요.");
-    }
+    Validator.isNum(input);
   }
 
   returnNum() {

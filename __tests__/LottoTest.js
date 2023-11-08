@@ -1,30 +1,30 @@
 import BonusNum from "../src/BonusNum.js";
 import Lotto from "../src/Lotto.js";
 import LottoController from "../src/LottoController.js";
-import BudgetValidator from "../src/utils/BudgetValidator.js";
 import ErrorMsg from "../src/utils/ErrorMsg.js";
 import LottoNumGenerator from "../src/utils/LottoNumGenerator.js";
+import Validator from "../src/utils/Validator.js";
 
 describe("구입 금액 입력 테스트", () => {
   test("구입금액에 숫자가 아닌 것이 입력된 경우 예외가 발생한다", () => {
     expect(() => {
-      BudgetValidator.isNum("123f");
-    }).toThrow(ErrorMsg.Budget.MUST_BE_NUM);
+      Validator.isNum("123f");
+    }).toThrow(ErrorMsg.IS_NAN);
   });
 
   test.each(["33", "999"])(
     "구입금액이 1000미만일 경우 예외가 발생한다",
     (input) => {
       expect(() => {
-        BudgetValidator.minIsUnitPrice(input);
-      }).toThrow(ErrorMsg.Budget.MIN_IS_UNIT_PRICE);
+        Validator.budgetMin(input);
+      }).toThrow(ErrorMsg.BUDGET.MIN_IS_UNIT_PRICE);
     }
   );
 
   test("구매금액이 1000단위가 아닌 경우 예외가 발생한다", () => {
     expect(() => {
-      BudgetValidator.divisibleByUnitPrice("2009");
-    }).toThrow(ErrorMsg.Budget.DIVISBLE_BY_UNIT_PRICE);
+      Validator.budgetDivisibleByUnit("2009");
+    }).toThrow(ErrorMsg.BUDGET.DIVISBLE_BY_UNIT_PRICE);
   });
 });
 
@@ -52,7 +52,7 @@ describe("로또 클래스 테스트", () => {
   test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5]);
-    }).toThrow("[ERROR]");
+    }).toThrow(ErrorMsg.LOTTO_NUM.IS_REDUNDANCY);
   });
 });
 
@@ -60,6 +60,6 @@ describe("보너스 클래스 테스트", () => {
   test("보너스 번호에 숫자가 아닌 문자열을 입력하면 예외가 발생한다", () => {
     expect(() => {
       new BonusNum("d");
-    }).toThrow("[ERROR]숫자를 입력해 주세요.");
+    }).toThrow(ErrorMsg.IS_NAN);
   });
 });
