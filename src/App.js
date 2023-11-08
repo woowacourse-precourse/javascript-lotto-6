@@ -3,7 +3,9 @@ import User from './User';
 import outputView from './views/outputView';
 
 class App {
-  #player
+  #player;
+  #winningNumbers;
+  #bonusNumber;
 
   constructor() {}
 
@@ -21,6 +23,11 @@ class App {
     this.#player.numberOfLottosAvailable = Lotto.getHowManyLottoCanBuy(this.#player.purchaseAmount);
     this.#player.buyLottos(this.#player.numberOfLottosAvailable, Lotto.generateNumbers);
     outputView.printLottosInfo(this.#player.lottoNumbers);
+  }
+
+  async getWinningNumbers() {
+    const winningNumbersArray = await this.#player.setWinningNumbers();
+    this.#winningNumbers = new Lotto(winningNumbersArray);
   }
 };
 

@@ -43,6 +43,16 @@ class User {
       this.lottoNumbers.push(generator());
     }
   }
+
+  
+
+  async setWinningNumbers() {
+    const winningNumbersString = await inputView.inputWinningNumbers();
+    const winningNumbersArray = converter
+      .stringToArray(winningNumbersString)
+      .map(Number);
+    return winningNumbersArray;
+  }
 };
 
 export default User;

@@ -15,6 +15,13 @@ const validator = {
     )
   },
 
+  isPositiveIntegerArray(array) {
+    if (typeof array !== 'object') {
+      return false;
+    }
+    return array.every((value) => validator.isPositiveInteger(value));
+  },
+
   // 두 값을 나누었을 때 0으로 나누어떨어지는지 확인하는 함수
   isDividedBy(dividend, divisor) {
     if (divisor === 0 ||
@@ -23,6 +30,28 @@ const validator = {
       return false;
     }
     return dividend % divisor === 0;
+  },
+
+  isDuplicate(array) {
+    if (typeof array !== 'object') {
+      return false;
+    }
+    return array.length !== new Set(array).size;
+  },
+
+  isNumberInRange(min, max, value) {
+    if (
+      typeof min !== 'number' ||
+      typeof max !== 'number' ||
+      typeof value !== 'number'
+    ) {
+      return false;
+    }
+    return value >= min && value <= max;
+  },
+
+  isNumberInRangeArray(min, max, array) {
+    return array.every((value) => this.isNumberInRange(min, max, value));
   },
 };
 
