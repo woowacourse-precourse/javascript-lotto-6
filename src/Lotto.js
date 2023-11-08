@@ -1,5 +1,5 @@
-import { PRIZE_STATUS } from '../constants/prize.js';
-import Validator from '../utils/validator.js';
+import { PRIZE_STATUS } from './constants/prize.js';
+import Validator from './utils/validator.js';
 
 class Lotto {
   #numbers;

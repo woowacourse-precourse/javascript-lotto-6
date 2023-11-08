@@ -3,7 +3,7 @@ import { PRIZE, PRIZE_STATUS } from '../constants/prize.js';
 import { LOTTO_ROLE } from '../constants/lotto.js';
 import Validator from '../utils/validator.js';
 import { InputView, OutputView } from '../view/index.js';
-import Lotto from '../model/Lotto.js';
+import Lotto from '../Lotto.js';
 
 export default class LottoGame {
   async run() {
