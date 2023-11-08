@@ -6,7 +6,7 @@ import { isArrayType, isAllNumeric, isOutOfRange } from './Common.js';
 
 class LottoNumbersValidator {
   validateLottoNumbers(lottoNumbers) {
-    this.validateGeneratedLottoNumbers(lottoNumbers);
+    this.validateLottoNumbersArray(lottoNumbers);
     this.validateNumbers(lottoNumbers);
     this.validateLottoNumbersLength(lottoNumbers);
     this.validateLottoNumbersInRange(lottoNumbers);
@@ -14,9 +14,9 @@ class LottoNumbersValidator {
     return true;
   }
 
-  validateGeneratedLottoNumbers(lottoNumbers) {
+  validateLottoNumbersArray(lottoNumbers) {
     if (!isArrayType(lottoNumbers)) {
-      throw new Error(LOTTO_NUMBERS_ERROR_MESSAGES.NOT_GENERATED);
+      throw new Error(LOTTO_NUMBERS_ERROR_MESSAGES.NOT_ARRAY);
     }
   }
 
