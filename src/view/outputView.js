@@ -21,6 +21,7 @@ class OutputView {
   }
 
   static async printRating(rate) {
+    rate.toFixed(2);
     Console.print(`\n총 수익률은 ${rate}%입니다.`);
   }
 }
