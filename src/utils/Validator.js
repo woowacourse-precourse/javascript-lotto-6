@@ -1,44 +1,35 @@
-import { ERROR_MESSAGE } from '../constants/messages';
+import Validate from './Validate';
 
 class Validator {
   static amountValidator(purchaseAmount) {
-    const NUMBER_REGEX = /^[0-9]+$/.test(purchaseAmount);
-    if (!NUMBER_REGEX) throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidNumber}`);
-
-    if (purchaseAmount % 1000 !== 0) {
-      throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidDivision}`);
-    }
-
-    if (purchaseAmount === '0') {
-      throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidQuantity}`);
-    }
+    Validate.numberValidate(purchaseAmount);
+    Validate.divisionValidate(purchaseAmount);
+    Validate.quantityValidate(purchaseAmount);
   }
 
   static winningNumberValidator(winningNumbers) {
     winningNumbers.forEach((v) => {
-      if (v < 1 || v > 45) throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidRange}`);
+      Validate.rangeValidate(v);
     });
 
-    if (winningNumbers.length !== 6) {
-      throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidLength}`);
-    }
-
-    const BONUS_REGEXP = /^[0-9,]+$/.test(winningNumbers);
-    if (!BONUS_REGEXP) throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidBonus}`);
-
-    const duplicateCheck = new Set(winningNumbers);
-    if (duplicateCheck.size !== winningNumbers.length) {
-      throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidUnique}`);
-    }
+    Validate.lengthValidate(winningNumbers);
+    Validate.bonusValidate(winningNumbers);
+    Validate.duplicateValidate(winningNumbers);
   }
 
   static bonusNumberValidator(bonusNumber) {
-    if (bonusNumber < 1 || bonusNumber > 45) {
-      throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidRange}`);
-    }
+    Validate.rangeValidate(bonusNumber);
+    Validate.numberValidate(bonusNumber);
+  }
 
-    const NUMBER_REGEX = /^[0-9]+$/.test(bonusNumber);
-    if (!NUMBER_REGEX) throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidNumber}`);
+  static LottoValidator(lottoNumbers) {
+    lottoNumbers.forEach((v) => {
+      Validate.rangeValidate(v);
+    });
+
+    Validate.lengthValidate(lottoNumbers);
+    Validate.duplicateValidate(lottoNumbers);
+    Validate.numberValidate(lottoNumbers);
   }
 }
 

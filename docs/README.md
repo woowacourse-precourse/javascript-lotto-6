@@ -143,17 +143,23 @@
 `printRevenueRate(rate)`: **수익률을 출력하는 메소드**  
 `rate`: 수익률
 
+### /utils/Validate.js (사용자 입력 검증)
+
+`numberValidate(value)`: 숫자를 제외한 문자를 입력한 경우에 대해 예외 처리하는 메소드  
+`divisionValidate(value)`: 구입 금액이 1,000원으로 나누어 떨어지지 않은 경우에 대해 예외 처리하는 메소드  
+`quantityValidate(value)`: 구입 금액에 0원을 입력한 경우에 대해 예외 처리하는 메소드  
+`rangeValidate(value)`: 당첨 번호의 숫자가 1-45 내에 없을 경우에 대해 예외 처리하는 메소드  
+`lengthValidate(value)`: 로또 번호의 개수가 6개가 아닌 경우에 대해 예외 처리하는 메소드  
+`bonusValidate(value)`: 숫자와 콤마(,)를 제외한 문자를 입력한 경우에 대해 예외 처리하는 메소드  
+`duplicateValidate(value)`: 중복된 로또 번호가 있을 경우에 대해 예외 처리하는 메소드
+
 ### /utils/Validator.js (사용자 입력 검증)
 
 `amountValidator(purchaseAmount)`: **입력 받은 구입 금액을 검증하는 메소드**  
 `purchaseAmount`: 입력 받은 구입 금액
 
-1,000원으로 나누어 떨어지지 않은 경우, 0원을 입력한 경우, 숫자를 제외한 문자를 입력한 경우에 대해서 예외 처리한다.
-
 `winningNumberValidator(winningNumbers)`: **입력 받은 당첨 번호를 검증하는 메소드**  
 `winningNumbers`: 입력 받은 당첨 번호
-
-당첨 번호의 숫자가 1-45 내에 없을 경우, 중복될 경우, 숫자와 콤마(,)를 제외한 문자를 입력한 경우에 대해서 예외 처리한다.
 
 `bonusNumberValidator(bonusNumber)`: **입력 받은 보너스 번호를 검증하는 메소드**  
 `bonusNumber`: 입력 받은 보너스 번호
@@ -178,7 +184,7 @@
 
 ### /domain/Winning.js (로또 당첨)
 
-`countMatchNumber(lottos, winningNumbers, bonusNumber)`: **당첨 번호와 일치하는 번호가 몇 개인지 반환하는 메소드**
+`countMatchNumber(lottos, winningNumbers, bonusNumber)`: **당첨 번호와 일치하는 번호가 몇 개인지 반환하는 메소드**  
 `countWinning(lottoss, winningNumbers, bonusNumber)`: **당첨 횟수를 카운트하는 메소드**
 
 `lottos`: 발행한 로또  
@@ -199,5 +205,9 @@
 ### /constants/symbol.js (심볼 상수화)
 
 `SYMBOL`: 코드에서 사용되는 심볼 상수화
+
+### /constants/regexp.js (정규식 상수화)
+
+`REGEXP`: 정규식들을 객체로 상수화
 
 ### /controller/LottoController.js (로또 게임 Controller)

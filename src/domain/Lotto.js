@@ -10,7 +10,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validator.winningNumberValidator(numbers);
+    Validator.LottoValidator(numbers);
   }
 
   static generateLottoNumber(numbers) {
