@@ -1,7 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
 import Input from "../Input/Input";
+import LottoCount from "../domain/LottoCount";
 
 class LottoController {
+  #lottoCount;
+  
   constructor() {}
 
   async LottoStart() {
@@ -14,7 +17,9 @@ class LottoController {
   }
 
   async getLottoCount(input) {
-    
+    this.#lottoCount = new LottoCount(input);
+
+    Console.print(this.#lottoCount.getLottoCount());
   }
 }
 
