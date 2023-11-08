@@ -27,6 +27,10 @@ class OutputView {
     }
   }
 
+  static printProfitRate(profitRate) {
+    Console.print(`총 수익률은 ${profitRate}입니다.`);
+  }
+
   static printBlankLine() {
     Console.print('');
   }
