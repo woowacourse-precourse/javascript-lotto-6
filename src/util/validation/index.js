@@ -1,6 +1,7 @@
 import purchaseMoneyInputValidator from './purchaseMoneyInputValidator.js';
 import winningNumberInputValidator from './winningNumberInputValidator.js';
 import bonusNumberInputValidator from './bonusNumberInputValidator.js';
+
 const validation = {
   purchaseMoneyInput(input) {
     purchaseMoneyInputValidator.format(input);

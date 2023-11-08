@@ -6,11 +6,11 @@ const LOTTO_PRIZE = Object.freeze({
   FIFTH: 5000,
 });
 
-const LOTTO = Object.freeze({
+const LOTTO_CONSTANTS = Object.freeze({
   MIN: 1,
   MAX: 45,
   LENGTH: 6,
   PRICE: 1000,
 });
 
-export { LOTTO_PRIZE, LOTTO };
+export { LOTTO_PRIZE, LOTTO_CONSTANTS };

@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../constant/index.js';
+import { ERROR_MESSAGE, LOTTO_CONSTANTS } from '../constant/index.js';
 const purchaseMoneyInputValidator = {
   format(rawInput) {
     if (rawInput.length === 0) {
@@ -12,7 +12,7 @@ const purchaseMoneyInputValidator = {
   data(rawInput) {
     const input = Number(rawInput);
 
-    if (input % 1000 !== 0) {
+    if (input % LOTTO_CONSTANTS.PRICE !== 0) {
       throw new Error(ERROR_MESSAGE.DATA_NON_PURCHASE_THOUSAND);
     }
   },

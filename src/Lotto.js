@@ -20,8 +20,12 @@ class Lotto {
 
   // LOTTO번호 오름차순으로 정렬하기
   sortLottoNumbers() {
-    console.log(this.#numbers);
-    return [...this.#numbers].sort((a, b) => a - b);
+    this.#numbers.sort((a, b) => a - b);
+    return this;
+  }
+
+  getLottoTicket() {
+    return [...this.#numbers];
   }
 }
 

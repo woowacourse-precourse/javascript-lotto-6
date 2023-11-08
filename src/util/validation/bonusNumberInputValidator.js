@@ -1,4 +1,5 @@
-import { ERROR_MESSAGE } from '../constant/index.js';
+import { ERROR_MESSAGE, LOTTO_CONSTANTS } from '../constant/index.js';
+
 const bonusNumberInputValidator = {
   format(rawInput) {
     if (rawInput.length === 0) {
@@ -12,17 +13,18 @@ const bonusNumberInputValidator = {
   data(bonusNumberRawInput, winningNumberRawInput) {
     const bonusNumberInput = Number(bonusNumberRawInput);
 
-    if (Number.isNaN(bonusNumberInput)) {
+    if (
+      bonusNumberInput < LOTTO_CONSTANTS.MIN ||
+      bonusNumberInput > LOTTO_CONSTANTS.MAX
+    ) {
       throw new Error(ERROR_MESSAGE.DATA_NON_BONUS_NUMBER);
     }
-    if (bonusNumberInput < 1 || bonusNumberInput > 45) {
-      throw new Error(ERROR_MESSAGE.DATA_NON_BONUS_NUMBER);
-    }
+
     const winningNumberInput = winningNumberRawInput.split(',').map(Number);
 
     if (winningNumberInput.includes(bonusNumberInput)) {
       throw new Error(
-        ERROR_MESSAGE.DATA_NON_BONUS_REPEAT + `"${winningNumberRawInput}")\n`
+        `${ERROR_MESSAGE.DATA_NON_BONUS_REPEAT}"${winningNumberRawInput}")\n`,
       );
     }
   },
