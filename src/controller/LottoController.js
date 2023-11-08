@@ -1,5 +1,5 @@
 import MESSAGES from "../constants/messages";
-import LottoGame from "../model/LottoGame";
+import LottoGame from "../domain/LottoGame";
 import InputView from "../views/InputView";
 import OutputView from "../views/OutputView";
 

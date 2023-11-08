@@ -1,4 +1,4 @@
-import LottoGame from "../src/model/LottoGame";
+import LottoGame from "../src/domain/LottoGame";
 import SETTINGS from "../src/constants/settings";
 import MESSAGES from "../src/constants/messages";
 
