@@ -14,5 +14,29 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
+  test("로또 번호는 1에서 45사이여야 합니다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 57]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("로또 번호는 숫자 형식이어야 합니다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, Number('a')]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("로또 번호 포함 갯수 반환.", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+
+    expect(lotto.getMatchCount([1,2,3,4,5,7])).toBe(5)
+  });
+
+  test("로또 번호 포함 여부 반환.", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+
+    expect(lotto.getBonusNumberIsInclude(5)).toBe(true)
+  });
+
   // 아래에 추가 테스트 작성 가능
 });
