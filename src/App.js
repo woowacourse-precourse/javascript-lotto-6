@@ -50,17 +50,19 @@ class App {
 
   async play() {
     await this.getPurchasePrice();
-
     await Output.showPurchaseSize(this.purchasePrice);
 
     const drawingLotto = await this.game.drawLotto(this.purchasePrice);
     await Output.drawLotto(drawingLotto);
-
     await Output.showEnter();
 
     await this.getLottoNumbers();
     await this.getBonusNumber();
 
+    this.performGame(drawingLotto);
+  }
+
+  async performGame(drawingLotto) {
     const matchingResults = this.game.calculateAllLottoMatches(
       this.lotto,
       drawingLotto,
