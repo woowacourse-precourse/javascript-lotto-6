@@ -119,37 +119,30 @@ class LottoGame {
     this.#earningsRate = 100 * this.#totalPrizeAmount / this.#purchaseAmount;
   }
 
-  /** @param {number} 구입 금액 */
   setPurchaseAmount(purchaseAmount) {
     this.#purchaseAmount = purchaseAmount;
   }
 
-  /** @returns {number} 티켓 구입 수량 */
   getPurchaseQuantity() {
     return this.#purchaseQuantity;
   }
 
-  /** @returns {Lotto} 구입한 티켓 */
   getTickets() {
     return this.#tickets;
   }
 
-  /** @param {Array<number>} winningNumbers 당첨 번호 배열 */
   setWinningNumbers(winningNumbers) {
     this.#winningNumbers = winningNumbers;
   }
 
-  /** @returns {Array<number>} 당첨 번호 */
   getWinningNumbers() {
     return this.#winningNumbers;
   }
 
-  /** @param {number} bonusNumber 보너스 번호 */
   setBonusNumber(bonusNumber) {
     this.#bonusNumber = bonusNumber;
   }
 
-  /** @returns {number} 당첨 번호 */
   getBonusNumber() {
     return this.#bonusNumber;
   }
