@@ -12,6 +12,8 @@ export default class ProfitCalculator {
   }
 
   calculateROI(totalPrize, purchasePrice) {
-    return (totalPrize / purchasePrice) * 100;
+    const rawROI = (totalPrize / purchasePrice) * 100;
+    const roundedROI = Number(rawROI.toFixed(1));
+    return roundedROI;
   }
 }
