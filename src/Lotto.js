@@ -74,9 +74,9 @@ class LottoMachine {
   }
 
   printLottos() {
-    Console.print(`\n${this.#lottoCount}개를 구매했습니다.`);
+    Console.print(`${this.#lottoCount}개를 구매했습니다.`);
     for (const lotto of this.#lottos) {
-      Console.print(lotto.getNumbers());
+      Console.print(`[${lotto.getNumbers().join(', ')}]`); // 수정된 부분
     }
   }
 
