@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import WinningLotto from '../Domain/WinningLotto.js';
 
 class LottoGameController {
@@ -46,6 +47,9 @@ class LottoGameController {
     this.#winningJudge.calculateWinner(this.#lottoList, winngLotto);
     const winnerList = this.#winningJudge.getWinnerList();
     this.#outputview.printresult(winnerList);
+    const purchaseAmount = this.#lottoList.length * 1000;
+    const rateOfReturn = this.#winningJudge.calculateRateOfReturn(winnerList, purchaseAmount);
+    this.#outputview.printRateOfReturn(rateOfReturn);
   }
 }
 

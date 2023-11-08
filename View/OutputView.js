@@ -17,8 +17,11 @@ class OutputView {
 4개 일치 (50,000원) - ${winnerList.fourth}개
 5개 일치 (1,500,000원) - ${winnerList.third}개
 5개 일치, 보너스 볼 일치 (30,000,000원) - ${winnerList.second}개
-6개 일치 (2,000,000,000원) - ${winnerList.first}개
-  `);
+6개 일치 (2,000,000,000원) - ${winnerList.first}개`);
+  }
+
+  printRateOfReturn(rateOfReturn) {
+    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   }
 }
 export default OutputView;
