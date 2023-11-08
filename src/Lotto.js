@@ -18,6 +18,9 @@ class Lotto {
     if (new Set(numbers).size !== numbers.length) {
       throw new Error("[ERROR] 중복된 숫자가 있습니다.");
     }
+    if (!numbers.every(num => !Number.isNaN(Number(num)) && num >= 1 && num <= 45)) {
+      throw new Error('[ERROR] 로또 번호는 1부터 45의 숫자만 사용하실 수 있습니다.');
+    }
   }
 
   generateRandomNumber(lottoCnt) {
@@ -31,6 +34,12 @@ class Lotto {
     return lottoArr;
   }
   repeatLottoNumber(purchasePrice) {
+    if (Number.isNaN(Number(purchasePrice))) {
+      throw new Error("[ERROR] 숫자만 입력 가능합니다.");
+    }
+    if (purchasePrice % 1000 !== 0) {
+      throw new Error("[ERROR] 구입금액은 반드시 1000원 단위이여야 합니다.");
+    }
     const lottoCnt = purchasePrice / 1000;
     return lottoCnt;
   }
