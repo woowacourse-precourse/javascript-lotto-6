@@ -13,6 +13,9 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  showNumber() {
+    console.log(this.#numbers);
+  }
 }
 
 export default Lotto;
