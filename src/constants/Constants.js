@@ -1,4 +1,4 @@
-const CONSTANTS = {
+const CONSTANTS = Object.freeze({
   maxRange: 45,
   minRange: 1,
   numberTypeRegex: /\D/,
@@ -9,6 +9,6 @@ const CONSTANTS = {
     second: 30000000,
     first: 2000000000,
   },
-};
+});
 
 export default CONSTANTS;
