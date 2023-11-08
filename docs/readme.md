@@ -107,6 +107,10 @@
     </tr>
     <tr>
         <td><input type="checkBox" disabled></td>
+        <td>로또 번호가 자연수가 아닐 경우 예외 처리한다.</td>
+    </tr>
+    <tr>
+        <td><input type="checkBox" disabled></td>
         <td>당첨 번호를 입력 받는다. 번호는 쉼표(,)를 기준으로 구분한다.</td>
     </tr>
     <tr>
