@@ -6,7 +6,7 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async play() {
-    const totalLottoCount = await getUserInput();
+    await getUserInput();
     getCorrectNumberInput();
   }
 }

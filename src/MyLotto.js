@@ -39,6 +39,10 @@ class MyLotto {
       Console.print(this.#lottos[i]);
     }
   }
+
+  getMyLotts() {
+    return this.#lottos;
+  }
 }
 
 export default MyLotto;
