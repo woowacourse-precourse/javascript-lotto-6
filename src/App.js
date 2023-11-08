@@ -24,6 +24,7 @@ class App {
   #cost;
   #prizeNumber;
   #bonusNumber;
+  #computer;
 
   checkValidation(inputValue, checkList) {
     const inValidObject = checkList.find((elem) => !elem.check(inputValue, this.#prizeNumber));
