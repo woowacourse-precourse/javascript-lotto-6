@@ -1,5 +1,6 @@
 import Validator from '../utils/validation.js';
 import MakeLottoModel from '../model/MakeLottoModel.js';
+import MakeResultModel from '../model/MakeResultModel.js';
 import UserInputView from '../view/UserInputView.js';
 import UserOutputView from '../view/UserOutputView.js';
 import { OPTIONS } from '../constants/Constants.js';
@@ -59,12 +60,27 @@ class GameController {
     }
   }
 
+  winningResult() {
+    const matchCounts = MakeResultModel.calculateMatchCounts(
+      this.#lottos,
+      this.#winningNumbers,
+      this.#bonusNumber,
+    );
+    const profit = MakeResultModel.calculateProfit(
+      this.#purchasePrice,
+      matchCounts,
+    );
+    UserOutputView.printMatchResult(matchCounts);
+    UserOutputView.printProfitResult(profit);
+  }
+
   async startGame() {
     await this.enterPurchasePrice();
     this.calculateTicketCount();
     this.makeAndPrintLottos();
     await this.enterWinningNumbers();
     await this.enterBonusNumber();
+    this.winningResult();
   }
 }
 

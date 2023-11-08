@@ -1,3 +1,12 @@
+export const PRIZE = Object.freeze({
+  rank6: 0,
+  rank5: 5000,
+  rank4: 50000,
+  rank3: 1500000,
+  rank2: 30000000,
+  rank1: 2000000000,
+});
+
 export const OPTIONS = Object.freeze({
   priceUnit: 1000,
   lottoNumberCount: 6,
@@ -10,8 +19,9 @@ export const MESSAGE = Object.freeze({
   purchaseAmount: `개를 구매했습니다.`,
   enterWinningNumbers: `\n당첨 번호를 입력해 주세요.\n`,
   enterBonusNumber: `\n보너스 번호를 입력해 주세요.\n`,
-  winningResult: `당첨 통계\n---\n`,
-  totalProfitPercentage: `총 수익률은`,
+  winningResult: `\n당첨 통계\n---`,
+  profitPercentageA: `총 수익률은 `,
+  profitPercentageZ: `%입니다.`,
 });
 
 export const ERROR = Object.freeze({
