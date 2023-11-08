@@ -95,6 +95,12 @@ describe("구매 금액 유효성 테스트", () => {
       validatePrice("1500");
     }).toThrow("[ERROR]");
   });
+
+  test("구매 금액 정상 작동하는 경우", () => {
+    expect(() => {
+      validatePrice("10000");
+    }).not.toThrow();
+  });
 });
 
 describe("로또 번호 세트 유효성 테스트", () => {
@@ -106,5 +112,16 @@ describe("로또 번호 세트 유효성 테스트", () => {
     const uniqueLottoNumSets = validateLottoNumSet(lottoNumSets);
     expect(uniqueLottoNumSets).toHaveLength(2);
     expect(uniqueLottoNumSets[0]).not.toEqual(uniqueLottoNumSets[1]);
+  });
+
+  test("로또 번호 세트 정상 작동하는 경우", () => {
+    const lottoNumSets = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 7],
+    ];
+    const uniqueLottoNumSets = validateLottoNumSet(lottoNumSets);
+    expect(uniqueLottoNumSets).toHaveLength(2);
+    expect(uniqueLottoNumSets[0]).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(uniqueLottoNumSets[1]).toEqual([1, 2, 3, 4, 5, 7]);
   });
 });
