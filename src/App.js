@@ -1,11 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import {
-  getLottoCntFromInputMoney,
-  getWinningNumberArray,
-} from './utils/getUserInput.js';
 import LottoList from './repository/LottoList.js';
-import Lotto from './repository/Lotto.js';
-import BounsNumber from './repository/BonusNumber.js';
+import UserInput from './UserInput.js';
 
 class App {
   #lottoList;
@@ -13,24 +8,16 @@ class App {
   #bonusNumber;
   #inputMoney;
   async play() {
-    this.#inputMoney = await MissionUtils.Console.readLineAsync(
-      '구입금액을 입력해 주세요.\n'
-    );
-    const lottoCnt = getLottoCntFromInputMoney(this.#inputMoney);
+    const userInput = new UserInput();
 
+    this.#inputMoney = await userInput.getInputMoney();
+    const lottoCnt = Number(this.#inputMoney) / 1000;
     this.#lottoList = new LottoList(lottoCnt).getLottoList();
 
-    const winningNumberStr = await MissionUtils.Console.readLineAsync(
-      '\n당첨 번호를 입력해 주세요.\n'
-    );
-    const winningNumberArr = getWinningNumberArray(winningNumberStr);
+    this.#winningLottoNumbers = await userInput.getWinningNumbers();
 
-    this.#winningLottoNumbers = new Lotto(winningNumberArr).getLotto();
-
-    const inputBonusNumber = await MissionUtils.Console.readLineAsync(
-      '\n보너스 번호를 입력해 주세요.\n'
-    );
-    this.#bonusNumber = new BounsNumber(inputBonusNumber).getBonusNumber();
+    this.#bonusNumber = await userInput.getBonusNumber();
+    console.log(this.#bonusNumber);
     this.winningStat();
   }
   winningStat() {
