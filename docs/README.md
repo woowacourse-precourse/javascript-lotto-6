@@ -410,3 +410,18 @@
 # 💻 테스트 실행 결과
 
 <img width="392" alt="image" src="https://github.com/cobocho/javascript-lotto-6/assets/99083803/3f13c6eb-0c69-4519-870e-a1f105ea42ff">
+
+테스트 실행 전에 더미 입력값을 테스트 수트에서 제외하기 위해서 `package.json`의 `"jest"를
+
+```json
+  "jest": {
+    "transform": {
+      "\\.js$": "babel-jest"
+    },
+    "testMatch": [
+      "**/*.test.js"
+    ]
+  },
+```
+
+위와 같이 설정해주세요!
