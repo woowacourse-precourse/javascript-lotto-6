@@ -1,3 +1,5 @@
+import { LOTTO_CONSTANTS } from "./util/constants";
+const { LENGTH, MIN, MAX } = LOTTO_CONSTANTS;
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Random } = MissionUtils;
 class BuyLotto {
@@ -17,7 +19,7 @@ class BuyLotto {
   }
 
   buyOneLotto() {
-    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    const numbers = Random.pickUniqueNumbersInRange(MIN, MAX, LENGTH);
     return numbers;
   }
 
@@ -29,8 +31,5 @@ class BuyLotto {
     this.#boughtLotto = lotto;
   }
 }
-// const buyLotto = new BuyLotto(1);
-// buyLotto.buyLottos();
-// console.log(buyLotto.getBoughtLotto);
 
 export default BuyLotto;

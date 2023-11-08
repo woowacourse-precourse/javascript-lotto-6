@@ -1,4 +1,6 @@
 import { ERRORMESSAGES } from "./util/Message";
+import { LOTTO_CONSTANTS } from "./util/constants";
+const { LENGTH, MIN, MAX } = LOTTO_CONSTANTS;
 class Lotto {
   #numbers;
 
@@ -11,13 +13,13 @@ class Lotto {
     if (numbers.some((number) => Number.isNaN(Number(number)))) {
       throw new Error(ERRORMESSAGES.NOT_A_NUMBER);
     }
-    if (numbers.length !== 6) {
+    if (numbers.length !== LENGTH) {
       throw new Error(ERRORMESSAGES.LOTTO_NUMBER_LENGTH);
     }
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== LENGTH) {
       throw new Error(ERRORMESSAGES.LOTTO_DUPLICATE);
     }
-    if (numbers.some((number) => number < 1 || number > 45)) {
+    if (numbers.some((number) => number < MIN || number > MAX)) {
       throw new Error(ERRORMESSAGES.LOTTO_NUMBER_RANGE);
     }
 
