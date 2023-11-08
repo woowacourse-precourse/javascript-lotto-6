@@ -7,9 +7,9 @@ class App {
     const lottoCount = await this.getMoneyReturnCount();
     console.log("lottoCount", lottoCount);
     MissionUtils.Console.print(`${lottoCount}개를 구매했습니다.`);
-    const userLotto = this.generateAndPrintLotto();
-    const winningLotto = this.getWinningLotto();
-    const bonusLotto = this.getBonusLotto(winningLotto);
+    const userLotto = this.generateAndPrintLotto(lottoCount);
+    const winningLotto = await this.getWinningLotto();
+    const bonusLotto = await this.getBonusLotto(winningLotto);
     this.getResult(lottoCount, userLotto, winningLotto, bonusLotto);
   }
 
@@ -76,19 +76,22 @@ class App {
       if(bonus) return bonus;
     } catch(error) {
       console.error(error.message);
-      this.getBonusLotto(winning);
+      // this.getBonusLotto(winning);
     }
   }
 
   async getWinningLotto() {
     const winningNumber = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    const winnigArray = winningNumber.split(",").map(Number);
+    console.log("winningNumber", winningNumber)
     try {
+      const winnigArray = winningNumber.split(",").map(Number);
+      console.log("winnigArray", winnigArray)
+
       const lotto = new Lotto(winnigArray);
       if(lotto) return winnigArray;
     } catch(error) {
       console.error(error.message);
-      this.getWinningLotto();
+      // this.getWinningLotto();
     }
   }
 
@@ -105,15 +108,12 @@ class App {
       MissionUtils.Console.print(oneLotto);
       lottoArray.push(oneLotto);
     }
+    console.log("lottoArray 모든", lottoArray)
     return lottoArray;
   }
 
   generateLotto() {
-    const array = [];
-    for(let i=0; i<6; i++) {
-      const num = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      array.push(num);
-    }
+    const array = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
     array.sort((a,b)=>a-b);
     return array
   }
