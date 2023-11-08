@@ -1,9 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
 import {  WINNING_NUMBERS_COUNT_TYPE } from "../src/constants.js";
-import { LottoResult } from "../src/lottoGame/result/Lotto.js";
-import { WinningLottosResult } from "../src/lottoGame/result/WinningLottos.js";
+import { LottoResult } from "../src/game/lotto/LottoResult.js";
+import { WinningLottosResult } from "../src/game/result/WinningLottos.js";
 import { getRoundedNumber } from "../src/utils/getRoundedNumber.js";
-import { printResult } from "../src/lottoGame/result/printResult.js";
+import { printResult } from "../src/game/result/printResult.js";
 
 let printTitleSpy; 
 let printWinningLottoWithBonusSpy;

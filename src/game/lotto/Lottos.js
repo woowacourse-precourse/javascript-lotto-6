@@ -1,8 +1,8 @@
 import Lotto from './Lotto.js';
-import { Print } from './interface/Output.js';
-import { generateRandomNumbers } from './utils/generateRandomNumbers.js';
-import { sortAscending } from './utils/sort.js';
-import { getArrayLikeString } from './utils/typeCasters.js';
+import { Print } from '../../interface/Output.js';
+import { generateRandomNumbers } from '../../utils/generateRandomNumbers.js';
+import { sortAscending } from '../../utils/sort.js';
+import { getArrayLikeString } from '../../utils/typeCasters.js';
 
 export class Lottos {
   #list;

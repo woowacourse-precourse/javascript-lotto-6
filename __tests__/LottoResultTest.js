@@ -1,5 +1,5 @@
 import { BONUS_NUMBER_TYPE } from "../src/constants.js";
-import { LottoResult } from "../src/lottoGame/result/Lotto.js";
+import { LottoResult } from "../src/game/lotto/LottoResult.js";
 
 const numbers = [1,2,3,4,5,6];
 const winWinningNumbers = [1,2,3,4,44,45];

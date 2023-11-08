@@ -1,10 +1,7 @@
-import { Lottos } from './Lottos.js';
-import { WinningLottosResult } from './lottoGame/result/WinningLottos.js';
+import { LottoResult } from './game/lotto/LottoResult.js';
+import { Lottos } from './game/lotto/Lottos.js';
+import { WinningLottosResult } from './game/result/WinningLottos.js';
 import { User } from './User.js';
-import { Input } from './interface/Input.js';
-import { LottoResult } from './lottoGame/result/Lotto.js';
-import Lotto from './Lotto.js';
-import { generateRandomNumbers } from './utils/generateRandomNumbers.js';
 
 class App {
   async play() {
