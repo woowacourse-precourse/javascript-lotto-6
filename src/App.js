@@ -15,6 +15,7 @@ class App {
     this.#printLottos();
     await this.#requestWinningNumbers();
     await this.#requestBonusNumbers();
+    this.#lottoMachine.compareLottosWithWinningNumber();
   }
 
   async #requestUserMoney() {

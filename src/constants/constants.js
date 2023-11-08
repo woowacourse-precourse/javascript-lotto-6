@@ -16,7 +16,14 @@ export const CONSTANT = Object.freeze({
   MIN_VALUE: 1,
   MAX_VALUE: 45,
   COMMA: ',',
+  THREE_MATCH_PRIZE: 5000,
+  FOUR_MATCH_PRIZE: 50000,
+  FIVE_MATCH_PRIZE: 1500000,
+  FIVE_MATCH_WITH_BONUS_PRIZE: 30000000,
+  SIX_MATCH_PRIZE: 2000000000,
+  MATCHING_COUNT: 1,
 });
+
 export const CONSOLE_MESSAGE = Object.freeze({
   INPUT_MONEY: '구입금액을 입력해 주세요.',
   INPUT_WINNING_NUMBER: '당첨 번호를 입력해 주세요.',
