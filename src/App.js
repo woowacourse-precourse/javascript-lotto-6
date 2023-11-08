@@ -4,8 +4,8 @@ import OutputView from './View/OutputView.js';
 import IssuedLotto from './model/IssuedLotto.js';
 import Lotto from './model/Lotto.js';
 import Bonus from './model/Bonus.js';
-import Computer from './computer/Computer.js';
-import Validate from './utils/Validate.js';
+import Computer from './model/Computer.js';
+import Validate from './validation/Validate.js';
 
 class App {
   amount;
