@@ -1,3 +1,4 @@
+import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
 class LottoList {
@@ -11,10 +12,18 @@ class LottoList {
   }
 
   #generateLottos() {
-    
+    return new Array(this.#amount)
+      .fill(0)
+      .map(() =>
+        new Lotto(
+          Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b)
+        ).getLotto()
+      );
   }
 
-  #generateRandomNumbers() {}
+  getLottoList() {
+    return this.#lottos;
+  }
 }
 
 export default LottoList;
