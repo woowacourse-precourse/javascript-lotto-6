@@ -7,18 +7,6 @@ import CheckList from './datas/CheckList.js';
 import { prize, rank } from './datas/prize.js';
 import { NUMBER, PROMPT } from './datas/constants.js';
 
-const inputStep = {
-  cost: {
-    prompt: PROMPT.costInput,
-  },
-  winnerNumbers: {
-    prompt: PROMPT.prizeNumberInput,
-  },
-  bonusNumber: {
-    prompt: PROMPT.bonusNumberInput,
-  },
-};
-
 class App {
   #lottos;
   #cost;
@@ -58,7 +46,7 @@ class App {
   }
 
   printLottos() {
-    print(`${this.#cost / 1000}개를 구매했습니다.`);
+    print(`${this.#cost / NUMBER.divisor}개를 구매했습니다.`);
     this.#lottos.forEach((lotto) => {
       print(`[${lotto.getNumbers().join(', ')}]`);
     });
@@ -81,17 +69,17 @@ class App {
   }
 
   async setLottos() {
-    this.#cost = await this.getInput(inputStep.cost.prompt, 'cost');
+    this.#cost = await this.getInput(PROMPT.costInput, 'cost');
     this.createLotto(this.#cost);
   }
 
   async setPrizeNumber() {
-    const prizeNumberString = await this.getInput(inputStep.winnerNumbers.prompt, 'prizeNumber');
+    const prizeNumberString = await this.getInput(PROMPT.prizeNumberInput, 'prizeNumber');
     this.#prizeNumber = prizeNumberString.split(',').map((elem) => Number(elem));
   }
 
   async setBonusNumber() {
-    const bonusString = await this.getInput(inputStep.bonusNumber.prompt, 'bonusNumber');
+    const bonusString = await this.getInput(PROMPT.bonusNumberInput, 'bonusNumber');
     this.#bonusNumber = Number(bonusString);
   }
 
