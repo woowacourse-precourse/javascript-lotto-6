@@ -61,18 +61,21 @@ class LottoResult {
     return comparedResult;
   };
 
+  updateLottoResult(lottoResult) {
+    Object.entries(allLottoResult).forEach(([key, value]) => {
+      const rankingDetailStr = JSON.stringify(value.rankingDetail);
+      const lottoResultStr = JSON.stringify(lottoResult);
+
+      if (rankingDetailStr === lottoResultStr) {
+        value.count++;
+      }
+    });
+  }
+
   checkAllLottoResult(lottos, lottoWinningNumber, lottoBonusNumber) {
     lottos.forEach(lotto => {
-      const comparedResult = this.compareToLottoNumbers(lotto, lottoWinningNumber, lottoBonusNumber);
-      
-      Object.entries(allLottoResult).forEach(([key, value]) => {
-        const rankingDetailStr = JSON.stringify(value.rankingDetail);
-        const comparedResultStr = JSON.stringify(comparedResult);
-
-        if (rankingDetailStr === comparedResultStr) {
-          value.count++;
-        }
-      });
+      const lottoResult = this.compareToLottoNumbers(lotto, lottoWinningNumber, lottoBonusNumber);
+      this.updateLottoResult(lottoResult);
     });
 
     return allLottoResult;
