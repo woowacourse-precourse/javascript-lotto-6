@@ -1,8 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-
+import { OUTPUT_MESSAGE } from '../util/constant/index.js';
 class OutputView {
-  constructor() {}
-
   static printLottoTicketsCount(count, tickets) {
     Console.print(`${count}개를 구매했습니다.`);
     tickets.forEach((ticket) => {
@@ -12,12 +10,22 @@ class OutputView {
 
   static printLottoStatistics(results, profitRate) {
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH } = results;
-    Console.print('당첨 통계');
-    Console.print('---');
+    const prizeLevels = [
+      { name: OUTPUT_MESSAGE.FIFTH_NAME, count: FIFTH },
+      { name: OUTPUT_MESSAGE.FOURTH_NAME, count: FOURTH },
+      { name: OUTPUT_MESSAGE.THIRD_NAME, count: THIRD },
+      { name: OUTPUT_MESSAGE.SECOND_NAME, count: SECOND },
+      { name: OUTPUT_MESSAGE.FIRST_NAME, count: FIRST },
+    ];
 
-    Console.print(
-      `당첨 통계\n---\n3개 일치 (5,000원) - ${FIFTH}개\n4개 일치 (50,000원) - ${FOURTH}개\n5개 일치 (1,500,000원) - ${THIRD}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${SECOND}개\n6개 일치 (2,000,000,000원) - ${FIRST}개\n총 수익률은 ${profitRate}%입니다.`
-    );
+    Console.print(OUTPUT_MESSAGE.STATISTICS);
+    Console.print(OUTPUT_MESSAGE.LINE);
+
+    prizeLevels.forEach((prize) => {
+      Console.print(`${prize.name} - ${prize.count}개`);
+    });
+
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 }
 

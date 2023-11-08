@@ -1,8 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Lotto.js';
-import { LOTTO } from '../util/constant/index.js';
-// Lotto에 Array넣기
-// Lotto 클래스로 n개의 티켓 생성하기
+import Lotto from '../Lotto.js';
+import { LOTTO_CONSTANTS } from '../util/constant/index.js';
 
 class LottoGenerator {
   constructor(ticketCount) {
@@ -11,17 +9,24 @@ class LottoGenerator {
   }
 
   generateLottoTickets() {
-    const tickets = [];
-    for (let i = 0; i < this.ticketCount; i++) {
-      const lottoTicket = new Lotto(
-        Random.pickUniqueNumbersInRange(LOTTO.MIN, LOTTO.MAX, LOTTO.LENGTH)
-      );
-      tickets.push(lottoTicket.sortLottoNumbers());
-    }
+    const tickets = Array.from({ length: this.ticketCount }, () =>
+      new Lotto(this.pickRandomLottoNumbers())
+        .sortLottoNumbers()
+        .getLottoTicket(),
+    );
     return tickets;
   }
 
+  pickRandomLottoNumbers() {
+    return Random.pickUniqueNumbersInRange(
+      LOTTO_CONSTANTS.MIN,
+      LOTTO_CONSTANTS.MAX,
+      LOTTO_CONSTANTS.LENGTH,
+    );
+  }
+
   getLottoTickets() {
+    console.log(this.lottoTickets);
     return this.lottoTickets;
   }
 }
