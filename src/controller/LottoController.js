@@ -55,6 +55,7 @@ class LottoController {
       this.#lottoDataProcessor.getLottoResults()
     );
     const result = this.#resultProcessor.getResult();
+    await this.#outputView.printWinningResult(result);
   }
 }
 
