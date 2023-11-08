@@ -1,5 +1,5 @@
 import { validateArray } from "./utils/validation.js";
-import { LOTTO_ERROR } from "./constant/ERROR.js";
+import { LOTTO } from "./constant/ERROR.js";
 
 class Lotto {
   #numbers;
@@ -11,16 +11,16 @@ class Lotto {
 
   #validate(numbers) {
     if (!validateArray.isNumber(numbers)) {
-      throw new Error(LOTTO_ERROR.isNumber);
+      throw new Error(LOTTO.isNumber);
     }
-    if (!validateArray.isSixSize(numbers)) {
-      throw new Error(LOTTO_ERROR.isSixSize);
+    if (!validateArray.isSize(numbers)) {
+      throw new Error(LOTTO.isSize);
     }
-    if (!validateArray.isIncludesRange(numbers)) {
-      throw new Error(LOTTO_ERROR.isIncludesRange);
+    if (!validateArray.isInRange(numbers)) {
+      throw new Error(LOTTO.isInRange);
     }
     if (validateArray.isDuplicate(numbers)) {
-      throw new Error(LOTTO_ERROR.isDuplicate);
+      throw new Error(LOTTO.isDuplicate);
     }
   }
 

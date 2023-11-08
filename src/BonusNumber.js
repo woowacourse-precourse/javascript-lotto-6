@@ -1,5 +1,5 @@
 import { validateNumber } from "./utils/validation.js";
-import { BONUS_NUMBER_ERROR } from "./constant/ERROR.js";
+import { BONUS_NUMBER } from "./constant/ERROR.js";
 
 class BonusNumber {
   #bonusNumber;
@@ -11,6 +11,11 @@ class BonusNumber {
 
   #validate(number, array) {
     if (!validateNumber.isNumber(number)) {
+      throw new Error(BONUS_NUMBER.isNumber);
+    }
+    if (!validateNumber.isInRange(number)) {
+      throw new Error(BONUS_NUMBER.isInRange);
+    }
     if (validateNumber.isInArray(number, array)) {
       throw new Error(BONUS_NUMBER.isInArray);
     }

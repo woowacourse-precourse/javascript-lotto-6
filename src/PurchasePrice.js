@@ -1,5 +1,5 @@
 import { validateNumber } from "./utils/validation.js";
-import { PURCHASE_PRICE_ERROR } from "./constant/ERROR.js";
+import { PURCHASE_PRICE } from "./constant/ERROR.js";
 
 class PurchasePrice {
   #purchasePrice;
@@ -11,13 +11,13 @@ class PurchasePrice {
 
   #validate(price) {
     if (!validateNumber.isNumber(price)) {
-      throw new Error(PURCHASE_PRICE_ERROR.isNumber);
+      throw new Error(PURCHASE_PRICE.isNumber);
     }
-    if (!validateNumber.isDividePrice(price)) {
-      throw new Error(PURCHASE_PRICE_ERROR.isDividePrice);
+    if (!validateNumber.isDivisible(price)) {
+      throw new Error(PURCHASE_PRICE.isDivisible);
     }
-    if (!validateNumber.isBiggerThanPrice(price)) {
-      throw new Error(PURCHASE_PRICE_ERROR.isBiggerThanPrice);
+    if (!validateNumber.isAtLeastPrice(price)) {
+      throw new Error(PURCHASE_PRICE.isAtLeastPrice);
     }
   }
 
