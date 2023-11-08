@@ -12,6 +12,11 @@ import {
   purchaseAmountInput,
   winningNumberInput,
 } from "./view/inputView.js";
+import {
+  printErrorMessage,
+  printLottoResult,
+  printQuantity,
+} from "./view/outputView.js";
 
 class App {
   constructor() {
@@ -24,13 +29,18 @@ class App {
   }
 
   async startLotto() {
-    const inputPurchaseAmount = await purchaseAmountInput();
-    this.purchaseAmount = inputPurchaseAmount;
-    this.purchaseQuantity(inputPurchaseAmount);
+    try {
+      const inputPurchaseAmount = await purchaseAmountInput();
+      this.purchaseAmount = inputPurchaseAmount;
+      this.validateInput(inputPurchaseAmount);
+      return this.purchaseQuantity(inputPurchaseAmount);
+    } catch (e) {
+      printErrorMessage(e);
+      await this.startLotto();
+    }
   }
 
   async purchaseQuantity(inputPurchaseAmount) {
-    this.validateInput(inputPurchaseAmount);
     const lottoQuantity = inputPurchaseAmount / LOTTO.PRICE;
     this.createLotto(lottoQuantity);
   }
@@ -45,14 +55,19 @@ class App {
       const lottoNumber = lottoRandomNumber(LOTTO.MIN, LOTTO.MAX, LOTTO.LENGTH);
       lottos.push(new Lotto(lottoNumber));
     }
-    print(MESSAGE.PURCHASE_QUANTITY(lottoQuantity));
+    printQuantity(lottoQuantity);
     lottos.forEach((lotto) => lotto.printLottos());
     this.winningNumber(lottos);
   }
 
   async winningNumber(lottos) {
-    const inputWinningNumber = await winningNumberInput();
-    this.createWinningNumber(lottos, inputWinningNumber);
+    try {
+      const inputWinningNumber = await winningNumberInput();
+      return this.createWinningNumber(lottos, inputWinningNumber);
+    } catch (e) {
+      printErrorMessage(e);
+      await this.winningNumber(lottos);
+    }
   }
 
   async createWinningNumber(lottos, inputWinningNumber) {
@@ -65,13 +80,18 @@ class App {
   }
 
   async bonusNumber(lottos, winningNumber) {
-    const inputBonusNumber = Number(await bonusNumberInput());
-    this.createBonusNumber(inputBonusNumber, winningNumber);
-    this.lottoMatch(lottos, winningNumber, inputBonusNumber);
+    try {
+      const inputBonusNumber = Number(await bonusNumberInput());
+      return this.createBonusNumber(lottos, inputBonusNumber, winningNumber);
+    } catch (e) {
+      printErrorMessage(e);
+      await this.bonusNumber(lottos, winningNumber);
+    }
   }
 
-  async createBonusNumber(inputBonusNumber, winningNumber) {
+  async createBonusNumber(lottos, inputBonusNumber, winningNumber) {
     validateBonusNumberInput(inputBonusNumber, winningNumber);
+    this.lottoMatch(lottos, winningNumber, inputBonusNumber);
   }
 
   async lottoMatch(lottos, winningNumber, inputBonusNumber) {
@@ -85,8 +105,6 @@ class App {
   }
 
   async lottoResult(matchLottoCount, matchLottoBonus) {
-    // 3,4,5,5(보너스), 수익률 총 6개
-
     const lottoResultArray = Array(6).fill(0);
     for (let i = 0; i < matchLottoCount.length; i++) {
       if (matchLottoCount[i] === LOTTO.SIX) {
@@ -122,38 +140,7 @@ class App {
 
   async totalLottoSumRetrun(lottoResultArray, lottoSum) {
     const lottoSumReturn = ((lottoSum / this.purchaseAmount) * 100).toFixed(1);
-    this.printLootoResult(lottoResultArray, lottoSumReturn);
-  }
-
-  async printLootoResult(lottoResultArray, lottoSumReturn) {
-    print(MESSAGE.WINNING_STATISTICS);
-    print(MESSAGE.UNDERLINE);
-    print(
-      `${MESSAGE.FIFTH_PLACE}${lottoResultArray[LOTTO.FIFTH_PLACE]}${
-        MESSAGE.EA
-      }`
-    );
-    print(
-      `${MESSAGE.FOURTH_PLACE}${lottoResultArray[LOTTO.FOURTH_PLACE]}${
-        MESSAGE.EA
-      }`
-    );
-    print(
-      `${MESSAGE.THIRD_PLACE}${lottoResultArray[LOTTO.THIRD_PLACE]}${
-        MESSAGE.EA
-      }`
-    );
-    print(
-      `${MESSAGE.SECOND_PLACE}${lottoResultArray[LOTTO.SECOND_PLACE]}${
-        MESSAGE.EA
-      }`
-    );
-    print(
-      `${MESSAGE.FIRST_PLACE}${lottoResultArray[LOTTO.FIRST_PLACE]}${
-        MESSAGE.EA
-      }`
-    );
-    print(MESSAGE.TOTAL_RETURN(lottoSumReturn));
+    printLottoResult(lottoResultArray, lottoSumReturn);
   }
 }
 
