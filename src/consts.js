@@ -1,0 +1,35 @@
+export const message = Object.freeze({
+  purchaseAmount: '구입금액을 입력해주세요.',
+  winningNumbers: '당첨 번호를 입력해 주세요',
+  bonusNumber: '보너스 번호를 입력해 주세요',
+  winningStatistics: '당첨 통계',
+  devider: '---',
+});
+
+export const error = Object.freeze({
+  purchaseAmountError: '[ERROR] 구입금액은 1,000원으로 나누어 떨어져야 합니다.',
+  winningNumbersSeparatorError:
+    '[ERROR] 당첨 번호는 "," 로 구분해서 입력해야 합니다.',
+  winningNumbersDuplicationError: '[ERROR] 당첨 번호는 중복이 없어야 합니다.',
+  winningNumbersLengthError: '[ERROR] 당첨 번호는 숫자 6개여야 합니다.',
+  numberRangeError: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
+  numberTypeError: '[ERROR] 숫자가 잘못된 형식입니다.',
+});
+
+export const outputString = Object.freeze({
+  purchaseCount: '개를 구매했습니다.',
+  lottoRank5th: '3개 일치 (5,000원) - ',
+  lottoRank4th: '4개 일치 (50,000원) - ',
+  lottoRank3rd: '5개 일치 (1,500,000원) - ',
+  lottoRank2nd: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  lottoRank1st: '6개 일치 (2,000,000,000원) - ',
+  countUnit: '개',
+  rateOfReturn: '총 수익률은 ',
+  rateOfReturnSuffix: '%입니다.',
+});
+
+export const condition = Object.freeze({
+  lottoMinNumber: 1,
+  lottoMaxNumber: 45,
+  separator: ',',
+});
