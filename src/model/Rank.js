@@ -1,7 +1,7 @@
 class Rank {
-  constructor(requiredCount, prize, isRequiredBonus) {
-    this.requiredCount = requiredCount;
+  constructor(prize, requiredCount, isRequiredBonus) {
     this.prize = prize;
+    this.requiredCount = requiredCount;
     this.isRequiredBonus = isRequiredBonus;
   }
 
