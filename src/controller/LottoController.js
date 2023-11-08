@@ -1,4 +1,4 @@
-import InputView from "../views/InputView.js"
+import InputView from "../views/InputView.js";
 import OutputView from "../views/OutputView.js";
 import GenerateLottoNumbers from "../models/GenerateLottoNumbers.js";
 import LottoResultCalculator from "../models/LottoResultCalculator.js";
@@ -16,7 +16,7 @@ class LottoController {
 
   constructor() {
     this.#lottoNumberGenerator = new GenerateLottoNumbers();
-    this.#profitCalculator = new ProfitCalculator(); 
+    this.#profitCalculator = new ProfitCalculator();
   }
 
   async playGame() {
@@ -54,7 +54,10 @@ class LottoController {
     const game = new LottoResultCalculator(this.#lottos);
     this.#result = game.getResult(this.#winningNumbers, this.#bonusNumber);
     const totalPrize = this.#profitCalculator.calculateTotalPrize(this.#result);
-    this.#roi = this.#profitCalculator.calculateROI(totalPrize, this.#purchasePrice);
+    this.#roi = this.#profitCalculator.calculateROI(
+      totalPrize,
+      this.#purchasePrice,
+    );
   }
 
   #displayResult() {

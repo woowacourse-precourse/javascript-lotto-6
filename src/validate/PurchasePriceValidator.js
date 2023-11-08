@@ -12,4 +12,4 @@ export default class PurchasePriceValidator {
       throw new Error(PURCHASE_AMOUNT_ERROR_MESSAGE.wrongFormat);
     }
   }
-}  
+}

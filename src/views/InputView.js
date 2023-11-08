@@ -19,7 +19,9 @@ const InputView = {
   async getWinningNumbers() {
     try {
       const winningNumbers = await Console.readLineAsync("");
-      const numbersArray = winningNumbers.split(',').map(num => parseInt(num.trim()));
+      const numbersArray = winningNumbers
+        .split(",")
+        .map((num) => parseInt(num.trim()));
       WinningNumbersValidator.validateWinningNumbers(numbersArray);
       return numbersArray;
     } catch (error) {
@@ -37,7 +39,7 @@ const InputView = {
       OutputView.printError(error);
       return this.getBonusNumber(winningNumbers);
     }
-  }
+  },
 };
 
 export default InputView;

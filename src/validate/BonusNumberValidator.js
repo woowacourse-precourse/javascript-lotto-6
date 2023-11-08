@@ -1,4 +1,4 @@
-import { BONUS_NUMBER_ERROR_MESSAGE } from '../constants/Message.js';
+import { BONUS_NUMBER_ERROR_MESSAGE } from "../constants/Message.js";
 
 export default class BonusNumberValidator {
   static validateBonusNumber(bonusNumber, winningNumbers) {

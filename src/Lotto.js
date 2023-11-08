@@ -32,7 +32,7 @@ class Lotto {
     this.#correctTarget = correctTarget;
     this.#correctBonus = correctBonus;
   }
-  
+
   judgeResult() {
     if (this.#correctTarget === 6) return 1;
     if (this.#correctTarget === 5 && this.#correctBonus) return 2;
@@ -41,7 +41,6 @@ class Lotto {
     if (this.#correctTarget === 3) return 5;
     return 0;
   }
-  
 }
 
 export default Lotto;

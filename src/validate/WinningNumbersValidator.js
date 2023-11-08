@@ -1,4 +1,4 @@
-import { WINNING_NUMBERS_ERROR_MESSAGE } from '../constants/Message';
+import { WINNING_NUMBERS_ERROR_MESSAGE } from "../constants/Message";
 
 export default class WinningNumbersValidator {
   static validateWinningNumbers(numbers) {

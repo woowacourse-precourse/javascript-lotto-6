@@ -26,11 +26,11 @@ const OutputView = {
   },
 
   printError(error) {
-    if (error.message.startsWith('[ERROR]')) {
-      Console.print(error.message); 
-      return; 
+    if (error.message.startsWith("[ERROR]")) {
+      Console.print(error.message);
+      return;
     }
-    throw error;  
+    throw error;
   },
 
   printResult(roi, result) {
@@ -51,7 +51,7 @@ const OutputView = {
         }),
       ),
     );
-  }
+  },
 };
 
 export default OutputView;

@@ -1,4 +1,4 @@
-import LottoController from "./controller/LottoController"
+import LottoController from "./controller/LottoController";
 
 class App {
   async play() {
