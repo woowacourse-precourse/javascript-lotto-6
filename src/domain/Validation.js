@@ -8,13 +8,16 @@ class Validation {
   }
 
   validatePrice() {
-    if (!this.#isCheckNumber()) throw new Error(ERROR_MESSAGE.NUMBER);
-    if (!this.#isCheckThousandUnit())
+    if (!this.#isCheckNumber()) {
+      throw new Error(ERROR_MESSAGE.NUMBER);
+    }
+    if (!this.#isCheckThousandUnit()) {
       throw new Error(ERROR_MESSAGE.THOUSAND_UNIT);
+    }
   }
 
   #isCheckNumber() {
-    return !Number.isNaN(this.#number);
+    return !Number.isNaN(Number(this.#number));
   }
 
   #isCheckThousandUnit() {
