@@ -1,30 +1,30 @@
 import OPTION from './option.js';
 
 const read = Object.freeze({
-  readPurchaseAmount: '구입 금액을 입력해 주세요.\n',
-  readWinningNumbers: '당첨 번호를 입력해 주세요.\n',
-  readBonusNumber: '보너스 번호를 입력해 주세요.\n',
+  purchaseAmount: '구입 금액을 입력해 주세요.\n',
+  winningNumbers: '당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '보너스 번호를 입력해 주세요.\n',
 });
 
 const print = Object.freeze({
-  printLottoCounts: '개를 구매했습니다.',
-  printLottoResult: '당첨 통계\n---',
-  printFirstPrize: `6개 일치 (${OPTION.firstPrizeAmount.toLocaleString(
+  lottoCount: '개를 구매했습니다.',
+  lottoResultHeader: '당첨 통계\n---',
+  firstPrizeCount: `6개 일치 (${OPTION.firstPrizeAmount.toLocaleString(
     'ko-KR',
   )}원) -`,
-  printSecondPrize: `5개 일치, 보너스 볼 일치 (${OPTION.secondPrizeAmount.toLocaleString(
+  secondPrizeCount: `5개 일치, 보너스 볼 일치 (${OPTION.secondPrizeAmount.toLocaleString(
     'ko-KR',
   )}원) -`,
-  printThirdPrize: `5개 일치 (${OPTION.thirdPrizeAmount.toLocaleString(
+  thirdPrizeCount: `5개 일치 (${OPTION.thirdPrizeAmount.toLocaleString(
     'ko-KR',
   )}원) -`,
-  printFourthPrize: `4개 일치 (${OPTION.fourthPrizeAmount.toLocaleString(
+  fourthPrizeCount: `4개 일치 (${OPTION.fourthPrizeAmount.toLocaleString(
     'ko-KR',
   )}원) -`,
-  printFifthPrize: `3개 일치 (${OPTION.fifthPrizeAmount.toLocaleString(
+  fifthPrizeCount: `3개 일치 (${OPTION.fifthPrizeAmount.toLocaleString(
     'ko-KR',
   )}원) -`,
-  printLottoTotalReturns: ['총 수익률은', '%입니다.'],
+  lottoTotalReturns: ['총 수익률은', '%입니다.'],
 });
 
 const error = Object.freeze({

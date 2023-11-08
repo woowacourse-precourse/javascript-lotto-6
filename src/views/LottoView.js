@@ -14,17 +14,17 @@ class LottoView {
   }
 
   async readPurchaseAmount() {
-    const result = await this.#inputView.read(MESSAGE.read.readPurchaseAmount);
+    const result = await this.#inputView.read(MESSAGE.read.purchaseAmount);
     return Number(result);
   }
 
   async readWinningNumbers() {
-    const result = await this.#inputView.read(MESSAGE.read.readWinningNumbers);
+    const result = await this.#inputView.read(MESSAGE.read.winningNumbers);
     return result.split(OPTION.inputSeparator).map(Number);
   }
 
   async readBonusNumber() {
-    const result = await this.#inputView.read(MESSAGE.read.readBonusNumber);
+    const result = await this.#inputView.read(MESSAGE.read.bonusNumber);
     return Number(result);
   }
 
@@ -36,8 +36,8 @@ class LottoView {
     this.print('');
   }
 
-  printLottoCounts(lottoCounts) {
-    this.print(`${lottoCounts}${MESSAGE.print.printLottoCounts}`);
+  printLottoCount(lottoCount) {
+    this.print(`${lottoCount}${MESSAGE.print.lottoCount}`);
   }
 
   printLottos(lottos) {
@@ -48,12 +48,12 @@ class LottoView {
 
   printLottoResult(lottoResult) {
     const messages = [
-      MESSAGE.print.printLottoResult,
-      `${MESSAGE.print.printFifthPrize} ${lottoResult.fifthPrizeCount}개`,
-      `${MESSAGE.print.printFourthPrize} ${lottoResult.fourthPrizeCount}개`,
-      `${MESSAGE.print.printThirdPrize} ${lottoResult.thirdPrizeCount}개`,
-      `${MESSAGE.print.printSecondPrize} ${lottoResult.secondPrizeCount}개`,
-      `${MESSAGE.print.printFirstPrize} ${lottoResult.firstPrizeCount}개`,
+      MESSAGE.print.lottoResultHeader,
+      `${MESSAGE.print.fifthPrizeCount} ${lottoResult.fifthPrizeCount}개`,
+      `${MESSAGE.print.fourthPrizeCount} ${lottoResult.fourthPrizeCount}개`,
+      `${MESSAGE.print.thirdPrizeCount} ${lottoResult.thirdPrizeCount}개`,
+      `${MESSAGE.print.secondPrizeCount} ${lottoResult.secondPrizeCount}개`,
+      `${MESSAGE.print.firstPrizeCount} ${lottoResult.firstPrizeCount}개`,
     ];
 
     messages.forEach((message) => this.print(message));
@@ -61,7 +61,7 @@ class LottoView {
 
   printLottoTotalReturns(lottoTotalReturns) {
     this.print(
-      `${MESSAGE.print.printLottoTotalReturns[0]} ${lottoTotalReturns}${MESSAGE.print.printLottoTotalReturns[1]}`,
+      `${MESSAGE.print.lottoTotalReturns[0]} ${lottoTotalReturns}${MESSAGE.print.lottoTotalReturns[1]}`,
     );
   }
 }

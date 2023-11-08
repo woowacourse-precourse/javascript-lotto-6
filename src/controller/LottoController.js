@@ -36,8 +36,8 @@ class LottoController {
 
   #buyLottos() {
     this.#service.buyLottos();
-    const lottoCounts = this.#service.getLottos().length;
-    this.#view.printLottoCounts(lottoCounts);
+    const lottoCount = this.#service.getLottos().length;
+    this.#view.printLottoCount(lottoCount);
   }
 
   #printLottos() {
