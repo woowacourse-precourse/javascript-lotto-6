@@ -1,21 +1,25 @@
 import { Console } from '@woowacourse/mission-utils';
 import User from './User.js';
 import Lotto from './Lotto.js';
+import UserView from './views/UserView.js';
 
 class App {
   
+  #userView
   #user
   #lotto
 
   constructor() {
-    this.#user = new User();
+    this.#userView = new UserView();
   }
 
   async play() {
-    await this.#user.setPurchaseAmount();
+    // user
+    const money = await this.#userView.inputPurchaseAmount();
+    this.#user = new User(money);
     this.#user.setLottoNumbers();
 
-    const winningNumbers = (await Console.readLineAsync('\n당첨 번호를 입력해주세요.\n')).split(',');
+    const winningNumbers = this.#userView.inputWinningNumbers();
     this.#lotto = new Lotto(winningNumbers);
     const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해주세요.\n');
     const userLottoNumbers = this.#user.getLottoNumbers(winningNumbers);

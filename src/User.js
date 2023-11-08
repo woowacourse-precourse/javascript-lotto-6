@@ -6,16 +6,12 @@ class User {
     #numberOfPurchases
     #lottoNumbers
 
-    constructor() {
+    constructor(money) {
         this.#DIVIDE_NUMBER = 1000;
-        this.#lottoNumbers = [];
-    }
-
-    async setPurchaseAmount() {
-        const money = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
         this.#validate(money);
         this.#purchaseAmount = Number(money);
         this.#numberOfPurchases = Number(money) / this.#DIVIDE_NUMBER;
+        this.#lottoNumbers = [];
     }
 
     #validate(money) {
@@ -26,7 +22,7 @@ class User {
             throw new Error('[ERROR] 구입 금액은 숫자로 입력해야합니다.');
         }
 
-        if (money % this.#DIVIDE_NUMBER !== 0) {
+        if (Number(money) % this.#DIVIDE_NUMBER !== 0) {
             throw new Error('[ERROR] 구입 금액은 1000원 단위의 숫자로 입력해야합니다.');
         }
     }
