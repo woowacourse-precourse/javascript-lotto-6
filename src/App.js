@@ -1,7 +1,6 @@
 import View from "./View.js";
 import Lotto from "./Lotto.js";
 import Price from "./Price.js";
-import BonusNumber from "./BonusNumber.js";
 import { Console, Random } from "@woowacourse/mission-utils";
 import Result from "./Result.js";
 

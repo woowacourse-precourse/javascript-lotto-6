@@ -44,7 +44,7 @@ class Result {
 
     if (winning === 6) this.#first++;
     if (winning === 5 && bonus === 1) this.#second++;
-    if (winning === 5) this.#third++;
+    if (winning === 5 && bonus === 0) this.#third++;
     if (winning === 4) this.#fourth++;
     if (winning === 3) this.#fifth++;
   }
