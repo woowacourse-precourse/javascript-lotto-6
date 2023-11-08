@@ -51,8 +51,10 @@ class App {
     await this.getPurchasePrice();
 
     await Output.showPurchaseSize(this.purchasePrice);
-    const arr = await this.game.drawLotto(this.purchasePrice);
-    await Output.drawLotto(arr);
+
+    const drawingLotto = await this.game.drawLotto(this.purchasePrice);
+    await Output.drawLotto(drawingLotto);
+
     await Output.showEnter();
 
     await this.getLottoNumbers();
