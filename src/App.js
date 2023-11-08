@@ -126,7 +126,21 @@ export function printPrizes(rateOfReturn, prizeList) {
 }
 
 class App {
-  async play() {}
+  async play() {
+    try {
+      let purchaseAmount = await purchaseTickets();
+      let ticketCount = calculateTicketCount(purchaseAmount);
+      let lottoTickets = generateLottoTickets(ticketCount);
+      printLottoTickets(ticketCount, lottoTickets);
+      let winningNumbers = await enterWinningNumbers();
+      let bonusNumber = await enterBonusNumber();
+      let prizeList = countPrizes(ticketCount, lottoTickets, winningNumbers, bonusNumber);
+      let rateOfReturn = calculateRateOfReturn(purchaseAmount, prizeList);
+      printPrizes(rateOfReturn, prizeList);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default App;
