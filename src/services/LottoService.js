@@ -72,6 +72,17 @@ class LottoService {
 
     return lottoPrize.getStatus();
   }
+
+  getLottoTotalPrizeAmount() {
+    return LottoPrize.getPrizeAmount(this.getLottoResult());
+  }
+
+  getLottoTotalReturns() {
+    const lottoTotalReturns =
+      this.getLottoTotalPrizeAmount() / this.getPurchaseAmount();
+
+    return lottoTotalReturns.toFixed(1);
+  }
 }
 
 export default LottoService;

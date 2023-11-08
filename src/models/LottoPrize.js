@@ -1,3 +1,5 @@
+import OPTION from '../constants/option.js';
+
 class LottoPrize {
   #status;
 
@@ -29,6 +31,17 @@ class LottoPrize {
 
   getStatus() {
     return this.#status;
+  }
+
+  static getPrizeAmount(status) {
+    const prizeAmount =
+      status.firstPrizeCount * OPTION.firstPrizeAmount +
+      status.secondPrizeCount * OPTION.secondPrizeAmount +
+      status.thirdPrizeCount * OPTION.thirdPrizeAmount +
+      status.fourthPrizeCount * OPTION.fourthPrizeAmount +
+      status.fifthPrizeCount * OPTION.fifthPrizeAmount;
+
+    return prizeAmount;
   }
 }
 
