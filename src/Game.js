@@ -13,6 +13,8 @@ class Game {
 
   #bonusNumber;
 
+  #winningDetails = { 3: 0, 4: 0, 5: 0, '5b': 0, 6: 0 };
+
   static async #getLottoPrice() {
     const priceInput = await User.readInput(MESSAGE.enterPrice);
     return Validation.price(priceInput);
@@ -70,7 +72,24 @@ class Game {
 
   #hasBonusNumber(myLotto) {
     const myNumbers = myLotto.getNumbers();
-    return myNumbers.include(this.#bonusNumber);
+    return myNumbers.includes(this.#bonusNumber);
+  }
+
+  #setWinningDetails() {
+    this.#myLotto.forEach((myLotto) => {
+      const match = Game.#howManyMatch(this.#winLotto, myLotto);
+      if (match === 5 && this.#hasBonusNumber(myLotto)) {
+        this.#winningDetails['5b'] += 1;
+        return;
+      }
+      if (match >= 3) {
+        this.#winningDetails[match] += 1;
+      }
+    });
+  }
+
+  #printWinningDetails() {
+    User.printMessage(MESSAGE.winningDetails(this.#winningDetails));
   }
 
   async play() {
@@ -79,6 +98,8 @@ class Game {
     this.#printMyLotto();
     await this.#setWinLotto();
     await this.#setBonusNumber();
+    this.#setWinningDetails();
+    this.#printWinningDetails();
   }
 }
 
