@@ -14,6 +14,10 @@ import {
   FIVE_MATCH_MONEY,
   BONUS_MATCH_MONEY,
   ALL_MATCH_MONEY,
+  CORRECTS,
+  CORRECT_COUNT,
+  YIELD_HEAD,
+  YIELD_TAIL,
 } from "./Constants.js";
 
 import User from "./User.js";
@@ -57,7 +61,7 @@ class App {
 
     for (let i = 0; i < 5; i++) {
       await MissionUtils.Console.print(
-        NUMS[i] + "개 일치" + MONEYS[i] + " - " + STATISTICS[i] + "개"
+        NUMS[i] + CORRECTS + MONEYS[i] + " - " + STATISTICS[i] + CORRECT_COUNT
       );
     }
   }
@@ -73,8 +77,7 @@ class App {
       100
     ).toFixed(1);
 
-    const YIELD_PRINT_MESSAGE =
-      "\n총 수익률은 " + YIELD.toString() + "%입니다.";
+    const YIELD_PRINT_MESSAGE = YIELD_HEAD + YIELD.toString() + YIELD_TAIL;
 
     MissionUtils.Console.print(YIELD_PRINT_MESSAGE);
   }

@@ -3,7 +3,7 @@ export const MIN = 1;
 export const MAX = 45;
 export const PICK_NUMBER = 6;
 export const INPUT_RANGE_ERROR_MESSAGE =
-  "[ERROR]" + MIN + "~" + MAX + "사이의 정수를 입력해야 합니다.";
+  "[ERROR] " + MIN + "~" + MAX + "사이의 정수를 입력해야 합니다.";
 export const THREE = 3;
 export const FOUR = 4;
 export const FIVE = 5;
@@ -47,6 +47,10 @@ export const FOUR_MATCH_MONEY = 50000;
 export const FIVE_MATCH_MONEY = 1500000;
 export const BONUS_MATCH_MONEY = 30000000;
 export const ALL_MATCH_MONEY = 2000000000;
+export const CORRECTS = "개 일치";
+export const CORRECT_COUNT = "개";
+export const YIELD_HEAD = "\n총 수익률은 ";
+export const YIELD_TAIL = "%입니다.";
 
 //Function.js
 export const FAIL = false;
