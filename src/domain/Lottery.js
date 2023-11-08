@@ -14,7 +14,6 @@ import {
   readlineWinningNumberListAync,
   readlineBonusNumberAsync,
 } from '../view/inputView.js';
-// 추후 리팩토링하기
 import {
   outputIssueComment,
   outputLottoNummbers,
@@ -22,6 +21,18 @@ import {
   outputStatisticCommnet,
   outputEarningRateCommnet,
 } from '../view/outputView.js';
+import {
+  LOTTO_PRICE,
+  MAKING_PERCENTAGE,
+  CHANGE_ONE_DIGIT,
+  THE_FIRST_DECIMAL_PLACE,
+  DIGIT_FOR_THOUSAND,
+  PRIZE_FOR_THREE_MATCH,
+  PRIZE_FOR_FOUR_MATCH,
+  PRIZE_FOR_FIVE_MATCH,
+  PRIZE_FOR_FIVE_AND_BONUS_MATCH,
+  PRIZE_FOR_SIX_MATCH,
+} from '../constants/lotteryConstants.js';
 
 export default class Lottery {
   #payMoney;
@@ -42,7 +53,13 @@ export default class Lottery {
     this.bonusNumber = 0;
     this.lottoList = [];
     this.winningCount = [0, 0, 0, 0, 0]; // 3,4,5,5+보너스,6개 일치
-    this.#prizes = [5000, 50000, 1500000, 30000000, 2000000000];
+    this.#prizes = [
+      PRIZE_FOR_THREE_MATCH,
+      PRIZE_FOR_FOUR_MATCH,
+      PRIZE_FOR_FIVE_MATCH,
+      PRIZE_FOR_FIVE_AND_BONUS_MATCH,
+      PRIZE_FOR_SIX_MATCH,
+    ];
   }
 
   async readPayMoney() {
@@ -91,9 +108,8 @@ export default class Lottery {
   }
 
   pay(payMoney) {
-    // TODO
-    const numberOfLotto = payMoney / 1000;
-    // 발행
+    const numberOfLotto = payMoney / LOTTO_PRICE;
+
     this.issue(numberOfLotto);
 
     outputLottoNummbers(this.lottoList);
@@ -105,8 +121,9 @@ export default class Lottery {
     );
 
     matchResults.forEach((eachResult) => {
-      if (eachResult.winning - 3 < 0) return;
       const resultCaseIndex = eachResult.winning - 3;
+      if (resultCaseIndex < 0) return;
+
       const ALL = 4;
       const five = eachResult.bonus ? 3 : 2;
       const resultCase = [resultCaseIndex, resultCaseIndex, five, ALL];
@@ -121,10 +138,10 @@ export default class Lottery {
           .map((eachCount, index) => eachCount * this.#prizes[index])
           .reduce((acc, cur) => acc + cur, 0) /
           this.#payMoney) *
-          100 *
-          10,
-      ) / 10
-    ).toFixed(1);
+          MAKING_PERCENTAGE *
+          CHANGE_ONE_DIGIT,
+      ) / CHANGE_ONE_DIGIT
+    ).toFixed(THE_FIRST_DECIMAL_PLACE);
   }
 
   stringifyPrizeList() {
@@ -132,7 +149,8 @@ export default class Lottery {
       const prizeDigitStringList = eachPrize.toString().split('').reverse();
       return prizeDigitStringList
         .map((digitString, index) => {
-          if (index % 3 === 0 && index > 0) return `${digitString},`;
+          if (index % DIGIT_FOR_THOUSAND === 0 && index > 0)
+            return `${digitString},`;
           return digitString;
         })
         .reverse()

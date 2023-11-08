@@ -1,0 +1,10 @@
+export const LOTTO_PRICE = 1000;
+export const MAKING_PERCENTAGE = 100;
+export const CHANGE_ONE_DIGIT = 10;
+export const THE_FIRST_DECIMAL_PLACE = 1;
+export const DIGIT_FOR_THOUSAND = 3;
+export const PRIZE_FOR_THREE_MATCH = 5000;
+export const PRIZE_FOR_FOUR_MATCH = 50000;
+export const PRIZE_FOR_FIVE_MATCH = 1500000;
+export const PRIZE_FOR_FIVE_AND_BONUS_MATCH = 30000000;
+export const PRIZE_FOR_SIX_MATCH = 2000000000;
