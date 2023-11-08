@@ -4,27 +4,27 @@ import SCENARIO from './constant/scenario.js';
 import { getUserValidInputRecursive } from './util.js';
 
 class App {
-  async play() {
-    let lottoGame;
+  lottoGame;
 
+  async play() {
     await getUserValidInputRecursive(SCENARIO.enter_price, result => {
-      lottoGame = new LottoGame(result);
+      this.lottoGame = new LottoGame(result);
     });
 
-    lottoGame.addLottos();
-    Console.print(`${lottoGame.count}${SCENARIO.buy_count}`);
-    lottoGame.printLottos();
+    this.lottoGame.addLottos();
+    Console.print(`${this.lottoGame.count}${SCENARIO.buy_count}`);
+    this.lottoGame.printLottos();
 
     await getUserValidInputRecursive(SCENARIO.enter_winning_number, result => {
-      lottoGame.addWinningNumbers(result);
+      this.lottoGame.addWinningNumbers(result);
     });
     await getUserValidInputRecursive(SCENARIO.enter_bonus_number, result => {
-      lottoGame.addBonusNumber(result);
+      this.lottoGame.addBonusNumber(result);
     });
 
-    lottoGame.calculateLottoResult();
-    lottoGame.calculateLottoPrize();
-    lottoGame.printResult();
+    this.lottoGame.calculateLottoResult();
+    this.lottoGame.calculateLottoPrize();
+    this.lottoGame.printResult();
   }
 }
 
