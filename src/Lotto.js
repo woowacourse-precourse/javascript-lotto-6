@@ -35,15 +35,15 @@ class Lotto {
   }
 
   validateBonusNumber(bonusNumber) {
-    if (number.trim() === '') {
+    if (bonusNumber.trim() === '') {
       throw new Error(ERROR_MESSAGE.notNumberException);
     }
 
-    if (Number.isNaN(Number(number))) {
+    if (Number.isNaN(Number(bonusNumber))) {
       throw new Error(ERROR_MESSAGE.notNumberException);
     }
 
-    if (Number(number) < LOTTO_NUMBER_RANGE.minimum || Number(number) > LOTTO_NUMBER_RANGE.maximum) {
+    if (Number(bonusNumber) < LOTTO_NUMBER_RANGE.minimum || Number(bonusNumber) > LOTTO_NUMBER_RANGE.maximum) {
       throw new Error(ERROR_MESSAGE.numberRangeException);
     }
   }
