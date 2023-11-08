@@ -3,7 +3,7 @@ const ERROR = Object.freeze({
   divisibleByOneThousand: '[ERROR] 1000원으로 나누어떨어지는 구매금액을 입력해주세요',
   sixDigits: '[ERROR] 숫자는 6자리를 입력해주세요',
   duplicated: '[ERROR] 중복된 숫자가 있습니다. 다시 입력해주세요',
-  withinRange: '[ERROR] 배열의 모든 숫자는 1에서 45 사이에 있어야 합니다',
+  withinRange: '[ERROR] 숫자는 1에서 45 이내여야합니다',
   naturalNumber: '[ERROR] 보너스 번호는 자연수여야합니다',
   validateRandom: '[ERROR] 로또 번호 중 중복된 숫자가 있습니다',
 });

@@ -58,20 +58,23 @@ const Validation = {
   },
 
   isWithinRange(userInput) {
-    const isWithinRange = (number) => number >= 1 && number <= 45;
-
-    if (!userInput.every(isWithinRange)) {
-      Console.print(ERROR.withinRange);
-      return false;
+    if (typeof userInput === 'number' && userInput >= 1 && userInput <= 45) {
+      return true;
     }
-    return true;
+
+    if (Array.isArray(userInput) && userInput.every((number) => number >= 1 && number <= 45)) {
+      return true;
+    }
+
+    Console.print(ERROR.withinRange);
+    return false;
   },
 
   isBonusNumberOk(bonusNumber) {
     const isNaturalNumber = this.isNaturalNumber(bonusNumber);
-    // 이후 추가 // const isWithinRange = this.isWithinRange(bonusNumber);
+    const isWithinRange = this.isWithinRange(bonusNumber);
 
-    if (isNaturalNumber) {
+    if (isNaturalNumber && isWithinRange) {
       return true;
     }
     return false;

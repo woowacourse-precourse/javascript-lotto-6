@@ -3,7 +3,6 @@ import Lotto from '../src/Lotto.js';
 import WinningLotto from '../Domain/WinningLotto.js';
 import WinningJudge from '../Domain/WinningJudge.js';
 import Random from '../utils/random.js';
-import LottoMachine from '../Domain/LottoMachine.js';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
@@ -24,7 +23,6 @@ describe('로또 클래스 테스트', () => {
 
     const random = new Random();
     random.validation([6, 2, 3, 4, 5, 6]);
-    random.validation([1, 2, 3, 4, 5, 6]);
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
   });
@@ -44,7 +42,6 @@ describe('로또 클래스 테스트', () => {
     };
 
     // when
-    // const testLotto = new Lotto(lottoNumbers);
     const testWinningLotto = new WinningLotto({ numbers: winningNumbers, bonusNumber });
     const winningJudge = new WinningJudge();
 
