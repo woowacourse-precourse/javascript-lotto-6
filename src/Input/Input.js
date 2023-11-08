@@ -10,6 +10,13 @@ const Input = {
     Validator.InputPurchaseAmount(purchaseAmount);
     return purchaseAmount;
   },
+
+  async lottoWinningNumber() {
+    const winningNumber = await Console.readLineAsync(
+      PRINT_MESSAGE.REQUEST_WINNING_NUMBERS
+    );
+    return winningNumber;
+  },
 };
 
 export default Input;
