@@ -18,23 +18,20 @@ class Lotto {
 
   #validate(numbers) {
     // 입력 로또 번호 검증
-    if (numbers.length !== 6) {
-      throw new Error(ERROR_MESSAGE.OVER_LENGTH_NUMBER); // 로또 번호가 6개인지 확인
-    }
-    if (numbers === "" || numbers.split(",").some((number) => number === "")) {
-      throw new Error(ERROR_MESSAGE.EMPTY_NUMBER); // 로또 번호에 빈 값이 있는지 확인
-    }
-    if (numbers.split(",").some((number) => isNaN(number))) {
+    if (numbers.some(isNaN)) {
       throw new Error(ERROR_MESSAGE.NOT_NUMBER); // 로또 번호가 숫자인지 확인
+    }
+    if (numbers.length !== 6) {
+      throw new Error("[ERROR] 로또 번호는 6개여야 합니다."); // 로또 번호가 6개인지 확인
     }
     if (numbers.length !== new Set(numbers).size) {
       throw new Error(ERROR_MESSAGE.DUPLICATE_NUMBER); // 로또 번호에 중복된 값이 있는지 확인
     }
-    if (numbers.includes(" ")) {
-      throw new Error(ERROR_MESSAGE.SPACE_NUMBER); // 입력할 때 공백이 있는지 확인
+    if (numbers.some((num) => num < 1 || num > 45)) {
+      throw new Error(ERROR_MESSAGE.OVER_NUMBER); // 로또 번호가 1~45 사이인지 확인
     }
   }
-  // TODO: 추가 기능 구현
+
   winningResult(randomNumbers, bonusNumber) {
     // 당첨 결과 구하기
     const count = this.countMatchNumbers(randomNumbers);
@@ -70,13 +67,13 @@ class Lotto {
   }
 
   printWinningResult() {
-    Console.print("당첨 통계");
+    Console.print("\n당첨 통계");
     Console.print("---");
-    Console.print(`3개 일치 (5000원)- ${this.getMatchCount(5)}개`);
-    Console.print(`4개 일치 (50000원)- ${this.getMatchCount(4)}개`);
-    Console.print(`5개 일치 (1500000원)- ${this.getMatchCount(3)}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (30000000원)- ${this.getMatchCount(2)}개`);
-    Console.print(`6개 일치 (2000000000원)- ${this.getMatchCount(1)}개`);
+    Console.print(`3개 일치 (5,000원) - ${this.getMatchCount(5)}개`);
+    Console.print(`4개 일치 (50,000원) - ${this.getMatchCount(4)}개`);
+    Console.print(`5개 일치 (1,500,000원) - ${this.getMatchCount(3)}개`);
+    Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.getMatchCount(2)}개`);
+    Console.print(`6개 일치 (2,000,000,000원) - ${this.getMatchCount(1)}개`);
   }
 
   calculateRate(inputPrice) {
@@ -85,7 +82,7 @@ class Lotto {
     for (let i = 1; i <= 5; i++) {
       totalWinningMoney += this.getMatchCount(i) * this.prizes[i].winningMoney;
     }
-    return Math.round((totalWinningMoney / inputPrice) * 100);
+    return Math.round((totalWinningMoney / inputPrice) * 100 * 100) / 100;
   }
 
   printCalculateRate(inputPrice) {
