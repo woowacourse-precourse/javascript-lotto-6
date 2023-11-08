@@ -1,14 +1,5 @@
 class Format {
   /**
-   * 개수 포맷
-   * @param {number} count
-   * @returns {string}
-   */
-  static count(count) {
-    return `${count}개`;
-  }
-
-  /**
    * 돈 포맷
    * @param {number} number
    * @returns {string}
