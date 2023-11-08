@@ -58,10 +58,9 @@ const VALIDATION = {
   },
 
   lottoNumValidation(numbers) {
-    if (!this.isSix(numbers)) throw new Error(ERROR_MESSAGE.NOT_SIX);
-    if (!this.isDuplicate(numbers))
-      throw new Error(ERROR_MESSAGE.DUPLICATE_NUMBER);
-    if (!this.isLottoNum(numbers)) throw new Error(ERROR_MESSAGE.NOT_LOTTO_NUM);
+    if (!this.isSix(numbers)) throw Error(ERROR_MESSAGE.NOT_SIX);
+    if (!this.isDuplicate(numbers)) throw Error(ERROR_MESSAGE.DUPLICATE_NUMBER);
+    if (!this.isLottoNum(numbers)) throw Error(ERROR_MESSAGE.NOT_LOTTO_NUM);
   },
 };
 
