@@ -11,6 +11,7 @@ class LottoGame {
     this.purchaseCost = 0;
     this.matching = [];
     this.profit = 0;
+    this.checkLotto;
   }
 
   inputPayMoney(money) {
@@ -36,7 +37,7 @@ class LottoGame {
 
   inputWinningNumbers(numbers) {
     try {
-      new Lotto(numbers.split(',').map(Number));
+      this.checkLotto = new Lotto(numbers.split(',').map(Number));
       return numbers.split(',').map(Number);
     } catch (e) {
       Output.text(e);
@@ -46,7 +47,7 @@ class LottoGame {
 
   inputBonusNumber(number) {
     try {
-      if (!(Number(number) >= 1 && Number(number) <= 45)) throw ERROR.OUT_OF_RANGE;
+      this.checkLotto.checkBonusNumber(Number(number));
       return Number(number);
     } catch (e) {
       Output.text(e);
