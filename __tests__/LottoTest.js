@@ -3,7 +3,7 @@ import Lotto from "../src/Lotto.js";
 import { lottoChecker } from "../src/LottoChecker.js";
 import { checkLottoAmount, checkLottoBonusNumber } from "../src/LottoInput.js";
 import { lottoMachine } from "../src/LottoMachine.js";
-import { printLottoStatistics } from "../src/LottoOutput.js";
+import { printLottoStatistics, printProfitRate } from "../src/LottoOutput.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -62,5 +62,19 @@ describe("로또 클래스 테스트", () => {
         "5+bonus": { "price": 30000000, "text": "5개 일치, 보너스 볼 일치 (30,000,000원)", "value": 2 },
         "6": { "price": 2000000000, "text": "6개 일치 (2,000,000,000원)", "value": 0 }
       });
+  });
+
+  test("수익률을 출력한다.", () => {
+    const amount = 12000;
+    const winningData = {
+      "3": { "price": 5000, "text": "3개 일치 (5,000원)", "value": 1 },
+      "4": { "price": 50000, "text": "4개 일치 (50,000원)", "value": 0 },
+      "5": { "price": 1500000, "text": "5개 일치 (1,500,000원)", "value": 1 },
+      "5+bonus": { "price": 30000000, "text": "5개 일치, 보너스 볼 일치 (30,000,000원)", "value": 0 },
+      "6": { "price": 2000000000, "text": "6개 일치 (2,000,000,000원)", "value": 0 }
+    };
+    MissionUtils.Console.print = jest.fn();
+    printProfitRate(amount, winningData);
+    expect(MissionUtils.Console.print).toHaveBeenCalledWith("총 수익률은 12,541.7%입니다.");
   });
 });
