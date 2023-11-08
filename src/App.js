@@ -1,11 +1,11 @@
-import input from './utils/input.js';
-import print from './utils/print.js';
-import getRandomUniqueNumbers from './utils/getRandomUniqueNumbers.js';
-import Lotto from './Lotto.js';
-import Computer from './Computer.js';
-import CheckList from './datas/CheckList.js';
-import { prize, rank } from './datas/prize.js';
-import { NUMBER, PROMPT, INPUT_TYPE } from './datas/constants.js';
+import input from './utils/input';
+import print from './utils/print';
+import getRandomUniqueNumbers from './utils/getRandomUniqueNumbers';
+import Lotto from './Lotto';
+import Computer from './Computer';
+import CheckList from './datas/CheckList';
+import { prize, rank } from './datas/prize';
+import { NUMBER, PROMPT, INPUT_TYPE } from './datas/constants';
 
 class App {
   #lottos;
