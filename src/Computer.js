@@ -42,13 +42,13 @@ export default class Computer {
   }
 
   printLottoWinningStatistics() {
-    const result = this.getLottoResults();
+    this.result = this.getLottoResults();
     Console.print(MESSAGE.WINNING_STATISTICS);
     Console.print(MESSAGE.DASHES);
     for (let i = 5; i >= 1; i -= 1) {
       const { label, winnings } = LOTTERY_WINNINGS.get(i);
       const commaWinnings = NumberConverter.splitIntoThreeDigitWithComma(winnings);
-      Console.print(MESSAGE.MATCH_LOTTO_COUNT(label, commaWinnings, result[i]));
+      Console.print(MESSAGE.MATCH_LOTTO_COUNT(label, commaWinnings, this.result[i]));
     }
   }
 
