@@ -18,25 +18,11 @@ class BonusController {
   }
 
   #validateBonusNumber(bonusNumber, winningNumber) {
-    if (!bonusNumber) {
-      throw new Error(ERROR_MESSEGE.notInput);
-    }
-
-    if (isNaN(bonusNumber)) {
-      throw new Error(ERROR_MESSEGE.notNumber);
-    }
-
-    if (bonusNumber <= 0) {
-      throw new Error(ERROR_MESSEGE.notPositive);
-    }
-
-    if (bonusNumber < 1 || bonusNumber > 45) {
-      throw new Error(ERROR_MESSEGE.outOfRange);
-    }
-
-    if (winningNumber.includes(bonusNumber)) {
-      throw new Error(ERROR_MESSEGE.duplicates);
-    }
+    if (!bonusNumber) throw new Error(ERROR_MESSEGE.notInput);
+    if (isNaN(bonusNumber)) throw new Error(ERROR_MESSEGE.notNumber);
+    if (bonusNumber <= 0) throw new Error(ERROR_MESSEGE.notPositive);
+    if (bonusNumber < 1 || bonusNumber > 45) throw new Error(ERROR_MESSEGE.outOfRange);
+    if (winningNumber.includes(bonusNumber)) throw new Error(ERROR_MESSEGE.duplicates);
   }
 }
 

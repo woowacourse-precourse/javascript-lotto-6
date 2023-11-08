@@ -24,25 +24,11 @@ class WinningController {
 
     const winningNumbers = winningNumber.split(',');
 
-    if (winningNumbers.length !== 6) {
-      throw new Error(ERROR_MESSEGE.notSixNumbers);
-    }
-
-    if (winningNumbers.some((number) => isNaN(number))) {
-      throw new Error(ERROR_MESSEGE.notNumber);
-    }
-
-    if (winningNumbers.some((number) => number <= 0)) {
-      throw new Error(ERROR_MESSEGE.notPositive);
-    }
-
-    if (winningNumbers.some((number) => number < 1 || number > 45)) {
-      throw new Error(ERROR_MESSEGE.outOfRange);
-    }
-
-    if (this.#isDuplicates(winningNumbers)) {
-      throw new Error(ERROR_MESSEGE.duplicates);
-    }
+    if (winningNumbers.length !== 6) throw new Error(ERROR_MESSEGE.notSixNumbers);
+    if (winningNumbers.some((number) => isNaN(number))) throw new Error(ERROR_MESSEGE.notNumber);
+    if (winningNumbers.some((number) => number <= 0)) throw new Error(ERROR_MESSEGE.notPositive);
+    if (winningNumbers.some((number) => number < 1 || number > 45)) throw new Error(ERROR_MESSEGE.outOfRange);
+    if (this.#isDuplicates(winningNumbers)) throw new Error(ERROR_MESSEGE.duplicates);
   }
 
   #isDuplicates(array) {

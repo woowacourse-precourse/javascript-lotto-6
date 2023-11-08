@@ -25,9 +25,7 @@ class Controller {
     OutputView.printLottos(this.#lottos);
     this.#winning = await this.#WinningController.inputWinning();
     this.#bonus = await this.#BonusController.inputBonus(this.#winning);
-
     this.#CalculateController = new CalculateController(this.#lottos, this.#winning, this.#bonus);
-
     OutputView.printCalculate(this.#CalculateController.calculateState());
     OutputView.printRating(this.#CalculateController.rating());
   }

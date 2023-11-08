@@ -24,21 +24,10 @@ class PurchaseController {
   }
 
   #validatePurchaseAmount(purchaseAmount) {
-    if (!purchaseAmount) {
-      throw new Error(ERROR_MESSEGE.notInput);
-    }
-
-    if (isNaN(purchaseAmount)) {
-      throw new Error(ERROR_MESSEGE.notNumber);
-    }
-
-    if (purchaseAmount <= 0) {
-      throw new Error(ERROR_MESSEGE.notPositive);
-    }
-
-    if (purchaseAmount % 1000 !== 0) {
-      throw new Error(ERROR_MESSEGE.not1000Multiple);
-    }
+    if (!purchaseAmount) throw new Error(ERROR_MESSEGE.notInput);
+    if (isNaN(purchaseAmount)) throw new Error(ERROR_MESSEGE.notNumber);
+    if (purchaseAmount <= 0) throw new Error(ERROR_MESSEGE.notPositive);
+    if (purchaseAmount % 1000 !== 0) throw new Error(ERROR_MESSEGE.not1000Multiple);
   }
 }
 
