@@ -13,9 +13,13 @@ class LottoGenerator {
     const numberOfLottos = this.getNumberOfLottos(purchaseAmount);
     for (let i = 0; i < numberOfLottos; i++) {
       const lottoNumbers = this.generateLottoNumbers();
-      lottos.push(new Lotto(lottoNumbers));
+      lottos.push(this.generateLotto(lottoNumbers));
     }
     return lottos;
+  }
+
+  generateLotto(lottoNumbers) {
+    return new Lotto(lottoNumbers);
   }
 
   getNumberOfLottos(purchaseAmount) {
