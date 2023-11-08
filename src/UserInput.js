@@ -10,7 +10,7 @@ class Input {
     while (true) {
 
       try {
-        Console.print('구입금액을 입력해 주세요');
+        Console.print('구입금액을 입력해 주세요.');
         const input = await Console.readLineAsync('');
         const purchaseAmount = parseInt(input);
 
