@@ -9,6 +9,6 @@ export default async function inputPurchaseAmount() {
     return purchaseAmount;
   } catch (error) {
     Console.print(error.message);
-    return inputPurchaseAmount();
+    return
   }
 }
