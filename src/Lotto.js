@@ -14,7 +14,7 @@ class Lotto {
     );
     const rateOfReturn = this.calculateRateOfReturn(winningStatus);
 
-    return { winningStatus, rateOfReturn };
+    return [winningStatus, rateOfReturn];
   }
 
   calculateWinningStatus(winningNumbers, bonusNumber) {

@@ -11,7 +11,7 @@ class App {
     const bonusNumber = await LottoUi.inputBonusNumber();
 
     const lotto = new Lotto(purchasedLottos);
-    const { winningStatus, rateOfReturn } = lotto.result(
+    const [winningStatus, rateOfReturn] = lotto.result(
       winningNumbers,
       bonusNumber
     );
