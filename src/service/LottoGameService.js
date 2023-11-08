@@ -34,9 +34,7 @@ class LottoGameService {
           this.lottoGame.getWinningNumber(),
           this.lottoGame.getBonusNumber(),
         );
-      console.log(matchingNumbersCount, isMatchBonus);
       this.lottoStatistics.updateResults(matchingNumbersCount, isMatchBonus);
-      console.log(this.lottoStatistics.getResults());
     });
     return this.lottoStatistics.getResults();
   }
@@ -53,8 +51,6 @@ class LottoGameService {
 
   printWinningResult() {
     OutputView.printLottoStatistics(this.prizeDetail, this.profitRate);
-    console.log(this.prizeDetail);
-    console.log(this.profitRate);
   }
 }
 

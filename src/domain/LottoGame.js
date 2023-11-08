@@ -42,13 +42,6 @@ class LottoGame {
   getBonusNumber() {
     return this.#bonusNumber;
   }
-
-  consoleField() {
-    console.log('lottoCount', this.#lottoCount);
-    console.log('lottoTickets', this.#lottoTickets);
-    console.log('winningNumber', this.#winningNumber);
-    console.log('bonusNumber', this.#bonusNumber);
-  }
 }
 
 export default LottoGame;

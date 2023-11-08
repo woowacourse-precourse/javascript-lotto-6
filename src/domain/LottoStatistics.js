@@ -22,7 +22,6 @@ class LottoStatistics {
       winningNumber.includes(number),
     );
 
-    console.log(matchingNumbers);
     const isMatchBonus = lottoTicket.includes(bonusNumber);
     return [matchingNumbers.length, isMatchBonus];
   }

@@ -26,7 +26,6 @@ class LottoGenerator {
   }
 
   getLottoTickets() {
-    console.log(this.lottoTickets);
     return this.lottoTickets;
   }
 }

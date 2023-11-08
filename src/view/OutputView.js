@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../util/constant/index.js';
 class OutputView {
   static printLottoTicketsCount(count, tickets) {
-    Console.print(`${count}개를 구매했습니다.`);
+    Console.print(`\n${count}개를 구매했습니다.`);
     tickets.forEach((ticket) => {
       Console.print(`[${ticket.join(', ')}]`);
     });
@@ -18,7 +18,7 @@ class OutputView {
       { name: OUTPUT_MESSAGE.FIRST_NAME, count: FIRST },
     ];
 
-    Console.print(OUTPUT_MESSAGE.STATISTICS);
+    Console.print('\n' + OUTPUT_MESSAGE.STATISTICS);
     Console.print(OUTPUT_MESSAGE.LINE);
 
     prizeLevels.forEach((prize) => {
