@@ -73,7 +73,7 @@ class LottoMachine {
 
   getLotto(index) {
     const lottoLength = this.#lottos.length;
-    //Validator.isInvaildIndex(CONSTANT.ZERO, lottoLength.index, index);
+    Validator.isInvaildIndex(CONSTANT.ZERO, lottoLength.index, index);
     const lotto = this.#lottos[index].getLotto();
     return lotto;
   }
