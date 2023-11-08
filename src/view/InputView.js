@@ -53,9 +53,7 @@ class InputView {
   }
 
   #validate(price) {
-    if (validation.isEmpty(price)) {
-      throw new ValidateError(ERROR_MESSAGE.empty);
-    }
+    if (validation.isEmpty(price)) throw new ValidateError(ERROR_MESSAGE.empty);
 
     const numberPrice = Number(price);
 
@@ -63,13 +61,9 @@ class InputView {
   }
 
   #validateNumber(price) {
-    if (validation.isNumberZero(price)) {
-      throw new ValidateError(ERROR_MESSAGE.notZero);
-    }
+    if (validation.isNumberZero(price)) throw new ValidateError(ERROR_MESSAGE.notZero);
 
-    if (isNaN(price)) {
-      throw new ValidateError(ERROR_MESSAGE.notNumber);
-    }
+    if (isNaN(price)) throw new ValidateError(ERROR_MESSAGE.notNumber);
 
     if (validation.isNotLottoPurchagePriceRange(price)) {
       throw new ValidateError(ERROR_MESSAGE.lottoPurchasePriceRange);
@@ -77,9 +71,7 @@ class InputView {
   }
 
   #validateNumbers(numbers) {
-    if (validation.isEmpty(numbers)) {
-      throw new ValidateError(ERROR_MESSAGE.empty);
-    }
+    if (validation.isEmpty(numbers)) throw new ValidateError(ERROR_MESSAGE.empty);
 
     if (validation.isNotSeparateCommaNumbers(numbers)) {
       throw new ValidateError(ERROR_MESSAGE.notNumberFormat);
@@ -91,9 +83,7 @@ class InputView {
   }
 
   #validateSeparateNumbers(numbers) {
-    if (LOTTO.length !== numbers.length) {
-      throw new ValidateError(ERROR_MESSAGE.lottoLength);
-    }
+    if (LOTTO.length !== numbers.length) throw new ValidateError(ERROR_MESSAGE.lottoLength);
 
     if (validation.isExistDuplicateNumbers(numbers)) {
       throw new ValidateError(ERROR_MESSAGE.existDuplicateNumber);
@@ -101,15 +91,11 @@ class InputView {
 
     const isNotNumbersLottoRange = !numbers.every(validation.isLottoNumberRange);
 
-    if (isNotNumbersLottoRange) {
-      throw new ValidateError(ERROR_MESSAGE.lottoNumberRangee);
-    }
+    if (isNotNumbersLottoRange) throw new ValidateError(ERROR_MESSAGE.lottoNumberRangee);
   }
 
   #validateBonusNumber(number, winningNumbers) {
-    if (validation.isEmpty(number)) {
-      throw new ValidateError(ERROR_MESSAGE.empty);
-    }
+    if (validation.isEmpty(number)) throw new ValidateError(ERROR_MESSAGE.empty);
 
     if (!validation.isLottoNumberRange(number)) {
       throw new ValidateError(ERROR_MESSAGE.lottoNumberRangee);
