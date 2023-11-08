@@ -153,24 +153,16 @@ export default class LottoMachine {
         this.#bonusNumber
       );
 
-      switch (ranking) {
-        case RANKING.first:
-          this.winningDetails.first++;
-          break;
-        case RANKING.second:
-          this.winningDetails.second++;
-          break;
-        case RANKING.third:
-          this.winningDetails.third++;
-          break;
-        case RANKING.fourth:
-          this.winningDetails.fourth++;
-          break;
-        case RANKING.fifth:
-          this.winningDetails.fifth++;
-          break;
-        default:
-          break;
+      if (ranking === RANKING.first) {
+        this.winningDetails.first++;
+      } else if (ranking === RANKING.second) {
+        this.winningDetails.second++;
+      } else if (ranking === RANKING.third) {
+        this.winningDetails.third++;
+      } else if (ranking === RANKING.fourth) {
+        this.winningDetails.fourth++;
+      } else if (ranking === RANKING.fifth) {
+        this.winningDetails.fifth++;
       }
     });
   }
@@ -183,7 +175,7 @@ export default class LottoMachine {
       PRIZE.fourth * this.winningDetails.fourth +
       PRIZE.fifth * this.winningDetails.fifth;
 
-    const rateOfReturn = (prize / this.#purchaseAmount).toFixed(1);
+    const rateOfReturn = ((prize / this.#purchaseAmount) * 100).toFixed(1);
 
     return rateOfReturn;
   }
