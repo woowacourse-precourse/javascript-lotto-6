@@ -184,6 +184,7 @@ class App {
         this.#money) *
       100
     ).toFixed(1);
+    MissionUtils.Console.print(`총 수익률은 ${calculation}%입니다.`);
   }
 
   async play() {
