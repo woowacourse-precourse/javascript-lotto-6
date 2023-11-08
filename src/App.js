@@ -1,4 +1,5 @@
-import Lotto from "./Lotto"; // Lotto 클래스의 정의가 있는 파일 경로에 따라 임포트 경로를 수정해야 합니다.
+import Lotto from "./Lotto";
+import Price from "./Price";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
@@ -20,15 +21,11 @@ class App {
     do {
       try {
         purchaseAmount = await MissionUtils.Console.readLineAsync(MESSAGE1);
-        const parsedAmount = parseInt(purchaseAmount, 10);
-        if (isNaN(purchaseAmount) || parsedAmount % 1000 !== 0) {
-          throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
-        }
-        
-        purchaseAmount = parsedAmount;
+        const price = new Price(purchaseAmount);
+        purchaseAmount = price.getPrice();
         purchaseCount = purchaseAmount/1000;
-        MissionUtils.Console.print(`${purchaseCount}개를 구매했습니다.`);
         purchaseAmountStatus = false;
+        MissionUtils.Console.print(`${purchaseCount}개를 구매했습니다.`);
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
@@ -51,7 +48,6 @@ class App {
         lottoNumber = await MissionUtils.Console.readLineAsync(MESSAGE2);
         const lotto = new Lotto(lottoNumber.split(",").map(Number));
         lottoNumbersArray = lotto.getNumbers();
-        
         lottoNumberStatus = false;
       } catch (error) {
         MissionUtils.Console.print(error);
@@ -72,8 +68,6 @@ class App {
       }
     } while (bonusNumberStatus);
 
-    
-    // 당첨 티켓 개수를 초기화
     let win3 = 0;
     let win4 = 0;
     let win5 = 0;
@@ -99,7 +93,6 @@ class App {
       }
     }
 
-    // 당첨 통계 출력
     MissionUtils.Console.print(MESSAGE4);
     MissionUtils.Console.print(`3개 일치 (5,000원) - ${win3}개`);
     MissionUtils.Console.print(`4개 일치 (50,000원) - ${win4}개`);
@@ -107,7 +100,6 @@ class App {
     MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${win5WithBonus}개`);
     MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${win6}개`);
 
-    // 총 수익률 계산
     const totalPrize = win3 * 5000 + win4 * 50000 + win5 * 1500000 + win5WithBonus * 30000000 + win6 * 2000000000;
     const totalCost = purchaseAmount;
     const profitRate = ((totalPrize / totalCost) * 100).toFixed(1);
