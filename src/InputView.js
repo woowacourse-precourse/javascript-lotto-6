@@ -8,7 +8,6 @@ class InputView {
     try {
       const amount = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
       this.validator.validatePurchaseAmount(amount);
-      Console.print(amount);
       return amount;
     } catch (e) {
       Console.print(e.message);
@@ -30,13 +29,13 @@ class InputView {
     }
   }
 
-  async askBonusNumber() {
+  async askBonusNumber(winningNumbers) {
     try {
       const input = await Console.readLineAsync(
         "\n보너스 번호를 입력해 주세요.\n"
       );
       const bonusNumber = Number(input);
-      this.validator.validateNumbers([bonusNumber]);
+      this.validator.validateBonusNumber([bonusNumber], winningNumbers);
       return bonusNumber;
     } catch (e) {
       Console.print(e.message);

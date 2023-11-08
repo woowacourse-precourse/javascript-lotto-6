@@ -31,7 +31,7 @@ class LottoController {
 
   async viewResults() {
     const winningNumbers = await this.inputView.askWinningNumbers();
-    const bonusNumber = await this.inputView.askBonusNumber();
+    const bonusNumber = await this.inputView.askBonusNumber(winningNumbers);
     const countWinners = this.calculateWinners.manageWinners(
       this.lottos,
       winningNumbers,
