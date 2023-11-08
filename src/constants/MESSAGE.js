@@ -1,22 +1,34 @@
+import LOTTO from "./LOTTO.js";
+
 const INPUT = {
-  PURCHASE_AMOUNT: "구입금액을 입력해주세요.",
-  WINNING_NUMBER: "당첨 번호를 입력해 주세요.",
-  BONUS_NUMBER: "보너스 번호를 입력해 주세요.",
+  PURCHASE_AMOUNT: "구입금액을 입력해주세요.\n",
+  WINNING_NUMBER: "당첨 번호를 입력해 주세요.\n",
+  BONUS_NUMBER: "보너스 번호를 입력해 주세요.\n",
 };
 
 const SIGNAL = {
   SEPERATOR: ",",
+  DIVIDER: "---",
+  NEW_LINE: "",
 };
 
 const OUTPUT = {
-  PURCHASE_COUNT: (count) => `${count}개를 구매했습니다.`,
-  LOTTO_NUMBER: (lotto) => `[${lotto.join(", ")}]`,
-  RESULT_HEADER: "당첨 통계\n___",
-  RESULT: (result) => {
-    const { rank, count, prize } = result;
-    return `${rank}(${prize.toLocaleString()}원)- ${count}개`;
+  PURCHASE_COUNT(count) {
+    return `${count}개를 구매했습니다.`;
   },
-  PROFIT: (profit) => `총 수익률은 ${profit}%입니다.`,
+  LOTTO_NUMBER(lotto) {
+    return `[${lotto.join(", ")}]`;
+  },
+  RESULT_HEADER: "당첨 통계",
+  RESULT(result) {
+    const { rank, count } = result;
+    return `${LOTTO.RANK[rank]} (${LOTTO.PRIZE[
+      rank
+    ].toLocaleString()}원) - ${count}개`;
+  },
+  PROFIT(profit) {
+    return `총 수익률은 ${profit}%입니다.`;
+  },
 };
 
 const ERROR = {
