@@ -1,4 +1,4 @@
-import LottoMachine from '../src/LottoMachine.js';
+import LottoMachine from '../src/Model/LottoMachine.js';
 
 describe('로또 기계 테스트', () => {
   test('로또 구입 금액이 4000원이면 로또를 4개 발행한다.', () => {

@@ -1,9 +1,9 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LottoMachine from '../LottoMachine.js';
+import LottoMachine from '../Model/LottoMachine.js';
 import InputView from '../View/InputView.js';
 import OutputView from '../View/OutputView.js';
-import WinningLotto from '../WinningLotto.js';
-import ResultCalculator from '../ResultCalculator.js';
+import WinningLotto from '../Model/WinningLotto.js';
+import ResultCalculator from '../Model/ResultCalculator.js';
 
 class GameController {
   #lottoMachine;

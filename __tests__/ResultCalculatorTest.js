@@ -1,6 +1,6 @@
-import Lotto from '../src/Lotto';
-import ResultCalculator from '../src/ResultCalculator';
-import WinningLotto from '../src/WinningLotto';
+import Lotto from '../src/Model/Lotto';
+import ResultCalculator from '../src/Model/ResultCalculator';
+import WinningLotto from '../src/Model/WinningLotto';
 import { roundToOneDecimalPlace } from '../src/utils/function';
 
 describe('당첨 결과 테스트', () => {

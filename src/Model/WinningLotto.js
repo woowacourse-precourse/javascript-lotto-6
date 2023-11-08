@@ -1,7 +1,7 @@
 import Lotto from './Lotto.js';
-import ERROR from './constants/error.js';
-import LOTTO from './constants/lotto.js';
-import CustomError from './errors/CustomError.js';
+import ERROR from '../constants/error.js';
+import LOTTO from '../constants/lotto.js';
+import CustomError from '../errors/CustomError.js';
 
 class WinningLotto extends Lotto {
   #bonusNumber;

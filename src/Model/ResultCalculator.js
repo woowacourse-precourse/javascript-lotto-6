@@ -1,6 +1,6 @@
-import LOTTO from './constants/lotto.js';
-import WINNING_INFO from './constants/winningInfo.js';
-import { roundToOneDecimalPlace } from './utils/function.js';
+import LOTTO from '../constants/lotto.js';
+import WINNING_INFO from '../constants/winningInfo.js';
+import { roundToOneDecimalPlace } from '../utils/function.js';
 
 class ResultCalculator {
   #cntRank;
