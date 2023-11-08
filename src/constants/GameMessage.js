@@ -12,7 +12,7 @@ const GAME_MESSAGE = Object.freeze({
   dash: ' - ',
   numberSuffix: '개',
   resultRate: '총 수익률은',
-  resultSuffix: '입니다.',
+  resultSuffix: '%입니다.',
 });
 
 export default GAME_MESSAGE;
