@@ -3,6 +3,7 @@ class App {
   async play() {
     const payment = await this.getPayment();
     const lottoCount = parseInt(payment / this.LOTTO_UNIT);
+    const lottoList = this.getPickedLottoList(lottoCount);
   async getPayment() {
     try {
       const payment =
@@ -24,6 +25,18 @@ class App {
       throw new Error("[ERROR] 구입 금액은 1000원으로 나누어져야 합니다.");
     }
   }
+
+  getPickedLottoList(lottoCount) {
+    const pickedLottoList = [];
+    for (let i = 0; i < lottoCount; i++) {
+      const pickedLotto = new Lotto(
+        Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, INPUT_LENGTH)
+      );
+      pickedLottoList.push(pickedLotto);
+    }
+    return pickedLottoList;
+  }
+
 }
 
 export default App;
