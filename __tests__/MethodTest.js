@@ -220,3 +220,25 @@ describe('getBonusNum 메서드 테스트', () => {
     expect(bonusNum).toBe("7");
   });
 });
+
+describe('calculateWin 메서드 테스트', () => {
+  test('calculateWin 메서드는 각 등수별 당첨 개수를 리턴해야한다.', async () => {
+    //given
+    const app = new App();
+    const tickets = [
+      [1, 2, 3, 4, 5, 6]
+    ];
+    const winningNums = [1, 2, 3, 4, 5, 6];
+    const bonus = 7;
+
+    //when
+    const winLog = app.calculateWin(tickets, winningNums, bonus);
+
+    //then
+    expect(winLog[0]).toBe(0);
+    expect(winLog[1]).toBe(0);
+    expect(winLog[2]).toBe(0);
+    expect(winLog[3]).toBe(1);
+    expect(winLog[4]).toBe(0);
+  });
+});
