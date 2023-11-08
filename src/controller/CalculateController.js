@@ -13,7 +13,7 @@ class CalculateController {
     this.#state = [0, 0, 0, 0, 0];
   }
 
-  calculateStats() {
+  calculateState() {
     this.#lottos.forEach((lotto) => {
       const updateState = lotto.calculate(this.#winning, this.#bonus);
       if (updateState !== -1) {
