@@ -5,6 +5,7 @@ export const MESSAGE = {
   PRINT_ISSUE_LOTTOS: "\n%s개를 구매했습니다.",
   PRINT_RESULT_TITLE: "당첨 통계\n---",
   PRINT_RESULT_RANK: "%s개 일치%s (%s원) - %s개",
+  PRINT_RATE: "총 수익률은 %s%입니다.",
 };
 
 export const ERROR = {

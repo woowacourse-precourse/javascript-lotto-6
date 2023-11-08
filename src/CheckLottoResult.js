@@ -23,6 +23,20 @@ class CheckLottoResult {
     if (rank === undefined) return;
     this.rankCount.set(rank, this.rankCount.get(rank) + 1);
   }
+
+  returnRate(inputMoney) {
+    let profit = 0;
+    this.rankCount.forEach((count, rank) => {
+      profit += count * RANK[rank].PRIZE;
+    })
+    const rate = profit / inputMoney * 100;
+    return this.round(rate);
+  }
+
+  round(num) {
+    return (+(Math.round(num + `e+1`) + `e-1`)).toFixed(1);
+  }
+  
 }
 
 export default CheckLottoResult;

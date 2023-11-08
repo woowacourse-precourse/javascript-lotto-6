@@ -62,6 +62,7 @@ class App {
     this.checkLottoResult.checkResult(this.lottos, this.userLotto, this.bonusNumber);
     Console.print(MESSAGE.PRINT_RESULT_TITLE);
     this.printLottoResult();
+    this.printLottoRate();
   }
 
   printLottoResult() {
@@ -69,18 +70,28 @@ class App {
       Console.print(MESSAGE.PRINT_RESULT_RANK.format(
         RANK[rank].MATCHING_COUNT,
         RANK[rank].EXTRA_TEXT,
-        RANK[rank].PRIZE,
+        this.addCommasToNumber(RANK[rank].PRIZE),
         rankCount,
       ));
     });
   }
 
+  printLottoRate() {
+    Console.print(MESSAGE.PRINT_RATE.format(
+      this.checkLottoResult.returnRate(this.inputMoney)
+    ))
+  }
+
+  // 출력 형식
   changePrintFormat() {
     String.prototype.format = function() {
       return [...arguments].reduce((pattern,value) => pattern.replace(/%s/,value), this);
     };
   }
   
+  addCommasToNumber(money) {
+    return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 }
 
 export default App;
