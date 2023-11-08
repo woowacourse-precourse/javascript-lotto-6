@@ -11,8 +11,8 @@ class App {
     
     async play() {
       try {
-          const lottoNum = await this.createLottoNum.start();
-          this.createWinNum = new CreateWinNum(lottoNum.numbers);
+          const { lottoNum, lottoCount } = await this.createLottoNum.start();
+          this.createWinNum = new CreateWinNum(lottoNum.numbers, lottoCount);
           await this.createWinNum.start();
       } catch (error) {
           MissionUtils.Console.print(error.message);
