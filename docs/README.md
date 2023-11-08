@@ -1,6 +1,6 @@
 # 기능 명세서
 
-> UI와 핵심 로직 구분, 메시지/값 하드 코딩 의식해서 구현하기
+> UI와 핵심 로직 구분, 메시지/값 하드코딩하던 것 의식해서 구현하기
 
 > 작은 단위의 테스트부터 작성
 
@@ -11,21 +11,34 @@
 UI 로직 담당
 
 - [x] `play()`: 애플리케이션 실행
-- [x] `getAmountInput()`: 구입 금액 입력받는 메서드
-- [x] `getWinningInput()`: 당첨 번호, 보너스 번호 입력받는 메서드
+
+- [x] `getAmountInput()`: 구입 금액을 입력받는 메서드
+
+- [x] `getWinningInput()`: 당첨 번호, 보너스 번호를 입력받는 메서드
+
+- [x] `getResultInfo()`: 당첨 통계를 출력하기 위해 필요한 게임의 결과를 반환하는 메서드
+
 - [x] `printResult()`: 당첨 통계를 출력하는 메서드
 
 ### Game 클래스
 
 도메인 로직 담당
 
-- [x] `getLottoTickets()`: 입력받은 금액만큼 로또 인스턴스 생성하는 메서드
+- [x] `generateTickets()`: 로또 티켓들을 생성하고 출력하는 메서드
+
+- [x] `getTickets()`: 입력받은 금액만큼 로또 인스턴스 생성하는 메서드
+
   > 정렬해서 값 넘기기
-- [x] `draw()`: 로또를 추첨하는 메서드
-- [x] `recordResult()`: 추첨 중 당첨 정보를 기록하는 메서드
+
 - [x] `printTickets()`: 발행된 로또 티켓들의 정보를 출력하는 메서드
-- [x] `getRank()`: 추첨 결과를 토대로 순위를 반환하는 메서드
-- [x] `getReturn()`: 총 수익을 반환하는 메서드
+
+- [x] `draw()`: 로또를 추첨하는 메서드
+
+- [x] `recordDrawResult()`: 추첨 중 당첨 정보를 기록하는 메서드
+
+- [x] `getDrawRank()`: 추첨 결과를 토대로 순위를 반환하는 메서드
+
+- [x] `getProfitRate()`: 최종 수익률을 반환하는 메서드
   > 소수점 둘째 자리에서 반올림
 
 ### Lotto 클래스
@@ -33,8 +46,11 @@ UI 로직 담당
 중복없는 6자리 숫자 배열을 받아 로또 인스턴스를 생성
 
 - [x] `#validate`: 추가적인 예외 처리 구현
+
   - [x] 중복 숫자 유효성 검사
+
 - [x] `#getWinningInfo(winningNumbers, bonusNumber)`: 보너스 따로 구분해 당첨내역 반환 (등수, 일치 정보)
+
 - [x] `info()`: `private` 필드 값을 넘기기 위한 `getter` 함수
 
 ### validateInput.js
@@ -42,7 +58,9 @@ UI 로직 담당
 사용자 입력에 대한 유효성 검사 로직을 분리한 파일
 
 - [x] `validateAmountInput(input)`: 구입 금액 검사
+
 - [x] `validateWinningInput(input)`: 당첨 번호 검사
+
 - [x] `validateBonusInput(input)`: 보너스 번호 검사
 
 ## 예외 처리
