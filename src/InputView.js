@@ -1,7 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { INPUT_MSG } from './constant.js';
 
-
 const inputView = {
   async purchaseInput() {
     const inputPurchase = await MissionUtils.Console.readLineAsync(INPUT_MSG.PURCHASE);

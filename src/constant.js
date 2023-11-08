@@ -1,4 +1,5 @@
 export const LOTTO = {
+    UNIT: 1000,
     LENGTH: 6,
     MIN_RANGE: 1,
     MAX_RANGE: 45,
@@ -34,6 +35,6 @@ export const ERROR_MSG = {
     INPUT_NAN: '[ERROR] 입력된 숫자가 잘못된 형식입니다.',
     NUM_UNIT: '[ERROR] 1,000원 단위로만 입력 가능합니다.',
     NUM_RANGE: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
-    NUM_COUNT: '[ERROR] 로또 번호는 6개여야 합니다.',
+    NUM_LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
     NUM_DUPE: '[ERROR] 중복된 숫자는 입력할 수 없습니다.',
 };
