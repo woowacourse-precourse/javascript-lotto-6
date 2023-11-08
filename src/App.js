@@ -1,4 +1,4 @@
-import PlayView from './View.js';
+import { PlayView } from './View.js';
 
 class App {
   async play() {
