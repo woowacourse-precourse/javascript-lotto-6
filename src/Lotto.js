@@ -1,3 +1,6 @@
+import Validator from './validator/Validator.js';
+import { WINNING_AMOUNTS } from './constants/constants.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,57 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    Validator.isNumbersValid(String(numbers));
   }
 
-  // TODO: 추가 기능 구현
+  returnWinningNumbers() {
+    return String(this.#numbers).split(',').map(Number);
+  }
+
+  returnOneLotto() {
+    return this.#numbers.sort((a, b) => a - b);
+  }
+
+  calculateWinningStats(lottos, winningNubers, bonusNumbers) {
+    const STATS = [0, 0, 0, 0, 0];
+
+    lottos.forEach((lotto) => {
+      const MATCHES = winningNubers.filter((el) => lotto.includes(el));
+      const MATCH_COUNT = MATCHES.length;
+      const BONUS_MATCH = lotto.includes(bonusNumbers);
+
+      if (MATCH_COUNT === 6) {
+        STATS[0] += 1;
+      } else if (MATCH_COUNT === 5 && BONUS_MATCH) {
+        STATS[1] += 1;
+      } else if (MATCH_COUNT === 5) {
+        STATS[2] += 1;
+      } else if (MATCH_COUNT === 4) {
+        STATS[3] += 1;
+      } else if (MATCH_COUNT === 3) {
+        STATS[4] += 1;
+      }
+    });
+
+    return STATS;
+  }
+
+  getProfits(STATS) {
+    const PRIZE_MONEYS = Object.values(WINNING_AMOUNTS).map(Number);
+    let profits = 0;
+
+    STATS.forEach((n, i) => {
+      if (n > 0) {
+        profits += PRIZE_MONEYS[4 - i];
+      }
+    });
+
+    return profits;
+  }
+
+  calculateRate(profits, money) {
+    return profits / Number(money);
+  }
 }
 
 export default Lotto;
