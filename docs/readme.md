@@ -110,19 +110,19 @@
         <td>로또 번호가 자연수가 아닐 경우 예외 처리한다.</td>
     </tr>
     <tr>
-        <td><input type="checkBox" disabled></td>
+        <td><input type="checkBox" checked></td>
         <td>당첨 번호를 입력 받는다. 번호는 쉼표(,)를 기준으로 구분한다.</td>
     </tr>
     <tr>
-        <td><input type="checkBox" disabled></td>
+        <td><input type="checkBox" checked></td>
         <td>보너스 번호를 입력받는다.</td>
     </tr>
     <tr>
-        <td><input type="checkBox" disabled></td>
+        <td><input type="checkBox" checked></td>
         <td>로또 번호는 1-45사이 숫자이며 아닐 경우 예외 처리한다.</td>
     </tr>
     <tr>
-        <td><input type="checkBox" disabled></td>
+        <td><input type="checkBox" checked></td>
         <td>로또 번호가 중복되는 숫자일 경우 예외 처리한다.</td>
     </tr>
 </table>
@@ -138,11 +138,11 @@
         <th>테스트</th>
     </tr>
     <tr>
-        <td><input type="checkBox" disabled></td>
+        <td><input type="checkBox" checked></td>
         <td>발행한 로또 수량 및 번호를 출력한다.</td>
     </tr>
     <tr>
-        <td><input type="checkBox" disabled></td>
+        <td><input type="checkBox" checked></td>
         <td>로또 번호는 오름차순으로 정렬하여 보여준다.</td>
     </tr>
     <tr>
