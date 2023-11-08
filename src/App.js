@@ -2,7 +2,6 @@ import { Console } from '@woowacourse/mission-utils';
 import InputView from './InputView.js';
 import Machine from './LottoMachine.js';
 import LottoGenerator from './LottoGenerator.js';
-import Lotto from './Lotto.js';
 import LottoResultCalculator from './LottoMachine.js';
 import OutputView from './OutputView.js';
 
