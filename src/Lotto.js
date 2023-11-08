@@ -18,7 +18,7 @@ class Lotto {
   }
 
   returnOneLotto() {
-    return this.#numbers;
+    return this.#numbers.sort((a, b) => a - b);
   }
 
   calculateWinningStats(lottos, winningNubers, bonusNumbers) {
