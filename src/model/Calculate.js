@@ -1,31 +1,42 @@
 import { PRICE, NUMBERS } from '../util/constant.js';
 
 class Calculate {
+  #lottoList;
+  #lotto;
+  #bonus;
+  countMatch;
+
+  constructor() {
+    this.countMatch = new Array(NUMBERS.rankLength).fill(0);
+  }
+
   countLottoAmounnt(money) {
     return parseInt(Number(money) / NUMBERS.unitOfMoney);
   }
 
   async countTotalRanking(lottoList, lotto, bonus) {
-    this.countMatch = new Array(NUMBERS.rankLength).fill(0);
+    this.#lottoList = lottoList;
+    this.#lotto = lotto;
+    this.#bonus = Number(bonus);
 
-    await lottoList.forEach(eachLotto => {
-      this.#countEachLotto(eachLotto, lotto, bonus);
+    await this.#lottoList.forEach(eachLotto => {
+      this.#countEachLotto(eachLotto);
     });
 
     return this.countMatch;
   }
 
-  async #countEachLotto(eachLotto, lotto, bonus) {
-    let matchLength = await eachLotto.filter(eachLottoNumber => lotto.includes(eachLottoNumber)).length;
-    this.#rankCount(matchLength, eachLotto, bonus);
+  async #countEachLotto(eachLotto) {
+    let matchLength = await eachLotto.filter(eachLottoNumber => this.#lotto.includes(eachLottoNumber)).length;
+    this.#rankCount(matchLength, eachLotto);
   }
 
-  #rankCount(matchLength, eachLotto, bonus) {
+  #rankCount(matchLength, eachLotto) {
     switch (matchLength) {
       case 6:
         return (this.countMatch[4] += NUMBERS.rankCountUp);
       case 5:
-        return (this.countMatch[this.#chechBonusAndFive(eachLotto, bonus)] += NUMBERS.rankCountUp);
+        return (this.countMatch[this.#chechBonusAndFive(eachLotto)] += NUMBERS.rankCountUp);
       case 4:
         return (this.countMatch[1] += NUMBERS.rankCountUp);
       case 3:
@@ -33,16 +44,16 @@ class Calculate {
     }
   }
 
-  #chechBonusAndFive(eachLotto, bonus) {
-    if (eachLotto.includes(Number(bonus))) return 3;
+  #chechBonusAndFive(eachLotto) {
+    if (eachLotto.includes(this.#bonus)) return 3;
     return 2;
   }
 
-  calculateBenefit(rank, price) {
+  calculateBenefit(price) {
     let eachPrice = 0;
 
     Array.from({ length: NUMBERS.rankLength }, (v, rankIdx) => {
-      eachPrice += PRICE[rankIdx] * rank[rankIdx];
+      eachPrice += PRICE[rankIdx] * this.countMatch[rankIdx];
     });
 
     return ((eachPrice / price) * 100).toFixed(1);

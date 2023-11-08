@@ -14,9 +14,9 @@ describe('로또 계산 기능 테스트', () => {
 
   test('수익률 계산', () => {
     const calculate = new Calculate();
-    const rank = [0, 0, 0, 0, 1];
+    calculate.countMatch = [0, 0, 0, 0, 1];
     const price = 2000;
 
-    expect(calculate.calculateBenefit(rank, price)).toEqual('100000000.0');
+    expect(calculate.calculateBenefit(price)).toEqual('100000000.0');
   });
 });
