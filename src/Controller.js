@@ -17,11 +17,23 @@ class Controller {
   #tickets;
 
   async progress() {
+    await this.#handlerPurchasePhase();
+    await this.#handlerDrawPhase();
+    await this.#handlerResultPhase();
+  }
+
+  async #handlerPurchasePhase() {
     await this.#handlerErrorAndProceed(this.#getPurchaseAmount);
     this.#tickets = await this.#getLottoTicketList();
     this.#displayLottoTicket(this.#tickets);
+  }
+
+  async #handlerDrawPhase() {
     await this.#handlerErrorAndProceed(this.#getWinningNumbers);
     await this.#handlerErrorAndProceed(this.#getBonusNumber);
+  }
+
+  async #handlerResultPhase() {
     const matchStatus = await this.#getMatchStatus(
       this.#tickets,
       this.#winningNumbers,
@@ -55,10 +67,10 @@ class Controller {
   }
 
   async #getWinningNumbers() {
-    this.inputWinningNumbers = await InputView.readLottoWinningNumbers();
-    this.#validateWinningNumbers(this.inputWinningNumbers);
-    this.inputWinningNumbers = this.#convertWinningNumbers(this.inputWinningNumbers);
-    this.#winningNumbers = new Lotto(this.inputWinningNumbers).winningNumbers;
+    const inputWinningNumbers = await InputView.readLottoWinningNumbers();
+    this.#validateWinningNumbers(inputWinningNumbers);
+    const winningNumbers = this.#convertWinningNumbers(inputWinningNumbers);
+    this.#winningNumbers = new Lotto(winningNumbers).winningNumbers;
   }
 
   #convertWinningNumbers(inputValue) {
@@ -75,8 +87,8 @@ class Controller {
   }
 
   async #getBonusNumber() {
-    this.inputBonusNumber = Number(await InputView.readLottoBonusNumber());
-    this.#bonusNumber = new Bonus(this.#winningNumbers, this.inputBonusNumber).bonusNumber;
+    const inputBonusNumber = Number(await InputView.readLottoBonusNumber());
+    this.#bonusNumber = new Bonus(this.#winningNumbers, inputBonusNumber).bonusNumber;
   }
 
   async #getMatchStatus(tickets, winningNumbers, bonusNumber) {
