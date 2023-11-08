@@ -24,6 +24,7 @@ export default class Vendor {
 
   issueTickets(paid) {
     const numOfTickets = paid / 1000;
+    Console.print(`\n${numOfTickets}개를 구매했습니다.`);
     const tickets = [];
     for (let i = 0; i < numOfTickets; i += 1) {
       const ticket = Random.pickUniqueNumbersInRange(1, 45, 6);

@@ -9,7 +9,7 @@ export default class Host {
   }
 
   async enrollWinningNumbers() {
-    const user = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+    const user = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
     const winningNumbers = user
       .split(',')
       .map((num) => parseInt(num, 10))
@@ -20,8 +20,9 @@ export default class Host {
 
   async getBonusNumber() {
     try {
-      const user =
-        await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+      const user = await Console.readLineAsync(
+        '\n보너스 번호를 입력해 주세요.\n',
+      );
       const bonus = parseInt(user, 10);
       this.#validate(bonus, this.#winningNumbers);
       return bonus;
