@@ -6,8 +6,8 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     LottoValidator.isSixLength(numbers);
-    LottoValidator.isInteger(numbers);
-    LottoValidator.isValidRange(numbers);
+    LottoValidator.isAllPositiveInt(numbers);
+    LottoValidator.isAllValidRange(numbers);
     LottoValidator.isDuplicated(numbers);
     this.#numbers = numbers;
   }
