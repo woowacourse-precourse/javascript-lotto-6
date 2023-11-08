@@ -1,5 +1,6 @@
 import { Console, MissionUtils } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../constant/Messages.js';
+import { NUM } from '../constant/Number.js';
 
 class Lottos {
   constructor(buyMoney) {
@@ -11,9 +12,11 @@ class Lottos {
   createLottos() {
     for (let i = 0; i < this.numOfLottos; i++) {
       this.createdLottos.push(
-        MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort(
-          (a, b) => a - b
-        )
+        MissionUtils.Random.pickUniqueNumbersInRange(
+          NUM.LOTTO_MINNUM,
+          NUM.LOTTO_MAXNUM,
+          NUM.LOTTO_LENGTH
+        ).sort((a, b) => a - b)
       );
     }
   }

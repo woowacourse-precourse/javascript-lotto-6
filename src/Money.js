@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constant/Messages.js';
+import { ERROR_MESSAGE } from '../constant/Messages.js';
 
 class Money {
   constructor(buyMoney) {

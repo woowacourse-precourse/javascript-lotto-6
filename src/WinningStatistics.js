@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../constant/Messages.js';
+import { NUM } from '../constant/Number.js';
 class winningStatistics {
   constructor(lottos, bonusNum, winningNum, buyMoney) {
     this.lottos = lottos;
@@ -36,11 +37,11 @@ class winningStatistics {
 
   checkRevenue() {
     const totalRevenue =
-      this.rank[5] * 5000 +
-      this.rank[4] * 50000 +
-      this.rank[3] * 1500000 +
-      this.rank[2] * 30000000 +
-      this.rank[1] * 2000000000;
+      this.rank[5] * NUM.RANK_FIFTH_REWARD +
+      this.rank[4] * NUM.RANK_FOURTH_REWARD +
+      this.rank[3] * NUM.RANK_THIRD_REWARD +
+      this.rank[2] * NUM.RANK_SECOND_REWARD +
+      this.rank[1] * NUM.RANK_FIRST_REWARD;
 
     this.rateOfReturn = (totalRevenue / this.buyMoney) * 100;
     this.calculateRevenue(this.rateOfReturn);

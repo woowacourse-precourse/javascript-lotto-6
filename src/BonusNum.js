@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE } from '../constant/Messages.js';
+import { NUM } from '../constant/Number.js';
 
 class BonusNum {
   constructor(BonusNum, winningNum) {
@@ -7,7 +8,7 @@ class BonusNum {
   }
 
   validate(BonusNum, winningNum) {
-    if (BonusNum <= 0 || 45 < BonusNum) {
+    if (BonusNum < NUM.LOTTO_MINNUM || NUM.LOTTO_MAXNUM < BonusNum) {
       Console.print(ERROR_MESSAGE.NUM_RANGE);
       throw new Error(ERROR_MESSAGE.NUM_RANGE);
     } else if (winningNum.includes(BonusNum)) {

@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constant/Messages.js';
+import { ERROR_MESSAGE } from '../constant/Messages.js';
+import { NUM } from '../constant/Number.js';
 
 class Lotto {
   #numbers;
@@ -11,7 +12,7 @@ class Lotto {
 
   #validate(numbers) {
     const duplicate = new Set(numbers);
-    if (numbers.length !== 6) {
+    if (numbers.length !== NUM.LOTTO_LENGTH) {
       Console.print(ERROR_MESSAGE.RANDOM_NUM_SIX);
       throw new Error(ERROR_MESSAGE.RANDOM_NUM_SIX);
     }
@@ -26,7 +27,7 @@ class Lotto {
   }
 
   checkNumRange(e) {
-    if (e <= 0 || 45 < e) {
+    if (e < NUM.LOTTO_MINNUM || NUM.LOTTO_MAXNUM < e) {
       Console.print(ERROR_MESSAGE.NUM_RANGE);
       throw new Error(ERROR_MESSAGE.NUM_RANGE);
     }
