@@ -27,7 +27,7 @@ const LottoView = {
         Object.keys(gameResult).forEach(key => {
             Console.print(`${ROI_DETAIL_MESSAGE[key]}${gameResult[key]}개`);
         })
-        Console.print(`${PROMPT.ROI_HEADER}((Number(result_money)/Number(input_money))*100).toFixed(1)${PROMPT.ROI_FOOTER}`)
+        Console.print(`${PROMPT.ROI_HEADER}${((Number(result_money)/Number(input_money))*100).toFixed(1)}${PROMPT.ROI_FOOTER}`)
     }
 }
 export default LottoView;
