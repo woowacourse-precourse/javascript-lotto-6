@@ -1,4 +1,4 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import Output from './Output.js';
 import UserInput from './UserInput.js';
 import Validate from './Validate.js';
@@ -31,12 +31,16 @@ class App {
     return this.getLottoCount()
   }
 
-  async getLottoCount () {
-    this.Output.printPurchaseAmonut()
-    this.money = await this.Input.amountInput()
-    this.Validate.DivisibleBy1000(this.money)
-    this.amonut = this.money / 1000
-    this.generateLotto()
+  async getLottoCount() {
+    try {
+      this.Output.printPurchaseAmonut();
+      this.money = await this.Input.amountInput();
+      this.Validate.DivisibleBy1000(this.money);
+      this.amonut = this.money / 1000;
+      this.generateLotto();
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   async generateLotto() {
@@ -50,22 +54,31 @@ class App {
   }
 
   async winningNumber() {
-    this.Output.printWinnerNumber()
+    this.Output.printWinnerNumber();
     const inputNum = await this.Input.winningNumbersInput();
-    const lotto = new Lotto(inputNum.split(","));
-    this.winningNumbers = inputNum.split(",").map(Number);
-    this.winningBonusNumber()
+    try {
+      const lotto = new Lotto(inputNum.split(","));
+      this.winningNumbers = inputNum.split(",").map(Number);
+    } catch (error) {
+      Console.print(error.message)
+      return; 
+    }
+    this.winningBonusNumber();
   }
 
   async winningBonusNumber() {
-    this.Output.printBonusNumber()
-    this.bonusNumber = await this.Input.winningBounsInput();
-    this.bonusNumber = this.bonusNumber.split(",").map((numbers) => Number(numbers));
-    this.Validate.checkNumberRange(this.bonusNumber);
-    this.Validate.checkNumbersType(this.bonusNumber);
-    this.Validate.checkedBonusLength(this.bonusNumber);
-    this.Validate.checkDuplicateBonus(this.bonusNumber, this.winningNumbers);
-    this.winningStats()
+    this.Output.printBonusNumber();
+    try {
+      this.bonusNumber = await this.Input.winningBounsInput();
+      this.bonusNumber = this.bonusNumber.split(",").map((numbers) => Number(numbers));
+      this.Validate.checkNumberRange(this.bonusNumber);
+      this.Validate.checkNumbersType(this.bonusNumber);
+      this.Validate.checkedBonusLength(this.bonusNumber);
+      this.Validate.checkDuplicateBonus(this.bonusNumber, this.winningNumbers);
+      this.winningStats();
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   winningStats() {
