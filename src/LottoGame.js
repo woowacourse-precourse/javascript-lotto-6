@@ -25,6 +25,7 @@ class LottoGame {
   };
 
   static getRandomLottos(count) {
+    Console.print(`${count}개를 구매했습니다.`);
     const lottos = Array.from({ length: count }, () => {
       const lotto = new Lotto(Random.pickUniqueNumbersInRange(1, 45, 6));
       Console.print(`[${lotto.join(', ')}]`);
