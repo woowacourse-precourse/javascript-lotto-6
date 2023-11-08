@@ -1,4 +1,5 @@
 import { ERROR_MESSEGE } from '../constants/messages.js';
+import { OPTIONS } from '../constants/lottoConstants.js';
 
 class Lotto {
   #numbers;
@@ -12,7 +13,6 @@ class Lotto {
   #validateLotto() {
     this.#validateSize(this.#numbers);
     this.#validateDuplicate(this.#numbers);
-    this.#validateRange(this.#numbers);
   }
 
   getLotto() {
@@ -20,7 +20,7 @@ class Lotto {
   }
 
   #validateSize(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== OPTIONS.length) {
       throw new Error(ERROR_MESSEGE.length);
     }
   }
@@ -35,14 +35,6 @@ class Lotto {
 
   #duplicateCount(numbers, number) {
     return numbers.filter((current) => current === number).length;
-  }
-
-  #validateRange(numbers) {
-    numbers.forEach((number) => {
-      if (1 < number && number > 45) {
-        throw new Error(ERROR_MESSEGE.notInRange);
-      }
-    });
   }
 
   #sortedLotto(numbers) {

@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import { REGEXS } from '../constants/options.js';
 import { INPUT_MESSEGE, ERROR_MESSEGE } from '../constants/messages.js';
+import { OPTIONS } from '../constants/lottoConstants.js';
+import REGEXS from '../constants/regexs.js';
 import Lotto from '../models/Lotto.js';
 
 class TiketBooth {
@@ -15,10 +16,9 @@ class TiketBooth {
 
   async takePaymentForTickets() {
     const paymentAmount = await Console.readLineAsync(INPUT_MESSEGE.purchase);
-    this.#validateNumber(paymentAmount);
     this.#validateMoney(paymentAmount);
 
-    return Number(paymentAmount) / 1000;
+    return Number(paymentAmount) / OPTIONS.unit;
   }
 
   async receiveWinNumbers() {
@@ -30,9 +30,30 @@ class TiketBooth {
 
   async receiveBonusNumber() {
     const bonusInput = await Console.readLineAsync(INPUT_MESSEGE.bonus);
-    this.#validateNumber(bonusInput);
     this.#validateBonusNumber(this.winNumber, bonusInput);
     this.bonusNumber = Number(bonusInput);
+  }
+
+  #validateMoney(paymentAmount) {
+    this.#validateNumber(paymentAmount);
+    if (paymentAmount < OPTIONS.unit || Number(paymentAmount) % OPTIONS.unit) {
+      throw new Error(ERROR_MESSEGE.invalidUnit);
+    }
+  }
+
+  #validateWinNumbers(winNumbers) {
+    winNumbers.forEach((number) => {
+      this.#validateNumber(number);
+      this.#validateRange(number);
+    });
+  }
+
+  #validateBonusNumber(winNumbers, bonusNumber) {
+    this.#validateNumber(bonusNumber);
+    this.#validateRange(bonusNumber);
+    if (winNumbers.getLotto().includes(Number(bonusNumber))) {
+      throw new Error(ERROR_MESSEGE.duplicate);
+    }
   }
 
   #validateNumber(number) {
@@ -41,21 +62,9 @@ class TiketBooth {
     }
   }
 
-  #validateMoney(paymentAmount) {
-    if (paymentAmount < 1000 || Number(paymentAmount) % 1000 !== 0) {
-      throw new Error(ERROR_MESSEGE.invalidUnit);
-    }
-  }
-
-  #validateWinNumbers(winNumbers) {
-    winNumbers.forEach((number) => {
-      this.#validateNumber(number);
-    });
-  }
-
-  #validateBonusNumber(winNumbers, bonusNumber) {
-    if (winNumbers.getLotto().includes(Number(bonusNumber))) {
-      throw new Error(ERROR_MESSEGE.duplicate);
+  #validateRange(number) {
+    if (OPTIONS.minNumber < number && number > OPTIONS.maxNumber) {
+      throw new Error(ERROR_MESSEGE.notInRange);
     }
   }
 }
