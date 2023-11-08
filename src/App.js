@@ -68,7 +68,6 @@ class App {
       try {
         inputPurchaseAmount = await this.input.askPurchaseAmount();
         return new PurchaseAmount(inputPurchaseAmount);
-        break;
       } catch (error) {
         console.log(error.message);
       }
