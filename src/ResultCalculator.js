@@ -56,7 +56,7 @@ class ResultCalculator {
     return numberOfMatchingNumbers;
   }
 
-  getEarningRate(money) {
+  calculateEarningRate(money) {
     const sum = this.#getSumOfWinningAmount();
     const earningRate = (sum / money) * 100;
     this.#earningRate = roundToOneDecimalPlace(earningRate);

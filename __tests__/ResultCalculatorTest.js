@@ -45,7 +45,7 @@ describe('당첨 결과 테스트', () => {
     const expected = roundToOneDecimalPlace((earnedMoney / paidMoney) * 100);
 
     resultCalculator.compareLottos([lotto], winningLotto);
-    resultCalculator.getEarningRate(paidMoney);
+    resultCalculator.calculateEarningRate(paidMoney);
     const output = resultCalculator.earningRate;
 
     expect(output).toBe(expected);

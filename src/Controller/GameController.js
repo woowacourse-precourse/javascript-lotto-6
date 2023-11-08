@@ -88,7 +88,7 @@ class GameController {
       this.#lottoMachine.lottos,
       this.#winningLotto,
     );
-    this.#resultCalculator.getEarningRate(this.#lottoMachine.money);
+    this.#resultCalculator.calculateEarningRate(this.#lottoMachine.money);
   }
 
   printResult() {
