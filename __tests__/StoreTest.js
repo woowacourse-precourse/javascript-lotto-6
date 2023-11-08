@@ -76,7 +76,7 @@ describe("스토어 클래스 테스트", () => {
     }
   });
 
-  test("등수 통계 산출하기 테스트", async () => {
+  test("등수 통계 산출하기 테스트", () => {
     const store = new Store();
     const rankCountMapOutput = getRankCountMap();
 
@@ -91,5 +91,16 @@ describe("스토어 클래스 테스트", () => {
     expect(store.calculateRankStatistics([1, 2, 3, 4, 5, 6], 7)).toEqual(
       rankCountMapOutput
     );
+  });
+
+  test("복권 당첨 내역 메시지 생성하기 테스트", () => {
+    const rankCountMap = getRankCountMap();
+    const messageOutput =
+      "3개 일치 (5,000원) - 1개\n" +
+      "4개 일치 (50,000원) - 0개\n" +
+      "5개 일치 (1,500,000원) - 0개\n" +
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개\n" +
+      "6개 일치 (2,000,000,000원) - 1개\n";
+    expect(Store.generateWinningMessage(rankCountMap)).toBe(messageOutput);
   });
 });
