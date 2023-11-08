@@ -22,7 +22,7 @@ class Lotto {
 
   compareTo(lotto, bonus) {
     const result = this.#numbers.filter((number) => lotto.#numbers.includes(number)).length;
-    if (result === BONUS_MATCHES && lotto.#numbers.includes(bonus)) return RESULT.BONUS;
+    if (result === BONUS_MATCHES && this.#numbers.includes(bonus)) return RESULT.BONUS;
     return result;
   }
 }
