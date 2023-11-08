@@ -3,6 +3,7 @@ import Lotto from "./Lotto.js";
 
 class App {
   totalLotto = [];
+  winningNumber = [];
 
   async payAmount() {
     const amount = await MissionUtils.Console.readLineAsync(
@@ -24,10 +25,19 @@ class App {
       this.totalLotto.push(new Lotto(number));
     }
   }
+  async enterWinningNumber() {
+    const number = await MissionUtils.Console.readLineAsync(
+      "\n당첨번호를 입력해 주세요.\n"
+    );
+    // TODO: 당첨번호 예외처리
+    this.winningNumber = number.split(",").map(Number);
+  }
+
   async play() {
     const amount = await this.payAmount();
     const quantity = this.quantityLotto(amount);
     this.perchaseLotto(quantity);
+    await this.enterWinningNumber();
   }
 }
 
