@@ -3,7 +3,7 @@ import Lotto from '../Lotto.js';
 import { LOTTO_PRICE } from '../constants/GameSetting.js';
 import { checkLottoResult } from '../utils/CheckLottoResult.js';
 import { incomingProfits } from '../utils/IncomingProfits.js';
-import { getRandomNumber } from '../utils/RandomNumber.js';
+import { getRandomNumberSort } from '../utils/RandomNumber.js';
 import { inputBounsNumber, inputBuyAmount, inputWinningLotto } from '../view/InputView.js';
 import {
   printBuyLotto,
@@ -14,7 +14,7 @@ import {
 } from '../view/OutputView.js';
 
 export default class LottoGameController {
-  #buyLottoAmount;
+  #buyLottoMoney;
   #buyLottoCnt;
   #createdLottoNumbers = [];
   #winningLottoNumbers;
@@ -23,7 +23,7 @@ export default class LottoGameController {
 
   async play() {
     try {
-      await this.buyLottoAmount();
+      await this.buyLottoMoney();
       await this.giveLottoNumbers();
       await this.giveBonusNumber();
       this.checkLotto();
@@ -34,26 +34,27 @@ export default class LottoGameController {
     }
   }
 
-  async buyLottoAmount() {
-    this.#buyLottoAmount = await inputBuyAmount();
-    this.countLotto();
-    this.buyLotto();
+  async buyLottoMoney() {
+    this.#buyLottoMoney = await inputBuyAmount();
+    this.#countLotto();
+    this.#buyLotto();
   }
 
-  countLotto() {
-    this.#buyLottoCnt = this.#buyLottoAmount / LOTTO_PRICE;
+  #countLotto() {
+    this.#buyLottoCnt = this.#buyLottoMoney / LOTTO_PRICE;
   }
 
-  buyLotto() {
+  //   FIXME: 컨트롤러에서 하는게 맞는지? / 분리할 필요가 있을까?
+  #buyLotto() {
     printBuyLotto(this.#buyLottoCnt);
     for (let i = 0; i < this.#buyLottoCnt; i++) {
-      this.#createdLottoNumbers.push(this.makeLotto());
+      this.#createdLottoNumbers.push(this.#makeLotto());
     }
     printLottoArray(this.#createdLottoNumbers);
   }
 
-  makeLotto() {
-    const lotto = new Lotto(getRandomNumber());
+  #makeLotto() {
+    const lotto = new Lotto(getRandomNumberSort());
     return lotto.getNumbers();
   }
 
@@ -73,10 +74,10 @@ export default class LottoGameController {
     );
     printResult();
     printResultDetail(result);
-    this.giveProfitRate(incomingProfits(result, this.#buyLottoAmount));
+    this.#giveProfitRate(incomingProfits(result, this.#buyLottoMoney));
   }
 
-  giveProfitRate(profit) {
+  #giveProfitRate(profit) {
     this.#profitRate = profit;
   }
 

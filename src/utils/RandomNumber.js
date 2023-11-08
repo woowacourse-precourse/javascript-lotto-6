@@ -1,10 +1,9 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO_NUMBER_RANGE, LOTTO_NUMBER_SIZE } from '../constants/GameSetting.js';
 
-export function getRandomNumber() {
-  return Random.pickUniqueNumbersInRange(
-    LOTTO_NUMBER_RANGE.start,
-    LOTTO_NUMBER_RANGE.end,
-    LOTTO_NUMBER_SIZE,
-  );
+function makeRandomNumber(start, end, size) {
+  return Random.pickUniqueNumbersInRange(start, end, size);
+}
+
+export function getRandomNumberSort(start, end, size) {
+  return makeRandomNumber(start, end, size).sort((a, b) => a - b);
 }

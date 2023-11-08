@@ -6,7 +6,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = this.#sort(numbers);
+    this.#numbers = numbers;
   }
 
   #validate(numbers) {
@@ -19,10 +19,6 @@ class Lotto {
     if (setLottoNumbers.size !== LOTTO_NUMBER_SIZE) {
       throw new Error(MESSAGE_ERROR.lottoDuplicateNumber);
     }
-  }
-
-  #sort(numbers) {
-    return numbers.sort((a, b) => a - b);
   }
 
   getNumbers() {

@@ -9,6 +9,7 @@ export function printBuyLotto(buyLottoCnt) {
   Console.print(MESSAGE_LOTTO_COUNT.buyLotto(buyLottoCnt));
 }
 
+// FIXME: 쉼표나 대괄호를 상수로 빼는게 좋을까?
 export function printLottoArray(lottos) {
   const lottosList = [];
   lottos.forEach((lotto) => {
