@@ -20,6 +20,13 @@ class Validations {
       throw new Error(Errors.IS_NOT_PLUS);
     }
   }
+
+  static isThousandUnit(input) {
+    const number = Number(input);
+    if (number % 1000 !== 0) {
+      throw new Error(Errors.IS_NOT_THOUSAND_UNIT);
+    }
+  }
 }
 
 export default Validations;

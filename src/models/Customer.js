@@ -12,6 +12,7 @@ class Customer {
     Validations.hasSpace(lottoPrice);
     Validations.isNumber(lottoPrice);
     Validations.isPlus(lottoPrice);
+    Validations.isThousandUnit(lottoPrice);
   }
 }
 
