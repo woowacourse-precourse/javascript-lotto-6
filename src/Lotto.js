@@ -27,6 +27,13 @@ class Lotto {
   matchCount(target) {
     return this.#numbers.filter((number) => target.contains(number)).length;
   }
+
+  /**
+   * 로또 배열을 문자열로 반환합니다
+   * @return {string} */
+  toString() {
+    return `[${this.#numbers.join(', ')}]`;
+  }
 }
 
 export default Lotto;
