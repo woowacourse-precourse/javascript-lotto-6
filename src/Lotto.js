@@ -1,9 +1,14 @@
+import { getLottoNumbers } from "./function/getLottoNumbers.js";
+import { getBonusNumber } from "./function/getBonusNumber.js";
+import { printWinningMoney } from "./function/util/printWinningMoney.js";
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = numbers.sort((a, b) => a - b);
+    this.#duplicationValidate(numbers);
   }
 
   #validate(numbers) {
@@ -12,7 +17,75 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  #duplicationValidate(number) {
+    number.forEach((el, index) => {
+      if (el === number[index + 1]) {
+        throw new Error("[ERROR] 중복값은 입력이 불가합니다.");
+      }
+    });
+  }
+
+  calculateResultCount(lottoNums, bonusNum) {
+    let count = 0;
+    let bonusCount = 0;
+
+    lottoNums.forEach((el) => {
+      this.#numbers.forEach((winNum) => {
+        if (winNum === el) {
+          count += 1;
+        }
+      });
+
+      if (el === bonusNum) {
+        count += 1;
+        bonusCount += 1;
+      }
+    });
+
+    return { count: count, bonusCount: bonusCount };
+  }
+
+  getWinNumberCount(lottos, bonusNumber) {
+    const resultCount = lottos.map((lottoNums) => {
+      const countResult = this.calculateResultCount(lottoNums, bonusNumber);
+
+      return countResult;
+    });
+
+    return resultCount;
+  }
+
+  static verifyAmount(money) {
+    if (isNaN(money)) {
+      throw new Error("[ERROR] 유효한 금액이 아닙니다. 다시 입력 해주세요.");
+    }
+
+    if (money % 1000 !== 0) {
+      throw new Error(
+        "[ERROR] 로또는 1000원 단위로 구입이 가능합니다. 금액을 다시 입력해주세요"
+      );
+    }
+
+    return money;
+  }
+
+  static buyLotto(money, lottoCount) {
+    this.verifyAmount(money);
+
+    const lottoNumberArr = getLottoNumbers(lottoCount);
+
+    return lottoNumberArr;
+  }
+
+  async printLottoResult(money, lottoNumber) {
+    this.#validate(this.#numbers);
+
+    const bonusCount = await getBonusNumber(this.#numbers);
+
+    const winNumber = this.getWinNumberCount(lottoNumber, bonusCount);
+
+    printWinningMoney(winNumber, money);
+  }
 }
 
 export default Lotto;
