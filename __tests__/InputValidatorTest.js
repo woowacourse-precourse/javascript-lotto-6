@@ -1,8 +1,10 @@
 import PurchaseAmountInputValidator from '../src/Service/PurchaseAmountInputValidator.js';
 import WinningNumbersInputValidator from '../src/Service/WinningNumbersInputValidator.js';
+import BonusNumberInputValidator from '../src/Service/BonusNumberInputValidator.js';
 import {
   PURCHASE_AMOUNT_ERROR_MESSAGES,
   WINNING_NUMBERS_ERROR_MESSAGES,
+  BONUS_NUMBER_ERROR_MESSAGES,
 } from '../src/Constant/Constants.js';
 
 describe('구입 금액 입력값 유효성 검사(PurchaseAmountInputValidator) 클래스 테스트', () => {
@@ -95,6 +97,46 @@ describe('당첨 번호 입력값 유효성 검사(WinningNumbersInputValidator)
           invalidWinningNumbersInput
         );
       }).toThrow(WINNING_NUMBERS_ERROR_MESSAGES.DUPLICATED);
+    }
+  );
+});
+
+describe('보너스 번호 입력값 유효성 검사(BonusNumberInputValidator) 클래스 테스트', () => {
+  test.each(['1a', '1[', '가'])(
+    '보너스 번호 입력값이 숫자가 아닌 다른 값을 포함하고 있는 경우 예외가 발생한다.',
+    (invalidBonusNumberInput) => {
+      const bonusNumberInputValidator = new BonusNumberInputValidator();
+
+      expect(() => {
+        bonusNumberInputValidator.validateBonusNumberInput({
+          bonusNumberInput: invalidBonusNumberInput,
+          winningNumbers: [1, 2, 3, 4, 5, 6],
+        });
+      }).toThrow(BONUS_NUMBER_ERROR_MESSAGES.NOT_NUMBER);
+    }
+  );
+  test.each(['0', '46'])(
+    '보너스 번호 입력값이 1 이상 45이하의 숫자가 아닌 경우 예외가 발생한다.',
+    (invalidBonusNumberInput) => {
+      const bonusNumberInputValidator = new BonusNumberInputValidator();
+      expect(() => {
+        bonusNumberInputValidator.validateBonusNumberInput({
+          bonusNumberInput: invalidBonusNumberInput,
+          winningNumbers: [1, 2, 3, 4, 5, 6],
+        });
+      }).toThrow(BONUS_NUMBER_ERROR_MESSAGES.OUT_OF_RANGE);
+    }
+  );
+  test.each(['1', '6'])(
+    '보너스 번호와 당첨 번호가 중복되는 경우 예외가 발생한다.',
+    (invalidBonusNumberInput) => {
+      const bonusNumberInputValidator = new BonusNumberInputValidator();
+      expect(() => {
+        bonusNumberInputValidator.validateBonusNumberInput({
+          bonusNumberInput: invalidBonusNumberInput,
+          winningNumbers: [1, 2, 3, 4, 5, 6],
+        });
+      }).toThrow(BONUS_NUMBER_ERROR_MESSAGES.DUPLICATED_WITH_WINNING_NUMBER);
     }
   );
 });
