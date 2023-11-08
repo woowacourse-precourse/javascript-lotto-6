@@ -90,6 +90,10 @@ class App {
         return winningLottoResult
     }
 
+    calculateProfitablity(resultObj){
+        return (((5000 * resultObj.matchedThree + 50000 * resultObj.matchedFour + 1500000 * resultObj.matchedFive + 30000000 * resultObj.matchedFiveBonus + resultObj.matchedFull * 2000000000) / resultObj.lottoPurchasedAmount) * 100).toFixed(1)
+    }
+
     async play() {
         const purchasedLottoCount = await this.buyAmountOfLotto()
         const buyLottoNumbers = this.generatingLottoNumbers(purchasedLottoCount)
