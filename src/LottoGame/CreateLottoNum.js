@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { PurChasePrice } from "./PurChasePrice.js";
+import { PurChasePrice } from "../LottoInput/PurChasePrice.js";
 import { LottoNum } from "../Computer/LottoNums.js";
 
 export class CreateLottoNum {
@@ -10,11 +10,11 @@ export class CreateLottoNum {
     async start() {
         const lottoCount = await this.purChasePrice.inputPrice();
         const lottoNum = new LottoNum(lottoCount);
-        MissionUtils.Console.print(`\n${lottoCount}개를 구매했습니다.`)
+        MissionUtils.Console.print(`${lottoCount}개를 구매했습니다.`);
         lottoNum.numbers.forEach(number => 
-            MissionUtils.Console.print(number.sort(function(a,b){
+            MissionUtils.Console.print(`[${number.sort(function(a,b){
                 return a-b;
-            }))
+            }).join(', ')}]`)
         );
         return lottoNum;
     }
