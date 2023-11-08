@@ -4,9 +4,9 @@ const ERROR_MESSAGE = Object.freeze({
     THOUSAND_UNIT : '[ERROR] 금액은 1,000원 단위로 입력해주세요.',
     NUMBER_EMPTY : '[ERROR] 숫자를 입력하세요.',
     RANGE_BONUS : '[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.',
-    LOTTO_EMPTY : '[ERROR] 로또 번호를 입력하세요.',
-    SIX_NUMBERS : '[ERROR] 로또 번호는 6개여야 합니다.',
-    LOTTO_RANGE : '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
+    LOTTO_EMPTY : '[ERROR] 당첨 번호를 입력하세요.',
+    SIX_NUMBERS : '[ERROR] 당첨 번호는 6개여야 합니다.',
+    LOTTO_RANGE : '[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.',
     SAME_NUMBERS : '[ERROR] 중복되지 않는 숫자를 입력하세요',
 });
 
