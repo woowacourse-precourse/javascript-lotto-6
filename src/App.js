@@ -10,7 +10,7 @@ class App {
     const BONUS = await this.getBonusNum(WINNINGNUMS);
     const WINLOG = this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
     this.printWinningStatistics(WINLOG);
-    this.calculateProfit(COUNT, TICKETS);
+    this.calculateProfit(COUNT, WINLOG);
   }
 
   // 사용자로부터 구입금액을 입력 받는 메서드
@@ -98,32 +98,32 @@ class App {
 
   // 당첨 통계를 출력해주는 메서드
   printWinningStatistics(WINLOG) {
-    const prizeList = [5000, 50000, 1500000, 30000000, 2000000000];
+    const PRIZELIST = ["5,000", "50,000", "1,500,000", "30,000,000", "2,000,000,000"];
 
     Console.print("당첨 통계\n---");
     for(let i = 0; i<WINLOG.length; i++) {
       if (i === 3) {
-        Console.print(`${i + 2}개 일치, 보너스 볼 일치 (${prizeList[i]}) - ${WINLOG[4]}개`);
+        Console.print(`${i + 2}개 일치, 보너스 볼 일치 (${PRIZELIST[i]}원) - ${WINLOG[4]}개`);
       } else if (i === 4) {
-        Console.print(`${i + 2}개 일치 (${prizeList[i]}) - ${WINLOG[3]}개`);
+        Console.print(`${i + 2}개 일치 (${PRIZELIST[i]}원) - ${WINLOG[3]}개`);
       } else {
-        Console.print(`${i + 3}개 일치 (${prizeList[i]}) - ${WINLOG[i]}개`);
+        Console.print(`${i + 3}개 일치 (${PRIZELIST[i]}원) - ${WINLOG[i]}개`);
       }
     }
   }
 
   // 총 수익률을 계산해주는 메서드
-  calculateProfit(COUNT ,WINLOG) {
+  calculateProfit(COUNT, WINLOG) {
     const PRICE = COUNT * 1000;
-    const prizeList = [5000, 50000, 1500000, 2000000000, 30000000];
+    const PRIZELIST = [5000, 50000, 1500000, 2000000000, 30000000];
     let sum = 0;
     for(let i = 0; i<WINLOG.length; i++){
-      sum += (WINLOG[i] * prizeList[i])
+      sum += (WINLOG[i] * PRIZELIST[i]);
     }
 
-    const profit = ((sum - PRICE) / PRICE) * 100;
-    const roundedProfit = Math.round(profit * 100) / 100;
-    Console.print(`총 수익률은 ${roundedProfit}%입니다.`)
+    const PROFIT = (sum / PRICE) * 100;
+    const ROUNDEDPROFIT = Math.round(PROFIT * 100) / 100;
+    Console.print(`총 수익률은 ${ROUNDEDPROFIT}%입니다.`)
   }
 }
 
