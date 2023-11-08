@@ -3,12 +3,12 @@ import { INPUT_MESSAGE } from '../constants/InputMessage.js';
 
 class InputView {
   static async inputPrice() {
-    const input = await Console.readLineAsync(INPUT_MESSAGE.price);
+    const input = await Console.readLineAsync(`${INPUT_MESSAGE.price}\n`);
     return input;
   }
 
   static async inputWinningNumber() {
-    const input = await Console.readLineAsync(INPUT_MESSAGE.winningNumber);
+    const input = await Console.readLineAsync(`\n${INPUT_MESSAGE.winningNumber}\n`);
     const numberList = input
       .split(',')
       .map((number) => parseInt(number.trim()))
@@ -17,7 +17,7 @@ class InputView {
   }
 
   static async inputBonusNumber() {
-    const input = await Console.readLineAsync(INPUT_MESSAGE.bonusNumber);
+    const input = await Console.readLineAsync(`\n${INPUT_MESSAGE.bonusNumber}\n`);
     return input;
   }
 }
