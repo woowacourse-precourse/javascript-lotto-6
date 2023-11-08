@@ -79,15 +79,9 @@ e.g. [ERROR] 숫자가 잘못된 형식입니다.
 
   - [] 수익률을 계산한다. Game#calcProfit()
 
-- [] 로또 번호들을 입력받아 로또를 생성한다. Lotto
+  - [x] 당첨 번호와 로또 번호중 일치하는 번호의 수를 계산한다. Game#countMatchingNumbers()
 
-  - [] 당첨 번호와 로또 번호중 일치하는 번호의 수를 계산한다. Lotto#countMatchingNumbers()
-
-  - [] 일치하는 번호가 5개일때 보너스 번호와 일치하는지 여부를 판단한다. Lotto#isMatchBonusNumber()
-
-  - [] 당첨 결과를 구한다. Lotto#result()
-
-- [x] 6개의 숫자를 생성한다. NumberGenerator#createRandomNumber()
+  - [] 당첨 결과를 구한다. Game#result()
 
 ## 예외 목록
 

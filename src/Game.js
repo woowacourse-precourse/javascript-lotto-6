@@ -8,8 +8,31 @@ class Game {
 
   #bonusNumber;
 
+  #isBonus = false;
+
   constructor(lotteryNumbers) {
     this.createLotto(lotteryNumbers);
+  }
+
+  countMatchingNumbers() {
+    const matchingCounts = this.#lottos.map((lotto) => {
+      const lottoNumbers = lotto.getLottoNumbers();
+
+      const matchedNumbers = lottoNumbers.filter((number) =>
+        this.#winningNumbers.includes(number),
+      );
+
+      if (
+        matchedNumbers.length === 4 &&
+        lottoNumbers.includes(this.#bonusNumber)
+      ) {
+        this.#isBonus = true;
+      }
+
+      return matchedNumbers.length;
+    });
+    Console.print(matchingCounts);
+    return matchingCounts;
   }
 
   createLotto(lotteryNumbers) {
