@@ -1,5 +1,6 @@
 import LottoResult from './LottoResult';
 import { LOTTO_CONSTANTS } from './constants/constants';
+import { LOTTO_ERROR } from './errorMessages/errorMessage';
 
 class Lotto {
   #numbers;
@@ -11,9 +12,9 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO_CONSTANTS.digits) throw new Error('[ERROR]');
+    if (numbers.length !== LOTTO_CONSTANTS.digits) throw new Error(LOTTO_ERROR.digits);
 
-    if (numbers.length !== new Set(numbers).size) throw new Error('[ERROR]');
+    if (numbers.length !== new Set(numbers).size) throw new Error(LOTTO_ERROR.duplication);
   }
 
   #sortAscending() {
