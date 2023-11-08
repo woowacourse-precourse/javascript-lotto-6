@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
-import { LOTTO_RANK_INFO, CHECK_RANK, RANK } from "./constants/Ranking.js";
+import { LOTTO_RANK_INFO, CHECK_RANK } from "./constants/ranking.js";
 
 class App {
   purchaseAmount = 0;
