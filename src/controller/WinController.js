@@ -23,6 +23,7 @@ export default class WinController {
   checkWinResults() {
     this.printWinningStats();
 
+    this.calculateMatchLottos();
     this.calculateWinningDetails();
     this.printWinningDetails();
 
@@ -34,7 +35,7 @@ export default class WinController {
     this.outputView.printMessage(`\n${WINNING_MESSAGES.WINNING_STATS}`);
   }
 
-  calculateWinningDetails() {
+  calculateMatchLottos() {
     this.#purchasedLottos.forEach((pLotto) => {
       pLotto.setMatchCount(
         this.countMatchingNumbers(pLotto.getNumbers()),
@@ -60,7 +61,7 @@ export default class WinController {
     return 0;
   }
 
-  printWinningDetails() {
+  calculateWinningDetails() {
     this.#purchasedLottos.forEach((pLotto) => {
       if (
         pLotto.getMatchedBonusCount() == 1 &&
@@ -71,6 +72,9 @@ export default class WinController {
       }
       this.#WinningCount[pLotto.getMatchedNumberCount()]++;
     });
+  }
+
+  printWinningDetails() {
     this.outputView.printWinning(this.#WinningCount, this.#Win5andBonus);
   }
 
