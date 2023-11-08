@@ -37,7 +37,7 @@ class App {
     let winningNumber = 0;
     while (true) {
       try {
-        winningNumber = await this.view.inputWinningNumber("당첨 번호를 입력해 주세요.\n");
+        winningNumber = await this.view.inputWinningNumber("\n당첨 번호를 입력해 주세요.\n");
         this.validate.isWinningNumber(winningNumber);
         break;
       } catch (error) {
@@ -51,7 +51,7 @@ class App {
     let bonusNumber = 0;
     while (true) {
       try {
-        bonusNumber = await this.view.inputNumber("보너스 번호를 입력해 주세요.\n");
+        bonusNumber = await this.view.inputNumber("\n보너스 번호를 입력해 주세요.\n");
         this.validate.isBonusNumber(bonusNumber, this.model.getWinningNumber());
         break;
       } catch (error) {
@@ -62,7 +62,7 @@ class App {
   }
 
   printLottoCountAndLottoNumber() {
-    this.view.print(this.model.getBuyLottoNumber() + "개를 구매했습니다.");
+    this.view.print("\n"+this.model.getBuyLottoNumber() + "개를 구매했습니다.");
     for (let i = 0; i < this.model.getBuyLottoNumber(); i++) {
       this.view.print(`[${this.model.getLottoDataObject()[i].getNumbers().join(', ')}]`);
     }
