@@ -1,9 +1,16 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { LOTTO_PRICE } from '../../constants/constants.js';
+import { validateNumber } from '../validation/validation.js';
 
 const changeParseInt = numbersStringArray => {
-  return numbersStringArray.map(number => {
-    return parseInt(number, 10);
+  return numbersStringArray.map(numberString => {
+    if (typeof numberString === 'string') {
+      validateNumber(numberString);
+
+      return parseInt(numberString, 10);
+    }
+
+    return numberString;
   });
 };
 

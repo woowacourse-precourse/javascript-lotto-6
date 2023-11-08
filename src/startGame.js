@@ -73,9 +73,10 @@ class StartGame {
   async getValidatedWinningNumbersInput(textMessage) {
     const inputWinningNumbers = await Input.readLineAsync(textMessage);
     const winningNumbersStringArray = inputWinningNumbers.split(',');
-    const winningNumbers = changeParseInt(winningNumbersStringArray);
+    let winningNumbers;
 
     try {
+      winningNumbers = changeParseInt(winningNumbersStringArray);
       const validatedWinningLottoNumbers = new Lotto(winningNumbers);
 
       return validatedWinningLottoNumbers.getLottoNumbers();
