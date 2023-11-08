@@ -1,30 +1,33 @@
-import ERRORMESSAGES from '../constants/errorMessages.js';
-import NUMBERS from '../constants/numbers.js';
+import ERRORMESSAGES from '../constants/errorMessages';
+import NUMBERS from '../constants/numbers';
 
 class BonusLottoNumber {
-  static validate(userBonusNumberInput, userLottoNumberInput) {
-    if (userBonusNumberInput.length === 0) {
+  static validate(userBonusNumber, userLottoNumber) {
+    if (userBonusNumber.length === 0) {
       throw new Error(
         `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.inputOneNumber}`,
       );
     }
 
-    if (Number.isNaN(Number(userBonusNumberInput))) {
+    if (Number.isNaN(Number(userBonusNumber))) {
       throw new Error(
         `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.inputNumber}`,
       );
     }
 
-    if (
-      userBonusNumberInput < NUMBERS.minLottoNumber ||
-      userBonusNumberInput > NUMBERS.maxLottoNumber
-    ) {
+    if (userBonusNumber < NUMBERS.minLottoNumber) {
       throw new Error(
-        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.invalidRange}`,
+        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.inputUnderMaxNumber}`,
       );
     }
 
-    if (userLottoNumberInput.includes(userBonusNumberInput)) {
+    if (userBonusNumber > NUMBERS.maxLottoNumber) {
+      throw new Error(
+        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.inputOverMinNumber}`,
+      );
+    }
+
+    if (userLottoNumber.includes(userBonusNumber)) {
       throw new Error(
         `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.duplicatedNumber}`,
       );

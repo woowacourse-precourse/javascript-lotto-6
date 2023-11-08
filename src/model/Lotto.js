@@ -1,5 +1,5 @@
-import ERRORMESSAGES from '../constants/errorMessages.js';
-import NUMBERS from '../constants/numbers.js';
+import ERRORMESSAGES from '../constants/errorMessages';
+import NUMBERS from '../constants/numbers';
 
 class Lotto {
   #numbers;
@@ -11,21 +11,33 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== NUMBERS.lottoNumberLength) {
-      throw new Error(`${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.invalidLength}`);
+      throw new Error(
+        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.invalidLength}`,
+      );
     }
 
     const lottoNumberRange = number =>
       number >= NUMBERS.minLottoNumber && number <= NUMBERS.maxLottoNumber;
 
     if (!numbers.every(lottoNumberRange)) {
-      throw new Error(`${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.invalidRange}`);
+      throw new Error(
+        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.invalidRange}`,
+      );
     }
 
     const deleteDuplication = new Set(numbers);
 
     if (numbers.length !== deleteDuplication.size) {
-      throw new Error(`${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.duplicatedNumber}`);
+      throw new Error(
+        `${ERRORMESSAGES.errorHeader}${ERRORMESSAGES.duplicatedNumber}`,
+      );
     }
+
+    return this;
+  }
+
+  getNumbers() {
+    return this.#numbers;
   }
 }
 

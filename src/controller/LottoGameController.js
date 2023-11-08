@@ -1,11 +1,11 @@
-import Lotto from '../model/Lotto.js';
-import WinningNumbers from '../model/WinningNumbers.js';
-import InputView from '../view/InputView.js';
-import LottoPurchase from '../model/LottoPurchase.js';
-import BonusLottoNumber from '../model/BonusLottoNumber.js';
-import LottoResult from '../model/LottoResult.js';
-import ProfitRate from '../model/ProfitRate.js';
-import OutputView from '../view/OutputView.js';
+import Lotto from '../model/Lotto';
+import WinningNumbers from '../model/WinningNumbers';
+import InputView from '../view/InputView';
+import LottoPurchase from '../model/LottoPurchase';
+import BonusLottoNumber from '../model/BonusLottoNumber';
+import LottoResult from '../model/LottoResult';
+import ProfitRate from '../model/ProfitRate';
+import OutputView from '../view/OutputView';
 
 class LottoGameController {
   constructor() {
@@ -56,6 +56,7 @@ class LottoGameController {
     userLottoNumbers = userLottoNumbers.split(',');
     try {
       const lotto = new Lotto(userLottoNumbers);
+      userLottoNumbers = lotto.getNumbers();
     } catch (error) {
       OutputView.printErrorMessage(error);
       userLottoNumbers = await this.getUserLottoNumbers();

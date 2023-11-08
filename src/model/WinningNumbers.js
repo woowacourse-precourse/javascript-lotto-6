@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import NUMBERS from '../constants/numbers.js';
-import OutputView from '../view/OutputView.js';
+import NUMBERS from '../constants/numbers';
+import OutputView from '../view/OutputView';
 
 class WinningNumbers {
   static getWinningLottoNumbers(purchaseAmount) {

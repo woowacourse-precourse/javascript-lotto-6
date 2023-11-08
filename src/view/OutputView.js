@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import MESSAGES from '../constants/messages.js';
+import MESSAGES from '../constants/messages';
 
 class OutputView {
   static printErrorMessage(error) {

@@ -1,4 +1,4 @@
-import NUMBERS from './numbers.js';
+import NUMBERS from './numbers';
 
 const MESSAGES = Object.freeze({
   purchaseAmount: `최대 ${NUMBERS.maxPurchaseAmount}원까지 ${NUMBERS.purchaseUnit}원 단위로 구입금액을 입력해주세요.\n`,

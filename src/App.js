@@ -1,9 +1,10 @@
-import LottoGameController from './controller/LottoGameController.js';
+import LottoGameController from './controller/LottoGameController';
 
 class App {
   async play() {
     const lottoGame = new LottoGameController();
     await lottoGame.start();
+    return this;
   }
 }
 

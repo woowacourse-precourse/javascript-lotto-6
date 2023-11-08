@@ -1,6 +1,6 @@
-import MESSAGES from '../constants/messages.js';
-import OutputView from '../view/OutputView.js';
-import NUMBERS from '../constants/numbers.js';
+import MESSAGES from '../constants/messages';
+import OutputView from '../view/OutputView';
+import NUMBERS from '../constants/numbers';
 
 class LottoResult {
   constructor() {
