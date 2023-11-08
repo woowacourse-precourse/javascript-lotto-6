@@ -13,15 +13,26 @@ async function winningResult(winningMatchedResult, bonusMatchedResult) {
 
   winningStatisticsSentence();
   for (const key in winningMatchedResult) {
-    mathcedCount(winningMatchedResult[key], bonusMatchedResult[key], result);
+    await mathcedCount(
+      winningMatchedResult[key],
+      bonusMatchedResult[key],
+      result
+    );
   }
-  MissionUtils.Console.print(`3개 일치 (5,000원) - ${result.three}개`);
-  MissionUtils.Console.print(`4개 일치 (50,000원) - ${result.four}개`);
-  MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${result.five}개`);
-  MissionUtils.Console.print(
-    `5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.fiveAndBonus}개`
-  );
-  MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${result.six}개`);
+
+  const printedResults = {
+    three: `3개 일치 (5,000원) - ${result.three}개`,
+    four: `4개 일치 (50,000원) - ${result.four}개`,
+    five: `5개 일치 (1,500,000원) - ${result.five}개`,
+    fiveAndBonus: `5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.fiveAndBonus}개`,
+    six: `6개 일치 (2,000,000,000원) - ${result.six}개`,
+  };
+
+  for (const [key, value] of Object.entries(printedResults)) {
+    await MissionUtils.Console.print(value);
+  }
+
+  return printedResults;
 }
 
 export default winningResult;

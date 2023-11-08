@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import lottoAmountSentence from "./utils/LottoAmountSentence.js";
+import lottoAmountSentence from "./utils/lottoAmountSentence.js";
 import lottoAmountCount from "./utils/lottoAmountCount.js";
 import purchaseAmountSave from "./utils/purchaseAmountSave.js";
 import winningNumbers from "./utils/winningNumbers.js";
@@ -7,11 +7,13 @@ import bonusNumber from "./utils/bonusNumber.js";
 import winningResult from "./utils/winningResult.js";
 import mathcedCount from "./utils/matchedCount.js";
 import winningStatisticsFinalSentence from "./utils/winningStaticsFinalSentnece.js";
+
 class App {
   async play() {
     const PURCHASE_AMOUNT = await purchaseAmountSave();
     await lottoAmountSentence(PURCHASE_AMOUNT);
     const PURCHASE_LOTTOS = await purchaseLottosNumber(PURCHASE_AMOUNT);
+
     const WINNING_NUMBERS = await winningNumbers();
     const BONUSNUMBER = await bonusNumber();
     const WINNING_MACHEDRESULT = await LottosNumbersMatchWinningNumbers(
@@ -22,8 +24,13 @@ class App {
       PURCHASE_LOTTOS,
       BONUSNUMBER
     );
-    winningResult(WINNING_MACHEDRESULT, BONUS_MATCHEDRESULT);
-    winningStatistics(
+    await winningResult(
+      PURCHASE_AMOUNT,
+      WINNING_MACHEDRESULT,
+
+      BONUS_MATCHEDRESULT
+    );
+    await winningStatistics(
       PURCHASE_AMOUNT,
       WINNING_MACHEDRESULT,
       BONUS_MATCHEDRESULT
@@ -41,7 +48,8 @@ async function purchaseLottosNumber(purchaseAmount) {
       6
     ).sort((a, b) => a - b);
 
-    MissionUtils.Console.print(LOTTOS_NUMBER[`lottos${i}`]);
+    const numbersAsString = `[${LOTTOS_NUMBER[`lottos${i}`].join(", ")}]`;
+    await MissionUtils.Console.print(numbersAsString);
   }
   return LOTTOS_NUMBER;
 }
@@ -83,13 +91,16 @@ async function winningStatistics(
   winningMatchedResult,
   bonusMatchedResult
 ) {
-  const totalMoney = winningMoney(winningMatchedResult, bonusMatchedResult);
+  const totalMoney = await winningMoney(
+    winningMatchedResult,
+    bonusMatchedResult
+  );
   const rateOfReturn = Math.round(totalMoney / purchaseAmout) * 100;
-  winningStatisticsFinalSentence(rateOfReturn);
+  await winningStatisticsFinalSentence(rateOfReturn);
   return rateOfReturn;
 }
 
-function winningMoney(winningMatchedResult, bonusMatchedResult) {
+async function winningMoney(winningMatchedResult, bonusMatchedResult) {
   let result = {
     three: 0,
     four: 0,
@@ -108,8 +119,6 @@ function winningMoney(winningMatchedResult, bonusMatchedResult) {
     result.five * 1500000 +
     result.fiveAndBonus * 30000000 +
     result.six * 2000000000;
-
-  console.log(TOTAL_GETMONEY);
 
   return TOTAL_GETMONEY;
 }
