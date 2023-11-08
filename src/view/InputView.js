@@ -1,19 +1,32 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import OutputMessage from '../constants/OutputMessage';
+import { printMessage } from '../utils/messages';
 
-class InputView {
-  static async inputParchaseCost() {
-    return MissionUtils.Console.readLineAsync('구입 금액을 입력해 주세요. \n');
+class OutputView {
+  static printLottos(lottos) {
+    printMessage(OutputMessage.PURCHASED_LOTTO_COUNT(lottos.length));
+    lottos.forEach(lotto => {
+      printMessage(`[${lotto.join(', ')}]`);
+    });
   }
 
-  static async inputWinningNumbers() {
-    return MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요. \n');
+  static printFinalResult(results, profit) {
+    this.printResults(results);
+    this.printProfit(profit);
   }
 
-  static async inputBonusNumber() {
-    return MissionUtils.Console.readLineAsync(
-      '보너스 번호를 입력해 주세요. \n',
-    );
+  static printResults(results) {
+    const order = [3, 4, 5, '5+1', 6];
+    printMessage(OutputMessage.RESULT_HEADER);
+
+    order.forEach(key => {
+      const { count, prize } = results[key];
+      printMessage(OutputMessage.RESULT(key, prize, count));
+    });
+  }
+
+  static printProfit(profit) {
+    printMessage(OutputMessage.PROFIT(profit));
   }
 }
 
-export default InputView;
+export default OutputView;
