@@ -28,10 +28,10 @@ describe("WinningNumbers 클래스 테스트", () => {
     const bonusNumber = 8;
     const numbers = [1, 2, 3, 7, 8, 9];
 
-    const WinningNumbers = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
+    const result = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
     const lotto = new Lotto(numbers);
 
-    expect(WinningNumbers.countMatchLottoNumber(lotto)).toBe(3);
+    expect(result.countMatchLottoNumber(lotto)).toBe(3);
   });
 
   test("당첨 번호의 4개 일치 개수를 센다.", () => {
@@ -39,10 +39,10 @@ describe("WinningNumbers 클래스 테스트", () => {
     const bonusNumber = 8;
     const numbers = [1, 2, 3, 4, 7, 8];
 
-    const WinningNumbers = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
+    const result = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
     const lotto = new Lotto(numbers);
 
-    expect(WinningNumbers.countMatchLottoNumber(lotto)).toBe(4);
+    expect(result.countMatchLottoNumber(lotto)).toBe(4);
   });
 
   test("당첨 번호의 5개 일치 개수를 센다.", () => {
@@ -50,10 +50,10 @@ describe("WinningNumbers 클래스 테스트", () => {
     const bonusNumber = 8;
     const numbers = [1, 2, 3, 4, 5, 7];
 
-    const WinningNumbers = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
+    const result = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
     const lotto = new Lotto(numbers);
 
-    expect(WinningNumbers.countMatchLottoNumber(lotto)).toBe(5);
+    expect(result.countMatchLottoNumber(lotto)).toBe(5);
   });
 
   test("당첨 번호의 5개 일치 + 보너스 번호 일치를 센다.", () => {
@@ -61,11 +61,11 @@ describe("WinningNumbers 클래스 테스트", () => {
     const bonusNumber = 8;
     const numbers = [1, 2, 3, 4, 5, 8];
 
-    const WinningNumbers = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
+    const result = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
     const lotto = new Lotto(numbers);
 
-    expect(WinningNumbers.countMatchLottoNumber(lotto)).toBe(5);
-    expect(WinningNumbers.isMatchBonusNumber(lotto)).toBe(true);
+    expect(result.countMatchLottoNumber(lotto)).toBe(5);
+    expect(result.isMatchBonusNumber(lotto)).toBe(true);
   });
 
   test("당첨 번호의 6개 일치 개수를 센다.", () => {
@@ -73,9 +73,9 @@ describe("WinningNumbers 클래스 테스트", () => {
     const bonusNumber = 8;
     const numbers = [1, 2, 3, 4, 5, 6];
 
-    const WinningNumbers = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
+    const result = new WinningNumbers(new Lotto(winningNumbers), bonusNumber);
     const lotto = new Lotto(numbers);
 
-    expect(WinningNumbers.countMatchLottoNumber(lotto)).toBe(6);
+    expect(result.countMatchLottoNumber(lotto)).toBe(6);
   });
 });
