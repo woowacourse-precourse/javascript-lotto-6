@@ -1,3 +1,5 @@
+import OPTIONS from "./constant/option";
+
 class Lotto {
   #numbers;
 
@@ -37,7 +39,7 @@ class Lotto {
 
   isFromOneToFortyFive(numbers) {
     numbers.split(',').map((num) => {
-      if (Number(num) > 45 || Number(num) < 1) {
+      if (Number(num) > OPTIONS.maxRandomNumber || Number(num) < OPTIONS.minRandomNumber) {
         throw new Error('[ERROR] 숫자 1부터 45까지 입력해주세요.');
       }
     })
