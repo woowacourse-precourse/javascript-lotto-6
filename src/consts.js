@@ -1,7 +1,7 @@
 export const message = Object.freeze({
-  purchaseAmount: '구입금액을 입력해주세요.',
-  winningNumbers: '당첨 번호를 입력해 주세요.',
-  bonusNumber: '보너스 번호를 입력해 주세요.',
+  purchaseAmount: '구입금액을 입력해주세요.\n',
+  winningNumbers: '당첨 번호를 입력해 주세요.\n',
+  bonusNumber: '보너스 번호를 입력해 주세요.\n',
 });
 
 export const error = Object.freeze({
@@ -16,8 +16,8 @@ export const error = Object.freeze({
 });
 
 export const outputString = Object.freeze({
-  winningStatistics: '당첨 통계\n',
-  devider: '---\n',
+  winningStatistics: '당첨 통계',
+  devider: '---',
   purchaseCount: '개를 구매했습니다.',
   lottoRank5: '3개 일치 (5,000원) - ',
   lottoRank4: '4개 일치 (50,000원) - ',
@@ -39,4 +39,5 @@ export const condition = Object.freeze({
   lottoNumbersLength: 6,
   bonusNumberLength: 1,
   bonusNumberChance: 5,
+  maxRankNumber: 5,
 });
