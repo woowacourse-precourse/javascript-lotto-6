@@ -71,7 +71,7 @@ describe('위닝 넘버 클래스 테스트', () => {
       winningNumber.setWinningNumbers(numbers);
 
       // then
-      expect(winningNumber.getWinningNumber()).toEqual(numbers);
+      expect(winningNumber.getWinningNumbers()).toEqual(numbers);
     });
   });
 

@@ -16,7 +16,7 @@ class WinningNumber {
   }
 
   #validateBonusNumber(bonusNumber) {
-    const copyWinningNumbers = this.getWinningNumber();
+    const copyWinningNumbers = this.getWinningNumbers();
 
     Validator.isNaN(bonusNumber);
     Validator.isDouble(bonusNumber);
@@ -29,7 +29,7 @@ class WinningNumber {
     this.#winningNumbers = winningNumbers;
   }
 
-  getWinningNumber() {
+  getWinningNumbers() {
     return [...this.#winningNumbers];
   }
 
