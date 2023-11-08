@@ -2,6 +2,8 @@ import { getRoundedNumber } from '../../utils/getRoundedNumber.js';
 import { WINNING_CONDITIONS_AND_PRIZES } from '../../constants.js';
 import { printResult } from './printResult.js';
 
+const percent = 100;
+
 export class WinningLottosResult {
   #winningLottosResult = WINNING_CONDITIONS_AND_PRIZES.map(({ condition, prize }) => {
     return { condition, prize, count: 0, profit: 0 };
@@ -35,7 +37,7 @@ export class WinningLottosResult {
   }
 
   getTotalProfitRate() {
-    const rate = (this.getTotalProfit() / this.#userMoney) * 100;
+    const rate = (this.getTotalProfit() / this.#userMoney) * percent;
     return getRoundedNumber(rate);
   }
 

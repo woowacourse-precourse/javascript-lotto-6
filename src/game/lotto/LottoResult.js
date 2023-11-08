@@ -1,4 +1,8 @@
-import { BONUS_NUMBER_TYPE, WINNING_CONDITIONS_AND_PRIZES } from '../../constants.js';
+import {
+  BONUS_NUMBER_TYPE,
+  WINNING_CONDITIONS_AND_PRIZES,
+  WINNING_NUMBERS_COUNT_TYPE,
+} from '../../constants.js';
 
 export class LottoResult {
   #numbers;
@@ -19,7 +23,7 @@ export class LottoResult {
   }
 
   getBonusNumberType() {
-    if (this.#countOfWinningNumbers === 5) {
+    if (this.#countOfWinningNumbers === WINNING_NUMBERS_COUNT_TYPE.second) {
       if (this.#numbers.some((number) => number === this.#bonusNumber)) {
         return BONUS_NUMBER_TYPE.withFiveWinningNumbers;
       }

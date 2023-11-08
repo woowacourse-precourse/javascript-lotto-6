@@ -1,3 +1,13 @@
+export const EMPTY = ' ';
+
+export const MONEY_UNIT = 1000;
+
+export const RANDOM_NUMBERS_RANGE = {
+  min: 1,
+  max: 45,
+  size: 6,
+};
+
 export const BONUS_NUMBER_TYPE = {
   withFiveWinningNumbers: 2,
   withOutFiveWinningNumbers: 1,

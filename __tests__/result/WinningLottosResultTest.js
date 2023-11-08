@@ -75,7 +75,7 @@ describe("n 개의 당첨된 로또들",()=>{
     })
 
     test("수익률 = 당첨 금액 / 구매한 금액 계산",()=>{
-        expect(winningLottosResult.getTotalProfitRate()).toBe(getRoundedNumber( (winningLottosResult.getTotalProfit() / userMoney) *100))
+        expect(winningLottosResult.getTotalProfitRate()).toBe(50166.67)
     })
 
     test("당첨 내역 출력",()=>{

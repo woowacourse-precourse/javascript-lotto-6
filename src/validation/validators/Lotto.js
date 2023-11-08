@@ -1,8 +1,9 @@
+import { RANDOM_NUMBERS_RANGE } from '../../constants.js';
 import { CustomError } from '../../error/CustomError.js';
 
 export class LottoValidator {
   isNumbersCountNotInRange(numbers) {
-    return numbers.length !== 6;
+    return numbers.length !== RANDOM_NUMBERS_RANGE.size;
   }
 
   isIncludedNotInRangeNumber(numbers) {
@@ -14,7 +15,7 @@ export class LottoValidator {
   }
 
   isDuplicated(numbers) {
-    return new Set(numbers).size !== 6;
+    return new Set(numbers).size !== RANDOM_NUMBERS_RANGE.size;
   }
 
   validate(numbers) {

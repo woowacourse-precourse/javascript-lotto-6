@@ -1,4 +1,3 @@
-import { BonusNumberValidator } from './BonusNumber.js';
 import { LottoValidator } from '../Lotto.js';
 
 export class WinningNumbersValidator extends LottoValidator {}

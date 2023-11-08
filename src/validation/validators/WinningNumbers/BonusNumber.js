@@ -1,3 +1,4 @@
+import { RANDOM_NUMBERS_RANGE } from '../../../constants.js';
 import { CustomError } from '../../../error/CustomError.js';
 import { LottoValidator } from '../Lotto.js';
 
@@ -12,7 +13,9 @@ export class BonusNumberValidator extends LottoValidator {
     }
 
     if (this.isNumberNotInRangeNumber(bonusNumber)) {
-      throw CustomError.BonusNumber('1 미만 혹은 45 를 초과하는 숫자가 포함되어 있습니다.');
+      throw CustomError.BonusNumber(
+        `${RANDOM_NUMBERS_RANGE.min} 미만 혹은 ${RANDOM_NUMBERS_RANGE.max} 를 초과하는 숫자가 포함되어 있습니다.`,
+      );
     }
   }
 }

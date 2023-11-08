@@ -1,11 +1,12 @@
+import { EMPTY } from '../../../constants.js';
 import { CustomError } from '../../../error/CustomError.js';
 export class CommonUserInputValidator {
   isEmpty(input) {
-    return input.split('').every((char) => char === ' ');
+    return input.split('').every((char) => char === EMPTY);
   }
 
   isIncludedSpace(input) {
-    return !this.isEmpty(input) && input.includes(' ');
+    return !this.isEmpty(input) && input.includes(EMPTY);
   }
 
   validate(input) {
