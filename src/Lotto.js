@@ -20,7 +20,7 @@ class Lotto {
    * @returns {number[]}
    */
   static pickRandomNumbers() {
-    return Random.pickUniqueNumbersInRange(...[1, 45], 6).sort((a, b) => a - b);
+    return Random.pickUniqueNumbersInRange(...[1, 45], 6,).sort((a, b) => a - b);
   }
 }
 
