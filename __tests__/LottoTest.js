@@ -25,4 +25,16 @@ describe("로또 클래스 테스트", () => {
     //then
     expect(logSpy).toHaveBeenCalledWith("[1, 44, 3, 5, 6, 7]");
   });
+
+  test("로또 간의 비교 (일치수)", () => {
+    //given
+    const lotto = new Lotto([1, 44, 3, 5, 6, 7]);
+    const lotto2 = new Lotto([1, 3, 41, 5, 6, 7]);
+
+    //when
+    const matchCount = lotto.getMatchingCountWith(lotto2);
+
+    //then
+    expect(matchCount).toBe(5);
+  });
 });
