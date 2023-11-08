@@ -27,6 +27,10 @@ class Game {
     return this.allLottoNumbers;
   }
 
+  #calculateOneLottoMatch(lotto, drawingLotto) {
+    return lotto.filter((item) => drawingLotto.includes(item)).length;
+  }
+
 }
 
 export default Game;
