@@ -43,4 +43,22 @@ describe('LottoService 테스트', () => {
 
     expect(lottoService.getWinningNumbers()).toEqual(input);
   });
+
+  test(`보너스 번호를 설정할 수 있다.`, () => {
+    const input = 7;
+
+    lottoService.setWinningNumbers([1, 2, 3, 4, 5, 6]);
+    lottoService.setBonusNumber(input);
+
+    expect(lottoService.getBonusNumber()).toBeDefined();
+  });
+
+  test(`보너스 번호를 반환할 수 있다.`, () => {
+    const input = 7;
+
+    lottoService.setWinningNumbers([1, 2, 3, 4, 5, 6]);
+    lottoService.setBonusNumber(input);
+
+    expect(lottoService.getBonusNumber()).toEqual(input);
+  });
 });
