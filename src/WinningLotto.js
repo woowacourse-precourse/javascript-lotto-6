@@ -12,8 +12,10 @@ class WinningLotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6 || numbers.length !== new Set(numbers).size) {
+    if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.THE_NUMBER);
+    } else if (numbers.length !== new Set(numbers).size) {
+      throw new Error(ERROR_MESSAGE.OVERLAP);
     }
     numbers.forEach((number) => {
       if (!Number.isInteger(number) || number < 1 || number > 45) {

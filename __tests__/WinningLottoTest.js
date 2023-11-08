@@ -50,13 +50,13 @@ describe('당첨 로또 에러 테스트', () => {
     await runWinningNumbersExpection('1,2,3,4,5,6,7');
   });
   test('당첨 로또에 정수가 아닌 값이 들어 있는 경우', async () => {
-    await runWinningNumbersExpection('1.1,2,3,4,5');
+    await runWinningNumbersExpection('1.1,2,3,4,5,6');
   });
   test('당첨 로또에 문자열이 들어 있는 경우', async () => {
-    await runWinningNumbersExpection('1,2,3,4,5a');
+    await runWinningNumbersExpection('1,2,3,4,5a,6');
   });
   test('당첨 로또에 1-45 사이가 아닌 값이 들어 간 경우', async () => {
-    await runWinningNumbersExpection('1,2,3,4,50');
+    await runWinningNumbersExpection('1,2,3,4,50,6');
   });
   test('당첨 로또에 중복된 값이 들어 간 경우', async () => {
     await runWinningNumbersExpection('1,1,2,3,4,5');

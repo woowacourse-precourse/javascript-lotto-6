@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1699447962216" clover="3.2.0">
+  <project timestamp="1699447962216" name="All files">
+    <metrics statements="99" coveredstatements="99" conditionals="45" coveredconditionals="45" methods="20" coveredmethods="20" elements="164" coveredelements="164" complexity="0" loc="99" ncloc="99" packages="1" files="6" classes="6"/>
+    <file name="App.js" path="C:\Users\USER\Desktop\woowa-tech\javascript-lotto-6\src\App.js">
+      <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="8" count="11" type="stmt"/>
+      <line num="9" count="11" type="stmt"/>
+      <line num="10" count="11" type="stmt"/>
+      <line num="11" count="11" type="stmt"/>
+      <line num="13" count="11" type="stmt"/>
+      <line num="14" count="25" type="stmt"/>
+      <line num="15" count="25" type="stmt"/>
+      <line num="16" count="25" type="stmt"/>
+      <line num="18" count="11" type="stmt"/>
+      <line num="19" count="11" type="stmt"/>
+      <line num="20" count="11" type="stmt"/>
+      <line num="21" count="11" type="stmt"/>
+      <line num="22" count="11" type="stmt"/>
+    </file>
+    <file name="Lotto.js" path="C:\Users\USER\Desktop\woowa-tech\javascript-lotto-6\src\Lotto.js">
+      <metrics statements="13" coveredstatements="13" conditionals="9" coveredconditionals="9" methods="6" coveredmethods="6"/>
+      <line num="8" count="30" type="stmt"/>
+      <line num="9" count="25" type="stmt"/>
+      <line num="13" count="25" type="stmt"/>
+      <line num="17" count="30" type="cond" truecount="2" falsecount="0"/>
+      <line num="18" count="2" type="stmt"/>
+      <line num="19" count="28" type="cond" truecount="2" falsecount="0"/>
+      <line num="20" count="1" type="stmt"/>
+      <line num="22" count="27" type="stmt"/>
+      <line num="23" count="161" type="cond" truecount="5" falsecount="0"/>
+      <line num="24" count="2" type="stmt"/>
+      <line num="31" count="125" type="stmt"/>
+      <line num="32" count="25" type="stmt"/>
+      <line num="38" count="25" type="stmt"/>
+    </file>
+    <file name="Money.js" path="C:\Users\USER\Desktop\woowa-tech\javascript-lotto-6\src\Money.js">
+      <metrics statements="15" coveredstatements="15" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
+      <line num="10" count="23" type="cond" truecount="2" falsecount="0"/>
+      <line num="11" count="2" type="stmt"/>
+      <line num="12" count="21" type="cond" truecount="2" falsecount="0"/>
+      <line num="13" count="3" type="stmt"/>
+      <line num="14" count="18" type="cond" truecount="2" falsecount="0"/>
+      <line num="15" count="1" type="stmt"/>
+      <line num="21" count="23" type="stmt"/>
+      <line num="22" count="23" type="stmt"/>
+      <line num="23" count="23" type="stmt"/>
+      <line num="25" count="6" type="stmt"/>
+      <line num="26" count="6" type="stmt"/>
+      <line num="28" count="23" type="stmt"/>
+      <line num="29" count="23" type="stmt"/>
+      <line num="33" count="14" type="stmt"/>
+      <line num="37" count="36" type="stmt"/>
+    </file>
+    <file name="Statistics.js" path="C:\Users\USER\Desktop\woowa-tech\javascript-lotto-6\src\Statistics.js">
+      <metrics statements="27" coveredstatements="27" conditionals="14" coveredconditionals="14" methods="4" coveredmethods="4"/>
+      <line num="18" count="16" type="stmt"/>
+      <line num="19" count="16" type="stmt"/>
+      <line num="20" count="16" type="stmt"/>
+      <line num="21" count="16" type="stmt"/>
+      <line num="22" count="16" type="stmt"/>
+      <line num="23" count="16" type="stmt"/>
+      <line num="24" count="16" type="stmt"/>
+      <line num="25" count="16" type="stmt"/>
+      <line num="29" count="16" type="stmt"/>
+      <line num="39" count="16" type="cond" truecount="2" falsecount="0"/>
+      <line num="40" count="12" type="stmt"/>
+      <line num="41" count="12" type="stmt"/>
+      <line num="43" count="4" type="stmt"/>
+      <line num="47" count="16" type="stmt"/>
+      <line num="48" count="300" type="stmt"/>
+      <line num="49" count="50" type="cond" truecount="2" falsecount="0"/>
+      <line num="50" count="39" type="cond" truecount="4" falsecount="0"/>
+      <line num="51" count="37" type="cond" truecount="2" falsecount="0"/>
+      <line num="52" count="35" type="cond" truecount="2" falsecount="0"/>
+      <line num="53" count="33" type="cond" truecount="2" falsecount="0"/>
+      <line num="58" count="16" type="stmt"/>
+      <line num="59" count="16" type="stmt"/>
+      <line num="60" count="16" type="stmt"/>
+      <line num="61" count="16" type="stmt"/>
+      <line num="62" count="16" type="stmt"/>
+      <line num="63" count="16" type="stmt"/>
+      <line num="64" count="16" type="stmt"/>
+    </file>
+    <file name="WinningLotto.js" path="C:\Users\USER\Desktop\woowa-tech\javascript-lotto-6\src\WinningLotto.js">
+      <metrics statements="26" coveredstatements="26" conditionals="16" coveredconditionals="16" methods="6" coveredmethods="6"/>
+      <line num="10" count="24" type="stmt"/>
+      <line num="11" count="24" type="stmt"/>
+      <line num="15" count="27" type="cond" truecount="2" falsecount="0"/>
+      <line num="16" count="2" type="stmt"/>
+      <line num="17" count="25" type="cond" truecount="2" falsecount="0"/>
+      <line num="18" count="1" type="stmt"/>
+      <line num="20" count="24" type="stmt"/>
+      <line num="21" count="137" type="cond" truecount="5" falsecount="0"/>
+      <line num="22" count="3" type="stmt"/>
+      <line num="29" count="27" type="stmt"/>
+      <line num="30" count="27" type="stmt"/>
+      <line num="32" count="162" type="stmt"/>
+      <line num="33" count="27" type="stmt"/>
+      <line num="35" count="6" type="stmt"/>
+      <line num="36" count="6" type="stmt"/>
+      <line num="38" count="27" type="stmt"/>
+      <line num="43" count="22" type="stmt"/>
+      <line num="44" count="22" type="stmt"/>
+      <line num="45" count="22" type="cond" truecount="5" falsecount="0"/>
+      <line num="46" count="3" type="stmt"/>
+      <line num="47" count="19" type="cond" truecount="2" falsecount="0"/>
+      <line num="48" count="1" type="stmt"/>
+      <line num="51" count="4" type="stmt"/>
+      <line num="52" count="4" type="stmt"/>
+      <line num="54" count="22" type="stmt"/>
+      <line num="58" count="14" type="stmt"/>
+    </file>
+    <file name="constant.js" path="C:\Users\USER\Desktop\woowa-tech\javascript-lotto-6\src\constant.js">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="1" count="5" type="stmt"/>
+      <line num="7" count="5" type="stmt"/>
+      <line num="14" count="5" type="stmt"/>
+      <line num="15" count="5" type="stmt"/>
+      <line num="24" count="5" type="stmt"/>
+    </file>
+  </project>
+</coverage>
