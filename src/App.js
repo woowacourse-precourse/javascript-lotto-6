@@ -1,5 +1,13 @@
+import LottoGame from './LottoGame/index.js';
+
 class App {
-  async play() {}
+  constructor() {
+    this.game = new LottoGame();
+  }
+
+  async play() {
+    await this.game.start();
+  }
 }
 
 export default App;
