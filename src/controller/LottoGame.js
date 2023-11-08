@@ -26,6 +26,7 @@ class LottoGame {
     6: 0,
     '5b': 0,
   };
+  #myWinningMoney = 0;
 
   async buyLotto() {
     await this.#setMoney();
@@ -125,7 +126,7 @@ class LottoGame {
   }
 
   #calculateTotalBenefit() {
-    const myWinningMoney =
+    this.#myWinningMoney =
       5000 * this.#rewardCount['3'] +
       50000 * this.#rewardCount['4'] +
       1500000 * this.#rewardCount['5'] +
@@ -133,9 +134,13 @@ class LottoGame {
       200000000 * this.#rewardCount['6'];
 
     const myThrowMoney = this.#money;
-    const myBenefit = (myWinningMoney / myThrowMoney) * 100;
+    const myBenefit = (this.#myWinningMoney / myThrowMoney) * 100;
 
     return myBenefit.toLocaleString('ko-KR', { minimumFractionDigits: 1 });
+  }
+
+  getMyWinningMoney() {
+    return this.#myWinningMoney;
   }
 }
 
