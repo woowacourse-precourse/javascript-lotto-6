@@ -135,6 +135,7 @@ class Lotto {
     MissionUtils.Console.print(this.lottoNumArrMultiplynumberPurchased());
     await this.enterWinningNumber();
     await this.enterBonusNumber();
+    MissionUtils.Console.print(`당첨 통계 \n ---`);
   }
 }
 export default Lotto;
