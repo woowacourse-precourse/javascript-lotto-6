@@ -21,5 +21,7 @@ export const ERROR = {
   INVALID_LOTTO_NUMBER_RANGE: '로또 번호는 1에서 45 사이의 숫자여야 합니다.',
   INVALID_LOTTO_NUMBER_COUNT: '로또 번호는 6개여야 합니다.',
   DUPLICATED_LOTTO_NUMBERS: '로또 번호는 중복될 수 없습니다.',
+  BONUS_NOT_A_NUMBER: '보너스 번호는 숫자여야 합니다.',
   BONUS_ALREADY_IN_LOTTO: '로또 번호와 보너스 번호는 중복될 수 없습니다.',
+  BONUS_NOT_IN_RANGE: '로또 번호는 1에서 45 사이의 숫자여야 합니다.',
 };
