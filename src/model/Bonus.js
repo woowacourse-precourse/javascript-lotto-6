@@ -1,5 +1,6 @@
 import FindIndex from '../controller/FindIndex';
 import EXCEPTION from '../constant/Exception';
+import Init from '../constant/Init';
 
 class Bonus {
   #numbers;
@@ -13,19 +14,22 @@ class Bonus {
     if (!Number(numbers)) {
       throw new Error(EXCEPTION.nonNumberError);
     }
-    if (!(numbers >= 1 && numbers <= 45)) {
+    if (!(numbers >= Init.minLottoRange && numbers <= Init.maxLottoRange)) {
       throw new Error(EXCEPTION.outOfRangeError);
     }
   }
 
   lottoNumberValidate(winningNumber, userBonusNumber) {
-    if (winningNumber.indexOf(String(userBonusNumber)) !== -1) {
+    if (winningNumber.indexOf(String(userBonusNumber)) !== Init.nonIndex) {
       throw new Error(EXCEPTION.bonusWinningSameError);
     }
   }
 
   isInFive(resultArray) {
-    this.arrayInFiveIndex = FindIndex.findArrayIndex(resultArray, 5);
+    this.arrayInFiveIndex = FindIndex.findArrayIndex(
+      resultArray,
+      Init.bonusNumber,
+    );
     if (this.arrayInFiveIndex.length !== 0) {
       return this.arrayInFiveIndex;
     }

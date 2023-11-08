@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import Output from '../view/Output';
+import Init from '../constant/Init';
 
 class RandomNumber {
   lottoNumber;
@@ -8,7 +9,11 @@ class RandomNumber {
     let count = 1;
     const lottoNumberArray = [];
     while (count <= purhcaseAmount) {
-      this.lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+      this.lottoNumber = Random.pickUniqueNumbersInRange(
+        Init.minLottoRange,
+        Init.maxLottoRange,
+        Init.lottoLength,
+      );
       Output.printRandomLottoNumber(this.lottoNumber);
       lottoNumberArray.push(this.lottoNumber);
       count += 1;

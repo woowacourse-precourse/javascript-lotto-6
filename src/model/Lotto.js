@@ -1,4 +1,5 @@
 import EXCEPTION from '../constant/Exception';
+import Init from '../constant/Init';
 
 class Lotto {
   #numbers;
@@ -10,20 +11,19 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== Number(Init.lottoLength)) {
       throw new Error(EXCEPTION.lottoLengthError);
     }
-    if (numbers.length !== [...new Set(numbers)].length) {
+    if (Number(numbers.length) !== Number([...new Set(numbers)].length)) {
       throw new Error(EXCEPTION.duplicateError);
     }
-    if (numbers.every(x => x >= 1 && x <= 45) === false) {
+    if (numbers.every(x => x >= Init.minLottoRange && x <= Init.maxLottoRange) === false) {
       throw new Error(EXCEPTION.outOfRangeError);
     }
   }
 
   #validateOfNonNumber(numbers) {
-    const SPECIAL_PATTERN = /[\{\}\\[\]\/?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
-    if (SPECIAL_PATTERN.test(numbers.join(',')) === true) {
+    if (Init.specialPattern.test(numbers.join(',')) === true) {
       throw new Error(EXCEPTION.specialCharacterError);
     }
   }

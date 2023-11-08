@@ -1,4 +1,5 @@
 import EXCEPTION from '../constant/Exception';
+import Init from '../constant/Init';
 
 class Purchase {
   #purchaseAmount;
@@ -12,7 +13,7 @@ class Purchase {
     if (!Number(userInput)) {
       throw new Error(EXCEPTION.nonNumericInputError);
     }
-    if (userInput % 1000 !== 0) {
+    if (userInput % Init.lottoAmount !== 0) {
       throw new Error(EXCEPTION.inValidAmountError);
     }
     if (userInput === 0) {
@@ -21,7 +22,7 @@ class Purchase {
   }
 
   calculatePurchaseCount() {
-    const PURCHASE_COUNT = this.#purchaseAmount / 1000;
+    const PURCHASE_COUNT = this.#purchaseAmount / Init.lottoAmount;
     return PURCHASE_COUNT;
   }
 }

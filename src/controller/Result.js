@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import Init from '../constant/Init';
 
 class Result {
   static getWinningResult(resultArray) {
@@ -8,11 +9,11 @@ class Result {
   }
 
   static calculateWinningMoney(winningInFive) {
-    const winThird = 5000 * this.winningThird;
-    const winForth = 50000 * this.winningForth;
-    const winFive = 1500000 * winningInFive[0];
-    const winBonus = 30000000 * winningInFive[1];
-    const winSix = 2000000000 * this.winningSix;
+    const winThird = Number(Init.winningThirtAmount) * this.winningThird;
+    const winForth = Number(Init.winningForthAmount) * this.winningForth;
+    const winFive = Number(Init.winningFiveAmount) * winningInFive[0];
+    const winBonus = Number(Init.winningBonusAmount) * winningInFive[1];
+    const winSix = Number(Init.winingSixAmount) * this.winningSix;
     this.winMoney = winThird + winForth + winFive + winBonus + winSix;
     return this.winMoney;
   }
