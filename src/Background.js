@@ -2,38 +2,41 @@ import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 
 class Background {
-  #lottos;
+  #numbers;
+  #bonus;
 
   constructor() {
-    this.#lottos = [];
+    this.#numbers = [];
+    this.#bonus = 0;
   }
 
   // getters & setters
-  getLottos() {
-    return this.#lottos;
-  }
-
-  #setLottos(lottos) {
-    this.#lottos.splice(0, this.#lottos.length, ...lottos);
-  }
 
   // queries
   issueLottos(bet) {
-    let lottos = [];
+    let money = bet;
+    const lottos = [];
 
-    for (let i = 0; bet - i >= 1000; i += 1000) {
-      let numbers = new Set();
+    while (1000 <= money) {
+      money -= 1000;
 
-      while (numbers.size !== 6) {
-        let number = Random.pickNumberInRange(1, 45);
-        numbers.add(number);
-      }
-
-      let lotto = new Lotto([...numbers]);
+      const lotto = this.#makeLotto();
       lottos.push(lotto);
     }
 
-    this.#setLottos(lottos);
+    return [money, lottos];
+  }
+
+  // utility
+  #makeLotto() {
+    let numbers = new Set();
+
+    while (numbers.size !== 6) {
+      let number = Random.pickNumberInRange(1, 45);
+      numbers.add(number);
+    }
+
+    return new Lotto([...numbers]);
   }
 }
 

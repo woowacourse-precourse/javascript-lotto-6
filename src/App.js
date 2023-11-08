@@ -14,9 +14,8 @@ class App {
 
   async play() {
     this.#bet = await Controls.getBet();
-    this.#background.issueLottos(this.#bet);
+    [this.#bet, this.#lottos] = this.#background.issueLottos(this.#bet);
 
-    this.#lottos = this.#background.getLottos();
     Controls.printLottos(this.#lottos);
   }
 }
