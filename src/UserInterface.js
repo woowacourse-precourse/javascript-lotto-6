@@ -1,6 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
 
 const UserInterface = () => {
+  let winningNumbers = [];
+
   const getLottoNumbers = async () => {
     let isValid = false;
     let inputToNumber;
@@ -38,18 +40,15 @@ const UserInterface = () => {
   };
 
   const getWinningNumbers = async () => {
-    const winningNumbers = [];
     let isValid = false;
+    let winningNumbersArray;
     while (!isValid) {
       const winningNumber = await Console.readLineAsync(
         "당첨 번호를 입력해 주세요.\n"
       );
       try {
-        validateWinningNumbers(winningNumber);
-
-        winningNumber.split(",").forEach((number) => {
-          winningNumbers.push(parseInt(number, 10));
-        });
+        winningNumbersArray = validateWinningNumbers(winningNumber);
+        winningNumbers = [...winningNumbersArray];
         isValid = true;
       } catch (error) {
         Console.print(error.message);
@@ -59,7 +58,9 @@ const UserInterface = () => {
   };
 
   const validateWinningNumbers = (winningNumbers) => {
-    const winningNumbersArray = winningNumbers.split(",");
+    const winningNumbersArray = winningNumbers.split(",")
+      .map((number) => parseInt(number.trim(), 10));
+
     if (winningNumbersArray.length !== 6) {
       throw new Error("[ERROR] 6개의 숫자를 입력해주세요.");
     }
@@ -79,9 +80,48 @@ const UserInterface = () => {
     if (set.size !== 6) {
       throw new Error("[ERROR] 당첨 번호에 중복된 숫자가 있습니다.");
     }
-    return winningNumbers;
+    return Array.from(winningNumbersArray);;
   }
-  return { getLottoNumbers, printLottoNumbers, getWinningNumbers };
+
+  const getBonusNumber = async () => {
+    let isValid = false;
+    let bonusNumberToInt;
+    while (!isValid) {
+      const bonusNumber = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+      try {
+        bonusNumberToInt = validateBonusNumber(bonusNumber);
+        isValid = true;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
+    return bonusNumberToInt;
+  }
+
+  const validateBonusNumber = (bonusNumber) => {
+    const bonusNumberToInt = parseInt(bonusNumber, 10);
+    if (Number.isNaN(bonusNumberToInt)) {
+      throw new Error("[ERROR] 숫자를 입력해주세요.");
+    }
+
+    if (bonusNumberToInt < 1 || bonusNumberToInt > 45) {
+      throw new Error("[ERROR] 1~45 사이의 숫자만 입력해주세요.");
+    }
+
+    if (winningNumbers.includes(bonusNumberToInt)) {
+      throw new Error("[ERROR] 당첨 번호와 중복된 숫자입니다.");
+    }
+
+    // 쉼표를 입력한 경우 1개가 아니기 때문에 예외 처리
+    if (bonusNumber.includes(",")) {
+      throw new Error("[ERROR] 1개의 숫자만 입력해주세요.");
+    }
+
+
+    return bonusNumberToInt;
+  };
+
+  return { getLottoNumbers, printLottoNumbers, getWinningNumbers, getBonusNumber };
 };
 
 export default UserInterface;
