@@ -18,8 +18,8 @@ class Game {
     ).sort((a, b) => a - b);
   }
 
-  drawLotto(size) {
-    this.allLottoNumbers = Array.from({ length: purchaseSize(size) }).map(
+  drawLotto(price) {
+    this.allLottoNumbers = Array.from({ length: purchaseSize(price) }).map(
       () => {
         return this.#generateRandomLotto();
       }
