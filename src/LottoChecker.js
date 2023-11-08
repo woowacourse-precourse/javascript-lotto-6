@@ -1,4 +1,4 @@
-import { MESSAGES } from "./Messages";
+import { MESSAGES } from "./Messages.js";
 
 export function lottoChecker(randomNumbers, winningNumbers, bonusNumber) {
   const matchedCounts = [];
