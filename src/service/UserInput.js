@@ -10,7 +10,8 @@ class UserInput {
 
   async #drawBonusNumber() {
     const userNumber = await Utils.ask(QUESTIONS.bonusNumber);
-    return userNumber;
+    const bonusNumber = Number(userNumber);
+    return bonusNumber;
   }
 
   async #receiveUserCost() {
