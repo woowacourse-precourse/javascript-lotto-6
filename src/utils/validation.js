@@ -2,30 +2,34 @@ export const validateNumber = {
   isDivideThousand(number) {
     return number % 1000 === 0;
   },
+
   isBiggerThanThousand(number) {
     return number >= 1000;
   },
+
   isNumber(number) {
     return !Number.isNaN(number);
   },
+
   isOneToFourtyFive(number) {
     return number > 1 && number < 45;
   },
 };
 
 export const validateArray = {
-  isNotSixSize(numbers) {
-    return numbers.length !== 6;
+  isSixSize(numbers) {
+    return numbers.length === 6;
   },
-  isNotOneToFourtyFive(numbers) {
-    return numbers.some((element) => element < 1 || element > 45);
+
+  isOneToFourtyFive(numbers) {
+    return numbers.every((element) => element >= 1 && element <= 45);
   },
+
   isDuplicate(numbers) {
-    return numbers.some(
-      (element) => numbers.indexOf(element) !== numbers.lastIndexOf(element)
-    );
+    return numbers.some((element, index) => numbers.indexOf(element) !== index);
   },
-  isNotNumber(numbers) {
-    return numbers.some((element) => Number.isNaN(element));
+
+  isNumber(numbers) {
+    return numbers.every((element) => !Number.isNaN(element));
   },
 };

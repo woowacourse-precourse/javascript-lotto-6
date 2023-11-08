@@ -10,21 +10,23 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (validateArray.isNotNumber(numbers)) {
+    if (!validateArray.isNumber(numbers)) {
       throw new Error(LOTTO_ERROR.isNumber);
     }
-    if (validateArray.isNotSixSize(numbers)) {
+    if (!validateArray.isSixSize(numbers)) {
       throw new Error(LOTTO_ERROR.isSixSize);
     }
-    if (validateArray.isNotOneToFourtyFive(numbers)) {
+    if (!validateArray.isOneToFourtyFive(numbers)) {
       throw new Error(LOTTO_ERROR.isOneToFourtyFive);
     }
     if (validateArray.isDuplicate(numbers)) {
-      throw new Error(LOTTO_ERROR.isNotDuplicate);
+      throw new Error(LOTTO_ERROR.isDuplicate);
     }
   }
 
-  // TODO: 추가 기능 구현
+  get numbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
