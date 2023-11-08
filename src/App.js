@@ -9,6 +9,14 @@ class App {
     this.#manager = new LottoManager();
   }
 
+  async #handleGlobalError(callback) {
+    try {
+      await callback();
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
+
   async play() {
     await this.#handleGlobalError(async () => {
       const userMoney = await inputUserMoney();
