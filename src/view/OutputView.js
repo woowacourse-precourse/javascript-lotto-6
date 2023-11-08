@@ -6,7 +6,7 @@ class OutputView {
     Console.print(`\n${amount}개를 구매했습니다.`);
   }
 
-  static printPurchaseNumbers(lottos) {
+  static printNumbers(lottos) {
     lottos.forEach(lotto => {
       const numbersString = lotto.getNumbers().join(', ');
       Console.print(`[${numbersString}]`);

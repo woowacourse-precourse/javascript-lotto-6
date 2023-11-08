@@ -50,10 +50,11 @@ class LottoManager {
     this.#bonusNumber = bonusNumber;
   }
 
-  #setPrizeCount(purchaseLotto) {
+  #calculatePrizeCount(purchaseLotto) {
     const matchCount = Lotto.getMatchCount(this.#winLotto, purchaseLotto);
     const matchBonus =
       matchCount === 5 && purchaseLotto.isIncludeBonus(this.#bonusNumber);
+      
     if (matchBonus) {
       this.#prizeCount['second'] += 1;
     } else if (matchCount in PRIZE_TEXT_BY_MATCH_COUNT) {
@@ -61,12 +62,12 @@ class LottoManager {
     }
   }
 
-  #setAllPrizeCount() {
-    this.#purchaseLottos.forEach(lotto => this.#setPrizeCount(lotto));
+  #calculateAllPrizeCount() {
+    this.#purchaseLottos.forEach(lotto => this.#calculatePrizeCount(lotto));
   }
 
   getPrizeCount() {
-    this.#setAllPrizeCount();
+    this.#calculateAllPrizeCount();
     return this.#prizeCount;
   }
 }
