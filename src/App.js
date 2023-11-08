@@ -6,6 +6,7 @@ import Computer from './Computer.js';
 import isValidCost from './modules/isValidCost.js';
 import isValidWinnerNumber from './modules/isValidWinnerNumber.js';
 import isValidBonusNumber from './modules/isValidBonusNumber.js';
+import { prize, rank } from './datas/prize.js';
 
 const inputStep = {
   cost: {
@@ -22,23 +23,6 @@ const inputStep = {
   },
 };
 
-const printStep = ['fifth', 'fourth', 'third', 'second', 'first'];
-const prizeMoney = {
-  first: 2000000000,
-  second: 30000000,
-  third: 1500000,
-  fourth: 50000,
-  fifth: 5000,
-};
-
-const prizeStandard = {
-  first: '6개 일치',
-  second: '5개 일치, 보너스 볼 일치',
-  third: '5개 일치',
-  fourth: '4개 일치',
-  fifth: '3개 일치',
-};
-
 class App {
   #lottos;
 
@@ -47,6 +31,7 @@ class App {
       try {
         const inputValue = await input(prompt);
         validateFunc(inputValue);
+
         return inputValue;
       } catch (error) {
         print(error.message);
@@ -89,8 +74,10 @@ class App {
     computer.setPrizeResult(this.#lottos);
 
     const reuslt = computer.getPrizeResult();
-    printStep.forEach((elem) => {
-      print(`${prizeStandard[elem]} (${prizeMoney[elem].toLocaleString()}원) - ${reuslt[elem]}개`);
+    rank.reverse().forEach((elem) => {
+      print(
+        `${prize[elem].standard} (${prize[elem].money.toLocaleString()}원) - ${reuslt[elem]}개`,
+      );
     });
 
     print(`총 수익률은 ${computer.getProfitRatio()}입니다.`);
