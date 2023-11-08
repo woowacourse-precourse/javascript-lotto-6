@@ -1,5 +1,5 @@
-import { LOTTO } from './LottoInfo.js';
-import { ERROR } from './LottoMessage.js';
+import { LOTTO } from './constant/LottoInfo.js';
+import { ERROR } from './constant/LottoMessage.js';
 
 class Lotto {
   #numbers = [];

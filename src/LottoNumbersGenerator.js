@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO } from './LottoInfo.js';
+import { LOTTO } from './constant/LottoInfo.js';
 
 class LottoNumbersGenerator {
   static generate() {

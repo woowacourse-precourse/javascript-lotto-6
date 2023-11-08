@@ -3,7 +3,7 @@ import {
   PRIZE_MONEY_BY,
   RANKING_BY,
   RESULTS_INITIAL_ARRAYS,
-} from './LottoInfo.js';
+} from './constant/LottoInfo.js';
 
 class WinningResults {
   #resultMap = new Map(RESULTS_INITIAL_ARRAYS);

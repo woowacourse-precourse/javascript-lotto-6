@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { TEMPLATE, WINNING_STATISTICS } from './LottoMessage.js';
+import { TEMPLATE, WINNING_STATISTICS } from '../constant/LottoMessage.js';
 
 class OutputView {
   static #DELIMITER = ',';

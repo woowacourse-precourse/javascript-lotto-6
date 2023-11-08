@@ -1,5 +1,5 @@
+import { ERROR } from '../src/constant/LottoMessage.js';
 import Lotto from '../src/Lotto.js';
-import { ERROR } from '../src/LottoMessage.js';
 import WinningLotto from '../src/WinningLotto.js';
 
 describe('당첨 번호 클래스 테스트', () => {

@@ -1,6 +1,6 @@
+import { LOTTO } from './constant/LottoInfo.js';
+import { ERROR } from './constant/LottoMessage.js';
 import Lotto from './Lotto.js';
-import { LOTTO } from './LottoInfo.js';
-import { ERROR } from './LottoMessage.js';
 import LottoNumbersGenerator from './LottoNumbersGenerator.js';
 
 class LottoShop {

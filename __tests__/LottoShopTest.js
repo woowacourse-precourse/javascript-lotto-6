@@ -1,6 +1,6 @@
 import Lottoshop from '../src/Lottoshop.js';
-import { ERROR } from '../src/LottoMessage.js';
 import LottoPurchaser from '../src/LottoPurchaser.js';
+import { ERROR } from '../src/constant/LottoMessage.js';
 
 describe('로또 판매점 클래스 테스트', () => {
   const lottoPurchaser = new LottoPurchaser();

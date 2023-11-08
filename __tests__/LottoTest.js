@@ -1,5 +1,5 @@
+import { ERROR } from '../src/constant/LottoMessage.js';
 import Lotto from '../src/Lotto.js';
-import { ERROR } from '../src/LottoMessage.js';
 
 describe('로또 클래스 테스트', () => {
   describe('includes', () => {

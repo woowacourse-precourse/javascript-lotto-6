@@ -1,6 +1,6 @@
+import { LOTTO, MATCHING_COUNT } from './constant/LottoInfo.js';
+import { ERROR } from './constant/LottoMessage.js';
 import Lotto from './Lotto.js';
-import { LOTTO, MATCHING_COUNT } from './LottoInfo.js';
-import { ERROR } from './LottoMessage.js';
 
 class WinningLotto {
   #lotto;

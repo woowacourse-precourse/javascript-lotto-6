@@ -1,7 +1,7 @@
-import InputView from './InputView.js';
 import LottoPurchaser from './LottoPurchaser.js';
 import LottoShop from './LottoShop.js';
-import OutputView from './OutputView.js';
+import InputView from './view/InputView.js';
+import OutputView from './view/OutputView.js';
 import WinningLotto from './WinningLotto.js';
 import WinningResults from './WinningResults.js';
 

@@ -1,4 +1,4 @@
-import { LOTTO } from './LottoInfo.js';
+import { LOTTO } from './constant/LottoInfo.js';
 
 class LottoPurchaser {
   #lottos = [];

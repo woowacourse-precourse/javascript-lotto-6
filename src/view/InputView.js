@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { QUERY } from './LottoMessage.js';
+import { QUERY } from '../constant/LottoMessage.js';
 
 class InputView {
   static #DELIMITER = ',';
