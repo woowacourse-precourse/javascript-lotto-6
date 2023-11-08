@@ -62,4 +62,9 @@ describe("보너스 클래스 테스트", () => {
       new BonusNum("d");
     }).toThrow(ErrorMsg.IS_NAN);
   });
+  test("보너스 번호에 1미만 45초과를 입력하면 예외가 발생한다", () => {
+    expect(() => {
+      new BonusNum("555");
+    }).toThrow(ErrorMsg.NUM_OUT_OF_RANGE);
+  });
 });

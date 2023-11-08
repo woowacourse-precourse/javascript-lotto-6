@@ -36,7 +36,7 @@ const Validator = {
   checkRange(input) {
     input = Number(input);
     if (input < Constant.MIN || input > Constant.MAX) {
-      throw new Error(ErrorMsg.LOTTO_NUM.OUT_OF_RANGE);
+      throw new Error(ErrorMsg.NUM_OUT_OF_RANGE);
     }
   },
 };

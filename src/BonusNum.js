@@ -10,6 +10,7 @@ class BonusNum {
 
   #validate(input) {
     Validator.isNum(input);
+    Validator.checkRange(input);
   }
 
   returnNum() {
