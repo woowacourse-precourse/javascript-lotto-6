@@ -22,6 +22,9 @@ class Lottos {
     if (purchasePrice % VALUE.lottoUnit !== 0) {
       throw new Error(ERROR.invalidUnit);
     }
+    if (purchasePrice <= 0){
+      throw new Error(ERROR.invalidNumber);
+    }
   }
 
   createLottos(input) {
