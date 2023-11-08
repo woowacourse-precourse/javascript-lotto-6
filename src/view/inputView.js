@@ -8,6 +8,13 @@ const inputView = {
     );
     return purchaseAmount;
   },
+
+  async winningNumbers() {
+    const winningNumbers = await MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGE.WINNING_NUMBERS,
+    );
+    return winningNumbers;
+  },
 };
 
 export default inputView;

@@ -25,6 +25,10 @@ class LottoController {
     lottoNumbersList.map((list) => outputView.printLottoNumbersList(list));
     this.lottoNumbersList = lottoNumbersList;
   }
+
+  async getWinningNumbers() {
+    const input = await inputView.winningNumbers();
+  }
 }
 
 export default LottoController;
