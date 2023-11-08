@@ -18,7 +18,8 @@ class Lotto {
   }
 
   #validateNumber(number) {
-    if(isNaN(number) || number<1 || number>45) {
+    const parsedNumber = Number(number)
+    if(isNaN(parsedNumber) || parsedNumber<1 || parsedNumber>45) {
       throw new Error("[ERROR] 각 번호는 1~45의 숫자여야 합니다.")
     }
   }
