@@ -5,9 +5,13 @@ const Output = {
   printPurcahse(count) {
     MissionUtils.Console.print(count + MESSAGE.OUTPUT_PURCHASE);
   },
+
   printLottos(lottos) {
-    lottos.forEach((lotto) => MissionUtils.Console.print(lotto.getNumbers()));
+    lottos.forEach((lotto) =>
+      MissionUtils.Console.print(`[${lotto.getNumbers().join(', ')}]`),
+    );
   },
+
   printErrorMessage(message) {
     MissionUtils.Console.print(message);
   },
