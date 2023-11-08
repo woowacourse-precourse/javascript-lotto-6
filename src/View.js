@@ -3,9 +3,9 @@ import { CONSTANT } from "./Constant.js";
 
 class View {
     static showLotto(userLotto) {
-        const AMOUNT = userLotto.length;
+        const amount = userLotto.length;
 
-        let output = `${AMOUNT}${CONSTANT.MONEY_INPUT_RESPONSE}\n`;
+        let output = `${amount}${CONSTANT.MONEY_INPUT_RESPONSE}\n`;
         userLotto.forEach((lotto) => {
             output += `[${lotto.getNum().join(", ")}]\n`;
         });

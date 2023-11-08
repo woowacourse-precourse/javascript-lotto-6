@@ -5,33 +5,33 @@ import Winning from "./Winning.js";
 
 class App {
     async play() {
-        const USER = new User();
-        await USER.setMoney();
+        const user = new User();
+        await user.setMoney();
 
-        for (let i = 0; i < USER.getAmount(); i++)
-            USER.setUserLotto(Controller.generateRandomLotto());
+        for (let i = 0; i < user.getAmount(); i++)
+            user.setUserLotto(Controller.generateRandomLotto());
 
-        View.showLotto(USER.getUserLotto());
+        View.showLotto(user.getUserLotto());
 
-        const WINNING = new Winning();
-        await WINNING.setWinning();
-        await WINNING.setBonus();
+        const winning = new Winning();
+        await winning.setWinning();
+        await winning.setBonus();
 
-        const RESULT = {};
-        for (let i = 0; i < USER.getUserLotto().length; i++) {
-            const TMP = Controller.compare(
-                USER.getUserLotto()[i],
-                WINNING.getWinning(),
-                WINNING.getBonus()
+        const result = {};
+        for (let i = 0; i < user.getUserLotto().length; i++) {
+            const tmp = Controller.compare(
+                user.getUserLotto()[i],
+                winning.getWinning(),
+                winning.getBonus()
             );
-            if (TMP in RESULT) RESULT[TMP] += 1;
-            else RESULT[TMP] = 1;
+            if (tmp in result) result[tmp] += 1;
+            else result[tmp] = 1;
         }
         const rateOfReturn = Controller.rateOfReturnCal(
-            USER.getMoney(),
-            RESULT
+            user.getMoney(),
+            result
         );
-        View.showStatistics(RESULT, rateOfReturn);
+        View.showStatistics(result, rateOfReturn);
     }
 }
 

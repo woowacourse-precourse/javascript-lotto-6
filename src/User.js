@@ -12,16 +12,20 @@ class User {
 
     async setMoney() {
         try {
-            const MONEY = await Console.readLineAsync(
+            const money = await Console.readLineAsync(
                 `${CONSTANT.MONEY_INPUT_ASK}\n`
             );
-            if (Number(MONEY) % 1000 != 0) throw new Error(CONSTANT.ERROR);
-            this.#money = Number(MONEY);
+            this.#validate(money);
+            this.#money = Number(money);
         } catch (e) {
             Console.print(e.message);
             await this.setMoney();
         }
     }
+    #validate(money) {
+        if (Number(money) % 1000 != 0) throw new Error(CONSTANT.ERROR);
+    }
+
     getMoney() {
         return this.#money;
     }

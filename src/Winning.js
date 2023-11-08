@@ -29,19 +29,22 @@ class Winning {
 
     async setBonus() {
         try {
-            const BONUS = await Console.readLineAsync(
+            const bonus = await Console.readLineAsync(
                 `\n${CONSTANT.BONUS_INPUT_ASK}\n`
             );
-            if (
-                !(Number(BONUS) >= 1 && Number(BONUS <= 45)) ||
-                this.#winningLotto.getNum().includes(Number(BONUS))
-            )
-                throw new Error(CONSTANT.ERROR);
-            this.#bonus = Number(BONUS);
+            this.#validateBonus(bonus);
+            this.#bonus = Number(bonus);
         } catch (e) {
             Console.print(e.message);
             await this.setBonus();
         }
+    }
+    #validateBonus(bonus) {
+        if (
+            !(Number(bonus) >= 1 && Number(bonus <= 45)) ||
+            this.#winningLotto.getNum().includes(Number(bonus))
+        )
+            throw new Error(CONSTANT.ERROR);
     }
 
     getBonus() {
