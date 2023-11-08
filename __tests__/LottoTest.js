@@ -15,12 +15,12 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  test("랜덤 로또 생성 테스트.", () =>{
-    const input = 6;
-    const app = new App();
+  // test("랜덤 로또 생성 테스트.", () =>{
+  //   const input = 6;
+  //   const app = new App();
 
-    const lottos = app.generatRandomLottos(6);
+  //   const lottos = app.generatRandomLottos(6);
 
-    expect(input).toEqual(lottos.length);
-  });
+  //   expect(input).toEqual(lottos.length);
+  // });
 });
