@@ -7,7 +7,43 @@
 ## 개선된 점
 
 - DDD 학습 후, 유사 DDD(?) 도입. 다만, 너무 과도한 파일 분리가 일어나지 않도록 각 Layer를 최대한 통합하여 사용.
+
 - 코드리뷰를 진행하며 고민했던 자체적인 테스트 컨벤션 도입. 각 도메인별로 자세하게 테스트를 진행하되 외부 의존성을 최소화하기.
+
+- 자체적인 테스트 컨벤션 수립 및 적용.
+
+```js
+describe('로또 생성시 예외가 발생하는 경우', () => {
+  describe('로또 번호의 개수가 6개 미만인 경우, 예외가 발생한다.', () => {
+    // given
+    const cases = [
+      { input: [] },
+      { input: [1] },
+      { input: [1, 2] },
+      { input: [1, 2, 3] },
+      { input: [1, 2, 3, 4] },
+      { input: [1, 2, 3, 4, 5] },
+    ];
+
+    test.each(cases)(
+      '로또 번호로 $input가 주어지는 경우, 예외가 발생한다.',
+      ({ input }) => {
+        // when
+        const createLotto = () => new Lotto(input);
+
+        // then
+        expect(createLotto).toThrow(ERROR.message.lotto.length);
+      },
+    );
+  });
+});
+```
+
+- 성공하는 경우, 실패하는 경우 전부 테스트하기.
+- beforeEach로 반복되는 로직 제거하기.
+- test.each로 다양한 케이스 테스트하기.
+- describe 포매팅을 이용하여 테스트 자세히 설명하기.
+- ~한 경우, ~해야 한다. 문자를 맞춤으로써 가독성 확보하기.
 
 ---
 
