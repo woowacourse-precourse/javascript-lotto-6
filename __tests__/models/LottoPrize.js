@@ -30,4 +30,15 @@ describe('LottoPrize 테스트', () => {
 
     expect(lottoPrize.getStatus().fifthPrizeCount).toBe(1);
   });
+  test('당첨 결과의 총 상금을 반환할 수 있다.', () => {
+    const input = {
+      firstPrizeCount: 1,
+      secondPrizeCount: 0,
+      thirdPrizeCount: 0,
+      fourthPrizeCount: 0,
+      fifthPrizeCount: 0,
+    };
+
+    expect(LottoPrize.getPrizeAmount(input)).toBe(2000000000);
+  });
 });

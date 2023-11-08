@@ -79,7 +79,7 @@ describe('LottoService 테스트', () => {
       fourthPrizeCount: 0,
       fifthPrizeCount: 0,
     };
-    
+
     mockRandoms([input]);
     lottoService.setPurchaseAmount(1000);
     lottoService.buyLottos();
@@ -87,5 +87,17 @@ describe('LottoService 테스트', () => {
     lottoService.setBonusNumber(7);
 
     expect(lottoService.getLottoResult()).toEqual(output);
+  });
+
+  test('당첨 결과의 총 수익률을 반환할 수 있다.', () => {
+    const input = [1, 2, 3, 4, 5, 6];
+
+    mockRandoms([input]);
+    lottoService.setPurchaseAmount(1000);
+    lottoService.buyLottos();
+    lottoService.setWinningNumbers(input);
+    lottoService.setBonusNumber(7);
+
+    expect(lottoService.getLottoTotalReturns()).toBe('2000000.0');
   });
 });
