@@ -41,13 +41,13 @@ class Calculate {
 
   countMatchNumbers(lotto) {
     const matchedNumbers = lotto
-      .getNumber()
+      .getNumbers()
       .filter((number) => this.winningNumbers.includes(number));
     return matchedNumbers;
   }
 
   countBonusNumbers(lotto) {
-    const bonusMatch = lotto.getNumber().includes(this.bonusNumber);
+    const bonusMatch = lotto.getNumbers().includes(this.bonusNumber);
     return bonusMatch;
   }
 
