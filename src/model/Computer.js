@@ -16,7 +16,7 @@ class Computer {
       this.state.rank5.count += 1;
     } else if (lottoMatch === 4) {
       this.state.rank4.count += 1;
-    } else if (lottoMatch === 5) {
+    } else if (lottoMatch === 5 && !bonusMatch) {
       this.state.rank3.count += 1;
     } else if (lottoMatch === 5 && bonusMatch) {
       this.state.rank2.count += 1;
