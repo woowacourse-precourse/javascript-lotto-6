@@ -6,7 +6,7 @@ const isInteger = (number) => {
   }
 };
 
-const validateLottonRange = (number) => {
+const validateLottoRange = (number) => {
   if (number < condition.lottoMinNumber || number > condition.lottoMaxNumber) {
     throw error.numberRangeError;
   }
@@ -26,6 +26,18 @@ const Validator = {
     }
   },
 
+  validateLottoLength(numbers) {
+    if (numbers.length !== condition.lottoNumbersLength) {
+      throw error.lottoNumbersLengthError;
+    }
+  },
+
+  validateLottoDuplicate(numbers) {
+    if (new Set(numbers).size !== condition.lottoNumbersLength) {
+      throw error.LottoNumbersDuplicationError;
+    }
+  },
+
   validateWinnigNumbersString(winningNumbers) {
     if (!Number(winningNumbers.split(condition.separator).join(''))) {
       throw error.winningNumbersSeparatorError;
@@ -33,21 +45,17 @@ const Validator = {
   },
 
   validateWinningNumbers(winningNumbers) {
-    if (winningNumbers.length !== condition.winningNumbersLength) {
-      throw error.winningNumbersLengthError;
-    }
-    if (new Set(winningNumbers).size !== condition.winningNumbersLength) {
-      throw error.winningNumbersDuplicationError;
-    }
+    this.validateLottoLength(winningNumbers);
+    this.validateLottoDuplicate(winningNumbers);
     winningNumbers.forEach((number) => {
       isInteger(number);
-      validateLottonRange(number);
+      validateLottoRange(number);
     });
   },
 
   validateBonusNumber(bonusNumber) {
     isInteger(bonusNumber);
-    validateLottonRange(bonusNumber);
+    validateLottoRange(bonusNumber);
   },
 };
 
