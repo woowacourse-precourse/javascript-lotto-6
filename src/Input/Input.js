@@ -1,10 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
 import Validator from "../utils/Validator";
+import PRINT_MESSAGE from "../constant/PrintMessage";
 
 const Input = {
   async lottoPurchaseAmount() {
     const purchaseAmount = await Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
+      PRINT_MESSAGE.REQUEST_PURCHASE_AMOUNT
     );
     Validator.InputPurchaseAmount(purchaseAmount);
     return purchaseAmount;
