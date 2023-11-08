@@ -21,7 +21,11 @@ const OutputView = {
   },
 
   printTotalRate(totalRate) {
-    Console.print(`${MESSAGE_PRINT.TOTAL_RATE_HEAD}${totalRate}${MESSAGE_PRINT.TOTAL_RATE_TAIL}`);
+    Console.print(
+      `${MESSAGE_PRINT.TOTAL_RATE_HEAD}${Number(totalRate).toLocaleString()}${
+        MESSAGE_PRINT.TOTAL_RATE_TAIL
+      }`,
+    );
   },
 
   printErrorMessage(message) {
