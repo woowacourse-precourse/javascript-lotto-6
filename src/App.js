@@ -7,79 +7,79 @@ import OutputView from './View/OutputView.js';
 import Validator from './validator/Validator.js';
 
 class App {
-  async play() {
-    const { lottos, buyingPrice } = await App.buyLotto();
-    OutputView.printBuyingLottos(lottos);
+  #buyingPrice;
+  #lottoTickets;
+  #winningNumbers;
+  #bonusNumber;
 
-    const { winningNumbers, bonusNumber } = await App.drawLottoBalls();
-    const lottoResult = App.checkLottoResult(
-      {
-        winningNumbers,
-        bonusNumber,
-      },
-      lottos
-    );
-    OutputView.lottoOutcome(lottoResult);
-
-    const returnRate = App.calculateLottoReturnRate({
-      lottoResult,
-      buyingPrice,
-    });
-    OutputView.lottoRate(returnRate);
+  constructor() {
+    this.#buyingPrice = 0;
+    this.#lottoTickets = [];
+    this.#winningNumbers = [];
+    this.#bonusNumber = undefined;
   }
 
-  static async buyLotto() {
+  async play() {
+    this.#buyingPrice = await this.readBuyingPrice();
+    this.#lottoTickets = LottoShop.issueLottoTickets(this.#buyingPrice);
+    OutputView.printBuyingLottos(this.#lottoTickets);
+
+    this.#winningNumbers = await this.readWinningNumbers();
+    this.#bonusNumber = await this.readBonusNumber();
+
+    const lottoResult = this.checkLottoResult();
+    OutputView.printlottoResult(lottoResult);
+
+    const returnRate = this.calculateLottoReturnRate(lottoResult);
+    OutputView.printLottoReturnRate(returnRate);
+  }
+
+  async readBuyingPrice() {
     try {
       const buyingPrice = await InputView.readNumber(INPUT.BUYING_PRICE);
       Validator.validateBuyingPrice(buyingPrice);
-      const lottos = LottoShop.issueLottoTickets(buyingPrice);
-
-      return { lottos, buyingPrice };
+      return buyingPrice;
     } catch (e) {
       OutputView.print(e.message);
-      return await App.buyLotto();
+      return await this.readBuyingPrice();
     }
   }
 
-  static async drawLottoBalls() {
-    const winningNumbers = await App.getWinningNumbers();
-    const bonusNumber = await App.getBonusNumber(winningNumbers);
-
-    return {
-      winningNumbers,
-      bonusNumber,
-    };
-  }
-
-  static async getWinningNumbers() {
+  async readWinningNumbers() {
     try {
       const winningNumbers = await InputView.readNumbers(INPUT.WINNING_NUMBERS);
       Validator.validateLottoNumbers(winningNumbers);
       return winningNumbers;
     } catch (e) {
       OutputView.print(e.message);
-      return await App.getWinningNumbers();
+      return await this.readWinningNumbers();
     }
   }
 
-  static async getBonusNumber(winningNumbers) {
+  async readBonusNumber() {
     try {
       const bonusNumber = await InputView.readNumber(INPUT.BONUS_NUMBERS);
-      Validator.validateBonusNumber(bonusNumber, winningNumbers);
+      Validator.validateBonusNumber(bonusNumber, this.#winningNumbers);
       return bonusNumber;
     } catch (e) {
       OutputView.print(e.message);
-      return await App.getBonusNumber([...winningNumbers]);
+      return await this.readBonusNumber();
     }
   }
 
-  static checkLottoResult(lottoBalls, lottoTickets) {
-    const verifier = new LottoResultCalculator(lottoBalls);
-    return verifier.checkLottoResult(lottoTickets);
+  checkLottoResult() {
+    const verifier = new LottoResultCalculator({
+      winningNumbers: this.#winningNumbers,
+      bonusNumber: this.#bonusNumber,
+    });
+    return verifier.checkLottoResult(this.#lottoTickets);
   }
 
-  static calculateLottoReturnRate(operands) {
-    const calculator = new LottoReturnRateCalculator(operands);
+  calculateLottoReturnRate(lottoResult) {
+    const calculator = new LottoReturnRateCalculator({
+      lottoResult,
+      buyingPrice: this.#buyingPrice,
+    });
     return calculator.calculateReturnRate();
   }
 }
