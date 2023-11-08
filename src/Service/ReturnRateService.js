@@ -5,18 +5,17 @@ export default class ReturnMoneyService {
 
   #myWallet;
 
-  constructor(myLotto, mywallet) {
+  constructor(myLotto, myWallet) {
     this.#myLotto = myLotto;
-    this.#myWallet = mywallet;
+    this.#myWallet = myWallet;
   }
 
   calculateWinMoney() {
     let returnMoney = 0;
-
     Object.keys(REWARDSET).forEach((rank, i) => {
-      returnMoney += Number(REWARDSET[rank].money) * this.myLotto.getWinResultArr()[i];
+      returnMoney += parseInt(REWARDSET[rank].money.replace(/,/g, ''), 10) * this.#myLotto.getWinResultArr()[i];
     });
 
-    return returnMoney;
+    return this.#myWallet.setReturnMoney(returnMoney);
   }
 }
