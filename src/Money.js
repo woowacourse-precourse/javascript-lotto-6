@@ -24,6 +24,10 @@ class Money {
   getPurchaseCount() {
     return this.#purchaseCount;
   }
+
+  getMoney() {
+    return this.#money;
+  }
 }
 
 export default Money;

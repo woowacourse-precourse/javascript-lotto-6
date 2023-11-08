@@ -22,6 +22,13 @@ export const CONSTANT = Object.freeze({
   FIVE_MATCH_WITH_BONUS_PRIZE: 30000000,
   SIX_MATCH_PRIZE: 2000000000,
   MATCHING_COUNT: 1,
+  INITIAL_MATCH_COUNT: 0,
+  INITIAL_LOTTO_PRIZE: 0,
+  THREE_MATCH_TEXT: '3개 일치',
+  FOUR_MATCH_TEXT: '4개 일치',
+  FIVE_MATCH_TEXT: '5개 일치',
+  FIVE_MATCH_WITH_BONUS_TEXT: '5개 일치, 보너스 볼 일치',
+  SIX_MATCH_TEXT: '6개 일치',
 });
 
 export const CONSOLE_MESSAGE = Object.freeze({

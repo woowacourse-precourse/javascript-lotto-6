@@ -16,13 +16,13 @@ class LottoMachine {
     this.#money = money;
     this.#winningNumber = new WinningNumber();
     this.#compareResult = {
-      threeMatch: 0,
-      fourMatch: 0,
-      fiveMatch: 0,
-      fiveMatchWithBonus: 0,
-      sixMatch: 0,
+      threeMatchCount: CONSTANT.INITIAL_MATCH_COUNT,
+      fourMatchCount: CONSTANT.INITIAL_MATCH_COUNT,
+      fiveMatchCount: CONSTANT.INITIAL_MATCH_COUNT,
+      fiveMatchWithBonusCount: CONSTANT.INITIAL_MATCH_COUNT,
+      sixMatchCount: CONSTANT.INITIAL_MATCH_COUNT,
     };
-    this.#lottoPrize = 0;
+    this.#lottoPrize = CONSTANT.INITIAL_LOTTO_PRIZE;
   }
 
   #updateLottoPrize(prize) {
@@ -32,32 +32,38 @@ class LottoMachine {
   #updateComparisonResults(matchingCount, isMachingBouns) {
     switch (matchingCount) {
       case 3: {
-        this.#compareResult.threeMatch += CONSTANT.MATCHING_COUNT;
+        this.#compareResult.threeMatchCount += CONSTANT.MATCHING_COUNT;
         this.#updateLottoPrize(CONSTANT.THREE_MATCH_PRIZE);
         break;
       }
       case 4: {
-        this.#compareResult.fourMatch += CONSTANT.MATCHING_COUNT;
+        this.#compareResult.fourMatchCount += CONSTANT.MATCHING_COUNT;
         this.#updateLottoPrize(CONSTANT.FOUR_MATCH_PRIZE);
         break;
       }
       case 5: {
         if (isMachingBouns) {
-          this.#compareResult.fiveMatchWithBonus += CONSTANT.MATCHING_COUNT;
+          this.#compareResult.fiveMatchWithBonusCount +=
+            CONSTANT.MATCHING_COUNT;
           this.#updateLottoPrize(CONSTANT.FIVE_MATCH_PRIZE);
           break;
         }
 
-        this.#compareResult.fiveMatch += CONSTANT.MATCHING_COUNT;
+        this.#compareResult.fiveMatchCount += CONSTANT.MATCHING_COUNT;
         this.#updateLottoPrize(CONSTANT.FIVE_MATCH_WITH_BONUS_PRIZE);
         break;
       }
       case 6: {
-        this.#compareResult.sixMatch += CONSTANT.MATCHING_COUNT;
+        this.#compareResult.sixMatchCount += CONSTANT.MATCHING_COUNT;
         this.#updateLottoPrize(CONSTANT.SIX_MATCH_PRIZE);
         break;
       }
     }
+  }
+
+  getMoney() {
+    const money = this.#money.getMoney();
+    return money;
   }
 
   getPurchaseCount() {
@@ -67,7 +73,7 @@ class LottoMachine {
 
   getLotto(index) {
     const lottoLength = this.#lottos.length;
-    Validator.isInvaildIndex(CONSTANT.ZERO, lottoLength.index, index);
+    //Validator.isInvaildIndex(CONSTANT.ZERO, lottoLength.index, index);
     const lotto = this.#lottos[index].getLotto();
     return lotto;
   }
@@ -93,7 +99,7 @@ class LottoMachine {
   }
 
   issueLottos() {
-    const purchaseCount = this.#money.getPurchaseCount();
+    const purchaseCount = this.getPurchaseCount();
 
     for (let i = 0; i < purchaseCount; i++) {
       const lottoNumbers = Lotto.generateLottoNumbers();

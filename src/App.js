@@ -1,12 +1,57 @@
 import LottoMachine from './LottoMachine';
 import InputView from './view/InputView';
 import OutputView from './view/OutputView';
+import { CONSTANT } from './constants/constants';
 
 class App {
   #lottoMachine;
+  #matchPrizes;
 
   constructor() {
     this.#lottoMachine = new LottoMachine();
+    this.#matchPrizes = {
+      threeMatch: {
+        count: CONSTANT.INITIAL_MATCH_COUNT,
+        prize: CONSTANT.THREE_MATCH_PRIZE,
+        text: CONSTANT.THREE_MATCH_TEXT,
+      },
+      fourMatch: {
+        count: CONSTANT.INITIAL_MATCH_COUNT,
+        prize: CONSTANT.FOUR_MATCH_PRIZE,
+        text: CONSTANT.FOUR_MATCH_TEXT,
+      },
+      fiveMatch: {
+        count: CONSTANT.INITIAL_MATCH_COUNT,
+        prize: CONSTANT.FIVE_MATCH_PRIZE,
+        text: CONSTANT.FIVE_MATCH_TEXT,
+      },
+      fiveMatchWithBonus: {
+        count: CONSTANT.INITIAL_MATCH_COUNT,
+        prize: CONSTANT.FIVE_MATCH_WITH_BONUS_PRIZE,
+        text: CONSTANT.FIVE_MATCH_WITH_BONUS_TEXT,
+      },
+      sixMatch: {
+        count: CONSTANT.INITIAL_MATCH_COUNT,
+        prize: CONSTANT.SIX_MATCH_PRIZE,
+        text: CONSTANT.SIX_MATCH_TEXT,
+      },
+    };
+  }
+
+  #setMatchCount() {
+    const {
+      threeMatchCount,
+      fourMatchCount,
+      fiveMatchCount,
+      fiveMatchWithBonusCount,
+      sixMatchCount,
+    } = this.#lottoMachine.getCompareResult();
+
+    this.#matchPrizes.threeMatch.count = threeMatchCount;
+    this.#matchPrizes.fourMatch.count = fourMatchCount;
+    this.#matchPrizes.fiveMatch.count = fiveMatchCount;
+    this.#matchPrizes.fiveMatchWithBonus.count = fiveMatchWithBonusCount;
+    this.#matchPrizes.sixMatch.count = sixMatchCount;
   }
 
   async play() {
@@ -16,6 +61,7 @@ class App {
     await this.#requestWinningNumbers();
     await this.#requestBonusNumbers();
     this.#lottoMachine.compareLottosWithWinningNumber();
+    this.#printResult();
   }
 
   async #requestUserMoney() {
@@ -68,6 +114,31 @@ class App {
         OutputView.printError(errorMessage);
       }
     }
+  }
+
+  #printResult() {
+    OutputView.printMatchResult();
+    OutputView.printSeparator();
+    this.#printCompareResult();
+    this.#printProfit();
+  }
+
+  #printCompareResult() {
+    this.#setMatchCount();
+
+    for (const matchType in this.#matchPrizes) {
+      const { text, prize, count } = this.#matchPrizes[matchType];
+      OutputView.printPrizeResult(text, prize, count);
+    }
+  }
+
+  #printProfit() {
+    const money = this.#lottoMachine.getMoney();
+    const lottoPrize = this.#lottoMachine.getLottoPrize();
+    const profitRate = (lottoPrize / money) * 100;
+    const roundedProfitRate = profitRate.toFixed(1); //Math.round(profitRate * 100) / 100;
+
+    OutputView.printTotalProfitRate(roundedProfitRate);
   }
 }
 
