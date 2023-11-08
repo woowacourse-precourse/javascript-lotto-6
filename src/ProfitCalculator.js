@@ -1,6 +1,6 @@
 class ProfitCalculator {
-	static getProfitRate(budget, winningLottoList) {
-		const totalWinnings = ProfitCalculator.sumTotalWinnings(winningLottoList);
+	static getProfitRate(budget, purchaseResult) {
+		const totalWinnings = ProfitCalculator.sumTotalWinnings(purchaseResult);
 
 		const profitRate = (totalWinnings / budget) * 100;
 
@@ -11,11 +11,11 @@ class ProfitCalculator {
 		return `${number.toFixed(1)}%`;
 	}
 
-	static sumTotalWinnings(winningLottoList) {
-		return winningLottoList.reduce((sum, statisticObj) => {
+	static sumTotalWinnings(purchaseResult) {
+		return purchaseResult.reduce((sum, winningLotto) => {
 			const { winnings } =
-				statisticObj.condition.getWinningCondition();
-			const { count } = statisticObj;
+				winningLotto.condition.getWinningCondition();
+			const { count } = winningLotto;
 			return winnings * count + sum;
 		}, 0);
 	}

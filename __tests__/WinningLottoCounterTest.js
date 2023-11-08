@@ -15,10 +15,10 @@ describe('WinningLottoCounter 클래스 테스트', () => {
 		// when
 		const counter = new WinningLotoCounter();
 		counter.countWinningLottos(lottoList, '1,2,3,10,11,12', '7');
-		const winningLottoList = counter.getWinningLottoList();
+		const purchaseResult = counter.getPurchaseResult();
 
 		// then
-		expect(winningLottoList.map((statisticObj) => statisticObj.count)).toEqual([
+		expect(purchaseResult.map((winningLotto) => winningLotto.count)).toEqual([
 			2, 1, 0, 0, 1,
 		]);
 	});

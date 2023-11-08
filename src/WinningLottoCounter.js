@@ -1,14 +1,14 @@
 import LottoRules from './LottoRules.js';
-import StatisticObj from './StatisticCondition.js';
+import WinningLotto from './WinningLotto.js';
 
 class WinningLotoCounter {
-	#winningLottoList; // [{condition:{},count:number}]
+	#purchaseResult; // [{condition:{},count:number}]
 
 	#rules = [];
 
 	constructor(lottoRules) {
 		this.#initializeRule(lottoRules);
-		this.#initializeWinningLottoList();
+		this.#initializePurchaseResult();
 	}
 
 	countWinningLottos(lottoList, winningNumber, bonusNumber) {
@@ -23,15 +23,15 @@ class WinningLotoCounter {
 	}
 
 	#updateCount(correctCnt, bonusCnt) {
-		this.#winningLottoList.forEach((statisticObj) => {
-			if (statisticObj.condition.checkWin(correctCnt, bonusCnt)) {
-				statisticObj.addCount();
+		this.#purchaseResult.forEach((winningLotto) => {
+			if (winningLotto.condition.checkWin(correctCnt, bonusCnt)) {
+				winningLotto.addCount();
 			}
 		});
 	}
 
-	getWinningLottoList() {
-		return this.#winningLottoList;
+	getPurchaseResult() {
+		return this.#purchaseResult;
 	}
 
 	#initializeRule(newRule) {
@@ -39,15 +39,18 @@ class WinningLotoCounter {
 		this.#rules = rules.getTotalRule();
 	}
 
-	#initializeWinningLottoList() {
-		const winningLottoList = this.#rules.map(
-			(condition) => new StatisticObj(condition),
+	#initializePurchaseResult() {
+		const purchaseResultt = this.#rules.map(
+			(condition) => new WinningLotto(condition),
 		);
-		this.#winningLottoList = winningLottoList;
+		this.#purchaseResult = purchaseResultt;
 	}
 
 	static checkLotto(numbers, winningNumberStr, bonusNumberStr) {
-		const winningNumbers = winningNumberStr.split(',').map((str) => str * 1);
+		const winningNumbers = winningNumberStr
+			.split(',')
+			.map((str) => str * 1)
+			.sort((a, b) => a - b);
 		const bonusNumber = bonusNumberStr * 1;
 
 		const correctCnt = WinningLotoCounter.countCorrectCnt(

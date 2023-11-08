@@ -5,7 +5,7 @@ describe('ProfitCalculator 클래스 테스트', () => {
 	test('로또 규칙에 명시된 금액에 맞게 수익률을 계산해야 한다.', async () => {
 		// given
 		const budget = 8000;
-		const winningLottoList = [
+		const purchaseResult = [
 			{
 				condition: new WinningCondition({
 					correctCnt: 3,
@@ -37,7 +37,7 @@ describe('ProfitCalculator 클래스 테스트', () => {
 		const calculator = ProfitCalculator;
 
 		// then
-		expect(calculator.getProfitRate(budget, winningLottoList)).toEqual(
+		expect(calculator.getProfitRate(budget, purchaseResult)).toEqual(
 			expectedRate,
 		);
 	});

@@ -11,16 +11,16 @@ class Output {
 		Console.print('');
 	}
 
-	static printWinningResult(winningLottoList) {
+	static printWinningResult(purchaseResult) {
 		Console.print('당첨 통계\n---');
-		winningLottoList.forEach((statisticObj) => {
+		purchaseResult.forEach((winningLottObj) => {
 			const { correctCnt, bonusCnt, winnings } =
-				statisticObj.condition.getWinningCondition();
+				winningLottObj.condition.getWinningCondition();
 			Console.print(
 				`${correctCnt}개 일치${
 					bonusCnt > 0 ? ', 보너스 볼 일치' : ''
 				} (${Output.numberWithCommas(winnings)}원) - ${
-					statisticObj.count
+					winningLottObj.count
 				}개`,
 			);
 		});

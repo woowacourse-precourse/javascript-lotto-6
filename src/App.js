@@ -9,7 +9,7 @@ import { ENTER_BONUS_NUMBER, ENTER_BUDGET, ENTER_LOTTO_NUMBERS } from './constan
 class App {
 	#lottoList;
 
-	#winningLottoList;
+	#purchaseResult;
 
 	async play() {
 		const budget = await this.#getBudget();
@@ -18,7 +18,7 @@ class App {
 
 		const { winningNumber, bonusNumber } = await this.#getWinningCondition();
 
-		this.#announceWinningLottoList(winningNumber, bonusNumber);
+		this.#announcePurchaseResult(winningNumber, bonusNumber);
 
 		this.#announceProfitRate(budget);
 	}
@@ -29,7 +29,7 @@ class App {
 		Output.printLottoList(this.#lottoList);
 	}
 
-	#announceWinningLottoList(winningNumber, bonusNumber) {
+	#announcePurchaseResult(winningNumber, bonusNumber) {
 		const winningLottoCounter = new WinningLotoCounter();
 
 		winningLottoCounter.countWinningLottos(
@@ -37,14 +37,14 @@ class App {
 			winningNumber,
 			bonusNumber,
 		);
-		this.#winningLottoList = winningLottoCounter.getWinningLottoList();
-		Output.printWinningResult(this.#winningLottoList);
+		this.#purchaseResult = winningLottoCounter.getPurchaseResult();
+		Output.printWinningResult(this.#purchaseResult);
 	}
 
 	#announceProfitRate(budget) {
 		const profitRate = ProfitCalculator.getProfitRate(
 			budget,
-			this.#winningLottoList,
+			this.#purchaseResult,
 		);
 		Output.printProfitRate(profitRate);
 	}
