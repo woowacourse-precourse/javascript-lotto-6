@@ -12,6 +12,7 @@ class LottoController {
   constructor() {
     this.count = 0;
     this.lottoNumbersList = [];
+    this.winningNumbers = [];
   }
 
   async getPurchaseAmount() {
@@ -34,6 +35,7 @@ class LottoController {
     validation.validateWinningNumbers(input);
     const numbers = input.split(',').map(Number);
     this.#Lotto = new Lotto(numbers);
+    this.winningNumbers = this.#Lotto.getWinningNumbers();
   }
 }
 
