@@ -1,5 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE, INPUT_MESSAGE } from "./constants/constants";
+import {
+  ERROR_MESSAGE,
+  INPUT_MESSAGE,
+  WINNING_MONEN_VALUE,
+} from "./constants/constants";
 import Lotto from "./Lotto";
 import generateLottoNumbers from "./utils/generateLottoNumbers";
 
@@ -123,6 +127,15 @@ class System {
       else if (matchedCount === 3) winningCounts.fifth += 1;
     });
     return winningCounts;
+  }
+
+  calculateTotalWinningMoney(winningCounts) {
+    let prize = 0;
+    Object.entries(winningCounts).forEach(([key, value]) => {
+      prize += value * WINNING_MONEN_VALUE[key];
+    });
+
+    return prize;
   }
 }
 

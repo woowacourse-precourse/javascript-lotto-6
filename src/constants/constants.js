@@ -20,6 +20,14 @@ export const LOTTO_NUMBER = Object.freeze({
   NUMBERS_TO_PICK: 6,
 });
 
+export const WINNING_MONEN_VALUE = Object.freeze({
+  first: 2000000000,
+  second: 30000000, // 보너스 볼이 일치할 경우의 당첨금
+  third: 1500000,
+  fourth: 50000,
+  fifth: 5000,
+});
+
 export const RANK = Object.freeze({
   first: 6,
   second: 5,

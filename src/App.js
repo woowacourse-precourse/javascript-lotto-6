@@ -26,6 +26,7 @@ class App {
       bonusNumber
     );
     consolePrint.printPrize(winningCounts);
+    const prize = system.calculateTotalWinningMoney(winningCounts);
   }
 }
 
