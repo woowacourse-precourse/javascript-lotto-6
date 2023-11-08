@@ -27,4 +27,12 @@ describe("ValidateTest", () => {
       )
     );
   });
+
+  test("당첨번호는 1~45이내 정수를 중복해서 입력하면 예외가 발생한다.", () => {
+    expect(() =>
+      Validator.validateWinningNumbers([1, 2, 3, 4, 45, 55]).toThrow(
+        ERROR_MESSAGE.invalidTicketNumbers
+      )
+    );
+  });
 });
