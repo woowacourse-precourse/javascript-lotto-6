@@ -29,7 +29,7 @@ class Input {
    * 입력 값은 콤마로 구분된 숫자여야 한다.
    * @returns {Promise<number[]>} 당첨번호
    */
-  static async readCommaSeparatedIntegerAsync(message) {
+  static async readCommaSeparatedAsync(message) {
     const userInput = await this.readNonEmptyAsync(message);
 
     if (!StringValidator.isCommaSeparatedNumbers(userInput.replace(/\s/g, ''))) {
