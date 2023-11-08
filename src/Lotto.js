@@ -1,18 +1,45 @@
+import { ERROR_MESSAGE, GAME_NUMBER } from './Constants.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.#typeValidate(numbers);
+    this.#rangeValidate(numbers);
+    this.#lengthValidate(numbers);
+    this.#duplicationValidate(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+  #typeValidate(numbers) {
+    if (numbers.some(number => isNaN(number))) {
+      throw new Error(ERROR_MESSAGE.typeError);
+    }
+  }
+  #rangeValidate(numbers) {
+    if (
+      numbers.some(
+        number =>
+          number < GAME_NUMBER.numberMin || number > GAME_NUMBER.numberMax,
+      )
+    ) {
+      throw new Error(ERROR_MESSAGE.rangeError);
+    }
+  }
+  #lengthValidate(numbers) {
+    if (numbers.length !== GAME_NUMBER.numberLength) {
+      throw new Error(ERROR_MESSAGE.lottoLengthError);
+    }
+  }
+  #duplicationValidate(numbers) {
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error(ERROR_MESSAGE.duplicationError);
     }
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
