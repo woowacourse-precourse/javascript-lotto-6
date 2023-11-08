@@ -16,7 +16,7 @@ class Input {
 
   static async readLottoNumber() {
     const lottoNumbers = await Console.readLineAsync(
-      Messages.READ_LOTTO_NUMBER
+      `\n${Messages.READ_LOTTO_NUMBER}`
     );
 
     const validatedLottoNumbers =
@@ -26,7 +26,9 @@ class Input {
   }
 
   static async readBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(Messages.READ_BONUS_NUMBER);
+    const bonusNumber = await Console.readLineAsync(
+      `\n${Messages.READ_BONUS_NUMBER}`
+    );
 
     const validatedBonusNumber =
       InputValidator.bonusNumberValidator(bonusNumber);
