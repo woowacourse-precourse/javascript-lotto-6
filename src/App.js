@@ -8,7 +8,7 @@ import { pickRandomLottoNumbers } from './utils/random.js';
 import InputView from './view/inputView.js';
 import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
-import { WINNINGS } from './constants.js';
+import { UNIT, WINNINGS } from './constants.js';
 
 class App {
   constructor() {
@@ -90,7 +90,7 @@ class App {
   }
 
   getLottoCount(amount) {
-    return parseInt(amount / 1000);
+    return parseInt(amount / UNIT);
   }
 
   getLottoTickets(count) {

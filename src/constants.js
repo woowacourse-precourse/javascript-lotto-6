@@ -1,3 +1,8 @@
+const UNIT = 1000;
+const MIN = 1;
+const MAX = 45;
+const COUNT = 6;
+
 const WINNING_CATEGORY = {
   5: '3개 일치 (5,000원)',
   4: '4개 일치 (50,000원)',
@@ -14,4 +19,4 @@ const WINNINGS = {
   1: 2000000000,
 };
 
-export { WINNING_CATEGORY, WINNINGS };
+export { UNIT, MIN, MAX, COUNT, WINNING_CATEGORY, WINNINGS };
