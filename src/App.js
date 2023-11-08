@@ -2,7 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import CONSTANTS from './constants/Constants.js';
 import LOTTO_PRIZE from './constants/LottoPrize.js';
-import { matchArrays, sortArray } from './utils/arrayUtils.js';
+import { sortArray } from './utils/arrayUtils.js';
 import view from './utils/view.js';
 
 class App {
@@ -44,43 +44,49 @@ class App {
     await this.setWinningLotto();
   }
 
-  matchLottoNumbers(lotto) {
-    const matchCount = matchArrays(lotto, this.winningNumbers).length;
-    const matchBonus = lotto.includes(this.bonusNumber);
+  getPrize(lotto) {
+    const [matchCount, isMatchBonus] = lotto.matchLotto(
+      this.winningNumbers,
+      this.bonusNumber,
+    );
 
-    return [matchCount, matchBonus];
-  }
-
-  setPrize(lotto) {
-    const [matchCount, matchBonus] = this.matchLottoNumbers(lotto);
-
-    const lottoResult = Object.keys(LOTTO_PRIZE).find(
+    const prize = Object.keys(LOTTO_PRIZE).find(
       prizeTitle =>
         LOTTO_PRIZE[prizeTitle].CONDITION.matchCount === matchCount &&
-        LOTTO_PRIZE[prizeTitle].CONDITION.matchBonus === matchBonus,
+        LOTTO_PRIZE[prizeTitle].CONDITION.matchBonus === isMatchBonus,
     );
+
+    return prize;
+  }
+
+  getLottoResult(lottoList) {
+    const lottoResult = lottoList
+      .map(lotto => this.getPrize(lotto))
+      .filter(prize => prize !== undefined)
+      .map(prize => prize.toLowerCase());
 
     return lottoResult;
   }
 
-  drawLotto() {
-    const lottoResults = this.lottos
-      .map(lotto => this.setPrize(lotto.getNumberList()))
-      .filter(prize => prize !== undefined)
-      .map(prize => prize.toLowerCase());
-
+  setTotalPrize(lottoResult) {
     const prizeCount = {};
 
-    lottoResults.forEach(prize => {
+    lottoResult.forEach(prize => {
       prizeCount[prize] = (prizeCount[prize] || 0) + 1;
     });
 
     this.totalPrize = { ...this.totalPrize, ...prizeCount };
   }
 
+  drawLotto(lottoList) {
+    const lottoResult = this.getLottoResult(lottoList);
+
+    this.setTotalPrize(lottoResult);
+  }
+
   async play() {
     await this.setLottoConfig();
-    this.drawLotto();
+    this.drawLotto(this.lottos);
   }
 }
 

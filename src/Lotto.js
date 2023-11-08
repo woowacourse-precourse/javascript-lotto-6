@@ -1,3 +1,5 @@
+import { matchArrays } from './utils/arrayUtils.js';
+
 class Lotto {
   #numbers;
 
@@ -18,6 +20,13 @@ class Lotto {
 
   getString() {
     return `[${this.#numbers.join(', ')}]`;
+  }
+
+  matchLotto(winningNumbers, bonusNumber) {
+    const matchCount = matchArrays(this.#numbers, winningNumbers).length;
+    const isMatchBonus = this.#numbers.includes(bonusNumber);
+
+    return [matchCount, isMatchBonus];
   }
 }
 
