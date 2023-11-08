@@ -1,7 +1,7 @@
 export const message = Object.freeze({
   purchaseAmount: '구입금액을 입력해주세요.',
-  winningNumbers: '당첨 번호를 입력해 주세요',
-  bonusNumber: '보너스 번호를 입력해 주세요',
+  winningNumbers: '당첨 번호를 입력해 주세요.',
+  bonusNumber: '보너스 번호를 입력해 주세요.',
   winningStatistics: '당첨 통계',
   devider: '---',
 });
@@ -13,7 +13,8 @@ export const error = Object.freeze({
   winningNumbersDuplicationError: '[ERROR] 당첨 번호는 중복이 없어야 합니다.',
   winningNumbersLengthError: '[ERROR] 당첨 번호는 숫자 6개여야 합니다.',
   numberRangeError: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
-  numberTypeError: '[ERROR] 숫자가 잘못된 형식입니다.',
+  numberTypeError: '[ERROR] 숫자는 정수형으로 입력해야 합니다.',
+  inputEmptyError: '[ERROR] 값을 입력해주세요.',
 });
 
 export const outputString = Object.freeze({
@@ -31,5 +32,6 @@ export const outputString = Object.freeze({
 export const condition = Object.freeze({
   lottoMinNumber: 1,
   lottoMaxNumber: 45,
+  inputEmptyLength: 0,
   separator: ',',
 });
