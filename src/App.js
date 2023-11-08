@@ -30,6 +30,12 @@ function isPurchaseTicketsValid(purchaseTickets) {  // 입력된 구입 금액�
   }
 }
 
+function printLottoTickets(purchaseTickets){
+  var numberOfTickets = purchaseTickets / 1000;
+  Console.print("\n" + numberOfTickets + "개를 구매했습니다.");
+  return numberOfTickets;
+}
+
 function generateLottoNumbers(numberOfTickets) {  // 발행한 로또 개수 만큼 번호 출력
   var lottoList = []
 
@@ -39,7 +45,16 @@ function generateLottoNumbers(numberOfTickets) {  // 발행한 로또 개수 만
     lottoList.push(lottoObj);
   }
 
+  getLottoNumbers(lottoList, numberOfTickets);
+
   return lottoList;
+}
+
+function getLottoNumbers(lottoList, numberOfTickets){
+  for (var i = 0; i < numberOfTickets; i++){
+    var lottoNum = lottoList[i].getNumbers().join(", ");
+    Console.print("[" + lottoNum + "]");
+  }
 }
 
 function lottoNumbersSort(lottoNum){  // 두 수의 차를 이용해 오름차순 정렬
@@ -69,23 +84,17 @@ function checkLottoResult(lottoList, winningNumbers, bonusNumber){  // 로또 �
   for (var i = 0; i < lottoList.length; i++){
     var sameNumber = lottoList[i].getNumbers().filter(it => winningNumbers.getNumbers().includes(it));
     
-    if(sameNumber.length == 6){
+    if(sameNumber.length == 6)
       result[0] ++;
-    }
-    if(sameNumber.length == 5 || lottoList[i].getNumbers().includes(bonusNumber)){
+    if(sameNumber.length == 5 || lottoList[i].getNumbers().includes(bonusNumber))
       result[1] ++;
-    }
-    if(sameNumber.length == 5){
+    if(sameNumber.length == 5)
       result[2] ++;
-    }
-    if(sameNumber.length == 4){
+    if(sameNumber.length == 4)
       result[3] ++;
-    }
-    if(sameNumber.length == 3){
+    if(sameNumber.length == 3)
       result[4] ++;
-    }
   }
-
   return result;
 }
 
@@ -112,14 +121,8 @@ class App {
       purchaseTickets = await inputPurchaseTickets();
     }
 
-    var numberOfTickets = purchaseTickets / 1000;
-    Console.print("\n" + numberOfTickets + "개를 구매했습니다.");
-
+    var numberOfTickets = printLottoTickets(purchaseTickets);
     var lottoList = generateLottoNumbers(numberOfTickets);
-    for (var i = 0; i < numberOfTickets; i++){
-      var lottoNum = lottoList[i].getNumbers().join(", ");
-      Console.print("[" + lottoNum + "]");
-    }
     
     var winningNumbersList = [];
     var winningNumbersStr = await getInput("\n당첨 번호를 입력해 주세요.\n");
@@ -135,3 +138,4 @@ class App {
 }
 
 export default App;
+export {isPurchaseTicketsValid, generateLottoNumbers, printLottoTickets, printLottoResult, isBonusNumValid};
