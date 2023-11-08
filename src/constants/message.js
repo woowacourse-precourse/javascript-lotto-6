@@ -11,8 +11,8 @@ const print = Object.freeze({
   printLottoResult: '당첨 통계\n---',
   printFirstPrize: `6개 일치 (${OPTION.firstPrizeAmount.toLocaleString(
     'ko-KR',
-  )}) -`,
-  printSecondPrize: `5개 일치, 보너스 번호 일치 (${OPTION.secondPrizeAmount.toLocaleString(
+  )}원) -`,
+  printSecondPrize: `5개 일치, 보너스 볼 일치 (${OPTION.secondPrizeAmount.toLocaleString(
     'ko-KR',
   )}원) -`,
   printThirdPrize: `5개 일치 (${OPTION.thirdPrizeAmount.toLocaleString(

@@ -42,7 +42,7 @@ class LottoView {
 
   printLottos(lottos) {
     lottos.forEach((lotto) => {
-      this.print(lotto);
+      this.print(`[${lotto.join(', ')}]`);
     });
   }
 
