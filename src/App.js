@@ -54,7 +54,8 @@ class App {
       randomNums.sort((a, b) => a - b);
       
       this.checkDuplicateNums(randomNums);
-
+      this.checkListLength(randomNums);
+      
       const printedString = `[${randomNums.join(', ')}]`;
       Console.print(printedString)
       
@@ -77,13 +78,14 @@ class App {
       winningNumsList = winningNums.split(',').map(Number);
       
       this.checkInputIsNull(winningNums);
-      
-      if (winningNumsList.length !== 6) {
-        throw new Error(ERROR_MESSAGE.INVALID_ERROR)
-      }
-      this.checkDuplicateNums(winningNumsList);
       this.checkListLength(winningNumsList);
-      
+      this.checkDuplicateNums(winningNumsList);
+
+      for (let i = 0; i < winningNumsList.length; i++) {
+        if (!numRangePattern.test(winningNumsList[i])) {
+          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
+        }
+      }
       return winningNumsList;
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
