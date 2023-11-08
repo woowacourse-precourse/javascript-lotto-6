@@ -204,3 +204,19 @@ describe('getWinningNum 메서드 테스트', () => {
     expect(winningNum).toEqual([1,2,3,4,5,6]);
   });
 });
+
+describe('getBonusNum 메서드 테스트', () => {
+  test('getBonusNum 메서드는 사용자가 입력한 보너스 번호를 리턴해야한다.', async () => {
+    // given
+    const input = ["1,2,3,4,5,6", "7"];
+    mockQuestions(input);
+
+    // when
+    const app = new App();
+    const winningNum = await app.getWinningNum();
+    const bonusNum = await app.getBonusNum(winningNum);
+
+    // then
+    expect(bonusNum).toBe("7");
+  });
+});
