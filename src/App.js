@@ -1,11 +1,7 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import userInputAllCheck from "./error-check/userInputCheck";
-import { BONUS_NUMBER, BUY_LOTTO_AMOUNT, WINNING_NUMBERS } from "./constant/constant";
-import inputBonusNumberValidation from "./error-check/inputBonusNumberCheck";
 import User from "./User";
-import Lotto from "./Lotto";
 import playLottoGame from './game/playLottoGame';
 import OutputView from "./view/OutputView";
+import inputValid from "./valid/inputValid";
 
 class App {
   constructor() {
@@ -18,8 +14,7 @@ class App {
 
   async userBuyLotto() {
     try {
-      const buyLottoAmount = await MissionUtils.Console.readLineAsync(BUY_LOTTO_AMOUNT);
-      userInputAllCheck(buyLottoAmount);
+      const buyLottoAmount = await inputValid.validLottoAmount();
       this.user.lottoBuy(buyLottoAmount);
       await this.userInputLottoNumbers();
     } catch (error) {
@@ -29,9 +24,8 @@ class App {
 
   async userInputLottoNumbers() {
     try {
-      const inputLottoNumbers = await MissionUtils.Console.readLineAsync(WINNING_NUMBERS);
-      this.lotto = new Lotto(inputLottoNumbers);
-      await this.userInputBonusNumber(this.lotto.getNumber());
+      const lottoNumbers = await inputValid.validLottoNumbers();
+      await this.userInputBonusNumber(lottoNumbers);
     } catch (error) {
       OutputView.printError(error);
     }
@@ -39,9 +33,8 @@ class App {
 
   async userInputBonusNumber(lottoNumber) {
     try {
-      const inputBonusNumber = await MissionUtils.Console.readLineAsync(BONUS_NUMBER);
-      inputBonusNumberValidation(inputBonusNumber, lottoNumber);
-      this.user.saveBonusNumber(inputBonusNumber);
+      const bonusNumber = await inputValid.validBonusNumber(lottoNumber);
+      this.user.saveBonusNumber(bonusNumber);
       this.lottoGameStart(lottoNumber);
     } catch (error) {
       OutputView.printError(error);
