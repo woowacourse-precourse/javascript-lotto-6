@@ -1,28 +1,25 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
+import STRING from '../Message/Strig';
+import NUMBER from '../Message/Number';
 class Print {
   static printTickets(tickets = []) {
-    Console.print(`\n${tickets.length}개를 구매했습니다.`);
+    Console.print(`${STRING.lineBreak}${tickets.length}${STRING.purchaseAmountSuffix}`);
     tickets.forEach((lotto) => {
       Console.print(lotto.toString());
     });
   }
 
   static printResults(results = []) {
-    const prizeMoney = ['5000', '50000', '1500000', '30000000', '2000000000'];
-    const matchCount = [3, 4, 5, 5, 6];
+    const resultSring = [...STRING.result]
     results.forEach((result, index) => {
-      const bonusText = index === 3 ? ', 보너스 볼 일치' : '';
       Console.print(
-        `${matchCount[index]}개 일치${bonusText} (${prizeMoney[index].replace(
-          /\B(?=(\d{3})+(?!\d))/g,
-          ',',
-        )}원) - ${result}개`,
+        `${resultSring[index]}${result}${STRING.resultSuffix}`,
       );
     });
   }
 
-  static printEarningRate(earningRate = 0) {
-    Console.print(`총 수익률은 ${earningRate}%입니다.`);
+  static printEarningRate(earningRate = NUMBER.defaultNumber) {
+    Console.print(`${STRING.earningRatePrefix}${earningRate}${STRING.earningRateSuffix}`);
   }
 }
 export default Print;

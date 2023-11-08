@@ -2,45 +2,53 @@ import Lotto from './Lotto';
 import Query from './View/Query';
 import Print from './View/Print';
 import { Console, Random } from '@woowacourse/mission-utils';
+import ERROR from './Message/Error';
+import WINNGPRICE from './Message/WinningPrice';
+import NUMBER from './Message/Number';
+import STRING from './Message/Strig';
 class LottoGame {
   async start() {
     const ticketCount = await LottoGame.getTicketCount();
     const tickets = LottoGame.purchaseLottos(ticketCount);
     Print.printTickets([...tickets]);
     const winningNumbersArray = await LottoGame.getWinngNumberArray();
-    const bonusNumber = await LottoGame.getBonusNumber([...winningNumbersArray.getNumbers()]);
+    const bonusNumber = await LottoGame.getBonusNumber([...winningNumbersArray.getNumbers(),]);
     const results = LottoGame.calculateResult(
       bonusNumber,
       [...tickets],
       [...winningNumbersArray.getNumbers()],
     );
     Print.printResults([...results]);
-    const earningRate = LottoGame.calculateEarningsRate(ticketCount, [...results]);
+    const earningRate = LottoGame.calculateEarningsRate(ticketCount, [...results,]);
     Print.printEarningRate(earningRate);
   }
 
-  static validatePurchaseAmount(purchaseAmount = '0') {
+  static validatePurchaseAmount(purchaseAmount = NUMBER.defaultNumber) {
     if (
       Number.isNaN(Number(purchaseAmount)) ||
-      Number(purchaseAmount) % 1000 !== 0 ||
-      Number(purchaseAmount) < 1000
+      Number(purchaseAmount) % NUMBER.priceUnit !== NUMBER.defaultNumber ||
+      Number(purchaseAmount) < NUMBER.priceUnit
     ) {
-      throw new Error('[ERROR] 구입 금액이 잘못 입력되었습니다.');
+      throw new Error(ERROR.purchaseAmount);
     }
-    return Number(purchaseAmount) / 1000;
+    return Number(purchaseAmount) / NUMBER.priceUnit;
   }
 
-  static purchaseLottos(ticketCount = 0) {
+  static purchaseLottos(ticketCount = NUMBER.defaultNumber) {
     const tickets = [];
-    for (let i = 0; i < ticketCount; i += 1) {
-      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    for (let i = NUMBER.defaultNumber; i < ticketCount; i += NUMBER.countPlus) {
+      const numbers = Random.pickUniqueNumbersInRange(
+        NUMBER.lottoStartNumber,
+        NUMBER.lottoEndNumber,
+        NUMBER.lottoLength,
+      );
       tickets.push(new Lotto(numbers));
     }
-    return [...tickets]
+    return [...tickets];
   }
 
   static async getTicketCount() {
-    while (true) {
+    while (STRING.loopFlag) {
       try {
         const purchaseAmount = await Query.getPurchaseAmount();
         const ticketCount = LottoGame.validatePurchaseAmount(purchaseAmount);
@@ -52,7 +60,7 @@ class LottoGame {
   }
 
   static async getWinngNumberArray() {
-    while (true) {
+    while (STRING.loopFlag) {
       try {
         const winningNumbers = await Query.getWinningNumber();
         const winningNumbersArray = new Lotto(
@@ -65,8 +73,8 @@ class LottoGame {
     }
   }
 
-  static async getBonusNumber(winningNumbersArray = []) {
-    while (true) {
+  static async getBonusNumber(winningNumbersArray = STRING.emptyArray) {
+    while (STRING.loopFlag) {
       try {
         const bonusNumber = await Query.getBonusNumber();
         const bonusNumberInt = this.validatebonusNumber(
@@ -80,55 +88,58 @@ class LottoGame {
     }
   }
 
-  static winningNumberToWinningNumberArray(winningNumbers = '') {
-    return winningNumbers.split(',').map((winningNumber) => {
+  static winningNumberToWinningNumberArray(winningNumbers = STRING.empty) {
+    return winningNumbers.split(STRING.separator).map((winningNumber) => {
       const trimWinningNumber = winningNumber.trim();
       return Number(trimWinningNumber);
     });
   }
 
-  static validatebonusNumber(bonusNumber = '0', winningNumbersArray = []) {
+  static validatebonusNumber(bonusNumber = NUMBER.defaultNumber,winningNumbersArray = []) {
     const bonusNumberInt = Number(bonusNumber);
     if (
       winningNumbersArray.includes(bonusNumberInt) ||
       !Number.isInteger(bonusNumberInt) ||
-      bonusNumberInt < 1 ||
-      bonusNumberInt > 45
+      bonusNumberInt < NUMBER.lottoStartNumber ||
+      bonusNumberInt > NUMBER.lottoEndNumber
     ) {
-      throw new Error('[ERROR] 보너스 숫자가 잘못되었습니다.');
+      throw new Error(ERROR.bonusNumber);
     }
     return bonusNumberInt;
   }
 
   static getRank(matchCount, hasBonus) {
-    if (matchCount === 6) return 5;
-    if (matchCount === 5) return hasBonus ? 4 : 3;
-    if (matchCount === 4) return 2;
-    if (matchCount === 3) return 1;
-    return 0; // 당첨되지 않음
+    if (matchCount === NUMBER.matchSix) return NUMBER.firstPlace;
+    if (matchCount === NUMBER.matchFive)
+      return hasBonus ? NUMBER.secondPlace : NUMBER.thirdPlace;
+    if (matchCount === NUMBER.matchFour) return NUMBER.fourthPlace;
+    if (matchCount === NUMBER.matchThree) return NUMBER.fifthPlace;
+    return NUMBER.defaultNumber;
   }
 
-  static calculateResult(bonusNumber = 0, tickets = [], winningNumbersArray = []) {
+  static calculateResult(bonusNumber = NUMBER.defaultNumber, tickets = [], winningNumbersArray = []) {
     return tickets.reduce(
       (matchCounts, ticket) => {
         const matchCount = ticket.getMatchCount(winningNumbersArray);
-        const rank = LottoGame.getRank(matchCount, ticket.hasNumber(bonusNumber));
+        const rank = LottoGame.getRank(matchCount, ticket.hasNumber(bonusNumber),);
         const newMatchCounts = [...matchCounts];
-        if (rank > 0) newMatchCounts[rank - 1] += 1;
+        if (rank > NUMBER.defaultNumber)
+          newMatchCounts[rank - NUMBER.countPlus] += NUMBER.countPlus;
         return newMatchCounts;
       },
-      [0, 0, 0, 0, 0],
+      [...NUMBER.defaultArray],
     );
   }
 
-  static calculateEarningsRate(ticketCount = 0, results = []) {
-    const prizeMoney = [5000, 50000, 1500000, 30000000, 2000000000];
+  static calculateEarningsRate(ticketCount = NUMBER.defaultNumber,results = []) {
+    const prizeMoney = [...WINNGPRICE];
     const totalEarnings = results.reduce(
       (sum, result, index) => sum + result * prizeMoney[index],
       0,
     );
-    const earningsRate = (totalEarnings / (ticketCount * 1000)) * 100;
-    return earningsRate.toFixed(1); // 소수점 둘째 자리에서 반올림
+    const earningsRate =
+      (totalEarnings / (ticketCount * NUMBER.priceUnit)) * NUMBER.percent;
+    return earningsRate.toFixed(NUMBER.roundPosition);
   }
 }
 

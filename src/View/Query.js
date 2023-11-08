@@ -1,35 +1,30 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Console } from "@woowacourse/mission-utils";
+import STRING from "../Message/Strig";
 class Query {
   static async getPurchaseAmount() {
     try {
-      const purchaseAmount = await Console.readLineAsync(
-        '구입금액을 입력해 주세요.\n'
-      );
+      const purchaseAmount = await Console.readLineAsync(STRING.purchaseAmount);
       return purchaseAmount;
     } catch (error) {
-      throw new Error('ERROR');
+      throw new Error(STRING.error);
     }
   }
 
   static async getWinningNumber() {
     try {
-      const winningNumber = await Console.readLineAsync(
-        '\n당첨 번호를 입력해 주세요.\n'
-      );
+      const winningNumber = await Console.readLineAsync(STRING.WinningNumber);
       return winningNumber;
     } catch (error) {
-      throw new Error('ERROR');
+      throw new Error(STRING.error);
     }
   }
 
   static async getBonusNumber() {
     try {
-      const bonusNumber = await Console.readLineAsync(
-        '\n보너스 번호를 입력해 주세요.\n'
-      );
+      const bonusNumber = await Console.readLineAsync(STRING.BonusNumber);
       return bonusNumber;
     } catch (error) {
-      throw new Error('ERROR');
+      throw new Error(STRING.error);
     }
   }
 }

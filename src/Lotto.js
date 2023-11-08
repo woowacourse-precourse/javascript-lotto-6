@@ -1,3 +1,7 @@
+import ERROR from "./Message/Error";
+import NUMBER from "./Message/Number";
+import STRING from "./Message/Strig";
+
 class Lotto {
   #numbers;
 
@@ -13,39 +17,37 @@ class Lotto {
   }
 
   static validateNumbersLength(numbers = []) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== NUMBER.lottoLength) {
+      throw new Error(ERROR.lottoLength);
     }
   }
 
   static validateUniqueNumbers(numbers = []) {
-    if (new Set(numbers).size !== 6) {
-      throw new Error('[ERROR] 로또 번호는 중복되지 않은 6개여야 합니다.');
+    if (new Set(numbers).size !== NUMBER.lottoLength) {
+      throw new Error(ERROR.lottoOverlap);
     }
   }
 
   static validateNumberRange(numbers = []) {
     if (!numbers.every((number) => this.isValidNumber(number))) {
-      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 정수여야 합니다.');
+      throw new Error(ERROR.lottoRange);
     }
   }
 
   static isValidNumber(number = []) {
-    return Number.isInteger(number) && number >= 1 && number <= 45;
+    return Number.isInteger(number) && number >= NUMBER.lottoStartNumber && number <= NUMBER.lottoEndNumber;
   }
 
-  getNumbers() {
+  getNumbers(){
     return [...this.#numbers];
   }
 
   toString() {
-    return `[${this.#numbers.join(', ')}]`;
+    return `${STRING.frontSquareBracket}${this.#numbers.join(STRING.joinChar)}${STRING.backSquareBracket}`;
   }
 
   getMatchCount(winningNumbersArray = []) {
-    return this.#numbers.filter((number) =>
-      winningNumbersArray.includes(number)
-    ).length;
+    return this.#numbers.filter(number => winningNumbersArray.includes(number)).length;
   }
 
   hasNumber(number) {
