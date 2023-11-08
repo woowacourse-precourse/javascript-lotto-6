@@ -1,6 +1,6 @@
 import { INPUT } from '../constant/index.js';
-import InputView from './InputView';
-import OutputView from './OutputView';
+import InputView from './InputView.js';
+import OutputView from './OutputView.js';
 import Validator from '../validator/Validator.js';
 
 class LottoView {
@@ -10,7 +10,7 @@ class LottoView {
       Validator.validateBuyingPrice(buyingPrice);
       return buyingPrice;
     } catch (e) {
-      OutputView.print(e.message);
+      LottoView.printErrorMessage(e.message);
       return await LottoView.readBuyingPrice();
     }
   }
@@ -21,20 +21,27 @@ class LottoView {
       Validator.validateLottoNumbers(winningNumbers);
       return winningNumbers;
     } catch (e) {
-      OutputView.print(e.message);
+      LottoView.printErrorMessage(e.message);
       return await LottoView.readWinningNumbers();
     }
   }
 
   static async readBonusNumber(winningNumbers) {
     try {
+      OutputView.printNewLine();
       const bonusNumber = await InputView.readNumber(INPUT.BONUS_NUMBERS);
       Validator.validateBonusNumber(bonusNumber, winningNumbers);
       return bonusNumber;
     } catch (e) {
-      OutputView.print(e.message);
-      return await LottoView.readBonusNumber();
+      LottoView.printErrorMessage(e.message);
+      return await LottoView.readBonusNumber(winningNumbers);
     }
+  }
+
+  static printErrorMessage(message) {
+    OutputView.printNewLine(message);
+    OutputView.print(message);
+    OutputView.printNewLine(message);
   }
 
   static printBuyingLottos(lottos) {
@@ -43,6 +50,7 @@ class LottoView {
     lottos.forEach(lotto =>
       OutputView.print(`[${lotto.getNumbers().join(', ')}]`)
     );
+    OutputView.printNewLine();
   }
 
   static printlottoResult({ first, second, third, fourth, fifth }) {
