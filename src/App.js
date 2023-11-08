@@ -1,5 +1,10 @@
+import Controller from './controller/Controller.js';
+
 class App {
-  async play() {}
+  async play() {
+    const lottoGame = new Controller();
+    await lottoGame.buyLotto();
+  }
 }
 
 export default App;
