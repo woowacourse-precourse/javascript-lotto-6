@@ -87,3 +87,7 @@ node App.js
 ```
 npm test
 ```
+
+# 개발일지
+
+[[로또 게임] - Jest, 상수 활용, 기능 목록 작성](https://www.notion.so/Jest-5eab691b115a4aa292153eac7967c899?pvs=21)
