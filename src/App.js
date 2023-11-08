@@ -17,7 +17,9 @@ class App {
     const amount = await MissionUtils.Console.readLineAsync(
       "구입금액을 입력해 주세요.\n"
     );
-    // TODO: 숫자인지 확인
+
+    if (isNaN(parseInt(amount)))
+      throw new Error("[ERROR] 구입 금액은 숫자여야합니다.");
     return amount;
   }
 
