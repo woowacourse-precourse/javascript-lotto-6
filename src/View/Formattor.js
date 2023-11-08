@@ -69,6 +69,33 @@ const sortAscendingArray = (inputArray) => {
   return (ascendingArray);
 }
 
+const getEqulsElementsCount = (inputArray1, inputArray2) => {
+  if (!Array.isArray(inputArray1)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+  if (!Array.isArray(inputArray2)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+  
+  const count = inputArray1.filter((item) => inputArray2.includes(item)).length;
+  return (count);
+}
+
+const getEqulsValueCount = (input, inpinputArray) => {
+  if (!Number.isInteger(input)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+  if (!Array.isArray(inpinputArray)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+
+  if (inpinputArray.includes(input)) {
+    return (1);
+  }
+  return(0);
+}
+
+
 export default {
   formatStringToInteger,
   getDivisionQuotient,
@@ -76,4 +103,6 @@ export default {
   formatStringArrayToNumberArray,
   getUniqueRandomNumbers,
   sortAscendingArray,
+  getEqulsElementsCount,
+  getEqulsValueCount,
 };

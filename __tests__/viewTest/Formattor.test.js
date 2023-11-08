@@ -1,6 +1,7 @@
 import { Random } from "@woowacourse/mission-utils";
 import STRING_LIST from "../test_list/StringList";
 import ARRAY_LIST from "../test_list/ArrayList";
+import NUMBER_LIST from "../test_list/NumberList";
 import Formattor from "../../src/View/Formattor";
 import ValidationError from "../../src/Error/ValidationError";
 import ERROR_CONSTANT from "../../src/Constant/ErrorConstant";
@@ -176,3 +177,25 @@ describe('Formattor sortAscendingArray', () => {
       expect(Formattor.sortAscendingArray(input)).toStrictEqual(expected);
   });
 });
+
+describe('Formattor getEqulsElementsCount', () => {
+  test('getEqulsElementsCount Function type이다 ', () => {
+    expect(typeof (Formattor.getEqulsElementsCount)).toBe('function');
+  })
+  test('getEqulsElementsCount 인자 유효성 검사, 인자의 타입이 배열이 아니면 에러를 리턴한다. ', () => {
+    ARRAY_LIST.errorArrayTestCases.forEach((input) => {
+      const input_dup = input;
+      expect(() => {
+        Formattor.getEqulsElementsCount(input, input_dup);
+      }).toThrow(new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY));
+    });
+  });
+  test(`getEqulsElementsCount 기능 검사, 두 배열 간 값이 동일한 원소 갯수을 리턴한다. `, () => {
+    const input1 = [3,2,1];
+    const input2 = [3,2,1];
+    const expected = 3;
+      expect(Formattor.getEqulsElementsCount(input1, input2)).toStrictEqual(expected);
+  });
+});
+
+
