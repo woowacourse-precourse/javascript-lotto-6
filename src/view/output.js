@@ -8,3 +8,7 @@ export const printError = (errorMessage) => {
 export const printLottoCount = (number) => {
 	Console.print(OUTPUT_MESSAGES.OUTPUT_LOTTO_COUNT(number));
 };
+
+export const printLotto = (lotto) => {
+	Console.print(`[${lotto.toString().replaceAll(",", ", ")}]`);
+};

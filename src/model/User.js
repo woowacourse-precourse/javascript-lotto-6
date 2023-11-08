@@ -16,6 +16,12 @@ class User {
 	getMoney() {
 		return this.#money;
 	}
+	getLottos() {
+		return this.#lottos;
+	}
+	addLotto(lotto) {
+		this.#lottos.push(lotto);
+	}
 }
 
 export default User;
