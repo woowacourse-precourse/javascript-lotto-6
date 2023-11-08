@@ -146,7 +146,10 @@ class Lotto {
 
   lottoDrawResult(rank) {
     let profit = 0;
-
+    if (rank === 0) {
+      profit = 0;
+      return profit;
+    }
     if (rank === 5) {
       this.statCount[0] = 1;
       profit = 5000;
@@ -176,7 +179,6 @@ class Lotto {
 
   lottoResultPrinter(count) {
     const statCount = this.statCount;
-
     Console.print(`${RESULT.START}`);
     Console.print(`${RESULT.RANK5}${statCount[0]}개`);
     Console.print(`${RESULT.RANK4}${statCount[1]}개`);

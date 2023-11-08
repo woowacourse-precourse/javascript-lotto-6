@@ -10,7 +10,8 @@ class Profit {
     return this.profitRate;
   }
 
-  profitPrinter(profitRate) {
+  profitPrinter(rate) {
+    const profitRate = this.profitRate;
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 }
