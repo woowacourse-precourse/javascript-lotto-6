@@ -1,8 +1,8 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LottoProcess from '../src/domain/LottoProcess';
-import Lotto from '../src/domain/Lotto';
+import LottoProcess from '../src/domain/LottoProcess.js';
+import Lotto from '../src/Lotto.js';
 
-jest.mock('../src/domain/Lotto');
+jest.mock('../src/Lotto.js');
 
 describe('xp', () => {
   let lottoProcess;
