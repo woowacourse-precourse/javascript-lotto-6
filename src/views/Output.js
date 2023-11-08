@@ -31,5 +31,9 @@ const Output = {
 
     messages.forEach((message) => MissionUtils.Console.print(message));
   },
+
+  printPlusRatio(plusRatio){
+    MissionUtils.Console.print(`총 수익률은 ${plusRatio}%입니다.`);
+  }
 };
 export default Output;

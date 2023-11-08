@@ -1,3 +1,4 @@
+import CONSTRAINTS from '../constants/Constraints';
 import Validation from '../model/Validation';
 import Winning from '../model/Winning';
 import Input from '../views/Input';
@@ -38,14 +39,23 @@ class WinningController {
       this.produceStatistics(lotto.getNumbers());
     });
     Output.printWinningResult(this.#winning.getWinningResult());
+    Output.printPlusRatio(this.calculatePlusRatio());
   }
 
-  async produceStatistics(lottoNumbers) {
+  produceStatistics(lottoNumbers) {
     const matchCount = this.#matchWinningNumber(lottoNumbers);
     const rank = this.calculateRank(matchCount, lottoNumbers);
     if (rank !== 'fail') {
       this.#winning.setWinningResult(rank);
     }
+  }
+
+  calculatePlusRatio() {
+    return (
+      (this.#winning.getWinningTotalPrice() /
+        (this.#lottos.length * CONSTRAINTS.PRICE_UNIT)) *
+      100
+    );
   }
 
   calculateRank(matchCount, lottoNumbers) {

@@ -1,3 +1,5 @@
+import CONSTRAINTS from '../constants/Constraints';
+
 class Winning {
   #winningResult;
 
@@ -17,6 +19,15 @@ class Winning {
 
   setWinningResult(index) {
     this.#winningResult[index] += 1;
+  }
+
+  getWinningTotalPrice() {
+    return Object.keys(this.#winningResult).reduce(
+      (totalPrice, prize) =>
+        totalPrice +
+        CONSTRAINTS.WINNING_PRICE[prize] * this.#winningResult[prize],
+      0,
+    );
   }
 }
 export default Winning;
