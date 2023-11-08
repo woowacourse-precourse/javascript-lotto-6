@@ -34,4 +34,16 @@ describe("로또 클래스 테스트", () => {
 
         await expect(lotto.printLottoNumber()).toEqual(result);
     });
+
+    test("로또 당첨 결과가 든 배열을 출력할 수 있어야 한다.", async () => {
+        const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+        const winningNumber = "1,2,3,4,5,6";
+        const bonusNumber = "7";
+        const lottoResult = ["fiveMatch"];
+        const result = lottoResult.push("sixMatch");
+
+        await expect(
+            lotto.calculateLottoResult(winningNumber, bonusNumber, lottoResult)
+        ).toEqual(result);
+    });
 });
