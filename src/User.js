@@ -44,8 +44,6 @@ class User {
     }
   }
 
-  
-
   async setWinningNumbers() {
     const winningNumbersString = await inputView.inputWinningNumbers();
     const winningNumbersArray = converter

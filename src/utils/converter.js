@@ -1,6 +1,6 @@
-import { LOTTO } from "../constants/api";
-import { ERROR_MESSAGE } from "../constants/message";
-import validator from "./validator";
+import { LOTTO } from '../constants/api';
+import { ERROR_MESSAGE } from '../constants/message';
+import validator from './validator';
 
 const converter = {
   numbericStringToNumber(input) {

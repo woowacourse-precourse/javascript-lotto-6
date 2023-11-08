@@ -106,7 +106,6 @@ describe('isNumberInRange 함수 테스트', () => {
   })
 });
 
-
 describe('isNumberInRangeArray 함수 테스트', () => {
   it('값이 하나라도 범위 안에 속하지 않으면 false를 반환한다.', () => {
     const input = {

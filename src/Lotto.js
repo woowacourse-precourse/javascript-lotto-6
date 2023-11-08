@@ -1,7 +1,7 @@
-import { LOTTO } from "./constants/api";
-import { ERROR_MESSAGE } from "./constants/message";
-import random from "./utils/random";
-import validator from "./utils/validator";
+import { LOTTO } from './constants/api';
+import { ERROR_MESSAGE } from './constants/message';
+import random from './utils/random';
+import validator from './utils/validator';
 
 class Lotto {
   #numbers;

@@ -8,4 +8,4 @@ export const LOTTO = Object.freeze({
   MIN_NUMBER_IN_RANGE: 1,
   MAX_NUMBER_IN_RANGE: 45,
   POINT_TO_DIVIDE_INPUTS: ',',
-})
+});

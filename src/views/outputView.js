@@ -1,5 +1,5 @@
-import { OUTPUT_MESSAGE } from "../constants/message";
-import view from "../utils/view";
+import { OUTPUT_MESSAGE } from '../constants/message';
+import view from '../utils/view';
 
 const outputView = {
   printLottosInfo(lottos) {

@@ -1,5 +1,5 @@
-import converter from "../utils/Converter";
-import { LOTTO } from "./api";
+import converter from '../utils/Converter';
+import { LOTTO } from './api';
 
 export const INPUT_MESSAGE = Object.freeze({
   PURCHASE_AMOUNT: '구매금액을 입력해 주세요.',
