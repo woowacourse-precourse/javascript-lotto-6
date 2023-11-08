@@ -14,7 +14,7 @@ class WinningController {
         OutputView.printError(error.message);
       }
     }
-    return winningNumber.split(',');
+    return winningNumber.split(',').map(Number);
   }
 
   #validateWinningNumber(winningNumber) {
