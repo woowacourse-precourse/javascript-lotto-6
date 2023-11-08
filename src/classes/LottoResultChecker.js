@@ -16,7 +16,7 @@ class LottoResultChecker {
   constructor(winningNumbers, bonusNumber, boughtLottos) {
     this.#boughtLottos = boughtLottos;
     this.#checkResult(winningNumbers, bonusNumber);
-    this.#CalculateProfitRate();
+    this.#calculateProfitRate();
   }
 
   getResult() {
@@ -66,13 +66,11 @@ class LottoResultChecker {
         break;
       case 3: this.#result.lastPrize += 1;
         break;
-      default:
-        break;
     }
   }
 
-  #CalculateProfitRate() {
-    const keys = ['FIRST_PLACE', 'SECOND_PLACE', 'THIRD_PLACE', 'FOURTY_PLACE', 'LAST_PLACE'];
+  #calculateProfitRate() {
+    const keys = Object.keys(LOTTO_PRIZE_AMOUNT);
     const purchaseAmount = this.#boughtLottos.length * PRICE.LOTTO;
     const lottoProfits = Object.entries(this.#result)
       .reduce((total, [, value], index) => (
