@@ -4,9 +4,9 @@ import { Input } from "./utils/Input.js";
 import { BuyLotto } from "./utils/BuyLotto.js";
 import { BonusLotto } from "./utils/BonusLotto.js";
 import { Print } from "./utils/Print.js";
-import GetRrandomList from "./utils/getRrandomList.js";
 import ReturnRate from "./utils/ReturnRate.js";
 import CheckWinning from "./utils/CheckWinning.js";
+import GetRrandomList from "./utils/RandomList.js";
 
 class App {
   buyLotto;
