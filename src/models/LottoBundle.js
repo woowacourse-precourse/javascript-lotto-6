@@ -14,16 +14,16 @@ class LottoBundle {
   }
 
   #createLottoBundle(amount) {
-    const lottos = [];
+    const lottoBundle = [];
 
     let currentAmount = 0;
     while (currentAmount < amount) {
       const lotto = this.#generateLotto();
-      lottos.push(lotto);
+      lottoBundle.push(lotto);
       currentAmount += 1;
     }
 
-    return lottos;
+    return lottoBundle;
   }
 
   #generateLotto() {
