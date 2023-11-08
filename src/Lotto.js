@@ -1,4 +1,9 @@
+import { MESSAGES, NUMBER_BOUNDS } from './constants/constants.js';
+
 class Lotto {
+  /**
+   * @type number[]
+   */
   #numbers;
 
   constructor(numbers) {
@@ -7,12 +12,22 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.length !== NUMBER_BOUNDS.COUNT) {
+      throw new Error(MESSAGES.ERROR.COUNTS_OF_LOTTO_NUMBER_EXCEPTION);
+    }
+
+    if (numbers.length !== new Set(numbers).size) {
+      throw new Error(MESSAGES.ERROR.LOTTO_NUMBER_DUPLICATION_EXCEPTION);
+    }
+
+    if (!numbers.every((number) => number >= NUMBER_BOUNDS.MIN && number <= NUMBER_BOUNDS.MAX)) {
+      throw new Error(MESSAGES.ERROR.LOTTO_NUMBER_OUT_OF_BOUNDS_EXCEPTION);
     }
   }
 
-  // TODO: 추가 기능 구현
+  get lotto() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
