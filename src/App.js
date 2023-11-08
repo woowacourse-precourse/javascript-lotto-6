@@ -8,9 +8,6 @@ import { Results } from "./Results.js";
 class App {
   constructor() {
     this.counter = null;
-    this.winning = null;
-    this.bonus = null;
-    this.results = null;
   }
 
   async play() {
@@ -43,21 +40,21 @@ class App {
     const winningSplitNumber = winningNumberSpliter(winningNumber);
     new Winning(winningSplitNumber);
 
-    this.inputBonusNumber(model.winningNumber, model.counts);
+    this.inputBonusNumber();
   }
 
-  async inputBonusNumber(winning, counts) {
+  async inputBonusNumber() {
     this.bonusNumberComment();
 
     const bonusNumber = await MissionUtils.Console.readLineAsync('');
-    new Bonus(bonusNumber, winning);
+    new Bonus(bonusNumber, model.winningNumber);
 
-    this.callResults(winning, model.bonus, counts)
+    this.callResults()
     process.exitCode = 0;
   }
 
-  callResults(winning, bonus, counts) {
-    new Results(model.lottoNumbers, winning, bonus, counts)
+  callResults() {
+    new Results(model.lottoNumbers, model.winningNumber, model.bonus, model.counts)
   }
 
   inputNumberComment() {

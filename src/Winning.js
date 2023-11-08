@@ -54,6 +54,8 @@ export class Winning {
 
   #convertToNumberArray(stringArray) {
     const numberArray = stringArray.map((str) => parseInt(str, 10));
+    
+    model.winningNumber = [];
     model.winningNumber = numberArray;
   }
 }

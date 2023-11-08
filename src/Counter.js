@@ -41,6 +41,8 @@ export class Counter {
   }
 
   #publish(counts) {
+    model.lottoNumbers = [];
+    
     for (let num = 0; num < counts; num++) {
       const newLotto = this.#createNewLotto();
       this.list.push(newLotto);
