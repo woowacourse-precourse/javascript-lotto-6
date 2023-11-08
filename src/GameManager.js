@@ -1,6 +1,6 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 
-import RANK from './Constant.js';
+import { RANK } from './Constant.js';
 
 class GameManager {
   constructor() {}
