@@ -1,5 +1,5 @@
-import Customer from '../Customer';
-import Seller from '../Seller';
+import Customer from '../models/Customer';
+import Seller from '../models/Seller';
 
 class LottoFlow {
   #customer;
