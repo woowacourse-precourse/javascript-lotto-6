@@ -29,14 +29,16 @@ class App {
     for(let i = 0; i<COUNT; i++){
       const UNIQUENUMS = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       const TICKET = new Lotto(UNIQUENUMS);
+      TICKET.sortNumbers();
       this.printLottoNums(TICKET);
-      TICKETS.push(TICKET);
+      TICKETS.push(TICKET.returnNumbers());
     }
     return TICKETS;
   }
+
   // 생성된 로또의 번호를 출력하는 메서드
   printLottoNums(TICKET){
-    Console.print(`[${TICKET.join(", ")}]`);
+    Console.print(`[${TICKET.returnNumbers().join(", ")}]`);
   }
 
   // 사용자로부터 당첨 번호를 입력받는 메서드
