@@ -6,8 +6,18 @@ const Output = {
     await Console.print(`\n${lottoCount}${OUTPUT_LOTTO_COUNT}`);
   },
   printLottoList(lottoList) {
+    lottoList.map((lotto) => {
+      lotto.sort((pre, next) => {
+        return pre - next;
+      });
+    });
+
     lottoList.forEach((lotto) => {
-      Console.print(`[${lotto}]`);
+      Console.print(
+        `[${lotto.map((num, idx) => {
+          return idx > 0 && idx < lotto.length ? ` ${num}` : `${num}`;
+        })}]`
+      );
     });
   },
   printWinnerStatistics(resultMap) {
@@ -18,7 +28,7 @@ const Output = {
       if (sameNum > 2 && sameNum !== 6) {
         if (sameNum === 7) sameNum = 6;
         Console.print(
-          `${sameNum}개 일치 (${price[sameNum - 1]}) - ${totalCnt}개`
+          `${sameNum}개 일치 (${price[sameNum - 1]}원) - ${totalCnt}개`
         );
       } else if (sameNum === 6) {
         Console.print(
