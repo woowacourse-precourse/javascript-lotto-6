@@ -34,10 +34,12 @@ class InputValidator {
       throw new ErrorMessage(ERROR.number.notInterger);
     }
   }
+
   validateNaturalNumber(input) {
     this.validateNumber(input);
-    this.validatePositiveNumber(input);
-    this.validateInteger(input);
+    const number = Number(input);
+    this.validatePositiveNumber(number);
+    this.validateInteger(number);
   }
 
   validateUnitCost(input) {
@@ -66,10 +68,16 @@ class InputValidator {
   }
 
   validateNotInRange(inputs) {
-    for (const element in inputs) {
+    for (const element of inputs) {
       checkNotInRange(element);
     }
   }
 }
 
 export default InputValidator;
+
+// const i = new InputValidator();
+// const numbers = [1, 2, 3, 4, 5, 6];
+// for (const number of numbers) {
+//   i.validateNaturalNumber(number);
+// }

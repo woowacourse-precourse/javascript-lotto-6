@@ -12,9 +12,9 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#integratedValidation(numbers);
     this.#numbers = numbers;
     this.#inputValidator = new InputValidator();
+    this.#integratedValidation(numbers);
   }
 
   #validate(numbers) {
