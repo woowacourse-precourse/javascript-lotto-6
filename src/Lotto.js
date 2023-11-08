@@ -20,6 +20,12 @@ class Lotto {
     }
   }
 
+  #validateNumberDuplicate(numbers) {
+    if (numbers.length !== new Set(numbers).size) {
+      throw new Error(DUPLICATE_ERROR);
+    }
+  }
+
   #validateIsNumber(numbers) {
     numbers.forEach((number) => {
       if (isNaN(+number)) {
@@ -34,12 +40,6 @@ class Lotto {
         throw new Error(RANGE_ERROR);
       }
     });
-  }
-
-  #validateNumberDuplicate(numbers) {
-    if (numbers.length !== new Set(numbers).size) {
-      throw new Error(DUPLICATE_ERROR);
-    }
   }
 
   #validate(numbers) {
