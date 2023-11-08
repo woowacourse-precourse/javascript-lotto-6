@@ -1,7 +1,6 @@
 import Money from '../src/Money';
-import mockQuestions from './ApplicationTest';
 
-describe('로또 클래스 테스트', () => {
+describe('머니 클래스 테스트', () => {
 
   test('금액을 입력하지 않으면 예외가 발생한다.', () => {
     expect(() => {

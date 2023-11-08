@@ -1,4 +1,4 @@
-import WinInput from '../src/WinInput';
+import WinInput from '../src/Win';
 
 describe('당첨번호입력 클래스 테스트', () => {
   test('번호를 입력하지 않으면 예외가 발생한다.', () => {

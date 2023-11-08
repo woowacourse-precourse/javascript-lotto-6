@@ -1,7 +1,5 @@
 import ExceptionList from "./ExceptionList";
 
-ExceptionList
-
 class BonusInput {
   bonus;
   win;

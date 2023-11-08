@@ -16,7 +16,7 @@ class Money {
     exception.noInputError(payedMoney);
     exception.isZeroError(payedMoney);
     // exception.notThousandError(payedMoney);
-    // exeption.isNaNError(payedMoney);
+    // exception.isNaNError(payedMoney);
     // if (payedMoney==='') {
     //   throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     // }
