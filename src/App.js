@@ -1,58 +1,66 @@
-import { MissionUtils, Console, Random } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
+import Lottos from "./Lottos.js";
+import WinningNumbers from "./WinningNumber.js";
+import BonusNumber from "./BonusNumber.js";
+import { Console } from "@woowacourse/mission-utils";
+import { MESSAGE } from "./libs/constants.js";
+
 class App {
-    async play() {
-        const purchaseAmount = await this.getValidPurchaseAmount();
-        const lottoCount = Math.floor(purchaseAmount / 1000);
-        const lottos = this.purchaseLottos(lottoCount);
+	constructor() {
+		this.lottos = null;
+		this.winningNumbers = null;
+		this.bonusNumber = null;
+	}
 
-        MissionUtils.Console.print(`${lottoCount}개를 구매했습니다.`);
-    }
+	async play() {
+		await this.requestMoney();
+	}
 
-    async getValidPurchaseAmount() {
-        while (true) {
-            const purchaseAmount = await this.getInputNumber(
-                "구입 금액을 입력해 주세요."
-            );
-            if (this.isPurchaseAmountValid(purchaseAmount)) {
-                return purchaseAmount;
-            }
-        }
-    }
-    async getInputNumber(prompt) {
-        const input = await MissionUtils.Console.readLineAsync(prompt);
-        const number = parseInt(input);
+	async requestMoney() {
+		const money = await Console.readLineAsync(MESSAGE.REQUEST_MONEY);
+		this.lottos = new Lottos(money);
 
-        if (!isNaN(number)) {
-            return number;
-        } else {
-            return this.handleInvalidInput();
-        }
-    }
+		this.lottos.printCount();
+		this.lottos.printList();
 
-    async handleInvalidInput() {
-        MissionUtils.Console.print("[ERROR] 숫자가 잘못된 형식입니다.");
-        return NaN;
-    }
-    isPurchaseAmountValid(purchaseAmount) {
-        if (purchaseAmount % 1000 === 0) {
-            return true;
-        } else {
-            MissionUtils.Console.print("[ERROR] 1,000원 단위로 입력해 주세요.");
-            return false;
-        }
-    }
-    purchaseLottos(lottoCount) {
-        const lottos = [];
+		await this.requestWinningNumbers();
+	}
 
-        Array(lottoCount)
-            .fill(0)
-            .forEach(() => {
-                const lotto = Lotto.generateRandomLotto();
-                lottos.push(lotto);
-            });
-        return lottos;
-    }
+	async requestWinningNumbers() {
+		const winningNumbers = await Console.readLineAsync(
+			MESSAGE.REQUEST_WINNING_NUMBERS
+		);
+		this.winningNumbers = new WinningNumbers(
+			winningNumbers.split(",").map((item) => Number(item))
+		);
+
+		await this.requestBonusNumber();
+	}
+
+	async requestBonusNumber() {
+		const bonusNumber = await Console.readLineAsync(
+			MESSAGE.REQUEST_BONUS_NUMBER
+		);
+		this.bonusNumber = new BonusNumber(
+			bonusNumber,
+			this.winningNumbers.value
+		);
+
+		this.printWinningStats();
+	}
+
+	printWinningStats() {
+		Console.print(MESSAGE.WINNING_STATS);
+
+		const lottoRanks = this.lottos.getRanks(
+			this.winningNumbers.value,
+			this.bonusNumber.value
+		);
+
+		this.lottos.printWinningDetails(lottoRanks);
+		this.lottos.printRate(lottoRanks);
+	}
 }
+const app = new App();
+app.play();
 
 export default App;
