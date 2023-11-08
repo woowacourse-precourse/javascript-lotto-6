@@ -37,7 +37,8 @@ export const BONUS_NUMBER_ERROR_MESSAGES = Object.freeze({
 
 export const LOTTO_NUMBERS_ERROR_MESSAGES = Object.freeze({
   NOT_GENERATED: '[ERROR] 로또 번호가 셍성되지 않았습니다.',
-  NOT_NUMBER: '[ERROR] 로또 번호는 숫자여야 합니다.',
+  NOT_NUMERIC: '[ERROR] 로또 번호는 숫자형이여야 합니다.',
+  INVALID_LOTTO_NUMBERS_LENGTH: `[ERROR] 로또 번호는 ${LOTTO_NUMBERS_LENGTH}개여야 합니다.`,
 });
 
 export const GAEM_RESULT_MESSAGE = `\n당첨 통계\n---`;
