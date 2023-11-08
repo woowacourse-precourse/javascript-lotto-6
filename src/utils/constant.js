@@ -41,6 +41,7 @@ export const ERROR_MESSAGE = Object.freeze({
   INVALID_RANGE: `${ERROR_HEAD} 번호는 1 ~ 45 사이의 숫자여야 합니다.`,
   INVALID_CHAR: `${ERROR_HEAD} 쉼표 이외의 특수문자 입력은 불가합니다.`,
   INVALID_BONUS_LENGTH: `${ERROR_HEAD} 보너스 번호는 1개여야 합니다.`,
+  INVALID_VALUE : `${ERROR_HEAD} 존재하지 않는 값 입니다.`
 });
 
 export const RANK = Object.freeze({
