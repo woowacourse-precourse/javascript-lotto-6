@@ -5,19 +5,17 @@ import Lotto from '../Lotto.js';
 import OutputView from '../view/OutputView.js';
 import { LOTTO_MACHINE_RULES, LOTTO_RULES } from '../constants/Rules.js';
 import { ERROR_MESSAGE } from '../constants/Messages.js';
+import WinningNumbers from '../model/WinningNumbers.js';
 
 export default class LottoMachine {
   #player;
 
   #winningNumbers;
 
-  #bonusNumber;
-
   #INFINITE;
 
   constructor() {
     this.#INFINITE = true;
-    this.#bonusNumber = 0;
   }
 
   async run() {
@@ -25,7 +23,7 @@ export default class LottoMachine {
     this.#makeLottoNumbers(this.#player.getPurchaseAmount());
     OutputView.printLottoTickets(this.#player.getLottoTickets());
     this.#winningNumbers = await this.#getWinningNumbers();
-    this.#bonusNumber = await this.#getBonusNumber();
+    await this.#getBonusNumber();
     this.#findMatchCount();
     this.#calculateWinningStats();
     this.#calculateProfit();
@@ -84,8 +82,9 @@ export default class LottoMachine {
     while (this.#INFINITE) {
       try {
         const winningNumbersInput = await InputView.readWinningNumbers();
+        const parseWinningNumber = winningNumbersInput.split(',').map((number) => Number(number));
 
-        return new Lotto(winningNumbersInput.split(',').map((number) => Number(number)));
+        return new WinningNumbers(parseWinningNumber);
       } catch (e) {
         Console.print(e.message);
       }
@@ -99,28 +98,11 @@ export default class LottoMachine {
         const bonusNumberInput = await InputView.readBonusNumber();
         const parseBonusNumber = Number(bonusNumberInput);
 
-        this.#bonusNumberValidate(parseBonusNumber);
-
-        return parseBonusNumber;
+        this.#winningNumbers.setBonusNumber(parseBonusNumber);
+        break;
       } catch (e) {
         Console.print(e.message);
       }
-    }
-  }
-
-  #bonusNumberValidate(bonusNumber) {
-    const ONLY_DIGIT_PATTERN = /^\d+$/;
-
-    if (!ONLY_DIGIT_PATTERN.test(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.notNumber);
-    }
-
-    if (this.#winningNumbers.getNumbers().includes(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.duplication);
-    }
-
-    if (bonusNumber < LOTTO_RULES.minNumber || bonusNumber > LOTTO_RULES.maxNumber) {
-      throw new Error(ERROR_MESSAGE.lottoNumber.notInRange);
     }
   }
 
@@ -131,7 +113,7 @@ export default class LottoMachine {
         .filter((number) => this.#winningNumbers.getNumbers().includes(number)).length;
 
       if (LOTTO_MACHINE_RULES.minimumWiningCount <= matchCount) {
-        this.#player.setRankCounts(matchCount, !!this.#bonusNumber);
+        this.#player.setRankCounts(matchCount, !!this.#winningNumbers.getBonusNumber());
       }
     });
   }
