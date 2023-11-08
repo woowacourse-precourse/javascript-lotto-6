@@ -1,17 +1,17 @@
 import { Console } from '@woowacourse/mission-utils';
-import { GAME_MESSAGES, RANK_MESSAGES,  } from '../utils/Constants.js';
+import { GAME_MESSAGES, RANK_MESSAGES } from '../utils/Constants.js';
 
 class OutputView {
   constructor() {}
 
   printLottoCounts(lottoCounts) {
     Console.print(lottoCounts + GAME_MESSAGES.CONFIRM_PURCHASED_LOTTOS_AMOUNT);
-    Console.print('');
+    // Console.print('');
   }
 
   printLottoNumbers(lottos) {
     lottos.map((lotto, _) => { 
-      Console.print(lotto);
+      Console.print(`[${lotto.join(", ")}]`);
     })
     Console.print('');
   }
@@ -24,6 +24,10 @@ class OutputView {
       const message = RANK_MESSAGES[rank] + `${counts[rank]}` + GAME_MESSAGES.MESSSAGE_SUFFIX;
       Console.print(message);
     }
+  }
+
+  printProfitRates(profitRates) {
+    Console.print(GAME_MESSAGES.TOTAL_PRIZE_RATE(profitRates));
   }
 }
 

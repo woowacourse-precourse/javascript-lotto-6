@@ -47,6 +47,8 @@ class WinningLotto {
     });
 
     this.outputView.printWinningResult(counts);
+
+    return Object.values(counts);
   }
 }
 

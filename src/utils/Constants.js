@@ -3,6 +3,7 @@ export const GAME_MESSAGES = {
   CONFIRM_PURCHASED_LOTTOS_AMOUNT: "개를 구매했습니다.",
   ENTER_WINNING_NUMBERS: "당첨 번호를 입력해 주세요. ",
   ENTER_BONUS_NUMBER: "보너스 번호를 입력해 주세요. ",
+  TOTAL_PRIZE_RATE: (winningRates) => `총 수익률은 ${winningRates}%입니다.`,
   STATICS_HEADER: "당첨 통계",
   DIVIDER: "---------",
   MESSSAGE_SUFFIX: "개"

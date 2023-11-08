@@ -35,7 +35,7 @@ handleLottoWinningNumbers
 - [x] 보너스 당첨 번호 입력을 처리
 
 calculateProfitRates
-- [ ] 수익률을 계산
+- [x] 수익률을 계산
 
 <br/>
 
@@ -146,7 +146,7 @@ printLottoResult
   `6개 일치 (2,000,000,000원) - 0개` <br/>
 
 printProfitRates
-- [ ] 수익률을 화면에 출력하기
+- [x] 수익률을 화면에 출력하기
 - `총 수익률은 ${winningRates}%입니다.`
 
 <br/>

@@ -1,4 +1,4 @@
-import Lotto from "./Lotto.js";
+import Lotto from "./Model/Lotto.js";
 import OutputView from "./View/OutputView.js";
 import LottoController from "./Controller/LottoController.js";
 import LottoMachine from "./Model/LottoMachine.js";
@@ -31,7 +31,10 @@ class App {
       return this.winningLotto.checkWinning(lottoNumbers, winningNumbers);
     })
     
-    this.winningLotto.countAndPrintResult(lottoResult);
+    const lottoWinningResult = this.winningLotto.countAndPrintResult(lottoResult);
+
+    const profitRates = this.lottoController.calculateProfitRates(lottoWinningResult);
+    this.outputView.printProfitRates(profitRates.toFixed(1));
   }
 }
 

@@ -11,17 +11,15 @@ class Lotto {
 
   generateLottoNumbers(lottoCount) {
     for (let i = 0; i < lottoCount; i += 1) {
-      const lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
-      this.sortLottoNumbers(lottoNumber);
-
-      // this.lottoNumbersArray.push(lottoNumber);
+      this.#numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      this.sortLottoNumbers();
     }
 
     return this.lottoNumbersArray;
   }
 
-  sortLottoNumbers(lottoNumber) {
-    this.lottoNumbersArray.push(lottoNumber.sort((num1, num2) => num1 - num2));
+  sortLottoNumbers() {
+    this.lottoNumbersArray.push(this.#numbers.sort((num1, num2) => num1 - num2));
   }
 
   #validate(numbers) {
