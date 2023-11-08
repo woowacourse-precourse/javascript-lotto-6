@@ -138,6 +138,8 @@ class App {
    * @param {LottoInfo[]} ranks
    * @return {number} */
   calculateProfitRate(money, ranks) {
+    const TOTAL_WINNING_MONEY = ranks.reduce((acc, rank) => acc + rank.winningMoney, 0);
+    return TOTAL_WINNING_MONEY / money * 100;
   }
 
   /**
