@@ -18,5 +18,13 @@ describe("로또 클래스 테스트", () => {
     expect(lotto).toBeInstanceOf(Lotto);
   });
 
+  test("로또 번호를 정상적으로 출력할 수 있어야 합니다.", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const spy = jest.spyOn(console, "log");
+    lotto.printLottoNumbers();
+    expect(spy).toHaveBeenCalledWith("[1, 2, 3, 4, 5, 6]");
+    spy.mockRestore();
+  });
+
   // 아래에 추가 테스트 작성 가능
 });
