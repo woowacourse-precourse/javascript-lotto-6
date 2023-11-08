@@ -17,6 +17,16 @@ class LottoGameController {
   }
 
   async start() {
+    await this.initLottoInputs();
+    this.totalPrize = LottoResult.getLottoResult(
+      this.userLottoNumbers,
+      this.userBonuseNumber,
+      this.winningNumbers,
+    );
+    ProfitRate.calculateProfitRate(this.purchaseAmount, this.totalPrize);
+  }
+
+  async initLottoInputs() {
     this.purchaseAmount = await this.purchaseLotto();
 
     this.winningNumbers = WinningNumbers.getWinningLottoNumbers(
@@ -28,14 +38,6 @@ class LottoGameController {
     this.userBonuseNumber = await this.getUserBonusNumber(
       this.userLottoNumbers,
     );
-
-    this.totalPrize = LottoResult.getLottoResult(
-      this.userLottoNumbers,
-      this.userBonuseNumber,
-      this.winningNumbers,
-    );
-
-    ProfitRate.calculateProfitRate(this.purchaseAmount, this.totalPrize);
   }
 
   async purchaseLotto() {
