@@ -17,6 +17,7 @@ class LottoGame {
     this.#winningLottery = winningLottery;
 
     //당첨내역을 계산한다.
+    this.calculateWinningHistory();
     //수익률을 계산한다.
     // this.#view.printRaceResult({ winner, raceResult });
   }
@@ -27,7 +28,7 @@ class LottoGame {
 
     Console.print(`\n${numberOfLotto}개를 구매했습니다.`);
     lotteries.forEach((lottery) => {
-      Console.print(`[${lottery.printLotto()}]`);
+      Console.print(`[${lottery.printLotto().join(', ')}]`);
     });
 
     //당첨 번호를 입력한다. (당첨번호 6자리+ 보너스번호)
@@ -51,10 +52,11 @@ class LottoGame {
         range.from,
         range.to,
         length
-      );
+      ); //[1,2,3,4,5,6]
       set.add(new Lotto(lottery.sort((a, b) => a - b)));
     }
     return Array.from(set);
   }
+  calculateWinningHistory() {}
 }
 export default LottoGame;
