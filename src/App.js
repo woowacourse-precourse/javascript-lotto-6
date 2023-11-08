@@ -2,7 +2,7 @@ import UserInput from "./UserInput.js";
 import Lotto from "./Lotto.js";
 import LottoResult from "./LottoResult.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { LOTTO_CONSTANTS, MESSAGE } from "./Message.js";
+import { MESSAGE } from "./Message.js";
 
 class App {
   constructor(){
