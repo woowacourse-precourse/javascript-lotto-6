@@ -39,17 +39,18 @@
 ┃ ┃ ┣ LottoGenerator.js (금액에 맞춘 로또 번호 생성)
 ┃ ┃ ┣ index.js
 ┃ ┃ ┗ utils.js
+┣ 📂errors
+┃ ┗ error.js
 ┣ 📂Lib
-┃ ┣ 📂InputHanlder
-┃ ┃ ┗ InputHanlder.js // 구매 금액, 당첨 번호, 보너스 번호를 입력 받음.
-┃ ┣ ExceptionHandler.js
 ┃ ┣ constans.js
 ┃ ┣ error.js
+┃ ┣ ExceptionHandler.js
 ┃ ┣ message.js
 ┃ ┣ messageFormat.js
 ┃ ┗ utils.js
-┣ 📂errors
-┃ ┗ error.js
+┣ 📂View
+┃ ┣ InputHandler.js // 입력 UI.
+┃ ┗ OutputHandler.js // 출력 UI.
 ┣ App.js
 ┗ index.js
 ```
