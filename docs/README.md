@@ -83,3 +83,5 @@ flowchart LR
 
   COMPUTE_PRIZE --> PRINT_PRIZE --> COMPUTE_PROFIT --> PRINT_PROFIT --> END
 ```
+### 실행 결과
+![image](https://github.com/JungHun98/javascript-lotto-6/assets/97653343/7c06c7ac-c9a1-410b-b692-f3eff7d8a4dd)
