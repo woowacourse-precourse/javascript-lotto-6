@@ -25,7 +25,7 @@ export default class PurchaseController {
   printPurchasedLottos() {
     this.outputView.printPurchased(this.#quantity);
     this.#purchasedLottos.forEach((lotto) => {
-      this.outputView.printMessage(`[${lotto.getNumbers()}]`);
+      this.outputView.printMessage(`[${lotto.getNumbers().join(', ')}]`);
     });
   }
 

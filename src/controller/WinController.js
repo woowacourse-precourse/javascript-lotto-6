@@ -76,7 +76,7 @@ export default class WinController {
   calculateProfitRate() {
     this.calculateWinningAmount() / this.#amount;
     this.#profitRate =
-      Math.round((this.calculateWinningAmount() / this.#amount) * 1000) / 100;
+      Math.round((this.calculateWinningAmount() / this.#amount) * 10000) / 100;
   }
 
   calculateWinningAmount() {
