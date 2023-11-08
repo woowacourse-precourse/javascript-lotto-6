@@ -8,15 +8,14 @@ class Rank {
     this.#lottos = lottos.getLottos();
     this.#bonusNumber = bonusNumber.getBonusNumber();
     this.#winningLotto = new Set(winningLotto.getTicketNumbers().map(Number));
-    this.initRank();
   }
 
-  initRank() {
+  async initRank() {
     this.#rank = Array(5).fill(0);
     this.calculateRank();
   }
 
-  calculateRank() {
+  async calculateRank() {
     for (let i = 0; i < this.#lottos.length; i++) {
       const lotto = this.#lottos[i];
       const count = this.compareWinningLotto(lotto);

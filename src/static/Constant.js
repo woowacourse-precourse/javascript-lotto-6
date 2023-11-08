@@ -14,7 +14,7 @@ const ErrorMessage = Object.freeze({
   BONUS_LENGTH_ERROR: "[ERROR] 보너스 번호는 1개여야 합니다.",
   USER_NUMBER_ERROR: "[ERROR] 입력한 값이 숫자가 아닙니다.",
   USER_DUPLICATE_ERROR: "[ERROR] 로또는 모두 다른 숫자로 구성되어야 합니다.",
-  USER_LENGTH_ERROR: "[ERROR] ",
+  USER_LENGTH_ERROR: "[ERROR] 입력한 값이 숫자가 아닙니다.",
 });
 
 const RewardsMessage = [

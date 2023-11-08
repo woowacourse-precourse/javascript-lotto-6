@@ -7,7 +7,11 @@ class Lottos {
 
   constructor(tickets) {
     this.#count = tickets;
-    for (let i = 0; i < tickets; i++) {
+    this.setLottos();
+  }
+
+  setLottos() {
+    for (let i = 0; i < this.#count; i++) {
       this.#lottos.push(
         new Lotto(lottoNumberGenerator.generate()).getTicketNumbers()
       );

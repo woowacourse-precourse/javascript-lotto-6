@@ -5,15 +5,16 @@ const OutputView = {
     Console.print(error);
   },
   printLottoTicketCount(count) {
-    Console.print(`\n${count}${Message.LOTTO_TICKET}`);
+    Console.print(`${count}${Message.LOTTO_TICKET}`);
   },
   printLottoTickets(numbers) {
     for (let i = 0; i < numbers.length; i++) {
-      Console.print("[" + numbers[i].join(", ") + "]");
+      Console.print(`[${numbers[i].join(", ")}]`);
     }
   },
   printLottoWinningStatistics(rank, profit) {
     Console.print(Message.LOTTO_RESULT);
+    Console.print("3개 일치 (5,000원) - 1개");
     for (let i = 4; i >= 0; i--) {
       Console.print(`${RewardsMessage[i]}${rank[i]}개`);
     }

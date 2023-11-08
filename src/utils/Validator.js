@@ -3,7 +3,10 @@ import CheckDuplicates from "./CheckDuplicates.js";
 
 const InputValidator = {
   purchaseAmount(input) {
-    if (input <= 0) {
+    if (input.includes(" ")) {
+      throw new Error(ErrorMessage.USER_NUMBER_ERROR);
+    }
+    if (+input <= 0) {
       throw new Error(ErrorMessage.USER_NUMBER_ERROR);
     }
     if (!Number.isInteger(+input) || input.trim() === "") {
@@ -29,18 +32,15 @@ const InputValidator = {
       throw new Error(ErrorMessage.USER_DUPLICATE_ERROR);
     }
   },
-  bonusNumber(numbers, input) {
-    if (input.length > 2) {
-      throw new Error(ErrorMessage.BONUS_LENGTH_ERROR);
+  bonusNumber(input) {
+    if (input === "" || input.includes(" ")) {
+      throw new Error(ErrorMessage.USER_NUMBER_ERROR);
     }
     if (!Number.isInteger(+input) || input.trim() === "") {
       throw new Error(ErrorMessage.USER_NUMBER_ERROR);
     }
     if (+input < 1 || +input > 45) {
       throw new Error(ErrorMessage.LOTTO_NUMBER_ERROR);
-    }
-    if (numbers.includes(input)) {
-      throw new Error(ErrorMessage.USER_DUPLICATE_ERROR);
     }
   },
 };
