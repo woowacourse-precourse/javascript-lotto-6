@@ -22,6 +22,7 @@ class App {
     this.printPickedLotto(lottoCount, lottoList);
 
     const winningNumbers = await this.getWinningNumber();
+    const bonusNumber = await this.getBonusNumber();
   async getPayment() {
     try {
       const payment =
@@ -75,6 +76,27 @@ class App {
     }
   }
 
+  async getBonusNumber() {
+    try {
+      const bonusNumber = await Console.readLineAsync(
+        "\n보너스 번호를 입력해 주세요.\n"
+      );
+
+      if (
+        !/^\d+$/g.test(bonusNumber) ||
+        bonusNumber < MIN_NUMBER ||
+        bonusNumber > MAX_NUMBER
+      ) {
+        throw new Error(
+          "[ERROR] 보너스 번호는 1과 45 사이의 숫자로 입력하셔야 합니다."
+        );
+      }
+      return +bonusNumber;
+    } catch (e) {
+      Console.print(e.message);
+      return this.getBonusNumber();
+    }
+  }
 }
 
 export default App;
