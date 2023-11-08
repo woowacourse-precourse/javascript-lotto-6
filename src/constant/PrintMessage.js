@@ -4,6 +4,8 @@ const PRINT_MESSAGE = Object.freeze({
   REQUEST_WINNING_NUMBERS: "\n당첨 번호를 입력해 주세요.\n",
   REQUEST_BONUS_NUMBER: "\n보너스 번호를 입력해 주세요.\n",
   WINNING_STATS: "\n당첨 통계\n---",
+  REVENUE_PREFIX: "총 수익률은",
+  REVENUE_SUFFIX: "%입니다.\n",
 });
 
 export default PRINT_MESSAGE;

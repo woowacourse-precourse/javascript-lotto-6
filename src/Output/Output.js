@@ -21,7 +21,9 @@ const Output = {
   },
 
   printRevenueResult(revenue) {
-    Console.print(`총 수익률은 ${revenue}%입니다.\n`);
+    Console.print(
+      `${PRINT_MESSAGE.REVENUE_PREFIX} ${revenue}${PRINT_MESSAGE.REVENUE_SUFFIX}`
+    );
   },
 };
 

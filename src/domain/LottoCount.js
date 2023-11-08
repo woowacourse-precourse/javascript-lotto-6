@@ -1,4 +1,5 @@
 import STATIC_NUMBER from "../constant/StaticNumber";
+import WINNING_REWARD from "./WinningReward";
 
 class LottoCount {
   #lottoCount;
@@ -15,13 +16,13 @@ class LottoCount {
   }
 
   getRevenueRate(winningStatistic) {
-    const purchasePrice = this.#lottoCount * 1000;
+    const purchasePrice =
+      this.#lottoCount * STATIC_NUMBER.PURCHASE_AMOUNT_SPLIT;
     winningStatistic.forEach((count, index) => {
-      this.#revenue +=
-        [2_000_000_000, 30_000_000, 1_500_000, 50_000, 5_000][index] * count;
+      this.#revenue += WINNING_REWARD[index] * count;
     });
 
-    return ((this.#revenue / purchasePrice) * 100).toFixed(1);
+    return ((this.#revenue / purchasePrice) * STATIC_NUMBER.PERCENT).toFixed(1);
   }
 }
 

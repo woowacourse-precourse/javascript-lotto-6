@@ -8,6 +8,7 @@ const STATIC_NUMBER = Object.freeze({
   THIRD_PLACE: 3,
   FOURTH_PLACE: 4,
   FIFTH_PLACE: 5,
+  PERCENT: 100,
 });
 
 export default STATIC_NUMBER;

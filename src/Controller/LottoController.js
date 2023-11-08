@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import Input from "../Input/Input";
 import Output from "../Output/Output";
 import LottoCount from "../domain/LottoCount";
