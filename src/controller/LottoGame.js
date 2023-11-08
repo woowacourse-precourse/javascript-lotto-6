@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { PRIZE } from '../constants/prize.js';
+import { PRIZE, PRIZE_STATUS } from '../constants/prize.js';
 import { LOTTO_ROLE } from '../constants/lotto.js';
 import Validator from '../utils/validator.js';
 import { InputView, OutputView } from '../view/index.js';
@@ -14,6 +14,7 @@ export default class LottoGame {
     const bonusNumber = await this.#requireBonusNumber(winningLotteryNumbers);
     const lotteryResult = this.#confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber);
     const earningsRate = this.#calculateEarningsRate(purchaseAmount, lotteryResult);
+    this.#printPrizeResult(lotteryResult, earningsRate);
   }
 
   async #requirePurchaseAmount() {
@@ -57,14 +58,19 @@ export default class LottoGame {
     OutputView.printLottoList(lottoList);
   }
 
+  #printPrizeResult(lotteryResult, earningsRate) {
+    OutputView.printPrizeResult(lotteryResult, earningsRate);
+  }
+
   #confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber) {
     const lotteryResult = lottoList.map((lotto) =>
       lotto.getPrize(winningLotteryNumbers, bonusNumber),
     );
 
-    const lotteryResultMap = new Map();
+    const initialResult = Object.keys(PRIZE_STATUS).map((key) => [key, 0]);
+    const lotteryResultMap = new Map(initialResult);
     lotteryResult.forEach((result) => {
-      lotteryResultMap.set(result, (lotteryResultMap.get(result) || 0) + 1);
+      lotteryResultMap.set(result, lotteryResultMap.get(result) + 1);
     });
     return lotteryResultMap;
   }
@@ -76,7 +82,7 @@ export default class LottoGame {
       profit += prizeMoney * count;
     }
 
-    const EarningsRate = profit / purchaseAmount;
+    const EarningsRate = (profit / purchaseAmount) * 100;
     return EarningsRate.toFixed(1);
   }
 }

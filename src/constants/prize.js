@@ -6,26 +6,31 @@ const PRIZE_OUT = Object.freeze({
 const PRIZE_FIRST = Object.freeze({
   status: 'first',
   prizeMoney: 2_000_000_000,
+  message: '6개 일치 (2,000,000,000원) - ',
 });
 
 const PRIZE_SECOND = Object.freeze({
   status: 'second',
   prizeMoney: 30_000_000,
+  message: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
 });
 
 const PRIZE_THIRD = Object.freeze({
   status: 'third',
   prizeMoney: 1_500_000,
+  message: '5개 일치 (1,500,000원) - ',
 });
 
 const PRIZE_FOURTH = Object.freeze({
   status: 'fourth',
   prizeMoney: 50_000,
+  message: '4개 일치 (50,000원) - ',
 });
 
 const PRIZE_FIFTH = Object.freeze({
   status: 'fifth',
   prizeMoney: 5_000,
+  message: '3개 일치 (5,000원) - ',
 });
 
 const PRIZE_STATUS = Object.freeze({
