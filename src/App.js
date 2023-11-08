@@ -12,6 +12,7 @@ const WINNING_MESSAGES = [
   '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
   '6개 일치 (2,000,000,000원) - '
 ];
+const WINNING_PROFITS = [5_000, 50_000, 1_500_000, 30_000_000, 2_000_000_000]
 
 class App {
   async getLottoAmount() {
@@ -75,15 +76,15 @@ class App {
       const intersection = lotto.numbers.filter((item) => winningSet.has(item));
       const intersectionCount = intersection.length;
       if (intersectionCount === 6) {
-        statistics[0]++;
+        statistics[4]++;
       } else if (intersectionCount === 5 && lotto.numbers.includes(bonusNumber)) {
-        statistics[1]++;
+        statistics[3]++;
       } else if (intersectionCount === 5) {
         statistics[2]++;
       } else if (intersectionCount === 4) {
-        statistics[3]++;
+        statistics[1]++;
       } else if (intersectionCount === 3) {
-        statistics[4]++;
+        statistics[0]++;
       }
     });
     return statistics;
@@ -98,6 +99,19 @@ class App {
     }
   }
 
+  calculateProfitRate(lottoAmount, winningStatistics) {
+    let winningProfit = 0;
+    for (let i = 0; i < winningStatistics.length; i++) {
+      winningProfit += WINNING_PROFITS[i] * winningStatistics[i];
+    }
+    const profitRate = parseFloat(((winningProfit - lottoAmount) / lottoAmount * 100).toFixed(1));
+    return profitRate;
+  }
+
+  printProfitRate(profitRate) {
+    Console.print(`총 수익률은 ${profitRate}%입니다.`);
+  }
+
   async play() {
     const lottoAmount = await this.getLottoAmount();
     this.validateLottoAmount(lottoAmount);
@@ -109,6 +123,8 @@ class App {
     const bonusNumber = await this.getBonusNumber();
     const winningStatistics = this.calculateWinningStatistics(winningLotto, bonusNumber);
     this.printWinningStatistics(winningStatistics);
+    const profitRate = this.calculateProfitRate(lottoAmount, winningStatistics);
+    this.printProfitRate(profitRate);
   }
 }
 
