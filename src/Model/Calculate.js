@@ -25,6 +25,14 @@ class CalculateWinnings {
     return this.#results;
   }
 
+  caculate() {
+    this.lottoTickets.forEach((lottoTicket) => {
+      const matchedNumbers = this.countMatchNumbers(lottoTicket);
+      const bonusMatch = this.countBonusNumbers(lottoTicket);
+      this.countWinnings(matchedNumbers, bonusMatch);
+    });
+  }
+
   countMatchNumbers(lotto) {
     const matchedNumbers = lotto
       .getNumber()
