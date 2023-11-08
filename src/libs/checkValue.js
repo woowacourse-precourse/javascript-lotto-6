@@ -7,7 +7,7 @@ import {
 } from './constants';
 
 export const checkValue = {
-  //구매금액
+  //구입 금액
   purchaseAmount(purchaseAmount) {
     if (isNaN(purchaseAmount))
       return { errorMessage: createErrorMessage.type(PURCHASE_AMOUNT) };
