@@ -1,3 +1,5 @@
+import { ERRORS } from "./contants.js";
+
 class Lotto {
   #numbers;
 
@@ -8,11 +10,27 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERRORS.SIX_NUMBER);
+    }
+
+    const isAllNumbers = numbers.every((item) => !isNaN(item));
+    if (!isAllNumbers) {
+      throw new Error(ERRORS.ONLY_NUMBER);
+    }
+
+    if (numbers.length !== new Set([...numbers]).size) {
+      throw new Error(ERRORS.NOT_DUPLICATE);
+    }
+
+    const isAllCorrectRange = numbers.every((item) => item > 0 && item <= 45);
+    if (!isAllCorrectRange) {
+      throw new Error(ERRORS.OUT_OF_RANGE);
     }
   }
 
-  // TODO: 추가 기능 구현
+  getCorrectNumber() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
