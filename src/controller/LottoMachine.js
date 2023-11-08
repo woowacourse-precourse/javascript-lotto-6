@@ -137,7 +137,9 @@ export default class LottoMachine {
   }
 
   #calculateWinningStats() {
-    const rankCountsObjectEntries = Object.entries(this.#player.getRankCounts()).reverse();
+    const rankCountsObjectEntries = Object.entries(this.#player.getRankCounts()).sort(
+      (lowRank, highRank) => highRank - lowRank,
+    );
 
     OutputView.printwinningStats();
     rankCountsObjectEntries.forEach(([rank, counts]) => {
