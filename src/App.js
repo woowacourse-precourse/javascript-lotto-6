@@ -42,10 +42,7 @@ class App {
     );
 
     const lottoGame = new Lotto(this.#winningNumbers);
-    lottos.forEach((lotto) => {
-      const compareResult = lottoGame.compareLottos(lotto, this.#bonusNumber);
-      lottoGame.saveCompareResult(compareResult, this.lottoBoard);
-    });
+    this.processLotto(lottos, lottoGame);
 
     this.totalReward += lottoGame.calculateReward(this.lottoBoard);
 
@@ -104,6 +101,13 @@ class App {
         Console.print(e.message + "\n");
       }
     }
+  }
+
+  processLotto(lottos, lottoGame) {
+    lottos.forEach((lotto) => {
+      const compareResult = lottoGame.compareLottos(lotto, this.#bonusNumber);
+      lottoGame.saveCompareResult(compareResult, this.lottoBoard);
+    });
   }
 }
 
