@@ -1,5 +1,5 @@
-import { mockReadLineAsync } from './mockMissionUtils';
-import { askPurchaseAmount } from '../src/askPurchaseAmount';
+import { getLogSpy, mockReadLineAsync } from './mockMissionUtils';
+import LottoPurchase from '../src/LottoPurchase';
 
 describe('askPurchaseAmount 함수 테스트', () => {
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('askPurchaseAmount 함수 테스트', () => {
     mockReadLineAsync(purchaseAmount);
 
     // when
-    const result = await askPurchaseAmount();
+    const result = await LottoPurchase.askPurchaseAmount();
 
     // then
     expect(result).toBe(8000);
@@ -25,9 +25,25 @@ describe('askPurchaseAmount 함수 테스트', () => {
       mockReadLineAsync([purchaseAmount, 8000]);
 
       // when & then
-      await expect(askPurchaseAmount()).rejects.toThrow(
+      await expect(LottoPurchase.askPurchaseAmount()).rejects.toThrow(
         '[ERROR] Invalid purchase amount.'
       );
     }
   );
+});
+
+describe('로또 구매 기능 테스트', () => {
+  test('로또 8개 구입', () => {
+    // given
+    const lottoAmount = 8;
+    const log = '8개를 구입했습니다.';
+    const logSpy = getLogSpy();
+
+    // when
+    const lottos = LottoPurchase.purchaseLottos(lottoAmount);
+
+    // then
+    expect(lottos.length).toBe(lottoAmount);
+    expect(logSpy).toHaveBeenCalledWith(log);
+  });
 });
