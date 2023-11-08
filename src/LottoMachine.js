@@ -48,8 +48,13 @@ export default class LottoMachine {
       USER_INPUT.purchaseAmount
     );
 
-    this.#validateReceivedMoney(inputMoney);
-    this.#purchaseAmount = +inputMoney;
+    try {
+      this.#validateReceivedMoney(inputMoney);
+      this.#purchaseAmount = +inputMoney;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.#receiveMoney();
+    }
   }
 
   #validateReceivedMoney(money) {
@@ -92,12 +97,16 @@ export default class LottoMachine {
     );
     const inputNumbersArray = inputNumbers.split(',').map((num) => +num);
 
-    this.#validateNumbersArray(inputNumbersArray);
-    inputNumbersArray.forEach((num) => {
-      this.#validateNumber(num);
-    });
-
-    this.#winningNumbers = inputNumbersArray;
+    try {
+      this.#validateNumbersArray(inputNumbersArray);
+      inputNumbersArray.forEach((num) => {
+        this.#validateNumber(num);
+      });
+      this.#winningNumbers = inputNumbersArray;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.#setWinningNumbers();
+    }
   }
 
   #validateNumbersArray(numbers) {
@@ -121,11 +130,20 @@ export default class LottoMachine {
       USER_INPUT.bonusNumber
     );
 
-    if (this.#winningNumbers.includes(+inputNumber)) {
+    try {
+      this.#validateDuplicate(this.#winningNumbers, +inputNumber);
+      this.#validateNumber(inputNumber);
+      this.#bonusNumber = +inputNumber;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.#setBonusNumber();
+    }
+  }
+
+  #validateDuplicate(array, number) {
+    if (array.includes(number)) {
       throw new Error(ERROR.number.duplicateBonus);
     }
-    this.#validateNumber(inputNumber);
-    this.#bonusNumber = +inputNumber;
   }
 
   #aggregateRank() {
