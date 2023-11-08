@@ -7,7 +7,7 @@ class Validation {
   }
 
   static isDivisible(num) {
-    if(num % 1000 !== 0) throw new Error(this.makeErrorMsg(ERROR_MSG.AMOUNT_UNIT_ERROR));
+    if((num !== 0) && (num % 1000 !== 0)) throw new Error(this.makeErrorMsg(ERROR_MSG.AMOUNT_UNIT_ERROR));
   }
 
   static isValidLen(winningArr) {
