@@ -48,7 +48,9 @@ class LottoData {
 
       if (winningCount === 5 && bonusCount) {
         this.lottoStats.bonus += 1;
-      } else if (winningCount in this.lottoStats) {
+        return;
+      }
+      if (winningCount in this.lottoStats) {
         this.lottoStats[winningCount] += 1;
       }
     });
