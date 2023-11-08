@@ -42,7 +42,7 @@ class Validator {
   }
 
   static isInvaildIndex(firstIndex, lastIndex, index) {
-    if (firstIndex < index || lastIndex <= index) {
+    if (index < firstIndex || lastIndex <= index) {
       throw printError(ERROR.INVALID_INDEX);
     }
   }
