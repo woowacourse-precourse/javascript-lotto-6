@@ -17,6 +17,10 @@ const outputView = {
   printResult(rank, resultCount) {
     MissionUtils.Console.print(`${OUTPUT_MESSAGE[rank]}${resultCount}개`);
   },
+
+  printProfitRate(profitRate) {
+    MissionUtils.Console.print(`총 수익률은 ${profitRate}%입니다.`);
+  },
 };
 
 export default outputView;

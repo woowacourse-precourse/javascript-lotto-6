@@ -3,6 +3,7 @@ import Lotto from '../Lotto.js';
 import validation from '../utils/validation.js';
 import inputView from '../view/inputView.js';
 import outputView from '../view/outputView.js';
+import { PRIZE_AMOUNTS } from '../constants/constants.js';
 
 class LottoController {
   #Lotto;
@@ -90,6 +91,21 @@ class LottoController {
     ranks.forEach((rank) => {
       outputView.printResult(parseInt(rank, 10), this.result[rank]);
     });
+  }
+
+  calculateProfitRate() {
+    const ticketPrice = 1000;
+    const totalInvestment = this.count * ticketPrice;
+
+    const totalPrize = Object.keys(this.result).reduce((total, rank) => {
+      const rankCount = this.result[rank];
+      const prizeAmount = PRIZE_AMOUNTS[rank];
+      return total + rankCount * prizeAmount;
+    }, 0);
+
+    const profitRate = (totalPrize / totalInvestment) * 100;
+    const roundedProfitRate = Math.round(profitRate * 100) / 100;
+    outputView.printProfitRate(roundedProfitRate);
   }
 }
 

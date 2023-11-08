@@ -11,6 +11,7 @@ class App {
     await this.#controller.getBonusNumber();
     this.#controller.calculateMatchCount();
     this.#controller.printResult();
+    this.#controller.calculateProfitRate();
   }
 }
 
