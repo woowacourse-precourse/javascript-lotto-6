@@ -12,6 +12,15 @@ describe('로또 계산 기능 테스트', () => {
     });
   });
 
+  test('랭킹 계산', async () => {
+    const calculate = new Calculate();
+    const lottoList = [[1, 2, 3, 4, 5, 6]];
+    const lotto = [1, 2, 3, 4, 5, 6];
+    const bonus = 7;
+    const result = [0, 0, 0, 0, 1];
+    expect(await calculate.countTotalRanking(lottoList, lotto, bonus)).toEqual(result);
+  });
+
   test('수익률 계산', () => {
     const calculate = new Calculate();
     calculate.countMatch = [0, 0, 0, 0, 1];
