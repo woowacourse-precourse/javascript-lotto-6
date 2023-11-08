@@ -16,17 +16,12 @@ describe('App 클래스 테스트', () => {
   test('사용자 input 테스트 1000원 단위 인지', async () => {
     const app = new App();
     const logSpy = getLogSpy();
-    await app.validatePriceInput('12345');
-    expect(logSpy).toHaveBeenCalledWith(
-      expect.objectContaining({
-        message: expect.stringContaining('[ERROR]'),
-      })
-    );
+    app.validatePriceInput('12345');
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
   });
   test('lotto 번호 발행 테스트', async () => {
     //given
     // const logSpy = getLogSpy();
-
     mockRandoms([
       [1, 7, 12, 35, 40, 41],
       [7, 14, 16, 18, 20, 41],
@@ -39,7 +34,7 @@ describe('App 클래스 테스트', () => {
     ]);
     // when
     const app = new App();
-    const numbers = await app.getLottoNumbers('8000');
+    const numbers = app.getLottoNumbers('8000');
     const num = [
       [1, 7, 12, 35, 40, 41],
       [7, 14, 16, 18, 20, 41],
