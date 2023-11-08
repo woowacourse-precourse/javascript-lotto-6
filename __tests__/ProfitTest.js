@@ -6,7 +6,7 @@ describe("수익률 클래스 테스트", () => {
     const purchase_amount = 12000;
 
     const profit = new Profit();
-    const total_rate = profit.calcProfit(ranking, purchase_amount);
+    const total_rate = profit.calculateProfit(ranking, purchase_amount);
 
     expect(total_rate).toBe("458.3");
   });

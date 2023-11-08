@@ -37,7 +37,7 @@ class Purchase {
     this.#validateIsCorrectUnit(input);
   }
 
-  calcPurchaseQuantity(input) {
+  calculatePurchaseQuantity(input) {
     return input / PURCHASE_AMOUNT_UNIT;
   }
 

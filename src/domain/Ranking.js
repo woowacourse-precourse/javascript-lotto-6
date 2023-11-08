@@ -8,7 +8,7 @@ class Ranking {
 
   constructor() {}
 
-  #calcRank(correct_number, hasBonus) {
+  #calculateRank(correct_number, hasBonus) {
     if (correct_number === 3) {
       this.#rank[4]++;
     } else if (correct_number === 4) {
@@ -30,7 +30,7 @@ class Ranking {
         winning_number.includes(num)
       ).length;
       const hasBonus = lotto.includes(bonus_number);
-      this.#calcRank(correct_number, hasBonus);
+      this.#calculateRank(correct_number, hasBonus);
     });
 
     return this.#rank;

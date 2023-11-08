@@ -16,36 +16,54 @@ class App {
   }
 
   async play() {
-    // 1. 구매 금액 입력 받기
-    const purchase = new Purchase();
-    this.purchase_amount = await purchase.purchase();
-    this.purchase_quantity = purchase.calcPurchaseQuantity(
+    this.purchase_amount = await this.getPurchaseAmount();
+    this.purchase_quantity = this.calculatePurchaseQuantity(
       this.purchase_amount
     );
+    this.generateLottos(this.purchase_quantity);
+    await this.getWinningNumber();
+    await this.getBonusNumber();
+    this.compareAndPrintRank();
+    this.calculateAndPrintProfit();
+  }
 
-    // 2. 로또 발행하기
+  async getPurchaseAmount() {
+    const purchase = new Purchase();
+    return await purchase.purchase();
+  }
+
+  calculatePurchaseQuantity(purchaseAmount) {
+    const purchase = new Purchase();
+    return purchase.calculatePurchaseQuantity(purchaseAmount);
+  }
+
+  generateLottos(purchaseQuantity) {
     const lotto_machine = new LottoMachine();
-    this.lotto_list = lotto_machine.generateAllLottos(this.purchase_quantity);
-    lotto_machine.printLottos(this.purchase_quantity, this.lotto_list);
+    this.lotto_list = lotto_machine.generateAllLottos(purchaseQuantity);
+    lotto_machine.printLottos(purchaseQuantity, this.lotto_list);
+  }
 
-    // 3. 당첨 번호 입력받기
+  async getWinningNumber() {
     const winning_number = new WinningNumber();
     this.winning_number = await winning_number.getWinningNumber();
+  }
 
-    // 4. 보너스 번호 입력받기
+  async getBonusNumber() {
     const bonus_number = new BonusNumber();
     this.bonus_number = await bonus_number.getBonusNumber(this.winning_number);
+  }
 
-    // 5. 로또 번호와 당첨 번호 비교하기
+  compareAndPrintRank() {
     const ranking = new Ranking();
     this.rank_result = ranking.compareRank(
       this.lotto_list,
       this.winning_number,
       this.bonus_number
     );
-
-    // 6. 당첨 통계 출력하기
     ranking.printRank(this.rank_result);
+  }
+
+  calculateAndPrintProfit() {
     const profit = new Profit();
     profit.returnProfit(this.rank_result, this.purchase_amount);
   }

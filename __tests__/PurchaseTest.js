@@ -24,7 +24,7 @@ describe("로또 구매 클래스 테스트", () => {
 
   test("구매 수량은 구입 금액을 1000으로 나눈 값과 일치해야 한다.", () => {
     const purchase = new Purchase();
-    const quantity = purchase.calcPurchaseQuantity(3000);
+    const quantity = purchase.calculatePurchaseQuantity(3000);
 
     expect(quantity).toBe(3);
   });

@@ -7,7 +7,7 @@ class Profit {
 
   constructor() {}
 
-  calcProfit(ranking, purchase_amount) {
+  calculateProfit(ranking, purchase_amount) {
     ranking.map((el, i) => (this.total_profit += el * PRIZE_ARR[i]));
     this.total_rate = ((this.total_profit / purchase_amount) * 100).toFixed(1);
 
@@ -19,7 +19,7 @@ class Profit {
   }
 
   returnProfit(ranking, purchase_amount) {
-    this.calcProfit(ranking, purchase_amount);
+    this.calculateProfit(ranking, purchase_amount);
     this.printProfit();
   }
 }
