@@ -78,7 +78,7 @@ describe('로또 클래스 메서드 테스트', () => {
 	});
 
 	describe('getMatchingNumbersArray 메서드 테스트', () => {
-		test('자동으로 생성된 나의 복권 티켓에서 일치하는 번호의 개수가 나오는지 테스트', () => {
+		test('랜덤으로 생성된 나의 복권 티켓에서 일치하는 번호의 개수가 나오는지 테스트', () => {
 			const lottoTicketsArray = [
 				[8, 21, 23, 41, 42, 43],
 				[3, 5, 11, 16, 32, 38],
@@ -90,7 +90,26 @@ describe('로또 클래스 메서드 테스트', () => {
 			const expectArray = [0, 2, 0, 1, 3];
 			lotto = new Lotto(lottoTicketsArray);
 
-			expect(lotto.getMatchingNumbersArray(lottoWinningNumberArray)).toEqual(
+			expect(
+				lotto.getMatchingNumbersArray(lottoWinningNumberArray)
+			).toStrictEqual(expectArray);
+		});
+	});
+
+	describe('getMatchingBonusNumberArray 메서드 테스트', () => {
+		test('램덤으로 생성된 나의 복권 티켓에서 보너스 번호와 일치하지 여부', () => {
+			const lottoTicketsArray = [
+				[8, 21, 23, 41, 42, 43],
+				[3, 5, 11, 16, 32, 38],
+				[7, 11, 16, 35, 36, 44],
+				[1, 8, 11, 31, 41, 42],
+				[1, 3, 5, 14, 22, 45],
+			];
+			const bonusNumber = 7;
+			const expectArray = [0, 0, 1, 0, 0];
+			lotto = new Lotto(lottoTicketsArray);
+
+			expect(lotto.getMatchingBonusNumberArray(bonusNumber)).toStrictEqual(
 				expectArray
 			);
 		});
