@@ -1,9 +1,11 @@
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
+  constructor(numbers, bonusNumber) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.validateUserBonusNumberInput(bonusNumber);
+    this.bonusNumber = bonusNumber;
   }
 
   #validate(numbers) {
@@ -21,6 +23,11 @@ class Lotto {
     }
   }
 
+  validateUserBonusNumberInput(number) {
+    if (Number.isNaN(Number(number)) || number < 1 || number > 45) {
+      throw new Error('[ERROR] 보너스 번호는 1부터 45사이의 숫자여야 합니다.');
+    }
+  }
   // TODO: 추가 기능 구현
 }
 

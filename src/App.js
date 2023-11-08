@@ -1,4 +1,8 @@
-import { inputUserWinningNumber, inputUserPurchaseAmount } from './utils.js';
+import {
+  inputUserWinningNumber,
+  inputUserPurchaseAmount,
+  inputUserBonusNumber,
+} from './utils.js';
 import User from './User.js';
 import Lotto from './Lotto.js';
 
@@ -7,8 +11,10 @@ class App {
     const purchaseAmount = await inputUserPurchaseAmount();
     const user = new User(purchaseAmount);
     const userWinningNumberInput = await inputUserWinningNumber();
-    console.log(userWinningNumberInput); //TODO 디버깅용
-    const lotto = new Lotto(userWinningNumberInput);
+    console.log(userWinningNumberInput); // TODO 디버깅용
+    const bonusNumber = await inputUserBonusNumber();
+    console.log(bonusNumber); // TODO 디버깅용
+    const lotto = new Lotto(userWinningNumberInput, bonusNumber);
   }
 }
 
