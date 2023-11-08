@@ -7,7 +7,7 @@ import { COMMA } from '../constants/GameSetting.js';
 
 export async function inputBuyMoney() {
   try {
-    const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.buyAmount);
+    const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.buyMoney);
     isValidBuyMoney(inputValue);
     return Number(inputValue);
   } catch (err) {

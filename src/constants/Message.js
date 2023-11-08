@@ -1,7 +1,7 @@
 import { LOTTO_RANK } from './GameSetting.js';
 
 export const MESSAGE_NOTIFICATION = Object.freeze({
-  buyAmount: '구입금액을 입력해 주세요.\n',
+  buyMoney: '구입금액을 입력해 주세요.\n',
   winningLotto: '\n당첨 번호를 입력해 주세요.\n',
   bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
   result: '\n당첨 통계\n---',
