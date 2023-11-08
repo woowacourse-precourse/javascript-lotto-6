@@ -1,5 +1,6 @@
 import MESSAGES from '../constants/messages.js';
 import OutputView from '../view/OutputView.js';
+import NUMBERS from '../constants/numbers.js';
 
 class LottoResult {
   constructor() {
@@ -13,7 +14,7 @@ class LottoResult {
       this.checkMatch(userLottoNumbers, userBonusNumber, winningNumbers),
     );
 
-    this.winningResult = this.getWinningList(this.matchResult);
+    this.winningResult = this.countMatch(this.matchResult);
 
     this.totalPrize = this.getPrize(this.winningResult);
 
@@ -35,48 +36,42 @@ class LottoResult {
     return matchCount;
   }
 
-  static getWinningList(result) {
-    const initResult = Array.from({ length: 5 }, () => 0);
-    result.forEach(e => {
-      if (e === 3) {
-        initResult[0] += 1;
+  static countMatch(matchResult) {
+    const countMathResult = Array.from({ length: 5 }, () => 0);
+    matchResult.forEach(match => {
+      if (match === 3) {
+        countMathResult[0] += 1;
+        return;
       }
-      if (e === 4) {
-        initResult[1] += 1;
+      if (match === 4) {
+        countMathResult[1] += 1;
+        return;
       }
-      if (e === 5) {
-        initResult[2] += 1;
+      if (match === 5) {
+        countMathResult[2] += 1;
+        return;
       }
-      if (e === MESSAGES.bonus) {
-        initResult[3] += 1;
+      if (match === MESSAGES.bonus) {
+        countMathResult[3] += 1;
+        return;
       }
-      if (e === 6) {
-        initResult[4] += 1;
+      if (match === 6) {
+        countMathResult[4] += 1;
       }
     });
-    return initResult;
+    return countMathResult;
   }
 
   static getPrize(winningResult) {
-    const messages = [
-      MESSAGES.matchThree,
-      MESSAGES.matchFour,
-      MESSAGES.matchFive,
-      MESSAGES.matchFiveAndBonus,
-      MESSAGES.matchSix,
-    ];
-
     OutputView.printLottoResultHeader();
-
-    const prize = [5000, 50000, 1500000, 30000000, 2000000000];
 
     let totalPrize = 0;
 
     winningResult.forEach((result, index) => {
       if (result !== 0) {
-        totalPrize += result * prize[index];
+        totalPrize += result * NUMBERS.prize[index];
       }
-      OutputView.printLottoResult(messages[index], result);
+      OutputView.printLottoResult(index, result);
     });
 
     return totalPrize;
