@@ -59,6 +59,8 @@ class App {
     await this.setUserMoney(user);
     this.setLottoTickets(user);
 
+    this.#output.lottoTickets(user.getTickets());
+
     await this.setWinningNumbers();
     await this.setBonusNumber();
   }
@@ -66,8 +68,6 @@ class App {
   async play() {
     const user = new User();
     await this.setGameConditions(user);
-
-    this.#output.lottoTickets(user.getTickets());
 
     const result = this.#game.calculateGameResults(user.getTickets(), user.getMoney());
     this.#output.gameResult(result);
