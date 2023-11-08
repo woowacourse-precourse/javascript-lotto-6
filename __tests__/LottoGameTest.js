@@ -19,11 +19,11 @@ describe("로또게임 클래스 테스트", () => {
   });
 
   test('보너스 번호에 1~45 정수 이외의 문자인 경우 예외 발생', () => {
-    expect(() => LottoGame.validatebonusNumber('0.8', [1,2,3,4,5,6])).toThrow('[ERROR]');
+    expect(() => LottoGame.validateBonusNumber('0.8', [1,2,3,4,5,6])).toThrow('[ERROR]');
   });
 
   test('보너스 번호가 로또 번호에 중복 시 예외 발생', () => {
-    expect(() => LottoGame.validatebonusNumber('1', [1,2,3,4,5,6])).toThrow('[ERROR]');
+    expect(() => LottoGame.validateBonusNumber('1', [1,2,3,4,5,6])).toThrow('[ERROR]');
   });
 
   test('당첨 번호와 랜덤 번호와 count', () => {

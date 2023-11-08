@@ -77,7 +77,7 @@ class LottoGame {
     while (STRING.loopFlag) {
       try {
         const bonusNumber = await Query.getBonusNumber();
-        const bonusNumberInt = this.validatebonusNumber(
+        const bonusNumberInt = LottoGame.validateBonusNumber(
           bonusNumber,
           winningNumbersArray,
         );
