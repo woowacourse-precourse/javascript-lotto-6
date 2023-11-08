@@ -60,7 +60,16 @@ class App {
     );
     Console.print(`6개 일치 (2,000,000,000원) - ${lottoResult[6]}개`);
 
-    // 당첨금 / 구입금액
+    const prizeAmount =
+      5000 * lottoResult[3] +
+      50000 * lottoResult[4] +
+      1500000 * lottoResult[5] +
+      30000000 * lottoResult[7] +
+      2000000000 * lottoResult[6];
+
+    const profit = prizeAmount - purchaseAmount;
+    const roi = (profit / purchaseAmount) * 100; // ROI(수익률)를 백분율로 계산
+    Console.print(`총 수익률은 ${roi}%입니다.`);
   }
 }
 
