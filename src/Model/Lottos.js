@@ -8,7 +8,7 @@ class Lottos {
   }
 
   calculateLottoQuantity(purchaseAmount) {
-    this.validateAmount(purchaseAmount);
+    this.validatePurchaseAmount(purchaseAmount);
     this.#lottoQuantity = purchaseAmount / 1000;
   }
 
