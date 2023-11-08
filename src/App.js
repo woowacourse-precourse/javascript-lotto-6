@@ -5,26 +5,32 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { LOTTO_CONSTANTS, MESSAGE } from "./Message.js";
 
 class App {
+  constructor(){
+    this.userInput = new UserInput();
+    this.money = 0;
+    this.countOfLottos = 0;
+    this.myLottos = [];
+    this.winningLotto = [];
+    this.bonusNumber = 0;
+    this.lottoResult = new LottoResult();
+  }
   async play() {
-    const userInput = new UserInput();
-    let [money, countOfLottos] = await userInput.getInputMoney();
-    MissionUtils.Console.print(MESSAGE.numberOfLottos(countOfLottos));
+    [this.money, this.countOfLottos] = await this.userInput.getInputMoney();
+    MissionUtils.Console.print(MESSAGE.numberOfLottos(this.countOfLottos));
     
-    const myLottos = [];
-    while(countOfLottos--){
-      myLottos.push(Lotto.makeLotto());
+    while(this.countOfLottos--){
+      this.myLottos.push(Lotto.makeLotto());
     }
-    myLottos.forEach((lotto) => MissionUtils.Console.print(`[${[...lotto.getLotto()].join(", ")}]`));
+    this.myLottos.forEach((lotto) => MissionUtils.Console.print(`[${[...lotto.getLotto()].join(", ")}]`));
 
-    const winningNumbers = await userInput.getInputWinningNumbers();
-    const bonusNumber = await userInput.getInputBonusNumber();
+    this.winningLotto = await this.userInput.getInputWinningNumbers();
+    this.bonusNumber = await this.userInput.getInputBonusNumber();
 
-    const lottoResult = new LottoResult();
-    myLottos.forEach((lotto) => {
-      const winningIndex = lotto.checkLottoWinning(winningNumbers, bonusNumber);
-      lottoResult.result[winningIndex]++;
+    this.myLottos.forEach((lotto) => {
+      const winningIndex = lotto.checkLottoWinning(this.winningLotto, this.bonusNumber);
+      this.lottoResult.result[winningIndex]++;
     });
-    lottoResult.printResult(money);
+    this.lottoResult.printResult(this.money);
   }
 }
 
