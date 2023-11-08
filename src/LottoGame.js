@@ -1,5 +1,6 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import { validateInputMoney } from "./Validator.js";
+import Lotto from "./Lotto.js";
 
 class LottoGame {
   #gameCount;
@@ -44,6 +45,13 @@ class LottoGame {
     this.#lottoList.forEach((lottoNum) => {
       Console.print(`[${lottoNum.join(", ")}]`);
     });
+  }
+
+  async getWinningNumber() {
+    const WinningInput = await Console.readLineAsync(
+      "\n당첨 번호를 입력해 주세요.\n"
+    );
+    const WinningLotto = new Lotto(WinningInput.split(",").map(Number));
   }
 }
 
