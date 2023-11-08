@@ -1,5 +1,8 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { STRINGS } from './constants/STRINGS';
+import Validation from './Validation';
+import Lotto from './Lotto';
+
 class App {
   async play() {
     this.startGame();
@@ -38,6 +41,10 @@ class App {
     return this.getBonusNumber(ANSWER_NUMBERS);
   }
 
+  async getBonusNumber(answerNumbers){
+    const INPUT_BONUS_NUMBER = await MissionUtils.Console.readLineAsync(STRINGS.BONUS_NUMBER);
+    Validation.validateBonusNumber(answerNumbers, INPUT_BONUS_NUMBER);
+  }
 }
 
 export default App;
