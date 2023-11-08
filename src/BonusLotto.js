@@ -1,4 +1,6 @@
 import { ERRORMESSAGES } from "./util/Message";
+import { LOTTO_CONSTANTS } from "./util/constants";
+const { MIN, MAX } = LOTTO_CONSTANTS;
 class BonusLotto {
   #bonusNumbers;
 
@@ -14,7 +16,7 @@ class BonusLotto {
     if (numbers.some((number) => number === bonusNumbers)) {
       throw new Error(ERRORMESSAGES.BONUS_DUPLICATE);
     }
-    if (bonusNumbers < 1 || bonusNumbers > 45) {
+    if (bonusNumbers < MIN || bonusNumbers > MAX) {
       throw new Error(ERRORMESSAGES.LOTTO_NUMBER_RANGE);
     }
 
