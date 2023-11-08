@@ -28,9 +28,8 @@ class Controller {
 
     this.#CalculateController = new CalculateController(this.#lottos, this.#winning, this.#bonus);
 
-    const state = this.#CalculateController.calculateState();
-    OutputView.printCalculate(state);
-    Console.print(this.#CalculateController.rating());
+    OutputView.printCalculate(this.#CalculateController.calculateState());
+    OutputView.printRating(this.#CalculateController.rating());
   }
 }
 

@@ -19,6 +19,10 @@ class OutputView {
       Console.print(`${message}${state[index]}개`);
     });
   }
+
+  static async printRating(rate) {
+    Console.print(`\n총 수익률은 ${rate}%입니다.`);
+  }
 }
 
 export default OutputView;
