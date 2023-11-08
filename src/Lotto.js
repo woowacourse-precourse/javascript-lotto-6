@@ -33,6 +33,18 @@ class Lotto {
       .fill(0)
       .map(() => new Lotto(Lotto.pickRandomNumbers()));
   }
+  /**
+   * @param {number[]} numbers
+   * @returns {number}
+   */
+  getMatchNumberCount(numbers) {
+    return numbers.reduce((count, number) => {
+      if (this.#numbers.includes(number)) {
+        return count + 1;
+      }
+      return count;
+    }, 0);
+  }
 }
 
 export default Lotto;
