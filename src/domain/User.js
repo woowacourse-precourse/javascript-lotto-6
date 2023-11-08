@@ -3,6 +3,7 @@ import { ERROR_MESSAGE } from '../constants/message.js';
 import { LOTTO_NUMBER_RANGE } from '../constants/lottoNumber.js';
 
 class User {
+    
     #DIVIDE_NUMBER
     #purchaseAmount
     #numberOfPurchases
@@ -20,6 +21,7 @@ class User {
         if (money.trim() === '') {
             throw new Error(ERROR_MESSAGE.notNumberException);
         }
+
         if (Number.isNaN(Number(money))) {
             throw new Error(ERROR_MESSAGE.notNumberException);
         }
