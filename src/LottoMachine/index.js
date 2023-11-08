@@ -1,7 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { NUMBER, RANDOM } from '../constants/index.js';
 import Lotto from '../Lotto.js';
-import Validator from '../Validator/index.js';
 import Calculator from '../Caculator/index.js';
 import Formatter from '../Formatter/index.js';
 
@@ -14,18 +13,18 @@ class LottoMachine {
 
   #bonusNumber;
 
-  #caculator;
+  #calculator;
 
   constructor() {
     this.#purchaseAmount = 0;
     this.#lottos = [];
     this.#winningNumbers = [];
     this.#bonusNumber = null;
-    this.#caculator = null;
+    this.#calculator = null;
   }
 
   #setCalculator() {
-    this.#caculator = new Calculator(
+    this.#calculator = new Calculator(
       this.#lottos,
       this.#winningNumbers,
       this.#bonusNumber,
@@ -37,8 +36,7 @@ class LottoMachine {
   }
 
   setBonusNumber(number) {
-    Validator.validateDuplication(this.#winningNumbers, number);
-    this.#bonusNumber = Number(number);
+    this.#bonusNumber = number;
     this.#setCalculator();
   }
 
@@ -62,9 +60,9 @@ class LottoMachine {
   }
 
   makeResult() {
-    const ranks = this.#caculator.calculateRanks();
-    const revenu = this.#caculator.calculateRevenu(this.#purchaseAmount);
-    return Formatter.formatResult(ranks, revenu);
+    const ranks = this.#calculator.calculateRanks();
+    const revenu = this.#calculator.calculateRevenu(this.#purchaseAmount);
+    return Formatter.formatResult(ranks, Number(revenu));
   }
 }
 

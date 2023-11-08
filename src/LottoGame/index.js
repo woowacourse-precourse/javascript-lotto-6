@@ -2,6 +2,9 @@ import Validator from '../Validator/index.js';
 import { MESSAGE } from '../constants/index.js';
 import { Input, Output } from '../View/index.js';
 import LottoMachine from '../LottoMachine/index.js';
+import WinningNumberValidator from '../Validator/WinningNumbersValidator/index.js';
+import BonusNumberValidator from '../Validator/BonusNumberValidation/index.js';
+import Formatter from '../Formatter/index.js';
 
 class LottoGame {
   #lottoMachine;
@@ -15,10 +18,11 @@ class LottoGame {
   }
 
   async askPurchaseAmount() {
-    const amount = await Input.readLine(MESSAGE.askPurchaseAmount, (answer) =>
-      Validator.validatePurchaseAmount(answer),
+    const amountAsnwer = await Input.readLine(
+      MESSAGE.askPurchaseAmount,
+      (answer) => Validator.validatePurchaseAmount(answer),
     );
-    this.purchase(Number(amount));
+    await this.purchase(Number(amountAsnwer));
   }
 
   async purchase(amount) {
@@ -29,20 +33,20 @@ class LottoGame {
   }
 
   async askWinningNumbers() {
-    const winningNumbers = await Input.readLine(
+    const winningAnswer = await Input.readLine(
       MESSAGE.askWinningNumbers,
-      (answer) => Validator.validateWinningNumbers(answer),
+      (answer) => WinningNumberValidator.validateWinningNumbers(answer),
     );
-    const winningNums = winningNumbers.split(',').map(Number);
-    this.#lottoMachine.setWinningNumbers(winningNums);
-    await this.askBonusNumber(winningNums);
+    const winningNumbers = Formatter.toNumbers(winningAnswer);
+    this.#lottoMachine.setWinningNumbers(winningNumbers);
+    await this.askBonusNumber(winningNumbers);
   }
 
   async askBonusNumber(winningNumbers) {
-    const bonusNumber = await Input.readLine(MESSAGE.askBonusNumber, (answer) =>
-      Validator.validateBonusNumber(winningNumbers, answer),
+    const bonusAnswer = await Input.readLine(MESSAGE.askBonusNumber, (answer) =>
+      BonusNumberValidator.validateBonusNumber(winningNumbers, answer),
     );
-    this.#lottoMachine.setBonusNumber(bonusNumber);
+    this.#lottoMachine.setBonusNumber(bonusAnswer);
     this.prize();
   }
 
