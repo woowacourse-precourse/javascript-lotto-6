@@ -1,16 +1,18 @@
 import { Console } from '@woowacourse/mission-utils';
 import MESSAGES from '../constants/Messages.js';
 import validation from './validation.js';
+import CONSTANTS from '../constants/Constants.js';
+import { arraySort } from './arrayUtils.js';
 
 const view = {
-  async readPurchaseAmount() {
+  async readPurchaseLottos() {
     const purchaseAmount = await Console.readLineAsync(
       MESSAGES.INPUT_REQUEST.PURCHASE_AMOUNT,
     );
 
     validation.isValidInputPurchaseAmount(purchaseAmount);
 
-    return Number(purchaseAmount);
+    return Number(purchaseAmount) / CONSTANTS.LOTTO_PRICE;
   },
 
   async readWinningNumbers() {
@@ -20,10 +22,7 @@ const view = {
 
     validation.isValidInputWinningNumbers(winningNumbers);
 
-    return winningNumbers
-      .split(',')
-      .map(number => Number(number))
-      .sort((a, b) => a - b);
+    return arraySort(winningNumbers.split(',').map(number => Number(number)));
   },
 
   async readBonusNumber(winningNumbers) {
@@ -35,6 +34,10 @@ const view = {
     validation.bonusNumberIncludedWinningNumbers(bonusNumber, winningNumbers);
 
     return Number(bonusNumber);
+  },
+
+  printPurchaseLottoCount(lottoCount) {
+    Console.print(`\n${lottoCount + MESSAGES.PURCHASE_COUNT}`);
   },
 };
 

@@ -33,7 +33,7 @@ const validation = {
       );
     }
 
-    if (!Number.isInteger(Number(purchaseAmount) / CONSTANTS.PRICE_UNIT)) {
+    if (!Number.isInteger(Number(purchaseAmount) / CONSTANTS.LOTTO_PRICE)) {
       throw new Error(
         messageFormat.error(ERROR.INPUT_PURCHASE_AMOUNT.INVALID_PRICE_UNIT),
       );
