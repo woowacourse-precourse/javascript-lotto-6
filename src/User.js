@@ -1,13 +1,14 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./message.js";
-import { purchaseAmountValidation } from "./validator/purchaseAmountValidation.js";
+import { typeofNumber,amountUnit } from "./validator/purchaseAmountValidation.js";
 import { winningNumberLength, duplicate } from "./validator/winningNumberValidation.js";
 import { bonusNumberValidation } from "./validator/bonusNumberValidation.js";
 
 class User {
   static async inputLottoPurchaseAmout() {
     const inputValue = await Console.readLineAsync(MESSAGE.LOTTO_PURCHASE_AMOUNT);
-    purchaseAmountValidation(inputValue);
+    typeofNumber(inputValue);
+    amountUnit(inputValue);
     return inputValue;
   }
 
