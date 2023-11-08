@@ -19,5 +19,5 @@
 
 - [ ] 테스트코드
     - [x] 예외처리 테스트코드
-    - [ ] LottoService 테스트코드
+    - [x] LottoService 테스트코드
     - [ ] Lotto 테스트 코드
