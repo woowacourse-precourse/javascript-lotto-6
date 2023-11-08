@@ -98,7 +98,8 @@ class LottoGame {
     while (true) {
       try {
         const inputNumbers = await this.input.winningNumbers();
-        const winningNumbers = inputNumbers.split(',');
+        let winningNumbers = inputNumbers.split(',');
+        winningNumbers = winningNumbers.map(Number);
         const winningTicket = new Lotto(winningNumbers);
         const sortedWinningTicket = winningTicket.getSortNumbers();
         return sortedWinningTicket;
