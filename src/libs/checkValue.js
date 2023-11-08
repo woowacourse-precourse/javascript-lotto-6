@@ -29,7 +29,7 @@ export const checkValue = {
       [...new Set(numbers)].length !== LOTTO.NUMBERS_COUNT
     )
       return { errorMessage: createErrorMessage.length(name) };
-    if (!isCorrectRange)
+    if (!isCorrectRange(numbers))
       return { errorMessage: createErrorMessage.range(name) };
 
     //모두 통과하면 넘어가기
@@ -68,6 +68,6 @@ export const isNumberType = numbers => {
 
 export const isCorrectRange = numbers => {
   return numbers.every(
-    number => LOTTO.MIN_NUMBER <= number && number <= LOTTO.MAX_NUMBER,
+    number => number <= LOTTO.MAX_NUMBER && number >= LOTTO.MIN_NUMBER,
   );
 };
