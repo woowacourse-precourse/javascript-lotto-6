@@ -1,6 +1,6 @@
 import Lotto from './Lotto';
 import { PRICE, SETTING } from '../constants';
-import { generateLottoNumber, calculateNumberMatch, isBonusMatch } from '../utils/calculate';
+import { generateLottoNumber, calculateNumberMatch, isBonusMatch } from '../utils/calculation';
 import { 
   isDivideMinCost, 
   isLottoNumberRange, 
