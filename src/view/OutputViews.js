@@ -13,6 +13,17 @@ const OutputView = {
   printPublishedLotto(numbers) {
     this.print(numbers);
   },
+
+  printWinningStatistics(ranks) {
+    this.print(outputString.winningStatistics);
+    this.print(outputString.devider);
+    ranks.forEach((rank, i) => {
+      const stringName = `lottoRank${5 - i}`;
+      this.print(
+        `${outputString[stringName]}${rank}${outputString.countUnit}\n`,
+      );
+    });
+  },
 };
 
 export default OutputView;
