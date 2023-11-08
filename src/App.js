@@ -71,5 +71,20 @@ async function inputWinningNumbers() {
   this.winningNumbers = numbers;
 }
 
+async function inputBonusNumber() {
+  const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+  const number = Number(input);
+  this.validateNumber(number);
+  if (this.winningNumbers.includes(number)) {
+    throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.");
+  }
+  this.bonusNumber = number;
+}
+function validateNumber(number) {
+  if (number < this.NUMBER_RANGE[0] || number > this.NUMBER_RANGE[1]) {
+    throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+  }
+}
+
 
 export default App;
