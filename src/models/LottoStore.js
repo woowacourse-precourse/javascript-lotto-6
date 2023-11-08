@@ -1,5 +1,5 @@
 import createLottoNumbers from '../utils/createLottoNumbers.js';
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 
 class LottoStore {
   constructor(purchasedAmount) {

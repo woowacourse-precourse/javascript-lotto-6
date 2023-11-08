@@ -6,7 +6,7 @@ import LottoStore from '../models/LottoStore.js';
 import LottoComparer from '../models/LottoComparer.js';
 import LottoWinnerPrize from '../models/LottoWinnerPrize.js';
 import LottoProfitCalculator from '../models/LottoProfitCalculator.js';
-import Lotto from '../models/Lotto.js';
+import Lotto from '../Lotto.js';
 
 const { bonusNumber, winningNumber, purchasePrice } = PROPMT_MESSAGE;
 const { purchaseInvalidAmount } = ERROR_MESSAGE;

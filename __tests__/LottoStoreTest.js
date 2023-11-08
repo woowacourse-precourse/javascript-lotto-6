@@ -1,7 +1,6 @@
 import LottoStore from '../src/models/LottoStore.js';
-import Lotto from './../src/models/Lotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
-
+import Lotto from '../src/Lotto.js';
 describe('LottoStore', () => {
   let lottoStore;
 
