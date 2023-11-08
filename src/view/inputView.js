@@ -4,7 +4,7 @@ import { INPUT_MESSEGE } from '../constant/messages.js';
 class inputView {
   static async inputPurchaseAmount() {
     const purchaseAmount = await Console.readLineAsync(INPUT_MESSEGE.purchase);
-    return Number(purchaseAmount);
+    return purchaseAmount;
   }
 }
 

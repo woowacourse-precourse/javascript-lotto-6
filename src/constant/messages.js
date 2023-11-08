@@ -3,3 +3,10 @@ export const INPUT_MESSEGE = Object.freeze({
   winning: '당첨 번호를 입력해 주세요.\n',
   bonus: '보너스 번호를 입력해 주세요.\n',
 });
+
+export const ERROR_MESSEGE = Object.freeze({
+  notNumber: '[ERROR] 숫자만 입력하여 주세요.\n',
+  notPositive: '[ERROR] 양수만 입력하여 주세요.\n',
+  notInput: '[ERROR] 입력이 없습니다.\n',
+  not1000Multiple: '[ERROR] 1000 단위로 입력하여 주세요.\n',
+});
