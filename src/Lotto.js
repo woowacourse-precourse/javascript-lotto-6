@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from './constants/Messages.js';
+import { LOTTO_RULES } from './constants/Rules.js';
 
 class Lotto {
   #numbers;
@@ -49,7 +50,7 @@ class Lotto {
 
   #numberRangeValidate(numbers) {
     numbers.forEach((number) => {
-      if (number < 1 || number > 45) {
+      if (number < LOTTO_RULES.minNumber || number > LOTTO_RULES.maxNumber) {
         throw new Error(ERROR_MESSAGE.lottoNumber.notInRange);
       }
     });
