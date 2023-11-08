@@ -1,12 +1,12 @@
 <div align='center'>
-  <h2>🎰 로또</h2>
+  <h1>🎰 로또</h1>
 </div>
 
 > 로또 게임을 구현한 프로그램입니다.
 
 ## 📌 게임 규칙
 
-로또 게임은 아래와 같은 규칙으로 진행됩니다.
+로또 게임은 아래와 같은 규칙으로 진행돼요.
 
 ```
 - 로또 번호의 숫자 범위는 1~45까지이다.
@@ -24,7 +24,7 @@
 
 ### 1. Node.js 설치
 
-- 18.17.1 버전 이상의 Node.js를 설치합니다.
+- 18.17.1 버전 이상의 Node.js를 설치하세요.
   - [Node.js 공식 홈페이지](https://nodejs.org/en)에서 설치할 수 있습니다.
 
 ### 2. git clone & checkout
@@ -52,8 +52,39 @@ npm start
 npm test
 ```
 
+## 🛠️ 기술 스택
+
+- javaScript
+- jest
+- @woowacourse/mission-utils
+
+## 🙏 컨벤션 룰
+
+### commit
+
+[gitmoji](https://gitmoji.dev/)를 활용해서 커밋해요. 이 때 [작성한 기능 단위](/docs/README.md)로 커밋해요.
+
+### test
+
+도메인 로직을 구현하기 전에, 먼저 해당 테스트 코드를 작성한 후 구현해요. `__tests__` 폴더에 테스트 코드를 작성하면 됩니다.
+
+### 지켜주세요!
+
+- [JavaScript 코드 컨벤션](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript)을 기반으로 진행해요.
+- `package.json`을 변경할 수 없고 외부 라이브러리(jQuery, Lodash 등)를 사용하면 안돼요. 순수 Vanilla JS로만 구현해야 해요.
+- 프로그램 종료 시 `process.exit()`를 호출하지 않아요.
+- 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동하지 않아요.
+- indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현해야 해요.
+  - `indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메서드)를 분리하기!`
+- 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어요.
+- 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현해요.
+  - 함수(또는 메서드)가 **한 가지 일**만 잘 하도록 구현해요.
+- else를 지양해요.
+  - `if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 돼요!`
+  - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분해요.
+
 <details>
-<summary>과제 요구사항 확인하기</summary>
+<summary>과제 요구사항 자세히 보기</summary>
 
 ## 🎯 기능 목록
 
@@ -298,3 +329,22 @@ class Lotto {
 - 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.
 
 </details>
+
+## 👤 참여 인원
+
+<table>
+  <tr>
+    <td align="center" width="200px">
+      <a href="https://github.com/kangju2000" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/23312485?v=4" alt="강주혁" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/kangju2000" target="_blank">
+        강주혁
+      </a>
+    </td>
+  </tr>
+</table>
