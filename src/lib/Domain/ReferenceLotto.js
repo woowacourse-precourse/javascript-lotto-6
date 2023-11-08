@@ -38,8 +38,12 @@ class ReferenceLotto extends Lotto {
     this.#bonus = bonus;
   }
 
-  get bonus() {
-    return this.#bonus;
+  hasBonus() {
+    return Boolean(this.#bonus);
+  }
+
+  checkBonusMatched(numbers) {
+    return numbers.includes(this.#bonus);
   }
 }
 

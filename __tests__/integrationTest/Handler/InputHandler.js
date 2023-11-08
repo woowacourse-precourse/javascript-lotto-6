@@ -72,7 +72,8 @@ describe("InputHandler.injectBonus - 기능", () => {
     await InputHandler.injectBonus(referenceLotto);
 
     // then
-    expect(referenceLotto.bonus).toEqual(expected);
+    const result = referenceLotto.checkBonusMatched([expected]);
+    expect(result).toEqual(true);
   });
 });
 

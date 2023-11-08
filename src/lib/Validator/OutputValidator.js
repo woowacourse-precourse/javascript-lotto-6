@@ -11,7 +11,7 @@ class OutputValidator {
   static result(lottoBundle, referenceLotto) {
     if (
       !referenceLotto ||
-      !referenceLotto.bonus ||
+      !referenceLotto.hasBonus() ||
       !lottoBundle ||
       !lottoBundle.items
     ) {

@@ -19,7 +19,7 @@ class Lotto {
 
   calcPrize(referenceLotto) {
     const match = this.#calcMatch(referenceLotto);
-    const bonusFlag = this.#numbers.includes(referenceLotto.bonus);
+    const bonusFlag = referenceLotto.checkBonusMatched(this.#numbers);
     const prize = MATCH_TO_PRIZE[match][bonusFlag];
     return prize;
   }
