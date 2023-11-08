@@ -56,7 +56,7 @@ describe('입력 금액 유효성 검사', () => {
   });
 });
 
-describe('로또 번호 생성 및 당첨 번호 입력', () => {
+describe('로또 번호 유효성 검사', () => {
   test('로또 번호가 6개인 경우', () => {
     const validInput = [1, 2, 46, 100, 0, 12];
     expect(validateLength(validInput)).toBe(true);
@@ -91,6 +91,25 @@ describe('로또 번호 생성 및 당첨 번호 입력', () => {
       });
     } catch (error) {
       expect(error).toEqual(ERROR_MESSAGE.INVALID_LOTTO_RANGE);
+    }
+  });
+
+  test('로또 번호가 중복되지 않는 경우', () => {
+    const validInput = [1, 2, 24, 33, 12, 38];
+    expect(validateUnique(validInput)).toBe(true);
+  });
+  test('로또 번호가 중복되는 경우', () => {
+    const invalidInput = [
+      [1, 1, 2, 3, 4, 5],
+      [41, 2, 22, 22, 41, 5],
+      [1, 2, 34, 34, 34, 4],
+    ];
+    try {
+      invalidInput.forEach((lottoNum) => {
+        expect(validateUnique(lottoNum)).toBe(true);
+      });
+    } catch (error) {
+      expect(error).toEqual(ERROR_MESSAGE.INVALID_LOTTO_UNIQUE);
     }
   });
 });
