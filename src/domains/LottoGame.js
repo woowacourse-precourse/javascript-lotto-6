@@ -4,37 +4,40 @@ import LottoDrawChecker from './LottoDrawChecker.js';
 import LottoReward from './LottoReward.js';
 
 export default class LottoGame {
-  #purchasePrice;
-  #winningNumbers;
-  #bonusNumber;
-  #lottoList;
+  #state;
   #lottoDrawChecker;
 
   constructor(
     validUserInputs,
     _0 = paramType(validUserInputs, ValidUserInputs),
   ) {
-    this.#purchasePrice = validUserInputs.purchasePrice;
-    this.#winningNumbers = validUserInputs.winningNumbers;
-    this.#bonusNumber = validUserInputs.bonusNumber;
-    this.#lottoList = validUserInputs.lottoList;
+    this.#state = Object.freeze(this.#createState(validUserInputs));
     this.#lottoDrawChecker = new LottoDrawChecker(
-      this.#winningNumbers,
-      this.#bonusNumber,
+      this.#state.winningNumbers,
+      this.#state.bonusNumber,
     );
   }
 
   calculateDrawDetails() {
-    const lottoList = [...this.#lottoList];
+    const lottoList = [...this.#state.lottoList];
     const drawDetails = this.#lottoDrawChecker.getDrawResult(lottoList);
 
     return drawDetails;
   }
 
-  calculateProfitRate(drawResult) {
-    const reward = new LottoReward(drawResult, this.#purchasePrice);
+  calculateProfitRate(drawResult, _ = paramType(drawResult, Object)) {
+    const reward = new LottoReward(drawResult, this.#state.purchasePrice);
     const profitRate = reward.calculrateProfitRate();
 
     return profitRate;
+  }
+
+  #createState(validUserInputs) {
+    return Object.freeze({
+      purchasePrice: validUserInputs.purchasePrice,
+      winningNumbers: validUserInputs.winningNumbers,
+      bonusNumber: validUserInputs.bonusNumber,
+      lottoList: validUserInputs.lottoList,
+    });
   }
 }
