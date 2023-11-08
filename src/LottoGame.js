@@ -3,9 +3,11 @@ import LottoMachine from "./LottoMachine.js";
 
 class LottoGame {
   #lottoTickets;
+  rank;
 
   constructor() {
     this.#lottoTickets = [];
+    this.rank = [];
   }
 
   purchaseLotto = (money) => {
@@ -36,6 +38,49 @@ class LottoGame {
   getLottoTickets = () => {
     return this.#lottoTickets;
   };
+
+  compareLotto = (winningNumbers, bonusNumber) => {
+    this.#lottoTickets.forEach((lotto) => {
+      let equalCount = 0;
+      let bonusCount = 0;
+      lotto.forEach((number) => {
+        if (winningNumbers.includes(number)) {
+          equalCount++;
+        }
+      });
+      if (lotto.includes(bonusNumber)) {
+        bonusCount = 1;
+      }
+      this.rank.push({ equalCount, bonusCount });
+    });
+    return this.getRankByEqualCount();
+  }
+
+  getRankByEqualCount = () => {
+    let rankCount = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 };
+    for (let game of this.rank) {
+      switch (game.equalCount) {
+        case 6:
+          rankCount["1"]++;
+          break;
+        case 5:
+          if (game.bonusCount === 1) {
+            rankCount["2"]++;
+            break;
+          }
+          rankCount["3"]++;
+        case 4:
+          rankCount["4"]++;
+          break;
+        case 3:
+          rankCount["5"]++;
+          break;
+      }
+    }
+    return rankCount;
+  }
+
+
 }
 
 export default LottoGame;
