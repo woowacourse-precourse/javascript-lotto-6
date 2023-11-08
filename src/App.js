@@ -8,6 +8,7 @@ class App {
     await this.#controller.getPurchaseAmount();
     this.#controller.printLottoNumbers();
     await this.#controller.getWinningNumbers();
+    await this.#controller.getBonusNumber();
   }
 }
 

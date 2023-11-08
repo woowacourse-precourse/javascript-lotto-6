@@ -15,6 +15,13 @@ const inputView = {
     );
     return winningNumbers;
   },
+
+  async bonusNumber() {
+    const bonusNumber = await MissionUtils.Console.readLineAsync(
+      INPUT_MESSAGE.BONUS_NUMBER,
+    );
+    return bonusNumber;
+  },
 };
 
 export default inputView;
