@@ -68,7 +68,27 @@ class App {
     })
   }
 
-  async play() {}
+  printWin() {
+    const getMoney = this.#winResult[1] * PRIZE[1] + this.#winResult[2] * PRIZE[2] + this.#winResult[3] * PRIZE[3] + this.#winResult[4] * PRIZE[4] + this.#winResult[5] * PRIZE[5];
+    const spendmoney = this.#lottoAmount * 1000;
+    const rateofReturn = Number((getMoney / spendmoney) * 100).toFixed(1)
+    Console.print("\nWIN_PRINT\n---");
+    Console.print(`${WIN_INFO[3]}${this.#winResult[5]}개\n`);
+    Console.print(`${WIN_INFO[4]}${this.#winResult[4]}개\n`);
+    Console.print(`${WIN_INFO[5]}${this.#winResult[3]}개\n`);
+    Console.print(`${WIN_INFO['5+1']}${this.#winResult[2]}개\n`);
+    Console.print(`${WIN_INFO[6]}${this.#winResult[1]}개\n`);
+    Console.print(`총 수익률은 ${rateofReturn}%입니다.\n`);
+  }
+
+  async play() {
+    const money = await this.buyLotto();
+    this.printLotto(money);
+    await this.inputWinLotto();
+    await this.inputBonusNum();
+    await this.calculateWin();
+    await this.printWin();
+  }
 }
 
 export default App;
