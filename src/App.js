@@ -17,8 +17,14 @@ class App {
     this.lottostore.printLottos(lottos);
     this.buyer.setLottos(lottos);
   }
+
+  async drawLotto() {
+    await this.lottoDrawing.inputWinningLotto();
+    await this.lottoDrawing.inputBonusNumber();
+  }
   async play() {
     await this.buyLotto();
+    await this.drawLotto();
   }
 }
 
