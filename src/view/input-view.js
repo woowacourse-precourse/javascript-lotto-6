@@ -5,23 +5,35 @@ import WinningLotto from "../domain/WinningLotto.js";
 
 class InputView {
     async readPurchaseAmount() {
-        const inputPrice = await Console.readLineAsync(INPUT_MESSAGE.inputPurchaseAmount);
+        try{
+            const inputPrice = await Console.readLineAsync(INPUT_MESSAGE.inputPurchaseAmount);
 
-        InputValidator.purchaseRangeValidation(inputPrice);
-        InputValidator.inputPurchaseValidation(inputPrice);
-        return inputPrice / 1000;
+            InputValidator.purchaseRangeValidation(inputPrice);
+            InputValidator.inputPurchaseValidation(inputPrice);
+            return inputPrice / 1000;
+        }
+        catch(error){
+            Console.print(error);
+            await this.readPurchaseAmount();
+        }
     }
 
     async readWinningLotto() {
-        const readWinningNumber = await Console.readLineAsync(INPUT_MESSAGE.inputWinningNumbers);
-        const winningNumbers = readWinningNumber.split(",").map(Number);
+        try{
+            const readWinningNumber = await Console.readLineAsync(INPUT_MESSAGE.inputWinningNumbers);
+            const winningNumbers = readWinningNumber.split(",").map(Number);
 
-        const readBonusNumber = await Console.readLineAsync(INPUT_MESSAGE.inputBonusNumber);
-        const bonusNumber = readBonusNumber.split(",").map(Number);
+            const readBonusNumber = await Console.readLineAsync(INPUT_MESSAGE.inputBonusNumber);
+            const bonusNumber = readBonusNumber.split(",").map(Number);
 
-        const winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+            const winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        return winningLotto;
+            return winningLotto;
+        }
+        catch(error){
+            Console.print(error);
+            await this.readWinningLotto();
+        }
     }
 }
 
