@@ -10,17 +10,15 @@ const MESSAGES = Object.freeze({
   RATE_INCOME: (RATE) => `총 수익률은 ${RATE}%입니다.`,
 });
 
+const RANK_INFO = Object.freeze({
+  1: { STRING: "6개 일치 (2,000,000,000원)", PRICE: 2000000000 },
+  2: { STRING: "5개 일치, 보너스 볼 일치 (30,000,000원)", PRICE: 30000000 },
+  3: { STRING: "5개 일치 (1,500,000원)", PRICE: 1500000 },
+  4: { STRING: "4개 일치 (50,000원)", PRICE: 50000 },
+  5: { STRING: "3개 일치 (5,000원)", PRICE: 5000 },
+});
+
 class App {
-  #RANK_INFO = {
-    1: { STRING: "6개 일치 (2,000,000,000원)", PRICE: 2000000000 },
-    2: { STRING: "5개 일치, 보너스 볼 일치 (30,000,000원)", PRICE: 30000000 },
-    3: { STRING: "5개 일치 (1,500,000원)", PRICE: 1500000 },
-    4: { STRING: "4개 일치 (50,000원)", PRICE: 50000 },
-    5: { STRING: "3개 일치 (5,000원)", PRICE: 5000 },
-  };
-
-  #NUMBER_OF_RANK = 5;
-
   constructor() {
     this.userInput = new Input();
   }
@@ -75,7 +73,7 @@ class App {
         winNumbers: this.userInput.lottoNumbers,
         bonusNumber: this.userInput.bonusNumber,
       });
-      if (RANK <= this.#NUMBER_OF_RANK) lottoRanks[RANK] += 1;
+      if (RANK <= LOTTO_CONSTANT.RANK_NUMBER) lottoRanks[RANK] += 1;
     });
 
     return lottoRanks;
@@ -84,9 +82,9 @@ class App {
   printLottoResult(lottoRanks) {
     printOutput(MESSAGES.LOTTO_RESULT_START);
 
-    for (let rank = this.#NUMBER_OF_RANK; rank > 0; rank -= 1) {
+    for (let rank = LOTTO_CONSTANT.RANK_NUMBER; rank > 0; rank -= 1) {
       const COUNT = lottoRanks[rank];
-      const RANK_STRING = this.#RANK_INFO[rank].STRING;
+      const RANK_STRING = RANK_INFO[rank].STRING;
       printOutput(MESSAGES.LOTTO_RESULT_DETAIL(RANK_STRING, COUNT));
     }
   }
@@ -94,7 +92,7 @@ class App {
   printRateOfIncome(lottoRanks) {
     let income = 0;
     lottoRanks.forEach((number, rank) => {
-      if (rank !== 0) income += number * this.#RANK_INFO[rank].PRICE;
+      if (rank !== 0) income += number * RANK_INFO[rank].PRICE;
     });
 
     const RATE_INCOME = Math.round((income / this.userInput.money) * 1000) / 10;
