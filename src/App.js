@@ -1,9 +1,21 @@
 class App {
-  async play() {}
+  LOTTO_UNIT = 1000;
+  LOTTO_REWARD = [0, 2000000, 30000, 1500, 50, 5];
+  LOTTO_RULES = [
+    "",
+    "6개 일치",
+    "5개 일치, 보너스 볼 일치",
+    "5개 일치",
+    "4개 일치",
+    "3개 일치",
+  ];
+
   async play() {
     const payment = await this.getPayment();
     const lottoCount = parseInt(payment / this.LOTTO_UNIT);
     const lottoList = this.getPickedLottoList(lottoCount);
+
+    this.printPickedLotto(lottoCount, lottoList);
   async getPayment() {
     try {
       const payment =
@@ -37,6 +49,12 @@ class App {
     return pickedLottoList;
   }
 
+  printPickedLotto(lottoCount, lottoList = []) {
+    Console.print(`\n${lottoCount}개를 구매했습니다.`);
+    lottoList.forEach((lotto) =>
+      Console.print(`[${lotto.getNumber()?.join(", ")}]`)
+    );
+  }
 }
 
 export default App;
