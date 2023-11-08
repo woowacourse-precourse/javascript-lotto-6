@@ -21,8 +21,9 @@ class LottoModel {
 
   #validatePrice(price) {
     if (Number.isNaN(price)) throw new Error(MESSAGES.error.notNumber);
-    if (price % SETTINGS.priceUnit)
+    if (price % SETTINGS.priceUnit) {
       throw new Error(MESSAGES.error.invalidPricUnit);
+    }
   }
 
   getPrice() {
@@ -53,10 +54,12 @@ class LottoModel {
     const { count, minimum, maximum } = SETTINGS.targetNumber;
     const numbersSet = new Set(numbers);
 
-    if (numbers.length !== count)
+    if (numbers.length !== count) {
       throw new Error(MESSAGES.error.invalidTargetNumbersLength);
-    if (numbers.length !== numbersSet.size)
+    }
+    if (numbers.length !== numbersSet.size) {
       throw new Error(MESSAGES.error.notDuplicateTargetNumbers);
+    }
     if (numbers.some((number) => number > maximum || number < minimum)) {
       throw new Error(MESSAGES.error.invalidRange);
     }
@@ -74,10 +77,12 @@ class LottoModel {
   validateBonusNumbers = (number) => {
     const { minimum, maximum } = SETTINGS.targetNumber;
 
-    if (number > maximum || number < minimum)
+    if (number > maximum || number < minimum) {
       throw new Error(MESSAGES.error.invalidRange);
-    if (this.#targetNumbers.includes(number))
+    }
+    if (this.#targetNumbers.includes(number)) {
       throw Error(MESSAGES.error.notDuplicateTargetNumbers);
+    }
   };
 
   checkNumbers() {
@@ -86,6 +91,7 @@ class LottoModel {
       const [correctTarget, correctBonus] = this.calculateCorrect(numbers);
       this.calculateResult(correctTarget, correctBonus);
     }
+
     this.setIncome();
     return [this.#result, this.#income];
   }
