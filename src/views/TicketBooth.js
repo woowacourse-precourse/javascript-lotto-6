@@ -4,6 +4,15 @@ import { INPUT_MESSEGE, ERROR } from '../constants/messages.js';
 import Lotto from '../models/Lotto.js';
 
 class TiketBooth {
+  constructor() {
+    this.winNumber;
+    this.bonusNumber;
+  }
+
+  getWinNumbers() {
+    return [this.winNumber, this.bonusNumber];
+  }
+
   async takePaymentForTickets() {
     const paymentAmount = await Console.readLineAsync(INPUT_MESSEGE.purchase);
     this.#validateNumber(paymentAmount);
@@ -16,16 +25,14 @@ class TiketBooth {
     const winInput = await Console.readLineAsync(INPUT_MESSEGE.win);
     this.#validateWinNumbers(winInput.split(','));
     const numbers = winInput.split(',').map(Number);
-
-    return new Lotto(numbers);
+    this.winNumber = new Lotto(numbers);
   }
 
-  async receiveBonusNumber(winNumbers) {
+  async receiveBonusNumber() {
     const bonusInput = await Console.readLineAsync(INPUT_MESSEGE.bonus);
     this.#validateNumber(bonusInput);
-    this.#validateBonusNumber(winNumbers, bonusInput);
-
-    return Number(bonusInput);
+    this.#validateBonusNumber(this.winNumber, bonusInput);
+    this.bonusNumber = Number(bonusInput);
   }
 
   #validateNumber(number) {
