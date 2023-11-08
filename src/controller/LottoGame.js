@@ -17,8 +17,8 @@ export default class LottoGame {
       this.#requireBonusNumber(winningLotteryNumbers),
     );
     const lotteryResult = this.#confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber);
-    const earningsRate = this.#calculateEarningsRate(purchaseMoney, lotteryResult);
-    this.#printPrizeResult(lotteryResult, earningsRate);
+    const profitRate = this.#calculateProfitRate(purchaseMoney, lotteryResult);
+    this.#printPrizeResult(lotteryResult, profitRate);
   }
 
   async #handleErrorAndRetry(callback) {
@@ -71,8 +71,8 @@ export default class LottoGame {
     OutputView.printLottoList(lottoList);
   }
 
-  #printPrizeResult(lotteryResult, earningsRate) {
-    OutputView.printPrizeResult(lotteryResult, earningsRate);
+  #printPrizeResult(lotteryResult, profitRate) {
+    OutputView.printPrizeResult(lotteryResult, profitRate);
   }
 
   #confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber) {
@@ -88,14 +88,14 @@ export default class LottoGame {
     return lotteryResultMap;
   }
 
-  #calculateEarningsRate(purchaseMoney, lotteryResult) {
+  #calculateProfitRate(purchaseMoney, lotteryResult) {
     let profit = 0;
     for (const [key, count] of lotteryResult) {
       const { prizeMoney } = PRIZE[key];
       profit += prizeMoney * count;
     }
 
-    const EarningsRate = (profit / purchaseMoney) * 100;
-    return EarningsRate.toFixed(1);
+    const profitRate = (profit / purchaseMoney) * 100;
+    return profitRate.toFixed(1);
   }
 }

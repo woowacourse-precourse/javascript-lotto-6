@@ -11,7 +11,7 @@ export default class OutputView {
     lottoList.forEach((lotto) => this.print(lotto.getLottoNumbers()));
   }
 
-  static printPrizeResult(lotteryResult, earningsRate) {
+  static printPrizeResult(lotteryResult, profitRate) {
     this.print(`\n당첨 통계`);
     this.print(`---`);
     const list = ['fifth', 'fourth', 'third', 'second', 'first'];
@@ -20,7 +20,7 @@ export default class OutputView {
       const count = lotteryResult.get(key);
       this.print(`${message}${count}개`);
     });
-    this.print(`총 수익률은 ${earningsRate}%입니다.`);
+    this.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 
   static printError(error) {
