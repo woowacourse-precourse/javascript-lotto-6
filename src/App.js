@@ -21,12 +21,11 @@ class App {
   async play() {
     try {
       await this.setLotto();
-      const userTickets = this.createLotto();
+      const userTickets = this.createTickets();
       this.evaluateLotto(userTickets);
       this.returnRate();
     } catch (error) {
       Console.print(error.message);
-      return Promise.reject(error);
     }
   }
 
@@ -62,26 +61,32 @@ class App {
     new Lotto(lottoNumbers);
   }
 
-  createLotto() {
+  createTickets() {
     const ticketCount = this.payment.numberOfTickets();
     print.howManyBuyTickets(ticketCount);
     const userTickets = [];
 
     for (let i = 0; i < ticketCount; i++) {
-      const randomLottoNumbers = runLotteryMachine();
-      const myLotto = new Lotto(randomLottoNumbers);
-      myLotto.ascendingOrder();
-      print.formattedNumbers(myLotto.getNumbers());
-      userTickets.push(myLotto.getNumbers());
+      userTickets.push(this.createLotto());
     }
     return userTickets;
+  }
+
+  createLotto() {
+    const randomLottoNumbers = runLotteryMachine();
+    const myLotto = new Lotto(randomLottoNumbers);
+    myLotto.ascendingOrder();
+    print.formattedNumbers(myLotto.getNumbers());
+    return myLotto.getNumbers();
   }
 
   evaluateLotto(userTickets) {
     print.prizeStatistics();
     print.dashLine();
+    const baseNumbers = this.base.getBaseNumbers();
+    const bonusNumber = this.bonus.getBonusNumber();
 
-    this.lottoEvaluator = new LottoEvaluator(this.base.getBaseNumbers(), this.bonus.getBonusNumber());
+    this.lottoEvaluator = new LottoEvaluator(baseNumbers, bonusNumber);
     const results = this.lottoEvaluator.evaluateTickets(userTickets);
     print.prizeResults(results);
   }
