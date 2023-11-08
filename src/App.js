@@ -64,6 +64,11 @@ class App {
     });
   }
 
+  computePrize() {
+    this.#computer = new Computer(this.#prizeNumber, this.#bonusNumber, this.#cost);
+    this.#computer.setPrizeResult(this.#lottos);
+  }
+
   async play() {
     this.#cost = await this.getInput(inputStep.cost.prompt, 'cost');
     this.createLotto(this.#cost);
@@ -78,17 +83,16 @@ class App {
     print(PROMPT.prize);
     print(PROMPT.dividingLine);
 
-    const computer = new Computer(this.#prizeNumber, this.#bonusNumber, this.#cost);
-    computer.setPrizeResult(this.#lottos);
-    const reuslt = computer.getPrizeResult();
+    this.computePrize();
 
+    const reuslt = this.#computer.getPrizeResult();
     rank.reverse().forEach((elem) => {
       print(
         `${prize[elem].standard} (${prize[elem].money.toLocaleString()}원) - ${reuslt[elem]}개`,
       );
     });
 
-    print(`총 수익률은 ${computer.getProfitRatio()}입니다.`);
+    print(`총 수익률은 ${this.#computer.getProfitRatio()}입니다.`);
   }
 }
 
