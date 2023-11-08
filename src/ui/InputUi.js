@@ -4,6 +4,7 @@ import Utils from '../Utils.js';
 import { INPUT_MESSAGE } from '../Constants.js';
 class InputUi {
   constructor() {}
+  // 구매금액을 입력받고 반환
   async askpurchaseAmount() {
     try {
     const PURCHASE_AMOUNT = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.purchaseAmount);
@@ -14,6 +15,8 @@ class InputUi {
     }
     return await this.askpurchaseAmount();
   }
+
+  // 당첨금액 입력받은뒤 배열로 반환
   async askWinningNumber() {
     try {
     const WINNING_NUMBER_INPUT = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.winningNumbers);
@@ -25,6 +28,8 @@ class InputUi {
     }
     return await this.askWinningNumber();
   }
+
+  // 보너스 넘버 입력받은 뒤 반환
   async askBonusNumber() {
     try {
     const BONUS_NUMBER = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.bonusNumber);

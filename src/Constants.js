@@ -28,7 +28,7 @@ export const OUTPUT_MESSAGE = {
     },
     winningStatus(matchingCount, winnigStatus) {
         const WINNIG_PROFIT = WINNIG_PROFITS[matchingCount].toLocaleString();
-        if (matchingCount === "bonus") {
+        if (matchingCount === 'bonus') {
           return `5개 일치, 보너스 볼 일치 (${WINNIG_PROFIT}원) - ${winnigStatus[matchingCount]}개`;
         }
         return `${matchingCount}개 일치 (${WINNIG_PROFIT}원) - ${winnigStatus[matchingCount]}개`;
