@@ -16,6 +16,12 @@ const Validator = {
     }
   },
 
+  numberType(input) {
+    if (!Number.isInteger(input)) {
+      throw new Error('[ERROR] 구매 금액은 1,000원 단위로 된 숫자여야 합니다.');
+    }
+  },
+
   length(input) {
     if (input.length !== LOTTO.LENGTH) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');

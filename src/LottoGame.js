@@ -43,6 +43,7 @@ class LottoGame {
   validate(money) {
     Validator.availability(money);
     Validator.unit(money);
+    Validator.numberType(money);
   }
 
   async createWinningLotto() {
