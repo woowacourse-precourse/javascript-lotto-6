@@ -67,9 +67,9 @@ export default class WinController {
         pLotto.getMatchedNumberCount() == 5
       ) {
         this.#Win5andBonus++;
-      } else {
-        this.#WinningCount[pLotto.getMatchedNumberCount()]++;
+        return;
       }
+      this.#WinningCount[pLotto.getMatchedNumberCount()]++;
     });
     this.outputView.printWinning(this.#WinningCount, this.#Win5andBonus);
   }
