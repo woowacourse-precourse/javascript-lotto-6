@@ -61,15 +61,15 @@ class LottoManager {
 
       switch (lotteryResult) {
         case LottoResult.MATCH_3:
-          return { ...resultSum, case3: resultSum.case3 + 1 };
+          return { ...resultSum, match3: resultSum.match3 + 1 };
         case LottoResult.MATCH_4:
-          return { ...resultSum, case4: resultSum.case4 + 1 };
+          return { ...resultSum, match4: resultSum.match4 + 1 };
         case LottoResult.MATCH_5:
-          return { ...resultSum, case5: resultSum.case5 + 1 };
+          return { ...resultSum, match5: resultSum.match5 + 1 };
         case LottoResult.MATCH_5_BONUS:
-          return { ...resultSum, case5Bonus: resultSum.case5Bonus + 1 };
+          return { ...resultSum, match5Bonus: resultSum.match5Bonus + 1 };
         case LottoResult.MATCH_6:
-          return { ...resultSum, case6: resultSum.case6 + 1 };
+          return { ...resultSum, match6: resultSum.match6 + 1 };
         default:
           return resultSum;
       }
@@ -79,20 +79,24 @@ class LottoManager {
   printResult() {
     const result = this.#result;
 
-    Console.print(`3개 일치 (${LottoResult.CASE_3.prize.toLocaleString('ko-KR')}원) - ${result.case3}개`);
-    Console.print(`4개 일치 (${LottoResult.CASE_4.prize.toLocaleString('ko-KR')}원) - ${result.case4}개`);
-    Console.print(`5개 일치 (${LottoResult.CASE_5.prize.toLocaleString('ko-KR')}원) - ${result.case5}개`);
-    Console.print(`5개 일치, 보너스 볼 일치 (${LottoResult.CASE_5_BONUS.prize.toLocaleString('ko-KR')}원) - ${result.case5Bonus}개`);
-    Console.print(`6개 일치 (${LottoResult.CASE_6.prize.toLocaleString('ko-KR')}원) - ${result.case6}개`);
+    Console.print(`3개 일치 (${LottoResult.MATCH_3.prize.toLocaleString('ko-KR')}원) - ${result.match3}개`);
+    Console.print(`4개 일치 (${LottoResult.MATCH_4.prize.toLocaleString('ko-KR')}원) - ${result.match4}개`);
+    Console.print(`5개 일치 (${LottoResult.MATCH_5.prize.toLocaleString('ko-KR')}원) - ${result.match5}개`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (${LottoResult.MATCH_5_BONUS.prize.toLocaleString('ko-KR')}원) - ${
+        result.match5Bonus
+      }개`,
+    );
+    Console.print(`6개 일치 (${LottoResult.MATCH_6.prize.toLocaleString('ko-KR')}원) - ${result.match6}개`);
   }
 
   printYield() {
     const totalPrize =
-      this.#result.case3 * LottoResult.CASE_3.prize +
-      this.#result.case4 * LottoResult.CASE_4.prize +
-      this.#result.case5 * LottoResult.CASE_5.prize +
-      this.#result.case5Bonus * LottoResult.CASE_5_BONUS.prize +
-      this.#result.case6 * LottoResult.CASE_6.prize;
+      this.#result.match3 * LottoResult.MATCH_3.prize +
+      this.#result.match4 * LottoResult.MATCH_4.prize +
+      this.#result.match5 * LottoResult.MATCH_5.prize +
+      this.#result.match5Bonus * LottoResult.MATCH_5_BONUS.prize +
+      this.#result.match6 * LottoResult.MATCH_6.prize;
 
     const yieldRate = (totalPrize / this.#money) * 100;
 
