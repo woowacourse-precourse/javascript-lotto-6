@@ -15,15 +15,14 @@ describe('LottoGenerator', () => {
   describe('LottoGenerator 생성자 테스트', () => {
     test('purchaseAmount에 따라 난수를 통해 로또 번호 목록을 생성한다.', () => {
       const random = [
-        [21, 2, 43, 34, 15, 26],
+        [6, 5, 4, 3, 2, 1],
         [7, 28, 19, 30, 41, 12],
-        [13, 24, 35, 16, 37, 29],
-        [4, 7, 8, 12, 45, 9],
+        [25, 7, 43, 32, 15, 26],
       ];
       const expected = [
-        [2, 15, 21, 26, 34, 43],
+        [1, 2, 3, 4, 5, 6],
         [7, 12, 19, 28, 30, 41],
-        [13, 16, 24, 29, 35, 37],
+        [7, 15, 25, 26, 32, 43],
       ];
       mockRandoms(random);
       const lottoGenerator = new LottoGenerator(
