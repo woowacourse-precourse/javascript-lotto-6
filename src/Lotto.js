@@ -1,18 +1,38 @@
+import { MESSAGE_PRINT } from './constants/Message';
+import Validate from './utils/Validate';
+import OutputView from './views/OutputView';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+    this.#sortNumbers();
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    numbers.forEach(number => {
+      Validate.isNumber(number);
+      Validate.isInteger(number);
+      Validate.isPositive(number);
+    });
+    Validate.isWinningNumbersLength(numbers);
+    Validate.isDuplicateWinningNumbers(numbers);
+    numbers.map(number => Validate.isNumberInRange(number));
   }
 
-  // TODO: 추가 기능 구현
+  #sortNumbers() {
+    this.#numbers.sort((prev, next) => prev - next);
+  }
+
+  printLottoNumbers() {
+    return OutputView.printLottoNumbers(this.#numbers.join(MESSAGE_PRINT.NUMBER_SEPARATOR));
+  }
+
+  getLottoNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
