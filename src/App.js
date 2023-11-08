@@ -5,41 +5,50 @@ class App {
   answer;
   lottos;
   bonus;
-  threeLottoCorrect;
-  fourLottoCorrect;
-  fiveLottoCorrect;
-  fivePlusOneLottoCorrect;
-  sixLottoCorrect;
+  threeCorrect;
+  fourCorrect;
+  fiveCorrect;
+  fiveOneCorrect;
+  sixCorrect;
 
   constructor() {
     this.answer = [];
     this.lottos = [];
     this.bonus = null;
-    this.threeLottoCorrect = 0;
-    this.fourLottoCorrect = 0;
-    this.fiveLottoCorrect = 0;
-    this.fivePlusOneLottoCorrect = 0;
-    this.sixLottoCorrect = 0;
+    this.threeCorrect = 0;
+    this.fourCorrect = 0;
+    this.fiveCorrect = 0;
+    this.fiveOneCorrect = 0;
+    this.sixCorrect = 0;
   }
 
   async play() {
     //가격 입력 받음
-    const price = await MissionUtils.Console.readLineAsync(
-      "구입금액을 입력해주세요.\n"
-    );
-
-    //입력받은 가격에 대해 로또 생성
+    let price;
+    try {
+      price = Number(
+        await MissionUtils.Console.readLineAsync("구입금액을 입력해주세요.\n")
+      );
+      if (isNaN(price) || price % 1000 !== 0) {
+        throw new Error("[ERROR]");
+      }
+    } catch (e) {
+      MissionUtils.Console.print("[ERROR]");
+      this.play();
+      return;
+    }
+    // 입력받은 가격에 대해 로또 생성
     this.buyLottos(price);
 
     // 내 로또 번호(당첨번호) 입력 받음
     this.answer = (
       await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n")
-    ).split(",");
+    )
+      .split(",")
+      .map(Number);
 
     //보너스 번호 실행
-    this.bonus = await MissionUtils.Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n"
-    );
+    await this.BonusInput();
 
     //당첨 결과 발표 실행
     this.printResult();
@@ -47,11 +56,11 @@ class App {
     //수익률 결과 발표 실행
     this.calProfitRate(
       price,
-      this.threeLottoCorrect,
-      this.fourLottoCorrect,
-      this.fiveLottoCorrect,
-      this.fivePlusOneLottoCorrect,
-      this.sixLottoCorrect
+      this.threeCorrect,
+      this.fourCorrect,
+      this.fiveCorrect,
+      this.fiveOneCorrect,
+      this.sixCorrect
     );
   }
 
@@ -67,20 +76,19 @@ class App {
   //내가 선택하는 복권 번호
   generateNumbers(numOfLottos) {
     for (let i = 0; i < numOfLottos; i++) {
-      const number = MissionUtils.Random.pickUniqueNumbersInRange(
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
         1,
         45,
         6
       ).sort((a, b) => a - b); // [1,2,3,4,5,6,]
-      const lotto = new Lotto(number);
-      this.lottos.push(lotto);
+      this.lottos.push(new Lotto(numbers));
 
       let str = "[";
-      for (let i = 0; i < number.length; i++) {
-        if (i === number.length - 1) {
-          str += String(number[i]) + "]";
+      for (let i = 0; i < numbers.length; i++) {
+        if (i === numbers.length - 1) {
+          str += String(numbers[i]) + "]";
         } else {
-          str += String(number[i]) + ", ";
+          str += String(numbers[i]) + ", ";
         }
       }
       MissionUtils.Console.print(str);
@@ -89,65 +97,71 @@ class App {
 
   //결과 출력 함수
   printResult() {
-    let count = 0;
-    for (const lotto of this.lottos) {
-      for (const item of this.answer) {
-        if (lotto.numbers.includes(item)) {
-          count++;
-        }
-      }
-
+    for (const ticket of this.lottos) {
+      let count = ticket.answerCount(this.answer);
       if (count === 3) {
-        this.threeLottoCorrect++;
+        this.threeCorrect++;
       } else if (count === 4) {
-        this.fourLottoCorrect++;
+        this.fourCorrect++;
       } else if (count === 5) {
-        if (lotto.numbers.includes(this.bonus)) {
-          this.fivePlusOneLottoCorrect++;
+        if (ticket.bonusMatch(this.bonus)) {
+          this.fiveOneCorrect++;
         } else {
-          this.fiveLottoCorrect++;
+          this.fiveCorrect++;
         }
       } else if (count === 6) {
-        this.sixLottoCorrect++;
+        this.sixCorrect++;
       }
     }
 
     MissionUtils.Console.print("당첨 통계");
     MissionUtils.Console.print("---");
+    MissionUtils.Console.print(`3개 일치 (5,000원) - ${this.threeCorrect}개`);
+    MissionUtils.Console.print(`4개 일치 (50,000원) - ${this.fourCorrect}개`);
     MissionUtils.Console.print(
-      `3개 일치 (5,000원) - ${this.threeLottoCorrect}개`
+      `5개 일치 (1,500,000원) - ${this.fiveCorrect}개`
     );
     MissionUtils.Console.print(
-      `4개 일치 (50,000원) - ${this.fourLottoCorrect}개`
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.fiveOneCorrect}개`
     );
     MissionUtils.Console.print(
-      `5개 일치 (1,500,000원) - ${this.fiveLottoCorrect}개`
-    );
-    MissionUtils.Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.fivePlusOneLottoCorrect}개`
-    );
-    MissionUtils.Console.print(
-      `6개 일치 (2,000,000,000원) - ${this.sixLottoCorrect}개`
+      `6개 일치 (2,000,000,000원) - ${this.sixCorrect}개`
     );
   }
-
+  //보너스 번호 입력
+  async BonusInput() {
+    try {
+      this.bonus = Number(
+        await MissionUtils.Console.readLineAsync(
+          "보너스 번호를 입력해 주세요.\n"
+        )
+      );
+      if (isNaN(this.bonus)) {
+        throw new Error("[ERROR]");
+      }
+    } catch (e) {
+      MissionUtils.Console.print("[ERROR]");
+      this.BonusInput();
+      return;
+    }
+  }
   //수익률 계산 함수
   calProfitRate(
     price,
-    threeLottoCorrect,
-    fourLottoCorrect,
-    fiveLottoCorrect,
-    fivePlusOneLottoCorrect,
-    sixLottoCorrect
+    threeCorrect,
+    fourCorrect,
+    fiveCorrect,
+    fiveOneCorrect,
+    sixCorrect
   ) {
     const prizeResult =
-      5000 * threeLottoCorrect +
-      50000 * fourLottoCorrect +
-      1500000 * fiveLottoCorrect +
-      300000000 * fivePlusOneLottoCorrect +
-      2000000000 * sixLottoCorrect;
-    const ProfitRate = (prizeResult / price) * 100;
-    MissionUtils.Console.print(`총 수익률은 ${ProfitRate}% 입니다.`);
+      5000 * threeCorrect +
+      50000 * fourCorrect +
+      1500000 * fiveCorrect +
+      300000000 * fiveOneCorrect +
+      2000000000 * sixCorrect;
+    const ProfitRate = ((prizeResult / price) * 100).toFixed(1);
+    MissionUtils.Console.print(`총 수익률은 ${ProfitRate}%입니다.`);
   }
 }
 

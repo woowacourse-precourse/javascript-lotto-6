@@ -2,7 +2,6 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Lotto {
   #numbers;
-
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
@@ -21,17 +20,28 @@ class Lotto {
     }
     //로또 번호 중복 방지
     const set = new Set(numbers);
-    if (set.length < 6) {
+    if (set.size < 6) {
       throw new Error("[ERROR] 숫자가 중복됩니다.");
     }
   }
 
-  //getter 함수
-  get numbers() {
-    return this.#numbers;
+  answerCount(answer) {
+    let count = 0;
+    for (const n of this.#numbers) {
+      if (answer.includes(n)) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  bonusMatch(bonus) {
+    if (this.#numbers.includes(bonus)) {
+      return true;
+    }
+    return false;
   }
 }
-
 // TODO: 추가 기능 구현
 
 export default Lotto;
