@@ -4,6 +4,7 @@ import {
 	validateRange,
 	validateNumberLength,
 	validateDuplicate,
+	validateInWinnerNumber,
 } from "../utils/validation.js";
 
 class WinningLotto {
@@ -29,12 +30,15 @@ class WinningLotto {
 	getWinningNumbers() {
 		return this.#winningNumbers;
 	}
+	getBonusNumber() {
+		return this.#bonusNumber;
+	}
 	setBonusNumber(number) {
 		this.#validateInputBonusNumber(number);
 		this.#bonusNumber = number;
-		Console.print(this.#bonusNumber);
 	}
 	#validateInputBonusNumber(number) {
+		validateInWinnerNumber(number, this.#winningNumbers);
 		validateNumber(number);
 		validateRange(number);
 	}

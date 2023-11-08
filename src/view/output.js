@@ -12,3 +12,14 @@ export const printLottoCount = (number) => {
 export const printLotto = (lotto) => {
 	Console.print(`[${lotto.toString().replaceAll(",", ", ")}]`);
 };
+export const printResultIntro = () => {
+	Console.print(OUTPUT_MESSAGES.OUTPUT_RESULT_INTRO);
+};
+
+export const printRanking = (rank, rankCount) => {
+	Console.print(`${OUTPUT_MESSAGES.OUTPUT_MATCH_COUNT[rank]} ${rankCount}개`);
+};
+
+export const printIncomeRate = (incomeRate) => {
+	Console.print(`총 수익률은 ${incomeRate}%입니다.`);
+};

@@ -44,3 +44,9 @@ export const validateDuplicate = (numbers) => {
 		throw ERRORS.INVALID_NUMBERS_DUPLICATE;
 	}
 };
+
+export const validateInWinnerNumber = (bonusNumber, winningNummber) => {
+	if (winningNummber.includes(bonusNumber)) {
+		throw ERRORS.INVALID_NUMBER_IN_WINNINGNUMBER;
+	}
+};
