@@ -22,6 +22,16 @@ class Lotto {
     this.#numbers = sortedLottoNumbers;
   }
 
+  determineResult(userLottoArray, userBonusNumber) {
+    const lottoMatched = userLottoArray.filter((userLottoNum) => {
+      return this.#numbers.includes(userLottoNum);
+    });
+
+    const bounsMatched = this.#numbers.includes(userBonusNumber);
+
+    return LottoResult.getPrize(lottoMatched.length, bounsMatched);
+  }
+
   getLottoNumbersString() {
     return `[${this.#numbers.join(', ')}]`;
   }
