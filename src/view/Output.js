@@ -6,14 +6,6 @@ class Output {
     MissionUtils.Console.print(message)
   }
 
-  printTickets(tickets) {
-   this.print(`${tickets}${GUIDE_MESSAGE.totalTickets}`)
-  }
-
-  printLotto(lottos) {
-    lottos.forEach(lotto => this.print(`[${lotto.join(', ')}]`))
-  }
-
   printStats(STATS) {
     this.print(GUIDE_MESSAGE.winningStats)
     this.printDivider();

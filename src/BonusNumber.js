@@ -1,6 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
 import Validator from "./validator/Validator";
-import Output from "./view/Output";
 
 class BonusNumber {
   #bonusNumber

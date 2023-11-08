@@ -2,11 +2,6 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { GUIDE_MESSAGE } from "../constants/constants";
 
 class Input {
-  async getValue(message) {
-    const INPUT = await MissionUtils.Console.readLineAsync(message)
-    return String(INPUT)
-  }
-
   async getPurchaseAmount(){
     const money = await MissionUtils.Console.readLineAsync(GUIDE_MESSAGE.insertMoney)
 
