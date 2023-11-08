@@ -6,13 +6,15 @@ class LottoList {
 
   constructor(lottoCount) {
     this.#validate(lottoCount);
-    Console.print(`\n${lottoCount}개를 구매했습니다.`);
+
     this.#lottos = [];
+
+    Console.print(`\n${lottoCount}개를 구매했습니다.`);
 
     for (let i = 0; i < lottoCount; i += 1) {
       const numbers = this.#generateLottoNumbers().sort((a, b) => a - b);
-      Console.print(numbers);
       this.#lottos.push(new Lotto(numbers));
+      Console.print(`[${numbers.join(', ')}]`);
     }
   }
 
