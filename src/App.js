@@ -18,6 +18,8 @@ class App {
       winInfoAry[rank]++;
     });
 
+    game.printLottoResult(winInfoAry, lottoCnt);
+
 
   }
 }
