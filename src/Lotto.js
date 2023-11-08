@@ -1,18 +1,29 @@
+import LottoValidator from './classes/LottoValidator';
+import { ERROR_MESSAGE, MAX } from './constant/lottoConstants';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = numbers.sort((a, b) => a - b);
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    numbers.forEach(number => LottoValidator.validateLottoNumber(number));
+
+    if (numbers.length !== MAX.LOTTO_NUMBERS) {
+      throw ERROR_MESSAGE.LESS_LOTTO_NUMBERS;
+    }
+
+    if (new Set(numbers).size !== MAX.LOTTO_NUMBERS) {
+      throw ERROR_MESSAGE.LOTTO_NUMBER_HAVE_DUPLICATE;
     }
   }
 
-  // TODO: 추가 기능 구현
+  getWinningNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
