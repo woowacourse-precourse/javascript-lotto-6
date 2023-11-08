@@ -1,4 +1,4 @@
-import InputValidate from "./utils/InputValidate";
+import InputValidate from "./utils/InputValidate.js";
 
 class Lotto {
   #numbers;

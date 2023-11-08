@@ -27,6 +27,7 @@ class UserInput {
   }
 
   static async getLottoNumbers() {
+    Console.print("\n");
     const lottoNumbers = await Console.readLineAsync(
       `${COMMAND.lottoNumbersMessage}`
     );
@@ -40,6 +41,7 @@ class UserInput {
   }
 
   static async getBonusNumber() {
+    Console.print("\n");
     const bonusNumber = await Console.readLineAsync(
       `${COMMAND.bonusNumberMessage}`
     );

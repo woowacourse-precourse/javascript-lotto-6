@@ -46,6 +46,7 @@ class LottoGame {
   }
 
   printPurchasedLottos() {
+    Console.print("\n");
     Console.print(
       `${this.#purchasedAmount / LOTTO_GAME_RULE.lottoAmount}${
         COMMAND.purchaseMessage
@@ -109,6 +110,7 @@ class LottoGame {
   }
 
   printWinner() {
+    Console.print("\n");
     Console.print(`${LOTTO_RANK.startMessage}`);
     LOTTO_RANK.rankResultMessage.forEach((message, index) => {
       Console.print(
