@@ -18,13 +18,11 @@ class LottoController {
 	}
 
 	static generateLotto() {
-		const lottoNumbers = [];
-		while (lottoNumbers.length < LOTTO.count) {
-			const number = Random.pickNumberInRange(LOTTO.minRange, LOTTO.maxRange, LOTTO.count);
-			if (!lottoNumbers.includes(number)) {
-				lottoNumbers.push(number);
-			}
-		}
+		const lottoNumbers = Random.pickUniqueNumbersInRange(
+			LOTTO.minRange,
+			LOTTO.maxRange,
+			LOTTO.count
+		);
 		return lottoNumbers.sort((a, b) => a - b);
 	}
 

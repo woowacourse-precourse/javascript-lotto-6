@@ -11,7 +11,7 @@ const OutputPrintout = {
 		Array.from({ length: count }).forEach(() => {
 			const lotto = LottoController.generateLotto();
 			LottoController.setLottoList(lotto);
-			Console.print(lotto);
+			Console.print(JSON.stringify(lotto).replaceAll(",", ", "));
 		});
 	},
 	printMathingNumberList: (winningNumber, bonusNumber) => {

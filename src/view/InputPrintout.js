@@ -13,7 +13,7 @@ const InputPrintout = {
 				InputPrintout.isInvaildInput = false;
 				isVaildAmount(amount);
 			} catch (error) {
-				Console.print(error);
+				Console.print(error.toString());
 				InputPrintout.isInvaildInput = true;
 				amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
 			}
@@ -28,7 +28,7 @@ const InputPrintout = {
 				InputPrintout.isInvaildInput = false;
 				new Lotto(numbers);
 			} catch (error) {
-				Console.print(error);
+				Console.print(error.toString());
 				InputPrintout.isInvaildInput = true;
 				numbers = await Console.readLineAsync(PRINT_INPUT.inputNumbers);
 			}
@@ -43,7 +43,7 @@ const InputPrintout = {
 				InputPrintout.isInvaildInput = false;
 				isVaildBonusNum(bonus, winningNumber);
 			} catch (error) {
-				Console.print(error);
+				Console.print(error.toString());
 				InputPrintout.isInvaildInput = true;
 				bonus = await Console.readLineAsync(PRINT_INPUT.inputBonusNum);
 			}
