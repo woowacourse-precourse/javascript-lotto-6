@@ -1,4 +1,4 @@
-import { GAME } from './constants/Setting';
+import { GAME } from './constants/Setting.js';
 
 class Calculator {
   #winningAmount;

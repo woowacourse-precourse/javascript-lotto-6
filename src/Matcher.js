@@ -1,4 +1,4 @@
-import { PRIZE } from './constants/Setting';
+import { PRIZE } from './constants/Setting.js';
 
 class Matcher {
   #prizeTable = new Map(PRIZE);
