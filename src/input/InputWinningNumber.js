@@ -3,7 +3,7 @@ import { INPUT_MESSAGE } from "../constant/Log.js";
 import Lotto from "../Lotto.js";
 /*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
 
-async function InputWinningNumbers() {
+async function InputWinningNumber() {
   while (true) {
     try {
       const winningNumberStr = await MissionUtils.Console.readLineAsync(
@@ -16,4 +16,4 @@ async function InputWinningNumbers() {
   }
 }
 
-export default InputWinningNumbers;
+export default InputWinningNumber;

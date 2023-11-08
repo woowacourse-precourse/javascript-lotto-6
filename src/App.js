@@ -1,18 +1,21 @@
 import InputAmount from "./Input/InputAmount.js";
 import InputBonusNumber from "./input/InputBonusNumber.js";
-import InputWinningNumbers from "./input/InputWinningNumbers.js";
+import InputWinningNumber from "./input/InputWinningNumber.js";
 import RandomNumber from "./RandomNumber.js";
 import LottoCount from "./LottoCount.js";
-import { printLottoNumbers } from "./print.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { printLottoNumbers, printReturnRate, printWinning } from "./print.js";
+import CheckWinning from "./CheckWinning.js";
 class App {
   async play() {
     const amount = await InputAmount();
     const count = LottoCount(amount);
-    const lottoNumbers = RandomNumber(count);
-    printLottoNumbers(lottoNumbers);
-    const winningNumbers = await InputWinningNumbers();
+    const lottoNumberList = RandomNumber(count);
+    printLottoNumbers(lottoNumberList);
+    const winningNumber = await InputWinningNumber();
     const bonus = await InputBonusNumber();
+    const rank = CheckWinning(lottoNumberList, winningNumber, bonus);
+    printWinning(rank);
+    printReturnRate(rank, amount);
   }
 }
 

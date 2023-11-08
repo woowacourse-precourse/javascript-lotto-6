@@ -6,7 +6,7 @@ import {
   LOTTO_NUMBER_COUNT,
 } from "./constant/LottoInfo.js";
 function RandomNumber(count) {
-  let lottoNumbers = [];
+  let lottoNumberList = [];
   for (let i = 0; i < count; i++) {
     let lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(
       LOTTO_NUMBER_MIN,
@@ -14,9 +14,9 @@ function RandomNumber(count) {
       LOTTO_NUMBER_COUNT
     );
     lottoNumber.sort((a, b) => a - b);
-    lottoNumbers.push(new Lotto(lottoNumber));
+    lottoNumberList.push(new Lotto(lottoNumber));
   }
-  return lottoNumbers;
+  return lottoNumberList;
 }
 
 export default RandomNumber;

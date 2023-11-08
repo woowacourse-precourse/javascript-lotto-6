@@ -2,7 +2,7 @@ const ERROR_KEYWORD = "[ERROR]";
 export const ERROR_MESSAGE = {
   inputEmpty: ERROR_KEYWORD + "입력이 비어있거나 빈칸이 포함되어 있습니다.",
   inputString: ERROR_KEYWORD + "숫자를 입력해주세요.",
-  inputNaturalNumber: ERROR_KEYWORD + "숫자가 잘못된 형식으로 입력되었습니다.",
+  inputNaturalNumber: ERROR_KEYWORD + "숫자가 자연수가 아닙니다.",
   amountDivisibleThousand: ERROR_KEYWORD + "1000단위의 수로 입력해주세요.",
   outRangeLottoNumber: ERROR_KEYWORD + "1 ~ 45 사이의 수로 입력해주세요.",
   outCountLottoNumbers: ERROR_KEYWORD + "로또 번호는 6개여야 합니다.",
