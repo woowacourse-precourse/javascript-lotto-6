@@ -7,6 +7,15 @@ class Buyer {
   getPurchaseMoney() {
     return this.#purchaseMoney;
   }
+
+  getLottos() {
+    return this.#lottos;
+  }
+
+  setLottos(lottos) {
+    this.#lottos = lottos;
+  }
+
   async inputMoney() {
     try {
       const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
