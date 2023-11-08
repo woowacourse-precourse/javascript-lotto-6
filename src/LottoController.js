@@ -4,6 +4,7 @@ import Constant from "./utils/Constant.js";
 import View from "./View/View.js";
 import LottoNumGenerator from "./utils/LottoNumGenerator.js";
 import Lotto from "./Lotto.js";
+import BonusNum from "./BonusNum.js";
 
 class LottoController {
   #budget;
@@ -87,16 +88,25 @@ class LottoController {
   }
 
   async askBonusNum() {
-    // while (true) {
-    const input = View.input(InfoMsg.ASK_BONUS_NUM);
-    const isValid = this.validateBonusNum(input);
-    if (isValid) {
-      // break;
+    while (true) {
+      const input = await View.input(InfoMsg.ASK_BONUS_NUM);
+      const isValid = this.validateBonusNum(input);
+      if (isValid === true) {
+        break;
+      }
     }
   }
-  // }
 
-  validateBonusNum(input) {}
+  validateBonusNum(input) {
+    try {
+      const bonusNum = new BonusNum(input);
+      this.bonusNum = bonusNum.returnNum();
+    } catch (err) {
+      View.output(err);
+      return false;
+    }
+    return true;
+  }
 }
 
 export default LottoController;
