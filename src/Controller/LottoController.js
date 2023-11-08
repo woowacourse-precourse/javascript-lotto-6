@@ -3,30 +3,72 @@ import LottoGenerator from "../Model/LottoGenerator.js";
 import Output from "../View/Output.js";
 
 class LottoController{
-    constructor() {
-    }
-
     #dicQuantity = { 3 : 0 , 4 : 0 , 5 : 0 , 6 : 0 , 7 : 0 };
 
-    //TODO: Controller 구현 
+    #userInput;
+
+    #lottoGenerator;
+
+    #output;
+
+    #purchaseAmount;
+
+    #winningNumbers;
+
+    #bonusNumber;
+
+    constructor() {
+        this.#userInput = new UserInput();
+        this.#lottoGenerator = new LottoGenerator();
+        this.#output = new Output();
+        this.#purchaseAmount = 0;
+        this.#winningNumbers = [];
+        this.#bonusNumber = 0;
+    }
+
     async start() {
-        const userInput = new UserInput();
-        const lottogenerator = new LottoGenerator();
-        const output = new Output();
         
-        this.purchaseAmount = await userInput.inputPurchaseAmount();
-        this.generateLotto = lottogenerator.generateRandomNumbers(this.purchaseAmount/1000);
+        await this.occurIssuePurchaseAmount();
+        this.generateLotto = this.#lottoGenerator.generateRandomNumbers(this.#purchaseAmount/1000);
+    
+        this.#output.printLotto(this.generateLotto);
+        await this.occurIssueWinningNumbers();
+        await this.occurIssueBonusNumber();
         
-        output.printLotto(this.generateLotto);
-        this.winningNumbers = await userInput.inputWinningNumbers();
-        this.bonusNumber = await userInput.inputBonusNumber(this.winningNumbers);
-        
-        for (let i = 0; i<this.generateLotto.length;i++) {
-            this.comapreLotto(this.winningNumbers,this.generateLotto[i],this.bonusNumber)
+        for (let i = 0; i < this.generateLotto.length; i++) {
+
+            this.comapreLotto(this.#winningNumbers,this.generateLotto[i],this.bonusNumber)
         }
-        output.printStatistics(this.#dicQuantity);
-        const totalRate = this.getTotalRate(this.purchaseAmount);
-        output.printTotalRate(totalRate);
+        this.#output.printStatistics(this.#dicQuantity);
+        const totalRate = this.getTotalRate(this.#purchaseAmount);
+        this.#output.printTotalRate(totalRate);    
+    }
+
+    async occurIssuePurchaseAmount() {
+        try {
+            this.#purchaseAmount = await this.#userInput.inputPurchaseAmount();
+        } catch (e){
+            this.#userInput.printError(e.message);
+            await this.occurIssuePurchaseAmount();
+        }
+    }
+
+    async occurIssueWinningNumbers() {
+        try {
+            this.#winningNumbers = await this.#userInput.inputWinningNumbers();
+        } catch (e) {
+            this.#userInput.printError(e.message);
+            await this.occurIssueWinningNumbers();
+        }
+    }
+
+    async occurIssueBonusNumber() {
+        try {
+            this.bonusNumber = await this.#userInput.inputBonusNumber(this.#winningNumbers);
+        } catch (e) {
+            this.#userInput.printError(e.message);
+            await this.occurIssueBonusNumber();
+        }
     }
 
     comapreLotto(winNumbers, lotto, bonusNumber) {

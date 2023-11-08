@@ -24,6 +24,10 @@ class UserInput {
         validateBonusNumberDuplication(winningNumbers,Number(bonusNumber));
         return Number(bonusNumber)
     }
+
+    printError(errorMessage) {
+        return Console.print(errorMessage);
+    }
 }
 
 export default UserInput;
