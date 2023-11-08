@@ -14,9 +14,6 @@ class Lotto {
     }
     if (new Set(numbers).size !== numbers.length)
       throw new Error(ERROR_MESSAGE.CHECK_LOTTO_NUMBER_DUPLICATE);
-
-    if (numbers.join('').replace(/[0-9]/g, '').length > 0)
-      throw new Error(ERROR_MESSAGE.CHECK_LOTTO_NUMBER);
   }
 
   printLotto() {
