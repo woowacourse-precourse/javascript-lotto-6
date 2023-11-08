@@ -1,6 +1,6 @@
 import { ERROR, LOTTO_NUMBER } from '../src/constants/Constant.js';
 import BonusNumber from '../src/model/BonusNumber.js';
-import Lotto from '../src/model/Lotto.js';
+import Lotto from '../src/Lotto.js';
 
 describe('보너스 번호 클래스 검증 테스트', () => {
   const winningLottoNumbers = [1, 2, 3, 4, 5, 6];

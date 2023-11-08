@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { CONSTANT, LOTTO_NUMBER, RANK } from '../constants/Constant.js';
-import Lotto from './Lotto.js';
+import Lotto from '../Lotto.js';
 import Validator from '../validator/Validator.js';
 
 class LottoBundle {

@@ -1,4 +1,4 @@
-import Lotto from '../src/model/Lotto.js';
+import Lotto from '../src/Lotto.js';
 import { ERROR, LOTTO_NUMBER, RANK } from '../src/constants/Constant.js';
 
 describe('로또 클래스 검증 테스트', () => {

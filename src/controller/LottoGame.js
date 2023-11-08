@@ -1,7 +1,7 @@
 import InputView from '../view/InputView.js';
 import LottoBundle from '../model/LottoBundle.js';
 import OutputView from '../view/OutputView.js';
-import Lotto from '../model/Lotto.js';
+import Lotto from '../Lotto.js';
 import BonusNumber from '../model/BonusNumber.js';
 
 class LottoGame {

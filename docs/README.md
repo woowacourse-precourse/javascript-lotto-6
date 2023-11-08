@@ -343,21 +343,22 @@ File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #
 All files            |     100 |      100 |     100 |     100 |                   
  src                 |     100 |      100 |     100 |     100 |                   
   App.js             |     100 |      100 |     100 |     100 |                   
-  ValidationError.js |     100 |      100 |     100 |     100 |                   
+  Lotto.js           |     100 |      100 |     100 |     100 |                   
  src/constants       |     100 |      100 |     100 |     100 |                   
   Constant.js        |     100 |      100 |     100 |     100 |                   
  src/controller      |     100 |      100 |     100 |     100 |                   
   LottoGame.js       |     100 |      100 |     100 |     100 |                   
  src/model           |     100 |      100 |     100 |     100 |                   
   BonusNumber.js     |     100 |      100 |     100 |     100 |                   
-  Lotto.js           |     100 |      100 |     100 |     100 |                   
   LottoBundle.js     |     100 |      100 |     100 |     100 |                   
  src/validator       |     100 |      100 |     100 |     100 |                   
+  ValidationError.js |     100 |      100 |     100 |     100 |                   
   Validator.js       |     100 |      100 |     100 |     100 |                   
  src/view            |     100 |      100 |     100 |     100 |                   
   InputView.js       |     100 |      100 |     100 |     100 |                   
   OutputView.js      |     100 |      100 |     100 |     100 |                   
 ---------------------|---------|----------|---------|---------|-------------------
+
 
 ```
 
@@ -374,7 +375,6 @@ All files            |     100 |      100 |     100 |     100 |
   ┣ controller
   ┃  ┗ LottoGame.js        // 로또 게임의 진행을 책임지는 클래스
   ┣ model
-  ┃  ┣ Lotto.js            // 로또 번호를 저장하고 로또의 순위를 구하는 클래스
   ┃  ┣ LottoBundle.js      // 여러개의 로또를 관리하고 전체 로또의 수익률을 구하는 클래스
   ┃  ┗ BonusNumber.js      // 보너스 번호를 저장하는 클래스
   ┣ view
@@ -383,6 +383,7 @@ All files            |     100 |      100 |     100 |     100 |
   ┣ validator
   ┃  ┣ Validator.js        // 검증에 사용되는 메서드들의 모음
   ┃  ┗ ValidationError.js  // [ERROR] 키워드를 위한 커스텀 에러 클래스    
+  ┣ Lotto.js               // 로또 번호를 저장하고 로또의 순위를 구하는 클래스 (해당 클래스도 model이지만 파일 이동 금지로 인해 그대로 둠)
   ┣ App.js                 // 게임 시작 역할 
   ┗ index.js  
 ``` 
