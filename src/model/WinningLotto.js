@@ -16,11 +16,9 @@ class WinningLotto {
   async setWinningNumber() {
     try {
       const input = await inputWinningNumber();
-      const winningNumberArr = input
-        .split(',')
-        .map((number) => parseInt(number));
+      const winningNumberArr = input.split(',');
       this.#winningNumberValidate(winningNumberArr);
-      this.#winningNumber = winningNumberArr;
+      this.#winningNumber = winningNumberArr.map((num) => parseInt(num));
     } catch (error) {
       printErrorMessage(error);
       await this.setWinningNumber();

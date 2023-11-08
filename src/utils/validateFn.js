@@ -17,7 +17,7 @@ export const validateNumber = (number) => {
 };
 
 export const validateDivisible = (number) => {
-  if (number % 1000 !== 0 || number === 0) {
+  if (number % 1000 !== 0 || number === '0') {
     throw ERROR_MESSAGE.INVALID_NON_DIVISIBLE;
   }
 };
