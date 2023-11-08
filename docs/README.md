@@ -34,7 +34,7 @@
 - :open_file_folder: src 
     - :open_file_folder: common
         - :memo: outputMessage.js
-        - :memo: validate.js
+        - :memo: Validate.js
     - :open_file_folder: controller
         - :memo: LottoController.js
     - :memo: App.js
