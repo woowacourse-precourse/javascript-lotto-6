@@ -22,6 +22,15 @@ export const PRIZE = {
     5: 5000
 };
 
+export const checkWin = {
+    3: 0,
+    4: 0,
+    5: 0,
+    '5+1': 0,
+    6: 0,
+    total: 0
+};
+
 export const ERRORS = {
     InvalidAmount: "[ERROR] 1000원 단위만 가능합니다.",
     InvalidBlank: "[ERROR] 입력값이 옳지 않습니다.",

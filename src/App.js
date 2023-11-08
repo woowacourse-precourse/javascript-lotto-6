@@ -7,7 +7,10 @@ class App {
   #lottoNumbers = [];
   #winNumber = [];
   #bonusNumber = 0;
-  #winResult = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  
+  constructor() {
+    this.winResult = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  }
 
   async buyLotto() {
     try {
@@ -60,24 +63,24 @@ class App {
   calculateWin() {
     this.#lottoNumbers.forEach((num) => {
       const match = num.filter(num => this.#winNumber.includes(+num));
-      if (match.length === 6) this.#winResult[1]++;
-      if (match.length === 5 && num.includes(this.#bonusNumber)) this.#winResult[2]++;
-      if (match.length === 5 && !num.includes(this.#bonusNumber)) this.#winResult[3]++;
-      if (match.length === 4 || (match.length === 3 && num.includes(this.#bonusNumber))) this.#winResult[4]++;
-      if (match.length === 3 || (match.length === 2 && num.includes(this.#bonusNumber))) this.#winResult[5]++;
+      if (match.length === 6) this.winResult[1]++;
+      if (match.length === 5 && num.includes(this.#bonusNumber)) this.winResult[2]++;
+      if (match.length === 5 && !num.includes(this.#bonusNumber)) this.winResult[3]++;
+      if (match.length === 4 || (match.length === 3 && num.includes(this.#bonusNumber))) this.winResult[4]++;
+      if (match.length === 3 || (match.length === 2 && num.includes(this.#bonusNumber))) this.winResult[5]++;
     })
   }
 
   printWin() {
-    const getMoney = this.#winResult[1] * PRIZE[1] + this.#winResult[2] * PRIZE[2] + this.#winResult[3] * PRIZE[3] + this.#winResult[4] * PRIZE[4] + this.#winResult[5] * PRIZE[5];
+    const getMoney = this.winResult[1] * PRIZE[1] + this.winResult[2] * PRIZE[2] + this.winResult[3] * PRIZE[3] + this.winResult[4] * PRIZE[4] + this.winResult[5] * PRIZE[5];
     const spendmoney = this.#lottoAmount * 1000;
     const rateofReturn = Number((getMoney / spendmoney) * 100).toFixed(1)
-    Console.print("\nWIN_PRINT\n---");
-    Console.print(`${WIN_INFO[3]}${this.#winResult[5]}개\n`);
-    Console.print(`${WIN_INFO[4]}${this.#winResult[4]}개\n`);
-    Console.print(`${WIN_INFO[5]}${this.#winResult[3]}개\n`);
-    Console.print(`${WIN_INFO['5+1']}${this.#winResult[2]}개\n`);
-    Console.print(`${WIN_INFO[6]}${this.#winResult[1]}개\n`);
+    Console.print(`\n${WIN_PRINT}\n---`);
+    Console.print(`${WIN_INFO[3]}${this.winResult[5]}개\n`);
+    Console.print(`${WIN_INFO[4]}${this.winResult[4]}개\n`);
+    Console.print(`${WIN_INFO[5]}${this.winResult[3]}개\n`);
+    Console.print(`${WIN_INFO['5+1']}${this.winResult[2]}개\n`);
+    Console.print(`${WIN_INFO[6]}${this.winResult[1]}개\n`);
     Console.print(`총 수익률은 ${rateofReturn}%입니다.\n`);
   }
 
