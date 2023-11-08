@@ -13,4 +13,10 @@ describe("ValidateTest", () => {
       ERROR_MESSAGE.moneyValue
     );
   });
+
+  test("입력금액에 문자가 포함되어있으면 예외가 발생한다.", () => {
+    expect(() => Validator.validateInputMoney("1@00!a")).toThrow(
+      ERROR_MESSAGE.moneyValue
+    );
+  });
 });
