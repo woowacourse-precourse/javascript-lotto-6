@@ -3,7 +3,6 @@ import PublishController from "./PublishController.js";
 import ErrorView from "./ErrorView.js";
 import PublishView from "./PublishView.js";
 import DrawController from "./DrawController.js";
-import DrawView from "./DrawView.js";
 import WinningController from "./WinningController.js";
 import WinningResultView from "./WinningResultView.js";
 import LottoView from "./LottoView.js";
@@ -25,10 +24,9 @@ class MainController {
     let isSuccess = false;
 
     while(!isSuccess) {
-      const purchasePrice = await PurchaseController.purchase();
       try {
-        const quantity = PublishController.calculateLottoQuantity(purchasePrice);
-        const lottos = PublishController.publish(quantity);
+        const purchasePrice = await PurchaseController.purchase();
+        const lottos = PublishController.convertPriceToLottos(purchasePrice);
         this.#purchasePrice = purchasePrice;
         this.#lottos = lottos;
         isSuccess = true;
@@ -50,10 +48,8 @@ class MainController {
     let isSuccess = false;
 
     while (!isSuccess) {
-      DrawView.printWinningNumbersQuestion();
-      const winningNumbersText = await DrawController.getWinningNumbers();
       try {
-        const winningNumbers = DrawController.processWinningNumbersText(winningNumbersText);
+        const winningNumbers = await DrawController.getProcessedWinningNumbers();
         this.#winningNumbers = winningNumbers;
         isSuccess = true;
       } catch (error) {
@@ -67,15 +63,9 @@ class MainController {
     let isSuccess = false;
 
     while(!isSuccess) {
-      DrawView.printBonusNumberQuestion();
-      const bonusNumberText = await DrawController.getBonusNumber();
       try {
-        const bonusNumber = DrawController.processBonusNumberText(bonusNumberText);
-        DrawController.compareWinningBonus({ 
-          winningNumbers: this.#winningNumbers,
-          bonusNumber
-        });
-        this.#bonusNumber = this.#bonusNumber;
+        const bonusNumber = await DrawController.getProcessedBonusNumber(this.#winningNumbers);
+        this.#bonusNumber = bonusNumber;
         isSuccess = true;
       } catch (error) {
         ErrorView.printErrorMessage(error.message);

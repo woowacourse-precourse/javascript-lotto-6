@@ -29,21 +29,9 @@ class PurchaseController {
   }
 
   static async purchase() {
-    let isSuccess = false;
-    let price = 0;
-
-    while(!isSuccess) {
-      PurchaseView.printPriceQuestion();
-      const priceText = await PurchaseController.getPrice();
-
-      try {
-        price = PurchaseController.processPriceText(priceText);
-        isSuccess = true;
-      } catch (error) {
-        isSuccess = false;
-        ErrorView.printErrorMessage(error.message);
-      }
-    }
+    PurchaseView.printPriceQuestion();
+    const priceText = await PurchaseController.getPrice();
+    const price = PurchaseController.processPriceText(priceText);
 
     return price;
   }

@@ -35,6 +35,13 @@ class PublishController {
 
     return lottos;
   }
+
+  static convertPriceToLottos(price) {
+    const quantity = PublishController.calculateLottoQuantity(price);
+    const lottos = PublishController.publish(quantity);
+
+    return lottos;
+  }
 }
 
 export default PublishController;

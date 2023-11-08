@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import LottoNumberValidator from "./LottoNumberValidator.js";
 import { MESSAGES } from "./constants.js";
+import DrawView from "./DrawView.js";
 
 class DrawController {
   static async getWinningNumbers() {
@@ -104,6 +105,26 @@ class DrawController {
     if (!this.checkWinningBonusDifferent({ winningNumbers, bonusNumber })) {
       throw new Error(MESSAGES.winningBonusIncludeError);
     }
+  }
+
+  static async getProcessedWinningNumbers() {
+    DrawView.printWinningNumbersQuestion();
+    const winningNumbersText = await DrawController.getWinningNumbers();
+    const winningNumbers = DrawController.processWinningNumbersText(winningNumbersText);
+
+    return winningNumbers;
+  }
+
+  static async getProcessedBonusNumber(winningNumbers) {
+    DrawView.printBonusNumberQuestion();
+    const bonusNumberText = await DrawController.getBonusNumber();
+    const bonusNumber = DrawController.processBonusNumberText(bonusNumberText);
+    DrawController.compareWinningBonus({ 
+      winningNumbers,
+      bonusNumber,
+    });
+
+    return bonusNumber;
   }
 }
 
