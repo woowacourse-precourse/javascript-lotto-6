@@ -15,12 +15,16 @@ class App {
       const numOfLottos = player.getNumOfLottos();
       LottoConsole.printAmountOfLotto(numOfLottos);
 
+      // 구매한 로또 출력
+      const lottoNumbers = player.getLottoNumbers();
+      LottoConsole.printLottosNumber(lottoNumbers);
+
       // 당첨번호 입력
-      const lottoNumbers = await LottoConsole.getLottoNumbersUntilSuccess();
+      const winningNumbers = await LottoConsole.getLottoNumbersUntilSuccess();
       const bonusNumber = await LottoConsole.getBonusNumberUntilSuccess();
 
       // 로또 긁기
-      player.checkLottos(lottoNumbers, bonusNumber);
+      player.checkLottos(winningNumbers, bonusNumber);
 
       const scoreCard = player.getScoreCard();
       LottoConsole.printResult(scoreCard);

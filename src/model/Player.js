@@ -16,10 +16,6 @@ class Player {
     this.#scoreBoard = new ScoreBoard();
   }
 
-  getNumOfLottos() {
-    return this.#lottos.length;
-  }
-
   buyLottos() {
     while (this.#budget > 0) {
       this.#lottos.push(new Lotto(Player.#generateRandomLottoNumbers()));
@@ -40,8 +36,18 @@ class Player {
     return this;
   }
 
+  getNumOfLottos() {
+    return this.#lottos.length;
+  }
+
   getScoreCard() {
     return this.#scoreBoard.getScoreBoard();
+  }
+
+  getLottoNumbers() {
+    return this.#lottos.map((lotto) =>
+      lotto.getNumbers().sort((a, b) => a - b)
+    );
   }
 
   getPrize() {

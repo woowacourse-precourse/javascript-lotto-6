@@ -87,6 +87,13 @@ class LottoConsole {
     Console.print(`총 수익률은 ${((prize / budget) * 100).toFixed(1)}%입니다.`);
   }
 
+  static printLottosNumber(lottosNumber) {
+    lottosNumber.forEach((lottoNumber) =>
+      Console.print(`[${lottoNumber.join(', ')}]`)
+    );
+    LottoConsole.printEmptyLine();
+  }
+
   static printEmptyLine() {
     Console.print('');
   }

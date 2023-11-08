@@ -1,11 +1,9 @@
-import { Console } from '@woowacourse/mission-utils';
 import { CONSTANTS } from './constants/lotto.js';
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    Lotto.#printLottoNumber(numbers);
     Lotto.#validateNumbers(numbers);
     this.#numbers = numbers;
   }
@@ -15,9 +13,9 @@ class Lotto {
     return this.#numbers;
   }
 
-  static #printLottoNumber(numbers) {
-    Console.print(`[${numbers.sort((a, b) => a - b).join(', ')}]`);
-  }
+  // static #printLottoNumber(numbers) {
+  //   Console.print(`[${numbers.sort((a, b) => a - b).join(', ')}]`);
+  // }
 
   static #validateNumbers(numbers) {
     if (numbers.length !== CONSTANTS.LENGTH_OF_LOTTO) {
