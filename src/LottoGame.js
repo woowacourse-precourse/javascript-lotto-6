@@ -12,7 +12,7 @@ class LottoGame {
     const tickets = LottoGame.purchaseLottos(ticketCount);
     Print.printTickets([...tickets]);
     const winningNumbersArray = await LottoGame.getWinngNumberArray();
-    const bonusNumber = await LottoGame.getBonusNumber([...winningNumbersArray.getNumbers(),]);
+    const bonusNumber = await LottoGame.getBonusNumber([...winningNumbersArray.getNumbers()]);
     const results = LottoGame.calculateResult(
       bonusNumber,
       [...tickets],
@@ -95,7 +95,7 @@ class LottoGame {
     });
   }
 
-  static validatebonusNumber(bonusNumber = NUMBER.defaultNumber,winningNumbersArray = []) {
+  static validatebonusNumber(bonusNumber = NUMBER.defaultNumber, winningNumbersArray = []) {
     const bonusNumberInt = Number(bonusNumber);
     if (
       winningNumbersArray.includes(bonusNumberInt) ||
@@ -131,7 +131,7 @@ class LottoGame {
     );
   }
 
-  static calculateEarningsRate(ticketCount = NUMBER.defaultNumber,results = []) {
+  static calculateEarningsRate(ticketCount = NUMBER.defaultNumber, results = []) {
     const prizeMoney = [...WINNGPRICE];
     const totalEarnings = results.reduce(
       (sum, result, index) => sum + result * prizeMoney[index],
