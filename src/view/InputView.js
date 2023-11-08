@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE_NOTIFICATION } from '../constants/Message.js';
-import { isValidBuyAmount } from '../validator/BuyAmountValidator.js';
+import { isValidBuyAmount } from '../validator/BuyMoneyValidator.js';
 import { isValidWinningLotto } from '../validator/WinningLottoValidator.js';
 import { isValidBounsNumber } from '../validator/BounsNumberValidator.js';
 import { COMMA } from '../constants/GameSetting.js';
