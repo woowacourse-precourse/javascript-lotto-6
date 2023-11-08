@@ -57,11 +57,11 @@ class LottoGame {
   }
 
   outputStatistics() {
-    const results = this.caculateStatistics();
+    const results = this.calculateStatistics();
     OutputView.printStatistics(results);
   }
 
-  caculateStatistics() {
+  calculateStatistics() {
     this.#statistics = this.#lottoList.reduce(
       (acc, lotto) => {
         const rank = lotto.getRank(this.#winningNumbers, this.#bonusNumber);
@@ -78,11 +78,11 @@ class LottoGame {
   }
 
   outputTotalProfitRate() {
-    const totalProfitRate = this.caculateTotalProfitRate();
+    const totalProfitRate = this.calculateTotalProfitRate();
     OutputView.printTotalProfitRate(totalProfitRate);
   }
 
-  caculateTotalProfitRate() {
+  calculateTotalProfitRate() {
     const totalAmount =
       2000000000 * this.#statistics[0] +
       30000000 * this.#statistics[1] +

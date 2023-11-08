@@ -23,7 +23,7 @@ describe('로또 게임 클래스 테스트', () => {
     lottoGame = new LottoGame();
   });
 
-  test('로또를 구입하면, 구입한 개수만큼의 로또가 발행된다. - purchaseLotto()', async () => {
+  test('로또를 5개 구입하면, 5개의 로또가 발행된다. - purchaseLotto()', async () => {
     const MOCK_PURCHASE_AMOUNT = ['5000'];
     const RANDOM_NUMBERS = [
       [8, 21, 23, 41, 42, 43],
