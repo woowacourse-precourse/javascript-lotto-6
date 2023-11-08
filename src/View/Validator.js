@@ -6,16 +6,18 @@ import DATATYPE_CONSTANT from "../Constant/DataTypeConstant.js"
 const DOT = '.';
 
 const assertNonEmptyString = (input) => {
-  if (typeof input !== DATATYPE_CONSTANT.STRING)
+  if (typeof input !== DATATYPE_CONSTANT.STRING) {
     throw new ValidationError(ERROR_CONSTANT.IS_NOT_STRING);
-
-  if (input.length === NUMBER_CONSTANT.ZERO)
+  }
+  if (input.length === NUMBER_CONSTANT.ZERO) {
     throw new ValidationError(ERROR_CONSTANT.EMPTY_STRING);
+  }
 }
 
 const assertParsableAsInteger = (input) => {
-  if (typeof input !== DATATYPE_CONSTANT.STRING)
+  if (typeof input !== DATATYPE_CONSTANT.STRING) {
     throw new ValidationError(ERROR_CONSTANT.IS_NOT_STRING);
+  }
 
   const inputLength = input.length;
   if (
@@ -28,11 +30,12 @@ const assertParsableAsInteger = (input) => {
 }
 
 const assertPositiveNumber = (input) => {
-  if (typeof input !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(input))
+  if (typeof input !== DATATYPE_CONSTANT.NUMBER || Number.isNaN(input)) {
     throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
-
-  if (input < NUMBER_CONSTANT.ZERO)
+  }
+  if (input < NUMBER_CONSTANT.ZERO) {
     throw new ValidationError(ERROR_CONSTANT.NEGATIVE_AMOUNT);
+  }
 }
 
 const assertRemainderNotEqual = (value1, value2, expectedRemainderValue) => {
@@ -97,6 +100,19 @@ const assertNotInDuplicateValueInArray = (inputArray) => {
   }
 }
 
+const assertNotInDuplicateInputValueInArray = (inputArray, inputValue) => {
+  if (!Array.isArray(inputArray)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+  if (!Number.isInteger(inputValue)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+
+  if (inputArray.includes(inputValue)) {
+    throw new ValidationError(ERROR_CONSTANT.DUPLICATE_VALUE_IN_ARRAY);
+  }
+}
+
 export default {
   assertNonEmptyString,
   assertParsableAsInteger,
@@ -105,4 +121,5 @@ export default {
   assertArraySizeEqual,
   assertValueInRange,
   assertNotInDuplicateValueInArray,
+  assertNotInDuplicateInputValueInArray,
 };

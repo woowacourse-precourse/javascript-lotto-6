@@ -130,7 +130,7 @@ describe('Validator assertArraySizeEqual', () => {
       }).toThrow(new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY));
     });
   });
-  test('assertArraySizeEqual 인자 유효성 검사, NaN을 제외한 number가 아니면 에러를 throw한다 ', () => {
+  test('assertArraySizeEqual 인자 유효성 검사, 두번 쨰 인자는 NaN을 제외한 number가 아니면 에러를 throw한다 ', () => {
     const inputArray = ['1','2','3'];
     NUMBER_LIST.errorNumberTestCases.forEach((expectedSize) => {
       expect(() => {
@@ -208,6 +208,39 @@ describe('Validator assertNotInDuplicateValueInArray', () => {
     }).toThrow(new ValidationError(ERROR_CONSTANT.DUPLICATE_VALUE_IN_ARRAY));
     expect(() => {
       Validator.assertNotInDuplicateValueInArray(DuplicateValueNotInArray)
+    }).not.toThrow();
+  });
+});
+
+describe('Validator assertNotInDuplicateInputValueInArray', () => {
+  test('assertNotInDuplicateInputValueInArray Function type이다 ', () => {
+    expect(typeof (Validator.assertNotInDuplicateInputValueInArray)).toBe('function');
+  })
+  test('assertNotInDuplicateInputValueInArray 인자 유효성 검사, 첫번 째 인자의 타입이 배열이 아니면 에러를 리턴한다. ', () => {
+    const inputValue = 4;
+    ARRAY_LIST.errorArrayTestCases.forEach((input) => {
+      expect(() => {
+        Validator.assertNotInDuplicateInputValueInArray(input, inputValue)
+      }).toThrow(new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY))
+    });
+  });
+  test('assertNotInDuplicateInputValueInArray 인자 유효성 검사, 두번 쨰 인자는 NaN을 제외한 number가 아니면 에러를 throw한다 ', () => {
+    const inputArray = [];
+    NUMBER_LIST.errorNumberTestCases.forEach((value) => {
+      expect(() => {
+        Validator.assertNotInDuplicateInputValueInArray(inputArray, value);
+      }).toThrow(new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER));
+    })
+  })
+  test('assertNotInDuplicateInputValueInArray 기능 검사, 배열 원소에 같은 인자가 있는 경우 에러를 리턴한다. ', () => {
+    const Array = [1, 2];
+    const DuplicateValue = 1;
+    const NoDuplicateValue = 3;
+    expect(() => {
+      Validator.assertNotInDuplicateInputValueInArray(Array, DuplicateValue)
+    }).toThrow(new ValidationError(ERROR_CONSTANT.DUPLICATE_VALUE_IN_ARRAY));
+    expect(() => {
+      Validator.assertNotInDuplicateInputValueInArray(Array, NoDuplicateValue)
     }).not.toThrow();
   });
 });
