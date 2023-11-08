@@ -15,11 +15,7 @@ import Lotto from './Lotto.js';
 import InputManager from './UI/InputManager.js';
 import OutputManager from './UI/OutputManager.js';
 import { generateRandomNumbers } from './Utils.js';
-import {
-  validateBonusNumberInput,
-  validatePurchaseAmountInput,
-  validateWinnerNumbersInput,
-} from './Validation.js';
+import { Validators } from './Service/Validators.js';
 
 class App {
   constructor() {
@@ -51,7 +47,9 @@ class App {
   async getPurchaseAmount() {
     this.purchaseAmountInput = await this.inputManager.enterPurchaseAmount();
     try {
-      await validatePurchaseAmountInput(this.purchaseAmountInput);
+      await Validators.purchaseAmountInputValidator.validatePurChaseAmountInput(
+        this.purchaseAmountInput
+      );
     } catch (e) {
       await this.outputManager.printInputErrorMessage(e.message);
       await this.getPurchaseAmount();
@@ -63,7 +61,9 @@ class App {
     this.winningNumbersInput =
       await this.inputManager.enterWinningNumbersInput();
     try {
-      await validateWinnerNumbersInput(this.winningNumbersInput);
+      await Validators.winningNumbersInputValidator.validateWinningNumbersInput(
+        this.winningNumbersInput
+      );
     } catch (e) {
       await this.outputManager.printInputErrorMessage(e.message);
       await this.getWinningNumbers();
@@ -74,7 +74,7 @@ class App {
   async getBonusNumber() {
     this.bonusNumberInput = await this.inputManager.enterBonusNumberInput();
     try {
-      await validateBonusNumberInput({
+      await Validators.bonusNumberInputValidator.validateBonusNumberInput({
         bonusNumberInput: this.bonusNumberInput,
         winningNumbers: this.winningNumbers,
       });
