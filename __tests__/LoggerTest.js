@@ -30,14 +30,16 @@ describe("Logger 클래스 테스트", () => {
   });
 
   test("당첨 통계 출력 테스트", () => {
-    const input = {
-      three: 2,
-      four: 4,
-      five: 10,
-      bonusFive: 0,
-      six: 1,
-      returnRate: 34.454444,
-    };
+    const input = [
+      {
+        three: 2,
+        four: 4,
+        five: 10,
+        bonusFive: 0,
+        six: 1,
+      },
+      34.454444,
+    ];
     const logs = [
       "당첨 통계",
       "---",
@@ -51,7 +53,7 @@ describe("Logger 클래스 테스트", () => {
 
     const logSpy = getLogSpy();
 
-    logger.printWinningBoard(input);
+    logger.printWinningBoard(input[0], input[1]);
 
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
