@@ -75,7 +75,7 @@ class App {
       }
     });
 
-    if (lotto.myNumbers.includes(lottoBonusNumber)) {
+    if (comparedResult.theNumberOfMatches === 5 && lotto.myNumbers.includes(parseInt(lottoBonusNumber))) {
       comparedResult.haveBonusNumber = true;
     }
 
