@@ -8,6 +8,7 @@ class LottoModel {
     this.purchaseAmount = 0;
     this.purchasecount = 0;
     this.randomNumbers = [];
+    this.LuckyNumbers = [];
   }
 
   setPurchaseAmount(inputPrice) {
@@ -27,6 +28,11 @@ class LottoModel {
       lottoNumbers.sort((a, b) => a - b);
       return new Lotto(lottoNumbers).getNumbers();
     });
+  }
+
+  setLuckyNumbers(inputNumbers) {
+    InputValidator.ValidLuckyNumber(inputNumbers);
+    this.LuckyNumbers = inputNumbers.split(',').map(Number);
   }
 }
 // const test = new LottoModel();
