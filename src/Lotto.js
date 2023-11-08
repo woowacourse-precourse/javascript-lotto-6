@@ -1,13 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
 
 const RANK = ['lose', 'first', 'second', 'third', 'fourth', 'fifth'];
-const WINNING_REWARDS = [
+const WINNING_RULES = [
   '3개 일치 (5,000원)',
   '4개 일치 (50,000원)',
   '5개 일치 (1,500,000원)',
   '5개 일치, 보너스 볼 일치 (30,000,000원)',
   '6개 일치 (2,000,000,000원)',
 ];
+const REWARDS = [2000000000, 30000000, 1500000, 50000, 5000];
 
 class Lotto {
   #numbers;
@@ -18,11 +19,11 @@ class Lotto {
     this.#validate(numbers);
     this.#numbers = numbers;
     this.#result = {
-      first: 0,
-      second: 0,
-      third: 0,
-      fourth: 0,
-      fifth: 0,
+      [RANK[1]]: 0,
+      [RANK[2]]: 0,
+      [RANK[3]]: 0,
+      [RANK[4]]: 0,
+      [RANK[5]]: 0,
     };
   }
 
@@ -50,7 +51,7 @@ class Lotto {
   showResult(user_lotto_list) {
     this.getResult(user_lotto_list);
     const rank_reverse = RANK.reverse();
-    const result_form = WINNING_REWARDS.map((rule, idx) => {
+    const result_form = WINNING_RULES.map((rule, idx) => {
       return `${rule} - ${this.#result[rank_reverse[idx]]}개 \n`;
     }).join('');
     Console.print(result_form);
@@ -108,6 +109,22 @@ class Lotto {
     }
 
     return correct_number_count;
+  }
+
+  getRateOfReturn(user_lotto_list) {
+    const result_Arr = Object.entries(this.#result);
+    const spent_money = user_lotto_list.length * 1000;
+    let return_money = 0;
+
+    result_Arr.forEach((reward, idx) => {
+      return_money += reward[1] * REWARDS[idx];
+    });
+    return Math.round((return_money / spent_money) * 10000) / 100;
+  }
+
+  showRateOfReturn(user_lotto_list) {
+    const rate_of_return = this.getRateOfReturn(user_lotto_list);
+    Console.print(`총 수익률은 ${rate_of_return}%입니다.`);
   }
 }
 
