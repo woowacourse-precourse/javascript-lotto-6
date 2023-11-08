@@ -21,20 +21,20 @@ class Lotto {
   }
 
   calculate(winning, bonus) {
-    const matchingNumbers = this.getMatchingNumbers(winning);
-    const bonusMatch = this.getBonusMatch(bonus);
-    return this.updateState(matchingNumbers.length, bonusMatch);
+    const matchingNumbers = this.#getMatchingNumbers(winning);
+    const bonusMatch = this.#getBonusMatch(bonus);
+    return this.#updateState(matchingNumbers.length, bonusMatch);
   }
 
-  getMatchingNumbers(winning) {
+  #getMatchingNumbers(winning) {
     return this.#numbers.filter((number) => winning.includes(number));
   }
 
-  getBonusMatch(bonus) {
+  #getBonusMatch(bonus) {
     return this.#numbers.includes(bonus);
   }
 
-  updateState(matchingNumbers, bonusMatch) {
+  #updateState(matchingNumbers, bonusMatch) {
     if (matchingNumbers === 3) {
       return 0;
     } else if (matchingNumbers === 4) {
