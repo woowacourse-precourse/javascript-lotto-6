@@ -11,6 +11,32 @@ export const INPUT_MESSAGE = Object.freeze({
 
 export const OUTPUT_MESSAGE = Object.freeze({
 	infoLottoNumbers: '개를 구매했습니다.',
+	matchingStatics: '\n당첨 통계',
+	hypen: '-',
+	HYPEN_COUNT: 3,
+});
+
+export const MATCHING_RANK = Object.freeze({
+	5: {
+		matchingCount: 3,
+		proceed: 5000,
+	},
+	4: {
+		matchingCount: 4,
+		proceed: 50000,
+	},
+	3: {
+		matchingCount: 5,
+		proceed: 1500000,
+	},
+	2: {
+		matchingCount: 'bonus',
+		proceed: 30000000,
+	},
+	1: {
+		matchingCount: 6,
+		proceed: 2000000000,
+	},
 });
 
 export const ERROR_MESSAGE = Object.freeze({

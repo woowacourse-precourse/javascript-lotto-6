@@ -19,6 +19,8 @@ class LottoController {
 		await this.inputNumbers();
 
 		this.getResult();
+
+		outputView.printMatchingStatics(this.#lotto.getRateOfReturn());
 	}
 
 	async initializeLotto() {
@@ -65,6 +67,7 @@ class LottoController {
 		this.initializeStatics();
 		this.numbersMatching();
 		this.bonusNumberMatching();
+		this.getTotalMatchingStatics();
 	}
 
 	initializeStatics() {
@@ -82,6 +85,12 @@ class LottoController {
 			if (matchingStatic === INPUT_MESSAGE.BONUS_CHECK_NUMBER) {
 				this.#lotto.bonusCompareMatching(index, this.#lottoMaker.getLottoNumbers()[index]);
 			}
+		});
+	}
+
+	getTotalMatchingStatics() {
+		this.#lotto.getMatchingStatics().forEach((statics) => {
+			this.#lotto.countRateOfReturn(statics);
 		});
 	}
 }
