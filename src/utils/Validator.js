@@ -3,6 +3,9 @@ import CheckDuplicates from "./CheckDuplicates.js";
 
 const InputValidator = {
   purchaseAmount(input) {
+    if (input <= 0) {
+      throw new Error(ErrorMessage.USER_NUMBER_ERROR);
+    }
     if (!Number.isInteger(+input) || input.trim() === "") {
       throw new Error(ErrorMessage.USER_NUMBER_ERROR);
     }

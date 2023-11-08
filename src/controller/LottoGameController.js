@@ -5,7 +5,7 @@ import Lottos from "../model/Lottos.js";
 import Lotto from "../model/Lotto.js";
 import BonusNumber from "../model/BonusNumber.js";
 import Rank from "../model/Rank.js";
-import { Rewards } from "../static/Constant.js";
+import { ErrorMessage, Rewards } from "../static/Constant.js";
 class LottoGameController {
   #lottoTickets;
   #winningLotto;
@@ -20,7 +20,7 @@ class LottoGameController {
 
   async readPurchaseAmount() {
     const input = await InputView.purchaseAmount();
-    await this.handlePurchaseAmountError(input);
+    this.handlePurchaseAmountError(input);
   }
 
   async handlePurchaseAmountError(amount) {
@@ -30,7 +30,7 @@ class LottoGameController {
     } catch (error) {
       OutputView.printErrorMessage(error.message);
       const input = await InputView.purchaseAmount();
-      await this.handlePurchaseAmountError(input);
+      this.handlePurchaseAmountError(input);
     }
   }
 
@@ -41,34 +41,36 @@ class LottoGameController {
 
   showLottoTicketCount() {
     OutputView.printLottoTicketCount(this.#lottoTickets.getCount());
-    this.showLottoTicekts();
+    this.showLottoTickets();
   }
 
-  showLottoTicekts() {
+  showLottoTickets() {
     OutputView.printLottoTickets(this.#lottoTickets.getLottos());
     this.readWinningNumber();
   }
 
   async readWinningNumber() {
     const input = await InputView.lottoWinningNumber();
-    await this.handleWinningNumberError(input);
+    this.handleWinningNumberError(input);
   }
 
-  async handleWinningNumberError(numbers) {
+  async handleWinningNumberError(input) {
     try {
+      if (input.trim() === "") throw new Error(ErrorMessage.LOTTO_LENGTH_ERROR);
+      const numbers = input.split(",");
       InputValidator.winningNumber(numbers);
       this.#winningLotto = new Lotto(numbers);
       this.readBonusNumber();
     } catch (error) {
       OutputView.printErrorMessage(error.message);
       const input = await InputView.lottoWinningNumber();
-      await this.handleWinningNumberError(input);
+      this.handleWinningNumberError(input);
     }
   }
 
   async readBonusNumber() {
     const input = await InputView.lottoBonusNumber();
-    await this.handleBonusNumberError(input);
+    this.handleBonusNumberError(input);
   }
 
   async handleBonusNumberError(number) {
@@ -84,7 +86,7 @@ class LottoGameController {
     } catch (error) {
       OutputView.printErrorMessage(error.message);
       const input = await InputView.lottoBonusNumber();
-      await this.handleBonusNumberError(input);
+      this.handleBonusNumberError(input);
     }
   }
 

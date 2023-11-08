@@ -2,6 +2,7 @@ import LottoGameController from "./controller/LottoGameController.js";
 
 class App {
   #LottoGame = new LottoGameController();
+
   constructor() {}
 
   async play() {

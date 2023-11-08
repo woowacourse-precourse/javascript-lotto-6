@@ -25,6 +25,11 @@ const RewardsMessage = [
   "3개 일치 (5,000원) - ",
 ];
 
+const Number = {
+  RANK_LENGTH: 5,
+  LOTTO_LENGTH: 6,
+};
+
 const Rewards = [2000000000, 30000000, 15000000, 50000, 5000];
 
-export { Message, ErrorMessage, RewardsMessage, Rewards };
+export { Message, ErrorMessage, RewardsMessage, Number, Rewards };
