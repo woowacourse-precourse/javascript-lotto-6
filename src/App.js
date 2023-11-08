@@ -1,4 +1,4 @@
-import {lottoInput,lottoOutput} from './io/InputOutput';
+import {lottoInput,lottoOutput,printWinnings} from './io/InputOutput';
 import randomLottoGenerator from './utils/RandomLottoGenerator';
 import compareForResult from './utils/CompareForResult';
 import winningNumberToArray from './utils/WinningNumberToArray';
@@ -29,6 +29,8 @@ class App {
     printLine();
     lottoInput.printResultHeader();
     const winningList = compareForResult(winningNumbers,bonus,lottos);
+    lottoOutput.printWinningList(winningList);
+
 
 
 
