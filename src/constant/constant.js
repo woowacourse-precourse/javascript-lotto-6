@@ -44,4 +44,6 @@ export const ERROR = {
   OUT_OF_RANGE: `${PREFIX} 로또 번호의 숫자 범위는 1에서 45까지의 수입니다.`,
   DUPLICATE_NUMBER: `${PREFIX} 중복되는 번호가 존재합니다.`,
   INVALID_NUMBER_FORMAT: `${PREFIX} 유효하지 않은 숫자 형식입니다.`,
+  DUPLICATE_WINNING_NUMBER: `${PREFIX} 보너스 번호가 당첨 번호와 중복됩니다.`,
+  BONUS_NUMBER_IS_OUT_OF_RANGE: `${PREFIX} 보너스 번호의 숫자 범위는 1에서 45까지의 수입니다.`,
 };
