@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from "../constants/Constant";
+import { Console } from "@woowacourse/mission-utils";
 
 class ValidLotto {
   validPrice(price) {
@@ -9,12 +10,10 @@ class ValidLotto {
   }
 
   validLottoUnit(winningNum) {
-    if (winningNum.length !== new Set(winningNum).size) {
+    if (winningNum.length !== new Set(winningNum).size)
       throw new Error(ERROR_MESSAGE.LOTTO_INPUT);
-    }
-    if (winningNum.some((num) => num < 0 || num >= 45)) {
+    if (winningNum.some((num) => num < 0 || num >= 45))
       throw new Error(ERROR_MESSAGE.LOTTO_UNIT);
-    }
   }
 }
 

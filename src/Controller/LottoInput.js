@@ -23,6 +23,7 @@ class LottoInput {
       let winningNum = [];
       const winNum = await Console.readLineAsync(MESSAGE_INPUT.WINNING_INPUT);
       winningNum = winNum.split(",").map(Number);
+
       this.validLotto.validLottoUnit(winningNum);
       return winningNum;
     } catch (error) {
