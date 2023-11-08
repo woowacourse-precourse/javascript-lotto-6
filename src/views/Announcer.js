@@ -1,10 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import { PROMPT_MESSEGE, RESULT_MESSEGE } from '../constants/messages.js';
-import { RANK } from '../constants/options.js';
+import { RANK } from '../constants/lottoConstants.js';
 
 const purchase = (amount) => `\n${amount}개를 구매했습니다.`;
 const formatLotto = (lotto) => `[${lotto.join(', ')}]`;
-const profitRate = (rate) => `총 수익률은 ${rate}%입니다.`;
+const formatPrize = (message, count) => `${message}${count}개`;
+const formatProfitRate = (rate) => `총 수익률은 ${rate}%입니다.`;
 
 class Announcer {
   printLottoBundle(lottoBundle) {
@@ -19,7 +20,7 @@ class Announcer {
     Console.print(PROMPT_MESSEGE.lottoResult);
     const rankedLotto = analyzer.getRankedLotto();
     this.#printPrize(rankedLotto);
-    Console.print(profitRate(analyzer.calculateProfitRate()));
+    Console.print(formatProfitRate(analyzer.calculateProfitRate()));
   }
 
   #printPrize(rankedLotto) {
@@ -27,7 +28,7 @@ class Announcer {
     RESULT_MESSEGE.forEach((message, index) => {
       const rank = rankKeys[index];
       const count = rankedLotto[rank];
-      Console.print(`${message}${count}개`);
+      Console.print(formatPrize(message, count));
     });
   }
 }

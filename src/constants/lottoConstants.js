@@ -1,11 +1,8 @@
 export const OPTIONS = Object.freeze({
+  unit: 1000,
   minNumber: 1,
   maxNumber: 45,
   length: 6,
-});
-
-export const REGEXS = Object.freeze({
-  number: /^[0-9]+$/,
 });
 
 export const RANK = Object.freeze({

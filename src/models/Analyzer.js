@@ -1,4 +1,4 @@
-import { RANK, PRIZE } from '../constants/options.js';
+import { OPTIONS, RANK, PRIZE } from '../constants/lottoConstants.js';
 
 class Analyzer {
   #rankedLotto;
@@ -48,7 +48,7 @@ class Analyzer {
     for (const rank in this.#rankedLotto) {
       paymentAmount += this.#rankedLotto[rank];
     }
-    paymentAmount *= 1000;
+    paymentAmount *= OPTIONS.unit;
 
     return ((totalPrize / paymentAmount) * 100).toFixed(1);
   }
