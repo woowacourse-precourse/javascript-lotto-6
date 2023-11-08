@@ -11,11 +11,7 @@ export default class InputValidator {
     if (inputAsNumber % 1000 !== 0) throw new Error(ERROR.input_1000);
   }
 
-  validateNumber(userInput, TYPE) {
-    const NUMBER_STRING = userInput
-      .split(",")
-      .map((numStr) => parseInt(numStr, 10));
-
+  validateNumber(NUMBER_STRING, TYPE) {
     if (!NUMBER_STRING.every((number) => 1 <= number && number <= 45)) {
       throw new Error(ERROR.input_1_45);
     }
