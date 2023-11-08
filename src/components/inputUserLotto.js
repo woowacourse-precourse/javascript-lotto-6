@@ -2,10 +2,11 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { GAME, ERROR } from "../pages/text.js";
 import InputValidator from "../utils/valids.js";
 
-export default class BuyLotto {
-  constructor(count, numbers) {
+export default class inputUserLotto {
+  constructor(count, numbers, bonus) {
     this.count = count;
     this.numbers = numbers;
+    this.bonus = bonus;
     this.inputValidator = new InputValidator();
   }
 
@@ -15,10 +16,18 @@ export default class BuyLotto {
     this.count = userInput / 1000;
     return userInput / 1000;
   }
+
   async getUserNumber(TYPE) {
     const userInput = await MissionUtils.Console.readLineAsync(
       TYPE === "BONUS" ? GAME.input_bonus : GAME.input_number
     );
-    return this.inputValidator.validateNumber(userInput, TYPE);
+
+    if (TYPE === "BONUS") {
+      this.bonus = this.inputValidator.validateNumber(userInput, TYPE);
+      if (this.numbers.includes(this.bonus))
+        throw new Error(ERROR.input_lotto_bonus_in_numbers);
+    } else {
+      this.numbers = this.inputValidator.validateNumber(userInput, TYPE);
+    }
   }
 }

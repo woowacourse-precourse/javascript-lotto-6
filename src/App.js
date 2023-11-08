@@ -1,14 +1,13 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import buyLotto from "./components/buyLotto.js";
+import inputUserLotto from "./components/inputUserLotto.js";
 
 class App {
   async play() {
-    let lotto = new buyLotto();
+    let lotto = new inputUserLotto();
     await lotto.getUserCostToLotto();
-    const WINNING_NUMBER = await lotto.getUserNumber();
-    console.log(WINNING_NUMBER);
-    const BONUS_NUMBER = await lotto.getUserNumber("BONUS");
-    console.log(BONUS_NUMBER);
+    await lotto.getUserNumber();
+    await lotto.getUserNumber("BONUS");
+    console.log(lotto);
   }
 }
 
