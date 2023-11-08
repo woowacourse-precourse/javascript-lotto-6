@@ -91,12 +91,12 @@ describe("로또 테스트", () => {
   //   });
   // });
 
-  test("기능 테스트 2", async () => {
+  test("기능 테스트 2번째", async () => {
     // given
     const logSpy = getLogSpy();
     const LOTTO_AMOUNT = '12000';
     const WINNING_NUMBERS = '10,11,12,13,14,15'
-    const BONUS_NUMBER = '16';
+    const BONUS_NUMBER = '30';
 
     mockRandoms([
       [1, 2, 3, 4, 5, 6],
@@ -112,7 +112,7 @@ describe("로또 테스트", () => {
       [16, 17, 18, 19, 20, 21],
       [22, 23, 24, 25, 26, 27],
     ]);
-    mockQuestions(["12000", "10,11,12,13,14,15", "30"]);
+    mockQuestions([LOTTO_AMOUNT, WINNING_NUMBERS, BONUS_NUMBER]);
 
     // when
     const app = new App();
