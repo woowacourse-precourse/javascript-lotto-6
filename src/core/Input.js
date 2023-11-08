@@ -66,6 +66,7 @@ export default class Input {
    */
   async askBounsNumber() {
     let bonusNumber;
+
     while (true) {
       try {
         const response = await Console.readLineAsync(
@@ -80,6 +81,7 @@ export default class Input {
         Console.print(error.message + "\n");
       }
     }
+
     return bonusNumber;
   }
 }
