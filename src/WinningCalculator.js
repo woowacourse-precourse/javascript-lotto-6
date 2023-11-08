@@ -5,6 +5,10 @@ const NUMBER_NAME = {
   bonus: '보너스',
 };
 
+const LOTTO = {
+  price: 1000,
+};
+
 const BONUS_OPTIONS = {
   matchCount: 5,
 };
@@ -44,11 +48,14 @@ class WinningCalculator {
 
   #issuedLottoNumbers;
 
+  profit;
+
   constructor(totalWinningNumbers, issuedLottoNumbers) {
     this.#totalWinningNumbers = totalWinningNumbers;
     this.#issuedLottoNumbers = issuedLottoNumbers;
     this.winnerList = new Map();
     this.#analyzeWinner();
+    this.#calculateProfit();
   }
 
   #analyzeWinner() {
@@ -90,6 +97,17 @@ class WinningCalculator {
       this.winnerList.set(rank, this.winnerList.get(rank) - 1);
       this.winnerList.set(bonusRank, 1 + (this.winnerList.get(bonusRank) ?? 0));
     }
+  }
+
+  #calculateProfit() {
+    const totalCost = this.#issuedLottoNumbers.length * LOTTO.price;
+    const winnerListArray = Array.from(this.winnerList);
+    const totalPrize = winnerListArray.reduce((accPrize, rankAndCount) => {
+      const prize =
+        accPrize + WINNING_PRIZE.get(rankAndCount[0]) * rankAndCount[1];
+      return prize;
+    });
+    return totalPrize / totalCost;
   }
 
   informResult() {
