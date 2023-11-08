@@ -18,7 +18,7 @@ class OutputView {
   }
   
   static showLottoNumbers (lottoTickets) {
-    this.showLottoCount(lottoTickets.legnth);
+    this.showLottoCount(lottoTickets.length);
 
     lottoTickets.forEach((lotto) => {
       Console.print(`[${String(lotto.getNumbers()).split(DELIMITER).join(DELIMITER_SPACE)}]`);
