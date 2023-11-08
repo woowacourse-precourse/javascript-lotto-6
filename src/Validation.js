@@ -22,7 +22,11 @@ class Validation {
   }
 
   static isValidWinningNumbers(numbers) {
-    return numbers.length === 6 && new Set(numbers).size === 6 && numbers.every(Validation.isValidNumber);
+    return (
+      numbers.length === LOTTO_NUMBER.numberCount &&
+      new Set(numbers).size === LOTTO_NUMBER.numberCount &&
+      numbers.every(Validation.isValidNumber)
+    );
   }
 
   static validateBonusNumber(bonusNumber, winningNumbers) {
