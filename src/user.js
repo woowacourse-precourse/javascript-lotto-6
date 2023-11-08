@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto";
 
 function isNumber(input) {
   return typeof input === "number" && !isNaN(input);
@@ -23,7 +24,6 @@ export async function userPriceInput() {
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
-
   }
 }
 
@@ -34,14 +34,7 @@ export async function userWinningInput() {
           "당첨 번호를 입력해 주세요."
         );
         winNumber = winNumber.split(",").map(Number);
-        if (!this.isNumber(winNumber)) {
-          throw new Error("[ERROR] 잘못된 형식입니다. 숫자를 입력해주세요.");
-        }
-        if (!this.isLottoNumber(winNumber)) {
-          throw new Error(
-            "[ERROR] 잘못된 로또 번호 입니다. 로또 번호는 1부터 45 사이의 숫자여야 합니다."
-          );
-        }
+        return new Lotto(winNumber);
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }

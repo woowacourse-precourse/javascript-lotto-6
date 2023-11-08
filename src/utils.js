@@ -2,12 +2,16 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
 export function generateLottos(count) {
-  const lottos = [];
-  for (let i = 0; i < count; i++) {
-    const randomNumbers = generateRandomNumbers(6);
-    lottos.push(new Lotto(randomNumbers));
+  try {
+    const lottos = [];
+    for (let i = 0; i < count; i++) {
+      const randomNumbers = generateRandomNumbers(6);
+      lottos.push(new Lotto(randomNumbers));
+    }
+    return lottos;
+  } catch (error) {
+    MissionUtils.Console.print(error.message);
   }
-  return lottos;
 }
 
 function generateRandomNumbers(len) {

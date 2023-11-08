@@ -2,7 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { userPriceInput, userWinningInput, userBonusInput } from "./input.js";
 import { printCnt, printLottoNumber } from "./print.js";
 import { printWinningList, printROI } from "./result.js";
-import { checkWinning } from "./utils.js";
+import { generateLottos, checkAllLottos } from "./utils.js"
 import Lotto from "./Lotto.js";
 
 class App {
@@ -11,9 +11,9 @@ class App {
     printCnt(count, change);
     const lottos = generateLottos(count);
     printLottoNumber(lottos);
-    const winNumber = await userWinningInput();
+    const winNumbers = await userWinningInput();
     const bonusNumber = await userBonusInput();
-    const winList = checkAllLottos(lottos, winNumbers, bonusNumber);
+    const winList = checkAllLottos(lottos, winNumbers.getNumber(), bonusNumber.getNumber());
     printWinningList(winList);
     printROI(winList, count);
   }
