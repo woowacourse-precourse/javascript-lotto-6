@@ -59,6 +59,7 @@ class WinningLotoCounter {
 	}
 
 	static countCorrectCnt(numbers, winningNumbers) {
+		// both sorted assured
 		let cnt = 0;
 		let numberIndex = 0;
 		let winningNumbersIndex = 0;

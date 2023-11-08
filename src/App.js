@@ -4,17 +4,12 @@ import Output from './Output.js';
 import Validator from './Validator.js';
 import WinningLotoCounter from './WinningLottoCounter.js';
 import ProfitCalculator from './ProfitCalculator.js';
+import { ENTER_BONUS_NUMBER, ENTER_BUDGET, ENTER_LOTTO_NUMBERS } from './constant.js';
 
 class App {
 	#lottoList;
 
 	#winningLottoList;
-
-	#profitCalculator;
-
-	constructor() {
-		this.#profitCalculator = ProfitCalculator;
-	}
 
 	async play() {
 		const budget = await this.#getBudget();
@@ -56,7 +51,7 @@ class App {
 
 	async #getBudget() {
 		const budgetStr = await Input.askUserUntilValid(
-			'구입금액을 입력해 주세요.\n',
+			ENTER_BUDGET,
 			Validator.checkBudgetValidity,
 		);
 		const budget = budgetStr * 1;
@@ -65,11 +60,11 @@ class App {
 
 	async #getWinningCondition() {
 		const winningNumber = await Input.askUserUntilValid(
-			'당첨 번호를 입력해 주세요.\n',
+			ENTER_LOTTO_NUMBERS,
 			Validator.checkWinningNumberValidity,
 		);
 		const bonusNumber = await Input.askUserUntilValid(
-			'보너스 번호를 입력해 주세요.\n',
+			ENTER_BONUS_NUMBER,
 			Validator.generateBonusNumberValidateFunc(winningNumber),
 		);
 

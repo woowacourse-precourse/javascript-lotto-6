@@ -97,7 +97,9 @@ describe('Validator 클래스 테스트', () => {
 		strExample.forEach((str, i) => {
 			if (!expectedValidity[i]) {
 				expect(() =>
-					validator.checkBonusNumberValidity(str),
+					validator.checkBonusNumberCondition(
+						str,
+					),
 				).toThrow('[ERROR]');
 			}
 		});

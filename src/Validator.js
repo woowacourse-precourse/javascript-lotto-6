@@ -1,10 +1,21 @@
+import {
+	LOTTO_NUMBERS_CEIL,
+	LOTTO_NUMBERS_FLOOR,
+	LOTTO_PRICE,
+	SHOULD_AVOID_DUP_BONUS,
+	SHOULD_BE_DIVIDED_BY_PRICE,
+	SHOULD_BE_IN_RANGE,
+	SHOULD_BE_NATURAL_NUMBER,
+	SHOULD_HAVE_ENOUGH_NUMBER,
+} from './constant.js';
+
 class Validator {
 	static checkIsNaturalNumber(str) {
 		return /^[1-9]\d*$/.test(str);
 	}
 
 	static checkIsDividedByLottoPrice(str) {
-		return parseInt(str, 10) % 1000 === 0;
+		return parseInt(str, 10) % LOTTO_PRICE === 0;
 	}
 
 	static checkNoDupSize(array, expectedSize) {
@@ -26,12 +37,12 @@ class Validator {
 	static checkBudgetValidity(str) {
 		const isStrNaturalNumber = Validator.checkIsNaturalNumber(str);
 		if (!isStrNaturalNumber) {
-			throw new Error('[ERROR] 자연수를 입력해주세요.');
+			throw new Error(SHOULD_BE_NATURAL_NUMBER);
 		}
 
-		const isStrDivideBy1000 = Validator.checkIsDividedByLottoPrice(str);
-		if (!isStrDivideBy1000) {
-			throw new Error('[ERROR] 1000의 배수를 입력해주세요.');
+		const isStrDivideByPrice = Validator.checkIsDividedByLottoPrice(str);
+		if (!isStrDivideByPrice) {
+			throw new Error(SHOULD_BE_DIVIDED_BY_PRICE);
 		}
 
 		return true;
@@ -42,20 +53,16 @@ class Validator {
 
 		const isArraySizeCorrect = Validator.checkNoDupSize(winningNumberArray, 6);
 		if (!isArraySizeCorrect) {
-			throw new Error(
-				`[ERROR] ${6}개의 숫자를 입력해주세요. 중복은 허용되지 않습니다.`,
-			);
+			throw new Error(SHOULD_HAVE_ENOUGH_NUMBER);
 		}
 
 		const isAllNumberInRange = Validator.checkAllNumberInRange(
 			winningNumberArray,
-			1,
-			45,
+			LOTTO_NUMBERS_FLOOR,
+			LOTTO_NUMBERS_CEIL,
 		);
 		if (!isAllNumberInRange) {
-			throw new Error(
-				`[ERROR] ${1}에서 ${45}사이의 숫자를 입력해주세요.`,
-			);
+			throw new Error(SHOULD_BE_IN_RANGE);
 		}
 
 		return true;
@@ -71,14 +78,14 @@ class Validator {
 	static checkBonusNumberCondition(str) {
 		const isStrNaturalNumber = Validator.checkIsNaturalNumber(str);
 		if (!isStrNaturalNumber) {
-			throw new Error('[ERROR] 자연수를 입력해주세요.');
+			throw new Error(SHOULD_BE_NATURAL_NUMBER);
 		}
 
-		const isNumberInRange = parseInt(str, 10) >= 1 && parseInt(str, 10) <= 45;
+		const isNumberInRange =
+			parseInt(str, 10) >= LOTTO_NUMBERS_FLOOR &&
+			parseInt(str, 10) <= LOTTO_NUMBERS_CEIL;
 		if (!isNumberInRange) {
-			throw new Error(
-				`[ERROR] ${1}에서 ${45}사이의 숫자를 입력해주세요.`,
-			);
+			throw new Error(SHOULD_BE_IN_RANGE);
 		}
 
 		return true;
@@ -86,7 +93,7 @@ class Validator {
 
 	static checkWinningNumberBonusNumberDup(winningNumber, bonusNumber) {
 		if (winningNumber.split(',').indexOf(bonusNumber) > -1) {
-			throw new Error('[ERROR] 보너스 번호도 중복을 피해주세요.');
+			throw new Error(SHOULD_AVOID_DUP_BONUS);
 		}
 	}
 }

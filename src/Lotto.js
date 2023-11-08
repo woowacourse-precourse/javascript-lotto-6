@@ -1,3 +1,5 @@
+import { LOTTO_NUMBERS_CNT, SHOULD_BE_NO_DUP } from './constant.js';
+
 class Lotto {
 	#numbers; // array
 
@@ -8,13 +10,13 @@ class Lotto {
 	}
 
 	#validate(numbers) {
-		if (numbers.length !== 6) {
+		if (numbers.length !== LOTTO_NUMBERS_CNT) {
 			throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
 		}
 
 		const isDuplicated = !this.#checkHasNoDup(numbers);
 		if (isDuplicated) {
-			throw new Error('[ERROR] 로또 번호는 중복되지 않아야 합니다.');
+			throw new Error(SHOULD_BE_NO_DUP);
 		}
 	}
 

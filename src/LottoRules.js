@@ -1,12 +1,5 @@
 import WinningCondition from './WinningCondition.js';
-
-const DEFAULT_RULES = [
-	{ correctCnt: 3, bonusCnt: 0, winnings: 5000 },
-	{ correctCnt: 4, bonusCnt: 0, winnings: 50000 },
-	{ correctCnt: 5, bonusCnt: 0, winnings: 1500000 },
-	{ correctCnt: 5, bonusCnt: 1, winnings: 30000000 },
-	{ correctCnt: 6, bonusCnt: 0, winnings: 2000000000 },
-];
+import { DEFAULT_RULES } from './constant.js';
 
 class LottoRules {
 	#winningRule = [];
