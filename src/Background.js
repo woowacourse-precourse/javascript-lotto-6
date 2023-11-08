@@ -11,6 +11,13 @@ class Background {
   }
 
   // getters & setters
+  setNumbers(numbers) {
+    this.#numbers = numbers;
+  }
+
+  setBonus(bonus) {
+    this.#bonus = bonus;
+  }
 
   // queries
   issueLottos(bet) {

@@ -13,10 +13,15 @@ class App {
   }
 
   async play() {
+    // issue lottery tickets
     this.#bet = await Controls.getBet();
     [this.#bet, this.#lottos] = this.#background.issueLottos(this.#bet);
-
     Controls.printLottos(this.#lottos);
+
+    // set winning numbers
+    let [win, bonus] = await Controls.writeWin();
+    this.#background.setNumbers(win);
+    this.#background.setBonus(bonus);
   }
 }
 
