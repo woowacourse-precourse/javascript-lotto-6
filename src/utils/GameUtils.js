@@ -2,6 +2,13 @@ import { Random } from '@woowacourse/mission-utils';
 import PURCHASE_UNIT from '../constants/PurchaseUnit.js';
 import LOTTO_NUMBER from '../constants/LottoNumber.js';
 import PRIZE_MONEY from '../constants/PrizeMoney.js';
+import {
+  FIFTH_PLACE,
+  FOURTH_PLACE,
+  JACKPOT,
+  LOSE,
+} from '../constants/NumberForConsideringWin.js';
+import { PERCENT, ROUND_SECOND_DECIMAL_PLACE } from '../constants/Utils.js';
 
 class GameUtils {
   static dividedByThousand(amount) {
@@ -56,7 +63,7 @@ class GameUtils {
   }
 
   static isNothing(differencesLength) {
-    if (differencesLength > 3) {
+    if (differencesLength > LOSE) {
       return PRIZE_MONEY.NOTHING;
     }
 
@@ -64,7 +71,7 @@ class GameUtils {
   }
 
   static isFifth(differencesLength) {
-    if (differencesLength === 3) {
+    if (differencesLength === FIFTH_PLACE) {
       return PRIZE_MONEY.FIFTH;
     }
 
@@ -72,7 +79,7 @@ class GameUtils {
   }
 
   static isFourth(differencesLength) {
-    if (differencesLength === 2) {
+    if (differencesLength === FOURTH_PLACE) {
       return PRIZE_MONEY.FOURTH;
     }
 
@@ -80,7 +87,7 @@ class GameUtils {
   }
 
   static isFirst(differencesLength) {
-    if (differencesLength === 0) {
+    if (differencesLength === JACKPOT) {
       return PRIZE_MONEY.FIRST;
     }
 
@@ -96,8 +103,8 @@ class GameUtils {
   }
 
   static getReturnRateRoundSecondDecimalPlace(prizeSum, tickets) {
-    const persent = (prizeSum / tickets) * 100;
-    return persent.toFixed(1);
+    const persent = (prizeSum / tickets) * PERCENT;
+    return persent.toFixed(ROUND_SECOND_DECIMAL_PLACE);
   }
 }
 
