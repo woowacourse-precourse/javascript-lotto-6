@@ -1,6 +1,12 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-import { calculateProfit, calculateProfitRate, countIncludeNumbers, matchedLottoNumbers } from '../src/utils/calculate/calculate.js';
+import {
+  calculateProfit,
+  calculateProfitRate,
+  countIncludeNumbers,
+  matchedLottoNumbers,
+  filterLottoNumbers,
+} from '../src/utils/calculate/calculate.js';
 
 describe('당첨금 계산 함수 테스트', () => {
   test('당첨금 합계 테스트', () => {
@@ -13,6 +19,31 @@ describe('당첨금 계산 함수 테스트', () => {
 
     lottoResults.forEach((result, index) => {
       expect(calculateProfit(result)).toBe(prices[index]);
+    });
+  });
+
+  test('당첨된 로또 번호 체크 함수 테스트', () => {
+    const testCases = [
+      {
+        winningNumbers: [5, 17, 23, 33, 45, 49],
+        lottoNumbers: [3, 17, 23, 33, 45, 49],
+        expected: [17, 23, 33, 45, 49],
+      },
+      {
+        winningNumbers: [5, 17, 23, 33, 45, 49],
+        lottoNumbers: [3, 17, 20, 35, 45, 50],
+        expected: [17, 45],
+      },
+      {
+        winningNumbers: [5, 17, 23, 33, 45, 49],
+        lottoNumbers: [1, 2, 3, 4, 6, 7],
+        expected: [],
+      },
+    ];
+
+    testCases.forEach(({ winningNumbers, lottoNumbers, expected }) => {
+      const filteredNumbers = filterLottoNumbers(winningNumbers, lottoNumbers);
+      expect(filteredNumbers).toEqual(expected);
     });
   });
 
