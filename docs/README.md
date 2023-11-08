@@ -28,10 +28,11 @@
 <br/>
 
 handlePurchase
-- [ ] 로또 구매를 처리
+- [x] 로또 구매를 처리
 
-LottoWinningInputHandler
-- [ ] 당첨 번호 입력을 처리
+handleLottoWinningNumbers
+- [x] 당첨 번호 입력을 처리
+- [x] 보너스 당첨 번호 입력을 처리
 
 calculateProfitRates
 - [ ] 수익률을 계산
@@ -60,8 +61,8 @@ sortLottoNumbers
 calculateLottoCount
 - [x] 지불한 금액으로 구매할 수 있는 로또의 수를 계산
 
-printLottos
-- [ ] 구매한 로또의 번호를 출력
+printLottoNumbers
+- [x] 구매한 로또의 번호를 출력
 
 <br/>
 
@@ -78,9 +79,16 @@ setBonumsNumbers
 
 validateNumbers
 - [ ] 당첨 번호의 유효성을 검사
+- 예외 처리
+  - [ ] 숫자의 개수가 6개인지 확인
+  - [ ] 각 숫자가 로또 번호로서 1~45 범위 내에 있는지 확인
+  - [ ] 숫자들에 중복이 없는지 확인
 
 validateBonusNumbers
 - [ ] 보너스 당첨 번호의 유효성을 검사
+- 예외 처리
+  - [ ] 숫자가 로또 번호로서 1~45 범위 내에 있는지 확인
+  - [ ] 당첨 번호들과 중복되지 않아야 한다.
 
 checkWinning
 - [ ] 주어진 로또 번호가 당첨 번호와 일치하는지 확인
@@ -113,15 +121,26 @@ promptBonusNumber
 
 printLottoCounts
 - [x] 구매한 로또 개수를 화면에 출력하기
+- `${lottoCount}개를 구매했습니다.`
 
 printLottos
 - [x] 구매한 로또 번호를 화면에 출력하기
+- `[8, 21, 23, 41, 42, 43]` <br/>
+  `[3, 5, 11, 16, 32, 38]` ...
 
 printLottoResult
 - [ ] 당첨 결과를 화면에 출력하기
+- `당첨 통계` <br/>
+  `---` <br/>
+  `3개 일치 (5,000원) - 1개` <br/>
+  `4개 일치 (50,000원) - 0개` <br/>
+  `5개 일치 (1,500,000원) - 0개` <br/>
+  `5개 일치, 보너스 볼 일치 (30,000,000원) - 0개` <br/>
+  `6개 일치 (2,000,000,000원) - 0개` <br/>
 
 printProfitRates
 - [ ] 수익률을 화면에 출력하기
+- `총 수익률은 ${winningRates}%입니다.`
 
 <br/>
 
@@ -150,36 +169,6 @@ getLottoBonusWinningNumber
 
 ## InputValidator.js 
 > 입력값이 유효한지 검사하는 로직을 관리
-
-<br/>
-
-## OutputHandler.js
-> 사용자에게 정보를 출력하는 함수들을 관리
-
-<br/>
-
-printPurchaseCount
-- [ ] 몇개를 구입했는지 출력
-- `${lottoCount}개를 구매했습니다.`
-
-printLottoNumber
-- [ ] 사용자가 구입한 로또 번호 출력
-- `[8, 21, 23, 41, 42, 43]` <br/>
-  `[3, 5, 11, 16, 32, 38]` ...
-
-announceWinningNumber
-- [ ] 당첨 통계
-- `당첨 통계` <br/>
-  `---` <br/>
-  `3개 일치 (5,000원) - 1개` <br/>
-  `4개 일치 (50,000원) - 0개` <br/>
-  `5개 일치 (1,500,000원) - 0개` <br/>
-  `5개 일치, 보너스 볼 일치 (30,000,000원) - 0개` <br/>
-  `6개 일치 (2,000,000,000원) - 0개` <br/>
-
-printWinningRates
-- [ ] 총 수익률 출력
-- `총 수익률은 ${winningRates}%입니다.`
 
 <br/>
 

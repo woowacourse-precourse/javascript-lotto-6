@@ -7,9 +7,15 @@ class InputView {
   }
 
   async promptPurchaseAmount() {
-    const money = await this.getUserInput(GAME_MESSAGES.ENTER_PURCHASE_AMOUNT);
+    const purchaseAmount = await this.getUserInput(GAME_MESSAGES.ENTER_PURCHASE_AMOUNT);
     // validation 처리할 예정
-    return money;
+    return purchaseAmount;
+  }
+
+  async promptWinningNumbers() {
+    const winningNumbers = await this.getUserInput(GAME_MESSAGES.ENTER_WINNING_NUMBERS);
+    //validation 처리할 예정
+    return winningNumbers;
   }
 }
 
