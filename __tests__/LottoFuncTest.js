@@ -2,7 +2,7 @@ import LottoGame from "../src/Model/lottoGame";
 
 describe('로또 게임 클래스 테스트', () => {
   test('로또 번호에 따른 등수 구하는 함수 테스트', () => {
-    const lottoGame = new LottoGamegit c();
+    const lottoGame = new LottoGame();
     lottoGame.setWinningNumber('1, 2, 3, 11, 22, 33');
     lottoGame.setBonusNumber('4');
     expect(lottoGame.matchWinningNumber([1, 2, 3, 4, 11, 22])).toBe(2);
