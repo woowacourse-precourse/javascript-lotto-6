@@ -2,18 +2,15 @@ import { Console } from "@woowacourse/mission-utils";
 import { CONSOLE_MESSAGE } from "../Constants.js";
 import Lotto from "../errors/Lotto.js";
 import Bonus from "../errors/Bonus.js";
+import { InputView } from "../view/inputVeiw.js";
 class WinningLotto {
   async getWinningLotto() {
     let mainLotto = "";
     let mainLottoArr = [];
     while (true) {
       try {
-        mainLotto = await Console.readLineAsync(
-          CONSOLE_MESSAGE.WINNING_LOTTO_INPUT + "\n"
-        );
-        const testArr = mainLotto.split(",");
-        new Lotto(testArr);
-        mainLottoArr = testArr.map(Number);
+        mainLotto = await InputView.readMainLotto();
+        mainLottoArr = mainLotto.map(Number);
         break;
       } catch (error) {
         Console.print(error.message);
@@ -26,17 +23,15 @@ class WinningLotto {
     let bonusLotto = "";
     while (true) {
       try {
-        bonusLotto = await Console.readLineAsync(
-          CONSOLE_MESSAGE.BONUS_LOTTO_INPUT + "\n"
-        );
-        new Bonus([mainLottoArr, bonusLotto]);
+        bonusLotto = await InputView.readBonusLotto(mainLottoArr);
+
         break;
       } catch (error) {
         Console.print(error.message);
       }
     }
 
-    return Number(bonusLotto);
+    return bonusLotto;
   }
 
   compareNumbers(myLottos, winningArr) {

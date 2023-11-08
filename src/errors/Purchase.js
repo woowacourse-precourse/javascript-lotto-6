@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../Constants";
+import { ERROR_MESSAGE } from "../Constants.js";
 class Purchase {
   #amount;
 
