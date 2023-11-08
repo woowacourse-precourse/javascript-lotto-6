@@ -4,17 +4,17 @@ class OrganizeResults {
   organizeRank = (lotto, published, bonus) => {
     published.numbers.forEach((number) => {
       const result = lotto.compareNumbers(number);
-      this.exportRankAsResult(result, published, bonus);
+      this.exportRankAsResult(result, published, number, bonus);
     });
   }
 
-  exportRankAsResult = (result, published, bonus) => {
+  exportRankAsResult = (result, published, numbers, bonus) => {
     switch(result) {
       case 6 :
         published.rank[0] += 1;
         break;
       case 5 :
-        if (published.numbers.includes(bonus)) {
+        if (numbers.includes(bonus)) {
             published.rank[1] += 1;
           break;
         }
