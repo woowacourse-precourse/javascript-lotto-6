@@ -1,6 +1,6 @@
 import CONSTRAINTS from '../constants/Constraints';
 import Lotto from '../Lotto';
-import Validation from '../domain/Validation';
+import Validation from '../model/Validation';
 import randomNumber from '../utils/randomNumber';
 import Input from '../views/Input';
 import Output from '../views/Output';
@@ -9,11 +9,6 @@ class LottoController {
   #lottoCount;
 
   #lottos;
-
-  async play() {
-    await this.inputLottoPrice();
-    await this.purchaseLotto();
-  }
 
   async inputLottoPrice() {
     const price = await Input.readPrice();
@@ -44,7 +39,6 @@ class LottoController {
       const sortedLotto = lotto.sort((a, b) => a - b);
       numbers.push(sortedLotto);
     }
-    console.log(numbers);
     this.#lottos = numbers.map((lotto) => new Lotto(lotto));
   }
 }
