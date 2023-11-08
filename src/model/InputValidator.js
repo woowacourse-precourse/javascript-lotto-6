@@ -37,7 +37,8 @@ class InputValidator {
 
   static isValidNumber(num) {
     const numberCondition = Number.isInteger(num) && num >= INIT.validNumber.min && num <= INIT.validNumber.max;
-    this.errorCondition(!numberCondition, ERROR_MESSAGES.invalidNumber);
+    // this.errorCondition(!numberCondition, ERROR_MESSAGES.invalidNumber);
+    return numberCondition;
   }
 
   static numberCheck(numbers) {
