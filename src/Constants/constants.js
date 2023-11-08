@@ -1,9 +1,9 @@
 export const MESSAGE = {
   INPUT_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
-  INPUT_LOTTO_NUMBERS: '당첨 번호를 입력해 주세요.\n',
-  INPUT_BONUS_NUMBERS: '보너스 번호를 입력해 주세요.\n',
+  INPUT_LOTTO_NUMBERS: '\n당첨 번호를 입력해 주세요.\n',
+  INPUT_BONUS_NUMBERS: '\n보너스 번호를 입력해 주세요.\n',
   OUTPUT_LOTTO: '개를 구매했습니다.',
-  OUTPUT_STATISTICS: '당첨 통계 \n---\n',
+  OUTPUT_STATISTICS: '\n당첨 통계 \n---',
 };
 
 export const LOTTO = {

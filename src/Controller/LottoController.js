@@ -58,7 +58,6 @@ class LottoController {
       5.5: 0,
       6: 0,
     };
-    console.log(results);
     this.lottoList.forEach(lottoNumbers => {
       const matchCount = this.countMatchNumbers(lottoNumbers);
       let prize = 0;
