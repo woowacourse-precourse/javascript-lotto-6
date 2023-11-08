@@ -1,0 +1,85 @@
+import ERROR_MESSAGES from '../constant/errorMessages';
+import { MAX_NUMBER, MIN_NUMBER } from '../constant/lottoNumber';
+
+const onError = (subject, type) => {
+  throw new Error(ERROR_MESSAGES[subject][type]);
+};
+
+const paymentAmountValidater = {
+  isntNumber: paymentAmount => {
+    if (Number.isNaN(Number(paymentAmount))) {
+      onError('paymentAmount', 'isntNumber');
+    }
+  },
+  isntInteger: paymentAmount => {
+    if (!Number.isInteger(Number(paymentAmount))) {
+      onError('paymentAmount', 'isntInteger');
+    }
+  },
+  outOfRange: paymentAmount => {
+    if (paymentAmount < MIN_NUMBER) {
+      onError('paymentAmount', 'outOfRange');
+    }
+  },
+};
+
+const winningNumbersValidater = {
+  length: winningNumbers => {
+    if (winningNumbers.length !== 6) onError('winningNumbers', 'length');
+  },
+  isntNumber: winningNumbers => {
+    if (winningNumbers.some(number => Number.isNaN(Number(number)))) {
+      onError('winningNumbers', 'isntNumber');
+    }
+  },
+  isntInteger: winningNumbers => {
+    if (winningNumbers.some(number => !Number.isInteger(Number(number)))) {
+      onError('winningNumbers', 'isntInteger');
+    }
+  },
+  outOfRange: winningNumbers => {
+    if (
+      winningNumbers.some(number => number < MIN_NUMBER || number > MAX_NUMBER)
+    ) {
+      onError('winningNumbers', 'outOfRange');
+    }
+  },
+  duplicated: winningNumbers => {
+    if (
+      winningNumbers.some(
+        (number, index) => winningNumbers.indexOf(number) !== index
+      )
+    ) {
+      onError('winningNumbers', 'duplicated');
+    }
+  },
+};
+
+const bonusNumberValidater = {
+  isntNumber: bonusNumber => {
+    if (Number.isNaN(Number(bonusNumber))) {
+      onError('bonusNumber', 'isntNumber');
+    }
+  },
+  isntInteger: bonusNumber => {
+    if (!Number.isInteger(Number(bonusNumber))) {
+      onError('bonusNumber', 'isntInteger');
+    }
+  },
+  outOfRange: bonusNumber => {
+    if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
+      onError('bonusNumber', 'outOfRange');
+    }
+  },
+  duplicated: (bonusNumber, winningNumbers) => {
+    if (winningNumbers.includes(bonusNumber)) {
+      onError('bonusNumber', 'duplicated');
+    }
+  },
+};
+
+export {
+  paymentAmountValidater,
+  winningNumbersValidater,
+  bonusNumberValidater,
+};

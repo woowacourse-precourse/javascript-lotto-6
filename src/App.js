@@ -1,13 +1,20 @@
 import { Console } from '@woowacourse/mission-utils';
+import Lotto from './Lotto';
+import LottoStatistics from './LottoStatistics';
+import genLottoNumber from './genLottoNumber';
+import InputHandler from './utils/InputHandler';
 import {
   MAX_NUMBER,
   MIN_NUMBER,
   PERCHASE_AMOUNT,
 } from './constant/lottoNumber';
 import WINNING_MONEY from './constant/winningMoney';
-import Lotto from './Lotto';
-import LottoStatistics from './LottoStatistics';
-import genLottoNumber from './genLottoNumber';
+import USER_INPUT_TEXT from './constant/inputText';
+import {
+  paymentAmountValidater,
+  winningNumbersValidater,
+  bonusNumberValidater,
+} from './utils/validater';
 
 class App {
   #paymentAmount;
@@ -41,16 +48,18 @@ class App {
   }
 
   async #inputPaymentAmount() {
-    try {
-      const paymentAmount =
-        await Console.readLineAsync('구입금액을 입력해 주세요.');
-      this.#validatePaymentAmount(paymentAmount);
-      this.#paymentAmount = Number(paymentAmount);
-      this.#perchaseAmount = PERCHASE_AMOUNT(this.#paymentAmount);
-    } catch (error) {
-      Console.print(error.message);
-      this.#inputPaymentAmount();
-    }
+    const paymentAmount = await InputHandler(
+      USER_INPUT_TEXT.purchaseAmount,
+      this.#validatePaymentAmount
+    );
+    this.#paymentAmount = Number(paymentAmount);
+    this.#perchaseAmount = PERCHASE_AMOUNT(this.#paymentAmount);
+  }
+
+  #validatePaymentAmount(amount) {
+    Object.keys(paymentAmountValidater).forEach(validate => {
+      paymentAmountValidater[validate](amount);
+    });
   }
 
   #buyLottos() {
@@ -63,22 +72,43 @@ class App {
   }
 
   async #inputWinningNumbers() {
-    try {
-      const inputNumbers =
-        await Console.readLineAsync('당첨 번호를 입력해 주세요.');
-      const winningNumbers = inputNumbers
-        .split(',')
-        .map(Number)
-        .sort((a, b) => a - b);
-      this.#validateWinningNumber(winningNumbers);
-      this.#winningNumbers = winningNumbers;
-    } catch (error) {
-      Console.print(error.message);
-      this.#inputWinningNumbers();
-    }
+    const winningNumbers = await InputHandler(
+      USER_INPUT_TEXT.winningNumbers,
+      this.#validateWinningNumber
+    );
+    this.#winningNumbers = winningNumbers
+      .split(',')
+      .map(Number)
+      .sort((a, b) => a - b);
+  }
+
+  #validateWinningNumber(inputNumbers) {
+    const winningNumbers = inputNumbers
+      .split(',')
+      .map(Number)
+      .sort((a, b) => a - b);
+
+    Object.keys(winningNumbersValidater).forEach(validate => {
+      winningNumbersValidater[validate](winningNumbers);
+    });
   }
 
   async #inputBonusNumber() {
+    const bonusNumber = await InputHandler(
+      USER_INPUT_TEXT.bonusNumber,
+      this.#validateBonusNumber,
+      this.#winningNumbers
+    );
+    this.#bonusNumber = Number(bonusNumber);
+  }
+
+  #validateBonusNumber(inputNumber, winningNumbers) {
+    const bonusNumber = Number(inputNumber);
+    Object.keys(bonusNumberValidater).forEach(validate => {
+      bonusNumberValidater[validate](bonusNumber, winningNumbers);
+    });
+  }
+
     try {
       const bonusNumber =
         await Console.readLineAsync('보너스 번호를 입력해 주세요.');
