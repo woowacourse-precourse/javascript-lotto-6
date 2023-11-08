@@ -1,10 +1,13 @@
 import App from '../src/App.js';
+import Validate from '../src/Validate.js'
 
 describe('class App test', () => {
   let app;
+  let validate;
 
   beforeEach(() => {
     app = new App();
+    validate = new Validate();
   });
 
   describe('method test : getLottoTicket()', () => {
@@ -19,7 +22,7 @@ describe('class App test', () => {
     test('로또 구입 금액이 1000 미만이면 오류가 발생할까?', () => {
       const testPrice = 900;
       expect(() => {
-        app.checkLottoPrice(testPrice);
+        validate.checkLottoPrice(testPrice);
       }).toThrow('[ERROR] 로또 최소 구입 금액은 1000원입니다.');
     });
   });
@@ -28,7 +31,7 @@ describe('class App test', () => {
     test('입력 받은 로또 구입 금액이 문자이면 오류가 발생할까 ?', () => {
       const testPrice = 'Hundred';
       expect(() => {
-        app.checkLottoPrice(testPrice);
+        validate.checkLottoPrice(testPrice);
       }).toThrow('[ERROR] 숫자가 잘못된 형식입니다.');
     });
   });
@@ -37,7 +40,7 @@ describe('class App test', () => {
     test('입력 받은 로또 구입 금액에 문자가 있으면 오류가 발생할까 ?', () => {
       const testPrice = '1000j';
       expect(() => {
-        app.checkLottoPrice(testPrice);
+        validate.checkLottoPrice(testPrice);
       }).toThrow('[ERROR] 숫자가 잘못된 형식입니다.');
     });
   });
@@ -46,7 +49,7 @@ describe('class App test', () => {
     test('입력 받은 로또 구입 금액이 1,000원 단위가 아니면 오류가 발생할까 ?', () => {
       const testPrice = 12345;
       expect(() => {
-        app.checkLottoPrice(testPrice);
+        validate.checkLottoPrice(testPrice);
       }).toThrow('[ERROR] 금액은 1,000원 단위로 입력해주세요.');
     });
   });
@@ -78,21 +81,21 @@ describe('class App test', () => {
     test('보너스 번호를 입력 안했을 때 에러가 발생하는가 ?', () => {
       const testBonus = '';
       expect(() => {
-        app.checkBonusNumber(testBonus);
+        validate.checkBonusNumber(testBonus);
       }).toThrow('[ERROR] 숫자를 입력하세요.');
     });
 
     test('보너스 번호에 문자를 입력하면 에러가 발생하는가 ?', () => {
       const testBonus = '1000j';
       expect(() => {
-        app.checkBonusNumber(testBonus);
+        validate.checkBonusNumber(testBonus);
       }).toThrow('[ERROR] 숫자가 잘못된 형식입니다.');
     });
 
     test('보너스 번호에 문자를 입력하면 에러가 발생하는가 ?', () => {
       const testBonus = 99;
       expect(() => {
-        app.checkBonusNumber(testBonus);
+        validate.checkBonusNumber(testBonus);
       }).toThrow('[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.');
     });
   });
