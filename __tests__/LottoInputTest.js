@@ -24,7 +24,8 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe('LottoPurchase.getLottoPurchase 테스트', () => {
+// LottoPurchase 로직에 대한 테스트
+describe('LottoInput.getLottoPurchase 테스트', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -41,7 +42,8 @@ describe('LottoPurchase.getLottoPurchase 테스트', () => {
   });
 });
 
-describe('LottoPurchase.validateAmount', () => {
+// LottoPurchase 로직에 대한 테스트
+describe('LottoInput.validateAmount', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
