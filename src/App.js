@@ -4,6 +4,7 @@ import WinningLotto from './WinningLotto.js';
 import WinningCalculator from './domain/WinningCalculator.js';
 import UserInput from './service/UserInput.js';
 import InformResult from './service/InformResult.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class App {
   userInput;
@@ -14,7 +15,7 @@ class App {
 
   async play() {
     const userCost = await this.getUserCost();
-    const userPurchaseCount = this.getUserPurchaseCount(userCost);
+    const userPurchaseCount = await this.getUserPurchaseCount(userCost);
 
     const lottoList = this.getUserIssuedLotto(userPurchaseCount);
 
@@ -28,10 +29,17 @@ class App {
     return cost;
   }
 
-  getUserPurchaseCount(cost) {
-    const purchasingLotto = new PurchasingLotto(cost);
-    const count = purchasingLotto.getPurchaseCount();
-    return count;
+  async getUserPurchaseCount(cost) {
+    try {
+      const purchasingLotto = new PurchasingLotto(cost);
+      const count = purchasingLotto.getPurchaseCount();
+      return count;
+    } catch (error) {
+      Console.print(error);
+      const userCost = await this.getUserCost();
+      const count = await this.getUserPurchaseCount(userCost);
+      return count;
+    }
   }
 
   getUserIssuedLotto(count) {
@@ -46,11 +54,15 @@ class App {
   async getWinningLotto() {
     const winnerNumbers = await this.userInput.getWinningNumbers();
     const bonusNumber = await this.userInput.getBonusNumber();
-
-    const winningLotto = new WinningLotto(winnerNumbers, bonusNumber);
-    const totalNumbers = winningLotto.getTotalNumbers();
-
-    return totalNumbers;
+    try {
+      const winningLotto = new WinningLotto(winnerNumbers, bonusNumber);
+      const totalNumbers = winningLotto.getTotalNumbers();
+      return totalNumbers;
+    } catch (error) {
+      Console.print(error);
+      const totalNumbers = await this.getWinningLotto();
+      return totalNumbers;
+    }
   }
 
   informWinningResult(totalNumbers, issuedLotto) {
