@@ -1,4 +1,4 @@
-import Validation from './Validation.js';
+import Validation from '../service/Validation.js';
 
 const LOTTO = {
   price: 1000,

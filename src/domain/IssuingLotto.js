@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from './Lotto.js';
-import Utils from './Utils.js';
+import Lotto from '../Lotto.js';
+import Utils from '../service/Utils.js';
 
 const NUMBERS_OPTIONS = {
   first: 1,

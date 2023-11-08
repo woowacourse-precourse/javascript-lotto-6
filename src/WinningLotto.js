@@ -1,5 +1,5 @@
-import Lotto from './Lotto.js';
-import Validation from './Validation.js';
+import Lotto from '../Lotto.js';
+import Validation from '../service/Validation.js';
 
 const NUMBER_NAME = {
   winning: '당첨',

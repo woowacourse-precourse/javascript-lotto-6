@@ -1,4 +1,4 @@
-import Utils from './Utils.js';
+import Utils from '../service/Utils.js';
 
 const NUMBER_NAME = {
   winning: '당첨',
