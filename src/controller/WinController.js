@@ -7,8 +7,8 @@ export default class WinController {
   #winningNumbers;
   #bonusNumber;
   #purchasedLottos;
-  #WinningCount = [0, 0, 0, 0, 0, 0, 0];
-  #Win5andBonus = 0;
+  #winningCount = [0, 0, 0, 0, 0, 0, 0];
+  #win5andBonus = 0;
   #profitRate;
 
   constructor(purchaseAmount, winningNumbers, bonusNumber, purchasedLottos) {
@@ -67,15 +67,15 @@ export default class WinController {
         pLotto.getMatchedBonusCount() == 1 &&
         pLotto.getMatchedNumberCount() == 5
       ) {
-        this.#Win5andBonus++;
+        this.#win5andBonus++;
         return;
       }
-      this.#WinningCount[pLotto.getMatchedNumberCount()]++;
+      this.#winningCount[pLotto.getMatchedNumberCount()]++;
     });
   }
 
   printWinningDetails() {
-    this.outputView.printWinning(this.#WinningCount, this.#Win5andBonus);
+    this.outputView.printWinning(this.#winningCount, this.#win5andBonus);
   }
 
   calculateProfitRate() {
@@ -88,11 +88,11 @@ export default class WinController {
 
   calculateWinningAmount() {
     return (
-      this.#WinningCount[3] * WINNING_AMOUNT.MATCHING_3 +
-      this.#WinningCount[4] * WINNING_AMOUNT.MATCHING_4 +
-      this.#WinningCount[5] * WINNING_AMOUNT.MATCHING_5 +
-      this.#Win5andBonus * WINNING_AMOUNT.MATCHING_5_BONUS +
-      this.#WinningCount[6] * WINNING_AMOUNT.MATCHING_6
+      this.#winningCount[3] * WINNING_AMOUNT.MATCHING_3 +
+      this.#winningCount[4] * WINNING_AMOUNT.MATCHING_4 +
+      this.#winningCount[5] * WINNING_AMOUNT.MATCHING_5 +
+      this.#win5andBonus * WINNING_AMOUNT.MATCHING_5_BONUS +
+      this.#winningCount[6] * WINNING_AMOUNT.MATCHING_6
     );
   }
 
