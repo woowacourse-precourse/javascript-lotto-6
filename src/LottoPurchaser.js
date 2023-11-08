@@ -6,16 +6,8 @@ const LottoPurchaser = {
     const countLotto = inputPrice / 1000;
     const lottoTickets = [];
 
-    const generateLottoNumbers = () => {
-      const lottoNumbers = new Set();
-      while (lottoNumbers.size < 6) {
-        lottoNumbers.add(Random.pickNumberInRange(1, 45));
-      }
-      return Array.from(lottoNumbers);
-    };
-
     for (let i = 0; i < countLotto; i++) {
-      const randomNumber = generateLottoNumbers();
+      const randomNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       lottoTickets.push(randomNumber);
     }
 
