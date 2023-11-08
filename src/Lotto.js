@@ -1,6 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
 import CheckNumber from './Domain/NumberCheck.js';
-import Print from './View/Output.js';
 import Create from './Controller/Create.js';
 
 class Lotto {
@@ -29,20 +27,21 @@ class Lotto {
     const check = new CheckNumber({ randomNum, userNum });
 
     const matchResult = this.checkMatching(check);
-    this.calculateMargin(check, matchResult);
+    const marginResult = this.calculateMargin(check, matchResult);
+
+    return { matchResult, marginResult };
   }
 
   checkMatching(check) {
     const matchResult = check.getSameResult(check.sameCount());
-
-    Print.repeatResult(matchResult); // 숫자 비교결과 출력
 
     return matchResult;
   }
 
   calculateMargin(check, matchResult) {
     const margin = check.getMargin(check.totalAmount(matchResult));
-    Console.print(`총 수익률은 ${margin}%입니다.`);
+
+    return margin;
   }
 }
 

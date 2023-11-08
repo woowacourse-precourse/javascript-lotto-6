@@ -17,4 +17,14 @@ describe('로또 클래스 테스트', () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+
+  // test('입력된 번호에 따라 숫자매칭 결과, 수익률 반환', async () => {
+  //   const randomNum = [[3, 4, 5, 6, 7, 8]];
+
+  //   const user = [3, 4, 5, 6, 11, 22];
+
+  //   const result = new Lotto(user).compareWith(randomNum);
+
+  //   await expect(result).toEqual('avc ');
+  // });
 });

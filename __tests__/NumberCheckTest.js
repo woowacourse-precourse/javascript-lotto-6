@@ -53,7 +53,7 @@ describe('NumberCheck 테스트', () => {
     });
   });
 
-  describe('MatchNumber 테스트', () => {
+  describe('matchingNumber 테스트', () => {
     let num;
 
     beforeEach(() => {
@@ -63,7 +63,7 @@ describe('NumberCheck 테스트', () => {
       const user = num;
       const bonus = 19;
 
-      const result = new CheckNumber().MatchNumber(num, { user, bonus });
+      const result = new CheckNumber().matchingNumber(num, { user, bonus });
 
       expect(result).toEqual(
         expect.stringContaining('6개 일치 (2,000,000,000원')
@@ -74,7 +74,7 @@ describe('NumberCheck 테스트', () => {
       const user = [1, 3, 5, 7, 8, 10];
       const bonus = 9;
 
-      const result = new CheckNumber().MatchNumber(num, { user, bonus });
+      const result = new CheckNumber().matchingNumber(num, { user, bonus });
 
       expect(result).toEqual(
         expect.stringContaining('5개 일치, 보너스 볼 일치 (30,000,000원)')
@@ -85,7 +85,7 @@ describe('NumberCheck 테스트', () => {
       const user = [2, 4, 6, 10, 12, 14];
       const bonus = 9;
 
-      const result = new CheckNumber().MatchNumber(num, { user, bonus });
+      const result = new CheckNumber().matchingNumber(num, { user, bonus });
 
       expect(result).toEqual(null);
     });

@@ -15,13 +15,13 @@ class CheckNumber {
     const matchedNumber = [];
 
     randomNum.forEach((num) => {
-      matchedNumber.push(this.MatchNumber(num, { user, bonus }));
+      matchedNumber.push(this.matchingNumber(num, { user, bonus }));
     });
 
     return matchedNumber.filter(Boolean);
   }
 
-  MatchNumber(num, { user, bonus }) {
+  matchingNumber(num, { user, bonus }) {
     const sameNum = num.filter((cur) => user.includes(cur));
 
     if (sameNum.length === 5 && num.includes(Number(bonus))) {
@@ -41,6 +41,10 @@ class CheckNumber {
       if (sameResult) matched[sameResult] += 1;
     });
 
+    return this.#returnWinningCount(matched);
+  }
+
+  #returnWinningCount(matched) {
     const result = Object.keys(matched).map((el) => `${el} - ${matched[el]}개`);
 
     return result;
