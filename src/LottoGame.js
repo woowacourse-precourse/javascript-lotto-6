@@ -3,6 +3,17 @@ import Lotto from "./Lotto.js";
 import Input from "./UI/Input.js";
 import Output from "./UI/Output.js";
 
+const MIN_VALUE = 1;
+const MAX_VALUE = 45;
+const LOTTO_NUMBER_COUNT = 6;
+const TICKET_PRICE = 1000;
+const FIRST_PRIZE = 2000000000;
+const SECOND_PRIZE = 30000000;
+const THIRD_PRIZE = 1500000;
+const FOURTH_PRIZE = 50000;
+const FIFTH_PRIZE = 5000;
+const NO_PRIZE = 0;
+
 class LottoGame {
   #purchaseAmount
   #ticketCount;
@@ -26,8 +37,8 @@ class LottoGame {
   }
 
   async start() {
-    this.#purchaseAmount = await this.buyLotto(); //입력
-    this.#ticketCount = this.#purchaseAmount / 1000;
+    this.#purchaseAmount = await this.buyLotto();
+    this.#ticketCount = this.#purchaseAmount / TICKET_PRICE;
     this.setLottoTickets(this.#lottoTickets, this.#ticketCount);  //이름 generateLottoTickets로 바꾸기
     this.#lottoTickets = this.sortLottoTickets(this.#lottoTickets);
     this.output.boughtTickets(this.#lottoTickets, this.#ticketCount);
@@ -65,7 +76,7 @@ class LottoGame {
     if (!Number.isInteger(price)) {
       throw new Error("[ERROR] 구입 금액이 정수가 아닙니다.")
     }
-    if (price % 1000 !== 0) {
+    if (price % TICKET_PRICE !== 0) {
       throw new Error("[ERROR] 금액이 1,000원으로 나누어 떨어지지 않습니다.")
     }
     return price;
@@ -73,7 +84,7 @@ class LottoGame {
 
 
   generateLottoNumbers() {
-    let lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+    let lotto = Random.pickUniqueNumbersInRange(MIN_VALUE, MAX_VALUE, LOTTO_NUMBER_COUNT);
 
     const lottoTicket = new Lotto(lotto);
     return lottoTicket;
@@ -129,7 +140,7 @@ class LottoGame {
     if (!Number.isInteger(number)) {
       throw new Error("[ERROR] 정수가 아닌 입력입니다.")
     }
-    if (number < 1 || number > 45) {
+    if (number < MIN_VALUE || number > MAX_VALUE) {
       throw new Error("[ERROR] 1부터 45 사이의 숫자가 아닌 입력입니다.")
     }
     if (winningNumbers.includes(number)) {
@@ -151,7 +162,7 @@ class LottoGame {
   calculateWinningResults(winningResult, matchingCount, checkedBonus) {
     let bonus = checkedBonus ? 0 : 1
     let result = [...winningResult];
-    if (matchingCount === 6) {
+    if (matchingCount === LOTTO_NUMBER_COUNT) {
       result[0] += 1;
     } else if (matchingCount === 5) {
       result[1 + bonus] += 1
@@ -169,7 +180,7 @@ class LottoGame {
   }
 
   calculateProfitRate(winningResult, purchaseAmount) {
-    const prizeMoney = [2000000000, 30000000, 1500000, 50000, 5000, 0];
+    const prizeMoney = [FIRST_PRIZE, SECOND_PRIZE, THIRD_PRIZE, FOURTH_PRIZE, FIFTH_PRIZE, NO_PRIZE];
 
     const totalWinnings = winningResult.reduce((sum, count, index) => sum + prizeMoney[index] * count, 0);
 
