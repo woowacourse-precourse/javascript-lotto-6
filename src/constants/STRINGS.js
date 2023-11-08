@@ -4,11 +4,12 @@ const STRINGS = Object.freeze({
   ANSWER_NUMBERS: '당첨 번호를 입력해 주세요. \n',
   BONUS_NUMBER: '보너스 번호를 입력해 주세요. \n',
   RESULT_TITLE: '당첨 통계\n---',
-  RESULT_THREE_CORRECT: '3개 일치 (5,000원) - ',
-  RESULT_FOUR_CORRECT: '4개 일치 (50,000원) - ',
-  RESULT_FIVE_CORRECT: '5개 일치 (1,500,000원) - ',
-  RESULT_FIVE_BONUS_CORRECT: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
-  RESULT_SIX_CORRECT: '6개 일치 (2,000,000,000원) - ',
+  RESULT_THREE_CORRECT: (match) => `3개 일치 (5,000원) - ${match}개`,
+  RESULT_FOUR_CORRECT: (match) => `4개 일치 (50,000원) - ${match}개`,
+  RESULT_FIVE_CORRECT: (match) => `5개 일치 (1,500,000원) - ${match}개`,
+  RESULT_FIVE_BONUS_CORRECT: (match) =>
+    `5개 일치, 보너스 볼 일치 (30,000,000원) - ${match}개`,
+  RESULT_SIX_CORRECT: (match) => `6개 일치 (2,000,000,000원) - ${match}개`,
   RATE_OF_RETURN: (rateOfReturn) => `총 수익률은 ${rateOfReturn}%입니다.\n`,
 
   ERROR_LENGTH: '[ERROR] 로또 번호는 6개여야 합니다.',
