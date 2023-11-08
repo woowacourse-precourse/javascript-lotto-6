@@ -25,4 +25,10 @@ describe('LottoResult 클래스 테스트', () => {
 
     expect(Console.print).toHaveBeenCalled();
   });
+
+  test('수익률 계산 및 출력 테스트', () => {
+    const userInput = 8;
+    lottoResult.calculateReturnRate(userInput);
+    expect(Console.print).toHaveBeenCalled();
+  });
 });
