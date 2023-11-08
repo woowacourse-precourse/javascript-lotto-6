@@ -89,6 +89,58 @@ class App {
 
     return results;
   }
+
+  printResults(results) {
+    MissionUtils.Console.print("당첨 통계");
+    MissionUtils.Console.print("---");
+
+    const order = ["3", "4", "5", "5b", "6"];
+
+    for (const key of order) {
+      const prize = this.getPrize(key);
+      const prizeAmount = this.getPrizeAmount(key);
+      MissionUtils.Console.print(
+        `${prize} (${prizeAmount}원) - ${results[key]}개`
+      );
+    }
+
+    const totalProfit = this.calculateTotalProfit(results);
+    MissionUtils.Console.print(`총 수익률은 ${totalProfit}%입니다.`);
+  }
+
+  getPrize(key) {
+    const prizeMap = {
+      3: "3개 일치",
+      4: "4개 일치",
+      5: "5개 일치",
+      "5b": "5개 일치, 보너스 볼 일치",
+      6: "6개 일치",
+    };
+    return prizeMap[key];
+  }
+
+  getPrizeAmount(key) {
+    const prizeAmountMap = {
+      3: 5000,
+      4: 50000,
+      5: 1500000,
+      "5b": 30000000,
+      6: 2000000000,
+    };
+    return prizeAmountMap[key];
+  }
+
+  calculateTotalProfit(results) {
+    const totalProfit = Object.keys(results).reduce((acc, key) => {
+      const prizeAmount = this.getPrizeAmount(key);
+      const count = results[key];
+      return acc + prizeAmount * count;
+    }, 0);
+    const purchaseAmount = this.lottoList.length * 1000;
+    const profitPercentage =
+      ((totalProfit - purchaseAmount) / purchaseAmount + 1) * 100;
+    return profitPercentage.toFixed(1);
+  }
 }
 
 export default App;
