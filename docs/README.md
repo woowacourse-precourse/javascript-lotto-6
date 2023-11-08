@@ -1,5 +1,3 @@
-
-
 ## 📌 3주 차 미션 : 로또 게임 🎰
 
 ### 구현할 기능 목록
@@ -55,6 +53,7 @@
 
 
 4️⃣ 입력값 검증 (Validation)
+
 - 검증 (Validation)
     - [x] 구매 금액 검증
     - [x] 보너스 넘버 검증
@@ -76,13 +75,16 @@
         - [x] 로또의 각번호가 1~45숫자가 아닐 때 예외 발생 (inLottoNumberRange)
 
 5️⃣ 기타
+
 - GameUtils나 ui에서 쓰이는 전역적인 도구 메소드 (Utils)
+
     - [x] 문자열을 ,를 기준으로 나누어 배열로 만듬 (splitComma)
     - [x] 2차원 배열안의 각 배열요소들을 오름차순으로 정렬 (sortLottoNumbers)
     - [x] 1~45의 6개의 랜덤 번호 생성 (generateRandomNumbers)
     - [x] key가 있다면 그 key값의 value에 1을 더하고, 그렇지 않다면 그 key값의 value는 1인 새로운 속성 생성 (addOrUpdatePropertyInObj)
     - [x] 객체 안의 key가 3보다 작다면 제거 (removeItemsWithNumericKeysLessThanThree)
     - [x] 객체안에 당첨의 일치하는 개수의 key가 없다면 value가 0인 프로퍼티로 생성 (addMissingElements)
+
 
 
 
