@@ -20,6 +20,17 @@ class CalculateWinnings {
       six: 0,
     };
   }
+
+  getResults() {
+    return this.#results;
+  }
+
+  countMatchNumbers(lotto) {
+    const matchedNumbers = lotto
+      .getNumber()
+      .filter((number) => this.winningNumbers.includes(number));
+    return matchedNumbers;
+  }
 }
 
 export default CalculateWinnings;
