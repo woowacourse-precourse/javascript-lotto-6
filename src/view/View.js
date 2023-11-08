@@ -11,11 +11,8 @@ class View {
 
     while (true) {
       try {
-        const input = await Console.readLineAsync(
-          inputMessage.PURCHASE_MESSAGE
-        );
+        const input = await Console.readLineAsync(inputMessage.PURCHASE_MESSAGE);
         cash = parseInt(input);
-
         if (Validator.checkLottoPurchase(cash)) break;
       } catch (error) {
         Console.print(error.message);

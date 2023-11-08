@@ -10,11 +10,7 @@ class LottoHandler {
   }
 
   createLotto() {
-    const array = Random.pickUniqueNumbersInRange(
-      lotto.MIN_RANGE,
-      lotto.MAX_RANGE,
-      lotto.LENGTH
-    );
+    const array = Random.pickUniqueNumbersInRange(lotto.MIN_RANGE, lotto.MAX_RANGE, lotto.LENGTH);
     return new Lotto(array.sort((a, b) => a - b));
   }
 
@@ -37,9 +33,7 @@ class LottoHandler {
       const rankKey = Object.keys(rank).find(
         (key) => count === lottoCount[key]
       );
-      if (rankKey) {
-        rank[rankKey]++;
-      }
+      if (rankKey) rank[rankKey]++;
     });
     return rank;
   }
