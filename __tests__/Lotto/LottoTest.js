@@ -1,6 +1,11 @@
 import Lotto from '../../src/Lotto';
 import LottoError from '../../src/errors/LottoError.js';
 import { ERROR_MESSAGES } from '../../src/constants/errorMessages.js';
+import { newLottoGenerator } from '../../src/utils/newLottoGenerator.js';
+
+jest.mock('../../src/utils/newLottoGenerator.js', () => ({
+  newLottoGenerator: jest.fn(),
+}));
 
 describe('로또 클래스 테스트', () => {
   test.each([
@@ -16,6 +21,21 @@ describe('로또 클래스 테스트', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5]);
     }).toThrow(new LottoError(ERROR_MESSAGES.lotto_have_duplication_number));
+  });
+
+  describe('로또의 getRandomNums 는 무작위의 숫자를 생성해야한다.', () => {
+    test('로또 인스턴스는 유니크한 숫자의 총 6개, 오름차순으로 이루어져야한다.', () => {
+      // Mock 된 랜덤 번호
+      const mockNumbers = [10, 20, 30, 40, 41, 42];
+      newLottoGenerator.mockReturnValue(mockNumbers);
+
+      const lotto = Lotto.getRandomNums();
+
+      expect(lotto).toBeInstanceOf(Lotto);
+      expect(lotto.getNumbers().length).toBe(Lotto.LOTTO_LENGTH);
+      expect(lotto.getNumbers()).toEqual(mockNumbers.sort((a, b) => a - b));
+      expect(lotto.getNumbers()).toEqual(expect.arrayContaining(mockNumbers));
+    });
   });
 
   test.each([[`1, 2, 'hi', 4, 5, 6`], [`1, 2, ' 12', 4, 5, 6`], [`1, 2, '   ', 4, 5, 6`]])(
