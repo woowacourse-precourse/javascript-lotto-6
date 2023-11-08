@@ -1,4 +1,4 @@
-import getRateOfReturn from '../src/utils/getRateOfReturn';
+import getRateOfReturn from '../../src/utils/getRateOfReturn';
 
 describe('로또 수익율 계산 테스트', () => {
   test.each([

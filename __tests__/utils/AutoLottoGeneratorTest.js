@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import AutoLottoGenerator from '../src/utils/AutoLottoGenerator';
-import ERROR_MESSAGE from '../src/constants/error';
+import AutoLottoGenerator from '../../src/utils/AutoLottoGenerator';
+import ERROR_MESSAGE from '../../src/constants/error';
 
 const mockRandoms = (numbers) => {
   Random.pickUniqueNumbersInRange = jest.fn();

@@ -1,5 +1,5 @@
-import ERROR_MESSAGE from '../src/constants/error';
-import InputValidator from '../src/utils/InputValidator';
+import ERROR_MESSAGE from '../../src/constants/error';
+import InputValidator from '../../src/utils/InputValidator';
 
 describe('로또 구입금액 유효성 검사 테스트', () => {
   test.each(['1000', '2000', '3000'])(
