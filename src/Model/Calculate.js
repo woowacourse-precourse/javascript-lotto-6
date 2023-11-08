@@ -1,6 +1,6 @@
 import WinningNumbers from "./WinningNumbers.js";
 
-class CalculateWinnings {
+class Calculate {
   #results;
 
   #profitRate;
@@ -27,7 +27,7 @@ class CalculateWinnings {
     return this.#results;
   }
 
-  caculate() {
+  caculateResults() {
     this.lottoTickets.forEach((lottoTicket) => {
       const matchedNumbers = this.countMatchNumbers(lottoTicket);
       const bonusMatch = this.countBonusNumbers(lottoTicket);
@@ -74,4 +74,4 @@ class CalculateWinnings {
   }
 }
 
-export default CalculateWinnings;
+export default Calculate;
