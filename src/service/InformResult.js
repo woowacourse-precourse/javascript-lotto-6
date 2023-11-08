@@ -1,7 +1,7 @@
 import Utils from './Utils.js';
 import { INFORM_TEMPLATE, STATISTICS_STANDARD } from './Constants.js';
 
-const informResult = {
+const InformResult = {
   issuedLotto: (issuedLotto, count) => {
     const lottoList = issuedLotto.map(
       (lotto) => `[${lotto.join(INFORM_TEMPLATE.numberSeperator)}]`,
@@ -31,4 +31,4 @@ const informResult = {
   },
 };
 
-export default informResult;
+export default InformResult;
