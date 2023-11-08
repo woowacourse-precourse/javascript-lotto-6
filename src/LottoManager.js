@@ -39,6 +39,14 @@ class LottoManager {
     this.#lottoArray = arr.map(() => new Lotto(this.generateLottoNumber()));
   }
 
+  getMoney() {
+    return this.#money;
+  }
+
+  getCount() {
+    return this.#count;
+  }
+
   printLottoTickets() {
     Console.print(`${this.#count}개를 구매했습니다.`);
     this.#lottoArray.forEach((array) => {
