@@ -36,6 +36,18 @@ class WinnigStatistics {
 
     return [matchCount, matchBonus];
   }
+
+  addCountToResult(matchCount, matchBouns) {
+    if (matchCount < 3) return;
+
+    if (matchBouns) {
+      this.#result["5b"] += 1;
+      this.#prizeMoney += this.#prize["5b"];
+    } else {
+      this.#result[matchCount] += 1;
+      this.#prizeMoney += this.#prize[matchCount];
+    }
+  }
 }
 
 export default WinnigStatistics;
