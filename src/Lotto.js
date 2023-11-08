@@ -1,18 +1,27 @@
+import { Random } from "@woowacourse/mission-utils";
+
 class Lotto {
+  /**@type {number[]} */
   #numbers;
 
+  /**@constructor
+   * @param {number[]} numbers
+   */
+
   constructor(numbers) {
-    this.#validate(numbers);
+    console.log(
+      Random.pickUniqueNumbersInRange(...[1, 45], 6).sort((a, b) => a - b)
+    );
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  /**
+   *
+   * @returns {number[]}
+   */
+  static pickRandomNumbers() {
+    return Random.pickUniqueNumbersInRange(...[1, 45], 6).sort((a, b) => a - b);
   }
-
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
