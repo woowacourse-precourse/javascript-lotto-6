@@ -32,6 +32,16 @@ class App {
       .map((number) => Number(number.trim()));
     return numbers;
   }
+
+  // 보너스 번호 입력받기
+  async inputBonusNumber() {
+    const inputString = await MissionUtils.Console.readLineAsync(
+      "보너스 번호를 입력해주세요.\n"
+    );
+    const bonusNumber = Number(inputString.trim());
+    return bonusNumber;
+  }
+
   }
 }
 
