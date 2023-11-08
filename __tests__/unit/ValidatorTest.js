@@ -1,12 +1,12 @@
 /* eslint-disable max-lines-per-function */
 import {
-  isDivisibleByUnit,
-  isStringLengthEqualTo,
   containUniqueNumbersInString,
   isCommaSeparated,
-  isElementInString,
-  isNumeric,
+  isDivisibleByUnit,
+  isElementInTarget,
   isInRange,
+  isNumeric,
+  isStringLengthEqualTo
 } from '../../src/common/validator.js';
 
 describe('구입 금액 테스트', () => {
@@ -54,8 +54,8 @@ describe('당첨 번호 테스트', () => {
     const uniqueBonusNumber = '7';
     const duplicateBonusNumber = '6';
 
-    expect(isElementInString(winningNumber.split(','), uniqueBonusNumber)).toBe(false);
-    expect(isElementInString(winningNumber.split(','), duplicateBonusNumber)).toBe(true);
+    expect(isElementInTarget(winningNumber.split(','), uniqueBonusNumber)).toBe(false);
+    expect(isElementInTarget(winningNumber.split(','), duplicateBonusNumber)).toBe(true);
   });
 });
 
