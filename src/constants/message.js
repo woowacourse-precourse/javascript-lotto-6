@@ -1,4 +1,4 @@
-import { RANK, NUMBER, RANDOM } from './number.js';
+import { NUMBER, RANDOM } from './number.js';
 
 export const SYMBOLS = {
   numberDivider: ',',
@@ -37,16 +37,8 @@ export const MESSAGE = {
   askWinningNumbers: `${SYMBOLS.lineBreak}당첨 번호를 입력해 주세요.${SYMBOLS.lineBreak}`,
   askBonusNumber: `${SYMBOLS.lineBreak}보너스 번호를 입력해 주세요.${SYMBOLS.lineBreak}`,
   winningStatistics: `${SYMBOLS.lineBreak}당첨 통계${SYMBOLS.lineBreak}`,
-  purchase: `개를 구매했습니다.${SYMBOLS.lineBreak}`,
+  purchase: '개를 구매했습니다.',
   result: '총 수익률은 ',
-};
-
-export const RESULT = {
-  first: `${RANK.first}개 일치 (${REWARD_MESSAGE.first}원) ${SYMBOLS.hyphen} `,
-  second: `${RANK.second}개 일치, 보너스 볼 일치 (${REWARD_MESSAGE.second}원) ${SYMBOLS.hyphen} `,
-  third: `${RANK.third}개 일치 (${REWARD_MESSAGE.third}원) ${SYMBOLS.hyphen} `,
-  fourth: `${RANK.fourth}개 일치 (${REWARD_MESSAGE.fourth}원) ${SYMBOLS.hyphen} `,
-  fifth: `${RANK.fifth}개 일치 (${REWARD_MESSAGE.fifth}원) ${SYMBOLS.hyphen} `,
 };
 
 export const ERROR = {

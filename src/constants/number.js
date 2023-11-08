@@ -6,12 +6,11 @@ export const NUMBER = {
   lottoPurchaseUnit: 1000,
 };
 
-export const RANK = {
-  first: 6,
-  second: 5,
-  third: 5,
-  fourth: 4,
-  fifth: 3,
+export const MATCH = {
+  six: 6,
+  five: 5,
+  four: 4,
+  three: 3,
 };
 
 export const RANDOM = {

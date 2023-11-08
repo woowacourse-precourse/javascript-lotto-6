@@ -1,4 +1,4 @@
-import { NUMBER, RANK, RANK_MESSAGE, REWARD } from '../constants/index.js';
+import { NUMBER, MATCH, RANK_MESSAGE, REWARD } from '../constants/index.js';
 
 class Calculator {
   #lottos;
@@ -21,16 +21,16 @@ class Calculator {
   #getRank(lotto) {
     const matchCount = this.#countMatch(lotto, this.#winningNumbers);
     const hasBonusNumber = lotto.includes(this.#bonusNumber);
-    if (matchCount === RANK.first) {
+    if (matchCount === MATCH.six) {
       return RANK_MESSAGE.first;
     }
-    if (matchCount === RANK.second) {
+    if (matchCount === MATCH.five) {
       return hasBonusNumber ? RANK_MESSAGE.second : RANK_MESSAGE.third;
     }
-    if (matchCount === RANK.fourth) {
+    if (matchCount === MATCH.four) {
       return RANK_MESSAGE.fourth;
     }
-    return matchCount === RANK.fifth ? RANK_MESSAGE.fifth : RANK_MESSAGE.none;
+    return matchCount === MATCH.three ? RANK_MESSAGE.fifth : RANK_MESSAGE.none;
   }
 
   calculateRanks() {
