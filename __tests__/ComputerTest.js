@@ -12,6 +12,12 @@ const mockQuestions = (inputs) => {
   });
 };
 
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
+
 describe('컴퓨터 기능 테스트', () => {
   test.each([
     { input: [['1000']], count: 1 },
@@ -41,5 +47,32 @@ describe('컴퓨터 기능 테스트', () => {
     computer.bonusNumber = 7;
 
     expect(computer.getLottoResults()).toEqual([7, 0, 0, 0, 0, 1]);
+  });
+
+  test('로또 결과 출력 테스트', () => {
+    const computer = new Computer();
+
+    const mockGetLottoResults = (result) => {
+      computer.getLottoResults = jest.fn();
+      computer.getLottoResults.mockReturnValueOnce(result);
+    };
+    mockGetLottoResults([0, 1, 1, 0, 0, 3]);
+    const logSpy = getLogSpy();
+
+    computer.printLottoWinningStatistics();
+
+    const logs = [
+      '당첨 통계',
+      '---',
+      '3개 일치 (5,000원) - 3개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 1개',
+      '6개 일치 (2,000,000,000원) - 1개',
+    ];
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
   });
 });
