@@ -43,11 +43,7 @@ export default class LottoMachine {
   }
 
   #createLotto(numbers, _ = paramType(numbers, Array)) {
-    return new Lotto(numbers, this.#ascendingSort);
-  }
-
-  #ascendingSort() {
-    return (a, b) => a - b;
+    return new Lotto(numbers);
   }
 
   #validateSellingPrice(sellingPrice, _ = paramType(sellingPrice, 'number')) {
