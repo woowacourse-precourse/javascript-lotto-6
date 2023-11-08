@@ -1,20 +1,18 @@
-import RandomNumberGenerator from "../utils/RandomNumberGenerator";
+import Validator from "../utils/Validator";
 
 class Lotto {
-  #random;
-  #lottoResultArr;
+  #numbers;
 
-  constructor() {
-    this.#lottoResultArr = [];
-    this.#random = new RandomNumberGenerator();
+  constructor(numbers) {
+    this.#validate(numbers);
+    this.#numbers = numbers;
   }
 
-  lottoResults(count) {
-    for (let i = 0; i < count; i++) {
-      this.#lottoResultArr.push(this.#random.generateRandomNumber(1, 45, 6));
-    }
-    return this.#lottoResultArr;
+  #validate(numbers) {
+    Validator.validateLottoNumbers(numbers);
   }
+
+  // TODO: 추가 기능 구현
 }
 
 export default Lotto;

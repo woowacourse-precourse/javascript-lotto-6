@@ -1,12 +1,12 @@
 class Validator {
-  validatePurchaseAmount(inputNumber) {
+  static validatePurchaseAmount(inputNumber) {
     console.log(inputNumber, isNaN(inputNumber));
     if (isNaN(inputNumber)) throw new Error("[ERROR]");
 
     if (inputNumber % 1000 !== 0)
       throw new Error("[ERROR] 1,000원 단위의 구입금액만 입력 가능합니다.");
   }
-  validateLottoNumbers(inputArr) {
+  static validateLottoNumbers(inputArr) {
     const splitNumbers = inputArr
       .split(",")
       .map((number) => parseInt(number, 10));
@@ -17,23 +17,23 @@ class Validator {
       if (isNaN(number)) {
         throw new Error("[ERROR] 숫자만 입력 가능합니다.");
       }
-      if (!this.#validateNumberRange(number)) {
+      if (!Validator.#validateNumberRange(number)) {
         throw new Error("[ERROR] 1~45 범위의 숫자만 입력 가능합니다.");
       }
     }
-    if (!this.#validateLottoDuplication(splitNumbers)) {
+    if (!Validator.#validateLottoDuplication(splitNumbers)) {
       throw new Error("[ERROR] 중복되지 않는 6개의 숫자만 입력 가능합니다.");
     }
   }
 
-  #validateNumberRange(number) {
+  static #validateNumberRange(number) {
     if (number < 1 || number > 45) {
       return false;
     }
     return true;
   }
 
-  #validateLottoDuplication(numbers) {
+  static #validateLottoDuplication(numbers) {
     const setNumbers = new Set(numbers);
     if (setNumbers.size !== 6) {
       return false;

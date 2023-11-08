@@ -1,19 +1,19 @@
 import InputView from "../view/InputView";
 import OutputView from "../view/OutputView";
 import Validator from "../utils/Validator";
-import Lotto from "../model/Lotto";
+import LottoDataProcessor from "../model/LottoDataProcessor";
 
 class LottoController {
   #inputView;
   #outputView;
   #validator;
-  #lotto;
+  #lottoDataProcessor;
 
   constructor() {
     this.#inputView = new InputView();
     this.#outputView = new OutputView();
     this.#validator = new Validator();
-    this.#lotto = new Lotto();
+    this.#lottoDataProcessor = new LottoDataProcessor();
   }
 
   async gameStart() {
@@ -28,7 +28,7 @@ class LottoController {
 
   async #generateLotto(purchaseAmount) {
     this.#outputView.printPurchaseAmount(purchaseAmount / 1000);
-    const result = this.#lotto.lottoResults(purchaseAmount / 1000);
+    const result = this.#lottoDataProcessor.lottoResults(purchaseAmount / 1000);
     this.#outputView.printLottoResult(result);
     await this.#receiveLottoNumbers();
   }
