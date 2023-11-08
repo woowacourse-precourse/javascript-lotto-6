@@ -19,18 +19,16 @@ class LottoController {
   }
 
   async #getAndValidateInputs() {
-    const purchaseCost = await this.#getPurchaseCost();
-    const lottos = this.#createLottos(purchaseCost);
+    const purchaseCost = await this.getPurchaseCost();
+    this.#lottos = this.#createLottos(purchaseCost);
     const winningNumbers = await this.#getWinningNumbers();
-    // this.#winningNumbers = await this.#getWinningNumbers();
-    // this.#bonusNumber = await InputView.inputBonusNumber();
-    // this.validateBonusNumber(this.#bonusNumber);
+    const bonusNumber = await this.#getBonusNumber(winningNumbers);
     // const results = this.#calculateResults();
     // OutputView.printResults(results);
     // OutputView.printProfit(this.#calculateProfit(results));
   }
 
-  async #getPurchaseCost() {
+  async getPurchaseCost() {
     while (true) {
       try {
         const inputCost = await InputView.inputParchaseCost();
@@ -51,22 +49,27 @@ class LottoController {
   async #getWinningNumbers() {
     while (true) {
       try {
-        const winningNumbers = await InputView.inputWinningNumbers();
-        const winning = await Validator.winningNumberValidator(winningNumbers);
-        return winning;
+        const input = await InputView.inputWinningNumbers();
+        const winningNumber = Validator.winningNumberValidator(input);
+        return winningNumber;
       } catch (error) {
         printMessage(error);
       }
     }
   }
 
-  validateBonusNumber(bonusNumber) {
-    const parseBonusNumber = parseInt(bonusNumber, 10);
-    if (Number.isNaN(parseBonusNumber)) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
-    }
-    if (parseBonusNumber < 1 || parseBonusNumber > 45) {
-      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+  async #getBonusNumber(winningNumber) {
+    while (true) {
+      try {
+        const input = await InputView.inputBonusNumber();
+        const bonusNumber = Validator.bonusNumberValidator(
+          input,
+          winningNumber,
+        );
+        return bonusNumber;
+      } catch (error) {
+        printMessage(error);
+      }
     }
   }
 

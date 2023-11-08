@@ -33,6 +33,20 @@ class Validator {
     }
     return winningNumber;
   }
+
+  static bonusNumberValidator(input, winningNumber) {
+    const BonusNumber = parseInt(input, 10);
+    if (Number.isNaN(BonusNumber)) {
+      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+    }
+    if (BonusNumber < 1 || BonusNumber > 45) {
+      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
+    }
+    if (winningNumber.includes(BonusNumber)) {
+      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
+    }
+    return BonusNumber;
+  }
 }
 
 export default Validator;
