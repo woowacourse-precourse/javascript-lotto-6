@@ -3,13 +3,10 @@ import { LOTTO } from '../constants/lotto.js';
 
 export const validation = {
   isEmpty: (str) => {
-    return str === '';
+    return str === COMMON.blank;
   },
   isNumberZero: (number) => {
     return number === COMMON.zero;
-  },
-  isNotLottoPurchagePriceRange: (price) => {
-    return price % LOTTO.unitPrice !== 0;
   },
   isNotSeparateCommaNumbers: (str) => {
     const separateCommaNumbersRegexp = /^([0-9]+(,[0-9]+)+)$/g;
@@ -19,9 +16,13 @@ export const validation = {
     const deDuplicateNumbers = new Set(arr);
     return arr.length !== deDuplicateNumbers.size;
   },
+};
+
+export const lottoValidation = {
+  isNotLottoPurchagePriceRange: (price) => {
+    return price % LOTTO.unitPrice !== COMMON.zero;
+  },
   isLottoNumberRange: (number) => {
     return LOTTO.minNumber <= number && number <= LOTTO.maxNumber;
   },
 };
-
-export const abc = {};

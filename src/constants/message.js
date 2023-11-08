@@ -1,4 +1,4 @@
-import { utils } from '../utils/utils';
+import { utils } from '../utils/utils.js';
 
 export const INPUT_MESSAGE = Object.freeze({
   lottoPurchasePrice: '구입금액을 입력해 주세요.\n',

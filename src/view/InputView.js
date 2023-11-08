@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE, INPUT_MESSAGE } from '../constants/message.js';
-import { validation } from '../utils/validation.js';
-import { COMMON } from '../constants/common.js';
+import { lottoValidation, validation } from '../utils/validation.js';
+import { utils } from '../utils/utils.js';
 import { LOTTO } from '../constants/lotto.js';
 import ValidateError from '../error/ValidateError.js';
 
@@ -65,7 +65,7 @@ class InputView {
 
     if (isNaN(price)) throw new ValidateError(ERROR_MESSAGE.notNumber);
 
-    if (validation.isNotLottoPurchagePriceRange(price)) {
+    if (lottoValidation.isNotLottoPurchagePriceRange(price)) {
       throw new ValidateError(ERROR_MESSAGE.lottoPurchasePriceRange);
     }
   }
@@ -77,7 +77,7 @@ class InputView {
       throw new ValidateError(ERROR_MESSAGE.notNumberFormat);
     }
 
-    const separateNumbers = numbers.split(COMMON.comma).map((number) => parseInt(number));
+    const separateNumbers = utils.separateNumbers(numbers);
 
     this.#validateSeparateNumbers(separateNumbers);
   }
@@ -89,7 +89,7 @@ class InputView {
       throw new ValidateError(ERROR_MESSAGE.existDuplicateNumber);
     }
 
-    const isNotNumbersLottoRange = !numbers.every(validation.isLottoNumberRange);
+    const isNotNumbersLottoRange = !numbers.every(lottoValidation.isLottoNumberRange);
 
     if (isNotNumbersLottoRange) throw new ValidateError(ERROR_MESSAGE.lottoNumberRangee);
   }
@@ -97,7 +97,7 @@ class InputView {
   #validateBonusNumber(number, winningNumbers) {
     if (validation.isEmpty(number)) throw new ValidateError(ERROR_MESSAGE.empty);
 
-    if (!validation.isLottoNumberRange(number)) {
+    if (!lottoValidation.isLottoNumberRange(number)) {
       throw new ValidateError(ERROR_MESSAGE.lottoNumberRangee);
     }
 
