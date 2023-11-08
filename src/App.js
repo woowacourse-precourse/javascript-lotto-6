@@ -28,7 +28,7 @@ const inputPurchaseAmount = async()=>{
 }
 
 
-const inputPrizeNumberAndBonusNumber = async() =>{
+const inputPrizeNumber = async() =>{
   const prizeNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
   const prizeNumberArr = prizeNumber.split(',').map(Number);
   if (prizeNumberArr.length !== 6) {
@@ -43,19 +43,20 @@ const inputPrizeNumberAndBonusNumber = async() =>{
     Console.print("[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.")
     throw new Error("[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.")
   }
+  return prizeNumberArr;}
+const inpuBonusNumber = async(prizeNumber) =>{
   const bonusNumberInput = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
   const bonusNumber = Number(bonusNumberInput);
   if (isNaN(bonusNumber)|| bonusNumber<1 || bonusNumber>45){
     Console.print("[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.")
     throw new Error("[ERROR] 로또 번호는 1부터 45사이의 숫자여야 합니다.")
   }
-  if (prizeNumberArr.includes(bonusNumber)){
+  if (prizeNumber.includes(bonusNumber)){
     Console.print("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.")
     throw new Error("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
   }
-  return [prizeNumberArr,bonusNumber];
+  return bonusNumber;
 }
-
 
 const calculateResult = (prizeNumber,bonusNumber)=>{
   for(let i=0;i<lottos.length;i++){
@@ -83,7 +84,8 @@ class App {
   async play() {
     try{
       await inputPurchaseAmount();
-      const [prizeNumber,bonusNumber] = await inputPrizeNumberAndBonusNumber();
+      const prizeNumber = await inputPrizeNumber();
+      const bonusNumber = await inpuBonusNumber(prizeNumber);
       calculateResult(prizeNumber,bonusNumber);
       const ratio = calculateRatio();
       printResult(ratio);
