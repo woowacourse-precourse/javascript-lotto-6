@@ -48,6 +48,18 @@ class App {
       MissionUtils.Console.print(lottoNumbers);
     });
   }
+
+  async inputWinningNumbersAndBonus() {
+    const winningNumbers = (
+      await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.")
+    )
+      .split(",")
+      .map(Number);
+    const bonusNumber = await MissionUtils.Console.readLineAsync(
+      "보너스 번호를 입력해 주세요."
+    );
+    return { winningNumbers, bonusNumber };
+  }
 }
 
 export default App;
