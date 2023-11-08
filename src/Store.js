@@ -5,11 +5,11 @@ import * as MessageConstants from "./constants/MessageConstants.js";
 import * as LottoConstants from "./constants/LottoConstant.js";
 
 class Store {
-  #money;
+  #receivedMoney;
   #lottoList;
 
   constructor() {
-    this.#money = 0;
+    this.#receivedMoney = 0;
     this.#lottoList = [];
   }
 
@@ -38,7 +38,7 @@ class Store {
     let isMoneyPaid = false;
     while (!isMoneyPaid) {
       try {
-        this.#money = await Store.inputMoney();
+        this.#receivedMoney = await Store.inputMoney();
         isMoneyPaid = true;
       } catch (error) {
         Console.print(error.message);
@@ -47,7 +47,7 @@ class Store {
   }
 
   calculateLottoAmount() {
-    const lottoAmount = this.#money / MoneyConstants.LOTTO_MONEY_UNIT;
+    const lottoAmount = this.#receivedMoney / MoneyConstants.LOTTO_MONEY_UNIT;
     Console.print(`${lottoAmount}개를 구매했습니다.`);
     return lottoAmount;
   }
@@ -216,7 +216,7 @@ class Store {
   calculateProfitRate(rankCountMap) {
     let profitRate;
     const lottoProfit = Store.#caculateProfit(rankCountMap);
-    profitRate = (lottoProfit / this.#money) * 100;
+    profitRate = (lottoProfit / this.#receivedMoney) * 100;
     return profitRate;
   }
 
