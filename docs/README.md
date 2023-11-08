@@ -72,3 +72,18 @@ git clone https://github.com/dev-yenya/javascript-lotto-6
 cd javascript-lotto-6
 npm install
 ```
+
+# 실행
+이 프로젝트를 실행하기 위해서는 터미널에 하단의 코드를 작성하시면 됩니다.
+```
+cd javascript-lotto-6
+cd src
+node App.js
+```
+
+
+# 테스트
+이 프로젝트를 테스트하기 위해서는 javascript-lotto-6 폴더 내 터미널에서 하단의 코드를 작성하시면 됩니다.
+```
+npm test
+```
