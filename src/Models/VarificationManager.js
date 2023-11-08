@@ -10,6 +10,8 @@ class VarificationManager {
 		if (Varificator.isNotDividableWithStandardCost(value, LOTTO_CONSTANTS.standartLottoCost)) {
 			throw new Error(`[ERROR] ${LOTTO_CONSTANTS.standartLottoCost}원 단위로 입력해주세요.`);
 		}
+
+		return true;
 	}
 
 	static checkLottoNumber(numbers) {
@@ -41,6 +43,8 @@ class VarificationManager {
 				`[ERROR] ${LOTTO_CONSTANTS.minLottoNumber}과 ${LOTTO_CONSTANTS.maxLottoNumber} 사이 숫자만 입력 가능합니다.`,
 			);
 		}
+
+		return true;
 	}
 
 	static checkBonusLottoNumber(bonusNumber, numbers) {
@@ -69,6 +73,8 @@ class VarificationManager {
 				`[ERROR] ${LOTTO_CONSTANTS.minLottoNumber}과 ${LOTTO_CONSTANTS.maxLottoNumber} 사이 숫자만 입력 가능합니다.`,
 			);
 		}
+
+		return true;
 	}
 }
 
