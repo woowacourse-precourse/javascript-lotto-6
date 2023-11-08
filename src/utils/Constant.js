@@ -7,6 +7,7 @@ const LOTTO = Object.freeze({
 	maxRange: 45,
 	count: 6,
 	cost: 1000,
+	totalCount: 7,
 });
 
 const PRINT_INPUT = Object.freeze({

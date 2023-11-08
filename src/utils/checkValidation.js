@@ -13,15 +13,12 @@ const isVaildLottoNumbers = (numList) => {
 	throwError(isValidNumrange(numList), ERROR_MESSAGE.invalidNumberRange);
 };
 
-const isVaildBonusNum = (bonus) => {
-	try {
-		throwError(!isValidNumber(bonus), ERROR_MESSAGE.invalidInputNumber);
-		//당첨번호와 중복
-	} catch (error) {
-		Console.print(error);
-		return false;
-	}
-	return true;
+const isVaildBonusNum = (bonus, winningNumber) => {
+	throwError(!isValidNumber(bonus), ERROR_MESSAGE.invalidInputNumber);
+	throwError(
+		new Set([...winningNumber, bonus]).size !== LOTTO.totalCount,
+		ERROR_MESSAGE.duplication
+	);
 };
 
 const isValidNumber = (value) => {
