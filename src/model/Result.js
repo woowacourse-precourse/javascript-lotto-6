@@ -1,13 +1,12 @@
-import { Console } from "@woowacourse/mission-utils";
 import LOTTO_CONSTANT from "../utils/constant";
 
 class Result {
   constructor() {
-    this.first = 0; // 6개 일치
-    this.second = 0; // 5개 일치 + 보너스 번호 일치
-    this.third = 0; // 5개 일치
-    this.fourth = 0; // 4개 일치
-    this.fifth = 0; // 3개 일치
+    this.first = 0; // 1등: 6개 일치
+    this.second = 0; // 2등: 5개 일치 + 보너스 번호 일치
+    this.third = 0; // 3등: 5개 일치
+    this.fourth = 0; // 4등: 4개 일치
+    this.fifth = 0; // 5등: 3개 일치
   }
 
   getMatchingNumbersCount(winning, bonus, myLotto) {
@@ -42,11 +41,11 @@ class Result {
 
   getProfitMargin(purchase) {
     const profit =
-      ((this.fifth * 5000 +
-        this.fourth * 50000 +
-        this.third * 1500000 +
-        this.second * 30000000 +
-        this.first * 2000000000) /
+      ((this.fifth * LOTTO_CONSTANT.fifthReward +
+        this.fourth * LOTTO_CONSTANT.fourthReward +
+        this.third * LOTTO_CONSTANT.thirdReward +
+        this.second * LOTTO_CONSTANT.secondReward +
+        this.first * LOTTO_CONSTANT.fifthReward) /
         purchase) *
       100;
 

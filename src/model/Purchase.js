@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGES } from "../utils/message";
 import LOTTO_CONSTANT from "../utils/constant";
 
@@ -14,7 +13,7 @@ class Purchase {
     if (Number.isNaN(amount) || typeof amount !== "number") {
       throw new Error(ERROR_MESSAGES.purchaseAmountNotNumber);
     }
-    if (amount % 1000 !== 0) {
+    if (amount % LOTTO_CONSTANT.lottoPrice !== 0) {
       throw new Error(ERROR_MESSAGES.purchaseAmountNotDivisible);
     }
   }

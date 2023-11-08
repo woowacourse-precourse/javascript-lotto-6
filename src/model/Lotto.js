@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGES } from "../utils/message";
 import LOTTO_CONSTANT from "../utils/constant";
 
