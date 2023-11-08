@@ -1,4 +1,4 @@
-import { LOTTO_PRIZE_AMOUNT, PRICE } from "../constant/lottoConstants";
+import { LOTTO_PRIZE_AMOUNT, MATCH_COUNT, PRICE } from "../constant/lottoConstants";
 
 class LottoResultChecker {
   #result = {
@@ -52,9 +52,9 @@ class LottoResultChecker {
 
   #updateResult(matchCount, bonusMatch) {
     switch (matchCount) {
-      case 6: this.#result.firstPrize += 1;
+      case MATCH_COUNT.SIX: this.#result.firstPrize += 1;
         break;
-      case 5:
+      case MATCH_COUNT.FIVE:
         if (bonusMatch) {
           this.#result.secondPrize += 1;
           break;
@@ -62,9 +62,9 @@ class LottoResultChecker {
 
         this.#result.thirdPrize += 1;
         break;
-      case 4: this.#result.fourthPrize += 1;
+      case MATCH_COUNT.FOUR: this.#result.fourthPrize += 1;
         break;
-      case 3: this.#result.lastPrize += 1;
+      case MATCH_COUNT.THREE: this.#result.lastPrize += 1;
         break;
     }
   }

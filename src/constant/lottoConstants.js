@@ -1,5 +1,12 @@
 export const MESSAGE = {
   PURCHASED: '개를 구매했습니다.',
+  WINNING_STATISTICS: '당첨통계\n---\n',
+  MATCH: '개 일치 (',
+  BONUS_MATCH: '개 일치, 보너스 볼 일치 (',
+  WON: '원) - ',
+  PIECES: '개\n',
+  TOTAL_PROFIT_RATE: '총 수익률은 ',
+  PERCENT: '%입니다.',
 };
 
 export const PROMPT_MESSAGE = {
@@ -28,4 +35,11 @@ export const LOTTO_PRIZE_AMOUNT = {
   THIRD_PLACE: 1500000,
   FOURTY_PLACE: 50000,
   LAST_PLACE: 5000,
+};
+
+export const MATCH_COUNT = {
+  THREE: 3,
+  FOUR: 4,
+  FIVE: 5,
+  SIX: 6,
 };

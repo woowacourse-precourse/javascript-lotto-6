@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { LOTTO_PRIZE_AMOUNT, MESSAGE } from '../constant/lottoConstants';
+import { LOTTO_PRIZE_AMOUNT, MATCH_COUNT, MESSAGE } from '../constant/lottoConstants';
 import Formatter from './Formatter';
 
 class LottoViewer {
@@ -13,18 +13,17 @@ class LottoViewer {
 
   static winningResult(result) {
     // 개행 줄의 공백을 없애기 위해 replace 사용
-    Console.print(`당첨통계
-      ---
-      3개 일치 (${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.LAST_PLACE)}원) - ${result.lastPrize}개
-      4개 일치 (${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.FOURTY_PLACE)}원) - ${result.fourthPrize}개
-      5개 일치 (${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.THIRD_PLACE)}원) - ${result.thirdPrize}개
-      5개 일치, 보너스 볼 일치 (${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.SECOND_PLACE)}원) - ${result.secondPrize}개
-      6개 일치 (${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.FIRST_PLACE)}원) - ${result.firstPrize}개
+    Console.print(`${MESSAGE.WINNING_STATISTICS}
+      ${MATCH_COUNT.THREE}${MESSAGE.MATCH}${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.LAST_PLACE)}${MESSAGE.WON}${result.lastPrize}${MESSAGE.PIECES}
+      ${MATCH_COUNT.FOUR}${MESSAGE.MATCH}${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.FOURTY_PLACE)}${MESSAGE.WON}${result.fourthPrize}${MESSAGE.PIECES}
+      ${MATCH_COUNT.FIVE}${MESSAGE.MATCH}${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.THIRD_PLACE)}${MESSAGE.WON}${result.thirdPrize}${MESSAGE.PIECES}
+      ${MATCH_COUNT.FIVE}${MESSAGE.BONUS_MATCH}${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.SECOND_PLACE)}${MESSAGE.WON}${result.secondPrize}${MESSAGE.PIECES}
+      ${MATCH_COUNT.SIX}${MESSAGE.MATCH}${Formatter.numberFormat.format(LOTTO_PRIZE_AMOUNT.FIRST_PLACE)}${MESSAGE.WON}${result.firstPrize}${MESSAGE.PIECES}
     `.replace(/^ +/gm, ''));
   }
 
   static lottoProfitRate(profitRate) {
-    Console.print(`총 수익률은 ${Formatter.numberFormat.format(Formatter.convertToTwoDecimalPoints(profitRate))}%입니다.`);
+    Console.print(`${MESSAGE.TOTAL_PROFIT_RATE}${Formatter.numberFormat.format(Formatter.convertToTwoDecimalPoints(profitRate))}${MESSAGE.PERCENT}`);
   }
 }
 
