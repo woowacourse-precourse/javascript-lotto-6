@@ -1,62 +1,19 @@
-import Validator from "./Validator.js";
-import LOTTO from "./constant/LOTTO.js";
 import PRIZE from "./constant/PRIZE.js";
 
 class LottoPrizeManager {
-  #winningNumberArray;
-  #bonusNumber;
-
-  constructor(winningNumberString, bonusNumberString) {
-    this.#validateWinningNumber(winningNumberString);
-    this.#winningNumberArray = winningNumberString.split(",").map(Number);
-
-    this.#validateBonusNumber(bonusNumberString);
-    this.#bonusNumber = Number(bonusNumberString);
-  }
-
-  #validateWinningNumber(string) {
-    if (!Validator.isStringOnlyDigitsAndComma(string)) {
-      throw new Error(PRIZE.ERROR.WINNING_NUMBER_STRING_TYPE);
-    }
-
-    const array = string.split(",");
-
-    // TODO: 메서드 분리
-    if (!Validator.isArrayLengthEqualTo(array, LOTTO.SIZE)) {
-      throw new Error(PRIZE.ERROR.WINNING_NUMBER_SIZE);
-    }
-
-    if (!array.every((numStr) => Validator.isInLottoNumberRange(numStr))) {
-      throw new Error(PRIZE.ERROR.WINING_NUMBER_RANGE_NUMBER);
-    }
-
-    if (Validator.hasDuplicate(array)) {
-      throw new Error(PRIZE.ERROR.WINING_NUMBER_DUPLICATE);
-    }
-  }
-
-  #validateBonusNumber(numStr) {
-    if (!Validator.isInLottoNumberRange(numStr)) {
-      throw new Error(PRIZE.ERROR.BONUS_NUMBER_RANGE_NUMBER);
-    }
-
-    if (Validator.hasDuplicate([...this.#winningNumberArray, Number(numStr)])) {
-      throw new Error(PRIZE.ERROR.BONUS_NUMBER_DUPLICATE);
-    }
-  }
-
-  #filterMatchingNumbers(numberArray) {
+  #filterMatchingNumbers({ winningNumbers, bonusNumber, numberArray }) {
     const matchedNumber = numberArray.filter((number) =>
-      this.#winningNumberArray.includes(number)
+      winningNumbers.includes(number)
     );
-    const isBonusNumberMatched = numberArray.includes(this.#bonusNumber);
+    const isBonusNumberMatched = numberArray.includes(bonusNumber);
 
     return { matchedNumber, isBonusNumberMatched };
   }
 
-  #getPrizeRank(numberArray) {
-    const { matchedNumber, isBonusNumberMatched } =
-      this.#filterMatchingNumbers(numberArray);
+  #getPrizeRank({ winningNumbers, bonusNumber, numberArray }) {
+    const { matchedNumber, isBonusNumberMatched } = this.#filterMatchingNumbers(
+      { winningNumbers, bonusNumber, numberArray }
+    );
 
     const matchedRank = Object.entries(PRIZE.RANK).find(
       ([_, { MATCHED_COUNT, BONUS_MATCH }]) => {
@@ -70,13 +27,17 @@ class LottoPrizeManager {
     return matchedRank?.[0];
   }
 
-  calculateAllLottoRank(lottoArray) {
+  calculateAllLottoRank({ winningNumbers, bonusNumber, lottoArray }) {
     const rankResult = Object.fromEntries(
       Object.keys(PRIZE.RANK).map((rank) => [rank, 0])
     );
 
     lottoArray.forEach((lotto) => {
-      const prizeRank = this.#getPrizeRank(lotto);
+      const prizeRank = this.#getPrizeRank({
+        winningNumbers,
+        bonusNumber,
+        numberArray: lotto,
+      });
       if (!prizeRank) return;
       rankResult[prizeRank]++;
     });

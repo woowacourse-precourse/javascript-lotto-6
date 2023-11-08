@@ -3,10 +3,14 @@ import Lotto from "./Lotto.js";
 import LottoPrizeManager from "./LottoPrizeManager.js";
 import InputHandler from "./InputHandler.js";
 import OutputHandler from "./OutputHandler.js";
+import WinningNumber from "./WinningNumber.js";
+import BonusNumber from "./BonusNumber.js";
 
 class App {
   #totalMoney;
   #lottoController;
+  #winningNumber;
+  #bonusNumber;
   #prizeManager;
 
   async #initializeLottoController() {
@@ -32,40 +36,65 @@ class App {
     );
   }
 
-  async #initializePrizeManager() {
+  async #initializeWinningNumberController() {
     try {
       const winningNumberString = await InputHandler.getWinningNumberString();
-      const bonusNumberString = await InputHandler.getBonusNumberString();
+      this.#winningNumber = new WinningNumber(winningNumberString);
+    } catch (e) {
+      OutputHandler.printErrorMessage(e);
+      await this.#initializeWinningNumberController();
+    }
+  }
 
-      this.#prizeManager = new LottoPrizeManager(
-        winningNumberString,
+  async #initializeBonusNumberController() {
+    try {
+      const bonusNumberString = await InputHandler.getBonusNumberString();
+      this.#bonusNumber = new BonusNumber(
+        this.#winningNumber.numberArray,
         bonusNumberString
       );
     } catch (e) {
       OutputHandler.printErrorMessage(e);
-      await this.#initializePrizeManager();
+      await this.#initializeBonusNumberController();
     }
   }
 
-  #calculateLottoPrizeResult() {
-    const rankResult = this.#prizeManager.calculateAllLottoRank(
-      this.#lottoController.lottoArray.map((lotto) => lotto.numbers)
+  async #initializePrizeManager() {
+    this.#prizeManager = new LottoPrizeManager();
+  }
+
+  #calculateLottoRankResult() {
+    const lottoArray = this.#lottoController.lottoArray.map(
+      (lotto) => lotto.numbers
     );
 
-    const profitRate = LottoPrizeManager.calculateProfitRate({
+    return this.#prizeManager.calculateAllLottoRank({
+      lottoArray,
+      winningNumbers: this.#winningNumber.numberArray,
+      bonusNumber: this.#bonusNumber.number,
+    });
+  }
+
+  #calculateProfitRate(rankResult) {
+    return LottoPrizeManager.calculateProfitRate({
       rankResult,
       totalMoney: +this.#totalMoney,
     });
-
-    OutputHandler.printPrizeResult({ rankResult, profitRate });
   }
 
   async play() {
     await this.#initializeLottoController();
     this.#printLottoTickets();
 
+    await this.#initializeWinningNumberController();
+    await this.#initializeBonusNumberController();
+
     await this.#initializePrizeManager();
-    this.#calculateLottoPrizeResult();
+
+    const rankResult = this.#calculateLottoRankResult();
+    const profitRate = this.#calculateProfitRate(rankResult);
+
+    OutputHandler.printPrizeResult({ rankResult, profitRate });
   }
 }
 
