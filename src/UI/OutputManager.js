@@ -27,13 +27,13 @@ class OutputManager {
     );
   }
 
-  printMatchingResult(matchingCounts) {
-    Object.keys(matchingCounts)
+  printMatchingResults(matchingResults) {
+    Object.keys(matchingResults)
       .map((key) => Number(key))
       .sort((a, b) => a - b)
-      .forEach((matchingCount) => {
+      .forEach((matchingResult) => {
         Console.print(
-          `${WINNING_DESCRIPTION_BY_COUNT[matchingCount]} - ${matchingCounts[matchingCount]}개`
+          `${WINNING_DESCRIPTION_BY_COUNT[matchingResult]} - ${matchingResults[matchingResult]}개`
         );
       });
   }
@@ -44,9 +44,9 @@ class OutputManager {
     );
   }
 
-  printGameResult({ matchingCounts, rateOfReturn }) {
+  printGameResult({ matchingResults, rateOfReturn }) {
     Console.print(GAEM_RESULT_MESSAGE);
-    this.printMatchingResult(matchingCounts);
+    this.printMatchingResults(matchingResults);
     this.printRateOfReturn(rateOfReturn);
   }
 }

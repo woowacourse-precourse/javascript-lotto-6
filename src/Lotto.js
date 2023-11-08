@@ -16,12 +16,12 @@ class Lotto {
     return this.#numbers;
   }
 
-  getMatchingResultWithWinningNumbers(winningNumbers) {
+  getMatchingCount({ winningNumbers, bonusNumber }) {
     return {
       matchingCountWithWinningNumbers:
         this.getMatchingCountWithWinningNumbers(winningNumbers),
       matchingCountWithBonusNumber:
-        this.getMatchingCountWithBonusNumber(winningNumbers),
+        this.getMatchingCountWithBonusNumber(bonusNumber),
     };
   }
 

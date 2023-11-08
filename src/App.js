@@ -1,26 +1,21 @@
 import {
-  BONUS_NUMBER_WEIGHT,
-  LAST_DECIMAL_PLACE_TO_DISPLAY,
   LOTTO_MAX_NUMBER,
   LOTTO_MIN_NUMBER,
   LOTTO_NUMBERS_LENGTH,
   LOTTO_PRICE,
-  MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER,
-  MIN_MATCHING_COUNTS_FOR_PRIZE,
-  PERCENT_CONVERSION_NUMBER,
-  WINNING_NUMBER_WEIGHT,
-  WINNING_PRIZE_BY_COUNT,
 } from './Constants.js';
 import Lotto from './Lotto.js';
 import InputManager from './UI/InputManager.js';
 import OutputManager from './UI/OutputManager.js';
 import { generateRandomNumbers } from './Utils.js';
 import { Validators } from './Service/Validators.js';
+import LottoGameResultCalculator from './Components/LottoGameResultCalculator.js';
 
 class App {
   constructor() {
     this.inputManager = new InputManager();
     this.outputManager = new OutputManager();
+    this.lottoGameResultCalculator = new LottoGameResultCalculator();
     this.purchaseAmountInput = '';
     this.winningNumbersInput = '';
     this.bonusNumberInput = '';
@@ -31,23 +26,33 @@ class App {
   }
 
   async play() {
+    await this.setConditionForGame();
+    const { matchingResults, rateOfReturn } =
+      this.lottoGameResultCalculator.getGameResult({
+        lottos: [...this.lottos],
+        winningNumbers: this.winningNumbers,
+        bonusNumber: this.bonusNumber,
+        purchaseAmount: this.purchaseAmount,
+      });
+    this.outputManager.printGameResult({
+      matchingResults,
+      rateOfReturn,
+    });
+  }
+
+  async setConditionForGame() {
     this.purchaseAmount = await this.getPurchaseAmount();
     const numberOfLottos = this.getNumberOfLottos();
     this.createLottos(numberOfLottos);
     this.outputManager.printPurchasedLottosInfo(this.lottos);
     this.winningNumbers = await this.getWinningNumbers();
     this.bonusNumber = await this.getBonusNumber();
-    const { matchingCounts, rateOfReturn } = this.getGameResult();
-    this.outputManager.printGameResult({
-      matchingCounts,
-      rateOfReturn,
-    });
   }
 
   async getPurchaseAmount() {
     this.purchaseAmountInput = await this.inputManager.enterPurchaseAmount();
     try {
-      await Validators.purchaseAmountInputValidator.validatePurChaseAmountInput(
+      Validators.purchaseAmountInputValidator.validatePurChaseAmountInput(
         this.purchaseAmountInput
       );
     } catch (e) {
@@ -61,7 +66,7 @@ class App {
     this.winningNumbersInput =
       await this.inputManager.enterWinningNumbersInput();
     try {
-      await Validators.winningNumbersInputValidator.validateWinningNumbersInput(
+      Validators.winningNumbersInputValidator.validateWinningNumbersInput(
         this.winningNumbersInput
       );
     } catch (e) {
@@ -74,7 +79,7 @@ class App {
   async getBonusNumber() {
     this.bonusNumberInput = await this.inputManager.enterBonusNumberInput();
     try {
-      await Validators.bonusNumberInputValidator.validateBonusNumberInput({
+      Validators.bonusNumberInputValidator.validateBonusNumberInput({
         bonusNumberInput: this.bonusNumberInput,
         winningNumbers: this.winningNumbers,
       });
@@ -104,55 +109,6 @@ class App {
     );
     numbers.sort((a, b) => a - b);
     return numbers;
-  }
-
-  getGameResult() {
-    const matchingCounts = this.getMatchingCounts();
-    const totalPrize = this.getTotalPrize(matchingCounts);
-    const rateOfReturn = this.getRateOfReturn(totalPrize);
-    return { matchingCounts, totalPrize, rateOfReturn };
-  }
-
-  getMatchingCount(
-    matchingCountWithWinningNumbers,
-    matchingCountWithBonusNumber
-  ) {
-    return matchingCountWithWinningNumbers ===
-      MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER
-      ? matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT +
-          matchingCountWithBonusNumber * BONUS_NUMBER_WEIGHT
-      : matchingCountWithWinningNumbers * WINNING_NUMBER_WEIGHT;
-  }
-
-  getMatchingCounts() {
-    const matchingCounts = { 3: 0, 4: 0, 5: 0, 5.5: 0, 6: 0 };
-    this.lottos.forEach((lotto) => {
-      const { matchingCountWithWinningNumbers, matchingCountWithBonusNumber } =
-        lotto.getMatchingResultWithWinningNumbers(this.winningNumbers);
-      const matchingCount = this.getMatchingCount(
-        matchingCountWithWinningNumbers,
-        matchingCountWithBonusNumber
-      );
-      if (matchingCount < MIN_MATCHING_COUNTS_FOR_PRIZE) return;
-      matchingCounts[matchingCount] += 1;
-    });
-    return { ...matchingCounts };
-  }
-
-  getTotalPrize(matchingCounts) {
-    let totalPrize = 0;
-    Object.keys(matchingCounts).forEach((matchingCount) => {
-      totalPrize +=
-        matchingCounts[matchingCount] * WINNING_PRIZE_BY_COUNT[matchingCount];
-    });
-    return totalPrize;
-  }
-
-  getRateOfReturn(totalPrize) {
-    return (
-      (totalPrize / this.purchaseAmount) *
-      PERCENT_CONVERSION_NUMBER
-    ).toFixed(LAST_DECIMAL_PLACE_TO_DISPLAY);
   }
 }
 
