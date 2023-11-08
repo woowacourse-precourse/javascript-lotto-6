@@ -29,7 +29,7 @@ class App {
     const amount = parseInt(input, 10);
 
     if (isNaN(amount) || amount < 1000 || amount % 1000 !== 0) {
-      throw new Error ("[ERROR] 구입 금액은 1,000 단위의 정수여야 합니다.");
+      throw new LottoError (ErrorMessages.INVALID_PURCHASE_AMOUNT);
     }
     MissionUtils.Console.print(`${amount}`)
     
