@@ -6,13 +6,10 @@ class App {
 		const amount = await InputPrintout.inputAmount();
 		OutputPrintout.printLottos(amount);
 
-		let a = await InputPrintout.inputLottoNumbers();
-		console.log("당첨번호 ", a.getNumbers()); // winningnum
+		const winningNumber = await InputPrintout.inputLottoNumbers();
+		const bonusNumber = await InputPrintout.inputBonusNum(winningNumber.getNumbers());
 
-		let b = await InputPrintout.inputBonusNum(a.getNumbers());
-		// console.log("보너스", b);
-
-		OutputPrintout.printMathingNumberList(a.getNumbers(), b);
+		OutputPrintout.printMathingNumberList(winningNumber.getNumbers(), bonusNumber);
 		OutputPrintout.printRate(Number(amount));
 	}
 }
