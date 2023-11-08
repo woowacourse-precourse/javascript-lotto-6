@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { ERROR_MESSAGE } from "./constants.js";
 class Lotto {
   #numbers;
 
@@ -16,8 +17,21 @@ class Lotto {
   }
 
   #validate(numbers) {
+    // 입력 로또 번호 검증
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR_MESSAGE.OVER_LENGTH_NUMBER); // 로또 번호가 6개인지 확인
+    }
+    if (numbers === "" || numbers.split(",").some((number) => number === "")) {
+      throw new Error(ERROR_MESSAGE.EMPTY_NUMBER); // 로또 번호에 빈 값이 있는지 확인
+    }
+    if (numbers.split(",").some((number) => isNaN(number))) {
+      throw new Error(ERROR_MESSAGE.NOT_NUMBER); // 로또 번호가 숫자인지 확인
+    }
+    if (numbers.length !== new Set(numbers).size) {
+      throw new Error(ERROR_MESSAGE.DUPLICATE_NUMBER); // 로또 번호에 중복된 값이 있는지 확인
+    }
+    if (numbers.includes(" ")) {
+      throw new Error(ERROR_MESSAGE.SPACE_NUMBER); // 입력할 때 공백이 있는지 확인
     }
   }
   // TODO: 추가 기능 구현
