@@ -3,7 +3,6 @@ import Validation from "./Validation";
 class LottoResult {
   /** @type {Lotto[]}*/
   #lottoes;
-
   /** @type {number[]}*/
   #numbers;
   /** @type {number}*/
@@ -24,6 +23,16 @@ class LottoResult {
     Validation.validateLottoNumbersWithBonus(numbers, bonus);
     this.#bonus = bonus;
     this.#numbers = numbers;
+  }
+
+  /**
+   * @param {number[]} numbers
+   * @param {number} bonus
+   */
+  setWinningNumber(numbers, bonus) {
+    Validation.validateLottoNumbersWithBonus(numbers, bonus);
+    this.#numbers = numbers;
+    this.#bonus = bonus;
   }
 }
 export default LottoResult;
