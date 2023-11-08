@@ -1,37 +1,21 @@
 import { Console } from '@woowacourse/mission-utils';
-import { QUERY, TEMPLATE, WINNING_STATISTICS } from './LottoMessage.js';
+import { TEMPLATE, WINNING_STATISTICS } from './LottoMessage.js';
 
-class View {
+class OutputView {
   static #DELIMITER = ',';
-
-  static async askPurchaseAmount() {
-    const answer = await Console.readLineAsync(QUERY.purchaseAmount);
-    return Number(answer);
-  }
-
-  static async askWinningNumbers() {
-    const answer = await Console.readLineAsync(QUERY.winningNumbers);
-    const winningNumbers = answer.split(View.#DELIMITER).map(Number);
-    return winningNumbers;
-  }
-
-  static async askBonusNumber() {
-    const answer = await Console.readLineAsync(QUERY.bonusNumber);
-    return Number(answer);
-  }
 
   static printLottoCount(lottoCount) {
     const message = TEMPLATE.lottoCount(lottoCount);
-    View.print(message);
+    OutputView.print(message);
   }
 
   static printLottos(lottos) {
-    const sortedLottos = View.#getSorted(lottos);
+    const sortedLottos = OutputView.#getSorted(lottos);
     const message = sortedLottos.reduce(
       (acc, cur) => acc + TEMPLATE.sortedLotto(cur.join(`${this.#DELIMITER} `)),
       '',
     );
-    View.print(message);
+    OutputView.print(message);
   }
 
   static #getSorted(arrays) {
@@ -41,12 +25,12 @@ class View {
   static printWinningResults(winningResults) {
     let message = WINNING_STATISTICS;
     message += this.#getWinningResultsMessage(winningResults);
-    View.print(message);
+    OutputView.print(message);
   }
 
   static #getWinningResultsMessage(winningResults) {
     let message = '';
-    const reversedMap = View.#getReversedMap(winningResults);
+    const reversedMap = OutputView.#getReversedMap(winningResults);
     reversedMap.forEach((count, ranking) => {
       message += TEMPLATE.winnigResultsBy[ranking](count);
     });
@@ -58,13 +42,13 @@ class View {
   }
 
   static printProfitRate(profitRate) {
-    const trimmedRate = View.#getTrimmedRate(profitRate);
+    const trimmedRate = OutputView.#getTrimmedRate(profitRate);
     const message = TEMPLATE.profitRate(trimmedRate);
-    View.print(message);
+    OutputView.print(message);
   }
 
   static #getTrimmedRate(rate) {
-    const roundedRate = View.#getRoundedRate(rate);
+    const roundedRate = OutputView.#getRoundedRate(rate);
     const includesDot = roundedRate.toString().includes('.');
     return includesDot ? roundedRate : `${roundedRate}.0`;
   }
@@ -78,4 +62,4 @@ class View {
   }
 }
 
-export default View;
+export default OutputView;

@@ -1,6 +1,7 @@
+import InputView from './InputView.js';
 import LottoPurchaser from './LottoPurchaser.js';
 import LottoShop from './LottoShop.js';
-import View from './View.js';
+import OutputView from './OutputView.js';
 import WinningLotto from './WinningLotto.js';
 import WinningResults from './WinningResults.js';
 
@@ -11,24 +12,24 @@ class LottoGame {
   async play() {
     await this.#purchaseLottos();
 
-    View.printLottoCount(this.#lottoPurchaser.getLottoCount());
-    View.printLottos(this.#lottoPurchaser.getLottos());
+    OutputView.printLottoCount(this.#lottoPurchaser.getLottoCount());
+    OutputView.printLottos(this.#lottoPurchaser.getLottos());
 
     await this.#saveWinningLotto();
     this.#lottoPurchaser.check(this.#winningLotto);
 
-    View.printWinningResults(this.#lottoPurchaser.getWinningResults());
-    View.printProfitRate(this.#lottoPurchaser.getProfitRate());
+    OutputView.printWinningResults(this.#lottoPurchaser.getWinningResults());
+    OutputView.printProfitRate(this.#lottoPurchaser.getProfitRate());
   }
 
   async #purchaseLottos() {
     try {
       new LottoShop().sellTo(
         this.#lottoPurchaser,
-        await View.askPurchaseAmount(),
+        await InputView.askPurchaseAmount(),
       );
     } catch (error) {
-      View.print(error.message);
+      OutputView.print(error.message);
       await this.#purchaseLottos();
     }
   }
@@ -36,11 +37,11 @@ class LottoGame {
   async #saveWinningLotto() {
     try {
       this.#winningLotto = new WinningLotto(
-        await View.askWinningNumbers(),
-        await View.askBonusNumber(),
+        await InputView.askWinningNumbers(),
+        await InputView.askBonusNumber(),
       );
     } catch (error) {
-      View.print(error.message);
+      OutputView.print(error.message);
       await this.#saveWinningLotto();
     }
   }
