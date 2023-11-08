@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import Lotto from '../Lotto.js';
+import Lotto from './Lotto.js';
 
 class Lottos {
   #lottos = [];
