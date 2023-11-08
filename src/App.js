@@ -38,8 +38,13 @@ class App {
   printLottoNums(TICKET){
     Console.print(`[${TICKET.join(", ")}]`);
   }
-  // getWinningNum
+
   // 사용자로부터 당첨 번호를 입력받는 메서드
+  async getWinningNum() {
+    const INPUTNUMS = parseInt(Console.readLineAsync("당첨 번호를 입력해 주세요."));
+    const WINNINGNUM = new Lotto(INPUTNUMS);
+    return WINNINGNUM.returnNumbers();
+  }
   // getBonusNum
   // 사용자로부터 보너스 번호를 입력받는 메서드
   // printWinningStatistics
