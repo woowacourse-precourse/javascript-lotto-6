@@ -6,7 +6,7 @@ class Profit {
   }
 
   profitRateAcc(profit, cost) {
-    this.profitRate = parseFloat(((profit / cost) * 100).toFixed(2));
+    this.profitRate = Number(((profit / cost) * 100).toFixed(2));
     return this.profitRate;
   }
 
