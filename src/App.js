@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from './Lotto.js';
+import { LOTTO_MESSAGE } from "./Messages.js";
 
 class App {
   constructor() {
@@ -7,19 +8,19 @@ class App {
   }
   async play() {
     const purchasePrice = await MissionUtils.Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
+      LOTTO_MESSAGE.ENTER_PURCHASE_PRICE_MESSAGE
     );
     const lottoCnt = this.lotto.repeatLottoNumber(purchasePrice);
-    MissionUtils.Console.print(lottoCnt + "개를 구매했습니다.");
+    MissionUtils.Console.print(lottoCnt + LOTTO_MESSAGE.LOTTO_CNT_MESSAGE);
     const lottoArr = this.lotto.generateRandomNumber(lottoCnt);
     const winningNumbers = await MissionUtils.Console.readLineAsync(
-      "\n당첨 번호를 입력해 주세요.\n"
+      LOTTO_MESSAGE.ENTER_WINNING_NUMBER_MESSAGE
     );
     this.lotto.isValidWinningNumbers(winningNumbers);
     const bonusNumber = await MissionUtils.Console.readLineAsync(
-      "\n보너스 번호를 입력해 주세요.\n"
+      LOTTO_MESSAGE.ENTER_BONUS_NUMBER_MESSAGE
     );
-    MissionUtils.Console.print("\n당첨 통계\n---");
+    MissionUtils.Console.print(LOTTO_MESSAGE.WINNING_RESULT);
     const winningCnt = this.lotto.checkWinningNumbers(lottoArr, winningNumbers.split(',').map(Number), bonusNumber)
     const totalPrizeMoney = this.lotto.returnWinningDetails(winningCnt);
     this.lotto.returnRevenuePercent(purchasePrice, totalPrizeMoney);

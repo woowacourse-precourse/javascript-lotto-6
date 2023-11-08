@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { LOTTO_MESSAGE, ERROR_MESSAGE, PRIZE_ARR } from "./Messages.js";
 
 class Lotto {
   #numbers;
@@ -13,13 +14,13 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR_MESSAGE.INVALID_LOTTO_NUMBER_COUNT);
     }
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error("[ERROR] 중복된 숫자가 있습니다.");
+      throw new Error(ERROR_MESSAGE.DUPLICATE_LOTTO_NUMBERS);
     }
     if (!numbers.every(num => !Number.isNaN(Number(num)) && num >= 1 && num <= 45)) {
-      throw new Error('[ERROR] 로또 번호는 1부터 45의 숫자만 사용하실 수 있습니다.');
+      throw new Error(ERROR_MESSAGE.INVALID_LOTTO_NUMBER_RANGE);
     }
   }
 
@@ -35,10 +36,10 @@ class Lotto {
   }
   repeatLottoNumber(purchasePrice) {
     if (Number.isNaN(Number(purchasePrice))) {
-      throw new Error("[ERROR] 숫자만 입력 가능합니다.");
+      throw new Error(ERROR_MESSAGE.NOT_ONLY_NUMBER);
     }
     if (purchasePrice % 1000 !== 0) {
-      throw new Error("[ERROR] 구입금액은 반드시 1000원 단위이여야 합니다.");
+      throw new Error(ERROR_MESSAGE.INVALID_PURCHASE_AMOUNT);
     }
     const lottoCnt = purchasePrice / 1000;
     return lottoCnt;
@@ -48,7 +49,7 @@ class Lotto {
   }
   checkWinningNumbers(lottoArr, winningNumbers, bonusNumber) {
     if (Number.isNaN(Number(bonusNumber)) || bonusNumber < 1 || bonusNumber > 45) {
-      throw new Error("[ERROR] 보너스 번호는 1부터 45의 숫자만 사용하실 수 있습니다.");
+      throw new Error(ERROR_MESSAGE.INVALID_BONUS_NUMBER_RANGE);
     }
     
     const winningCnt = [0, 0, 0, 0, 0];
@@ -79,28 +80,17 @@ class Lotto {
     return winningCnt;
   }
   returnWinningDetails(winningCnt) {
-    const prizeDescriptions = [
-      "3개 일치 (5,000원)",
-      "4개 일치 (50,000원)",
-      "5개 일치 (1,500,000원)",
-      "5개 일치, 보너스 볼 일치 (30,000,000원)",
-      "6개 일치 (2,000,000,000원)",
-    ];
-
-    const prizeMoneyArr = [
-      5000, 50000, 1500000, 30000000, 2000000000
-    ]
-
     let totalPrizeMoney = 0;
   
     for(let i = 0 ; i < winningCnt.length ; i++) {
-      MissionUtils.Console.print(`${prizeDescriptions[i]} - ${winningCnt[i]}개`);
-      totalPrizeMoney += prizeMoneyArr[i] * winningCnt[i];
+      MissionUtils.Console.print(`${PRIZE_ARR.PRIZE_DESCRIPTIONS[i]} - ${winningCnt[i]}개`);
+      totalPrizeMoney += PRIZE_ARR.PRIZE_MONEY_ARR[i] * winningCnt[i];
     }
     return totalPrizeMoney;
   }
   returnRevenuePercent(purchasePrice, totalPrizeMoney) {
-    return MissionUtils.Console.print(`총 수익률은 ${totalPrizeMoney / purchasePrice * 100}%입니다.`);
+    const revenuePercentage = (totalPrizeMoney / purchasePrice * 100).toFixed(1);
+    return MissionUtils.Console.print(`${LOTTO_MESSAGE.TOTAL_REVENUE_MESSAGE} ${revenuePercentage}${LOTTO_MESSAGE.PERCENT_MESSAGE}`);
   }
   
 }
