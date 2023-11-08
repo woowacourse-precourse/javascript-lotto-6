@@ -13,6 +13,13 @@ class Validations {
       throw new Error(Errors.NOT_NUMBER);
     }
   }
+
+  static isPlus(input) {
+    const number = Number(input);
+    if (number <= 0) {
+      throw new Error(Errors.IS_NOT_PLUS);
+    }
+  }
 }
 
 export default Validations;
