@@ -1,7 +1,7 @@
 import Controller from "./Controller.js";
 import User from "./User.js";
 import View from "./View.js";
-import Winning from "./WinningLotto.js";
+import Winning from "./Winning.js";
 
 class App {
     async play() {
