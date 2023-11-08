@@ -13,19 +13,13 @@ class LottoController {
     this.winnings = [];
   }
 
-  generateLottoNumber() {
-    this.Lottos = Lotto.generateLottoNumber(this.purchaseAmount);
-  }
-
   printLotto() {
+    this.Lottos = Lotto.generateLottoNumber(this.purchaseAmount);
     OutputView.printLotto(this.Lottos);
   }
 
-  countWinning() {
-    this.winnings = Winning.countWinning(this.Lottos, this.winningNumbers, this.bonusNumber);
-  }
-
   printWinningStatistics() {
+    this.winnings = Winning.countWinning(this.Lottos, this.winningNumbers, this.bonusNumber);
     OutputView.printWinningStatistics(this.winnings);
   }
 
@@ -36,11 +30,9 @@ class LottoController {
 
   async gameStart() {
     this.purchaseAmount = await InputView.readPurchaseAmount();
-    this.generateLottoNumber();
     this.printLotto();
     this.winningNumbers = await InputView.readWinningNumbers();
     this.bonusNumber = await InputView.readBonusNumber();
-    this.countWinning();
     this.printWinningStatistics();
     this.printRevenueRate();
   }
