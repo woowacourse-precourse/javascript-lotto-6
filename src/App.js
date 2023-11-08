@@ -13,55 +13,55 @@ class App {
 
   async play() {
     try {
-      await this.inputMoney();
+      await this.#inputMoney();
     } catch (e) {
       MissionUtils.Console.print(e.message);
     }
   }
 
-  async inputMoney() {
+  async #inputMoney() {
     comments.inputNumberComment();
 
     const totalMoney = await MissionUtils.Console.readLineAsync('');
-    this.callCounter(totalMoney);
+    this.#callCounter(totalMoney);
 
-    this.inputWinningNumber();
+    this.#inputWinningNumber();
   }
 
-  callCounter(money) {
+  #callCounter(money) {
     this.counter = new Counter(money);
     this.counter.lottoCountPrinter();
     this.counter.lottosPrinter();
   }
 
-  async inputWinningNumber() {
+  async #inputWinningNumber() {
     comments.winningNumberComment();
 
     const winningNumber = await MissionUtils.Console.readLineAsync('');
-    const winningSplitNumber = winningNumberSpliter(winningNumber);
+    const winningSplitNumber = this.winningNumberSpliter(winningNumber);
     new Winning(winningSplitNumber);
 
-    this.inputBonusNumber();
+    this.#inputBonusNumber();
   }
 
-  async inputBonusNumber() {
+  winningNumberSpliter(input) {
+    const winningNumberSplit = input.split(',');
+    return winningNumberSplit;
+  }
+
+  async #inputBonusNumber() {
     comments.bonusNumberComment();
 
     const bonusNumber = await MissionUtils.Console.readLineAsync('');
     new Bonus(bonusNumber, model.winningNumber);
 
-    this.callResults()
+    this.#callResults()
     process.exitCode = 0;
   }
 
-  callResults() {
+  #callResults() {
     new Results(model.lottoNumbers, model.winningNumber, model.bonus, model.counts)
   }
 }
 
 export default App;
-
-export function winningNumberSpliter(input) {
-  const winningNumberSplit = input.split(',');
-  return winningNumberSplit;
-}
