@@ -1,7 +1,7 @@
 import { MissionUtils, Console } from "@woowacourse/mission-utils";
-import Lotto from "./Lotto.js";
-import Buying from "./Buying.js";
-import WinningNumber from "./WinningNumber.js";
+import Lotto from "./class/Lotto";
+import Buying from "./class/Buying.js";
+import WinningNumber from "./class/WinningNumber.js";
 
 class App {
 
