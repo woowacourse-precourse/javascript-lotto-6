@@ -1,9 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
 import Lotto from '../src/models/Lotto';
-import TiketBooth from '../src/views/TicketBooth';
+import TicketBooth from '../src/views/TicketBooth';
 
-describe('TiketBooth 클래스 테스트', () => {
-  const ticketBooth = new TiketBooth();
+describe('TicketBooth 클래스 테스트', () => {
+  const ticketBooth = new TicketBooth();
 
   test('당첨번호와 보너스번호가 반환되는지 테스트', async () => {
     const mockWinningNumbers = '1,2,3,4,5,6';

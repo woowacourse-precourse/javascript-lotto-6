@@ -1,16 +1,16 @@
 import { Console } from '@woowacourse/mission-utils';
-import TiketBooth from '../views/TicketBooth.js';
+import { ERROR_MESSEGE } from '../constants/messages.js';
+import TicketBooth from '../views/TicketBooth.js';
 import Announcer from '../views/Announcer.js';
 import LottoBundle from '../models/LottoBundle.js';
 import WinLotto from '../models/WinLotto.js';
 import Analyzer from '../models/Analyzer.js';
-import { ERROR_MESSEGE } from '../constants/messages.js';
 
 class Controller {
   #lottoBundle;
 
   constructor() {
-    this.tiketBooth = new TiketBooth();
+    this.ticketBooth = new TicketBooth();
     this.announcer = new Announcer();
     this.analyzer = new Analyzer();
     this.#lottoBundle;
@@ -25,7 +25,7 @@ class Controller {
 
   async purchaseLotto() {
     try {
-      const amount = await this.tiketBooth.takePaymentForTickets();
+      const amount = await this.ticketBooth.takePaymentForTickets();
       this.#lottoBundle = new LottoBundle(amount);
       this.announcer.printLottoBundle(this.#lottoBundle);
     } catch (error) {
@@ -35,7 +35,7 @@ class Controller {
 
   async drawWinNumbers() {
     try {
-      await this.tiketBooth.receiveWinNumbers();
+      await this.ticketBooth.receiveWinNumbers();
     } catch (error) {
       await this.handleErrorAndRetry(error, this.drawWinNumbers.bind(this));
     }
@@ -43,7 +43,7 @@ class Controller {
 
   async drawBonusNumber() {
     try {
-      await this.tiketBooth.receiveBonusNumber();
+      await this.ticketBooth.receiveBonusNumber();
     } catch (error) {
       await this.handleErrorAndRetry(error, this.drawBonusNumber.bind(this));
     }
@@ -55,7 +55,7 @@ class Controller {
   }
 
   processLottoResults() {
-    const winLotto = new WinLotto(this.tiketBooth.getWinNumbers());
+    const winLotto = new WinLotto(this.ticketBooth.getWinNumbers());
     const matchedNumberList = this.#lottoBundle.populateWinResult(winLotto);
     this.analyzer.countWinningRank(matchedNumberList);
     this.announcer.printResult(this.analyzer);

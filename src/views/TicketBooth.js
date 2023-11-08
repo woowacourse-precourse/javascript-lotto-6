@@ -4,7 +4,7 @@ import { OPTIONS } from '../constants/lottoConstants.js';
 import REGEXS from '../constants/regexs.js';
 import Lotto from '../models/Lotto.js';
 
-class TiketBooth {
+class TicketBooth {
   constructor() {
     this.winNumber;
     this.bonusNumber;
@@ -69,4 +69,4 @@ class TiketBooth {
   }
 }
 
-export default TiketBooth;
+export default TicketBooth;
