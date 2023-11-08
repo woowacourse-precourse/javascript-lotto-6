@@ -33,16 +33,29 @@ class App {
     // 보너스 번호 입력받기
     const QUESTION_BONUS = '보너스 번호를 입력해 주세요.';
     const bonusNumber = await prompter.getUserInput(QUESTION_BONUS);
-    inspector.getIsDuplicate(winnerLotto, bonusNumber);
+    inspector.getIsDuplicate(ableWinnerLotto, bonusNumber);
 
     // 로또 생성 (이제 못바꿈)
     const lotto = new Lotto(ableWinnerLotto, bonusNumber);
 
     // 당첨 여부 확인
+    let totalPrice = 0;
+    let winCount;
     lottoNumbers.forEach(async (lottoNumber) => {
-      const compareCount = await lotto.getCompareCount(lottoNumber);
-      const isBonus = await lotto.getIsBonus(lottoNumber);
+      const compareCount = lotto.getCompareCount(lottoNumber);
+      const isBonus = lotto.getIsBonus(lottoNumber);
+      const order = lotto.getOrder(compareCount, isBonus);
+      if (order > 5) {
+        console.log("꽝");
+        return;
+      } else if (order <= 5) {
+        winCount[order] = winCount[order] === undefined ? 1 : winCount[order] + 1;
+      }
+      const money = lotto.getMoney(order);
+      totalPrice += money;
     });
+
+    // 당첨 결과 출력
   }
 }
 

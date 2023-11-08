@@ -49,9 +49,12 @@ class Inspector {
   // 보너스번호
   getIsDuplicate (winnerLotto, bonus) {
     this.getIsInRange(bonus);
-    if (winnerLotto.includes(bonus)) {
+    const duplicatedCount = winnerLotto
+      .filter(number => number === Number(bonus))
+      .length;
+    if (duplicatedCount !== 0) {
       throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중독되지 않아야 합니다.');
-    } else if (!winnerLotto.includes(bonus)) {
+    } else if (duplicatedCount === 0) {
       return true;
     }
   }
