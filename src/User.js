@@ -19,10 +19,19 @@ class User {
     });
   }
 
+  validateLottoNumberRange(lottoNumebers) {
+    lottoNumebers.forEach(number => {
+      if (number <1 || number > 45) {
+        throw new Error("[ERROR] 로또 번호는 1~45여야 합니다.");
+      }
+    });
+  }
+
   async inputLottoWinningNumber() {
     const winningNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
     const winningNumbers = winningNumber.split(',').map(number => parseInt(number));
 
+    winningNumbers.validateLottoNumberRange(winningNumbers);
     new Lotto(winningNumbers);
 
     return winningNumbers;
