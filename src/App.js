@@ -1,36 +1,12 @@
 import { MissionUtils, Console } from '@woowacourse/mission-utils';
-import Lotto from './Lotto.js';
 import Ticket from './Ticket.js';
-import { ERROR_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE, LOTTO } from './Constants.js';
+import { INPUT_MESSAGE, OUTPUT_MESSAGE, LOTTO } from './Constants.js';
+import { getValidPurchasePrice, getValidLottoNumber, getValidBonusNumber } from './Validate.js';
 
 async function getPurchasePrice() {
   const price = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.PURCHASE_PRICE);
   const purchasePrice = Number(price);
   return purchasePrice;
-}
-
-function validatePurchasePrice(purchasePrice) {
-  if (purchasePrice.length < 1) {
-    throw new Error(ERROR_MESSAGE.PRICE_INPUT.NOTHING);
-  }
-  if (isNaN(purchasePrice)) {
-    throw new Error(ERROR_MESSAGE.PRICE_INPUT.NOT_A_NUMBER);
-  }
-  if (purchasePrice % LOTTO.PRICE !== 0) {
-    throw new Error(ERROR_MESSAGE.PRICE_INPUT.WRONG_UNIT);
-  }
-}
-
-async function getValidPurchasePrice() {
-  while (true) {
-    try {
-      const purchasePrice = await getPurchasePrice();
-      validatePurchasePrice(purchasePrice);
-      return purchasePrice;
-    } catch (error) {
-      Console.print(error.message);
-    }
-  }
 }
 
 function getAmountOfTickets(purchasePrice) {
@@ -47,42 +23,9 @@ async function getLottoNumbers() {
   return lottoNumbersArr;
 }
 
-async function getValidLottoNumber() {
-  while (true) {
-    try {
-      const numbers = await getLottoNumbers();
-      const lotto = new Lotto(numbers);
-      return lotto.Numbers;
-    } catch (error) {
-      Console.print(error.message);
-    }
-  }
-}
-
 async function getBounusNumber() {
   const bonusNumber = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUMBER);
   return bonusNumber;
-}
-
-function validateBonusNumber(bonusnumber) {
-  if (bonusnumber.length < 1) {
-    throw new Error(ERROR_MESSAGE.BONUS_NUMBER.NOTHING);
-  }
-  if (isNaN(bonusnumber)) {
-    throw new Error(ERROR_MESSAGE.BONUS_NUMBER.NOT_A_NUMBER);
-  }
-}
-
-async function getValidBonusNumber() {
-  while (true) {
-    try {
-      const bonusNumber = await getBounusNumber();
-      validateBonusNumber(bonusNumber);
-      return bonusNumber;
-    } catch (error) {
-      Console.print(error.message);
-    }
-  }
 }
 
 class App {
@@ -109,7 +52,7 @@ class App {
     const rankCounts = [0, 0, 0, 0, 0];
 
     ticketArr.forEach((ticket) => {
-      if (ticket.Rank >= 1 && ticket.rank <= 5) {
+      if (ticket.Rank >= 1 && ticket.Rank <= 5) {
         rankCounts[ticket.Rank - 1]++;
       }
     });
@@ -129,3 +72,4 @@ class App {
 }
 
 export default App;
+export { getPurchasePrice, getLottoNumbers, getBounusNumber };
