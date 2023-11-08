@@ -34,7 +34,8 @@ class LottoController {
   }
 
   async #receiveLottoNumbers() {
-    const lottoNumbers = this.#inputView.readLottoNumbers();
+    const lottoNumbers = await this.#inputView.readLottoNumbers();
+    this.#validator.validateLottoNumbers(lottoNumbers);
   }
 }
 
