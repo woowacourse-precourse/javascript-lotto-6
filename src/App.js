@@ -1,4 +1,3 @@
-import { calcPurchaseQuantity } from "./utils/calcPurchaseQuantity.js";
 import LottoMachine from "./domain/LottoMachine.js";
 import Purchase from "./domain/Purchase.js";
 import WinningNumber from "./domain/WinningNumber.js";

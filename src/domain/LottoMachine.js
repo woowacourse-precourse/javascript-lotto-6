@@ -3,7 +3,7 @@ import { MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH } from "../utils/constants.js";
 import { print } from "../utils/print.js";
 
 class LottoMachine {
-  #generateLotto() {
+  generateLotto() {
     const RANDOM_NUMBER = Random.pickUniqueNumbersInRange(
       MIN_NUMBER,
       MAX_NUMBER,
@@ -17,7 +17,7 @@ class LottoMachine {
     let count = 0;
 
     while (count < input) {
-      const LOTTO = this.#generateLotto();
+      const LOTTO = this.generateLotto();
       LOTTO_LIST.push(LOTTO);
       count++;
     }
