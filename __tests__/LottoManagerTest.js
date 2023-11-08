@@ -29,7 +29,7 @@ describe('LottoManager 테스트', () => {
     expect(actualMoney).toBe(defaultTestMoney);
   });
 
-  test('getCount 확인', () => {
+  test('getCount 확인, 같은 카운트 반환', () => {
     lottoManager.generateLottoTickets(defaultTestMoney);
 
     const expectedCount = parseInt(defaultTestMoney / MONEY_CONSTANTS.countUnit);
