@@ -5,21 +5,17 @@ import Lotto from './Lotto.js';
 class LottoFactory {
   exchangeLottos(money) {
     const amount = money / LOTTO.MONEY_UNIT;
-
-    const lottos = Array.from({ length: amount }, () => {
-      const randomLottoNumbers = this.#generateLottoNumbers();
-      return new Lotto(randomLottoNumbers);
-    });
-
+    const lottos = Array.from({ length: amount }, this.#generateLotto);
     return lottos;
   }
 
-  #generateLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(
+  #generateLotto() {
+    const randomLottoNumbers = Random.pickUniqueNumbersInRange(
       LOTTO.MIN_NUMBER,
       LOTTO.MAX_NUMBER,
       LOTTO.COUNT
     );
+    return new Lotto(randomLottoNumbers);
   }
 }
 
