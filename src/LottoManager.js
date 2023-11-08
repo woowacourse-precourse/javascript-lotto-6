@@ -46,6 +46,35 @@ class LottoManager {
   setUserBonusNumber(userBonusNumber) {
     this.#userLottoBonusNumber = userBonusNumber;
   }
+
+  determineLotteryResult() {
+    const defaultResult = {
+      match3: 0,
+      match4: 0,
+      match5: 0,
+      match5Bonus: 0,
+      match6: 0,
+    };
+
+    this.#result = this.#lottoArray.reduce((resultSum, lotto) => {
+      const lotteryResult = lotto.determineResult(this.#userLottoArray, this.#userLottoBonusNumber);
+
+      switch (lotteryResult) {
+        case LottoResult.MATCH_3:
+          return { ...resultSum, case3: resultSum.case3 + 1 };
+        case LottoResult.MATCH_4:
+          return { ...resultSum, case4: resultSum.case4 + 1 };
+        case LottoResult.MATCH_5:
+          return { ...resultSum, case5: resultSum.case5 + 1 };
+        case LottoResult.MATCH_5_BONUS:
+          return { ...resultSum, case5Bonus: resultSum.case5Bonus + 1 };
+        case LottoResult.MATCH_6:
+          return { ...resultSum, case6: resultSum.case6 + 1 };
+        default:
+          return resultSum;
+      }
+    }, defaultResult);
+  }
 }
 
 export default LottoManager;
