@@ -5,7 +5,11 @@ import {
   LOTTO_NUMBER_RANGE,
   MONEY_UNIT,
 } from "../core/const";
-import { PurchaseValueError, WinningNumberError } from "./Error";
+import {
+  BonusNumberError,
+  PurchaseValueError,
+  WinningNumberError,
+} from "./Error";
 
 export default class Assert {
   constructor() {}
@@ -43,7 +47,13 @@ export default class Assert {
    * @param {number} bonusNumber
    * @param {number[]} winningNumbers
    */
-  assertBounsNumber(bonusNumber, winningNumbers) {}
+  assertBounsNumber(bonusNumber, winningNumbers) {
+    if (!this.#isValidLottoNumber(bonusNumber))
+      throw new BonusNumberError(BonusNumberError.TYPE_OUT_OF_RANGE);
+
+    if (!this.#hasAllUniqueArgumentsIn([...winningNumbers, bonusNumber]))
+      throw new BonusNumberError(BonusNumberError.TYPE_DUPLICATED);
+  }
 
   /**
    *
