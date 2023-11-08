@@ -1,5 +1,5 @@
-import { Random } from '@woowacourse/mission-utils';
 import LottoResult from './LottoResult';
+import { LOTTO_CONSTANTS } from './constants/constants';
 
 class Lotto {
   #numbers;
@@ -11,7 +11,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) throw new Error('[ERROR]');
+    if (numbers.length !== LOTTO_CONSTANTS.digits) throw new Error('[ERROR]');
 
     if (numbers.length !== new Set(numbers).size) throw new Error('[ERROR]');
   }
