@@ -5,15 +5,7 @@ import InputBonus from "./InputBonus.js";
 
 class App {
   async play() {
-    const budgetInput = await Console.readLineAsync(
-      "구입금액을 입력해 주세요.\n"
-    );
-    const budgetPrice = new InputPrice(budgetInput);
-    budgetPrice.validate(budgetInput)
-    const numLotto = budgetPrice.calculateLottoCount(budgetInput);
-    Console.print("");
-
-    const randomLottoArr = printLotto(numLotto);
+    const randomLottoArr = await InputValidation();
 
     const lottoInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
     const lottoNumber = lottoInput.split(",");
@@ -26,9 +18,28 @@ class App {
     bonus.validate(bonusInput, lottoNumber);
     Console.print("");
 
-    const matchList = matchLotto(randomLottoArr, lottoNumber, bonusInput);
+    const matchList = matchLotto(randomLottoArr[0], lottoNumber, bonusInput);
     const resultList = matchResult(matchList);
-    printResult(resultList, budgetInput);
+    printResult(resultList, randomLottoArr[1]);
+  }
+}
+
+async function InputValidation() {
+  while (true) {
+    try {
+      const budgetInput = await Console.readLineAsync(
+        "구입금액을 입력해 주세요.\n"
+      );
+      const budgetPrice = new InputPrice(budgetInput);
+      budgetPrice.validate(budgetInput);
+      const numLotto = budgetPrice.calculateLottoCount(budgetInput);
+      Console.print("");
+      const randomLottoArr = printLotto(numLotto);
+      return [randomLottoArr, budgetInput];
+
+    } catch (error) {
+      Console.print(`${error.message}`);
+    }
   }
 }
 
@@ -98,7 +109,7 @@ function printResult(resultList, budget) {
   Console.print("6개 일치 (2,000,000,000원) - " + resultList[4] + "개");
 
   const profit = 5000 * resultList[0] + 50000 * resultList[1] + 1500000 * resultList[2] + 30000000 * resultList[3] + 2000000000 * resultList[4];
-  const profitRate = profit / budget * 100;
+  const profitRate = Math.round((profit / budget * 100) * 100) / 100;
   Console.print("총 수익률은 " + profitRate + "%입니다.");
 }
 
