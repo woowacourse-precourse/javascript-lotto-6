@@ -3,8 +3,8 @@ import { PRINT_OUTPUT, PRINT_MATHINGNUMBER } from "../utils/Constant.js";
 import LottoController from "../controller/LottoController.js";
 
 const OutputPrintout = {
-	printLottos: (amount) => {
-		const count = LottoController.countLottos(amount);
+	printLottos: (amount) => { 
+		const count = LottoController.countLottos(amount); 
 		Console.print("");
 		Console.print(`${count}${PRINT_OUTPUT.outputLottoCount}`);
 
