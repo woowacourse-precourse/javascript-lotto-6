@@ -7,19 +7,14 @@ import VarificationManager from './Models/VarificationManager.js';
 
 class App {
 	userLottoSheet;
+	winnerLotto;
 
 	constructor() {
 		this.userLottoSheet = [];
 	}
 
 	generateLottoNumber() {
-		const lottoNumbers = [];
-		for (let count = 0; count < LOTTO_CONSTANTS.lottoNumberCount; count += 1) {
-			const randomNumber = Computer.getRandomNumber();
-			lottoNumbers.push(randomNumber);
-		}
-
-		return lottoNumbers;
+		return Computer.getRandomNumbers(LOTTO_CONSTANTS.lottoNumberCount);
 	}
 
 	showUserLottoInfo() {
