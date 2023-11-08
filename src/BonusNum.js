@@ -3,14 +3,15 @@ import Validator from "./utils/Validator.js";
 class BonusNum {
   #num;
 
-  constructor(input) {
-    this.#validate(input);
+  constructor(input, lottoNum) {
+    this.#validate(input, lottoNum);
     this.#num = input;
   }
 
-  #validate(input) {
+  #validate(input, lottoNum) {
     Validator.bonusNum(input);
     Validator.checkRange(input);
+    Validator.bonusIsSameWithLotto(input, lottoNum);
   }
 
   returnNum() {

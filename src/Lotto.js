@@ -10,7 +10,7 @@ class Lotto {
 
   #validate(numbers) {
     Validator.lottoNumCount(numbers);
-    Validator.isRedundancy(numbers);
+    Validator.lottoNumHasRedundancy(numbers);
     numbers.forEach((number) => {
       Validator.isNum(number);
       Validator.checkRange(number);

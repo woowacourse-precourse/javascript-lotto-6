@@ -22,7 +22,7 @@ const Validator = {
       throw new Error(ErrorMsg.LOTTO_NUM.WRONG_COUNT);
     }
   },
-  isRedundancy(input) {
+  lottoNumHasRedundancy(input) {
     const set = new Set(input);
     if (set.size !== Constant.NUM_COUNT) {
       throw new Error(ErrorMsg.LOTTO_NUM.IS_REDUNDANCY);
@@ -42,6 +42,11 @@ const Validator = {
   bonusNum(input) {
     if (!Constant.REGEX_IS_A_NUM.test(input)) {
       throw new Error(ErrorMsg.BONUS_NUM.IS_NOT_A_NUM);
+    }
+  },
+  bonusIsSameWithLotto(bonusNum, lottoNum) {
+    if (lottoNum.includes(bonusNum)) {
+      throw new Error(ErrorMsg.BONUS_NUM.INCLUDES_IN_LOTTO_NUM);
     }
   },
 };

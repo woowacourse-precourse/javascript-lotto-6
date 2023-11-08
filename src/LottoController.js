@@ -100,7 +100,7 @@ class LottoController {
 
   validateBonusNum(input) {
     try {
-      const bonusNum = new BonusNum(input);
+      const bonusNum = new BonusNum(input, this.winningNum);
       this.bonusNum = bonusNum.returnNum();
     } catch (err) {
       View.output(err);
