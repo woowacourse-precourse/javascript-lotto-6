@@ -40,7 +40,12 @@ class LottoGame {
   }
 
   async #inputWinningLotto() {
-    this.#winningLotto = new Lotto(await Screen.inputWinningLotto());
+    try {
+      this.#winningLotto = new Lotto(await Screen.inputWinningLotto());
+    } catch ({ message }) {
+      Screen.printErrorMessage(message);
+      await this.#inputWinningLotto();
+    }
   }
 }
 
