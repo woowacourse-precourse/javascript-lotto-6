@@ -3,7 +3,7 @@ import { Console, Random } from "@woowacourse/mission-utils";
 class LottoResultChecker {
   constructor() {}
   convertToArr(inputNum) {
-    return inputNum.split(",").map((element) => parseInt(element));
+    return inputNum.split(",").map((element) => Number(element));
   }
 
   async inputWinningLottoNum() {
