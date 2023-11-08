@@ -3,64 +3,71 @@ import CONSTANTS from '../constants/Constants.js';
 import LOTTO_PRIZE from '../constants/LottoPrize.js';
 import MESSAGES from '../constants/Messages.js';
 import { sortArray } from './arrayUtils.js';
-import validation from './validation.js';
+import Validation from './Validation.js';
 
-const view = {
-  async readPurchaseLottos() {
+export const readPurchaseLottos = async () => {
+  try {
     const purchaseAmount = await Console.readLineAsync(
       MESSAGES.INPUT_REQUEST.PURCHASE_AMOUNT,
     );
 
-    validation.isValidInputPurchaseAmount(purchaseAmount);
+    Validation.isValidInputPurchaseAmount(purchaseAmount);
 
     return Number(purchaseAmount) / CONSTANTS.LOTTO_PRICE;
-  },
+  } catch (error) {
+    Console.print(error.message);
+    return readPurchaseLottos();
+  }
+};
 
-  async readWinningNumbers() {
+export const readWinningNumbers = async () => {
+  try {
     const winningNumbers = await Console.readLineAsync(
       MESSAGES.INPUT_REQUEST.WINNING_NUMBERS,
     );
 
-    validation.isValidInputWinningNumbers(winningNumbers);
+    Validation.isValidInputWinningNumbers(winningNumbers);
 
     return sortArray(winningNumbers.split(',').map(number => Number(number)));
-  },
+  } catch (error) {
+    Console.print(error.message);
+    return readWinningNumbers();
+  }
+};
 
-  async readBonusNumber(winningNumbers) {
+export const readBonusNumber = async winningNumbers => {
+  try {
     const bonusNumber = await Console.readLineAsync(
       MESSAGES.INPUT_REQUEST.BONUS_NUMBER,
     );
 
-    validation.isValidInputBonusNumber(bonusNumber);
-    validation.bonusNumberIncludedWinningNumbers(bonusNumber, winningNumbers);
+    Validation.isValidInputBonusNumber(bonusNumber);
+    Validation.bonusNumberIncludedWinningNumbers(bonusNumber, winningNumbers);
 
     return Number(bonusNumber);
-  },
-
-  printPurchaseLottoInfo(lottos) {
-    const lottoCountMessage = `\n${lottos.length + MESSAGES.PURCHASE_COUNT}`;
-    const lottoNumbers = lottos.map(lotto => lotto.getString());
-
-    const messages = [lottoCountMessage, ...lottoNumbers];
-
-    messages.forEach(message => Console.print(message));
-  },
-
-  printLottoResult(matchCount, profitRate) {
-    const prizeText = Object.values(LOTTO_PRIZE).map(key => key.TEXT);
-    const countMessages = prizeText
-      .map((text, index) => `${text} - ${matchCount[index]}개`)
-      .reverse();
-    const profitRateMessage = MESSAGES.PROFIT_RESULT.join(`${profitRate}`);
-
-    const messages = [
-      MESSAGES.LOTTO_RESULT,
-      ...countMessages,
-      profitRateMessage,
-    ];
-
-    messages.forEach(message => Console.print(message));
-  },
+  } catch (error) {
+    Console.print(error.message);
+    return readBonusNumber();
+  }
 };
 
-export default view;
+export const printPurchaseLottoInfo = lottos => {
+  const lottoCountMessage = `\n${lottos.length + MESSAGES.PURCHASE_COUNT}`;
+  const lottoNumbers = lottos.map(lotto => lotto.getString());
+
+  const messages = [lottoCountMessage, ...lottoNumbers];
+
+  messages.forEach(message => Console.print(message));
+};
+
+export const printLottoResult = (matchCount, profitRate) => {
+  const prizeText = Object.values(LOTTO_PRIZE).map(key => key.TEXT);
+  const countMessages = prizeText
+    .map((text, index) => `${text} - ${matchCount[index]}개`)
+    .reverse();
+  const profitRateMessage = MESSAGES.PROFIT_RESULT.join(`${profitRate}`);
+
+  const messages = [MESSAGES.LOTTO_RESULT, ...countMessages, profitRateMessage];
+
+  messages.forEach(message => Console.print(message));
+};

@@ -1,7 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import view from '../src/utils/view.js';
-import App from '../src/App.js';
 import ERROR from '../src/constants/Error.js';
+import {
+  readBonusNumber,
+  readPurchaseLottos,
+  readWinningNumbers,
+} from '../src/utils/view.js';
 
 const mockQuestions = inputs => {
   Console.readLineAsync = jest.fn();
@@ -23,7 +26,7 @@ describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예�
     mockQuestions(inputs);
 
     // when
-    const userInput = view.readPurchaseLottos();
+    const userInput = readPurchaseLottos();
 
     // then
     await expect(userInput).rejects.toThrow(errorMessage(ERROR.EMPTY_INPUT));
@@ -36,7 +39,7 @@ describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예�
       mockQuestions(inputs);
 
       // when
-      const inputPurchaseAmount = view.readPurchaseLottos();
+      const inputPurchaseAmount = readPurchaseLottos();
 
       // then
       await expect(inputPurchaseAmount).rejects.toThrow(
@@ -52,7 +55,7 @@ describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예�
       mockQuestions(inputs);
 
       // when
-      const inputPurchaseAmount = view.readPurchaseLottos();
+      const inputPurchaseAmount = readPurchaseLottos();
 
       // then
       await expect(inputPurchaseAmount).rejects.toThrow(
@@ -68,7 +71,7 @@ describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예�
       mockQuestions(inputs);
 
       // when
-      const inputPurchaseAmount = view.readPurchaseLottos();
+      const inputPurchaseAmount = readPurchaseLottos();
 
       // then
       await expect(inputPurchaseAmount).rejects.toThrow(
@@ -85,7 +88,7 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
     mockQuestions(inputs);
 
     // when
-    const inputWinningNumbers = view.readWinningNumbers();
+    const inputWinningNumbers = readWinningNumbers();
 
     // then
     await expect(inputWinningNumbers).rejects.toThrow(
@@ -104,7 +107,7 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       mockQuestions(inputs);
 
       // when
-      const inputWinningNumbers = view.readWinningNumbers();
+      const inputWinningNumbers = readWinningNumbers();
 
       // then
       await expect(inputWinningNumbers).rejects.toThrow(
@@ -120,7 +123,7 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       mockQuestions(inputs);
 
       // when
-      const inputWinningNumbers = view.readWinningNumbers();
+      const inputWinningNumbers = readWinningNumbers();
 
       // then
       await expect(inputWinningNumbers).rejects.toThrow(
@@ -138,7 +141,7 @@ describe('보너스 번호(bonusNumbers) 입력 값 Validation 관련 예외 처
     mockQuestions(inputs);
 
     // when
-    const inputBonusNumber = view.readBonusNumber(winningNumbers);
+    const inputBonusNumber = readBonusNumber(winningNumbers);
 
     // then
     await expect(inputBonusNumber).rejects.toThrow(
@@ -154,7 +157,7 @@ describe('보너스 번호(bonusNumbers) 입력 값 Validation 관련 예외 처
       mockQuestions(inputs);
 
       // when
-      const inputBonusNumber = view.readBonusNumber(winningNumbers);
+      const inputBonusNumber = readBonusNumber(winningNumbers);
 
       // then
       await expect(inputBonusNumber).rejects.toThrow(
@@ -171,7 +174,7 @@ describe('보너스 번호(bonusNumbers) 입력 값 Validation 관련 예외 처
       mockQuestions(inputs);
 
       // when
-      const inputBonusNumber = view.readBonusNumber(winningNumbers);
+      const inputBonusNumber = readBonusNumber(winningNumbers);
 
       // then
       await expect(inputBonusNumber).rejects.toThrow(
@@ -188,7 +191,7 @@ describe('보너스 번호(bonusNumbers) 입력 값 Validation 관련 예외 처
       mockQuestions(inputs);
 
       // when
-      const inputBonusNumber = view.readBonusNumber(winningNumbers);
+      const inputBonusNumber = readBonusNumber(winningNumbers);
 
       // then
       await expect(inputBonusNumber).rejects.toThrow(

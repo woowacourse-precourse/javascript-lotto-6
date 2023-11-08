@@ -3,7 +3,13 @@ import Lotto from './Lotto.js';
 import CONSTANTS from './constants/Constants.js';
 import LOTTO_PRIZE from './constants/LottoPrize.js';
 import { sortArray } from './utils/arrayUtils.js';
-import view from './utils/view.js';
+import {
+  printLottoResult,
+  printPurchaseLottoInfo,
+  readBonusNumber,
+  readPurchaseLottos,
+  readWinningNumbers,
+} from './utils/view.js';
 
 class App {
   constructor() {
@@ -22,7 +28,7 @@ class App {
   }
 
   async setPurchaseLottos() {
-    const purchaseLottoCount = await view.readPurchaseLottos();
+    const purchaseLottoCount = await readPurchaseLottos();
 
     let i;
 
@@ -34,13 +40,13 @@ class App {
   }
 
   async setWinningLotto() {
-    this.winningNumbers = await view.readWinningNumbers();
-    this.bonusNumber = await view.readBonusNumber(this.winningNumbers);
+    this.winningNumbers = await readWinningNumbers();
+    this.bonusNumber = await readBonusNumber(this.winningNumbers);
   }
 
   async setLottoConfig() {
     await this.setPurchaseLottos();
-    view.printPurchaseLottoInfo(this.lottos);
+    printPurchaseLottoInfo(this.lottos);
 
     await this.setWinningLotto();
   }
@@ -110,7 +116,7 @@ class App {
     const matchCount = Object.values(this.matchCount);
     const profitRate = this.getProfitRate();
 
-    view.printLottoResult(matchCount, profitRate);
+    printLottoResult(matchCount, profitRate);
   }
 
   async play() {

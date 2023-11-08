@@ -3,14 +3,14 @@ import CONSTANTS from '../constants/Constants.js';
 import ERROR from '../constants/Error.js';
 import REGEXP from '../constants/RegExp.js';
 
-const validation = {
-  isEmptyValue(inputValue) {
+class Validation {
+  static isEmptyValue(inputValue) {
     if (!inputValue) {
       throw new CustomError(ERROR.EMPTY_INPUT);
     }
-  },
+  }
 
-  isValidInputPurchaseAmount(purchaseAmount) {
+  static isValidInputPurchaseAmount(purchaseAmount) {
     this.isEmptyValue(purchaseAmount);
 
     if (!purchaseAmount.match(REGEXP.PURCHASE_AMOUNT.FORMAT_CHECK)) {
@@ -25,9 +25,9 @@ const validation = {
     if (!Number.isInteger(Number(purchaseAmount) / CONSTANTS.LOTTO_PRICE)) {
       throw new CustomError(ERROR.INPUT_PURCHASE_AMOUNT.INVALID_PRICE_UNIT);
     }
-  },
+  }
 
-  isValidInputWinningNumbers(winningNumbers) {
+  static isValidInputWinningNumbers(winningNumbers) {
     this.isEmptyValue(winningNumbers);
 
     if (!winningNumbers.match(REGEXP.WINNING_NUMBER.CHARACTER_CHECK)) {
@@ -36,9 +36,9 @@ const validation = {
     if (!winningNumbers.match(REGEXP.WINNING_NUMBER.FORMAT_CHECK)) {
       throw new CustomError(ERROR.INPUT_NUMBERS.INVALID_FORMAT);
     }
-  },
+  }
 
-  isValidInputBonusNumber(bonusNumber) {
+  static isValidInputBonusNumber(bonusNumber) {
     this.isEmptyValue(bonusNumber);
 
     if (
@@ -48,13 +48,13 @@ const validation = {
     ) {
       throw new CustomError(ERROR.INPUT_BONUS_NUMBER.INVALID_FORMAT);
     }
-  },
+  }
 
-  bonusNumberIncludedWinningNumbers(bonusNumber, winningNumbers) {
+  static bonusNumberIncludedWinningNumbers(bonusNumber, winningNumbers) {
     if (winningNumbers.includes(Number(bonusNumber))) {
       throw new CustomError(ERROR.INPUT_BONUS_NUMBER.INCLUDE_WINNING_NUMBERS);
     }
-  },
-};
+  }
+}
 
-export default validation;
+export default Validation;
