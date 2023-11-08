@@ -3,7 +3,7 @@ import { ERROR_MESSAGE } from '../constants/message.js';
 import { LOTTO_NUMBER_RANGE } from '../constants/lottoNumber.js';
 
 class User {
-    
+
     #DIVIDE_NUMBER
     #purchaseAmount
     #numberOfPurchases
@@ -37,7 +37,7 @@ class User {
                 LOTTO_NUMBER_RANGE.minimum, 
                 LOTTO_NUMBER_RANGE.maximum, 
                 LOTTO_NUMBER_RANGE.count,
-            );
+            ).sort((a, b) => a - b);
             this.#lottoNumbers.push(randomNumber);
         }
     }
