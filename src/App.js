@@ -34,6 +34,11 @@ class App {
       winningNumbers[i] = parseInt(winningNumbers[i]);
     }
     // console.log(winningNumbers);
+
+    Console.print("");
+    Console.print("보너스 번호를 입력해 주세요.");
+    let bonusNumber = await Console.readLineAsync("");
+    bonusNumber = parseInt(bonusNumber);
   }
 }
 
