@@ -5,7 +5,7 @@ class InputValidator {
   }
 
   static isNan(input) {
-    return Number.isNaN(input);
+    return Number.isNaN(Number(input));
   }
 
   static isDuplicated(arr) {
@@ -27,9 +27,6 @@ class InputValidator {
   static isNegativeNumber(num) {
     return num < 0;
   }
-  // static checkLength(length, arr) {
-  //   return arr.length !== length;
-  // }
 }
 
 export default InputValidator;
