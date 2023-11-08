@@ -29,9 +29,7 @@ class App {
     try {
       const inputMoney = await Console.readLineAsync(MESSAGE.START);
       
-      if (isNaN(inputMoney)) {
-        throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
-      }
+      this.checkInputIsNaN(inputMoney);
       this.checkInputIsNull(inputMoney);
       this.userMoney = Number(inputMoney);
       if (this.userMoney % 1000 > 0 || this.userMoney <= 0) {
@@ -112,8 +110,11 @@ class App {
   async getBonus(winningNumsList) {
     try {
       const inputBonus = await Console.readLineAsync(MESSAGE.BONUS_INPUT);
-
-      if (inputBonus === null || isNaN(inputBonus) || winningNumsList.includes(Number(inputBonus))) {
+      
+      this.checkInputIsNull(inputBonus);
+      this.checkInputIsNaN(inputBonus);
+      
+      if (winningNumsList.includes(Number(inputBonus))) {
         throw new Error(ERROR_MESSAGE.INPUT_ERROR)
       }
       if (!this.pattern.test(Number(inputBonus))) {
@@ -123,6 +124,12 @@ class App {
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
       await this.getBonus(winningNumsList);
+    }
+  };
+
+  checkInputIsNaN(input) {
+    if (isNaN(input)) {
+      throw new Error(ERROR_MESSAGE.INPUT_ERROR);
     }
   };
 
