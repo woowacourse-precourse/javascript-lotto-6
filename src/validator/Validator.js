@@ -38,7 +38,7 @@ class Validator {
     const WINNINGS = String(input).split(',').map(Number);
     const MY_NUMBERS = WINNINGS.sort((a, b) => a - b).join('');
     const REMOVE_DUPLICATE_NUMBERS = [...new Set(WINNINGS)]
-      .sort((a, b) => a + b)
+      .sort((a, b) => a - b)
       .join('');
     const FILTERED_NUMBERS = WINNINGS.filter((num) => num < 1 || num > 45);
     const FILTER_STRINGS = WINNINGS.filter(num => isNaN(num))
