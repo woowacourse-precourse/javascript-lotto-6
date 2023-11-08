@@ -1,6 +1,5 @@
-import { LOTTO_RANGE } from '../constants/constant';
+import { LOTTO_RANGE , REGEX } from '../constants/constant';
 import { ERR_MESSAGE } from '../constants/message';
-import { REGEX_NUM } from '../constants/regex';
 
 class Lotto {
   #numbers;
@@ -22,7 +21,7 @@ class Lotto {
 
   #isNumber(num){
     const numToStr = num.toString();
-    if(!REGEX_NUM.test(numToStr)) throw new Error(ERR_MESSAGE.notNum);
+    if(!REGEX.num.test(numToStr)) throw new Error(ERR_MESSAGE.notNum);
   }
 
   #isUnderFourtyFive(num){
@@ -53,6 +52,10 @@ class Lotto {
 
   addBonusToNumbers(num){
     this.#numbers.push(num);
+  }
+
+  getUserLotto(){
+    return this.#numbers;
   }
 }
 

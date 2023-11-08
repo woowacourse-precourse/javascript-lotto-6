@@ -1,7 +1,6 @@
 /* eslint-disable lines-between-class-members */
-import { REGEX_NUM } from '../constants/regex'
+import { LOTTO_VAL, REGEX} from '../constants/constant'
 import { ERR_MESSAGE } from '../constants/message'
-import { LOTTO_VAL } from '../constants/constant'
 
 class PlayerLottoAmount{
   #lottoAmount
@@ -13,7 +12,7 @@ class PlayerLottoAmount{
   }
 
   #isNumber(str){
-    if(!REGEX_NUM.test(str)) throw new Error(ERR_MESSAGE.notNum);
+    if(!REGEX.num.test(str)) throw new Error(ERR_MESSAGE.notNum);
   }
 
   #isDividedThousand(str){
