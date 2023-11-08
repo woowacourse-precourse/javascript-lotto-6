@@ -3,6 +3,9 @@ export default class Model {
         this.buyLottoNumber = 0;
         this.lottoDataObject = new Array();
         this.winningNumber = new Array();
+        this.bonusNumber = 0;
+        this.gradeCounts = new Array();
+        this.earningRate = 0;
     }
 
     getBuyLottoNumber() {
