@@ -23,10 +23,6 @@ class Ticket {
     Console.print(`[${this.numbers.join(', ')}]`);
   }
 
-  get Numbers() {
-    return this.numbers;
-  }
-
   get Rank() {
     return this.rank;
   }
