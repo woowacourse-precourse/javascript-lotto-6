@@ -14,7 +14,8 @@ class PlayView {
   async viewFunction() {
     let now = STAGES.NUM_1;
     while (now !== STAGES.EXIT) {
-      now = this.switchView(now);
+      // eslint-disable-next-line no-await-in-loop
+      now = await this.switchView(now);
     }
   }
 
