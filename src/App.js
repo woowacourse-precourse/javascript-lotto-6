@@ -1,5 +1,6 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import WinningNumbers from './WinningNumbers.js';
+import BonusNumber from './BonusNumber.js';
 
 class App { 
 
@@ -24,25 +25,25 @@ class App {
     getWinningNumbers() {
         Console.readLine('당첨 번호를 입력해 주세요.\n', (winningNumbers) => {
             this.winningNumbers = new WinningNumbers(winningNumbers);
+            // 숫자가 6개가 아닌 경우 예외 처리한다.
+            this.getBonusNumber();
+        });
+    }
+
+    getBonusNumber() {
+        Console.readLine('보너스 번호를 입력해 주세요.\n', (bonusNumber) => {
+            this.bonusNumber = new BonusNumber(bonusNumber);
+            // 당첨번호와 겹칠 경우 예외 처리한다.
         });
     }
     
     // 입력값이 1000으로 나누어 떨어지지 않는 경우 예외 처리한다. if %1000 !== 0 return throw [ERROR]
         
-    // 발행한 로또 수량 출력하기
-    // 로또 구입금액을 가져와서
-    // 구입금액을 1000으로 나눈 후 변수에 저장
-    // '{변수}개를 구매했습니다.'를 출력한다.
- 
-    // 발행한 로또 번호 출력하기 > Lotto.generateLottoNumber() 불러오기
-
-    // 당첨 번호 입력받기
-    // 당첨 번호를 입력 받는다. 번호는 쉼표(,)를 기준으로 구분한다.
-    // 숫자가 6개가 아닌 경우 예외 처리한다.
+    
 
     // 보너스 번호 입력받기
 
-    // 당첨번호와 겹칠 경우 예외 처리한다.
+    
 
     // 당첨 결과
     // 당첨번호와 보너스번호와 로또번호를 호출해서 받아오고
