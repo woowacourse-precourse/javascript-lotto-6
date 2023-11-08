@@ -1,12 +1,17 @@
 import * as MissionUtils from "@woowacourse/mission-utils";
-import { LOTTO_PRICE } from "./Constants.js";
-import { INPUT_MONEY_MESSAGE } from "./Constants.js";
-import { INPUT_MONEY_ERROR_MESSAGE } from "./Constants.js";
-import { CREATE_LOTTO_MESSAGE } from "./Constants.js";
-import { MIN } from "./Constants.js";
-import { MAX } from "./Constants.js";
-import { PICK_NUMBER } from "./Constants.js";
-import { THREE, FOUR, FIVE, SIX } from "./Constants.js";
+import {
+  LOTTO_PRICE,
+  INPUT_MONEY_MESSAGE,
+  INPUT_MONEY_ERROR_MESSAGE,
+  CREATE_LOTTO_MESSAGE,
+  MIN,
+  MAX,
+  PICK_NUMBER,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+} from "./Constants.js";
 import Match from "./Match.js";
 import { literationMoney } from "./Function.js";
 

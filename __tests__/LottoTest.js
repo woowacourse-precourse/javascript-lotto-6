@@ -6,7 +6,6 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import {
   INPUT_NUMBER_ERROR_MESSAGE,
   INPUT_DUPLICATE_ERROR_MESSAGE,
-  INPUT_RANGE_ERROR_MESSAGE,
   NUMS,
   CORRECTS,
   MONEYS,
