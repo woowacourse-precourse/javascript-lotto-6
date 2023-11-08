@@ -23,6 +23,10 @@ class ConsolePrint {
       Console.print(`${PRIZE_INFO[key]} - ${value}개`);
     });
   }
+
+  printPercentage(percentage) {
+    Console.print(`총 수익률은 ${percentage}%입니다.`);
+  }
 }
 
 export default ConsolePrint;
