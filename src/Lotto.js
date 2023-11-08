@@ -20,13 +20,9 @@ class Lotto {
       }
   
       for (const number of numbers) {
-        if (typeof number !== 'number' || isNaN(number)) {
+        if (!Number.isInteger(number) || number < 1 || number > 45) {
           throw new Error('[ERROR] 로또 번호는 숫자여야 합니다.');
         }
-      }
-  
-      if (numbers.some((item) => typeof item === 'string')) {
-        throw new Error('[ERROR]');
       }
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);

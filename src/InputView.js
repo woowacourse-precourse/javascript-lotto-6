@@ -20,9 +20,15 @@ class InputView {
   async inputWinningNumber() {
     const playerWinningNumber = await Console.readLineAsync(INPUT_WINNING_NUMBER);
 
-    return playerWinningNumber;
-  }
+    try {
+      this.winningNumber = this.stringToNumberArray(playerWinningNumber);
+    } catch (error) {
+      Console.print(`[ERROR] ${error.message}`);
+      return;
+    }
 
+    return this.winningNumber;
+  }
   async getPlayerInputMoney() {
     while (true) {
       try {
@@ -53,8 +59,14 @@ class InputView {
     }
   }
 
-  stringToNumberArray(inputNumber) {
-    return inputNumber.split(',').map(Number);
+  async stringToNumberArray(input) {
+    const numbers = input.split(',').map((number) => Number(number));
+
+    if (numbers.some((number) => !Number.isInteger(number) || number < 1 || number > 45)) {
+      throw new Error('[ERROR] 로또 번호는 숫자여야 합니다.');
+    }
+
+    return numbers;
   }
 }
 
