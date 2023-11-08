@@ -12,8 +12,8 @@ class LottoBonus {
 		VarificationManager.checkBonusLottoNumber(number, lottoNumbers);
 	}
 
-	get bounsNumber() {
-		return this.bounsNumber;
+	get bonusNumber() {
+		return this.#bonusNumber;
 	}
 }
 
