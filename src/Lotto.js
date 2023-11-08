@@ -3,6 +3,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#validateDuplication(numbers);
     this.#numbers = numbers;
   }
 
@@ -12,7 +13,28 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  #validateDuplication(numbers) {
+    const uniqueNumbers = new Set(numbers);
+    if (uniqueNumbers.size !== numbers.length) {
+      throw new Error("[ERROR] 로또 번호는 중복되지 않아야 합니다.");
+    }
+  }
+
+  checkWinningNumbers(winningNumbers) {
+    let count = 0;
+    for (const num of this.#numbers) {
+      if (winningNumbers.includes(num)) {
+        count++;
+      }
+    }
+
+    return count;
+  }
+
+  checkBonusNumber(bonusNumber) {
+    if (this.#numbers.includes(bonusNumber)) return true;
+    return false;
+  }
 }
 
 export default Lotto;
