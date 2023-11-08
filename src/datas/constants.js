@@ -1,6 +1,8 @@
 export const NUMBER = {
   divisor: 1000,
   lottoNumberLength: 6,
+  start: 1,
+  end: 45,
 };
 
 export const PROMPT = {
