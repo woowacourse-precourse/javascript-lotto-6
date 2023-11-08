@@ -1,18 +1,24 @@
-import Lotto from "../src/Lotto.js";
+import { ERROR } from '../src/constant/constant.js';
+import Lotto from '../src/model/Lotto.js';
 
-describe("로또 클래스 테스트", () => {
-  test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
-    expect(() => {
-      new Lotto([1, 2, 3, 4, 5, 6, 7]);
-    }).toThrow("[ERROR]");
+describe('로또 클래스 에러 테스트', () => {
+  const testCases = [
+    { numbers: [1, 2, 3, 4, 5, 6, 7], expectedError: ERROR.length },
+    { numbers: [1, 2, 3, 4, 5, 5], expectedError: ERROR.duplicated },
+    { numbers: [1, 2, 3, 4, 5, 99], expectedError: ERROR.range },
+    { numbers: [1, 2, 3, 4, 5, 'asdf'], expectedError: ERROR.numberOnly },
+  ];
+
+  test.each(testCases)('예외 테스트 numbers: $numbers, toThrow: $expectedError', ({ numbers, expectedError }) => {
+    expect(() => new Lotto(numbers)).toThrow(expectedError);
   });
+});
 
-  // TODO: 이 테스트가 통과할 수 있게 구현 코드 작성
-  test("로또 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
-    expect(() => {
-      new Lotto([1, 2, 3, 4, 5, 5]);
-    }).toThrow("[ERROR]");
+describe('로또 클래스 생성 성공 후 반환', () => {
+  const LOTTO_NUMBER = [1, 2, 3, 4, 5, 6];
+  const lotto = new Lotto(LOTTO_NUMBER);
+
+  test('getLotto 테스트', () => {
+    expect(lotto.getLotto()).toEqual(LOTTO_NUMBER);
   });
-
-  // 아래에 추가 테스트 작성 가능
 });
