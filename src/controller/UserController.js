@@ -1,19 +1,27 @@
 import Inputview from "../views/Inputview.js";
+import Outputview from "../views/Outputview.js";
 import Lotto from "../models/Lotto.js";
 import { Random } from "@woowacourse/mission-utils";
 
 class UserController {
   #inputview
+  #outputview;
 
   constructor() {
     this.#inputview = new Inputview();
+    this.#outputview = new Outputview();
+  }
+
+  printLottoNumbers(count, lottolist) {
+    this.#outputview.printLottoNumbers(count, lottolist);
   }
 
   async getLotto() {
     const count = await this.#inputview.readAmount();
+    const lottolist = UserController.generateLottoList(count);
+    this.printLottoNumbers(count, lottolist);
     const winningnumbers = await this.#inputview.readWinningNumbers();
     const bonusNumber = await this.#inputview.readBonusNumber(winningnumbers.getNumbers());
-    const lottolist = UserController.generateLottoList(count);
     return { count, lottolist, winningnumbers, bonusNumber};
   }
 
