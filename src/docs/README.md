@@ -55,8 +55,7 @@ node index
 | 메소드 | 설명 |
 | --- | --- |
 | constructor(numbers) | 로또 번호를 검사하고 저장 |
-| #validate(numbers) | 로또 번호 배열의 길이가 6개가 아닌 경우 예외를 발생 |
-| #validateDuplicate(numbers) | 중복된 번호가 있는 경우 예외를 발생 |
+| #validate(numbers) | 로또 번호 예외처리 |
 | getNumbers() | 로또 번호 배열을 반환 |
 
 </br>
