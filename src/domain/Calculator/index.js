@@ -17,8 +17,8 @@ export class Calculator {
       const inputWinningNumbersStr = await InputView.readLine(
         MESSAGES.WINNING_NUMBER.PLACE_HOLDER
       );
-      const winningNumbers = this.#formatWinningNumber(inputWinningNumbersStr);
-      this.#validateWinningNumber(winningNumbers);
+      const winningNumbers = this.#formatWinningNumbers(inputWinningNumbersStr);
+      this.#validateWinningNumbers(winningNumbers);
       this.#winningNumbers = winningNumbers;
     } catch (error) {
       OutputView.print(error.message);
@@ -32,7 +32,7 @@ export class Calculator {
         MESSAGES.BONUS_NUMBER.PLACE_HOLDER
       );
       const bonusNumber = Number(inputBonusNumberStr);
-      this.#validateBonusNumber(bonusNumber);
+      this.#validateLottoNumber(bonusNumber);
       this.#bonusNumber = bonusNumber;
     } catch (error) {
       OutputView.print(error.message);
@@ -50,27 +50,17 @@ export class Calculator {
     return { lottoWinningsResult, totalReturn };
   }
 
-  #formatWinningNumber(str) {
+  #formatWinningNumbers(str) {
     return str.split(",").map(Number);
   }
 
-  #validateWinningNumber(winningNumbers) {
+  #validateWinningNumbers(winningNumbers) {
     if (!Validation.isLength(winningNumbers, LENGTH)) {
       throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_LENGTH(LENGTH));
     }
 
     winningNumbers.every((winningNumber) => {
-      if (!Validation.isNumber(winningNumber)) {
-        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_NUMBER);
-      }
-
-      if (!Validation.isOnRange(winningNumber, MIN, MAX)) {
-        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_ON_RANGE(MIN, MAX));
-      }
-
-      if (!Validation.isInteger(winningNumber)) {
-        throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_INTEGER);
-      }
+      this.#validateLottoNumber(winningNumber);
     });
 
     if (!Validation.isUnique(winningNumbers)) {
@@ -78,58 +68,31 @@ export class Calculator {
     }
   }
 
-  #validateBonusNumber(bonusNumber) {
-    if (!Validation.isNumber(bonusNumber)) {
+  #validateLottoNumber(number) {
+    if (!Validation.isNumber(number)) {
       throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_NUMBER);
     }
 
-    if (!Validation.isOnRange(bonusNumber, MIN, MAX)) {
+    if (!Validation.isOnRange(number, MIN, MAX)) {
       throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_ON_RANGE(MIN, MAX));
     }
 
-    if (!Validation.isInteger(bonusNumber)) {
+    if (!Validation.isInteger(number)) {
       throw new CustomError(MESSAGES.ERROR.LOTTO.NOT_INTEGER);
     }
   }
 
   #calculateLottoWinnings(lottos) {
-    let lottoWinnings = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-    };
+    let lottoWinnings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
     lottos.forEach((lotto) => {
       const matchCount = this.#calculateMatchCount(lotto);
+      const hasBonus = lotto.includes(this.#bonusNumber);
 
-      if (matchCount === 6) {
-        lottoWinnings[1] += 1;
-        return;
-      }
+      if (matchCount < 3) return; // 3개 미만은 당첨되지 않으므로 반환
 
-      if (matchCount === 5 && lotto.includes(this.#bonusNumber)) {
-        lottoWinnings[2] += 1;
-        return;
-      }
-
-      if (matchCount === 5) {
-        lottoWinnings[3] += 1;
-        return;
-      }
-
-      if (matchCount === 4) {
-        lottoWinnings[4] += 1;
-        return;
-      }
-
-      if (matchCount === 3) {
-        lottoWinnings[5] += 1;
-        return;
-      }
-
-      return;
+      const rank = this.#getRank(matchCount, hasBonus);
+      if (rank) lottoWinnings[rank]++;
     });
 
     return Object.values(lottoWinnings).reverse();
@@ -138,6 +101,16 @@ export class Calculator {
   #calculateMatchCount(lotto) {
     return lotto.filter((number) => this.#winningNumbers.includes(number))
       .length;
+  }
+
+  #getRank(matchCount, hasBonus) {
+    const rankByMatchCount = {
+      6: 1,
+      5: hasBonus ? 2 : 3,
+      4: 4,
+      3: 5,
+    };
+    return rankByMatchCount[matchCount];
   }
 
   #calculateTotalReturn(lottoWinnings, boughtAmount) {
