@@ -1,15 +1,14 @@
-import { Console } from "@woowacourse/mission-utils";
 import { validateNumber, validateUnit } from "../utils/validation.js";
 
 class User {
 	#money;
 	#lottos;
 	constructor(money) {
-		this.validateInputMoney(money);
+		this.#validateInputMoney(money);
 		this.#money = money;
 		this.#lottos = [];
 	}
-	validateInputMoney(money) {
+	#validateInputMoney(money) {
 		validateNumber(money);
 		validateUnit(money);
 	}

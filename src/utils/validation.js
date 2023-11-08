@@ -17,7 +17,30 @@ export const validateUnit = (number) => {
  * 입력이 숫자인지 validate하는 함수
  */
 export const validateNumber = (number) => {
-	if (isNaN(number) || !number.trim()) {
+	if (isNaN(number)) {
 		throw ERRORS.INVALID_NUMBER;
+	}
+};
+
+/**
+ *
+ * @param {Number} number
+ * 입력한 숫자가 범위 내에 있는지 validate하는 함수
+ */
+export const validateRange = (number) => {
+	if (number < 1 || number > 45) {
+		throw ERRORS.INVALID_NUMBER_RANGE;
+	}
+};
+
+export const validateNumberLength = (numbers) => {
+	if (numbers.length !== 6) {
+		throw ERRORS.INVALID_NUMBERS_LENGTH;
+	}
+};
+
+export const validateDuplicate = (numbers) => {
+	if (numbers.length !== new Set(numbers).size) {
+		throw ERRORS.INVALID_NUMBERS_DUPLICATE;
 	}
 };

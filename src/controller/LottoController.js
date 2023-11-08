@@ -1,11 +1,16 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { inputMoney } from "../view/input.js";
+import {
+	inputBonusNumber,
+	inputMoney,
+	inputWinningNumber,
+} from "../view/input.js";
 import User from "../model/User.js";
 import { printError, printLottoCount, printLotto } from "./../view/output.js";
 import Lotto from "../model/Lotto.js";
+import WinningLotto from "../model/WinningLotto.js";
 class LottoController {
 	#user;
-
+	#winningLotto;
 	async run() {
 		await this.getUserMoney();
 
@@ -18,14 +23,44 @@ class LottoController {
 
 		//세팅 된 유저의 로또 출력
 		this.printUserLottos(this.#user.getLottos());
+
+		//유저로부터 당첨 번호 입력받음
+		await this.getWinningNumbers();
+
+		await this.getBonusNumber();
 	}
 	async getUserMoney() {
-		try {
-			const userInput = await inputMoney();
-			this.#user = new User(userInput);
-		} catch (error) {
-			printError(error);
-			this.getUserMoney();
+		while (true) {
+			try {
+				const userInput = await inputMoney();
+				this.#user = new User(userInput);
+				break;
+			} catch (error) {
+				printError(error);
+			}
+		}
+	}
+	async getWinningNumbers() {
+		while (true) {
+			try {
+				const userInput = await inputWinningNumber();
+				const userInputNumbers = userInput.split(",");
+				this.#winningLotto = new WinningLotto(userInputNumbers);
+				break;
+			} catch (error) {
+				printError(error);
+			}
+		}
+	}
+	async getBonusNumber() {
+		while (true) {
+			try {
+				const userInput = await inputBonusNumber();
+				this.#winningLotto.setBonusNumber(userInput);
+				break;
+			} catch (error) {
+				printError(error);
+			}
 		}
 	}
 	setUserLottos(lottoAmount) {
