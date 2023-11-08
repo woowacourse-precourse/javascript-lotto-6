@@ -45,35 +45,33 @@ describe('UserLottoModel', () => {
     expect(instance.getStatistics()).toEqual(result);
   });
 
-  test('싪패 - amount가 1000 단위가 아닐 경우', async () => {
-    const instance = new UserLottoModel();
+  test.each([10001, 10002, 10003, 10004, 10005, 10006, 10007, 10008])(
+    '실패 - amount가 1000 단위가 아닐 경우',
+    async (amount) => {
+      const instance = new UserLottoModel();
 
-    const numbers = [10001, 10002, 10003, 10004, 10005, 10006, 10007, 10008];
+      const callback = async (number) => {
+        instance.setAmount(number);
+      };
 
-    const callback = async (number) => {
-      instance.setAmount(number);
-    };
+      await expect(callback(amount)).rejects.toThrow(
+        ERROR_MESSAGE.amount_division,
+      );
+    },
+  );
 
-    numbers.forEach((number) => {
-      expect(callback(number)).rejects.toThrow('[ERROR]');
-      expect(callback(number)).rejects.toThrow(ERROR_MESSAGE.amount_division);
-    });
-  });
+  test.each([1, 2, 3, 4, 5, 6, 7])(
+    '실패 - amount가 1000원 이하일 경우',
+    async (amount) => {
+      const instance = new UserLottoModel();
 
-  test('실패 - amount가 1000원 이하일 경우', () => {
-    const instance = new UserLottoModel();
+      const callback = async (number) => {
+        instance.setAmount(number);
+      };
 
-    const numbers = [1, 2, 3, 4, 5, 6, 7];
-
-    const callback = async (number) => {
-      instance.setAmount(number);
-    };
-
-    numbers.forEach((number) => {
-      expect(callback(number)).rejects.toThrow('[ERROR]');
-      expect(callback(number)).rejects.toThrow(ERROR_MESSAGE.amount_division);
-    });
-  });
+      await expect(callback(amount)).rejects.toThrow(ERROR_MESSAGE.amount_min);
+    },
+  );
 });
 
 describe('LottoManageModel', () => {

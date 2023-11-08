@@ -83,7 +83,7 @@ describe('LottoController', () => {
     await instance.start();
 
     expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining(ERROR_MESSAGE.amount_division),
+      expect.stringContaining(ERROR_MESSAGE.amount_min),
     );
   });
 
