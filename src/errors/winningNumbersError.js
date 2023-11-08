@@ -1,6 +1,4 @@
 const winningNumbersError = (winningNumbers) => {
-  console.log(winningNumbers);
-  console.log(winningNumbers.length);
   if (winningNumbers.length !== 6) {
     throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
   }
