@@ -10,18 +10,6 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  #validateDuplication(numbers) {
-    if (hasDuplicates(numbers)) {
-      throw new Error('[ERROR]');
-    }
-  }
-
-  #validateNumberOfElements(numbers) {
-    if (numbers.length > 6) {
-      throw new Error('[ERROR]');
-    }
-  }
-
   getRank(winningNumbers, bonusNumber) {
     let winningNumberCount = 0;
     winningNumbers.forEach(winningNumber => {
@@ -51,8 +39,27 @@ class Lotto {
   }
 
   printNumbers() {
+    console.log(this.#numbers.join());
+    this.#orderNumbersByASC();
+    console.log(this.#numbers.join());
     const numbers = this.#numbers.join(', ');
     MissionUtils.Console.print(`[${numbers}]`);
+  }
+
+  #validateDuplication(numbers) {
+    if (hasDuplicates(numbers)) {
+      throw new Error('[ERROR]');
+    }
+  }
+
+  #validateNumberOfElements(numbers) {
+    if (numbers.length > 6) {
+      throw new Error('[ERROR]');
+    }
+  }
+
+  #orderNumbersByASC() {
+    this.#numbers.sort((a, b) => a - b);
   }
 }
 
