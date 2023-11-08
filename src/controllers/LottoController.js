@@ -1,5 +1,5 @@
 import Lotto from '../Lotto.js';
-import User from '../User.js';
+import User from '../domain/User.js';
 
 export default class LottoController {
 

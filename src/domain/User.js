@@ -1,6 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE } from './constants/message.js';
-import { LOTTO_NUMBER_RANGE } from './constants/lottoNumber.js';
+import { ERROR_MESSAGE } from '../constants/message.js';
+import { LOTTO_NUMBER_RANGE } from '../constants/lottoNumber.js';
 
 class User {
     #DIVIDE_NUMBER
