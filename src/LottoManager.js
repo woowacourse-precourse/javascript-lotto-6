@@ -31,6 +31,21 @@ class LottoManager {
     const arr = Array(this.#count).fill(null);
     this.#lottoArray = arr.map(() => new Lotto(this.generateLottoNumber()));
   }
+
+  printLottoTickets() {
+    Console.print(`${this.#count}개를 구매했습니다.`);
+    this.#lottoArray.forEach((array) => {
+      Console.print(array.getLottoNumbersString());
+    });
+  }
+
+  setUserLottoArray(userLottoArray) {
+    this.#userLottoArray = userLottoArray;
+  }
+
+  setUserBonusNumber(userBonusNumber) {
+    this.#userLottoBonusNumber = userBonusNumber;
+  }
 }
 
 export default LottoManager;
