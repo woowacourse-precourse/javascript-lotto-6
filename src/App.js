@@ -1,24 +1,10 @@
 import { Console, Random } from '@woowacourse/mission-utils';
-import {
-  CONSOLE_MESSAGE,
-  ERROR_MESSAGE,
-  CONSTANT_NUMBERS,
-} from './constants.js';
+import { CONSOLE_MESSAGE, CONSTANT_NUMBERS } from './constants.js';
+import UserInput from './Input.js';
 
 class App {
   async play() {
-    const purchaseAmountInput = await Console.readLineAsync(
-      CONSOLE_MESSAGE.TYPE_PURCHASE_AMOUNT
-    );
-    const purchaseAmount = parseInt(purchaseAmountInput);
-
-    if (isNaN(purchaseAmount)) {
-      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-    }
-
-    if (purchaseAmount % CONSTANT_NUMBERS.THOUSAND != 0) {
-      throw new Error(ERROR_MESSAGE.NOT_DIVISIBLE_BY_THOUSAND);
-    }
+    const purchaseAmount = await UserInput.getPurchaseAmount();
 
     const numberOfLottoPurchased = purchaseAmount / CONSTANT_NUMBERS.THOUSAND;
     Console.print(
@@ -41,44 +27,8 @@ class App {
       Console.print(userLottoNumbers[i]);
     }
 
-    const winningNumbersInput = await Console.readLineAsync(
-      CONSOLE_MESSAGE.TYPE_WINNING_NUMBERS
-    );
-    const winningNumbersStringArray = winningNumbersInput.split(',');
-    const winningNumbersArray = [];
-
-    for (const stringNumber of winningNumbersStringArray) {
-      const integerNumber = parseInt(stringNumber);
-
-      if (isNaN(integerNumber)) {
-        throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-      }
-
-      if (integerNumber < 1 || integerNumber > 45) {
-        throw new Error(ERROR_MESSAGE.BETWEEN_MIN_AND_MAX);
-      }
-      winningNumbersArray.push(integerNumber);
-    }
-
-    if (new Set(winningNumbersArray).size !== winningNumbersArray.length) {
-      throw new Error(ERROR_MESSAGE.DUPLICATED);
-    }
-
-    if (winningNumbersArray.length !== 6) {
-      throw new Error(ERROR_MESSAGE.SHOULD_BE_SIX);
-    }
-
-    const bonusNumberString = await Console.readLineAsync(
-      CONSOLE_MESSAGE.TYPE_BONUS_NUMBER
-    );
-
-    const bonusNumber = parseInt(bonusNumberString);
-    if (isNaN(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.NOT_A_NUMBER);
-    }
-    if (winningNumbersArray.includes(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.DUPLICATED);
-    }
+    const winningNumbersArray = await UserInput.getSixWinningNumbers();
+    const bonusNumber = await UserInput.getBonusNumber(winningNumbersArray);
 
     const winnings = Object.freeze({
       three: CONSTANT_NUMBERS.THREE_PRIZE,
@@ -87,6 +37,7 @@ class App {
       fiveBonus: CONSTANT_NUMBERS.FIVE_BONUS_PRIZE,
       six: CONSTANT_NUMBERS.SIX_PRIZE,
     });
+
     let totalWinnings = 0;
     let threeNumbersHitCount = 0;
     let fourNumbersHitCount = 0;
