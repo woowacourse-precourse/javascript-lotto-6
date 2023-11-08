@@ -5,11 +5,13 @@ import LottoCount from "../domain/LottoCount";
 import Lottos from "../domain/Lottos";
 import WinningNumber from "../domain/WinningNumber";
 import BonusNumber from "../domain/BonusNumber";
-
+import Rank from "../domain/Rank";
 class LottoController {
   #lottoCount;
   #lottos;
   #winningNumber;
+  #bonusNumber;
+  #winningStatistics;
 
   constructor() {}
 
@@ -43,7 +45,18 @@ class LottoController {
     const bonusNumber = await Input.lottoBonusNumber(
       this.#winningNumber.getWinningNumber()
     );
-    this.#winningNumber = new BonusNumber(bonusNumber);
+    this.#bonusNumber = new BonusNumber(bonusNumber);
+
+    this.#winningStatistics = new Rank(this.#lottos.getLottos());
+    this.result();
+  }
+
+  async result() {
+    const winningStatistic = this.#winningStatistics.getRankStatistic({
+      winningNumber: this.#winningNumber.getWinningNumber(),
+      bonusNumber: this.#bonusNumber.getBonusNumber(),
+    });
+    Output.printResultStatistic(winningStatistic);
   }
 }
 
