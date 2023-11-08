@@ -1,3 +1,5 @@
+import { MESSAGES } from "./Messages.js";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,20 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (numbers.some(number => isNaN(number))) {
+      throw new Error(MESSAGES.NUMBER_ERROR);
+    } else if (numbers.length !== 6) {
+      throw new Error(MESSAGES.COUNT_ERROR);
+    } else if (numbers.some(number => number < 1 || number > 45)) {
+      throw new Error(MESSAGES.RANGE_ERROR);
+    } else if (new Set(numbers).size !== 6) {
+      throw new Error(MESSAGES.DUPLICATION_ERROR);
     }
   }
 
-  // TODO: 추가 기능 구현
+  get numbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
