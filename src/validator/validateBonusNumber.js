@@ -3,7 +3,7 @@ import BonusNumberError from '../error/BonusNumberError.js';
 
 const validateBonusNumber = (lotto, bonusNumber) => {
   if (lotto.includes(bonusNumber))
-    throw new BonusNumberError(ERROR.bonusNumber);
+    throw new BonusNumberError(ERROR.bonusNumberDup);
 };
 
 export default validateBonusNumber;
