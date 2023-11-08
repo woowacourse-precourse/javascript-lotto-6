@@ -14,11 +14,11 @@ const Validation = {
   /**
    * @param {number} number
    */
-  validationLottoNumber: (number) => {
-    if (!this.isNaturalNumber(number)) {
+  validateLottoNumber: (number) => {
+    if (!Validation.isNaturalNumber(number)) {
       throw new Error("[ERROR] 로또 번호는 1 이상의 정수만 입력해 주세요.");
     }
-    if (!this.isInRange(number)) {
+    if (!Validation.isInRange(number)) {
       throw new Error("[ERROR] 1이상 45 이하의 로또 번호를 입력해 주세요.");
     }
   },
@@ -57,6 +57,8 @@ const Validation = {
     if (this.isDuplicate(concattedNumber)) {
       throw new Error("[ERROR] 로또 번호는 6개입니다.");
     }
-    concattedNumber.forEach((number) => this.validateLottoNumber(number));
+    concattedNumber.forEach((number) =>
+      Validation.validateLottoNumbers(number)
+    );
   },
 };
