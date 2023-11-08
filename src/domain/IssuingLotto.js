@@ -1,17 +1,10 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
-import Utils from '../service/Utils.js';
 
 const NUMBERS_OPTIONS = {
   first: 1,
   last: 45,
   length: 6,
-};
-
-const INFORM_TEMPLATE = {
-  purchase: '개를 구매했습니다.',
-  numberSeperator: ', ',
-  lottoSeperator: '\n',
 };
 
 class IssuingLotto {
@@ -47,19 +40,6 @@ class IssuingLotto {
 
     this.#issuedLotto = usersLotto;
     return usersLotto;
-  }
-
-  informIssuedLotto() {
-    const lottoList = this.#issuedLotto.map(
-      (lotto) => `[${lotto.join(INFORM_TEMPLATE.numberSeperator)}]`,
-    );
-
-    Utils.informUser(`${this.#count}${INFORM_TEMPLATE.purchase}`);
-    Utils.informUser(`${lottoList.join(INFORM_TEMPLATE.lottoSeperator)}`);
-  }
-
-  getIssuedLotto() {
-    return this.#issuedLotto;
   }
 }
 
