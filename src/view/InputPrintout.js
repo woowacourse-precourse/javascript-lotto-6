@@ -7,7 +7,6 @@ const InputPrintout = {
 	isInvaildInput: true,
 	inputAmount: async () => {
 		let amount = await Console.readLineAsync(PRINT_INPUT.inputAmount);
-		// console.log("입력값", amount);
 		while (InputPrintout.isInvaildInput) {
 			try {
 				InputPrintout.isInvaildInput = false;
