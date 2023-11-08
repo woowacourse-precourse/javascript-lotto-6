@@ -12,12 +12,23 @@ class App {
   ];
   #winMoney = [0, 2000000000, 30000000, 1500000, 50000, 5000, 0];
 
-  async #getInput(message) {
+  getInput = async (message) => {
     try {
       const input = await MissionUtils.Console.readLineAsync(message);
       return input;
     } catch (error) {
       throw new Error("[ERROR] 입력을 받는 중 실패하였습니다.");
+    }
+  };
+
+  async getInputLoop(func, param = []) {
+    while (1) {
+      try {
+        const ret = await func(...param);
+        return ret;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+      }
     }
   }
 
@@ -27,26 +38,26 @@ class App {
     return lottoCnt;
   }
 
-  async #getUserMoney() {
-    const input = await this.#getInput("구입금액을 입력해 주세요.");
-    if (!/^[0-9]+$/.test(input))
-      throw new Error("[ERROR] 숫자를 입력해 주세요!!");
+  #getUserMoney = async () => {
+    const input = await this.getInput("구입금액을 입력해 주세요.");
+    if (!/^[0-9]+$/.test(input)) throw new Error("[ERROR] 숫자를 입력해주세요");
     if (+input % 1000 !== 0)
       throw new Error("[ERROR] 돈은 천원 단위로 입력해주세요");
     return this.#changeMoneyToLottoCnt(input);
-  }
+  };
 
-  async #getWinningNumber() {
-    const input = await this.#getInput("당첨 번호를 입력해 주세요.");
+  #getWinningNumber = async () => {
+    const input = await this.getInput("당첨 번호를 입력해 주세요.");
     const winningNumbers = input.split(",").map((v) => +v);
     const validateNumbers = winningNumbers.every((num) => 0 < num && num <= 45);
+
     if (!validateNumbers || winningNumbers.length !== 6)
       throw new Error("[ERROR] 로또 형식에 부합하지 않습니다.");
     return winningNumbers;
-  }
+  };
 
-  async #getBonusNumber(winningNumbers) {
-    const input = await this.#getInput("보너스 번호를 입력해 주세요.");
+  #getBonusNumber = async (winningNumbers) => {
+    const input = await this.getInput("보너스 번호를 입력해 주세요.");
     const bonusNum = +input;
     if (!/^[0-9]+$/.test(input))
       throw new Error("[ERROR] 숫자를 입력해 주세요");
@@ -55,7 +66,7 @@ class App {
     if (winningNumbers.includes(bonusNum))
       throw new Error("[ERROR] 보너스 번호는 로또번호와 달라야 합니다.");
     return bonusNum;
-  }
+  };
 
   #makeLottoAry(lottoCnt) {
     const ary = [...Array(lottoCnt)].map((_) => {
@@ -84,11 +95,13 @@ class App {
   }
 
   async play() {
-    const lottoCnt = await this.#getUserMoney();
+    const lottoCnt = await this.getInputLoop(this.#getUserMoney);
     const lottoAry = this.#makeLottoAry(lottoCnt);
 
-    const winningNumbers = await this.#getWinningNumber();
-    const bonusNumber = await this.#getBonusNumber(winningNumbers);
+    const winningNumbers = await this.getInputLoop(this.#getWinningNumber);
+    const bonusNumber = await this.getInputLoop(this.#getBonusNumber, [
+      winningNumbers,
+    ]);
 
     //각 인덱스에 결과 저장
     const winInfoAry = [0, 0, 0, 0, 0, 0, 0];
