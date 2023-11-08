@@ -108,24 +108,18 @@ class App {
     const bonusNumber = await this.inputBonusNumber(winningNumbers);
 
     let matched = [0, 0, 0, 0, 0];
+
     this.#lottos.forEach((lotto) => {
-      let matchedCount = 0;
-      lotto.forEach((number) => {
-        if (winningNumbers.includes(number)) {
-          matchedCount += 1;
-        }
-      });
-      if (matchedCount === 6) {
-        matched[4] += 1;
-      } else if (matchedCount === 5 && lotto.includes(bonusNumber)) {
+      const matchedCount = lotto.filter((number) =>
+        winningNumbers.includes(number)
+      ).length;
+
+      if (matchedCount === 6) matched[4] += 1;
+      else if (matchedCount === 5 && lotto.includes(bonusNumber)) {
         matched[3] += 1;
-      } else if (matchedCount === 5) {
-        matched[2] += 1;
-      } else if (matchedCount === 4) {
-        matched[1] += 1;
-      } else if (matchedCount === 3) {
-        matched[0] += 1;
-      }
+      } else if (matchedCount === 5) matched[2] += 1;
+      else if (matchedCount === 4) matched[1] += 1;
+      else if (matchedCount === 3) matched[0] += 1;
     });
 
     return matched;
