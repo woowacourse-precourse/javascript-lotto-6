@@ -28,14 +28,12 @@ describe('로또 게임 컨트롤 클래스 테스트.', () => {
     mockQuestions(input);
     const logSpy = getLogSpy();
 
+    // when
     const lottoGame = new LottoGame();
+    await lottoGame.inputPurchaseAmount();
 
-    // when & then
-    try {
-      await lottoGame.inputPurchaseAmount();
-    } catch (error) {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-    }
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
 
   test('구입 금액이 천원 단위가 아닌 경우 에러를 발생시킵니다.', async () => {
@@ -44,14 +42,29 @@ describe('로또 게임 컨트롤 클래스 테스트.', () => {
     mockQuestions(input);
     const logSpy = getLogSpy();
 
+    // when
     const lottoGame = new LottoGame();
+    await lottoGame.inputPurchaseAmount();
 
-    // when & then
-    try {
-      await lottoGame.inputPurchaseAmount();
-    } catch (error) {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-    }
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+  });
+
+  test('구입 금액이 100000을 넘길 경우 에러를 발생시킵니다.', async () => {
+    // given
+    const invalidInput = '10000000';
+    const validInput = '100000'
+    const input = [invalidInput, validInput];
+
+    mockQuestions(input);
+    const logSpy = getLogSpy();
+
+    // when
+    const lottoGame = new LottoGame();
+    await lottoGame.inputPurchaseAmount();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
 
   describe('당첨번호 입력 테스트', () => {
@@ -67,10 +80,11 @@ describe('로또 게임 컨트롤 클래스 테스트.', () => {
   
       mockQuestions([invalidInput, validInput]);
   
-      // when & then
+      // when
       const lottoGame = new LottoGame();
       await lottoGame.inputWinningNumbers();
   
+      // then
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
     });
   
