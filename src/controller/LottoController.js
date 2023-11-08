@@ -3,11 +3,14 @@ import OutputView from '../view/OutputView.js';
 import CONSTANTS from '../constants/constants.js';
 import Lottos from '../domain/Lottos.js';
 import WinningStatistics from '../domain/WinningStatistics.js';
+import RateOfReturn from '../domain/RateOfReturn.js';
 
 class LottoController {
   #lottos;
 
   #winningStatistics;
+
+  #rateOfReturn;
 
   constructor() {}
 
@@ -20,7 +23,8 @@ class LottoController {
     const bonusNumber = await this.#inputBonusNumber();
     this.#generateWinningStatistics(winningNumbers, bonusNumber);
     this.#printWinningStatistics();
-    this.#printRateOfReturn(purchaseAmount, winningNumbers, bonusNumber);
+    this.#generateRateOfReturn(this.#winningStatistics.getWinningStatistics(), purchaseAmount);
+    this.#printRateOfReturn();
   }
 
   async #inputPurchaseAmount() {
@@ -47,6 +51,10 @@ class LottoController {
     this.#winningStatistics = new WinningStatistics(this.#lottos, winningNumbers, bonusNumber);
   }
 
+  #generateRateOfReturn(winningStatistics, purchaseAmount) {
+    this.#rateOfReturn = new RateOfReturn(winningStatistics, purchaseAmount).getRateOfReturn();
+  }
+
   #printLottos(count) {
     OutputView.printLottosString(count, this.#lottos);
   }
@@ -55,8 +63,8 @@ class LottoController {
     OutputView.printWinningStatisticsString(this.#winningStatistics.getWinningStaticsString());
   }
 
-  #printRateOfReturn(purchaseAmount, winningNumbers, bonusNumber) {
-    OutputView.printRateOfReturnString(this.#lottos, purchaseAmount, winningNumbers, bonusNumber);
+  #printRateOfReturn() {
+    OutputView.printRateOfReturnString(this.#rateOfReturn);
   }
 }
 
