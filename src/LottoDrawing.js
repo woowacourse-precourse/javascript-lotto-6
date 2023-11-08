@@ -10,6 +10,10 @@ class LottoDrawing {
     return this.#winnigLotto;
   }
 
+  setWinningLotto(lotto) {
+    this.#winnigLotto = lotto;
+  }
+
   getBonusNumber() {
     return this.#bonusNumber;
   }
@@ -20,8 +24,10 @@ class LottoDrawing {
         "\n당첨 번호를 입력해 주세요.\n"
       );
 
+      console.log(input);
+
       const lotto = new Lotto(input.split(",").map(Number));
-      this.#winnigLotto = lotto;
+      this.setWinningLotto(lotto);
     } catch (error) {
       Console.print(error.message);
 
