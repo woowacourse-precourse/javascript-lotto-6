@@ -57,6 +57,16 @@ const Validator = {
     isInteger(bonusNumber);
     validateLottoRange(bonusNumber);
   },
+
+  validateBonusNumberDuplicate(winningNumbers, bonusNumber) {
+    const totalNumbers = [...winningNumbers, bonusNumber];
+    const totalNumbersLength =
+      condition.lottoNumbersLength + condition.bonusNumberLength;
+
+    if (new Set(totalNumbers).size !== totalNumbersLength) {
+      throw error.LottoNumbersDuplicationError;
+    }
+  },
 };
 
 export default Validator;
