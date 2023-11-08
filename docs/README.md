@@ -39,7 +39,8 @@
 
 ## 🗂️ 폴더 구조
 
-<img width="200" alt="lotto-folder-structure" src="https://github.com/ella-yschoi/TIL/assets/123397411/6cea9383-54be-4b96-b309-e37ba33498b2">
+<img width="200" alt="lotto-folder-structure" src="https://github.com/ella-yschoi/TIL/assets/123397411/a243ffad-804d-49f2-b260-820f3bd082ec">
+
 
 <br/>
 
