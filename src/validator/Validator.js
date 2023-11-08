@@ -12,19 +12,19 @@ class Validator {
   }
 
   static validateLottoNumbers(numbers) {
-    if (numbers.length !== LOTTO.NUMBERS.LENGTH) {
+    if (numbers.length !== LOTTO.NUMBERS_LENGTH) {
       throw new Error(ERROR.LOTTO_NUMBERS.LENGTH);
     }
 
     numbers.forEach(Validator.#validateLottoNumberRange);
 
-    if (new Set(numbers).size !== LOTTO.NUMBERS.LENGTH) {
+    if (new Set(numbers).size !== LOTTO.NUMBERS_LENGTH) {
       throw new Error(ERROR.LOTTO_NUMBERS.UNIQE);
     }
   }
 
   static #validateLottoNumberRange(number) {
-    if (number < LOTTO.NUMBERS.MIN || number > LOTTO.NUMBERS.MAX) {
+    if (number < LOTTO.MIN_NUMBER || number > LOTTO.MAX_NUMBER) {
       throw new Error(ERROR.LOTTO_NUMBERS.RANGE);
     }
   }
