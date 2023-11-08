@@ -12,3 +12,9 @@ export const PROMPT = {
   prize: '당첨 통계',
   dividingLine: '---',
 };
+
+export const INPUT_TYPE = {
+  cost: 'cost',
+  prizeNumber: 'prizeNumber',
+  bonusNumber: 'bonusNumber',
+};
