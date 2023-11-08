@@ -10,13 +10,13 @@ class PurchasePrice {
   }
 
   #validate(price) {
-    if (validateNumber.isNotNumber(price)) {
+    if (!validateNumber.isNumber(price)) {
       throw new Error(PURCHASE_PRICE_ERROR.isNumber);
     }
-    if (validateNumber.isNotDivideThousand(price)) {
+    if (!validateNumber.isDivideThousand(price)) {
       throw new Error(PURCHASE_PRICE_ERROR.isDivideThousand);
     }
-    if (validateNumber.isSmallerThanThousand(price)) {
+    if (!validateNumber.isBiggerThanThousand(price)) {
       throw new Error(PURCHASE_PRICE_ERROR.isBiggerThanThousand);
     }
   }

@@ -1,15 +1,15 @@
 export const validateNumber = {
-  isNotDivideThousand(number) {
-    return number % 1000 !== 0;
+  isDivideThousand(number) {
+    return number % 1000 === 0;
   },
-  isSmallerThanThousand(number) {
-    return number < 1000;
+  isBiggerThanThousand(number) {
+    return number >= 1000;
   },
-  isNotNumber(number) {
-    return Number.isNaN(number);
+  isNumber(number) {
+    return !Number.isNaN(number);
   },
-  isNotOneToFourtyFive(number) {
-    return number < 1 || number > 45;
+  isOneToFourtyFive(number) {
+    return number > 1 && number < 45;
   },
 };
 
