@@ -1,4 +1,12 @@
 const ERROR_MESSAGES = {
+  lottoNumbers: {
+    length: '[ERROR] 로또 번호는 6개여야 합니다.',
+    isntNumber: '[ERROR] 로또 번호는 숫자여야 합니다.',
+    isntInteger: '[ERROR] 로또 번호는 정수여야 합니다.',
+    outOfRange: '[ERROR] 로또 번호는 1~45 사이여야 합니다.',
+    duplicated: '[ERROR] 로또 번호는 중복될 수 없습니다.',
+  },
+
   paymentAmount: {
     isntNumber: '[ERROR] 구입 금액은 숫자여야 합니다.',
     isntInteger: '[ERROR] 구입 금액은 정수여야 합니다.',

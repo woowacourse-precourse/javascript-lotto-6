@@ -1,3 +1,5 @@
+import { lottoNumberValidator } from './utils/validator';
+
 class Lotto {
   #numbers;
 
@@ -7,18 +9,9 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
-    if (numbers.some(number => number < 1 || number > 45)) {
-      throw new Error('[ERROR] 로또 번호는 1~45 사이여야 합니다.');
-    }
-    if (numbers.some(number => !Number.isInteger(Number(number)))) {
-      throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
-    }
-    if (numbers.some((number, index) => numbers.indexOf(number) !== index)) {
-      throw new Error('[ERROR] 로또 번호는 중복될 수 없습니다.');
-    }
+    Object.keys(lottoNumberValidator).forEach(validate => {
+      lottoNumberValidator[validate](numbers);
+    });
   }
 
   // TODO: 추가 기능 구현

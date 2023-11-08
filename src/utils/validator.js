@@ -5,6 +5,42 @@ const onError = (subject, type) => {
   throw new Error(ERROR_MESSAGES[subject][type]);
 };
 
+const lottoNumberValidator = {
+  length: lottoNumbers => {
+    if (lottoNumbers.length !== 6) onError('lottoNumbers', 'length');
+  },
+  isntNumber: lottoNumbers => {
+    if (
+      lottoNumbers.some(
+        number => Number.isNaN(Number(number)) || !Number(number)
+      )
+    ) {
+      onError('lottoNumbers', 'isntNumber');
+    }
+  },
+  isntInteger: lottoNumbers => {
+    if (lottoNumbers.some(number => !Number.isInteger(Number(number)))) {
+      onError('lottoNumbers', 'isntInteger');
+    }
+  },
+  outOfRange: lottoNumbers => {
+    if (
+      lottoNumbers.some(number => number < MIN_NUMBER || number > MAX_NUMBER)
+    ) {
+      onError('lottoNumbers', 'outOfRange');
+    }
+  },
+  duplicated: lottoNumbers => {
+    if (
+      lottoNumbers.some(
+        (number, index) => lottoNumbers.indexOf(number) !== index
+      )
+    ) {
+      onError('lottoNumbers', 'duplicated');
+    }
+  },
+};
+
 const paymentAmountValidator = {
   isntNumber: paymentAmount => {
     if (Number.isNaN(Number(paymentAmount)) || !Number(paymentAmount)) {
@@ -86,4 +122,5 @@ export {
   paymentAmountValidator,
   winningNumbersValidator,
   bonusNumberValidator,
+  lottoNumberValidator,
 };
