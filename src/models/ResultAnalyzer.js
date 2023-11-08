@@ -5,8 +5,6 @@ class ResultAnalyzer {
 
   #ticketList;
 
-  #result;
-
   #prize;
 
   #profit;
@@ -47,7 +45,7 @@ class ResultAnalyzer {
   countCorrect(ticket) {
     let count = 0;
     ticket.forEach((number) => {
-      if (this.winningNumber.includes(number)) {
+      if (this.#winningNumber.includes(number)) {
         count += 1;
       }
     });
@@ -55,7 +53,7 @@ class ResultAnalyzer {
       this.#prize.bonus += 1;
     }
     if (count > 2) {
-      this.#prize.count += 1;
+      this.#prize[count] += 1;
     }
   }
 
@@ -68,8 +66,8 @@ class ResultAnalyzer {
       (accumulator, currentValue) => accumulator + currentValue,
       0,
     );
-    const pay = this.#ticketList.length;
-    this.#profit = (sum / pay).toFixed(1);
+    const pay = this.#ticketList.length * 1000;
+    this.#profit = ((sum / pay) * 100).toFixed(1);
   }
 }
 

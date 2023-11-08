@@ -1,4 +1,4 @@
-import LottoFlow from './controller/LottoFlow';
+import LottoFlow from './controller/LottoFlow.js';
 
 class App {
   #lottoFlow;

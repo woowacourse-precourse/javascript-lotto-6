@@ -1,7 +1,7 @@
-import InputView from '../views/InputView';
-import OutputView from '../views/OutputView';
-import LottoMachine from './LottoMachine';
-import Lotto from '../Lotto';
+import InputView from '../views/InputView.js';
+import OutputView from '../views/OutputView.js';
+import LottoMachine from './LottoMachine.js';
+import Lotto from '../Lotto.js';
 
 class Seller {
   #lottoMachine;
@@ -14,14 +14,14 @@ class Seller {
   }
 
   setAmount(money) {
-    const amount = money % 1000;
+    const amount = money / 1000;
     OutputView.printAmount(amount, this.makeLotto);
     this.setLottoTicket(amount);
   }
 
   setLottoTicket(amount) {
-    this.#lottoMachine = new LottoMachine();
     for (let order = 0; order < amount; order += 1) {
+      this.#lottoMachine = new LottoMachine();
       const ticket = this.#lottoMachine.makeTicket();
       this.ticketList.push(ticket);
     }
@@ -29,10 +29,11 @@ class Seller {
     this.makeWinnigNumber();
   }
 
-  makeWinnigNumber() {
-    const winningNumber = InputView.InputWinningNumber();
+  async makeWinnigNumber() {
+    const winningNumber = await InputView.InputWinningNumber();
     this.#lotto = new Lotto(winningNumber, this.ticketList);
-    this.#lotto.makeBonusNumber();
+    const bonusNumber = await InputView.InputBonusNumber();
+    this.#lotto.confirmNumber(bonusNumber);
     this.printResult();
   }
 

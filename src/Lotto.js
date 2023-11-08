@@ -1,5 +1,5 @@
-import InputView from './views/InputView';
-import ResultAnalyzer from './models/ResultAnalyzer';
+import InputView from './views/InputView.js';
+import ResultAnalyzer from './models/ResultAnalyzer.js';
 
 class Lotto {
   #numbers;
@@ -20,12 +20,6 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
-    this.makeBonusNumber();
-  }
-
-  makeBonusNumber() {
-    const bonusNumber = InputView.InputBonusNumber();
-    this.confirmNumber(bonusNumber);
   }
 
   confirmNumber(bonusNumber) {
@@ -37,9 +31,11 @@ class Lotto {
   }
 
   noticeNumber() {
-    this.#resultAnalizer = new ResultAnalyzer();
-    this.#resultAnalizer(this.#numbers, this.#bonusNumber, this.#ticketList);
-    this.getResult();
+    this.#resultAnalizer = new ResultAnalyzer(
+      this.#numbers,
+      this.#bonusNumber,
+      this.#ticketList,
+    );
   }
 
   getResult() {

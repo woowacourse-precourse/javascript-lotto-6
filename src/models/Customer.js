@@ -1,12 +1,13 @@
-import InputView from '../views/InputView';
-import Seller from './Seller';
+import InputView from '../views/InputView.js';
+import Seller from './Seller.js';
 
 class Customer {
   #seller;
 
-  payMoney() {
+  async payMoney() {
     this.#seller = new Seller();
-    this.#seller.getAmount(InputView.InputMoney());
+    const money = await InputView.InputMoney();
+    this.#seller.setAmount(money);
   }
 }
 
