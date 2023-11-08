@@ -19,8 +19,9 @@ class Lotto {
     if (numbers.length !== new Set(numbers).size)
       throw new Error(ERROR_MESSAGE.LOTTO_INPUT);
 
+    let [MIN_NUMBER, MAX_NUMBER] = [1, 45];
     numbers.forEach((number) => {
-      if (number < 1 || number > 45) {
+      if (number < MIN_NUMBER || number > MAX_NUMBER) {
         throw new Error(ERROR_MESSAGE.LOTTO_UNIT);
       }
     });
