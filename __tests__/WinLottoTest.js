@@ -11,6 +11,7 @@ describe('WinLotto 클래스 테스트', () => {
   const bonusNumber = 7;
   const winningLotto = new WinLotto([winningNumbers, bonusNumber]);
 
+  /* private 선언으로 테스트 불가
   test.each(lotteryList)(
     '당첨된 번호가 몇개인지 카운트한다.',
     ({ lottery, countWinning }) => {
@@ -23,7 +24,7 @@ describe('WinLotto 클래스 테스트', () => {
     ({ lottery, countBonus }) => {
       expect(winningLotto.countBonusNumber(lottery)).toBe(countBonus);
     }
-  );
+  ); */
 
   test.each(lotteryList)(
     '로또 번호가 주어졌을 때 일치하는 번호가 몇개인지 카운트한다.',
