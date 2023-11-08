@@ -181,7 +181,7 @@ class App {
 
     while(1) {
       try {
-        MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
+        MissionUtils.Console.print('\n당첨 번호를 입력해 주세요.');
   
         const userInputWinningNumbers = await this.getUserInput();
         const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
