@@ -14,6 +14,21 @@ export async function purchaseTickets() {
   }
 }
 
+export function calculateTicketCount(purchaseAmount) {
+  let ticketCount = purchaseAmount / 1000;
+  return ticketCount;
+}
+
+export function generateLottoTickets(ticketCount) {
+  let lottoTickets = [];
+  for (let i = 0; i < ticketCount; i++) {
+    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    const sortedNumbers = numbers.sort((a, b) => a - b);
+    lottoTickets.push(sortedNumbers);
+  }
+  return lottoTickets;
+}
+
 class App {
   async play() {}
 }
