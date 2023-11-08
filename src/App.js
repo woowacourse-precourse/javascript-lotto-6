@@ -1,29 +1,23 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
 import GetPurchaseAmount from "./GetPurchaseAmount.js";
 import GetBonusNumber from "./GetBonusNumber.js";
 import Lotto from "./Lotto.js";
-
-const UNIT_OF_PURCHASE = 1000;
-const WINNING_PRICE = [
-  "5,000",
-  "50,000",
-  "1,500,000",
-  "30,000,000",
-  "2,000,000,000",
-];
+import {
+  INPUT_BONUS_NUMBER,
+  INPUT_PRIZE_NUMBER,
+  INPUT_PURCHASE_AMOUNT,
+} from "./constants/index.js";
 
 class App {
   async getPurchaseAmount() {
     try {
-      const purchaseInput = await MissionUtils.Console.readLineAsync(
-        "구입금액을 입력해 주세요.\n",
-      );
+      const purchaseInput = await Console.readLineAsync(INPUT_PURCHASE_AMOUNT);
       const checkPurchaseInput = new GetPurchaseAmount(purchaseInput);
       const getPurchaseInput = checkPurchaseInput.getPurchaseAmount();
 
       return getPurchaseInput;
     } catch (error) {
-      MissionUtils.Console.print(error.message);
+      Console.print(error.message);
 
       return await this.getPurchaseAmount();
     }
@@ -32,7 +26,7 @@ class App {
   getRandomLottoNumbers(purchaseNumber) {
     const lottoNumbers = [];
     for (let i = 0; i < purchaseNumber; i++) {
-      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       const sortedNumbers = numbers.sort((a, b) => a - b);
       lottoNumbers.push(sortedNumbers);
     }
@@ -41,24 +35,20 @@ class App {
   }
 
   printPurchaseLottos(purchaseNumber, lottoNumbers) {
-    MissionUtils.Console.print(`\n${purchaseNumber}개를 구매했습니다.`);
-    lottoNumbers.forEach((lottoNumber) =>
-      MissionUtils.Console.print(lottoNumber),
-    );
-    MissionUtils.Console.print("");
+    Console.print(`\n${purchaseNumber}개를 구매했습니다.`);
+    lottoNumbers.forEach((lottoNumber) => Console.print(lottoNumber));
+    Console.print("");
   }
 
   async getWinningNumbers() {
     try {
-      const winningNumbers = await MissionUtils.Console.readLineAsync(
-        "당첨 번호를 입력해 주세요.\n",
-      );
+      const winningNumbers = await Console.readLineAsync(INPUT_PRIZE_NUMBER);
       const winningNumbersArray = winningNumbers.split(",");
       const checkWinningNumbers = new Lotto(winningNumbersArray);
 
       return winningNumbersArray;
     } catch (error) {
-      MissionUtils.Console.print(error.message);
+      Console.print(error.message);
 
       return await this.getWinningNumbers();
     }
@@ -66,15 +56,13 @@ class App {
 
   async getBonusNumber(winningNumber) {
     try {
-      const bonusNumber = await MissionUtils.Console.readLineAsync(
-        "보너스 번호를 입력해 주세요.\n",
-      );
+      const bonusNumber = await Console.readLineAsync(INPUT_BONUS_NUMBER);
       const checkBonusNumber = new GetBonusNumber(winningNumber, bonusNumber);
       const getBonusNumber = checkBonusNumber.getBonusNumber();
 
       return getBonusNumber;
     } catch (error) {
-      MissionUtils.Console.print(error.message);
+      Console.print(error.message);
 
       return await this.getBonusNumber(winningNumber);
     }
@@ -106,17 +94,17 @@ class App {
   }
 
   printWinningStatics(winningResult) {
-    MissionUtils.Console.print("\n당첨 통계\n---");
+    Console.print("\n당첨 통계\n---");
     winningResult.forEach((result, index) => {
       if (index === 3) {
-        MissionUtils.Console.print(
+        Console.print(
           `5개 일치, 보너스 볼 일치 (${WINNING_PRICE[index]}원) - ${result}개`,
         );
 
         return;
       }
 
-      MissionUtils.Console.print(
+      Console.print(
         `${index === 4 ? index + 2 : index + 3}개 일치 (${
           WINNING_PRICE[index]
         }원) - ${result}개`,
@@ -133,7 +121,7 @@ class App {
 
     const totalYield = (total / Number(purchaseAmount)) * 100;
 
-    MissionUtils.Console.print(`총 수익률은 ${totalYield.toFixed(1)}%입니다.`);
+    Console.print(`총 수익률은 ${totalYield.toFixed(1)}%입니다.`);
   }
 
   checkWinningStatics(
