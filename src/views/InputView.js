@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { IN_GAME_MESSAGE } from "../models/Constants.js";
-import InputValidation from "../validations/InputValidation.js"
+import InputValidation from "../validations/InputValidation.js";
 
 const InputView = {
   async receiveCost() {
@@ -11,7 +11,9 @@ const InputView = {
   },
 
   async receiveNumbers() {
-    const numbers = await Console.readLineAsync(IN_GAME_MESSAGE.getNumbers);
+    const numbers = (
+      await Console.readLineAsync(IN_GAME_MESSAGE.getNumbers)
+    ).split(",");
     InputValidation.checkNumbers(numbers);
 
     return numbers;
@@ -22,7 +24,7 @@ const InputView = {
       IN_GAME_MESSAGE.getBonusNumber
     );
     InputValidation.checkBonusNumber(bonusNumber);
-    
+
     return bonusNumber;
   },
 };
