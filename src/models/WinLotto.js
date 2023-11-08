@@ -1,7 +1,7 @@
 class WinLotto {
   #winLotto;
 
-  constructor(winLotto, bonusNumber) {
+  constructor([winLotto, bonusNumber]) {
     this.#winLotto = {
       winNumbers: winLotto.getLotto(),
       bonusNumber: bonusNumber,
