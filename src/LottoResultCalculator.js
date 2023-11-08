@@ -24,22 +24,17 @@ class LottoResultCalculator {
     if (
       !Array.isArray(userLottos) ||
       !userLottos.every((lotto) => this.#numbersValidate(lotto))
-    ) {
+    )
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBER);
-    }
+
     if (
       !Array.isArray(winningNumbers) ||
       !this.#numbersValidate(winningNumbers)
-    ) {
+    )
       throw new Error(ERROR_MESSAGE.LOTTO_RESULT);
-    }
-    if (
-      !Number.isInteger(bonusNumber) ||
-      bonusNumber <= 0 ||
-      bonusNumber > 45
-    ) {
+
+    if (!Number.isInteger(bonusNumber) || bonusNumber <= 0 || bonusNumber > 45)
       throw new Error(ERROR_MESSAGE.BONUS_NUMBER);
-    }
   }
 
   #numbersValidate(numbers) {
@@ -53,6 +48,14 @@ class LottoResultCalculator {
     );
   }
 
+  #increaseCount(count) {
+    if (count === 5) {
+      this.#results[this.#bonusNumber ? '5+' : '5'] += 1;
+    } else if (count >= 3) {
+      this.#results[count] += 1;
+    }
+  }
+
   #calculateResults() {
     this.#userLottos.forEach((userLotto) => {
       const commonNumbers = userLotto.filter((number) =>
@@ -60,46 +63,28 @@ class LottoResultCalculator {
       );
       const count = commonNumbers.length;
 
-      if (count === 5) {
-        if (userLotto.includes(this.#bonusNumber)) {
-          this.#results['5+'] += 1;
-        } else {
-          this.#results[5] += 1;
-        }
-      } else if (count >= 3) {
-        this.#results[count] += 1;
-      }
+      this.#bonusNumber = userLotto.includes(this.#bonusNumber);
+      this.#increaseCount(count);
     });
+  }
+
+  #printResult(count, message) {
+    const countText = count === '5+' ? '5개' : `${count}개`;
+    Console.print(
+      `${countText} 일치${message || ''} (${this.#formatNumber(
+        PRIZE_MONEY[count],
+      )}원) - ${this.#results[count]}개`,
+    );
   }
 
   printResults() {
     Console.print(MESSAGE.WINNING_STATISTICS);
 
-    Console.print(
-      `3개 일치 (${this.#formatNumber(PRIZE_MONEY[3])}원) - ${
-        this.#results[3]
-      }개`,
-    );
-    Console.print(
-      `4개 일치 (${this.#formatNumber(PRIZE_MONEY[4])}원) - ${
-        this.#results[4]
-      }개`,
-    );
-    Console.print(
-      `5개 일치 (${this.#formatNumber(PRIZE_MONEY[5])}원) - ${
-        this.#results[5]
-      }개`,
-    );
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (${this.#formatNumber(
-        PRIZE_MONEY['5+'],
-      )}원) - ${this.#results['5+']}개`,
-    );
-    Console.print(
-      `6개 일치 (${this.#formatNumber(PRIZE_MONEY[6])}원) - ${
-        this.#results[6]
-      }개`,
-    );
+    this.#printResult(3);
+    this.#printResult(4);
+    this.#printResult(5);
+    this.#printResult('5+', ', 보너스 볼 일치');
+    this.#printResult(6);
   }
 
   #formatNumber(x) {

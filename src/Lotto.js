@@ -9,14 +9,10 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error(ERROR_MESSAGE.LOTTO_LENGTH);
-    }
+    if (numbers.length !== 6) throw new Error(ERROR_MESSAGE.LOTTO_LENGTH);
 
     const numbersSet = new Set(numbers);
-    if (numbersSet.size !== 6) {
-      throw new Error(ERROR_MESSAGE.LOTTO_DUPLICATE);
-    }
+    if (numbersSet.size !== 6) throw new Error(ERROR_MESSAGE.LOTTO_DUPLICATE);
 
     if (
       !numbers.every(
