@@ -19,6 +19,7 @@
     "no-restricted-globals": ["off"],
     "prefer-const": "off",
     "arrow-body-style": "off",
-    "array-callback-return": "off"
+    "array-callback-return": "off",
+    "no-await-in-loop": "off"
   }
 }

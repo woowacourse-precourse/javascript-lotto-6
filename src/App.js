@@ -11,8 +11,8 @@ class App {
     const userMoney = await money.userMoney();
     const lottoCount = parseInt(userMoney / 1000, 10);
     Console.print(`\n${lottoCount}${GAME_MESSAGES.COUNT_LOTTO}`);
-    let lottos = this.generateLottoNumber(lottoCount);
-    this.getWinningNumbers(lottos);
+    // let lottos = this.generateLottoNumber(lottoCount);
+    // this.getWinningNumbers(lottos);
   }
 
   async getWinningNumbers(lottos) {
