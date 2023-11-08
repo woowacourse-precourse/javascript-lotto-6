@@ -7,6 +7,7 @@ export const Message = {
 
 export const ErrorMessage = {
   WRONGTYPE: "[ERROR] 숫자가 잘못된 형식입니다.",
+  WRONGWON: "[ERROR] 1000원 단위가 아닙니다.",
   WRONGRANGE: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
   ISDUPLICATE: "[ERROR] 중복된 번호가 있습니다.",
 };

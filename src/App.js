@@ -1,17 +1,18 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { Message } from "./constants/Message";
-import { checkMoney } from "./Validation";
+import { checkMoney, checkLottoNumbers, checkBonusNumber } from "./Validation";
 import Lotto from "./Lotto";
 
 class App {
   async play() {
-    const money = checkMoney(money);
+    const money = await askMoney(money);
     MissionUtils.Console.print(`${money / 1000}개를 구매했습니다.\n`);
     const lottos = buyLotto(money);
+    const userLottos = await askUserLotto();
   }
 }
 
-const checkMoney = async () => {
+const askMoney = async () => {
   let isPass = false;
   let money = 0;
   while (!isPass) {
@@ -39,4 +40,21 @@ const buyLotto = (money) => {
   }
   return lottos;
 };
+const askUserLotto = async () => {
+  let isPass = false;
+  let lottoNumbers = "";
+  while (!isPass) {
+    try {
+      lottoNumbers = await MissionUtils.Console.readLineAsync(
+        Message.LOTTOINPUT
+      );
+      checkLottoNumbers(lottoNumbers);
+      isPass = true;
+    } catch (error) {
+      MissionUtils.Console.print(error.Message);
+    }
+  }
+  return lottoNumbers.split(",");
+};
+
 export default App;
