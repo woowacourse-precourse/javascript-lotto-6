@@ -5,6 +5,7 @@ import { MissionUtils } from '@woowacourse/mission-utils'
 class LottoGame{
     #count
 
+
     constructor(){
         this.#count = 0
     }
@@ -14,6 +15,9 @@ class LottoGame{
 
         const lottoList = await this.getLottoNumList()
         OutputView.printLottoList(lottoList)
+
+        const winningLotto = InputView.getWinningLotto()
+        // const bonus = InputView.getBonus()
     }
 
     async getCount(){
