@@ -17,6 +17,11 @@ class UserInput {
     await Console.print("")
     return this.winningNumbers;
   }
+
+  async winningBounsInput() {
+    this.bonus = await Console.readLineAsync("");
+    return this.bonus;
+  }
 }
 
 export default UserInput;

@@ -15,7 +15,9 @@ class App {
 
   lottoList = [];
 
-  winningNumbers = [];
+  winningNumbers = []
+  
+  bonusNumber;
   
   async play() {
     return this.getLottoCount()
@@ -44,6 +46,17 @@ class App {
     const inputNum = await this.Input.winningNumbersInput();
     const lotto = new Lotto(inputNum.split(","));
     this.winningNumber = inputNum.split(",").map(Number);
+    this.winningBonusNumber()
+  }
+
+  async winningBonusNumber() {
+    this.Output.printBonusNumber()
+    this.bonusNumber = await this.Input.winningBounsInput();
+    this.bonusNumber = this.bonusNumber.split(",").map((numbers) => Number(numbers));
+    this.Validate.checkNumberRange(this.bonusNumber);
+    this.Validate.checkNumbersType(this.bonusNumber);
+    this.Validate.checkedBonusLength(this.bonusNumber);
+    this.Validate.checkDuplicateBonus(this.bonusNumber, this.winningNumbers);
   }
 }
 

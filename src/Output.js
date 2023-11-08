@@ -17,6 +17,10 @@ class Output {
   async printWinnerNumber() {
     await Console.print(OUTPUT_MSG.WINNER_NUMBER)
   }
+
+  async printBonusNumber() {
+    await Console.print(OUTPUT_MSG.WINNER_BOUNS_NUMBER)
+  }
 }
 
 export default Output
