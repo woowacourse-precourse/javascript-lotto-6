@@ -1,5 +1,5 @@
 import WinnigStatistics from "./WinnigStatistics.js";
-import LotteDrawing from "./LotteDrawing.js";
+import LotteDrawing from "./LottoDrawing.js";
 import LottoStore from "./LottoStore.js";
 import Buyer from "./Buyer.js";
 
