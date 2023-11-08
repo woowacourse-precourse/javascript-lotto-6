@@ -57,7 +57,9 @@ class App {
 
   printPurchasedLottos() {
     this.lottoList.forEach((lotto) => {
-      const lottoNumbers = JSON.stringify(lotto.getNumbers());
+      const lottoNumbers = JSON.stringify(
+        lotto.getNumbers().sort((a, b) => a - b)
+      );
       MissionUtils.Console.print(lottoNumbers);
     });
   }
