@@ -65,17 +65,22 @@ class App {
     return +price;
   }
 
+  validStringContionalSentence(s) {
+    if (isNaN(s) && s !== ",") {
+      this.displayErrorMessage(this.error.INVALID_STRING);
+      return null;
+    }
+    return s;
+  }
+
   async checkCommaSeparated(string) {
     for (let s of string) {
-      if (isNaN(s) && s !== ",") {
-        this.displayErrorMessage(this.error.INVALID_STRING);
-        return null;
-      }
+      this.validStringContionalSentence(s);
     }
     return string.split(",");
   }
 
-  setLotto(quantity) {
+  async setLotto(quantity) {
     MissionUtils.Console.print(`\n${quantity}개를 구매했습니다.`);
     let purchasedLottos = [];
 
@@ -105,7 +110,20 @@ class App {
       userLotto.setBonusNumber(bonusNumber);
     } catch (error) {
       MissionUtils.Console.print(`\n${error.message}`);
-      return await this.getBonusNumber();
+      await this.updateBonusNumber(userLotto);
+    }
+  }
+
+  async updateWinningNumber() {
+    try {
+      const winningNumberArray = await this.setWinnigArray();
+      const userLotto = new Lotto(winningNumberArray);
+      userLotto.setWinningNumber(winningNumberArray);
+      await this.updateBonusNumber(userLotto);
+      return userLotto;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      await this.updateWinningNumber();
     }
   }
 
@@ -127,11 +145,8 @@ class App {
   async play() {
     const money = await this.checkPrice();
     const quantity = this.getLottoQuantity(money);
-    const purchasedLottos = this.setLotto(quantity);
-    const winningNumberArray = await this.setWinnigArray();
-    const userLotto = new Lotto(winningNumberArray);
-    userLotto.setWinningNumber(winningNumberArray);
-    await this.updateBonusNumber(userLotto);
+    const purchasedLottos = await this.setLotto(quantity);
+    const userLotto = await this.updateWinningNumber();
     await this.getMatchingStatisticsAndRate(
       quantity,
       purchasedLottos,
