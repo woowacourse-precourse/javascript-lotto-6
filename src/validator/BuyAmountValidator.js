@@ -1,4 +1,4 @@
-import { MESSAGE_ERROR } from '../constants/Message.js';
+import { MESSAGE_ERROR } from '../constants/Error.js';
 import { LOTTO_PRICE } from '../constants/GameSetting.js';
 
 const isNumber = (input) => {

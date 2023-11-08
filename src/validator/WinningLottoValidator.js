@@ -1,5 +1,5 @@
-import { LOTTO_NUMBER_RANGE, LOTTO_NUMBER_SIZE } from '../constants/GameSetting.js';
-import { MESSAGE_ERROR } from '../constants/Message.js';
+import { MESSAGE_ERROR } from '../constants/Error.js';
+import { COMMA, LOTTO_NUMBER_RANGE, LOTTO_NUMBER_SIZE } from '../constants/GameSetting.js';
 
 const isNumberOrComma = (input) => {
   const regExp = /^[0-9]+(,[0-9]+)*$/;
@@ -30,7 +30,7 @@ const isLottoSize = (inputArray) => {
 };
 
 export function isValidWinningLotto(input) {
-  const inputArray = input.split(',');
+  const inputArray = input.split(COMMA);
 
   isNumberOrComma(input);
   isLottoRange(inputArray);

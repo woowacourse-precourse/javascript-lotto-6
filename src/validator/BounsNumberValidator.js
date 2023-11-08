@@ -1,5 +1,5 @@
+import { MESSAGE_ERROR } from '../constants/Error.js';
 import { LOTTO_NUMBER_RANGE } from '../constants/GameSetting.js';
-import { MESSAGE_ERROR } from '../constants/Message.js';
 
 const isNumber = (input) => {
   const regExp = /^[0-9]+$/;

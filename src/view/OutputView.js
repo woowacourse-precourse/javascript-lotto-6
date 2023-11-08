@@ -4,6 +4,7 @@ import {
   MESSAGE_NOTIFICATION,
   MESSAGE_RANK_RESULT,
 } from '../constants/Message.js';
+import { BRACKET_CLOSE, BRACKET_OPEN, SPACE_COMMA } from '../constants/GameSetting.js';
 
 export function printBuyLotto(buyLottoCnt) {
   Console.print(MESSAGE_LOTTO_COUNT.buyLotto(buyLottoCnt));
@@ -13,7 +14,7 @@ export function printBuyLotto(buyLottoCnt) {
 export function printLottoArray(lottos) {
   const lottosList = [];
   lottos.forEach((lotto) => {
-    lottosList.push(`[${lotto.join(', ')}]`);
+    lottosList.push(`${BRACKET_OPEN}${lotto.join(SPACE_COMMA)}${BRACKET_CLOSE}`);
   });
   lottosList.forEach((lotto) => Console.print(lotto));
 }

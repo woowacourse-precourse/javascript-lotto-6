@@ -1,5 +1,5 @@
+import { MESSAGE_ERROR } from './constants/Error.js';
 import { LOTTO_NUMBER_SIZE } from './constants/GameSetting.js';
-import { MESSAGE_ERROR } from './constants/Message.js';
 
 class Lotto {
   #numbers;

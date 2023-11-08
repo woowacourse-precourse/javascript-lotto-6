@@ -3,6 +3,7 @@ import { MESSAGE_NOTIFICATION } from '../constants/Message.js';
 import { isValidBuyAmount } from '../validator/BuyAmountValidator.js';
 import { isValidWinningLotto } from '../validator/WinningLottoValidator.js';
 import { isValidBounsNumber } from '../validator/BounsNumberValidator.js';
+import { COMMA } from '../constants/GameSetting.js';
 
 export async function inputBuyAmount() {
   try {
@@ -19,7 +20,7 @@ export async function inputWinningLotto() {
   try {
     const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.winningLotto);
     isValidWinningLotto(inputValue);
-    return inputValue.split(',').map((number) => Number(number));
+    return inputValue.split(COMMA).map((number) => Number(number));
   } catch (err) {
     Console.print(err.message);
     return inputWinningLotto();
