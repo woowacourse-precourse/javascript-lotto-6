@@ -25,7 +25,9 @@ const InputView = {
         const splitInput = input.split(',')
         this.checkLottoValidity(splitInput)
 
-        return splitInput.map(Number)
+        const numberInput = splitInput.map(Number)
+        const sortedInput = numberInput.sort((a, b) => a - b)
+        return [...sortedInput]
     },
 
     checkLottoValidity(lotto){
