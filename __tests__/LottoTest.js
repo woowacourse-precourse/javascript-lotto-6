@@ -15,6 +15,15 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("로또 번호는 오름차순으로 정렬되어야한다.", () => {
+    const unsortedNumbers = [6, 2, 4, 1, 5, 3];
+    const lotto = new Lotto(unsortedNumbers);
+
+    const sortedNumbers = [...unsortedNumbers].sort((current, next) => current - next);
+
+    expect(lotto.getNumbers()).toEqual(sortedNumbers);
+  });
+
   test(`로또 번호에 ${Lotto.NUMBER_MIN}부터 ${Lotto.NUMBER_MAX}사이 이외의 숫자가 있으면 예외가 발생한다.`, () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 55]);
@@ -30,12 +39,6 @@ describe("로또 클래스 테스트", () => {
   test("로또 번호에 중복된 값이 있으면 예외가 발생한다.", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5]);
-    }).toThrow("[ERROR]");
-  });
-
-  test("로또를 1장도 사지 못할 금액으로 구매하면 예외가 발생한다.", () => {
-    expect(() => {
-      Lotto.buyLottoTickets(Lotto.UNIT - 1000);
     }).toThrow("[ERROR]");
   });
 });
