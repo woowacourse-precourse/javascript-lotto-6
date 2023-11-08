@@ -37,8 +37,10 @@ class App {
       return this.getPriceInput();
     }
 
-    const lottoCount = parseInt(price / 1000);
+    this.issueLottos(parseInt(price / 1000));
+  }
 
+  issueLottos(lottoCount) {
     Console.print(`\n${lottoCount}개를 구매했습니다.`);
 
     this.#lottos = Array.from(
@@ -78,38 +80,38 @@ class App {
     }
   }
 
-  calculateResult() {
-    this.#lottos.forEach((lotto) => {
-      const { winning, bonus } = lotto.getNumbers().reduce(
-        (prev, current) => {
-          if (this.#winningNumbers.includes(current)) {
-            return {
-              ...prev,
-              winning: prev.winning + 1,
-            };
-          }
-          if (this.#bonusNumber === current) {
-            return {
-              ...prev,
-              bonus: prev.bonus + 1,
-            };
-          }
-          return prev;
-        },
-        { winning: 0, bonus: 0 }
-      );
+  lottoReducer(prev, current) {
+    if (this.#winningNumbers.includes(current)) {
+      return {
+        ...prev,
+        winning: prev.winning + 1,
+      };
+    }
+    if (this.#bonusNumber === current) {
+      return {
+        ...prev,
+        bonus: prev.bonus + 1,
+      };
+    }
+    return prev;
+  }
 
-      if (winning === 3) {
-        this.#result[0]++;
-      } else if (winning === 4) {
-        this.#result[1]++;
-      } else if (winning === 5 && bonus === 0) {
-        this.#result[2]++;
-      } else if (winning === 5) {
-        this.#result[3]++;
-      } else if (winning === 6) {
-        this.#result[4]++;
-      }
+  calculateResult() {
+    const initialState = { winning: 0, bonus: 0 };
+
+    this.#lottos.forEach((lotto) => {
+      const { winning, bonus } = lotto
+        .getNumbers()
+        .reduce(this.lottoReducer.bind(this), initialState);
+
+      const resultSchema = {
+        3: 0,
+        4: 1,
+        5: bonus === 0 ? 2 : 3,
+        6: 4,
+      };
+
+      this.#result[resultSchema[winning]]++;
     });
   }
 
