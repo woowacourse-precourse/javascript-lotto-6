@@ -78,7 +78,7 @@ const stageController = {
     const winNumsArr = errorController.winNumValidate(winNums);
     await serviceInst.switchStage(STAGES.NUM_3, winNumsArr);
   },
-  stage4Controller: async function requestWinNum() {
+  stage4Controller: async function requestBoNusNum() {
     const bonusNum = await MissionUtils.Console.readLineAsync(TEXTVIEW.REQUEST_LOTTOBONUS);
     const bonusPasInt = errorController.bonusNumValidate(bonusNum);
     await serviceInst.switchStage(STAGES.NUM_4, bonusPasInt);
