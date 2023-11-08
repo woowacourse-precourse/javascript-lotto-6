@@ -34,7 +34,11 @@ export default class Computer {
       LOTTERY.NUM_COUNT,
     );
 
-    this.lottos.push(new Lotto(randNum));
+    try {
+      this.lottos.push(new Lotto(randNum));
+    } catch (exception) {
+      this.printError(exception.message);
+    }
   }
 
   printLotto() {
@@ -91,5 +95,9 @@ export default class Computer {
     this.winningNumbers = [];
     this.lottos = [];
     this.result = [];
+  }
+
+  printError(error) {
+    Console.print(error);
   }
 }
