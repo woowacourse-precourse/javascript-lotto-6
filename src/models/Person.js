@@ -9,8 +9,16 @@ class Person {
   }
 
   #validate(money) {
-    if (isNaN(money) || money[0] === '0') {
-      throw new Error('[ERROR] 구매 금액은 양의 정수 입니다.');
+    if (
+      isNaN(money) ||
+      money[0] === '0' ||
+      /\s/g.test(money) ||
+      money[0] === '-' ||
+      Number(money) < 1000
+    ) {
+      throw new Error(
+        '[ERROR] 구매 금액은 최소 1000이상의 양의 정수여야 합니다.'
+      );
     }
   }
 

@@ -6,8 +6,6 @@ class LottoShop {
 
   #bonusNumber;
 
-  #person;
-
   #result;
 
   constructor(winningNumber) {
@@ -16,9 +14,6 @@ class LottoShop {
       .split(',')
       .sort((x, y) => x - y)
       .map((string) => Number(string));
-    // this.#validateBonusNumber(bonusNumber);
-    // this.#bonusNumber = Number(bonusNumber);
-    this.#result = [0, 0, 0, 0, 0];
   }
 
   setBonusNumber(bonusNumber) {
@@ -43,7 +38,7 @@ class LottoShop {
 
   #validateBonusNumber(bonusNumber) {
     if (
-      bonusNumber.length !== 1 ||
+      /\s/g.test(bonusNumber) ||
       isNaN(bonusNumber) ||
       Number(bonusNumber) < LOTTO.MIN_NUMBER ||
       Number(bonusNumber) > LOTTO.MAX_NUMBER ||
@@ -61,6 +56,9 @@ class LottoShop {
   }
 
   addResultSecondPlace(lottos) {
+    if (this.#bonusNumber === undefined) {
+      throw new Error('[ERROR] 보너스 번호를 입력해주세요');
+    }
     lottos.forEach((lotto) => {
       if (
         Utils.checkingSecondPlace(lotto, this.#winningNumber, this.#bonusNumber)
@@ -70,6 +68,9 @@ class LottoShop {
   }
 
   addResultThirdPlace(lottos) {
+    if (this.#bonusNumber === undefined) {
+      throw new Error('[ERROR] 보너스 번호를 입력해주세요');
+    }
     lottos.forEach((lotto) => {
       if (
         Utils.checkingThirdPlace(lotto, this.#winningNumber, this.#bonusNumber)
@@ -93,6 +94,7 @@ class LottoShop {
   }
 
   checkingTotalResult(lottos) {
+    this.#result = [0, 0, 0, 0, 0];
     this.addResultFirstPlace(lottos);
     this.addResultSecondPlace(lottos);
     this.addResultThirdPlace(lottos);
@@ -102,6 +104,8 @@ class LottoShop {
   }
 
   returnProfitRate(money) {
+    if (this.#result === undefined)
+      throw new Error('[ERROR] 결과를 먼저 확인해주세요');
     return (
       ((this.#result[0] * 200000000 +
         this.#result[1] * 30000000 +
