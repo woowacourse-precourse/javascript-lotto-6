@@ -1,5 +1,6 @@
-import Lotto from "./Lotto";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto";
+import Bonus from "./Bonus";
 
 class App {
   async play() {
@@ -8,6 +9,13 @@ class App {
     MissionUtils.Console.print(`${lottoCount}개를 구매했습니다.`);
     const userLotto = this.generateAndPrintLotto();
     const winningLotto = this.getWinningLotto();
+    const bonusLotto = this.getBonusLotto(winningLotto);
+  }
+
+  async getBonusLotto(winning) {
+    const bonusNumber = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    const bonus = new Bonus(bonusNumber, winning);
+    if(bonus) return bonus;
   }
 
   async getWinningLotto() {
