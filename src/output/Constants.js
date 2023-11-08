@@ -24,7 +24,7 @@ export const MESSAGES = {
   WINNING_NUMBERS_INPUT : "당첨 번호를 입력해 주세요."
 }
 
-export const CONSTANTS = {
+export const CONSTANT = {
   ONE_THOUSAND : 1000,
   MIN_LOTTO_NUMBER : 1,
   MAX_LOTTO_NUMBER : 45,

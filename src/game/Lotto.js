@@ -1,6 +1,6 @@
 import lottoRanking from "./lottoRanking";
 import { Random } from "@woowacourse/mission-utils";
-import { ERROR, CONSTANTS } from "../output/constants";
+import { ERROR, CONSTANT } from "../output/constants";
 
 class Lotto {
   #numbers;
@@ -12,7 +12,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== CONSTANTS.LOTTO_NUMBER_LENGTH) {
+    if (numbers.length !== CONSTANT.LOTTO_NUMBER_LENGTH) {
       throw new Error(`${ERROR.LOTTO_NUMBERS_INVALID_LENGTH}`);
     }
 
@@ -22,7 +22,7 @@ class Lotto {
   }
 
   #setLottoNumbers() {
-    const randomNumbers = Random.pickUniqueNumbersInRange(CONSTANTS.MIN_LOTTO_NUMBER, CONSTANTS.MAX_LOTTO_NUMBER, CONSTANTS.LOTTO_NUMBER_LENGTH);
+    const randomNumbers = Random.pickUniqueNumbersInRange(CONSTANT.MIN_LOTTO_NUMBER, CONSTANT.MAX_LOTTO_NUMBER, CONSTANT.LOTTO_NUMBER_LENGTH);
     return randomNumbers;
   }
 

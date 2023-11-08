@@ -1,7 +1,7 @@
 import Lotto from './Lotto.js';
 import lottoRanking from './lottoRanking.js';
 import { Console } from "@woowacourse/mission-utils";
-import { MESSAGES, CONSTANTS } from '../output/constants.js';
+import { MESSAGES, CONSTANT } from '../output/constants.js';
 
 class Customer {
   #payment;
@@ -9,7 +9,7 @@ class Customer {
 
   constructor(payment) {
     this.#payment = payment;
-    this.#cntLottoTickets = this.#payment / CONSTANTS.ONE_THOUSAND;
+    this.#cntLottoTickets = this.#payment / CONSTANT.ONE_THOUSAND;
     this.lottoList = [];
   } 
 
@@ -30,7 +30,7 @@ class Customer {
   }
 
   calculateProfitRate() {
-    return lottoRanking.calculateTotalPrice() / this.#payment * CONSTANTS.PERCENTAGE_FACTOR;
+    return lottoRanking.calculateTotalPrice() / this.#payment * CONSTANT.PERCENTAGE_FACTOR;
   }
 
   printResult(profitRate) {

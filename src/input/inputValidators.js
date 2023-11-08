@@ -1,4 +1,4 @@
-import { ERROR, CONSTANTS } from "../output/constants";
+import { ERROR, CONSTANT } from "../output/constants";
 
 const inputValidators = {
   validatePayment(payment) {
@@ -6,7 +6,7 @@ const inputValidators = {
       throw new Error(`${ERROR.PAYMENT_NOT_A_NUMBER}`);
     }
 
-    if (payment % CONSTANTS.ONE_THOUSAND !== 0){
+    if (payment % CONSTANT.ONE_THOUSAND !== 0){
       throw new Error(`${ERROR.PAYMENT_NOT_IN_THOUSANDS}`);
     }
     
@@ -16,7 +16,7 @@ const inputValidators = {
   },
 
   validateWinningNumbers(winnigNumbers) {
-    if (winnigNumbers.length !== CONSTANTS.LOTTO_NUMBER_LENGTH) {
+    if (winnigNumbers.length !== CONSTANT.LOTTO_NUMBER_LENGTH) {
       throw new Error(`${ERROR.WINNING_NUMBERS_INVALID_LENGTH}`);
     }
 
@@ -41,7 +41,7 @@ const inputValidators = {
   },
 
   isInRange(number) {
-    return number === parseInt(number) && number >= CONSTANTS.MIN_LOTTO_NUMBER && number <= CONSTANTS.MAX_LOTTO_NUMBER;
+    return number === parseInt(number) && number >= CONSTANT.MIN_LOTTO_NUMBER && number <= CONSTANT.MAX_LOTTO_NUMBER;
   },
 
   isDuplicated(numberlist) {
