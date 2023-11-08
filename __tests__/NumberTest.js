@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { parseStringsToIntegers, lottoPurchaseCount } from '../src/utils/lottoNumber/number.js';
+import { parseStringsToIntegers, lottoPurchaseCount, sortLottoNumbers } from '../src/utils/lottoNumber/number.js';
 
 const mockQuestions = inputs => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -26,6 +26,23 @@ describe('number.js 함수 테스트', () => {
 
     inputPrice.forEach((price, index) => {
       expect(lottoPurchaseCount(price)).toBe(predictedResults[index]);
+    });
+  });
+
+  test('랜덤 로또 번호 오름차순 정렬 함수 테스트', () => {
+    const randomArray = [
+      [1, 2, 3, 5, 6, 4],
+      [4, 5, 8, 6, 3, 2],
+      [6, 5, 4, 3, 2, 1],
+    ];
+    const predictedResults = [
+      [1, 2, 3, 4, 5, 6],
+      [2, 3, 4, 5, 6, 8],
+      [1, 2, 3, 4, 5, 6],
+    ];
+
+    randomArray.forEach((array, index) => {
+      expect(sortLottoNumbers(array)).toEqual(predictedResults[index]);
     });
   });
 });
