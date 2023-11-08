@@ -1,8 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import validateMoney from './validation/validateMoney';
 import validateLotto from './validation/validateLotto';
-import LottoManager from './LottoManager';
-import Lotto from './Lotto';
 
 const inputUserMoney = async () => {
   const userMoney = await Console.readLineAsync('구입 금액을 입력해 주세요.');
