@@ -6,7 +6,7 @@ class Computer {
   printPurchaseCount(purchaseAmount){
     this.purchaseCount = Math.floor(purchaseAmount / MIN_PURCHASE_AMOUNT);
   
-    Console.print(String(this.purchaseCount).concat("개를 구매했습니다."));
+    Console.print(`\n${String(this.purchaseCount)}개를 구매했습니다.`);
   }
 
   makeLottoList(){
@@ -36,7 +36,7 @@ class Computer {
   printFinalResult(lottoList, winNumbers, bonusNumber, purchaseAmount){
     const resultArray = this.makeResultArray(lottoList, winNumbers, bonusNumber);
     const total_result = this.distinctGrade(resultArray)
-    Console.print("당첨 통계\n---");
+    Console.print("\n당첨 통계\n---");
     Console.print(`${LOTTO_PICK.DRAW_UNITS - 3}개 일치 (${WIN_PRIZE.fifth.toLocaleString()}원) - ${total_result.fifth}개`);
     Console.print(`${LOTTO_PICK.DRAW_UNITS - 2}개 일치 (${WIN_PRIZE.fourth.toLocaleString()}원) - ${total_result.fourth}개`);
     Console.print(`${LOTTO_PICK.DRAW_UNITS - 1}개 일치 (${WIN_PRIZE.third.toLocaleString()}원) - 0개 - ${total_result.third}개`);

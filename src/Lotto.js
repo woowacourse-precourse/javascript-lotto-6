@@ -26,7 +26,8 @@ class Lotto {
   }
 
   printConsole(){
-    Console.print(this.#numbers);
+    var str = "[" + this.#numbers.join(", ") + "]";
+    Console.print(str);
   }
 
   #sortAscending(numbers){
