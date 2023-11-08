@@ -3,7 +3,7 @@ import { MESSAGE, NUMBER, SYMBOLS } from '../constants/index.js';
 import { Input, Output } from '../View/index.js';
 import LottoMachine from '../LottoMachine/index.js';
 import WinningNumberValidator from '../Validator/WinningNumbersValidator/index.js';
-import BonusNumberValidator from '../Validator/BonusNumberValidation/index.js';
+import BonusNumberValidator from '../Validator/BonusNumberValidator/index.js';
 import Formatter from '../Formatter/index.js';
 
 class LottoGame {
@@ -28,7 +28,7 @@ class LottoGame {
   async purchase(amount) {
     const lottoCount = Number(amount) / NUMBER.lottoPurchaseUnit;
     const lottos = this.#lottoMachine.buy(amount);
-    Output.log(`${lottoCount}${MESSAGE.purchase}`);
+    Output.log(`${SYMBOLS.lineBreak}${lottoCount}${MESSAGE.purchase}`);
     Output.log(lottos);
 
     await this.askWinningNumbers();
