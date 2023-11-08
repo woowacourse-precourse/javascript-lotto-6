@@ -1,6 +1,6 @@
 import { MATCH } from './constant/index.js';
 
-class LottoResultCalculator {
+class LottoResultChecker {
   #winningNumbers;
   #bonusNumber;
   #matchResult;
@@ -57,4 +57,4 @@ class LottoResultCalculator {
   }
 }
 
-export default LottoResultCalculator;
+export default LottoResultChecker;

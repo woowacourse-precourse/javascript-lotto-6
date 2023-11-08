@@ -25,7 +25,7 @@ describe('로또 클래스 테스트', () => {
     numbers => {
       expect(() => {
         new Lotto(numbers);
-      }).toThrow(ERROR.LOTTO_NUMBER.RANGE);
+      }).toThrow(ERROR.LOTTO_NUMBER_RANGE);
     }
   );
 });

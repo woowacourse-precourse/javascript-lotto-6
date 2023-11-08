@@ -1,5 +1,5 @@
 import LottoReturnRateCalculator from './LottoReturnRateCalculator.js';
-import LottoResultCalculator from './LottoResultCalculator.js';
+import LottoResultChecker from './LottoResultChecker.js';
 import LottoShop from './LottoShop.js';
 import LottoView from './View/LottoView.js';
 
@@ -32,11 +32,11 @@ class App {
   }
 
   checkLottoResult() {
-    const verifier = new LottoResultCalculator({
+    const checker = new LottoResultChecker({
       winningNumbers: this.#winningNumbers,
       bonusNumber: this.#bonusNumber,
     });
-    return verifier.checkLottoResult(this.#lottoTickets);
+    return checker.checkLottoResult(this.#lottoTickets);
   }
 
   calculateLottoReturnRate(lottoResult) {
