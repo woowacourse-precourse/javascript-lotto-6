@@ -1,3 +1,6 @@
+import { SETTING } from './constants/Constant.js';
+import { ERROR_MESSAGE } from './constants/Message.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,35 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (new Set(numbers).size !== SETTING.pick) {
+      throw new Error(ERROR_MESSAGE.length);
+    }
+    if (!numbers.every((number) => /^([1-9]|[1-3][0-9]|4[0-5])$/.test(number))) {
+      throw new Error(ERROR_MESSAGE.range);
     }
   }
 
-  // TODO: 추가 기능 구현
+  setBonusNumber(bonus) {
+    this.validateBonusNumber(bonus);
+    this.bonusNumber = bonus;
+  }
+
+  validateBonusNumber(bonus) {
+    if (this.#numbers.includes(bonus)) {
+      throw new Error(ERROR_MESSAGE.duplication);
+    }
+    if (!/^([1-9]|[1-3][0-9]|4[0-5])$/.test(bonus)) {
+      throw new Error(ERROR_MESSAGE.range);
+    }
+  }
+
+  getWinningNumber() {
+    return this.#numbers;
+  }
+
+  getBonusNumber() {
+    return this.bonusNumber;
+  }
 }
 
 export default Lotto;
