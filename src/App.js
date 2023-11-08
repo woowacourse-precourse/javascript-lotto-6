@@ -30,10 +30,11 @@ class App {
     try {
       const inputMoney = await Console.readLineAsync(MESSAGE.START);
       
-      if (isNaN(inputMoney) || inputMoney === null) {
+      if (isNaN(inputMoney)) {
         throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
       }
-      this.userMoney = Number(inputMoney)
+      this.checkInputIsNull(inputMoney);
+      this.userMoney = Number(inputMoney);
       if (this.userMoney % 1000 > 0 || this.userMoney <= 0) {
         throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
       }
@@ -73,32 +74,32 @@ class App {
 
     try {
       const winningNums = await Console.readLineAsync(MESSAGE.WINNING_INPUT);
-      
-      if (
-        winningNums.includes(',,') ||
-        winningNums[0] === ',' ||
-        winningNums[winningNums.length-1] === ',' ||
-        winningNums === null
-        ) {
-        throw new Error(ERROR_MESSAGE.INPUT_ERROR);
-      }
-
       winningNumsList = winningNums.split(',').map(Number);
+      
+      this.checkInputIsNull(winningNums);
       
       if (winningNumsList.length !== 6) {
         throw new Error(ERROR_MESSAGE.INVALID_ERROR)
       }
       this.checkDuplicateNums(winningNumsList);
-
-      for (let i = 0; i < winningNumsList.length; i++) {
-        if (!numRangePattern.test(winningNumsList[i])) {
-          throw new Error(ERROR_MESSAGE.INPUT_ERROR)
-        }
-      }
+      this.checkListLength(winningNumsList);
+      
       return winningNumsList;
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
       return await this.getWinningNumbers(numRangePattern);
+    }
+  };
+
+  checkInputIsNull(input) {
+    if (input === null) {
+      throw new Error(ERROR_MESSAGE.INPUT_ERROR);
+    }
+  };
+
+  checkListLength(list) {
+    if (list.length !== 6) {
+      throw new Error(ERROR_MESSAGE.INVALID_ERROR)
     }
   };
 
