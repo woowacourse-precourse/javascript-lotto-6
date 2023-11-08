@@ -13,7 +13,7 @@ const Input = {
 
   async lottoWinningNumber() {
     const winningNumber = await Console.readLineAsync(
-      "\n당첨 번호를 입력해 주세요.\n"
+      PRINT_MESSAGE.REQUEST_WINNING_NUMBERS
     );
     return winningNumber;
   },
