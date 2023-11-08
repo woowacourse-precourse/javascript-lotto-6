@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './constants';
+import { ERROR_MESSAGE } from './constants/message.js';
 
 class Lotto {
 
@@ -28,7 +28,7 @@ class Lotto {
       }
 
       if (Number(number) < 1 || Number(number) > 45) {
-        throw new Error(ERROR_MESSAGE.NumberRangeException);
+        throw new Error(ERROR_MESSAGE.numberRangeException);
       }
     });
   }
@@ -43,7 +43,7 @@ class Lotto {
     }
 
     if (Number(number) < 1 || Number(number) > 45) {
-      throw new Error(ERROR_MESSAGE.NumberRangeException);
+      throw new Error(ERROR_MESSAGE.numberRangeException);
     }
   }
 

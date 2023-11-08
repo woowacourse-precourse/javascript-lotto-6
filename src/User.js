@@ -1,4 +1,5 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGE } from './constants/message.js';
 
 class User {
     #DIVIDE_NUMBER
@@ -16,14 +17,14 @@ class User {
 
     #validate(money) {
         if (money.trim() === '') {
-            throw new Error('[ERROR] 구입 금액은 숫자로 입력해야합니다.');
+            throw new Error(ERROR_MESSAGE.notNumberException);
         }
         if (Number.isNaN(Number(money))) {
-            throw new Error('[ERROR] 구입 금액은 숫자로 입력해야합니다.');
+            throw new Error(ERROR_MESSAGE.notNumberException);
         }
 
         if (Number(money) % this.#DIVIDE_NUMBER !== 0) {
-            throw new Error('[ERROR] 구입 금액은 1000원 단위의 숫자로 입력해야합니다.');
+            throw new Error(ERROR_MESSAGE.notDivide1000Exception);
         }
     }
 

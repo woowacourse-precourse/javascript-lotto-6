@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import LottoController from '../controllers/LottoController.js';
-import { LOTTO_COMMAND, LOTTO_MESSAGE } from '../constants/index.js';
+import { LOTTO_COMMAND, LOTTO_MESSAGE } from '../constants/message.js';
 
 export default class UserView {
 

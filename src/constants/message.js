@@ -31,5 +31,5 @@ export const ERROR_MESSAGE = Object.freeze({
     notDivide1000Exception: '[ERROR] 구입 금액은 1000원 단위의 숫자로 입력해야합니다.',
     notNumberLengthSixException: '[ERROR] 로또 번호는 6개의 숫자를 쉼표를 사용하여 구분하여 입력해야 합니다.',
     notDuplicateWinningNumberException: '[ERROR] 중복된 숫자는 입력할 수 없습니다.',
-    NumberRangeException: '[ERROR] 로또 번호의 범위는 1에서 45 사이입니다.',
+    numberRangeException: '[ERROR] 로또 번호의 범위는 1에서 45 사이입니다.',
 });
