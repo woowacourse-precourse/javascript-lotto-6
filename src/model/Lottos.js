@@ -14,13 +14,8 @@ class Lottos {
   }
 
   #generateLotto() {
-    const lottoNumber = [];
-    while (lottoNumber.length < 6) {
-      const number = Random.pickNumberInRange(1, 45);
-      if (!lottoNumber.includes(number)) {
-        lottoNumber.push(number);
-      }
-    }
+    let lottoNumber = [];
+    lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
     return lottoNumber;
   }
 
