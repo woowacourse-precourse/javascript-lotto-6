@@ -1,5 +1,3 @@
-
-
 class Validate {
     WARNING = Object.freeze({
         AMOUNT : '[ERROR] 잘못된 입력입니다. 1000원 단위의 금액을 입력하시오.',
