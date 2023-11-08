@@ -1,7 +1,6 @@
-import { Print } from '../../interface/Output.js';
 import { getRoundedNumber } from '../../utils/getRoundedNumber.js';
 import { WINNING_CONDITIONS_AND_PRIZES } from '../../constants.js';
-import { separator } from '../../utils/separator.js';
+import { printResult } from './printResult.js';
 
 export class WinningLottosResult {
   #winningLottosResult = WINNING_CONDITIONS_AND_PRIZES.map(({ condition, prize }) => {
@@ -62,32 +61,16 @@ export class WinningLottosResult {
   }
 
   print() {
-    this.printTitle();
+    printResult.title();
     this.#winningLottosResult.forEach(({ condition, prize, count }) => {
       const { winningNumbersCount, bonusNumberType } = condition;
       if (bonusNumberType === 2) {
-        this.printWinningLottoWithBonus(winningNumbersCount, prize, count);
+        printResult.winningLottoWithBonus(winningNumbersCount, prize, count);
       } else {
-        this.printWinningLotto(winningNumbersCount, prize, count);
+        printResult.winningLotto(winningNumbersCount, prize, count);
       }
     });
 
-    this.printTotalProfitRate();
-  }
-
-  printTitle() {
-    Print('당첨통계\n---\n');
-  }
-
-  printWinningLottoWithBonus(winningNumbersCount, prize, count) {
-    Print(`${winningNumbersCount}개 일치, 보너스 볼 일치 (${separator(prize)}원) - ${count}개`);
-  }
-
-  printWinningLotto(winningNumbersCount, prize, count) {
-    Print(`${winningNumbersCount}개 일치 (${separator(prize)}원) - ${count}개`);
-  }
-
-  printTotalProfitRate() {
-    Print(`총 수익률은 ${this.getTotalProfitRate()}%입니다.`);
+    printResult.totalProfitRate(this.getTotalProfitRate());
   }
 }

@@ -3,6 +3,7 @@ import {  WINNING_NUMBERS_COUNT_TYPE } from "../src/constants.js";
 import { LottoResult } from "../src/lottoGame/result/Lotto.js";
 import { WinningLottosResult } from "../src/lottoGame/result/WinningLottos.js";
 import { getRoundedNumber } from "../src/utils/getRoundedNumber.js";
+import { printResult } from "../src/lottoGame/result/printResult.js";
 
 let printTitleSpy; 
 let printWinningLottoWithBonusSpy;
@@ -52,10 +53,10 @@ beforeEach(()=>{
 
     winningLottosResult = new WinningLottosResult(lottoResults, userMoney);
 
-    printWinningLottoWithBonusSpy = jest.spyOn(winningLottosResult, "printWinningLottoWithBonus")
-    printWinningLottoSpy = jest.spyOn(winningLottosResult, "printWinningLotto")
-    printTotalProfitRateSpy = jest.spyOn(winningLottosResult, "printTotalProfitRate")
-    printTitleSpy =  jest.spyOn(winningLottosResult, "printTitle")
+    printWinningLottoWithBonusSpy = jest.spyOn(printResult, "winningLottoWithBonus")
+    printWinningLottoSpy = jest.spyOn(printResult, "winningLotto")
+    printTotalProfitRateSpy = jest.spyOn(printResult, "totalProfitRate")
+    printTitleSpy =  jest.spyOn(printResult, "title")
 })
 
 describe("n 개의 당첨된 로또들",()=>{
