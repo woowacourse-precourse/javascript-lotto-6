@@ -64,7 +64,7 @@ describe('추가 테스트', () => {
       '[7, 11, 16, 35, 36, 44]',
     ];
 
-    logs.forEach((log, count) => {
+    logs.forEach((log) => {
       expect(MissionUtils.Console.print).toHaveBeenCalledWith(
         expect.stringContaining(log),
       );
@@ -80,8 +80,8 @@ describe('추가 테스트', () => {
       '6',
       '1,2,3,4,5,6',
       '6',
-      '1,2,3,4,5,6',
-      '7',
+      '3, 5, 11, 8, 21, 23',
+      '32',
     ]);
 
     await lottoController.makeWinningLotto();
@@ -95,6 +95,26 @@ describe('추가 테스트', () => {
     logs.forEach((log, count) => {
       expect(MissionUtils.Console.print).toHaveBeenNthCalledWith(
         count + 1,
+        expect.stringContaining(log),
+      );
+    });
+  });
+
+  test('결과 계산', () => {
+    MissionUtils.Console.print = jest.fn();
+    lottoController.printResult();
+
+    const logs = [
+      '3개 일치 (5,000원) - 2개',
+      '4개 일치 (50,000원) - 0개',
+      '5개 일치 (1,500,000원) - 0개',
+      '5개 일치, 보너스 볼 일치 (30,000,000원) - 0개',
+      '6개 일치 (2,000,000,000원) - 0개',
+      '333.3%',
+    ];
+
+    logs.forEach((log) => {
+      expect(MissionUtils.Console.print).toHaveBeenCalledWith(
         expect.stringContaining(log),
       );
     });
