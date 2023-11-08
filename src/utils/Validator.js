@@ -1,8 +1,10 @@
+import { PURCHASE_UNIT } from "../constants/Constants";
+
 class Validator {
   static validatePurchaseAmount(inputNumber) {
-    if (isNaN(inputNumber)) throw new Error("[ERROR]");
+    if (isNaN(inputNumber)) throw new Error("[ERROR] 숫자만 입력해야합니다.");
 
-    if (inputNumber % 1000 !== 0)
+    if (inputNumber % PURCHASE_UNIT !== 0)
       throw new Error("[ERROR] 1,000원 단위의 구입금액만 입력 가능합니다.");
   }
   static validateLottoNumbers(inputArr) {
@@ -17,19 +19,24 @@ class Validator {
         throw new Error("[ERROR] 1~45 범위의 숫자만 입력 가능합니다.");
       }
     }
-    if (!Validator.#validateLottoDuplication(inputArr, 6)) {
+    if (!Validator.#validateLottoDuplication(inputArr, inputArr.length)) {
       throw new Error("[ERROR] 중복되지 않는 6개의 숫자만 입력 가능합니다.");
     }
   }
 
   static validateBonusNumber(number, lottoNumbers) {
     if (isNaN(number)) {
-      throw new Error("[ERROR]");
+      throw new Error("[ERROR] 숫자만 입력해야합니다.");
     }
     if (!Validator.#validateNumberRange(number)) {
       throw new Error("[ERROR] 1~45 범위의 숫자만 입력 가능합니다.");
     }
-    if (!Validator.#validateLottoDuplication([number, ...lottoNumbers], 7)) {
+    if (
+      !Validator.#validateLottoDuplication(
+        [number, ...lottoNumbers],
+        lottoNumbers.length + 1
+      )
+    ) {
       throw new Error(
         "[ERROR] 당첨 번호와 중복되지 않는 숫자만 입력 가능합니다."
       );

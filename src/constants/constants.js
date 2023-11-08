@@ -21,3 +21,5 @@ export const LOTTO_RESULT = {
   bonus: 0,
   6: 0,
 };
+
+export const PURCHASE_UNIT = 1000;
