@@ -42,7 +42,6 @@ export default class WinningLotto extends Lotto {
   calculatePrizeAmount(lotto) {
     const matchCount = this.#getMatchCountWithoutBonusNumber(lotto);
     const isBonusNumberMatched = this.#isMatchBonusNumber(lotto);
-
     if (matchCount === 6) return FIRST;
     if (matchCount === 5 && isBonusNumberMatched) return SECOND;
     if (matchCount === 5) return THIRD;
