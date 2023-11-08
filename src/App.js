@@ -5,6 +5,13 @@ const LOTTO_UNIT_PRICE = 1000;
 const MIN_LOTTO_NUMBER = 1;
 const MAX_LOTTO_NUMBER = 45;
 const LOTTO_LENGTH = 6;
+const WINNING_MESSAGES = [
+  '3개 일치 (5,000원) - ',
+  '4개 일치 (50,000원) - ',
+  '5개 일치 (1,500,000원) - ',
+  '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+  '6개 일치 (2,000,000,000원) - '
+];
 
 class App {
   async getLottoAmount() {
@@ -49,16 +56,45 @@ class App {
 
   async getWinningNumbers() {
     const winningNumbersInput = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
-    const winningNumbers = new Lotto(winningNumbersInput.split(','));
+    const winningNumbers = new Lotto(winningNumbersInput.split(',').map(Number));
     return winningNumbers;
   }
 
   async getBonusNumber() {
     const bonusNumber = parseInt(await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n'));
-    if (bonusNumber > MAX_LOTTO_NUMBER || bonusNumber < MIN_LOTTO_NUMBER) {
+    if (bonusNumber > MAX_LOTTO_NUMBER || bonusNumbeㅁr < MIN_LOTTO_NUMBER) {
       throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
     }
     return bonusNumber;
+  }
+  calculateWinningStatistics(winningLotto, bonusNumber){
+    let statistics = [0, 0, 0, 0, 0];
+    const winningSet = new Set(winningLotto.numbers);
+    this.lottoNumbers.forEach(lotto => {
+      const intersection = lotto.numbers.filter((item) => winningSet.has(item));
+      const intersectionCount = intersection.length;
+      if (intersectionCount === 6) {
+        statistics[0]++;
+      } else if (intersectionCount === 5 && lotto.numbers.includes(bonusNumber)) {
+        statistics[1]++;
+      } else if (intersectionCount === 5) {
+        statistics[2]++;
+      } else if (intersectionCount === 4) {
+        statistics[3]++;
+      } else if (intersectionCount === 3) {
+        statistics[4]++;
+      }
+    });
+    return statistics;
+  }
+
+  printWinningStatistics(winningStatistics) {
+    Console.print('\n당첨 통계');
+    Console.print('---');
+    for (let i = 0; i < winningStatistics.length; i++) {
+      const message = WINNING_MESSAGES[i] + winningStatistics[i] + '개';
+      Console.print(message);
+    }
   }
 
 async play() {
@@ -68,8 +104,10 @@ async play() {
     this.printLottoCount(lottoCount);
     this.generateLottoNumbers(lottoCount);
     this.printLottoNumbers();
-    const winningNumbers = await this.getWinningNumbers();
+    const winningLotto = await this.getWinningNumbers();
     const bonusNumber = await this.getBonusNumber();
+    const winningStatistics = this.calculateWinningStatistics(winningLotto, bonusNumber);
+    this.printWinningStatistics(winningStatistics);
   }
 }
 
