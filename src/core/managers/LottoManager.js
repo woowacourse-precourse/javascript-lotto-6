@@ -3,7 +3,12 @@ import Lotto from "../Lotto.js";
 import { LOTTO_NUMBER_RANGE, WINNING_NUMBER_AMOUNT } from "../const.js";
 
 export default class LottoManager {
-  constructor() {}
+  /** @type {Lotto[]} */
+  #lottos;
+
+  constructor() {
+    this.#lottos = [];
+  }
 
   /**
    *
@@ -11,7 +16,7 @@ export default class LottoManager {
    * @returns {Lotto[]}
    */
   makeLottos(amount) {
-    const lottos = [];
+    this.#lottos = [];
 
     while (amount--) {
       const numbers = Random.pickUniqueNumbersInRange(
@@ -20,9 +25,31 @@ export default class LottoManager {
         WINNING_NUMBER_AMOUNT
       );
 
-      lottos.push(new Lotto(numbers));
+      this.#lottos.push(new Lotto(numbers));
     }
 
-    return lottos;
+    return this.#lottos;
+  }
+
+  /**
+   *
+   * @param {number[]} winningNumbers
+   * @param {number} bonusNumber
+   */
+  makeResultBoard(winningNumbers, bonusNumber) {
+    const board = {
+      three: 0,
+      four: 0,
+      five: 0,
+      bonusFive: 0,
+      six: 0,
+    };
+
+    this.#lottos
+      .map((lotto) => lotto.matchResult(winningNumbers, bonusNumber))
+      .filter((field) => field !== null)
+      .forEach((field) => board[field]++);
+
+    return board;
   }
 }
