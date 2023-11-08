@@ -1,26 +1,43 @@
-import { ERRORMESSAGE } from "./constants/errorMessage";
-import LottoNumberDraw from "./functions/LottoNumberDraw";
-import Validation from "./utills/validation";
+import { Random } from "@woowacourse/mission-utils";
+import { ERRORMESSAGE } from "./constants/errorMessage"
+import Validation, { validateLotto } from "./utills/validation";
 
 
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers.push(numbers);
+    this.#numbers = numbers;
+
+    if (numbers !== undefined) {
+      this.#validate(numbers);
+    }
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error(ERRORMESSAGE.LOTTO_NUMBER_LENGTH);
-    }
-
-    Validation.validate(numbers);
+    const result = validateLotto(numbers);
   }
 
   getNumber() {
     return this.#numbers;
+  }
+
+  setAnswer() {
+    const set = new Set();
+    set.add(Random.pickUniqueNumbersInRange(1, 45, 6));
+    return [...set];
+  }
+
+  makeLotto(amount) {
+    let lotto = [];
+
+    for (let i = 0; i < amount; i++) {
+      lotto.push(this.setAnswer());
+    }
+
+    const result = this.#validate(lotto);
+
+    return lotto;
   }
 }
 
