@@ -1,6 +1,7 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 
 class Lotto {
+
   #numbers;
 
   constructor(numbers) {
@@ -13,7 +14,7 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 6개의 숫자를 쉼표를 사용하여 구분하여 입력해야 합니다.');
     }
 
-    if (new Set(numbers).length !== 6) {
+    if (new Set(numbers).size !== 6) {
       throw new Error('[ERROR] 중복된 숫자는 입력할 수 없습니다.');
     }
 
@@ -30,6 +31,20 @@ class Lotto {
         throw new Error('[ERROR] 로또 번호의 범위는 1에서 45 사이입니다.');
       }
     });
+  }
+
+  validateBonusNumber(bonusNumber) {
+    if (bonusNumber.trim() === '') {
+      throw new Error('[ERROR] 로또 번호는 숫자만 입력해주세요.');
+    }
+
+    if (Number.isNaN(Number(bonusNumber))) {
+      throw new Error('[ERROR] 로또 번호는 숫자만 입력해주세요.');
+    }
+
+    if (Number(bonusNumber) < 1 || Number(bonusNumber) > 45) {
+      throw new Error('[ERROR] 로또 번호의 범위는 1에서 45 사이입니다.');
+    }
   }
 
   calculateLottoResult(userLottoNumbers, winningNumbers, bonusNumber) {
