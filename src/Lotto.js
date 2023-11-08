@@ -22,7 +22,7 @@ class Lotto {
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.SAME_NUMBER);
     }
     if (numbers.some((num) => num < LOTTO.NUMBER_RANGE.FROM || num > LOTTO.NUMBER_RANGE.TO)) {
-      throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.NOT_A_NUMBER);
+      throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.OUT_OF_RANGE);
     }
   }
 

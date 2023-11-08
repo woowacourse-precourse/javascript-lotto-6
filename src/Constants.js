@@ -9,6 +9,7 @@ const ERROR_MESSAGE = {
     NOT_SIX: '[ERROR] 로또 번호는 6개여야 합니다.',
     NOT_A_NUMBER: '[ERROR] 로또 번호는 숫자만 입력하세요.',
     SAME_NUMBER: '[ERROR] 로또 번호는 중복되지 않아야 합니다.',
+    OUT_OF_RANGE: `[ERROR] 로또 번호는 1이상 45이하여야 합니다.`,
   },
   BONUS_NUMBER: {
     NOTHING: '[ERROR] 보너스 번호를 입력하세요.',
