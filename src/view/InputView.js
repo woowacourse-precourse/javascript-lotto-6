@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { validatePurchaseAmount } from "../utils/validate.js";
+import { validatePurchaseAmount } from "../utils/Validate.js";
 import { MESSAGE } from "../constant/GameConfig.js";
 
 class InputView {

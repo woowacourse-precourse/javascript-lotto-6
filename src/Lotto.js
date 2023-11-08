@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { validateLotto } from "./utils/validate.js";
+import { validateLotto } from "./utils/Validate.js";
 import { GAME } from "./constant/GameConfig.js";
 
 class Lotto {
