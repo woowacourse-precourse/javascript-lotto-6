@@ -28,3 +28,17 @@ export const prize = {
 };
 
 export const rank = [FIRST, SECOND, THIRD, FOURTH, FIFTH];
+
+const prizeConditionArr = [
+  { key: { mathNumber: 6, isMatchBonus: false }, value: FIRST },
+  { key: { mathNumber: 5, isMatchBonus: true }, value: SECOND },
+  { key: { mathNumber: 5, isMatchBonus: false }, value: THIRD },
+  { key: { mathNumber: 5, isMatchBonus: true }, value: THIRD },
+  { key: { mathNumber: 4, isMatchBonus: false }, value: FOURTH },
+  { key: { mathNumber: 4, isMatchBonus: true }, value: FOURTH },
+  { key: { mathNumber: 3, isMatchBonus: false }, value: FIFTH },
+  { key: { mathNumber: 3, isMatchBonus: true }, value: FIFTH },
+];
+
+export const conditionMap = new Map();
+prizeConditionArr.forEach((elem) => conditionMap.set(JSON.stringify(elem.key), elem.value));
