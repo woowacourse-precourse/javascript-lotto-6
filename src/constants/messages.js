@@ -1,8 +1,8 @@
 const NOTICE_MESSAGES = {
   inputMoney: '구입금액을 입력해 주세요.\n',
   purchaseCount: '개를 구매했습니다.\n',
-  inputWinningNumbers: '당첨 번호를 입력해 주세요.\n',
-  inputBonusNumbers: '보너스 번호를 입력해 주세요.\n',
+  inputLuckyNumbers: '당첨 번호를 입력해 주세요.\n',
+  inputBonusNumber: '보너스 번호를 입력해 주세요.\n',
   matchingNumbers: (matchingCount, prizeAmount, totalCount) =>
     `${matchingCount}개 일치 (${prizeAmount}원) - ${totalCount}개`,
 };
@@ -29,6 +29,7 @@ const ERROR_MESSAGES = {
   priceUnit: '1000단위로 입력해주세요',
   invalidNumber: '유효한 숫자가 아닙니다.',
   nonDuplicateNumber: '중복된 숫자가 있습니다.',
+  lengthError: '6자리의 숫자를 입력해주세요.',
 };
 
 const REGEX = {
