@@ -9,12 +9,12 @@ import { GAME_INFO } from "./constant/GAME_INFO.js";
 import { purchaseSize } from "./utils/purchaseSize.js";
 
 export const Output = {
-  showPurchaseSize(size) {
-    Console.print(`${PURCHASE_SIZE(purchaseSize(size))}`);
+  showPurchaseSize(price) {
+    Console.print(`${PURCHASE_SIZE(purchaseSize(price))}`);
   },
 
   drawLotto(lottoArrays) {
-    lottoArrays.forEach((row) => Console.print("[" + row.join(", ") + "]"));
+    lottoArrays.forEach((row) => Console.print(`[${row.join(", ")}]`));
   },
 
   winningReport(matchingCount, rate) {
