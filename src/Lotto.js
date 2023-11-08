@@ -60,6 +60,19 @@ class Lotto {
     Console.print(`5개 일치, 보너스 볼 일치 (30000000원)- ${this.getMatchCount(2)}개`);
     Console.print(`6개 일치 (2000000000원)- ${this.getMatchCount(1)}개`);
   }
+
+  calculateRate(inputPrice) {
+    // 수익률 구하기
+    let totalWinningMoney = 0;
+    for (let i = 1; i <= 5; i++) {
+      totalWinningMoney += this.prizes[i].matchCount * this.prizes[i].winningMoney;
+    }
+    return (totalWinningMoney / inputPrice) * 100;
+  }
+
+  printCalculateRate(inputPrice) {
+    Console.print(`총 수익률은 ${this.calculateRate(inputPrice)}%입니다.`);
+  }
 }
 
 export default Lotto;

@@ -19,6 +19,7 @@ class App {
       loto.winningResult(randomNumbers[i], Number(inputBonusNumbers)); // 당첨 결과 구하기
     }
     loto.printWinningResult();
+    loto.printCalculateRate(inputPrice);
   }
 
   countOfLotto(inputPrice) {
