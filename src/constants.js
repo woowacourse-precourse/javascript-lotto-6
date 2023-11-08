@@ -1,3 +1,13 @@
+const PROMPT_BUY_LOTTO = '구입금액을 입력해 주세요.';
+
+const formatLottoCountMessage = count => `${count}개를 구매했습니다.`;
+
+const formatPurchasedLottos = lotto => `[${lotto.join(', ')}]\n`; // Single \n if you want to print a newline
+
+const PROMPT_INPUT_WINNING_NUMBER = '당첨 번호를 입력해 주세요';
+
+const PROMPT_GENERATE_BONUS_NUM = '보너스 번호를 입력해 주세요.';
+
 const LOTTO_OUTCOMES = [5000, 50000, 1500000, 30000000, 2000000000];
 
 const PRIZE_DESCRIPTIONS = [
@@ -9,6 +19,11 @@ const PRIZE_DESCRIPTIONS = [
 ];
 
 export {
+  formatLottoCountMessage,
+  formatPurchasedLottos,
+  PROMPT_BUY_LOTTO,
+  PROMPT_INPUT_WINNING_NUMBER,
+  PROMPT_GENERATE_BONUS_NUM,
   LOTTO_OUTCOMES,
   PRIZE_DESCRIPTIONS,
 };
