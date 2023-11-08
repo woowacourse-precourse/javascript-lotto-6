@@ -12,10 +12,12 @@ class ProfitCalculator {
 	}
 
 	static sumTotalWinnings(winningLottoList) {
-		return winningLottoList.reduce(
-			(sum, obj) => obj.condition.winnings * obj.count + sum,
-			0,
-		);
+		return winningLottoList.reduce((sum, statisticObj) => {
+			const { winnings } =
+				statisticObj.condition.getWinningCondition();
+			const { count } = statisticObj;
+			return winnings * count + sum;
+		}, 0);
 	}
 }
 export default ProfitCalculator;
