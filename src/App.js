@@ -10,7 +10,7 @@ class App {
     const amount = money / 1000;
     OutputView.printPurchaseAmount(amount);
 
-    // 기능 ➋ 구매 장수만큼 랜덤한 로또 번호를 생성한다.
+    // 기능 ➋ 로또를 구매 장수만큼 발행하기
     const lottoManager = new LottoManager(amount);
     lottoManager.generateLottos();
     OutputView.printLottoNumbers(lottoManager.getLottos());
