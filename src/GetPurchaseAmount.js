@@ -20,10 +20,6 @@ class GetPurchaseAmount {
       throw new Error(ERROR_PRICE_NOT_SPLITTED);
     }
   }
-
-  getPurchaseAmount() {
-    return this.#purchase;
-  }
 }
 
 export default GetPurchaseAmount;

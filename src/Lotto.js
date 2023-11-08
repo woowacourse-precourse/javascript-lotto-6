@@ -22,6 +22,10 @@ class Lotto {
       throw new Error(ERROR_DUPLICATED);
     }
   }
+
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
