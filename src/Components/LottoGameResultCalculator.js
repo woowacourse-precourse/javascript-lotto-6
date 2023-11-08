@@ -1,6 +1,5 @@
 import {
   BONUS_NUMBER_WEIGHT,
-  LAST_DECIMAL_PLACE_TO_DISPLAY,
   MATCHING_WINNING_COUNTS_FOR_USING_BONUS_NUMBER,
   MIN_MATCHING_COUNTS_FOR_PRIZE,
   PERCENT_CONVERSION_NUMBER,
@@ -85,9 +84,7 @@ class LottoGameResultCalculator {
   }
 
   getRateOfReturn({ totalPrize, purchaseAmount }) {
-    return ((totalPrize / purchaseAmount) * PERCENT_CONVERSION_NUMBER).toFixed(
-      LAST_DECIMAL_PLACE_TO_DISPLAY
-    );
+    return (totalPrize / purchaseAmount) * PERCENT_CONVERSION_NUMBER;
   }
 }
 
