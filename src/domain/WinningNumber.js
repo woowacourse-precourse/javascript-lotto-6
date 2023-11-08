@@ -20,7 +20,7 @@ class WinningNumber {
 
   static #validateEmptyNumber(winningNumbers) {
     if (winningNumbers.some((number) => number === 0)) {
-      throw new InvalidNumberError(ERROR_MESSAGE.INCLUDE_EMPTY_NUMBER);
+      throw new InvalidNumberError(ERROR_MESSAGE.EMPTY_INPUT);
     }
   }
 

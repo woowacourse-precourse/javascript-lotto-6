@@ -5,7 +5,7 @@ import GameUtils from '../utils/GameUtils.js';
 class LottoGameInput {
   static async purchaseAmount() {
     const userInput = await ConsoleInput.input(MESSAGE.INPUT_PURCHASE_AMOUNT);
-    const amount = Number(userInput);
+    const amount = userInput.trim();
 
     return amount;
   }
@@ -19,7 +19,7 @@ class LottoGameInput {
 
   static async inputBonusNumber() {
     const userInput = await ConsoleInput.input(MESSAGE.INPUT_BONUS_NUMBER);
-    const bonusNumber = Number(userInput);
+    const bonusNumber = userInput.trim();
 
     return bonusNumber;
   }

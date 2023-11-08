@@ -1,5 +1,7 @@
 import ERROR_MESSAGE from '../constants/ErrorMessage.js';
+import { EMPTY } from '../constants/Utils.js';
 import DuplicateNumberError from '../error/DuplicateNumberError.js';
+import EmptyInputError from '../error/EmptyInputError.js';
 import InvalidNumberError from '../error/InvalidNumberError.js';
 import GameUtils from '../utils/GameUtils.js';
 
@@ -13,9 +15,19 @@ class BonusNumber {
   }
 
   static #validate(number, winningNumbers) {
-    BonusNumber.#validateIsNumber(number);
-    BonusNumber.#validateIsInLottoNumberRange(number);
-    BonusNumber.#validateDuplicateWinningNumbers(number, winningNumbers);
+    BonusNumber.#validateIsNotEmpty(number);
+    BonusNumber.#validateIsNumber(Number(number));
+    BonusNumber.#validateIsInLottoNumberRange(Number(number));
+    BonusNumber.#validateDuplicateWinningNumbers(
+      Number(number),
+      winningNumbers,
+    );
+  }
+
+  static #validateIsNotEmpty(number) {
+    if (number.length === EMPTY) {
+      throw new EmptyInputError(ERROR_MESSAGE.EMPTY_INPUT);
+    }
   }
 
   static #validateIsNumber(number) {
