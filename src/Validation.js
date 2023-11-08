@@ -39,7 +39,7 @@ class Validation {
   }
 
   static isDuplicateBonusNumber([...winningNumbers], bonusNumber) {
-    return winningNumbers.includes(bonusNumber);
+    return winningNumbers.includes(Number(bonusNumber));
   }
 
   static hasDuplication([...numbers]) {
