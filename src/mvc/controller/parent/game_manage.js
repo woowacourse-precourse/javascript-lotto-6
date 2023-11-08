@@ -1,5 +1,5 @@
-import RandomLottoManage from '../child/random_lotto_manage';
-import WinningLottoManage from '../child/winning_lotto_manage';
+import RandomLottoManage from '../child/random_lotto_manage.js';
+import WinningLottoManage from '../child/winning_lotto_manage.js';
 
 class GameManage {
   async gameManage() {
