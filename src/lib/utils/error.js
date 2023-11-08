@@ -45,6 +45,12 @@ class InputError {
     }
   }
 
+  validateBonusRange(input) {
+    if (Number(input) < 1 || 45 < Number(input)) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NUMBER_RANGE_ERROR);
+    }
+  }
+
   validateInputDataType(input) {
     if (isNaN(Number(input))) {
       throw new Error(ERROR_MESSAGE.INPUT_DATA_TYPE_ERROR);
@@ -85,6 +91,13 @@ class InputError {
     this.validateLottoDataType(input);
     this.validateLottoIsPositiveNumber(input);
     this.validateLottoRange(input);
+  }
+
+  validateBonusInput(input) {
+    this.validateInputExist(input);
+    this.validateInputDataType(input);
+    this.validateIsPositiveNumber(input);
+    this.validateBonusRange(input);
   }
 }
 
