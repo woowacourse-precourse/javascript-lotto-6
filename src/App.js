@@ -56,14 +56,17 @@ class App {
     });
   }
 
-  async play() {
-    const cost = await this.getInput(inputStep.cost.prompt, 'cost');
-    this.createLotto(cost);
-
+  printLottos() {
     print(`${cost / 1000}개를 구매했습니다.`);
     this.#lottos.forEach((lotto) => {
       print(`[${lotto.getNumbers().join(', ')}]`);
     });
+  }
+
+  async play() {
+    this.#cost = await this.getInput(inputStep.cost.prompt, 'cost');
+    this.createLotto(cost);
+    this.printLottos();
 
     let winnerNumbers = await this.getInput(inputStep.winnerNumbers.prompt, 'prizeNumber');
     this.#prizeNumber = winnerNumbers.split(',').map((elem) => Number(elem));
