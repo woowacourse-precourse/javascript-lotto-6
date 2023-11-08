@@ -18,4 +18,10 @@ describe('로또 구매 금액 클래스 테스트', () => {
       LottoPurchase.validate(30000);
     }).toThrow('[ERROR]');
   });
+
+  test('숫자가 아니면 예외가 발생한다.', () => {
+    expect(() => {
+      LottoPurchase.validate('이만원');
+    }).toThrow('[ERROR]');
+  });
 });
