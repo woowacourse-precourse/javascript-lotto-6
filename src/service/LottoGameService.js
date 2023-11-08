@@ -1,4 +1,4 @@
-import InputView from '../view/InputView.js';
+import InputView from '../view/inputView.js';
 import LottoStatistics from '../domain/LottoStatistics.js';
 import OutputView from '../view/OutputView.js';
 
