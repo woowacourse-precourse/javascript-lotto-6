@@ -45,7 +45,7 @@ class Lotto {
     return result;
   }
 
-  CompareResult(numbers, winningNumbers, bonusNumber) {
+  static CompareResult(numbers, winningNumbers, bonusNumber) {
     const sameNumberCount = numbers.length + winningNumbers.length - new Set([...numbers, ...winningNumbers]).size;
 
     if (sameNumberCount === 5 && numbers.includes((number) => number === bonusNumber)) {
@@ -64,7 +64,7 @@ class Lotto {
     return LOTTO.FAILED_LOTTO_KEY;
   }
 
-  addToResult(resultKey, result) {
+  static addToResult(resultKey, result) {
     const value = result.get(resultKey);
     result.set(resultKey, value + 1);
 
@@ -99,9 +99,9 @@ class Lotto {
       [0, LOTTO.TOTAL_PRICE_KEY],
     ]);
 
-    for (numbers of numbersArray) {
-      const resultKey = this.CompareResult(numbers, winningNumbers, bonusNumber);
-      addToResult(resultKey, result);
+    for (let numbers of numbersArray) {
+      const resultKey = Lotto.CompareResult(numbers, winningNumbers, bonusNumber);
+      Lotto.addToResult(resultKey, result);
     }
     return result;
   }

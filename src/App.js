@@ -36,13 +36,13 @@ class App {
 
   async getBonusNumber() {
     const bonusNumberInput = await this.#player.setBonusNumber();
-    this.#winningBounsNumber = new BonusNumber(bonusNumberInput, this.#winningNumbers);
+    this.#winningBounsNumber = new BonusNumber(bonusNumberInput, this.#winningNumbers.getNumbers());
   }
 
   printResult() {
     const totalResult = Lotto.calcTotalResult(
       this.#player.lottoNumbers,
-      this.#winningNumbers,
+      this.#winningNumbers.getNumbers(),
       this.#winningBounsNumber
     );
     outputView.printTotalResult(totalResult, this.#player.purchaseAmount);

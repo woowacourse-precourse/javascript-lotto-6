@@ -1,5 +1,5 @@
 import { LOTTO } from './constants/api';
-import { ERROR_MESSAGE } from '../src/constants/message';
+import { ERROR_MESSAGE } from './constants/message';
 import validator from './utils/validator';
 
 class BonusNumber {
