@@ -1,14 +1,9 @@
 import Prize from '../Domain/Prize.js';
 import PRIZE from '../constants/prize.js';
 import LOTTO from '../constants/lotto.js';
+import PRIZE_SERVICE from '../constants/prizeService.js';
 
 class PrizeService {
-  static #defaultNumber = 0;
-
-  static #defaultProfit = 0;
-
-  static #countUnit = 1;
-
   static #defaultPrize = {};
 
   getPrize({ lotto, winningLotto }) {
@@ -29,21 +24,26 @@ class PrizeService {
 
   #getTotalPrize(prizes) {
     return Object.entries(prizes).reduce((acc, [status, quantity]) => {
-      const winningPrize = PRIZE[status]?.winningPrize || 0;
+      const winningPrize =
+        PRIZE[status]?.winningPrize || PRIZE_SERVICE.prize.defaultCount;
 
       return acc + winningPrize * quantity;
-    }, PrizeService.#defaultProfit);
+    }, PRIZE_SERVICE.profit.default);
   }
 
   #getProfitRate(totalPrize, purchaseQuantity) {
-    return (totalPrize / (purchaseQuantity * LOTTO.price)) * 100;
+    const totalCost = purchaseQuantity * LOTTO.price;
+    const rawProfitRate = totalPrize / totalCost;
+
+    return rawProfitRate * PRIZE_SERVICE.profit.unit;
   }
 
   countPrize(prizes) {
     return prizes.reduce((acc, prize) => {
       const { status } = prize;
       acc[status] =
-        (acc[status] || PrizeService.#defaultNumber) + PrizeService.#countUnit;
+        (acc[status] || PRIZE_SERVICE.prize.defaultCount) +
+        PRIZE_SERVICE.prize.countUnit;
 
       return acc;
     }, PrizeService.#defaultPrize);
@@ -62,8 +62,10 @@ class PrizeService {
   #getMatchCount({ lotto, winningNumbers }) {
     return winningNumbers.reduce(
       (count, number) =>
-        lotto.hasInclude(number) ? count + PrizeService.#countUnit : count,
-      PrizeService.#defaultNumber,
+        lotto.hasInclude(number)
+          ? count + PRIZE_SERVICE.prize.countUnit
+          : count,
+      PRIZE_SERVICE.prize.defaultCount,
     );
   }
 }

@@ -21,7 +21,7 @@ class Lotto {
   }
 
   toString() {
-    return `[${this.#numbers.join(', ')}]`;
+    return `[${this.#numbers.join(LOTTO.separator)}]`;
   }
 
   isLottoNumber(number) {
