@@ -31,6 +31,11 @@ class CalculateWinnings {
       .filter((number) => this.winningNumbers.includes(number));
     return matchedNumbers;
   }
+
+  countBonusNumbers(lotto) {
+    const bonusMatch = lotto.getNumber().includes(this.bonusNumber);
+    return bonusMatch;
+  }
 }
 
 export default CalculateWinnings;
