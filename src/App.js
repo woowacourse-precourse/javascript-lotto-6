@@ -100,13 +100,13 @@ class App {
 
   async getBonusNumber() {
     const bonusNumber = await MissionUtils.Console.readLineAsync(
-      "보너스 번호를 입력해 주세요.\n",
+      "\n보너스 번호를 입력해 주세요.\n",
     );
     App.#validateBonusNumber(bonusNumber);
-    this.#bonusNumber = bonusNumber;
+    this.#bonusNumber = Number(bonusNumber);
   }
 
-  static #DecideSecondOrThird(hasBonus) {
+  #DecideSecondOrThird(hasBonus) {
     const THIRD = 2;
     const SECOND = 3;
     if (hasBonus) {
@@ -140,7 +140,7 @@ class App {
         this.#winningList[FOURTH] += 1;
         break;
       case 5:
-        App.#DecideSecondOrThird(hasBonus);
+        this.#DecideSecondOrThird(hasBonus);
         break;
       case 6:
         this.#winningList[FIRST] += 1;
@@ -173,6 +173,19 @@ class App {
     );
   }
 
+  printYield() {
+    MissionUtils.Console.print("\n당첨 통계\n---");
+    const calculation = (
+      ((this.#winningList[0] * 5000 +
+        this.#winningList[1] * 50000 +
+        this.#winningList[2] * 1500000 +
+        this.#winningList[3] * 30000000 +
+        this.#winningList[4] * 2000000000) /
+        this.#money) *
+      100
+    ).toFixed(1);
+  }
+
   async play() {
     await this.getMoneyInput();
     for (let i = 0; i < this.#money / 1000; i += 1) {
@@ -183,6 +196,7 @@ class App {
     await this.getBonusNumber();
     this.checkLottos();
     this.printResults();
+    this.printYield();
   }
 }
 

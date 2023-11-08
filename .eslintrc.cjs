@@ -29,5 +29,6 @@ module.exports = {
         js: "ignorePackages",
       },
     ],
+    "operator-linebreak": "off",
   },
 };
