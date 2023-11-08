@@ -35,15 +35,15 @@ describe('LottoInput.getLottoPurchase 테스트', () => {
     mockQuestions(['3000']);
 
     // when
-    const amount = await LottoInput.getLottoAmount();
+    const AMOUNT = await LottoInput.getLottoAmount();
 
     // then
-    expect(amount).toBe(3000);
+    expect(AMOUNT).toBe(3000);
   });
 });
 
 // LottoPurchase 로직에 대한 테스트
-describe('LottoInput.validateAmount', () => {
+describe('LottoInput.validateAmount 테스트', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -70,5 +70,30 @@ describe('LottoInput.validateAmount', () => {
     expect(() => {
       LottoInput.validateAmount(3000);
     }).not.toThrow();
+  });
+});
+
+describe('LottoInput.getWinningNumbers 테스트', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  test('유저가 당첨 번호를 올바르게 입력하면 배열을 반환한다', async () => {
+    // given
+    mockQuestions(['10,11,12,13,14,15']);
+
+    // when
+    const NUMBERS = await LottoInput.getWinningNumbers();
+
+    // then
+    expect(NUMBERS).toEqual([10, 11, 12, 13, 14, 15]);
+  });
+
+  test('유저가 당첨 번호를 올바르게 입력하면 배열을 반환한다', async () => {
+    mockQuestions(['']);
+
+    await expect(LottoInput.getWinningNumbers()).rejects.toThrow(
+      '올바른 당첨 번호를 입력해야 합니다.',
+    );
   });
 });
