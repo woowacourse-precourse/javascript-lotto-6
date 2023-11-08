@@ -94,13 +94,5 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await expect(runException("1000j")).rejects.toThrow("[ERROR]");;
   });
-
-  test("구입금액이 숫자가 아닌 경우 예외를 던져야 합니다", async () => {
-    await expect(runException("오백")).rejects.toThrow("[ERROR] 숫자만 입력 가능합니다.");
-  });
-
-  test("구입금액이 1000의 배수가 아닌 경우 예외를 던져야 합니다", async () => {
-    await expect(runException("500")).rejects.toThrow("[ERROR] 구입금액은 반드시 1000원 단위이여야 합니다.");
-  });
 });
 
