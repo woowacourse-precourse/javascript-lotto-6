@@ -1,17 +1,14 @@
 class Lotto {
   #numbers;
 
-  constructor(numbers, bonus) {
+  constructor(numbers) {
     this.#validate(numbers);
-    this.checkDuplicate(numbers, bonus);
+    this.checkDuplicate(numbers);
     numbers.forEach((e) => {
       this.checkNumber(e);
     });
-    this.checkNumber(bonus);
-    this.checkNumber(bonus);
     this.#numbers = numbers;
     this.number = numbers;
-    this.bonus = bonus;
   }
 
   #validate(numbers) {
@@ -21,10 +18,9 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-  checkDuplicate(numbers, bonus) {
+  checkDuplicate(numbers) {
     const set = new Set(numbers);
-    set.add(bonus);
-    if (7 !== set.size) {
+    if (6 !== set.size) {
       throw new Error("[ERROR] 로또 번호에 중복이 있습니다.");
     }
   }

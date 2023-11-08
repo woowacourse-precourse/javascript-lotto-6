@@ -22,9 +22,13 @@ class App {
     // 로또 당첨 번호 인풋 받기
     MissionUtils.Console.print(``);
     const inputLottoNumber = await getLottoNumberInput();
-    const inputBonusNumber = await getBounsNumberInput();
-    const winningNumber = new Lotto(inputLottoNumber, inputBonusNumber);
-    const resultArray = calcResult(winningNumber, lottoNumbers);
+    const winningNumber = new Lotto(inputLottoNumber);
+    const inputBonusNumber = await getBounsNumberInput(winningNumber);
+    const resultArray = calcResult(
+      winningNumber,
+      inputBonusNumber,
+      lottoNumbers
+    );
     printResult(resultArray, priceInput);
   }
 }
