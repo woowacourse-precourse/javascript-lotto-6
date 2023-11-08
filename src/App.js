@@ -45,6 +45,13 @@ class App {
       }
     }
   }
+
+  printLottoNumbers = (lottoList) => {
+    lottoList.forEach((lottoNumbers) => {
+      MissionUtils.Console.print(`[${lottoNumbers.join(', ')}]`);
+    });
+  }
+
   async play() {
     let count = await this.calculateLottoCount();
 
@@ -52,13 +59,11 @@ class App {
     while(count--) {
       lottoList.push(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
     }
-    MissionUtils.Console.print(lottoList);
+    this.printLottoNumbers(lottoList);
 
-    // 당첨 번호 입력
     const win = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     const lotto = new Lotto(win.split(',').map(v=>Number(v)));
 
-    // 보너스 번호 입력
     const bonus = await this.inputBonus(win);
 
     const result = lotto.stats(lottoList, bonus);
