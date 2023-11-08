@@ -19,6 +19,7 @@
     "no-new": "off",
     "import/extentions": "off",
     "class-methods-use-this": "off",
-    "import/no-cycle": "off"
+    "import/no-cycle": "off",
+    "no-restricted-syntax": "off"
   }
 }

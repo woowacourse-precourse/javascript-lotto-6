@@ -10,8 +10,42 @@ class Game {
 
   #isBonus = false;
 
+  #matchingNumbers = [];
+
   constructor(lotteryNumbers) {
     this.createLotto(lotteryNumbers);
+  }
+
+  calcWinningStatistics() {
+    Console.print("\n당첨 통계\n---");
+    const matchingNumbers = this.#matchingNumbers;
+
+    const statistics = {
+      3: { prize: "5,000원", count: 0 },
+      4: { prize: "50,000원", count: 0 },
+      5: { prize: "1,500,000원", count: 0 },
+      5.1: { prize: "30,000,000원", count: 0 },
+      6: { prize: "2,000,000,000원", count: 0 },
+    };
+
+    matchingNumbers.forEach((count) => {
+      if (count in statistics) {
+        statistics[count].count += 1;
+      }
+    });
+
+    const keys = Object.keys(statistics).sort(
+      (a, b) => parseFloat(a) - parseFloat(b),
+    );
+    for (const key of keys) {
+      const stat = statistics[key];
+      let message = `${key}개 일치 (${stat.prize}) - ${stat.count}개`;
+
+      if (key === "5.1") {
+        message = `5개 일치, 보너스 볼 일치 (30,000,000원) - ${stat.count}개`;
+      }
+      Console.print(message);
+    }
   }
 
   countMatchingNumbers() {
@@ -31,7 +65,7 @@ class Game {
 
       return matchedNumbers.length;
     });
-    Console.print(matchingCounts);
+    this.#matchingNumbers = matchingCounts;
     return matchingCounts;
   }
 
