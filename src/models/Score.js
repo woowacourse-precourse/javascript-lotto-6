@@ -52,10 +52,8 @@ class Score {
 
     checkLotto(lotto, winningNum, bonusNum) {
         const correctCount = this.countCorrectNumbers(lotto, winningNum);
-        console.log("!!!!!!!!!!!!!!!"+correctCount)
         const hasBonus = this.checkBonusNumber(lotto, bonusNum);
         this.updateScore(correctCount, hasBonus);
-        console.log(this.#score);
     }
 
     getScore() {

@@ -9,13 +9,13 @@ import BonusValidation from "../validation/bonusValidation";
 import ProfitCalculator from "../models/ProfitCalculator";
 
 class LottoController {    
-    budget = 0;
-    lottoCount = 0;
-    lottos = [];
-    winningNum = [];
-    bonusNum;
-    result;
-    totalPrize;
+    budget = 0; //구매 금액
+    lottoCount = 0; //로또 개수
+    lottos = []; //발급받은 로또
+    winningNum = []; //당첨 번호
+    bonusNum; //보너스 번호
+    result; //당첨 결과(등수)
+    totalPrize; //총 수익
 
     async getInputBudget() {
         //사용자에게 로또 구매 금액을 입력받음

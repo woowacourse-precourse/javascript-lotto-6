@@ -1,7 +1,7 @@
 class ProfitCalculator {
     constructor(result, budget) {
-        this.result = result; // 상금 매핑 정보
-        this.budget = budget; // 총 투자 금액
+        this.result = result;
+        this.budget = budget;
     }
 
     getTotalPrize() {
