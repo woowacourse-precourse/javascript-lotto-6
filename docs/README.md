@@ -138,6 +138,33 @@
   - `LottoGeneratorTest.js` : `LottoGenerator` 클래스를 테스트하는 코드
   - `LottoGameResultCalculatorTest.js` : `LottoGameResultCalculator` 클래스를 테스트하는 코드
 
+## 📂 최종 애플리캐이션 구조(src 폴더)
+
+- `index.js` : 엔트리 포인트
+- `App.js` : 로또 게임이 진행되는 모듈
+  - 게임진행에 필요한 (유효성 검사를 통과한)조건 설정
+    - 구입 금액, 당첨 번호, 보너스 번호
+- `Lotto.js` : Lotto 모듈(클래스)
+  - 로또 번호를 반환
+  - 로또 번호의 유효성을 검증
+- `UI` : UI로직을 담당하는 모듈을 모아놓은 폴더
+  - `OutputManager.js` : UI로직의 출력을 담당하는 모듈
+  - `InputManager.js` : UI로직의 입력을 담당하는 모듈
+- `Components` : 로또 게임에서의 주요 기능을 수행하는 모듈을 모아놓은 폴더
+  - `LottoGenerator.js` : 로또를 발행하는 모듈
+  - `LottoGameResultCalculator.js` : 로또 게임 결과를 계산하는 모듈
+- `Service` : 유효성 검사를 수행하는 모듈을 모아놓은 폴더
+  - `Common.js` : 유효성 검사에 공통적으로 사용되는 함수를 모아놓은 모듈
+  - `PurchaseAmountInputValidator.js` : 구입 금액 입력값에 대한 유효성 검사를 진행하는 모듈
+  - `WinningNumbersInputValidator.js` : 당첨 번호 입력값에 대한 유효성 검사를 진행하는 모듈
+  - `BonusNumberInputValidator.js` : 보너스 번호 입력값에 대한 유효성 검사를 진행하는 모듈
+  - `LottoNumbersValidator.js` : 로또 번호에 대한 유효성 검사를 진행하는 모듈
+  - `Validators.js` : 모든 유효성 검사 모듈을 모아놓은 모듈
+- `Util` : util 모듈을 모아놓은 폴더
+  - `Util.js` : util 모듈
+- `Constant` : 상수 모듈을 모아놓은 폴더
+  - `Constants.js` : 상수 모듈
+
 ## 🤔 기타 고려 사항
 
 ### 2주차 공통 피드백 반영
@@ -149,3 +176,10 @@
   - 중복되어 사용되는 코드 분리 및 길이가 15라인이 넘지 않도록 구현
 - 테스트를 작성하는 이유에 대해 고민
 - 작은 단위의 테스트에서 큰 단위의 테스트 코드 작성
+
+### 2주차 동료 피드백 반영
+
+- 배열의 내장함수를 활용하여 가독성을 향상
+- 비동기 처리가 필요 없는 부분에 async await를 사용 금지
+- Semantic한 변수명을 사용
+- 불변 값 또는 기준이 되는 값은 상수로 분리 필요
