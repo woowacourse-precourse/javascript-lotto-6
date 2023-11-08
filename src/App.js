@@ -3,6 +3,7 @@ import inputView from './InputView.js';
 import validation from './validation.js';
 import Lotto from './Lotto.js';
 import { LOTTO } from './constant.js';
+import outputView from './OutputView.js';
 
 class App {
   async play() {
@@ -12,8 +13,11 @@ class App {
   async gameStart() {
     const purchasePrice = await inputView.purchaseInput();
     validation.checkPurchasePrice(purchasePrice);
-    
+
     this.pickLottoNum(purchasePrice);
+    this.checkWinningNum();
+
+
   }
 
   pickLottoNum(purchasePrice){
@@ -24,6 +28,10 @@ class App {
       const lottoNums = arraySort(this.pickNum());
       lottos.push(new Lotto(lottoNums));
     }
+
+    outputView.printLottoCount(lottoCount);
+    lottos.forEach((lotto) => outputView.printLottoNum(lotto));
+    return lottos;
   }
 
   static arraySort(arr) {
@@ -33,6 +41,12 @@ class App {
   pickNum() {
     const lottoNum = MissionUtils.Random.pickUniqueNumbersInRange(LOTTO.MIN_RANGE, LOTTO.MAX_RANGE, LOTTO.LENGTH);
     return lottoNum;
+  }
+
+  async checkWinningNum() {
+    const winningNum = await inputView.winningNumInput();
+        const winningNums = winningNum.split(',');
+        validation.checkWinningNum(winningNums);
   }
 }
 
