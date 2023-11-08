@@ -1,3 +1,5 @@
+import { STRINGS } from '../Constants';
+
 class Lotto {
   #numbers;
 
@@ -12,7 +14,10 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  getString() {
+    const lottoString = this.#numbers.join(STRINGS.lottoDelimiter);
+    return `${STRINGS.lottoPrefix}${lottoString}${STRINGS.lottoSuffix}`;
+  }
 }
 
 export default Lotto;

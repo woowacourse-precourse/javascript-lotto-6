@@ -15,6 +15,14 @@ class Screen {
   static printErrorMessage(message) {
     Console.print(`${ERROR_PREFIX} ${message}`);
   }
+
+  static printLottoNumbers(lottos) {
+    Console.print(`${lottos.length}${MESSAGES.purchaseLottoCountsMessage}`);
+
+    lottos.forEach((lotto) => {
+      Console.print(lotto.getString());
+    });
+  }
 }
 
 export default Screen;

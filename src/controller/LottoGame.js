@@ -11,6 +11,7 @@ class LottoGame {
     await this.#inputPurchaseCount();
 
     this.#issueLottos();
+    this.#printLottos();
   }
 
   async #inputPurchaseCount() {
@@ -29,6 +30,10 @@ class LottoGame {
       );
       this.#count -= 1;
     }
+  }
+
+  #printLottos() {
+    Screen.printLottoNumbers(this.#lottos);
   }
 }
 
