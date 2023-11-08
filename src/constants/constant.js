@@ -18,7 +18,7 @@ const MESSAGE_INPUT = (num) => Object.freeze({
 const ERROR_MESSAGE = Object.freeze({
   INPUT_USERMONEY_ERROR: '[ERROR] 올바른 숫자를 입력해 주세요.',
   NUM_RANGE: '[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.',
-  INPUT_ERROR: '[ERROR] 올바른 번호를 입력해 주세요.',
+  INPUT_ERROR: '[ERROR] 로또 번호는 6개여야 합니다.',
   // INPUT_NUM_ERROR: '[ERROR] 6개의 로또 번호를 입력해 주세요.',
   INPUT_TYPE_ERROR: '[ERROR] 숫자만 입력해 주세요.',
   INPUT_DUPLICATE_ERROR: '[ERROR] 중복 없는 6개의 로또 번호를 입력해 주세요.',
