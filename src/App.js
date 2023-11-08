@@ -32,7 +32,6 @@ class App {
     const lottoWinningNumber = await user.inputLottoWinningNumber();
     const lottoBonusNumber = await user.inputLottoBonusNumber();
 
-    
     const allLottoResult = lottoResult.checkAllLottoResult(lottos, lottoWinningNumber, lottoBonusNumber);
     user.printAllLottoResult(allLottoResult);
 

@@ -80,11 +80,11 @@ class LottoResult {
 
   calculateProfitRate(allLottoResult, theNumberOfLotto) {
     let profit = 0;
-    const theAmountOfLotto = theNumberOfLotto*1000;
+    const theAmountOfLotto = theNumberOfLotto * 1000;
 
     Object.values(allLottoResult).forEach(value => {
       const {rankingDetail, reward, count} = value;
-      profit += reward*count;
+      profit += reward * count;
     });
 
     profit -= theAmountOfLotto;

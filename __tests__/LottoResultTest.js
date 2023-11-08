@@ -1,5 +1,5 @@
-import Lotto from "../src/Lotto.js";
-import LottoResult from "../src/LottoResult.js";
+import Lotto from '../src/Lotto.js';
+import LottoResult from '../src/LottoResult.js';
 
 describe('로또 당첨 확인 테스트', () => {
   test('사용자가 구매한 1개의 로또와 당첨 번호, 보너스 번호를 비교하여 결과를 확인한다. (5등일 경우)', () => {

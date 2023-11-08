@@ -52,10 +52,8 @@ class User {
 
   async inputLottoWinningNumber() {
     let isValidInput = false;
-    let inputNumber;
-    let winningNumber;
+    let inputNumber, winningNumber;
 
-    
     while (!isValidInput) {
       inputNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
       winningNumber = inputNumber.split(',').map(number => parseInt(number));
@@ -75,7 +73,6 @@ class User {
     let isValidInput = false;
     let bonusNumber;
 
-    
     while (!isValidInput) {
       bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
 
@@ -92,7 +89,6 @@ class User {
 
   printAllLottoResult(allLottoResult) {
     let result = '\n당첨 통계\n---';
-
     Object.values(allLottoResult).forEach(value => {
       const {rankingDetail, reward, count} = value;
       result += `\n${rankingDetail.theNumberOfMatches}개 일치${rankingDetail.haveBonusNumber?', 보너스 볼 일치':''} (${reward.toLocaleString('ko-KR')}원) - ${count}개`;
