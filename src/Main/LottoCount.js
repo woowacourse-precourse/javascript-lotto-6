@@ -4,7 +4,7 @@ class LottoCount {
     #lottoCount;
   
     constructor(inputPurchaseAmount) {
-      this.#lottoCount = Number(inputPurchaseAmount) / STATIC_NUMBER.PURCHASE_AMOUNT_Split;
+      this.#lottoCount = Number(inputPurchaseAmount) / STATIC_NUMBER.PURCHASE_AMOUNT_SPLIT;
     }
   
     getLottoCount() {

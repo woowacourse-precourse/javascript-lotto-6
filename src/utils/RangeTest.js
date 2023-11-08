@@ -1,6 +1,11 @@
+import STATIC_NUMBER from "../Constant/StaticNumber";
+
 function RangeTest(inputNumbers) {
     return inputNumbers.some((number) => {
-      return number < 1 || number > 45;
+        return (
+            number < STATIC_NUMBER.LOTTO_START_NUMBER ||
+            number > STATIC_NUMBER.LOTTO_END_NUMBER
+          );
     });
   }
   
