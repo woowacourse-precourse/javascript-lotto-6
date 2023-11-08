@@ -106,6 +106,36 @@ class App {
             throw new Error("[ERROR] 당첨번호와 중복된 번호입니다.");
         }
     }
+
+    calculateWinningArr(winningNumber, bonusNumber, lottoArr) {
+        const lottoResult = [];
+        const winningArr = new Array(5);
+        lottoArr.forEach((el) =>
+            el.calculateLotto(winningNumber, bonusNumber, lottoResult)
+        );
+        for (let i = 0; i < 4; i++) {
+            winningArr[i] = lottoResult.filter((el) => el === 3 + i).length;
+        }
+        const isMatchBonus = lottoResult.includes("5bonus");
+        isMatchBonus
+            ? (winningArr[4] = lottoResult.filter(
+                  (el) => el === "5bonus"
+              ).length)
+            : (winningArr[4] = 0);
+        return winningArr;
+    }
+
+    calculateProfitRate(winningArr, purchaseAmount) {
+        const totalPrize =
+            5000 * winningArr[0] +
+            50000 * winningArr[1] +
+            1500000 * winningArr[2] +
+            30000000 * winningArr[4] +
+            2000000000 * winningArr[3];
+        const profitRate = ((totalPrize/purchaseAmount) * 100).toFixed(1);
+        console.log(profitRate);
+        return profitRate;
+    }
 }
 
 export default App;
