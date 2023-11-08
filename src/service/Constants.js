@@ -15,6 +15,9 @@ export const STATISTICS_STANDARD = {
   bonuesMatchCount: 5,
 
   matchCountRank: new Map([
+    [0, '순위 외'],
+    [1, '순위 외'],
+    [2, '순위 외'],
     [3, '5등'],
     [4, '4등'],
     [5, '3등'],
@@ -23,6 +26,7 @@ export const STATISTICS_STANDARD = {
   ]),
 
   prizeAmount: new Map([
+    ['순위 외', 0],
     ['5등', 5000],
     ['4등', 50000],
     ['3등', 1500000],

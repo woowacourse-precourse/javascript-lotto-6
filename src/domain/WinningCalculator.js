@@ -4,22 +4,19 @@ import {
   STATISTICS_STANDARD,
   PURCHASE_OPTIONS,
 } from '../service/Constants.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class WinningCalculator {
   #totalWinningNumbers;
 
   #issuedLotto;
 
-  profit;
-
   constructor(totalWinningNumbers, issuedLotto) {
     this.#totalWinningNumbers = totalWinningNumbers;
     this.#issuedLotto = issuedLotto;
     this.standard = STATISTICS_STANDARD;
     this.winnerList = new Map();
-    this.profit = null;
     this.#analyzeWinner();
-    this.#calculateProfit();
   }
 
   #analyzeWinner() {
@@ -69,11 +66,12 @@ class WinningCalculator {
   }
 
   #calculateProfit() {
+    const prizeList = this.standard.prizeAmount;
     const totalCost = this.#issuedLotto.length * PURCHASE_OPTIONS.unitPrice;
 
     const userPrize = [];
-    this.winnerList.forEach((count, match) => {
-      const winningPrize = this.standard.prizeAmount.get(match) * count;
+    this.winnerList.forEach((count, rank) => {
+      const winningPrize = prizeList.get(rank) * count;
       userPrize.push(winningPrize);
     });
     const totalPrize = userPrize.reduce(
@@ -81,7 +79,12 @@ class WinningCalculator {
     );
 
     const profit = Utils.convertPercentNumber(totalPrize, totalCost);
-    this.profit = profit;
+    return profit;
+  }
+
+  getProfit() {
+    const profit = this.#calculateProfit();
+    return profit;
   }
 }
 
