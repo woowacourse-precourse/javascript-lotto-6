@@ -12,6 +12,12 @@ class App {
 
   #results;
 
+  #answer;
+
+  #bonus;
+
+  #price;
+
   constructor() {
     this.#count = 0;
     this.#lottos = [];
@@ -22,6 +28,9 @@ class App {
       [PRIZE.fivePlus]: 0,
       [PRIZE.six]: 0,
     };
+    this.#answer = [];
+    this.#bonus = 0;
+    this.#price = 0;
   }
 
   #countLotto(price) {
@@ -56,28 +65,38 @@ class App {
     return ((prize / purchase) * 100).toFixed(1);
   }
 
-  async play() {
-    const price = await Input.getLottoPrice();
+  async buyLotto() {
+    this.#price = await Input.getLottoPrice();
     Print.printNewLine();
 
-    this.#count = this.#countLotto(price);
+    this.#count = this.#countLotto(this.#price);
     Print.printPurchase(this.#count);
 
     this.#lottos = this.#createLotto();
     this.#lottos.forEach((lotto) => Print.printArray(lotto));
     Print.printNewLine();
+  }
 
-    const answerNumbers = await Input.getLottoNumber();
+  async createLottoAnswer() {
+    this.#answer = await Input.getLottoNumber();
     Print.printNewLine();
 
-    const bonusNumber = await Input.getLottoBonusNumber(answerNumbers);
+    this.#bonus = await Input.getLottoBonusNumber(this.#answer);
     Print.printNewLine();
+  }
 
-    this.#updateResult(answerNumbers, bonusNumber);
+  drawLotto() {
+    this.#updateResult(this.#answer, this.#bonus);
     Print.printResults(this.#results);
 
-    const returnRate = this.#calcReturn(price);
+    const returnRate = this.#calcReturn(this.#price);
     Print.printReturnRate(returnRate);
+  }
+
+  async play() {
+    await this.buyLotto();
+    await this.createLottoAnswer();
+    this.drawLotto();
   }
 }
 
