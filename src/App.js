@@ -47,10 +47,8 @@ class App {
       lottoGame.saveCompareResult(compareResult, this.lottoBoard);
     });
 
-    this.totalReward += lottoGame.calculateReward(
-      this.lottoBoard,
-      this.totalReward
-    );
+    this.totalReward += lottoGame.calculateReward(this.lottoBoard);
+
     this.lottoBoard.rateOfReturn = lottoGame.calculateRateOfReturn(
       this.totalReward,
       this.#money
