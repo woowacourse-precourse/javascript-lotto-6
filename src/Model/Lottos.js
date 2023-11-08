@@ -45,3 +45,5 @@ class Lottos {
     return Array.from(randomNumbers).sort((a, b) => a - b);
   }
 }
+
+export default Lottos;
