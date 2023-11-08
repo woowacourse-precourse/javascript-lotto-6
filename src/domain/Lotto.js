@@ -1,7 +1,7 @@
 import { RANK } from "../static/Static.js";
+import lottoValidator from "../utils/validator/lottoValidator.js";
 class Lotto {
   #numbers;
-  // 필드 추가 불가
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -9,9 +9,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    lottoValidator.validateLength(numbers);
+    lottoValidator.validateDuplication(numbers);
   }
 
   checkResult(winningNums, bonusNum) {
