@@ -1,5 +1,5 @@
 import { inputMoney, inputWinningLotto, inputBonusNumber } from './ui/input.js';
-import { printLottoNumbers } from './ui/output.js';
+import { printLottoNumbers, printWinningLotto } from './ui/output.js';
 import printError from './ui/error.js';
 import Model from './Model.js';
 
@@ -42,13 +42,14 @@ class App {
 
   outputWinningLottos() {
     const winningLottos = this.#model.getWinningLottos();
-    // printWinningLottos(winningLottos);
+    printWinningLotto(winningLottos);
   }
 
   async play() {
     await this.intro();
     await this.inputWin();
     await this.inputBonus();
+    this.outputWinningLottos();
   }
 }
 
