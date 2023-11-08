@@ -6,7 +6,7 @@ const MESSAGES = Object.freeze({
   },
 
   PURCHASE_COUNT: '개를 구매했습니다.',
-  LOTTO_RESULT: '당첨 통계\n---\n',
+  LOTTO_RESULT: '당첨 통계\n---',
 });
 
 export default MESSAGES;

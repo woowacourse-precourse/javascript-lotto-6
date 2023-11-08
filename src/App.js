@@ -11,12 +11,12 @@ class App {
     this.winningNumbers = null;
     this.bonusNumber = null;
 
-    this.totalPrize = {
-      first: CONSTANTS.DEFAULT_PRIZE,
-      second: CONSTANTS.DEFAULT_PRIZE,
-      third: CONSTANTS.DEFAULT_PRIZE,
-      fourth: CONSTANTS.DEFAULT_PRIZE,
-      fifth: CONSTANTS.DEFAULT_PRIZE,
+    this.matchCount = {
+      first: CONSTANTS.DEFAULT_VALUE,
+      second: CONSTANTS.DEFAULT_VALUE,
+      third: CONSTANTS.DEFAULT_VALUE,
+      fourth: CONSTANTS.DEFAULT_VALUE,
+      fifth: CONSTANTS.DEFAULT_VALUE,
     };
   }
 
@@ -75,7 +75,7 @@ class App {
       prizeCount[prize] = (prizeCount[prize] || 0) + 1;
     });
 
-    this.totalPrize = { ...this.totalPrize, ...prizeCount };
+    this.matchCount = { ...this.matchCount, ...prizeCount };
   }
 
   drawLotto(lottoList) {
@@ -84,9 +84,16 @@ class App {
     this.setTotalPrize(lottoResult);
   }
 
+  printResult() {
+    const matchCount = Object.values(this.matchCount);
+
+    view.printLottoResult(matchCount);
+  }
+
   async play() {
     await this.setLottoConfig();
     this.drawLotto(this.lottos);
+    this.printResult();
   }
 }
 

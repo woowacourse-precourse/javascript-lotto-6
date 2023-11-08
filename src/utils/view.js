@@ -1,8 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import MESSAGES from '../constants/Messages.js';
-import validation from './validation.js';
 import CONSTANTS from '../constants/Constants.js';
+import LOTTO_PRIZE from '../constants/LottoPrize.js';
+import MESSAGES from '../constants/Messages.js';
 import { sortArray } from './arrayUtils.js';
+import validation from './validation.js';
 
 const view = {
   async readPurchaseLottos() {
@@ -41,6 +42,17 @@ const view = {
     const lottoNumbers = lottos.map(lotto => lotto.getString());
 
     const messages = [lottoCountMessage, ...lottoNumbers];
+
+    messages.forEach(message => Console.print(message));
+  },
+
+  printLottoResult(matchCount) {
+    const prizeText = Object.values(LOTTO_PRIZE).map(prize => prize.TEXT);
+    const countMessages = prizeText
+      .map((text, index) => `${text} - ${matchCount[index]}개`)
+      .reverse();
+
+    const messages = [MESSAGES.LOTTO_RESULT, ...countMessages];
 
     messages.forEach(message => Console.print(message));
   },
