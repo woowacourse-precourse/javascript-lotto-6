@@ -6,25 +6,26 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
+    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
-  static validate(numbers) {
+  #validate(numbers) {
     if (numbers.length !== NUMBERS.lottoNumberLength) {
-      printErrorMessage(MESSAGES.invalidLength);
+      throw new Error(`${MESSAGES.errorHeader}${MESSAGES.invalidLength}`);
     }
 
     const lottoNumberRange = number =>
       number >= NUMBERS.minLottoNumber && number <= NUMBERS.maxLottoNumber;
 
     if (!numbers.every(lottoNumberRange)) {
-      printErrorMessage(MESSAGES.invalidRange);
+      throw new Error(`${MESSAGES.errorHeader}${MESSAGES.invalidRange}`);
     }
 
     const deleteDuplication = new Set(numbers);
 
     if (numbers.length !== deleteDuplication.size) {
-      printErrorMessage(MESSAGES.duplicatedNumber);
+      throw new Error(`${MESSAGES.errorHeader}${MESSAGES.duplicatedNumber}`);
     }
   }
 }

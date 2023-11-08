@@ -5,16 +5,17 @@ import NUMBERS from '../constants/numbers.js';
 class LottoPurchase {
   static validate(purchaseAmount) {
     if (purchaseAmount % NUMBERS.purchaseUnit !== 0) {
-      printErrorMessage(`${MESSAGES.nonThousandUnitMessage}`);
+      throw new Error(
+        `${MESSAGES.errorHeader}${MESSAGES.nonThousandUnitMessage}`,
+      );
     }
 
     if (purchaseAmount > NUMBERS.maxPurchaseAmount) {
-      printErrorMessage(`${MESSAGES.errorHeader}${MESSAGES.inputLimitMessage}`);
-      return;
+      throw new Error(`${MESSAGES.errorHeader}${MESSAGES.inputLimitMessage}`);
     }
 
     if (!purchaseAmount.length) {
-      printErrorMessage(
+      throw new Error(
         `${MESSAGES.errorHeader}${MESSAGES.emptyPurchaseAmountInput}`,
       );
     }

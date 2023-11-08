@@ -1,12 +1,12 @@
-// import BonusLottoNumber from '../BonusLottoNumber';
 import Lotto from '../model/Lotto.js';
 import WinningNumbers from '../model/WinningNumbers.js';
 import InputView from '../view/InputView.js';
 import LottoPurchase from '../model/LottoPurchase.js';
 import { printMessage } from '../utils/printMessage.js';
-import MESSAGES from '../constants/messages.js';
 import BonusLottoNumber from '../model/BonusLottoNumber.js';
-import WinningResult from '../model/WinningResult.js';
+import LottoResult from '../model/LottoResult.js';
+import ProfitRate from '../model/ProfitRate.js';
+import OutputView from '../view/OutputView.js';
 
 class LottoGameController {
   constructor() {
@@ -14,23 +14,29 @@ class LottoGameController {
     this.winningNumbers = [];
     this.userLottoNumbers = [];
     this.userBonuseNumber = 0;
+    this.totalPrize = 0;
   }
 
   async start() {
     this.purchaseAmount = await this.purchaseLotto();
+
     this.winningNumbers = WinningNumbers.getWinningLottoNumbers(
       this.purchaseAmount,
     );
+
     this.userLottoNumbers = await this.getUserLottoNumbers();
+
     this.userBonuseNumber = await this.getUserBonusNumber(
       this.userLottoNumbers,
     );
-    this.getLottoWinninnResult(
-      this.purchaseAmount,
+
+    this.totalPrize = LottoResult.getLottoResult(
       this.userLottoNumbers,
       this.userBonuseNumber,
       this.winningNumbers,
     );
+
+    ProfitRate.calculateProfitRate(this.purchaseAmount, this.totalPrize);
   }
 
   async purchaseLotto() {
@@ -38,7 +44,7 @@ class LottoGameController {
     try {
       LottoPurchase.validate(purchaseAmount);
     } catch (error) {
-      printMessage(`${error.name}${error.message}`);
+      OutputView.printErrorMessage(error);
       purchaseAmount = await this.purchaseLotto();
     }
     return purchaseAmount;
@@ -48,9 +54,9 @@ class LottoGameController {
     let userLottoNumbers = await InputView.InputLottoNumbers();
     userLottoNumbers = userLottoNumbers.split(',');
     try {
-      Lotto.validate(userLottoNumbers);
+      const lotto = new Lotto(userLottoNumbers);
     } catch (error) {
-      printMessage(`${error.name}${error.message}`);
+      OutputView.printErrorMessage(error);
       userLottoNumbers = await this.getUserLottoNumbers();
     }
     return userLottoNumbers;
@@ -61,24 +67,10 @@ class LottoGameController {
     try {
       BonusLottoNumber.validate(userBonusNumber, userLottoNumbers);
     } catch (error) {
-      printMessage(`${error.name}${error.message}`);
+      OutputView.printErrorMessage(error);
       userBonusNumber = await this.getUserBonusNumber(userLottoNumbers);
     }
     return userBonusNumber;
-  }
-
-  getLottoWinninnResult(
-    purchaseAmount,
-    userLottoNumbers,
-    userBonusNumber,
-    winningNumbers,
-  ) {
-    const result = new WinningResult(
-      purchaseAmount,
-      userLottoNumbers,
-      userBonusNumber,
-      winningNumbers,
-    );
   }
 }
 
