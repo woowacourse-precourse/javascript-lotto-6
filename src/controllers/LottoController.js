@@ -111,7 +111,6 @@ class LottoController {
     printTotalPrize() {
         const calculate = new ProfitCalculator(this.result, this.budget);
         const profitRate = calculate.getProfitRate();
-        console.log(profitRate)
         const print = new OutputView();
         print.printPrize(profitRate);
     }

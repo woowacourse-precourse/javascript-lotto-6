@@ -12,7 +12,13 @@ class Score {
     }
 
     countCorrectNumbers(lotto, winningNum) {
-        return lotto.filter(number => winningNum.includes(number)).length;
+        let count = 0;
+        for (let i = 0; i < lotto.length; i++) {
+            if (lotto.includes(winningNum[i])) {
+                count += 1;
+            }
+        }
+        return count;
     }
 
     checkBonusNumber(lotto, bonusNum) {
@@ -20,25 +26,36 @@ class Score {
     }
 
     determineRank(correctCount, hasBonus) {
-        switch (correctCount) {
-            case 6: return '1st';
-            case 5: return hasBonus ? '2nd' : '3rd';
-            case 4: return '4th';
-            case 3: return '5th';
+        if (correctCount === 6) {
+            return '1st';
+        } 
+        if (correctCount === 5) {
+            if (hasBonus === true) {
+                return '2nd';
+            }
+            return '3rd';
+        }
+        if (correctCount === 4) {
+            return '4th';
+        }
+        if (correctCount === 3) {
+            return '5th';
         }
     }
 
     updateScore(correctCount, hasBonus) {
         const rank = this.determineRank(correctCount, hasBonus);
-        if (rank && this.#score.hasOwnProperty(rank)) {
+        if (rank) {
             this.#score[rank] += 1;
         }
     }
 
     checkLotto(lotto, winningNum, bonusNum) {
         const correctCount = this.countCorrectNumbers(lotto, winningNum);
+        console.log("!!!!!!!!!!!!!!!"+correctCount)
         const hasBonus = this.checkBonusNumber(lotto, bonusNum);
         this.updateScore(correctCount, hasBonus);
+        console.log(this.#score);
     }
 
     getScore() {

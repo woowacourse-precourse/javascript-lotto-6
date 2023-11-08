@@ -5,8 +5,6 @@ class ProfitCalculator {
     }
 
     getTotalPrize() {
-        console.log(this.result);
-        console.log(this.budget)
         const prizeAmounts = {
             '1st': 2000000000,
             '2nd': 30000000,
