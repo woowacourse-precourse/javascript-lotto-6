@@ -26,7 +26,8 @@ class Lotto {
 
   printLottoNumbers(lottoNumbers) {
     for (let i = 0; i < lottoNumbers.length; i++) {
-      Console.print(lottoNumbers[i]);
+      const lottoNumbersToString = `[${lottoNumbers[i].join(", ")}]`;
+      Console.print(lottoNumbersToString);
     }
   }
 
