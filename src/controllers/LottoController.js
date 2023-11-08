@@ -1,11 +1,15 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView.js';
-import ErrorMessage from '../constants/ErrorMessage.js';
+import OutputView from '../views/OutputView.js';
+import Result from '../models/Result.js';
+import { ErrorMessage } from '../constants/ErrorMessage.js';
 
 class LottoController {
   #lottos;
 
   #winningNumbers;
+
+  #bonusNumber;
 
   constructor() {
     this.#lottos = [];
@@ -19,14 +23,19 @@ class LottoController {
     const purchaseCost = await InputView.inputParchaseCost();
     this.validatePurchaseCost(purchaseCost);
     this.#lottos = await this.#createLottos(purchaseCost);
+    OutputView.printLottos(this.#lottos);
     this.#winningNumbers = await this.#getWinningNumbers();
-    const bonusNumber = await InputView.inputBonusNumber();
-    this.validateBonusNumber(bonusNumber);
+    console.log(this.#winningNumbers);
+    this.#bonusNumber = await InputView.inputBonusNumber();
+    this.validateBonusNumber(this.#bonusNumber);
+    const results = this.#calculateResults();
+    OutputView.printResults(results);
+    OutputView.printProfit(this.#calculateProfit(results));
   }
 
   async #getWinningNumbers() {
     const winningNumbers = await InputView.inputWinningNumbers();
-    this.#winningNumbers = winningNumbers.split(' ').map(number => {
+    this.#winningNumbers = winningNumbers.split(',').map(number => {
       const parseNumber = parseInt(number, 10);
       if (Number.isNaN(parseNumber)) {
         throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
@@ -36,7 +45,7 @@ class LottoController {
       }
       return parseNumber;
     });
-    if (this.#winningNumbers.length > 6) {
+    if (this.#winningNumbers.length !== 6) {
       throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_RANGE);
     }
     return this.#winningNumbers;
@@ -77,6 +86,24 @@ class LottoController {
       this.#lottos.push(sortedLotto);
     }
     return this.#lottos;
+  }
+
+  #calculateResults() {
+    const result = new Result(
+      this.#winningNumbers,
+      this.#bonusNumber,
+      this.#lottos,
+    );
+    return result.getResults();
+  }
+
+  #calculateProfit(results) {
+    const totalPrize = Object.values(results).reduce(
+      (acc, { count, prize }) => acc + count * prize,
+      0,
+    );
+    const totalCost = this.#lottos.length * 1000;
+    return Number(((totalPrize / totalCost) * 100).toFixed(2));
   }
 }
 
