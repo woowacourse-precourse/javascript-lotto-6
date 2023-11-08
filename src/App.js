@@ -33,15 +33,21 @@ class App {
       this.checkInputIsNaN(inputMoney);
       this.checkInputIsNull(inputMoney);
       this.userMoney = Number(inputMoney);
-      
-      if (this.userMoney % 1000 > 0 || this.userMoney <= 0) {
-        throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
-      }
+      this.checkRemains();
+      // if (this.userMoney % 1000 > 0 || this.userMoney <= 0) {
+      //   throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
+      // }
       return this.userMoney;
 
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_USERMONEY_ERROR)
       await this.getUserMoney();
+    }
+  };
+
+  checkRemains() {
+    if (this.userMoney % 1000 > 0 || this.userMoney <= 0) {
+      throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
     }
   };
 
