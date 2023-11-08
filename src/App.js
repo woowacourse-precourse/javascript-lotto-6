@@ -89,10 +89,10 @@ class App {
 
   bonusValidate(bonusNum) {
     if (this.winning.includes(bonusNum)) {
-      throw new Error("[ERROR] 당첨 번호와 중복되지 않는 숫자를 입력해주세요.");
+      throw new Error(ERROR_MESSAGES.IS_BONUS_DUPLICATION);
     }
     if (bonusNum < 1 || bonusNum > 45) {
-      throw new Error("[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요.");
+      throw new Error(ERROR_MESSAGES.IS_BONUS_RANGE);
     }
   }
 
