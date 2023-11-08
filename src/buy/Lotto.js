@@ -33,7 +33,7 @@ export default class Lotto {
     }
   }
 
-  getNumbers() {
+  get() {
     return this.#numbers;
   }
 }

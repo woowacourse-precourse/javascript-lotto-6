@@ -49,7 +49,7 @@ describe('buy/lotto : 로또 번호 반환값 테스트', () => {
     [[5, 10, 15, 20, 25, 30]],
   ])('lotto의 생성값과, getNumbers의 반환값이 동일해야 한다.', (numbers) => {
     const lotto = new Lotto(numbers);
-    const result = lotto.getNumbers();
+    const result = lotto.get();
 
     expect(result).toEqual(numbers);
   });

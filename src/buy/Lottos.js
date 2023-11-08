@@ -22,10 +22,10 @@ export default class Lottos {
     }
   }
 
-  getLottos() {
+  get() {
     const lottoNumbers = [];
     this.#lottos.forEach((lotto) => {
-      lottoNumbers.push(Utils.numberArrayToString(lotto.getNumbers()));
+      lottoNumbers.push(Utils.numberArrayToString(lotto.get()));
     });
 
     return lottoNumbers;

@@ -9,7 +9,15 @@ export default class Buy {
 
   constructor(balance) {
     this.#balance = new Balance(balance);
-    this.#amount = this.#balance / SETTINGS.lottoPrice;
+    this.#amount = Number(this.#balance.get()) / SETTINGS.lottoPrice;
     this.#lottos = new Lottos(this.#amount);
+  }
+
+  amount() {
+    return this.#amount;
+  }
+
+  lottos() {
+    return this.#lottos.get();
   }
 }

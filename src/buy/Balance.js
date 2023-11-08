@@ -15,7 +15,7 @@ export default class Balance {
     }
   }
 
-  getBalance() {
+  get() {
     return this.#balance;
   }
 }

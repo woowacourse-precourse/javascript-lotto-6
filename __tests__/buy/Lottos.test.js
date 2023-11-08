@@ -38,7 +38,7 @@ describe('buy/lottos : 다수 로또 번호 반환값 테스트', () => {
     mockRandoms(INPUT);
 
     const lottos = new Lottos(INPUT.length)
-    const result = lottos.getLottos();
+    const result = lottos.get();
 
     expect(result).toEqual(OUTPUT);
   });

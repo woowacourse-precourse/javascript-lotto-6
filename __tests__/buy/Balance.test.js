@@ -16,7 +16,7 @@ describe('buy/balance : balance 반환값 테스트', () => {
     ['1000', '20000', '19000', '4000', '77000', '100000']
   )('balance 생성값과, getBalance의 반환값이 동일해야 한다.', (input) => {
     const balance = new Balance(input)
-    const result = balance.getBalance();
+    const result = balance.get();
 
     expect(result).toEqual(input);
   });
