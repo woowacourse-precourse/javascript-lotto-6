@@ -1,3 +1,4 @@
+import BonusNum from "../src/BonusNum.js";
 import Lotto from "../src/Lotto.js";
 import LottoController from "../src/LottoController.js";
 import BudgetValidator from "../src/utils/BudgetValidator.js";
@@ -52,5 +53,13 @@ describe("로또 클래스 테스트", () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5]);
     }).toThrow("[ERROR]");
+  });
+});
+
+describe("보너스 클래스 테스트", () => {
+  test("보너스 번호에 숫자가 아닌 문자열을 입력하면 예외가 발생한다", () => {
+    expect(() => {
+      new BonusNum("d");
+    }).toThrow("[ERROR]숫자를 입력해 주세요.");
   });
 });
