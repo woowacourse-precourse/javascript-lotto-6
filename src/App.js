@@ -7,7 +7,9 @@ class App {
     const user = new User();
     const lottoAmonut = await user.purchaseAmount();
     const lottoList = computer.issuanceLotto(lottoAmonut);
-    computer.inputLottoNumber();
+    const lottoNumber = await computer.inputLottoNumber();
+    const bonusNumber = await computer.inutBonusNumber(lottoNumber);
+    console.log(bonusNumber);
   }
 }
 const app = new App();

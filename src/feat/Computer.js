@@ -1,9 +1,17 @@
 import { Console, Random } from "@woowacourse/mission-utils";
+import Validate from "../validate/Validate.js";
+
 class Computer {
   static MIN_LOTTO_NUMBER = 1;
   static MAX_LOTTO_NUMBER = 45;
   static LOTTO_PRICE = 1000;
   static INPUT_LOTTO_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.\n";
+  static INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.\n";
+
+  constructor() {
+    this.validate = new Validate();
+  }
+
   issuanceLotto = (lottoAmount) => {
     const purchaseQuantity = lottoAmount / Computer.LOTTO_PRICE;
     Console.print(`${purchaseQuantity}개를 구매했습니다.`);
@@ -28,7 +36,17 @@ class Computer {
     const LottoNumbers = await Console.readLineAsync(
       Computer.INPUT_LOTTO_NUMBER_MESSAGE,
     );
-    console.log(LottoNumbers);
+    if (this.validate.validateLottoNumbers(LottoNumbers)) {
+      return LottoNumbers;
+    }
+  }
+
+  async inutBonusNumber(lottoNumber) {
+    const bonusNumber = await Console.readLineAsync(
+      Computer.INPUT_BONUS_NUMBER_MESSAGE,
+    );
+    this.validate.validateBonusNumber(lottoNumber, bonusNumber);
+    return bonusNumber;
   }
 }
 
