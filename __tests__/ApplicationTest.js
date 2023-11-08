@@ -28,7 +28,7 @@ const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
   const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
@@ -40,12 +40,12 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -96,3 +96,53 @@ describe("로또 테스트", () => {
   });
 });
 
+describe("App 도메인 로직 단위 테스트", () => {
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test("calculateWinningStatsForLottoNumbers 동작 확인", () => {
+    const app = new App();
+    const lottoNumbers = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 7],
+    ];
+    const winNum = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+    const winConditions = {
+      6: { count: 0, amount: 2000000000 },
+      "5+bonus": { count: 0, amount: 30000000 },
+      5: { count: 0, amount: 1500000 },
+      4: { count: 0, amount: 50000 },
+      3: { count: 0, amount: 5000 },
+    };
+
+    app.calculateWinningStatsForLottoNumbers(
+      lottoNumbers,
+      winNum,
+      bonusNumber,
+      winConditions
+    );
+
+    expect(winConditions[6].count).toBe(1);
+  });
+
+  test("calculateWinningStats 동작 확인", () => {
+    const app = new App();
+    const lottoNumbers = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 7],
+    ];
+    const winNum = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+
+    const winConditions = app.calculateWinningStats(
+      lottoNumbers,
+      winNum,
+      bonusNumber
+    );
+
+    expect(winConditions[6].count).toBe(1);
+    expect(winConditions["5+bonus"].count).toBe(1);
+  });
+});
