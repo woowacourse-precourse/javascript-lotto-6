@@ -7,7 +7,7 @@ class App {
     const TICKETS = this.createUniqueRandomNums(COUNT);
     const WINNINGNUMS = await this.getWinningNum();
     const BONUS = await this.getBonusNum();
-    const WINLOG = this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
+    this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
   }
 
   // 사용자로부터 구입금액을 입력 받는 메서드
@@ -76,7 +76,7 @@ class App {
       }
     });
 
-    return WINLOG;
+    this.printWinningStatistics(WINLOG);
   }
 
 
@@ -86,8 +86,19 @@ class App {
   }
 
   // 당첨 통계를 출력해주는 메서드
-  printWinningStatistics(TICKETS, WINNINGNUMS, BONUS) {
+  printWinningStatistics(WINLOG) {
+    const prizeList = [5000, 50000, 1500000, 30000000, 2000000000];
 
+    Console.print("당첨 통계\n---");
+    for(let i = 0; i<WINLOG.length; i++) {
+      if (i === 3) {
+        Console.print(`${i + 2}개 일치, 보너스 볼 일치 (${prizeList[i]}) - ${WINLOG[4]}개`);
+      } else if (i === 4) {
+        Console.print(`${i + 2}개 일치 (${prizeList[i]}) - ${WINLOG[3]}개`);
+      } else {
+        Console.print(`${i + 3}개 일치 (${prizeList[i]}) - ${WINLOG[i]}개`);
+      }
+    }
   }
 
   // calculateProfit
