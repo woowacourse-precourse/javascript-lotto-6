@@ -33,7 +33,7 @@ const Validator = {
 
   bonusNumber(winningNumber, bonusNumber) {
     if (!VALIDATE.isNumber(bonusNumber))
-      throw new NotNumberError(MESSAGE.ERROR.NOT_NUMBER);
+      throw new Error(MESSAGE.ERROR.NOT_NUMBER);
 
     if (!VALIDATE.isInRange(bonusNumber))
       throw new Error(MESSAGE.ERROR.NOT_IN_RANGE);
