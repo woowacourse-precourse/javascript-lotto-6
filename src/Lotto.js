@@ -1,3 +1,6 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
+import Validation from './Validation';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,20 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    Validation.validateRandomNumbers(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  hasBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
+
+  hasAnswer(answer) {
+    return this.#numbers.includes(answer);
+  }
+
+  printLottos(numbers) {
+    MissionUtils.Console.print(`[${numbers}]\n`);
+  }
 }
 
-export default Lotto;
+module.exports = Lotto;
