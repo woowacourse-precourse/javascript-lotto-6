@@ -7,6 +7,7 @@ class LottoTickets {
 
   getLottoTicket(index) {
     if (index < 0 || index >= this.#lottoTickets.length) return null;
+
     return this.#lottoTickets[index];
   }
 

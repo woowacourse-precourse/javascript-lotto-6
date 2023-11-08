@@ -18,6 +18,7 @@ const calcProfit = (
     maximumFractionDigits: roundingNumber,
   };
   const profitRate = (winningAmount / purchaseAmount) * GAME_PROFIT.RATIO;
+
   return `${profitRate.toLocaleString(LOCALES, option)}%`;
 };
 

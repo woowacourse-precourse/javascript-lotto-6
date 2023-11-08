@@ -48,6 +48,7 @@ class LottoResult {
       5: 'five',
       6: 'six',
     };
+
     return keyMap[String(winningNumberCount)] || null;
   }
 
@@ -65,6 +66,7 @@ class LottoResult {
 
   getPrizeMoney() {
     this.#calcPrizeMoney();
+
     return this.#prizeMoney;
   }
 

@@ -95,6 +95,7 @@ class LottoGameController {
   async #getPurchaseAmount() {
     const money = Number(await this.inputView.getUserInputAsync(MESSAGE.INPUT));
     InputValidator.validateMoney(money);
+
     return money;
   }
 
@@ -114,6 +115,7 @@ class LottoGameController {
     InputValidator.validateWinningNumbers(
       winningNumbers.split(GAME_RULE.SEPARATOR),
     );
+
     return winningNumbers.split(GAME_RULE.SEPARATOR).map(Number);
   }
 
@@ -126,6 +128,7 @@ class LottoGameController {
       bonusNumber,
       this.lottoResult.getWinningNumbers(),
     );
+
     return Number(bonusNumber);
   }
 
@@ -158,6 +161,7 @@ class LottoGameController {
       this.lottoTickets.getWinningNumberMatchCount(
         this.lottoResult.getWinningNumbers(),
       );
+
     return winningNumberMatchCounts;
   }
 
@@ -165,6 +169,7 @@ class LottoGameController {
     const hasBonusMatch = this.lottoTickets.includesBonusNumber(
       this.lottoResult.getBonusNumber(),
     );
+
     return hasBonusMatch;
   }
 }
