@@ -1,5 +1,5 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { MESSAGE } from "./contants.js";
+import { MESSAGE, NUMBER } from "./contants.js";
 
 class MyLotto {
   #money;
@@ -9,7 +9,7 @@ class MyLotto {
   constructor(money) {
     this.#money = money;
     this.#validate();
-    this.#count = this.#money / 1000;
+    this.#count = this.#money / NUMBER.LOTTO_PRICE_FORMAT;
     this.printCount();
     this.#createMyLottos();
   }

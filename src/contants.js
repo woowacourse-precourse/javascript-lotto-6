@@ -1,4 +1,6 @@
-export const NUMBER = {};
+export const NUMBER = {
+  LOTTO_PRICE_FORMAT: 1000,
+};
 
 export const MESSAGE = {
   HOW_MANY_BUY_LOTTOS: "구입금액을 입력해 주세요.\n",
