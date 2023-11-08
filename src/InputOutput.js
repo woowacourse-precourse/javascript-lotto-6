@@ -9,6 +9,10 @@ class InputOutput {
       throw new Error("[ERROR] 입력을 받는 중 실패하였습니다.");
     }
   }
+
+  static print(message) {
+    MissionUtils.Console.print(message);
+  }
 }
 
 export default InputOutput;
