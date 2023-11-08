@@ -63,8 +63,11 @@
 
 ## 예외사항
 
-1. 입력 예외 사항
-  <!-- (유효성 확인 시 필요한 조건 정리) -->
+1. 입력 예외 사항 - 유효성 검사 필요 항목
+ - 구입 금액 입력에 대한 예외 사항
+ - 당첨 번호 중 일반 번호 입력에 대한 예외 사항
+ - 당첨 번호 중 보너스 번호 입력에 대한 예외 사항
+ - 로또 생성에 대한 예외 사항
 
 - 구입 금액 입력
   - 단위가 1000으로 나누어 떨어져야한다.
@@ -151,3 +154,24 @@
 5-1. 당첨 통계 안내 메세지와 구분선을 출력한다.
 5-2. 3~6개 일치에 대한 개수와 당첨금을 출력한다.
 5-3. 총 수익률을 출력한다.
+
+
+## 🗂️ 파일 구조
+
+┗ src
+  ┣ Domain
+  ┃  ┣ LottoCalculator.js 
+  ┃  ┗ LottoGenerator.js         
+  ┣ Validator
+  ┃  ┣ inputValidator.js
+  ┃  ┗ lottoValidator.js
+  ┣ View
+  ┃  ┣ InputView.js
+  ┃  ┗ OutputView.js
+  ┣ Utils
+  ┃  ┣ constants.js
+  ┃  ┣ handler.js 
+  ┃  ┗ getRandomNumber.js
+  ┣ App.js
+  ┣ Lotto.js
+  ┗ index.js
