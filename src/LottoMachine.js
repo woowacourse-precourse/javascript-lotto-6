@@ -17,12 +17,13 @@ export class LottoMachine {
     });
   }
 
-  buyLottos(cashCount) {
-    MissionUtils.Console.print(`${cashCount}개를 구매했습니다.`);
-    for (let count = 1; count <= cashCount; count++) {
+  buyLottos(lottoCount) {
+    MissionUtils.Console.print(`${lottoCount}개를 구매했습니다.`);
+    for (let count = 1; count <= lottoCount; count++) {
       this.generateLotto();
     }
     this.printLottos();
+
     return this.lottos;
   }
 }
