@@ -24,23 +24,28 @@ class CalculateLottoResult {
   #numberOfWinning(lotto) {
     const CORRECT_NUM = lotto
       .reduce((acc, cur) => (this.#winningNum.includes(cur) ? acc + 1 : acc), 0);
-    this.#determineGrade(CORRECT_NUM);
+    this.#determineGrade(CORRECT_NUM, lotto);
   }
 
-  #determineGrade(CORRECT_NUM) {
+  #determineGrade(CORRECT_NUM, lotto) {
     switch (CORRECT_NUM) {
       case 3: this.#lottoResult.grade.fifth += 1;
         break;
       case 4: this.#lottoResult.grade.fourth += 1;
         break;
-      case 5:
-        if (this.#winningNum.includes(this.#bonusNum)) {
-          this.#lottoResult.grade.second += 1;
-        }
-        this.#lottoResult.grade.third += 1;
+      case 5: this.#correctBonusNum(lotto);
         break;
       case 6: this.#lottoResult.grade.first += 1;
+        break;
     }
+  }
+
+  #correctBonusNum(lotto) {
+    if (lotto.includes(this.#bonusNum)) {
+      this.#lottoResult.grade.second += 1;
+      return;
+    }
+    this.#lottoResult.grade.third += 1;
   }
 
   #calculateTotalWinningAmount() {
