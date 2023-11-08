@@ -1,3 +1,5 @@
+import EXCEPTION from '../constant/Exception';
+
 class Lotto {
   #numbers;
 
@@ -9,20 +11,20 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(EXCEPTION.lottoLengthError);
     }
     if (numbers.length !== [...new Set(numbers)].length) {
-      throw new Error('[ERROR] 로또 번호는 중복될 수 없습니다.');
+      throw new Error(EXCEPTION.duplicateError);
     }
     if (numbers.every(x => x >= 1 && x <= 45) === false) {
-      throw new Error('[ERROR] 로또 번호는 1~45 범위 내에 포함되어야 합니다.');
+      throw new Error(EXCEPTION.outOfRangeError);
     }
   }
 
   #validateOfNonNumber(numbers) {
     const SPECIAL_PATTERN = /[\{\}\\[\]\/?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
     if (SPECIAL_PATTERN.test(numbers.join(',')) === true) {
-      throw new Error('[ERROR] 쉼표 외 문자는 포함될 수 없습니다.');
+      throw new Error(EXCEPTION.specialCharacterError);
     }
   }
 

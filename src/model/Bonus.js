@@ -1,4 +1,5 @@
 import FindIndex from '../controller/FindIndex';
+import EXCEPTION from '../constant/Exception';
 
 class Bonus {
   #numbers;
@@ -10,16 +11,16 @@ class Bonus {
 
   #validate(numbers) {
     if (!Number(numbers)) {
-      throw new Error('[ERROR] 숫자만 입력해주세요.');
+      throw new Error(EXCEPTION.nonNumberError);
     }
     if (!(numbers >= 1 && numbers <= 45)) {
-      throw new Error('[ERROR] 숫자는 1~45까지 입력해주세요.');
+      throw new Error(EXCEPTION.outOfRangeError);
     }
   }
 
   lottoNumberValidate(winningNumber, userBonusNumber) {
     if (winningNumber.indexOf(String(userBonusNumber)) !== -1) {
-      throw new Error('[ERROR] 보너스번호는 당첨번호와 같을 수 없습니다.');
+      throw new Error(EXCEPTION.bonusWinningSameError);
     }
   }
 
