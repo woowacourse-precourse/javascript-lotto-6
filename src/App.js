@@ -1,4 +1,4 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import Input from './Input.js';
 import Lotto from './Lotto.js';
 import WinningLotto from './WinningLotto.js';
@@ -16,6 +16,7 @@ class App {
   purchaseCount;
   myLottoList;
   winningResult;
+  winningLotto;
 
   constructor() {
     this.purchaseCount = 0;
@@ -39,12 +40,11 @@ class App {
 
     this.output.printMyLottoList(this.purchaseCount, this.myLottoList);
 
-    const winningLotto = await this.inputLottoNumber();
+    this.winningLotto = await this.inputLottoNumber();
 
-    const inputBonusLotto = await this.input.askLotteryBonusNumber();
-    winningLotto.validateBonusLotto(inputBonusLotto);
+    const inputBonusLotto = await this.askLotteryBonusNumber(this.winningLotto);
 
-    const winningLottoNumbers = winningLotto.getWinningLotto();
+    const winningLottoNumbers = this.winningLotto.getWinningLotto();
 
     this.myLottoList.forEach((myLotto) => {
       const count = myLotto.getWinningCount(winningLottoNumbers);
@@ -68,7 +68,7 @@ class App {
         inputPurchaseAmount = await this.input.askPurchaseAmount();
         return new PurchaseAmount(inputPurchaseAmount);
       } catch (error) {
-        console.log(error.message);
+        Console.print(error.message);
       }
     }
   }
@@ -80,8 +80,21 @@ class App {
         inputLottoNumber = await this.input.askLotteryNumbers();
         return new WinningLotto(inputLottoNumber);
       } catch (error) {
-        console.log(error.message);
+        Console.print(error.message);
       }
+    }
+  }
+
+  async askLotteryBonusNumber() {
+    let inputBonusLotto;
+    try {
+      inputBonusLotto = await this.input.askLotteryBonusNumber();
+      this.winningLotto.validateBonusLotto(inputBonusLotto);
+      return inputBonusLotto;
+    } catch (error) {
+      Console.print(error.message);
+
+      await this.askLotteryBonusNumber();
     }
   }
 
