@@ -1,27 +1,34 @@
+import * as Utils from "./ValidatorUtils.js";
 import ErrorMessages from "./ErrorMessages.js";
 
 class LottoValidator {
   validatePurchaseAmount(amount) {
-    if (amount % 1000 !== 0) {
-      throw new Error(ErrorMessages.NOT_DIVISIBLE_AMOUNT);
+    Utils.isNumber(amount);
+    if (amount % 1000 !== 0 || amount <= 0) {
+      throw new Error(ErrorMessages.UNDIVIDED_AMOUNT);
     }
   }
 
   validateNumbers(numbers) {
-    if (new Set(numbers).size !== numbers.length) {
-      throw new Error(ErrorMessages.DUPLICATE_NUMBER);
-    }
-
-    if (numbers.some((number) => number < 1 || number > 45)) {
-      throw new Error(ErrorMessages.NUMBER_OUT_OF_RANGE);
-    }
+    numbers.forEach((number) => {
+      Utils.isNumber(number);
+      Utils.outNumberRange(number);
+    });
+    Utils.isNotDuplicate(numbers);
+    Utils.exceedLength(numbers, 6);
+    Utils.lessLength(numbers, 6);
   }
 
   validateWinningNumbers(winningNumbers) {
-    if (winningNumbers.length > 6) {
-      throw new Error(LErrorMessages.TOO_MANY_WINNING_NUMBERS);
-    }
     this.validateNumbers(winningNumbers);
+  }
+
+  validateBonusNumber(bonusNumber, winningNumbers) {
+    Utils.isOneNumber(bonusNumber);
+    Utils.outNumberRange(bonusNumber);
+    if (winningNumbers.includes(bonusNumber)) {
+      throw new Error(ErrorMessages.DUPLICATE_BONUS_NUMBER);
+    }
   }
 }
 
