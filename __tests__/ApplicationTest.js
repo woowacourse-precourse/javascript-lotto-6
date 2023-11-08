@@ -126,7 +126,7 @@ describe("generateLottos 테스트", () => {
 });
 
 describe("displayPurchasedLottos", () => {
-  it("로또 티켓을 올바르게 출력해야 합니다", () => {
+  test("로또 티켓을 올바르게 출력해야 합니다", () => {
     // given
     const app = new App();
     const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -153,6 +153,23 @@ describe("displayPurchasedLottos", () => {
     });
   });
 });
+
+describe("inputWinningNumbers 테스트", () => {
+  it("유효한 당첨 번호를 올바르게 입력받아야 합니다", async () => {
+    // given
+    const validInput = "1, 2, 3, 4, 5, 6"; // 유효한 당첨 번호 입력
+    MissionUtils.Console.readLineAsync.mockResolvedValueOnce(validInput);
+
+    // when
+    const app = new App();
+    const winningNumbers = await app.inputWinningNumbers();
+
+    // then
+    expect(Array.isArray(winningNumbers)).toBe(true); // 입력된 당첨 번호가 배열인지 확인
+    expect(winningNumbers.length).toBe(6); // 6개의 숫자가 입력되었는지 확인
+    expect(winningNumbers.every(number => !isNaN(number) && number >= 1 && number <= 45)).toBe(true); // 각 숫자가 유효한 범위에 속하는지 확인
+  });
+})
 
 
 
