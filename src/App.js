@@ -38,10 +38,9 @@ class App {
         6
       );
       const lotto = new Lotto(RANDOM_NUMBERS);
-      lottos.push(lotto);
+      lottos.push(lotto.numbers);
       lotto.printLottos(RANDOM_NUMBERS);
     }
-
     return lottos;
   }
 
@@ -60,7 +59,7 @@ class App {
     const INPUT_BONUS_NUMBER = await MissionUtils.Console.readLineAsync(
       STRINGS.BONUS_NUMBER
     );
-    Validation.validateBonusNumber(answerNumbers, INPUT_BONUS_NUMBER);
+    // Validation.validateBonusNumber(answerNumbers, INPUT_BONUS_NUMBER);
     return { answers, INPUT_BONUS_NUMBER };
   }
 
@@ -81,18 +80,18 @@ class App {
     let match = 0;
     let bonus = false;
     answers.forEach((answer) => {
-      if (lotto.numbers.includes(answer)) {
+      if (lotto.hasAnswer(answer)) {
         match += 1;
       }
     });
 
-    if (lotto.numbers.includes(bonusNumber)) {
-      bonus = lotto.hasBonusNumber(bonusNumber);
+    if (lotto.hasBonusNumber(bonusNumber)) {
+      bonus = true;
     }
     return { match, bonus };
   }
 
-  async calculateMatches(results) {
+  async calculateMatches(results, lottoAmount) {
     const matchCounts = {
       3: 0,
       4: 0,
@@ -100,7 +99,6 @@ class App {
       5_1: 0,
       6: 0,
     };
-
     results.forEach((result) => {
       const { match, bonus } = result;
       if (match === 5 && bonus) {
@@ -109,10 +107,10 @@ class App {
         matchCounts[match] += 1;
       }
     });
-    return this.printResult(matchCounts);
+    return this.printResult(matchCounts, lottoAmount);
   }
 
-  async printResult(matchCounts) {
+  async printResult(matchCounts, lottoAmount) {
     let totalReward = 0;
     MissionUtils.Console.print(STRINGS.RESULT_THREE_CORRECT(matchCounts[3]));
     totalReward += 5000 * matchCounts[3];
@@ -126,8 +124,9 @@ class App {
     totalReward += 30000000 * matchCounts[5_1];
     MissionUtils.Console.print(STRINGS.RESULT_SIX_CORRECT(matchCounts[6]));
     totalReward += 2000000000 * matchCounts[6];
-    return calculateRateOfReturn(totalReward);
+    return this.calculateRateOfReturn(totalReward, lottoAmount);
   }
+
   async calculateRateOfReturn(totalReward, lottoAmount) {
     const RATE = (totalReward / (lottoAmount * 1000)).toFixed(1);
     MissionUtils.Console.print(STRINGS.RATE_OF_RETURN(RATE));
