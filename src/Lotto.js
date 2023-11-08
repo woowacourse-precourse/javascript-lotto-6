@@ -1,20 +1,16 @@
-import { ERROR_MESSAGE, MAX, MIN } from "./constant/lottoConstants";
+import LottoValidator from './classes/LottoValidator';
+import { ERROR_MESSAGE, MAX } from './constant/lottoConstants';
 
 class Lotto {
   #numbers;
 
-  #bonusNumber;
-
-  constructor(numbers, bonusNumber) {
+  constructor(numbers) {
     this.#validate(numbers);
-    this.#validateNumber(bonusNumber);
     this.#numbers = numbers.sort((a, b) => a - b);
-    this.#validateBonusNumber(bonusNumber);
-    this.#bonusNumber = bonusNumber;
   }
 
   #validate(numbers) {
-    numbers.forEach((number) => this.#validateNumber(number));
+    numbers.forEach(number => LottoValidator.validateLottoNumber(number));
 
     if (numbers.length !== MAX.LOTTO_NUMBERS) {
       throw ERROR_MESSAGE.LESS_LOTTO_NUMBERS;
@@ -25,27 +21,8 @@ class Lotto {
     }
   }
 
-  #validateNumber(number) {
-    if (Number.isNaN(Number(number))) {
-      throw ERROR_MESSAGE.MUST_BE_NUMBER;
-    }
-
-    if (number < MIN.LOTTO_NUMBER || number > MAX.LOTTO_NUMBER) {
-      throw ERROR_MESSAGE.INVALID_LOTTO_NUMBER_RANGE;
-    }
-  }
-
-  #validateBonusNumber(bonusNumber) {
-    if (this.#numbers.includes(bonusNumber)) {
-      throw ERROR_MESSAGE.INVALID_BONUS_NUMBER;
-    }
-  }
-
   getWinningNumbers() {
-    return {
-      winningNumbers: this.#numbers,
-      bonusNumber: this.#bonusNumber,
-    };
+    return this.#numbers;
   }
 }
 
