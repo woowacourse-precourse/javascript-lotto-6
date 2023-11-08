@@ -9,18 +9,26 @@ class App {
     this.BUY_COUNT = 0;
     this.MY_NUMBER = null;
     this.RANK_RESULT = [];
+    this.PUBLISH_LOTTO = null;
+    this.WINNING_LOTTO = null;
+    this.BONUS_NUM = 0;
   }
 
   async play() {
-    const VAL = false;
+    // this.settingMoney();
     this.BUY_COUNT = await INPUT_VIEW.inputPrice();
-    const publish = new Publish(this.BUY_COUNT);
+    this.PUBLISH_LOTTO = new Publish(this.BUY_COUNT);
     this.WINNING_LOTTO = await INPUT_VIEW.inputLotto();
-    const BONUS_NUM = await INPUT_VIEW.inputBonus(this.WINNING_LOTTO);
-    const ranking = publish.getRank(this.WINNING_LOTTO, BONUS_NUM);
-    // console.log(ranking);
+    this.BONUS_NUM = await INPUT_VIEW.inputBonus(this.WINNING_LOTTO);
+    const ranking = this.PUBLISH_LOTTO.getRank(
+      this.WINNING_LOTTO,
+      this.BONUS_NUM,
+    );
     OUTPUT_VIEW.outputRank(ranking);
-    const statistics = publish.getStatistics(this.BUY_COUNT, ranking);
+    const statistics = this.PUBLISH_LOTTO.getStatistics(
+      this.BUY_COUNT,
+      ranking,
+    );
     OUTPUT_VIEW.outputStatistics(statistics);
   }
 }
