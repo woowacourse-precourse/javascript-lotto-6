@@ -25,6 +25,19 @@ class View {
     const bonusNumber = await inputView(CONSOLE_MESSAGE.requestBonusNumber);
     return bonusNumber;
   }
+
+  async returnResult(lottoResult){
+    await outputView(CONSOLE_MESSAGE.returnWinning);
+      Object.entries(lottoResult).sort((a, b) => b[0] - a[0]).forEach(async ([_, [prize, matches, rank, count]]) => {
+        await outputView(CONSOLE_MESSAGE.returnEachResult(matches, prize, count));
+      });
+    }
+
+
+  async returnLottoROI(lottoROI){
+    await outputView(CONSOLE_MESSAGE.returnLottoROI(lottoROI));
+  }
+
 }
 
 export default View;
