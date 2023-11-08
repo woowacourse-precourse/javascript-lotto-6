@@ -22,7 +22,7 @@ class LottoNumbersValidator {
 
   validateNumbers(lottoNumbers) {
     if (!isAllNumeric(lottoNumbers)) {
-      throw new Error(LOTTO_NUMBERS_ERROR_MESSAGES.NOT_NUMBER);
+      throw new Error(LOTTO_NUMBERS_ERROR_MESSAGES.NOT_NUMERIC);
     }
   }
 
