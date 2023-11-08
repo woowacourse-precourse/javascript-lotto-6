@@ -95,3 +95,21 @@
 - RandomNumber : 범위 내의 숫자를 랜덤으로 정해진 길이만큼 생성하고 정렬하여 반환한다.
 
 - ValidationUtils : 유효성 검사 유틸리티 함수.
+
+---
+
+## Test
+
+> 테스트 코드는 Model, Controller, Domain 테스트를 진행했습니다.
+
+### ModelValidationTest
+
+각 입력받은 모델들의 예외사항에 대한 유효성 검사를.
+
+### LottoGameTest
+
+컨트롤러인 LottoGame 클래스 내부 메소드와 컨트롤러 테스트를 진행했습니다.
+
+### LottoResultTest
+
+컨트롤러에서 사용되는 메인 도메인 로직 테스트를 진행했습니다.
