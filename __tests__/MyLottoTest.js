@@ -141,4 +141,16 @@ describe('로또 클래스 메서드 테스트', () => {
 			);
 		});
 	});
+
+	describe('getRateOfReturn 메서드 테스트', () => {
+		test('수익률 계산', () => {
+			const lottoAmount = 8000;
+			const totalPrize = 5000;
+			const expectRateOfReturn = 62.5;
+
+			lotto = new Lotto(totalPrize);
+
+			expect(lotto.getRateOfReturn(lottoAmount)).toBe(expectRateOfReturn);
+		});
+	});
 });
