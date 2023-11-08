@@ -53,6 +53,30 @@ class LottoGame {
     this.printResults(lottoResultsList);
   }
 
+  calculateReturnRate(money, lottoResultsList) {
+    let rewardSum = 0;
+    LOTTO_CONSTANT.reverseRankList.forEach((rank) => {
+      const reward = LOTTO_RANK[rank].reward;
+      const count = lottoResultsList[rank];
+      rewardSum += reward * count;
+    });
+
+    const returnRate = (rewardSum / money) * LOTTO_CONSTANT.percentageFactor;
+    return returnRate.toFixed(LOTTO_CONSTANT.roundingDigit);
+  }
+
+  printReturnRate(returnRate) {
+    print(FORMATTER.returnRateFormatter(returnRate));
+  }
+
+  getAndPrintReturnRate(lottoResultsList) {
+    const returnRate = this.calculateReturnRate(
+      this.lottoStore.getMoney(),
+      lottoResultsList,
+    );
+    this.printReturnRate(returnRate);
+  }
+  
   async playLottoGame() {
     await this.buyAndIssueLottos();
 
