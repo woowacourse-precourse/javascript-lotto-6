@@ -15,4 +15,15 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("번호 5개를 맞춘 경우", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const result = lotto.compareTo(new Lotto([1, 2, 3, 4, 5, 7]), 45);
+    expect(result).toEqual(5);
+  });
+
+  test("번호 5개와 보너스 번호를 맞춘 경우", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const result = lotto.compareTo(new Lotto([1, 2, 3, 4, 5, 7]), 7);
+    expect(result).toEqual(7);
+  });
 });
