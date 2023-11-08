@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "./constants/message";
+import { ERROR_MESSAGE } from "./constants/constant";
 
 class Lotto {
   #numbers;

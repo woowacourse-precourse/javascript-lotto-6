@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE, GAME_MESSAGE } from "./constants/message";
+import { ERROR_MESSAGE, GAME_MESSAGE } from "./constants/constant";
 
 class BonusNumValidator {
   #winnerLotto;

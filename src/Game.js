@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { GAME_MESSAGE } from "./constants/message";
+import { GAME_MESSAGE } from "./constants/constant";
 import formatAmount from "./utils/formatAmount";
 
 class Game {

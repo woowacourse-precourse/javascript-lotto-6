@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import getRandomLotto from "./utils/getRandomLotto";
-import { GAME_MESSAGE } from "./constants/message";
+import { GAME_MESSAGE } from "./constants/constant";
 
 class LottoPurchase {
   #purchasedLottoList = [];
