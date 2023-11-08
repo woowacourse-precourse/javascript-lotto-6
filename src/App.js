@@ -18,7 +18,8 @@ class App {
       lottos.push(new Lotto(randomLottoGenerator));
     }
     printLine();
-    
+    winingNumber = lottoInput.readWinnigNumber();
+
 
 
   }

@@ -5,8 +5,8 @@ const lottoInput = {
     readMoney(){
         return Console.readLineAsync(GAME_MESSAGE.READ_MONEY);
     },    
-    readWinnigNumber(){
-        return Console.readLineAsync(GAME_MESSAGE.READ_WINNIG_NUMBER);
+    readWinningNumber(){
+        return Console.readLineAsync(GAME_MESSAGE.READ_WINNING_NUMBER);
     },
     readBonusNumber(){
         return Console.readLineAsync(GAME_MESSAGE.READ_BONUS_NUMBER);    
