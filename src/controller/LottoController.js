@@ -53,7 +53,10 @@ class LottoController{
 
   showLottoArr(){
     const lottoMap = this.#lottoNumbers.getLottoNumbers();
-    lottoMap.forEach(numsArr => this.#outputView.printInput(numsArr));
+    lottoMap.forEach(numsArr => {
+      const lottoStr = TYPE_CONVERTOR.arrTostrArr(numsArr);
+      this.#outputView.printInput(lottoStr);
+    });
   }
 
   async receivePlayerLottoNums(){

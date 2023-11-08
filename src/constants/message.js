@@ -13,8 +13,8 @@ export const OUTPUT_MESSAGE = Object.freeze({
   second: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
   first: '6개 일치 (2,000,000,000원) - ',
   unit: '개',
-  total: '총 수익률은',
-  isEnd: '%입니다.'
+  total: '총 수익률은 ',
+  isEnd: '%입니다.',
 })
 
 export const ERR_MESSAGE = Object.freeze({

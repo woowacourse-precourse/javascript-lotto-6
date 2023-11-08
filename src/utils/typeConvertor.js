@@ -10,6 +10,15 @@ const TYPE_CONVERTOR = {
     return strArr.map(strEl => Number(strEl));
   },
   strToNum: (str) => Number(str),
+  arrTostrArr: (arr) => {
+    let str = '';
+    arr.forEach((num, idx)=> {
+      if(idx === 0) str += `[${num}, `;
+      if(idx > 0 && idx < 5) str += `${num}, `;
+      if(idx === 5) str += `${num}]`;
+    })
+    return str;
+  },
 }
 
 export default TYPE_CONVERTOR;

@@ -68,7 +68,7 @@ class RankCalculator {
     const { everyThreeUnit } = REGEX;
     const { comma } = CONVERTER_VAR;
     
-    const profit = (( this.#totalPrizeMoney / money) * 100).toFixed(1);
+    const profit = ((this.#totalPrizeMoney / money) * 100).toFixed(1);
     const num  = profit.toString().replace(everyThreeUnit, comma);
     return num;
   }

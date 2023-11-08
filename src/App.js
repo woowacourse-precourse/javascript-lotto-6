@@ -8,11 +8,8 @@ class App {
   }
 
   async play() {
-    this.#lottoController.play();
+    await this.#lottoController.play();
   }
 }
-
-const app = new App();
-app.play();
 
 export default App;
