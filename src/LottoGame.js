@@ -79,6 +79,10 @@ class LottoGame {
         return null;
     }
   }
+
+  getLottos() {
+    return this.#lottos;
+  }
 }
 
 export default LottoGame;
