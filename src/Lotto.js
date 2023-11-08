@@ -1,3 +1,5 @@
+const {Console} = require('@woowacourse/mission-utils');
+
 class Lotto {
   #numbers;
 
@@ -12,7 +14,29 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  printNumbers() {
+    this.sortNumbers();
+
+    Console.print('[${this.#numbers.join(', ')}]');
+  }
+
+  sortNumbers() {
+    this.#numbers.sort((a,b) => a - b);
+  }
+
+  getRank(winningNumbers, bonusNumber) {
+    let count = 0;
+
+    this.#numbers.forEach((number) => {
+      if(winningNumbers.includes(number)) count += 1;
+    });
+
+    if (count === 6) return PLACE.FIRST;
+
+    if (count === 5 && this.#numbers.includes(bonusNumber)) return PLACE.SECOND;
+
+    return 8 - count;
+  }
 }
 
 export default Lotto;
