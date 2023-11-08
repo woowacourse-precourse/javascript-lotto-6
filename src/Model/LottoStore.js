@@ -13,7 +13,7 @@ import { MESSAGE_FACTOR } from "../constants/message.js";
 class LottoStore {
   #lottos = [];
 
-  #LottoMatchResult = {
+  #lottoMatchResult = {
     fifthPlace: LOTTO_MATCH_RESULT.initialResultValue,
     fourthPlace: LOTTO_MATCH_RESULT.initialResultValue,
     thirdPlace: LOTTO_MATCH_RESULT.initialResultValue,
@@ -52,7 +52,7 @@ class LottoStore {
     this.#calculateMatchResult(matchCounts);
     this.#calculateReturnRate();
 
-    return this.#LottoMatchResult;
+    return this.#lottoMatchResult;
   }
 
   #matchLottoNumbers({ lottoWinningNumbers, bonusNumber }) {
@@ -73,7 +73,7 @@ class LottoStore {
     for (const [place, conditions] of Object.entries(WINNING_CONDITIONS)) {
       if (lottoWinningNumbersMatchCount === conditions.lottoWinningNumbersMatchCount &&
         conditions.bonusNumberMatchCount.includes(bonusNumberMatchCount)) {
-        this.#LottoMatchResult[place]++;
+        this.#lottoMatchResult[place]++;
       }
     }
   }
@@ -82,14 +82,14 @@ class LottoStore {
     const totalWinningAmount = this.#calculateTotalWinningAmount();
     const returnRate = (totalWinningAmount / (this.#lottos.length * PURCHASE_AMOUNT.unit)) * MATH_FACTORS.percentage;
     const roundedReturnRate = Math.round((returnRate + Number.EPSILON) * MATH_FACTORS.roundingDigit) / MATH_FACTORS.roundingDigit;
-    this.#LottoMatchResult.returnRate = roundedReturnRate;
+    this.#lottoMatchResult.returnRate = roundedReturnRate;
   }
 
   #calculateTotalWinningAmount() {
-    return Object.keys(this.#LottoMatchResult)
+    return Object.keys(this.#lottoMatchResult)
       .filter((place) => place !== MESSAGE_FACTOR.returnRate)
       .reduce((acc, place) => {
-        return acc + this.#LottoMatchResult[place] * LOTTO_WINNING_AMOUNT[place];
+        return acc + this.#lottoMatchResult[place] * LOTTO_WINNING_AMOUNT[place];
       }, MATH_FACTORS.initialValue);
   }
 }
