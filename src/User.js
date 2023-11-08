@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { ERROR_MESSAGE } from './constants/message.js';
+import { LOTTO_NUMBER_RANGE } from './constants/lottoNumber.js';
 
 class User {
     #DIVIDE_NUMBER
@@ -30,7 +31,11 @@ class User {
 
     setLottoNumbers() {
         for (let i = 0; i < this.#numberOfPurchases; i++) {
-            const randomNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
+            const randomNumber = Random.pickUniqueNumbersInRange(
+                LOTTO_NUMBER_RANGE.minimum, 
+                LOTTO_NUMBER_RANGE.maximum, 
+                LOTTO_NUMBER_RANGE.count,
+            );
             this.#lottoNumbers.push(randomNumber);
         }
     }
