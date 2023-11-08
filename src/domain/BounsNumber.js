@@ -26,7 +26,7 @@ class BonusNumber {
 
   static #validateIsInLottoNumberRange(number) {
     if (GameUtils.isNotFromOneToFourtyFive(number)) {
-      throw new InvalidNumberError(ERROR_MESSAGE.LOTTO_NUMBER_RANGE_ERROR);
+      throw new InvalidNumberError(ERROR_MESSAGE.NOT_LOTTO_NUMBER_RANGE);
     }
   }
 

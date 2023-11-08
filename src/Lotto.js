@@ -19,13 +19,13 @@ class Lotto {
 
   static #validateNumberLength(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(ERROR_MESSAGE.NOT_SIX_DIGITS);
     }
   }
 
   static #validateIsInLottoNumberRange(numbers) {
     if (numbers.some((number) => GameUtils.isNotFromOneToFourtyFive(number))) {
-      throw new InvalidNumberError(ERROR_MESSAGE.LOTTO_NUMBER_RANGE_ERROR);
+      throw new InvalidNumberError(ERROR_MESSAGE.NOT_LOTTO_NUMBER_RANGE);
     }
   }
 
@@ -33,7 +33,7 @@ class Lotto {
     if (
       numbers.some((number) => GameUtils.checkDuplicateInList(numbers, number))
     ) {
-      throw new DuplicateNumberError(ERROR_MESSAGE.DUPLICATE_NUMBER_ERROR);
+      throw new DuplicateNumberError(ERROR_MESSAGE.DUPLICATE_NUMBER);
     }
   }
 

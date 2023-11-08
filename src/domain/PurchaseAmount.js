@@ -32,7 +32,7 @@ class PurchaseAmount {
 
   static #validateIsLessThanOneHundredThousand(amount) {
     if (amount > MAXIMUM_PURCHASE_MONEY) {
-      throw new TooMuchError(ERROR_MESSAGE.TOO_MUCH_TICKETS_ERROR);
+      throw new TooMuchError(ERROR_MESSAGE.TOO_MUCH_TICKETS);
     }
   }
 
