@@ -121,16 +121,14 @@ class App {
         const lottoResult = [];
         const winningArr = new Array(5);
         lottoArr.forEach((el) =>
-            el.calculateLotto(winningNumber, bonusNumber, lottoResult)
-        );
+            el.calculateLotto(winningNumber, bonusNumber, lottoResult));
         for (let i = 0; i < 4; i++) {
             winningArr[i] = lottoResult.filter((el) => el === 3 + i).length;
         }
         const isMatchBonus = lottoResult.includes("5bonus");
         isMatchBonus
             ? (winningArr[4] = lottoResult.filter(
-                  (el) => el === "5bonus"
-              ).length)
+                  (el) => el === "5bonus").length)
             : (winningArr[4] = 0);
         return winningArr;
     }
