@@ -1,3 +1,3 @@
-const generateMoney = (moneyString) => Number(moneyString)
+const generateMoney = (moneyString) => Number(moneyString);
 
 export default generateMoney;

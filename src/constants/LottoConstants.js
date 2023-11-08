@@ -4,10 +4,10 @@ export const LOTTO_LENGTH = 6;
 export const LOTTO_PRICE = 1000;
 
 export const DEFAULT_SCORE_BOARD = {
-    '1st' : 0,
-    '2nd' : 0,
-    '3rd' : 0,
-    '4th' : 0,
-    '5th': 0,
-    prize: 0
-}
+  '1st': 0,
+  '2nd': 0,
+  '3rd': 0,
+  '4th': 0,
+  '5th': 0,
+  prize: 0,
+};
