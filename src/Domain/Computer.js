@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { NUMBER } from '../Constant/stats';
+import { NUMBER } from '../Constant/stats.js';
 
 class Computer {
   getLotteryNumbers(numbers) {
