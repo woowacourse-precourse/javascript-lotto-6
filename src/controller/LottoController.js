@@ -1,18 +1,18 @@
 import InputView from "../view/InputView";
 import OutputView from "../view/OutputView";
 import Validator from "../utils/Validator";
+import Lotto from "../model/Lotto";
 import LottoDataProcessor from "../model/LottoDataProcessor";
 
 class LottoController {
   #inputView;
   #outputView;
-  #validator;
   #lottoDataProcessor;
+  #lotto;
 
   constructor() {
     this.#inputView = new InputView();
     this.#outputView = new OutputView();
-    this.#validator = new Validator();
     this.#lottoDataProcessor = new LottoDataProcessor();
   }
 
@@ -22,7 +22,7 @@ class LottoController {
 
   async #purchaseLotto() {
     const purchaseAmount = await this.#inputView.readPurchaseAmount();
-    this.#validator.validatePurchaseAmount(purchaseAmount);
+    Validator.validatePurchaseAmount(purchaseAmount);
     await this.#generateLotto(purchaseAmount);
   }
 
@@ -35,7 +35,10 @@ class LottoController {
 
   async #receiveLottoNumbers() {
     const lottoNumbers = await this.#inputView.readLottoNumbers();
-    this.#validator.validateLottoNumbers(lottoNumbers);
+    console.log(lottoNumbers);
+    this.#lotto = new Lotto(
+      lottoNumbers.split(",").map((number) => parseInt(number, 10))
+    );
   }
 }
 
