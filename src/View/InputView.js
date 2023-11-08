@@ -17,7 +17,7 @@ class InputView {
     const inputNumbers = await Console.readLineAsync(
       MESSAGE.INPUT_LOTTO_NUMBERS,
     );
-    const lottoNumbers = inputNumbers.split(',');
+    const lottoNumbers = inputNumbers.split(',').map(Number);
     // TODO : validation
     return lottoNumbers;
   }
@@ -28,7 +28,7 @@ class InputView {
       MESSAGE.INPUT_BONUS_NUMBERS,
     );
     // TODO : validation
-    return bonusNumber;
+    return parseInt(bonusNumber);
   }
 }
 export default InputView;

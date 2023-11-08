@@ -7,7 +7,7 @@ class LottoController {
   constructor() {
     this.AMOUNT = 0;
     this.lottoList = [];
-    this.lottoNumbers = [];
+    this.winLottoNumbers = [];
     this.bonusNumber = 0;
     this.lotto;
   }
@@ -19,8 +19,8 @@ class LottoController {
 
     this.createLottoNumberList();
 
-    const lottoNumber = await InputView.inputLottoNumbers();
-    this.lottoNumbers = lottoNumber;
+    const winLottoNumber = await InputView.inputLottoNumbers();
+    this.winLottoNumbers = winLottoNumber;
 
     this.lotto = this.createLotto();
 
@@ -45,12 +45,11 @@ class LottoController {
   }
 
   createLotto() {
-    const lotto = new Lotto(this.lottoNumbers);
+    const lotto = new Lotto(this.winLottoNumbers);
     return lotto;
   }
 
   // 당첨 통계 계산
-
   calculatePrizes() {
     const results = {
       3: 0,
@@ -59,33 +58,32 @@ class LottoController {
       5.5: 0,
       6: 0,
     };
-
-    for (const lottoNumbers of this.lottoList) {
-      const matchCount = this.countMatchNumbers(lottoNumbers, this.bonusNumber);
+    console.log(results);
+    this.lottoList.forEach(lottoNumbers => {
+      const matchCount = this.countMatchNumbers(lottoNumbers);
       let prize = 0;
-
       if (matchCount === 6) {
-        prize = bonus ? 5.5 : 6;
-      } else if (matchCount === 5 && bonus) {
+        prize = 6;
+      } else if (matchCount === 5 && lottoNumbers.includes(this.bonusNumber)) {
         prize = 5.5;
       } else if ([3, 4, 5].includes(matchCount)) {
         prize = matchCount;
       }
-
-      results[prize]++;
-    }
+      if (prize > 1) results[prize]++;
+    });
     OutputView.printPrize(results);
   }
 
   countMatchNumbers(lottoNumbers) {
     let count = 0;
-    for (let i = 0; i < this.AMOUNT; i++) {
-      if (lottoNumbers.includes(this.lotto[i])) {
-        count++;
-      }
-    }
+    lottoNumbers.forEach(num => {
+      if (this.winLottoNumbers.includes(num)) count += 1;
+    });
     return count;
   }
+
+  // 상금 반환
+  getPrizeAmount() {}
 }
 
 export default LottoController;

@@ -15,9 +15,9 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-
-  // 상금 반환
-  getPrizeAmount() {}
+  getNumber() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
