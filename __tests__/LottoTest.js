@@ -110,10 +110,9 @@ describe("티켓 결과 확인", () => {
   });
 });
 describe("예외 테스트..", () => {
-  const INPUT = ["1000j", "1004", "2000"];
-  const PRICE_UNIT = 1000;
-  let loop = true;
   test("구입금액", () => {
+    const INPUT = ["1000j", "1004", "2000"];
+    const PRICE_UNIT = 1000;
     MissionUtils.Console.print("구입금액을 입력해 주세요.");
     // const price = input_price();
     let price;
@@ -151,17 +150,66 @@ describe("예외 테스트..", () => {
 
     function is_not_number(input) {
       if (isNaN(input)) {
-        console.log("[ERROR] 숫자가 잘못된 형식입니다.");
+        // console.log("[ERROR] 숫자가 잘못된 형식입니다.");
         return true;
       }
       return false;
     }
     function is_not_multiple_of_priceunit(input) {
       if (parseInt(input) % PRICE_UNIT != 0 || parseInt(input) < PRICE_UNIT) {
-        console.log(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
+        // console.log(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
         return true;
       }
       return false;
     }
   });
+  test("당첨번호", () => {
+    const INPUT = ["1,2,3,4,5", "1,2,3,56,56", "2,3,t, 3, 4, 5", "1,2,3,4,5,6"];
+    let i = 0;
+    let winning_number;
+    MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
+    while (true) {
+      try {
+        let input = INPUT[i];
+        i++;
+        winning_number = new Lotto(input.split(",").map(Number));
+        break;
+      } catch (error) {
+        console.log(error.message);
+        continue;
+      }
+    }
+    console.log(winning_number.get_numbers());
+  });
+  // test("보너스 번호", () => {
+  //   const INPUT = ["66", "r", "4"];
+  //   let i = 0;
+  //   let bonus_number;
+  //   MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
+  //   while (true) {
+  //     try {
+  //       let input = INPUT[i];
+  //       i++;
+  //       console.log(input);
+  //       is_not_number(input);
+  //       is_not_in_range(input);
+  //       bonus_number = input;
+  //       break;
+  //     } catch (error) {
+  //       console.log(error.message);
+  //       continue;
+  //     }
+  //   }
+  //   console.log(winning_number.get_numbers());
+  //   function is_not_number(input) {
+  //     if (isNaN(input)) {
+  //       throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+  //     }
+  //   }
+  //   function is_not_in_range(input) {
+  //     if (input < MIN_NUMBER || input > MAX_NUMBER) {
+  //       throw new Error("[ERROR] 1~45까지의 번호를 입력해 주세요");
+  //     }
+  //   }
+  // });
 });

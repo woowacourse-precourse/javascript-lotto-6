@@ -7,19 +7,22 @@ const INPUT = ["8000", "1,2,3,4,5,6", "7"];
 
 class App {
   async play() {
+    let price;
+    let winning_number;
+    // let bonus_number;
     //구매금액 입력
     MissionUtils.Console.print("구입금액을 입력해 주세요.");
-    let price;
     while (true) {
-      let input = await MissionUtils.Console.readLineAsync();
-      if (is_not_number(input)) {
+      try {
+        let input = await MissionUtils.Console.readLineAsync();
+        is_not_number(input);
+        is_not_multiple_of_priceunit(input);
+        price = input;
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
         continue;
       }
-      if (is_not_multiple_of_priceunit(input)) {
-        continue;
-      }
-      price = input;
-      break;
     }
 
     // 발행한 로또 수량 및 번호를 출력
@@ -34,15 +37,22 @@ class App {
 
     //당첨번호 입력
     MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
-    const input = await MissionUtils.Console.readLineAsync();
-    // const input = INPUT[1];
-    const winning_number = new Lotto(input.split(",").map(Number));
+    while (true) {
+      try {
+        let input = await MissionUtils.Console.readLineAsync();
+        winning_number = new Lotto(input.split(",").map(Number));
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+        continue;
+      }
+    }
 
     //보너스 번호 입력
     MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
     const bonus_number = await MissionUtils.Console.readLineAsync();
     // const bonus_number = INPUT[2];
-    check_number(bonus_number);
+    is_not_number(bonus_number);
 
     //로또들 당첨 총액 확인
     //총 수익률은 62.5%입니다.
@@ -101,17 +111,13 @@ class App {
     //숫자 확인 함수
     function is_not_number(input) {
       if (isNaN(input)) {
-        console.log("[ERROR] 숫자가 잘못된 형식입니다.");
-        return true;
+        throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
       }
-      return false;
     }
     function is_not_multiple_of_priceunit(input) {
       if (parseInt(input) % PRICE_UNIT != 0 || parseInt(input) < PRICE_UNIT) {
-        console.log(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
-        return true;
+        throw new Error(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
       }
-      return false;
     }
 
     // 랜덤로또 생산
