@@ -16,7 +16,7 @@ class Lotto {
 
   #avoidDuplicate(numbers) {
     const NUMBERSET = new Set([...numbers]);
-    if (NUMBERSET.length !== 6) {
+    if (NUMBERSET.size !== 6) {
       throw new Error("[ERROR] 로또 번호는 중복되지 않은 6개의 숫자여야 합니다.");
     }
   }
