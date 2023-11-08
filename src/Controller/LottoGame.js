@@ -1,13 +1,13 @@
-import InputView from './View/InputView.js';
-import OutputView from './View/OutputView.js';
+import InputView from '../View/InputView.js';
+import OutputView from '../View/OutputView.js';
 
-import LottoArray from './LottoArray.js';
-import WinningLotto from './WinningLotto.js';
-import Rank from './Rank.js';
-import Lotto from './Lotto.js';
-import BonusBall from './BonusBall.js';
+import LottoArray from '../LottoArray.js';
+import WinningLotto from '../WinningLotto.js';
+import Rank from '../Rank.js';
+import Lotto from '../Lotto.js';
+import BonusBall from '../BonusBall.js';
 
-import Validator from './validator/Validator.js';
+import Validator from '../validator/Validator.js';
 
 class LottoGame {
   #lottoArray;
