@@ -15,7 +15,7 @@ class OutputView {
 
   printLottoResult(arr) {
     for (const value of arr) {
-      Console.print(value);
+      Console.print(`[${value.join(', ')}]`);
     }
   }
 
