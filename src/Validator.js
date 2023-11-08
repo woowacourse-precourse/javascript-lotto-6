@@ -30,6 +30,20 @@ class Validator {
       throw new Error(ERROR.lottoDuplicateErrorMessage);
     }
   }
+
+  static vaildateBonusNumber(lotto, number) {
+    if (!Number.isInteger(number)) {
+      throw new Error(ERROR.bonusInvalidErrorMessage);
+    }
+
+    if (number < 1 || number > 45) {
+      throw new Error(ERROR.bonusRangeErrorMessage);
+    }
+
+    if (lotto.getNumbers().includes(number)) {
+      throw new Error(ERROR.bonusDuplicateErrorMessage);
+    }
+  }
 }
 
 export default Validator;

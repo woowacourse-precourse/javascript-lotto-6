@@ -51,7 +51,12 @@ class LottoGame {
   }
 
   async #inputBonusNumber() {
-    this.#bonusNumber = await Screen.inputBonusNumber();
+    try {
+      this.#bonusNumber = await Screen.inputBonusNumber(this.#winningLotto);
+    } catch ({ message }) {
+      Screen.printErrorMessage(message);
+      await this.#inputBonusNumber();
+    }
   }
 }
 

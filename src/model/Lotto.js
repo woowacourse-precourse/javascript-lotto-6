@@ -13,6 +13,10 @@ class Lotto {
     Validator.validateLottoNumbers(numbers);
   }
 
+  getNumbers() {
+    return this.#numbers;
+  }
+
   getString() {
     const lottoString = this.#numbers.join(STRINGS.lottoDelimiter);
     return `${STRINGS.lottoPrefix}${lottoString}${STRINGS.lottoSuffix}`;

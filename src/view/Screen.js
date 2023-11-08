@@ -33,9 +33,11 @@ class Screen {
       .map((number) => Number(number.trim()));
   }
 
-  static async inputBonusNumber() {
+  static async inputBonusNumber(lotto) {
     Console.print(MESSAGES.bonusNumberInputMessage);
     const number = Number(await Console.readLineAsync());
+
+    Validator.vaildateBonusNumber(lotto, number);
 
     return number;
   }

@@ -14,6 +14,10 @@ export const ERROR = Object.freeze({
   lottoInvalidErrorMessage: '로또 번호 숫자의 형식이 올바르지 않습니다.',
   lottoRangeErrorMessage: '로또 번호는 1과 45 사이의 숫자여야 합니다.',
   lottoDuplicateErrorMessage: '로또 번호는 중복되지 않는 숫자여야 합니다.',
+  bonusInvalidErrorMessage: '보너스 번호 숫자의 형식이 올바르지 않습니다.',
+  bonusRangeErrorMessage: '보너스 번호는 1과 45 사이의 숫자여야 합니다.',
+  bonusDuplicateErrorMessage:
+    '보너스 번호는 당첨 번호와 중복되지 않는 숫자여야 합니다.',
 });
 
 export const STRINGS = Object.freeze({
