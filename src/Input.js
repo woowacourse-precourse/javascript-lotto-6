@@ -13,21 +13,21 @@ class Input {
         process.exit(1);
       } else {
         const count = purchaseAmount / 1000;
-        const message = `${count}개를 구매했습니다.`;
-        Console.print(message);
+        Console.print(`${count}개를 구매했습니다.`);
         const lottoNumbersArray = [];
         for (let i = 0; i < count; i++) {
           const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
-          lottoNumbersArray.push(lottoNumbers);
+          lottoNumbersArray.push(lottoNumbers.join(',')); // 각 로또 번호 세트를 문자열로 저장
           Console.print(`[${lottoNumbers.join(", ")}]`);
         }
-        return lottoNumbersArray;
+        return { purchaseAmount, lottoNumbersArray };
       }
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);
     }
   }
+
 
   static async inputNumber() {
     try {
