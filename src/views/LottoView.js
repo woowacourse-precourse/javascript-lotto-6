@@ -45,6 +45,25 @@ class LottoView {
       this.print(lotto);
     });
   }
+
+  printLottoResult(lottoResult) {
+    const messages = [
+      MESSAGE.print.printLottoResult,
+      `${MESSAGE.print.printFifthPrize} ${lottoResult.fifthPrizeCount}개`,
+      `${MESSAGE.print.printFourthPrize} ${lottoResult.fourthPrizeCount}개`,
+      `${MESSAGE.print.printThirdPrize} ${lottoResult.thirdPrizeCount}개`,
+      `${MESSAGE.print.printSecondPrize} ${lottoResult.secondPrizeCount}개`,
+      `${MESSAGE.print.printFirstPrize} ${lottoResult.firstPrizeCount}개`,
+    ];
+
+    messages.forEach((message) => this.print(message));
+  }
+
+  printLottoTotalReturns(lottoTotalReturns) {
+    this.print(
+      `${MESSAGE.print.printLottoTotalReturns[0]} ${lottoTotalReturns}${MESSAGE.print.printLottoTotalReturns[1]}`,
+    );
+  }
 }
 
 export default LottoView;

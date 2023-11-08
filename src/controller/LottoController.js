@@ -74,10 +74,12 @@ class LottoController {
 
   #printLottoResult() {
     const lottoResult = this.#service.getLottoResult();
+    this.#view.printLottoResult(lottoResult);
   }
 
   #printLottoTotalReturns() {
     const lottoTotalReturns = this.#service.getLottoTotalReturns();
+    this.#view.printLottoTotalReturns(lottoTotalReturns);
   }
 }
 

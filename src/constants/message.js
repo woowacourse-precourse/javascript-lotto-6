@@ -8,6 +8,23 @@ const read = Object.freeze({
 
 const print = Object.freeze({
   printLottoCounts: '개를 구매했습니다.',
+  printLottoResult: '당첨 통계\n---',
+  printFirstPrize: `6개 일치 (${OPTION.firstPrizeAmount.toLocaleString(
+    'ko-KR',
+  )}) -`,
+  printSecondPrize: `5개 일치, 보너스 번호 일치 (${OPTION.secondPrizeAmount.toLocaleString(
+    'ko-KR',
+  )}원) -`,
+  printThirdPrize: `5개 일치 (${OPTION.thirdPrizeAmount.toLocaleString(
+    'ko-KR',
+  )}원) -`,
+  printFourthPrize: `4개 일치 (${OPTION.fourthPrizeAmount.toLocaleString(
+    'ko-KR',
+  )}원) -`,
+  printFifthPrize: `3개 일치 (${OPTION.fifthPrizeAmount.toLocaleString(
+    'ko-KR',
+  )}원) -`,
+  printLottoTotalReturns: ['총 수익률은', '%입니다.'],
 });
 
 const error = Object.freeze({

@@ -79,7 +79,7 @@ class LottoService {
 
   getLottoTotalReturns() {
     const lottoTotalReturns =
-      this.getLottoTotalPrizeAmount() / this.getPurchaseAmount();
+      (this.getLottoTotalPrizeAmount() / this.getPurchaseAmount()) * 100;
 
     return lottoTotalReturns.toFixed(1);
   }
