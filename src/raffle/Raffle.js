@@ -17,11 +17,11 @@ export default class Raffle {
     this.#bonus = new Bonus(bonus);
   }
 
-  getNumbers() {
+  numbers() {
     return this.#numbers.get();
   }
 
-  getBonus() {
+  bonus() {
     return this.#bonus.get()
   }
 }

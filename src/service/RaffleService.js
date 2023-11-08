@@ -10,6 +10,6 @@ export default class RaffleService {
     this.#raffle.addBonus(bonus);
   }
   getRaffle() {
-    return { 'numbers': this.#raffle.getNumbers(), 'bonus': this.#raffle.getBonus() };
+    return { 'numbers': this.#raffle.numbers(), 'bonus': this.#raffle.bonus() };
   }
 }
