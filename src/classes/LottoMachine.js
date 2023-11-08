@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, PRICE } from '../constant/lottoConstants';
+import { ERROR_MESSAGE, MAX, MIN, PRICE } from '../constant/lottoConstants';
 
 class LottoMachine {
   #lottos = [];
@@ -23,7 +23,9 @@ class LottoMachine {
     const lottoTickets = purchaseAmount / PRICE.LOTTO;
 
     for (let i = 0; i < lottoTickets; i += 1) {
-      this.#lottos.push(Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
+      this.#lottos
+        .push(Random.pickUniqueNumbersInRange(MIN.LOTTO_NUMBER, MAX.LOTTO_NUMBER, MAX.LOTTO_NUMBERS)
+        .sort((a, b) => a - b));
     }
   }
 
