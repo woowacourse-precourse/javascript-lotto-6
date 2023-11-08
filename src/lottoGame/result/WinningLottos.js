@@ -4,38 +4,48 @@ import { getRoundedNumber } from '../../utils/getRoundedNumber.js';
 import { BONUS_NUMBER_TYPE } from '../../constants.js';
 
 export class WinningLottosResult {
-  #winningLottosResult = WinningLottosResult.RESULT_CONDITIONS.map(
-    ({ winningCount, bonusType, prize }) => {
-      return { condition: { winningCount, bonusType }, prize, count: 0, profit: 0 };
+  #winningLottosResult = WinningLottosResult.WINNING_CONDITIONS_AND_PRIZES.map(
+    ({ condition, prize }) => {
+      return { condition, prize, count: 0, profit: 0 };
     },
   );
 
   #userMoney;
 
-  static RESULT_CONDITIONS = [
+  static WINNING_CONDITIONS_AND_PRIZES = [
     {
-      winningCount: 3,
-      bonusType: BONUS_NUMBER_TYPE.useless,
+      condition: {
+        winningCount: 3,
+        bonusType: BONUS_NUMBER_TYPE.useless,
+      },
       prize: 5000,
     },
     {
-      winningCount: 4,
-      bonusType: BONUS_NUMBER_TYPE.useless,
+      condition: {
+        winningCount: 4,
+        bonusType: BONUS_NUMBER_TYPE.useless,
+      },
       prize: 50000,
     },
     {
-      winningCount: 5,
-      bonusType: BONUS_NUMBER_TYPE.withOutFiveWinningNumbers,
+      condition: {
+        winningCount: 5,
+        bonusType: BONUS_NUMBER_TYPE.withOutFiveWinningNumbers,
+      },
       prize: 1500000,
     },
     {
-      winningCount: 5,
-      bonusType: BONUS_NUMBER_TYPE.withFiveWinningNumbers,
+      condition: {
+        winningCount: 5,
+        bonusType: BONUS_NUMBER_TYPE.withFiveWinningNumbers,
+      },
       prize: 30000000,
     },
     {
-      winningCount: 6,
-      bonusType: BONUS_NUMBER_TYPE.useless,
+      condition: {
+        winningCount: 6,
+        bonusType: BONUS_NUMBER_TYPE.useless,
+      },
       prize: 2000000000,
     },
   ];
