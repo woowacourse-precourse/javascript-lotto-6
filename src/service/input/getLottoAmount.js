@@ -11,6 +11,6 @@ export default async function getLottoAmount() {
 
   inputValidator.validateUnitCost(userInput);
 
-  const lottoAmount = userInput;
+  const lottoAmount = Number(userInput);
   return lottoAmount;
 }
