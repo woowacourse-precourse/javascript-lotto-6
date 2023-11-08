@@ -1,6 +1,6 @@
 import LottoTypeConversion from './LottoTypeConversion.js';
 import ERROR from '../Constants/Error.js';
-import { NUMBER, DELIMITER, REGEXP } from '../Constants/Lotto.js';
+import { NUMBER, DELIMITER, REGEXP } from '../Constants/LottoGame.js'
 
 const Validator = {
   numberType(input) {

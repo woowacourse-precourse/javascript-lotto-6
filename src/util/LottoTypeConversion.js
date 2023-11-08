@@ -1,4 +1,4 @@
-import { DELIMITER } from '../Constants/Lotto.js';
+import { DELIMITER } from '../Constants/LottoGame.js';
 
 const LottoTypeConversion = {
   issuedLotto(lotto) {

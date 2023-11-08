@@ -1,4 +1,4 @@
-import { NUMBER, PRIZEMONEY_NUMBER } from './Constants/Lotto.js';
+import { NUMBER, PRIZEMONEY_NUMBER } from './Constants/LottoGame.js';
 
 class PrizeMoneyManager {
   #prizeMoneys

@@ -1,4 +1,4 @@
-import { RANK_WINNING_NUMBER } from './Lotto.js';
+import { RANK_WINNING_NUMBER } from './LottoGame.js';
 
 const MESSAGES = {
   buyLottoPrice: '구입금액을 입력해 주세요.\n',

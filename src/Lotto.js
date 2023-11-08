@@ -1,6 +1,6 @@
 import NumberGenerator from './util/NumberGenerator.js';
 import ERROR from './Constants/Error.js';
-import { NUMBER } from './Constants/Lotto.js';
+import { NUMBER } from './Constants/LottoGame.js';
 
 class Lotto {
   #numbers;
