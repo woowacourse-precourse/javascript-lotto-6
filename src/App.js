@@ -10,7 +10,15 @@ class App {
     this.lottostore = new LottoStore();
     this.lottoDrawing = new LotteDrawing();
   }
+
+  async buyLotto() {
+    const money = await this.buyer.inputMoney();
+    const lottos = this.lottostore.sellLotto(money);
+    this.lottostore.printLottos(lottos);
+    this.buyer.setLottos(lottos);
+  }
   async play() {
+    await this.buyLotto();
   }
 }
 
