@@ -20,6 +20,10 @@ class LottoDataProcessor {
     return this.#lottoResults;
   }
 
+  getPurchaseAmount() {
+    return this.#purchaseAmount;
+  }
+
   #generateLottoResults(count) {
     for (let i = 0; i < count; i++) {
       this.#lottoResults.push(

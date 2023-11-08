@@ -33,6 +33,10 @@ class OutputView {
     }
   }
 
+  async printWinningProfit(result) {
+    await Console.print(`총 수익률은 ${result}%입니다.`);
+  }
+
   #printWithoutBonus(key, value) {
     Console.print(`${key}개 일치 (${hitMoney[key - 3]}) - ${value}개`);
   }

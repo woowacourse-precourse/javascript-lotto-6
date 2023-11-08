@@ -5,6 +5,7 @@ import Lotto from "../model/Lotto";
 import LottoDataProcessor from "../model/LottoDataProcessor";
 import Bonus from "../model/Bonus";
 import ResultProcessor from "../model/ResultProcessor";
+import ProfitProcessor from "../model/ProfitProcessor";
 
 class LottoController {
   #inputView;
@@ -14,6 +15,7 @@ class LottoController {
   #lottoResult;
   #resultProcessor;
   #bonus;
+  #profitProcessor;
 
   constructor() {
     this.#inputView = new InputView();
@@ -56,6 +58,12 @@ class LottoController {
     );
     const result = this.#resultProcessor.getResult();
     await this.#outputView.printWinningResult(result);
+    this.#profitProcessor = new ProfitProcessor(
+      result,
+      this.#lottoDataProcessor.getPurchaseAmount()
+    );
+    const profit = this.#profitProcessor.getProfit();
+    await this.#outputView.printWinningProfit(profit);
   }
 }
 
