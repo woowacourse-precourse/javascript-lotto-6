@@ -491,7 +491,26 @@ const returnRatio = lottoReturnRatio([0,0,0,0,0,0,1,3,0,0,0,0,0],4);
 const sum = Get.sumOfArray([1,2,3]);
 ```
 
-## `ErrorCheck``
+## `ErrorCheck`
+
+예외 상황인지 확인해, 예외인 경우 예외를 던지는 함수들
+
+### `purchasePrice(string, lottoPrice)`
+
+- `string` 이 `lottoPrice`에 맞는 로또 구매 금액이 될 수 있는 문자열인지 확인해, 그렇지 않으면 예외를 던짐
+
+```jsx
+ErrorCheck.purchasePrice('10000', 1000);
+```
+
+**예외**
+
+양의 정수가 아닌 경우
+
+`Number(string)`이 `lottoPrice`의 배수가 아닌 경우
+
+
+
 
 구현해야할 기능
 - [x] 구입 금액 입력

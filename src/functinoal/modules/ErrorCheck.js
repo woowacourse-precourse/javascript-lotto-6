@@ -16,7 +16,7 @@ const {
 class ErrorCheck {
   static purchasePrice(string, lottoPrice) {
     ErrorCheck.positiveIntegerString(string);
-    ErrorCheck.multiplesInPositive(Number(inputString), lottoPrice);
+    ErrorCheck.multiplesInPositive(Number(string), lottoPrice);
   }
 
   static lottoNumbersString(string) {
