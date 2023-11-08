@@ -40,12 +40,16 @@ export function lottoNumberCompare(lotto, winNumber, bonusNumber) {
 
 	let winRank = new Array(5).fill(0);
 
-	lotto.map(innerArr => {
-		const numberCount = compare(lotto, winNumber);
-		winRank = rank(bonusNumber, innerArr, numberCount, winRank);
-	});
+	if (Array.isArray(lotto) && Array.isArray(lotto[0])) {
+		lotto.forEach(innerArr => {
 
-	Console.print(winRank);
+			let numberCount = compare(lotto, winNumber);
+			winRank = rank(bonusNumber, innerArr, numberCount, winRank);
+		});
+	} else {
+		let numberCount = compare(lotto, winNumber);
+		winRank = rank(bonusNumber, lotto, numberCount, winRank);
+	}
 
 	return winRank;
 };

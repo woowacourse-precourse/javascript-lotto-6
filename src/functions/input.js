@@ -15,7 +15,7 @@ export async function purchaseAmountInput() {
 
 	let purchaseAmount = await Console.readLineAsync();
 
-	if (!isPurchaseAmountInputValidation(+purchaseAmount)) throw new Error(ERRORMESSAGE.LOTTO_NUMBER_INTEGER);
+	if (!isPurchaseAmountInputValidation(+purchaseAmount)) throw new Error("[ERROR] 번호가 숫자여야 합니다.");
 
 	return +purchaseAmount;
 };
