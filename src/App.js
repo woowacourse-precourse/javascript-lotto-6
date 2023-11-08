@@ -5,6 +5,7 @@ import Lotto from './Lotto.js';
 function compareNumbers(a, b) {
   return a - b;
 }
+
 class App {
   async play() {
     const MONEY = await this.inputMoney();
@@ -16,10 +17,22 @@ class App {
     this.printLottoResult(MONEY, RESULT);
   }
 
+  // eslint-disable-next-line max-lines-per-function
   async inputMoney() {
-    const MONEY = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    this.checkMoney(MONEY);
-    const LOTTO_CNT = Math.floor(Number(MONEY) / 1000);
+    let flag = 1;
+    let money;
+    while (flag) {
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        money = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+        this.checkMoney(money);
+        flag = 0;
+      } catch (e) {
+        flag = 1;
+        Console.print('[ERROR] 로또 금액은 정수여야 합니다.');
+      }
+    }
+    const LOTTO_CNT = Math.floor(Number(money) / 1000);
     this.printMoney(LOTTO_CNT);
     return LOTTO_CNT;
   }
