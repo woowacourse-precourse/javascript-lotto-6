@@ -1,7 +1,7 @@
 import enterPurchaseAmount from './enterPurchaseAmount.js';
 import { Console } from '@woowacourse/mission-utils';
 
-async function tryEnterBonusNumber() {
+async function tryEnterPurchaseAmount() {
   let purchaseAmount;
 
   async function tryEnter() {
@@ -17,4 +17,4 @@ async function tryEnterBonusNumber() {
   return tryEnter();
 }
 
-export default tryEnterBonusNumber;
+export default tryEnterPurchaseAmount;
