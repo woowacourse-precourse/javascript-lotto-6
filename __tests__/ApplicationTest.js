@@ -94,4 +94,12 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await runException("1000j");
   });
+
+  test("1000원 단위로 떨어지는지 확인", async () => {
+    await runException("1234");
+  });
+
+  test("당첨번호의 개수가 다른 경우", async () => {
+    await runException("1000");
+  });
 });
