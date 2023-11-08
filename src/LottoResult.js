@@ -1,3 +1,6 @@
+import { Console } from '@woowacourse/mission-utils';
+import { PRIZE_VALUES, LOTTO_RESULT_MESSAGES } from './utils/constants.js';
+
 class LottoResult {
   #results;
   #prizes;
@@ -25,6 +28,37 @@ class LottoResult {
   #distributePrize(result) {
     const key = this.#getPrizeKey(result);
     this.#prizes.set(key, this.#getPrizeCount(key) + 1);
+  }
+
+  displayPrizes() {
+    Console.print(LOTTO_RESULT_MESSAGES.WINNING_STATISTICS);
+    this.#disaplayPrizeMatcher();
+  }
+
+  #disaplayPrizeMatcher() {
+    Object.entries(PRIZE_VALUES).forEach(([key, value]) => {
+      const prizeCount = this.#getPrizeCount(key);
+      const message = this.#generateMessage(key, value, prizeCount);
+
+      Console.print(message);
+    });
+  }
+
+  #generateMessage(key, value, prizeCount) {
+    switch (key) {
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+        return LOTTO_RESULT_MESSAGES.MATCHING_NUMBERS(key, value, prizeCount);
+      case '5B':
+        return LOTTO_RESULT_MESSAGES.MATCHING_NUMBERS_WITH_BONUS(
+          value,
+          prizeCount
+        );
+      default:
+        return '';
+    }
   }
 
   #getPrizeCount(key) {

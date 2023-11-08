@@ -26,6 +26,7 @@ class App {
       this.#winningNumbers,
       this.#bonusNumber
     );
+    this.#lottoResult.displayPrizes();
   }
 }
 

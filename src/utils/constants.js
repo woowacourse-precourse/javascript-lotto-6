@@ -22,3 +22,19 @@ export const ERROR_MESSAGES = Object.freeze({
   INVALID_BONUS_NUMBER_RANGE: '보너스 번호는 1~45 사이의 정수여야 합니다.',
   DUPLICATE_BONUS_NUMBER: '보너스 번호는 당첨 번호와 중복될 수 없습니다.',
 });
+
+export const PRIZE_VALUES = Object.freeze({
+  3: 5000,
+  4: 50000,
+  5: 1500000,
+  6: 2000000000,
+  '5B': 30000000,
+});
+
+export const LOTTO_RESULT_MESSAGES = Object.freeze({
+  WINNING_STATISTICS: '\n당첨 통계\n---',
+  MATCHING_NUMBERS: (matchCount, prizeMoney, count) =>
+    `${matchCount}개 일치 (${prizeMoney.toLocaleString()}원) - ${count}개`,
+  MATCHING_NUMBERS_WITH_BONUS: (prizeMoney, count) =>
+    `5개 일치, 보너스 볼 일치 (${prizeMoney.toLocaleString()}원) - ${count}개`,
+});
