@@ -7,6 +7,8 @@ class App {
 
     const purchaseAmount = await this.inputPurchaseAmount();
     const lottos = await this.generateLottos(purchaseAmount);
+
+    this.displayPurchasedLottos(lottos);
   }
 
   // 2. 로또 구입하기: 로또 구입 금액 입력
@@ -60,6 +62,20 @@ class App {
     fixedNumbers.forEach(numbers => {
       Console.print(`[${numbers.join(', ')}]`);
     });
+  }
+
+    // 3. 당첨 확인: 당첨 번호 입력
+  async inputWinningNumbers() {
+    while (true) {
+      const input = await Console.readLineAsync('당첨 번호를 입력해 주세요: ');
+      const winningNumbers = input.split(',').map(number => parseInt(number.trim()));
+
+      if (winningNumbers.length !== 6 || !winningNumbers.every(number => !isNaN(number) && number >= 1 && number <= 45)) {
+        Console.print('[ERROR] 유효한 당첨 번호를 입력하세요 (1부터 45까지 6개의 숫자).');
+      } else {
+        return winningNumbers;
+      }
+    }
   }
 }
 
