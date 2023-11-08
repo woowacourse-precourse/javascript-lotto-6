@@ -7,4 +7,6 @@ export const ERROR_MESSAGE = {
   outRangeLottoNumber: ERROR_KEYWORD + "1 ~ 45 사이의 수로 입력해주세요.",
   outCountLottoNumbers: ERROR_KEYWORD + "로또 번호는 6개여야 합니다.",
   lottoDuplication: ERROR_KEYWORD + "중복된 번호를 입력하셨습니다.",
+  bonusWinningDuplication:
+    ERROR_KEYWORD + "당첨번호와 중복된 보너스 번호를 입력하셨습니다.",
 };

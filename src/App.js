@@ -12,7 +12,7 @@ class App {
     const lottoNumberList = RandomNumber(count);
     printLottoNumbers(lottoNumberList);
     const winningNumber = await InputWinningNumber();
-    const bonus = await InputBonusNumber();
+    const bonus = await InputBonusNumber(winningNumber);
     const rank = CheckWinning(lottoNumberList, winningNumber, bonus);
     printWinning(rank);
     printReturnRate(rank, amount);
