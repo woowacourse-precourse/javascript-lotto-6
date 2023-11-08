@@ -8,10 +8,14 @@ class Customer {
   /** @type {number} */
   #lottoCount;
 
+  /** @type {Array} */
+  #lottoNumbers;
+
   constructor(lottoPrice) {
     this.#validateLottoPrice(lottoPrice);
     this.#lottoPrice = Number(lottoPrice);
     this.#lottoCount = this.#lottoPrice / Conditions.ONE_LOTTO_PRICE;
+    this.#lottoNumbers = [];
   }
 
   #validateLottoPrice(lottoPrice) {
@@ -23,6 +27,10 @@ class Customer {
 
   getLottoCount() {
     return this.#lottoCount;
+  }
+
+  setLottoNumbers(lottoNumbers) {
+    this.#lottoNumbers = lottoNumbers;
   }
 }
 
