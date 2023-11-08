@@ -7,7 +7,6 @@ class Budget{
     constructor(number, minLottoNumber, maxLottoNumber, lottoPrice){
         this.budget = number;
         this.LOTTO_PRICE = lottoPrice;
-        console.log(this.LOTTO_PRICE);
         this.MIN_LOTTO_NUM = minLottoNumber;
         this.MAX_LOTTO_NUM = maxLottoNumber;
         this.#validate(number);
@@ -20,7 +19,6 @@ class Budget{
         const CHANGE = lottoBudget % this.LOTTO_PRICE;
 
         if(CHANGE!==0){
-        console.log(lottoBudget,this.LOTTO_PRICE);
             throw new Error(this.ERROR_MESSAGE);
         }
     }

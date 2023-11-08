@@ -16,7 +16,6 @@ class LottoBudget {
         this.MIN_LOTTO_NUM=MIN_LOTTO_NUM;
         this.MAX_LOTTO_NUM=MAX_LOTTO_NUM;
         this.LOTTO_PRICE=LOTTO_PRICE;
-        console.log(this.LOTTO_PRICE);
     }
 
     #isNumberCharacter(ch){
