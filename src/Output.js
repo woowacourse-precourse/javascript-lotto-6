@@ -8,10 +8,12 @@ class Output {
   }
 
   async printLottoArray(amount, array) {
-    await Console.print(`\n${amount}${OUTPUT_MSG.PURCHASE_ITEM_COUNT}`)
-    for(let i=0; i<array.length; i += 1) {
-      Console.print(array[i])
-    }
+    Console.print(`\n${amount}${OUTPUT_MSG.PURCHASE_ITEM_COUNT}`)
+    
+    array.forEach((lotto) => {
+      const arraytoString = `[${lotto.join(', ')}]`; 
+      Console.print(arraytoString);
+    });
   }
 
   async printWinnerNumber() {
@@ -23,14 +25,18 @@ class Output {
   }
 
   async printLottoResult(key, value) {
-    const consoleMessages = [];
-    if (key === "3") consoleMessages.push(OUTPUT_MSG.WIN_RESULT, OUTPUT_MSG.LINE);
-    if (key === "4") consoleMessages.push(MATCH_DATA.FOUR);
-    if (key === "5") consoleMessages.push(MATCH_DATA.FIVE);
-    if (key === "bonus") consoleMessages.push(MATCH_DATA.BONUS);
-    if (key === "6") consoleMessages.push(MATCH_DATA.SIX);
-    consoleMessages.push(`${value}개`);
-    Console.print(consoleMessages.join(" "));
+    if (key === "3") {
+      Console.print("\n당첨 통계\n---");
+      Console.print(`${MATCH_DATA.THREE} ${value}개`);
+    } else if (key === "4") {
+      Console.print(`${MATCH_DATA.FOUR} ${value}개`);
+    } else if (key === "5") {
+      Console.print(`${MATCH_DATA.FIVE} ${value}개`);
+    } else if (key === "bonus") {
+      Console.print(`${MATCH_DATA.BONUS} ${value}개`);
+    } else if (key === "6") {
+      Console.print(`${MATCH_DATA.SIX} ${value}개`);
+    }
   }
   
   async printYieldCalculation(total) {
