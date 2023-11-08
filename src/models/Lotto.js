@@ -1,5 +1,4 @@
-import { LOTTO_SETTING } from '../constants/Setting.js';
-import { EXCEPTION_MESSAGE } from '../constants/ExceptionMessage.js';
+import LottoValidator from '../validators/LottoValidator.js';
 
 class Lotto {
   #numbers;
@@ -10,20 +9,7 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== LOTTO_SETTING.numbersLength) {
-      throw new Error(EXCEPTION_MESSAGE.lottoNumbersLength);
-    }
-    if (new Set(numbers).size !== 6) {
-      throw new Error(EXCEPTION_MESSAGE.lottoNumberIsDuplicated);
-    }
-    numbers.forEach((number) => {
-      if (isNaN(number)) {
-        throw new Error(EXCEPTION_MESSAGE.lottoNumberFormat);
-      }
-      if (number < LOTTO_SETTING.minNumber || number > LOTTO_SETTING.maxNumber) {
-        throw new Error(EXCEPTION_MESSAGE.lottoNumberFormat);
-      }
-    });
+    LottoValidator.validateLottoNumbers(numbers);
   }
 
   // TODO: 추가 기능 구현
