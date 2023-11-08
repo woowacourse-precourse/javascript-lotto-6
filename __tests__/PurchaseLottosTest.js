@@ -1,6 +1,6 @@
-import PurchaseLottos from "../src/PurchaseLottos";
+import PurchaseLottos from "../src/PurchaseLottos.js";
 
-describe("로또 구매 테스트", () => {
+describe("로또 구매 클래스 테스트", () => {
   const invalidAmounts = [0, 999, 1200, 21100];
 
   test.each(invalidAmounts)(
