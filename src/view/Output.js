@@ -7,9 +7,6 @@ class Output {
   }
 
   printStats(STATS) {
-    this.print(GUIDE_MESSAGE.winningStats)
-    this.printDivider();
-
     Object.keys(WINNING_RESULT_DETAILS).map((name, idx) => {
       this.print(`${WINNING_RESULT_DETAILS[name]}${STATS[4 - idx]}개`)
     })
