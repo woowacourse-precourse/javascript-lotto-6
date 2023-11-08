@@ -9,7 +9,7 @@ export class Bonus {
     this.#bonusNumberDuplicateValidater(validateNumber, winningNumbers);
     
     this.#number = number;
-    model.bonus = this.#number;
+    model.bonus = validateNumber;
   }
 
   #bonusNumberValidater(number) {
