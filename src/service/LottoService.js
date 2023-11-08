@@ -1,7 +1,7 @@
 import { LOTTO, RANKING, STATISTICS } from '../common/constants.js';
 
 import { generateRandomNumber } from '../common/utils.js';
-import Lotto from '../model/Lotto.js';
+import Lotto from '../Lotto.js';
 
 class LottoService {
   

@@ -1,4 +1,4 @@
-import LottoValidator from '../service/LottoValidator.js';
+import LottoValidator from './service/LottoValidator.js';
 
 class Lotto {
 
