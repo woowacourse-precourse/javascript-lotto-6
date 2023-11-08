@@ -18,6 +18,14 @@ class App {
   winningNumbers = []
   
   bonusNumber;
+
+  winningRanking = {
+    3: 0,
+    4: 0,
+    5: 0,
+    bonus: 0,
+    6: 0,
+  };
   
   async play() {
     return this.getLottoCount()
@@ -45,7 +53,7 @@ class App {
     this.Output.printWinnerNumber()
     const inputNum = await this.Input.winningNumbersInput();
     const lotto = new Lotto(inputNum.split(","));
-    this.winningNumber = inputNum.split(",").map(Number);
+    this.winningNumbers = inputNum.split(",").map(Number);
     this.winningBonusNumber()
   }
 
@@ -57,6 +65,29 @@ class App {
     this.Validate.checkNumbersType(this.bonusNumber);
     this.Validate.checkedBonusLength(this.bonusNumber);
     this.Validate.checkDuplicateBonus(this.bonusNumber, this.winningNumbers);
+    this.winningStats()
+  }
+
+  winningStats() {
+    this.matchLotto();
+    Object.entries(this.winningRanking).forEach(([key, value]) => {
+      this.Output.printLottoResult(key,value)
+    });
+  }
+
+  matchLotto() {
+    for(let i=0; i<this.lottoList.length; i+=1) {
+      const matched = this.lottoList[i].filter((numbers) => this.winningNumbers.includes(numbers));
+      const matchedCount = matched.length;
+      this.countMatches(matchedCount, this.lottoList[i])
+    }
+  }
+
+  countMatches(count, lottoList) {
+    const bonus = +this.bonusNumber.join("")
+
+    if(count === 5 && lottoList.includes(bonus)) this.winningRanking.bonus += 1
+    if (count >= 3) this.winningRanking[count] += 1
   }
 }
 

@@ -19,7 +19,8 @@ class Validate {
   }
 
   checkDuplicateBonus(number,numbers) {
-    const checked = numbers.filter((num) => num === number);
+    const bonusNum = +number.join("")
+    const checked = numbers.filter((num) => num === bonusNum);
     if(checked.length === 1) throw Error("[ERROR] 당첨 번호와 중복되지 않게 입력해 주세요/")
   }
 }
