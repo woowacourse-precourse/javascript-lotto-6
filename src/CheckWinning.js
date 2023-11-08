@@ -1,5 +1,3 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-
 let lottoWinningRank = { first: 0, second: 0, third: 0, fourth: 0, fifth: 0 };
 const CHECK_BONUS = {
   6: "first",
@@ -12,6 +10,7 @@ const CHECK_BONUS_COUNT = 5;
 const WINNING_COUNT_MIN = 3;
 
 function CheckWinning(lottoNumbers, winningNumber, bonus) {
+  lottoWinningRank = { first: 0, second: 0, third: 0, fourth: 0, fifth: 0 };
   lottoNumbers.forEach((lotto) => {
     let sameCount = compareList(winningNumber.getNumbers(), lotto.getNumbers());
     checkLottoWinningRank(sameCount, bonus, lotto.getNumbers());
@@ -46,9 +45,7 @@ function compareList(winning, lotto) {
   });
   return sameCount;
 }
-
 function compareNumber(lotto, bonus) {
   return lotto.includes(bonus);
 }
-
 export default CheckWinning;

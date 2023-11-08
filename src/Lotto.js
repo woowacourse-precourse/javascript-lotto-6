@@ -13,8 +13,8 @@ class Lotto {
 
   #validate(numbers) {
     this.#validateCount(numbers);
-    this.#validateDuplication(numbers);
     this.#validateNumber(numbers);
+    this.#validateDuplication(numbers);
   }
   #validateCount(numbers) {
     if (numbers.length !== LOTTO_NUMBER_COUNT) {
@@ -30,8 +30,8 @@ class Lotto {
   #validateNumber(numbers) {
     numbers.forEach((number) => {
       ValidateInputNumber.checkString(number);
-      ValidateInputNumber.checkLottoNumber(number);
       ValidateInputNumber.checkNaturalNumber(number);
+      ValidateInputNumber.checkLottoNumber(number);
     });
   }
   getNumbers() {
