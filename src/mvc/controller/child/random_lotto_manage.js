@@ -12,7 +12,11 @@ class RandomLottoManage {
     return this.#randomLotto;
   }
 
-  async inputPurchaseAmount() {
+  async startLotto() {
+    await this.#inputPurchaseAmount();
+  }
+
+  async #inputPurchaseAmount() {
     const AMOUNT = await userInput(Question.purchaseAmount());
     await this.#checkPurchaseAmount(AMOUNT);
   }
