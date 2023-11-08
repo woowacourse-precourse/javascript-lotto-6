@@ -61,4 +61,14 @@ const Validation = {
       Validation.validateLottoNumbers(number)
     );
   },
+
+  /**
+   * @param {number} money
+   */
+  validateMoney: (money) => {
+    if (!Number.isSafeInteger(Number(money)) || money < 0) {
+      throw new Error("[ERROR] 올바른 구입금액을 입력해 주세요.");
+    }
+  },
 };
+export default Validation;
