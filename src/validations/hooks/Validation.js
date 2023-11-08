@@ -49,7 +49,7 @@ const ValidationHook = {
   },
 
   checkDuplicate(numberList) {
-    if (new Set(numberList).length !== NUMBER_CRITERIA) {
+    if (new Set(numberList).size !== NUMBER_CRITERIA) {
       throw new Error(INPUT_ERROR.duplicate);
     }
   },
