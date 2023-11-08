@@ -34,15 +34,25 @@ class View {
     View.print(message);
   }
 
-  static printWinningResults(resultMap) {
+  static printWinningResults(resultArray) {
     View.print(WINNING_STATISTICS);
     View.print(View.#DIVISION_LINE);
 
+    const message = this.#getWinningResultsMessage(resultArray);
+    View.print(message);
+  }
+
+  static #getWinningResultsMessage(resultArray) {
     let message = '';
-    resultMap.forEach((count, ranking) => {
+    const reversedResultMap = View.#getReversedResultMap(resultArray);
+    reversedResultMap.forEach((count, ranking) => {
       message += TEMPLATE.winnigResultsBy[ranking](count);
     });
-    View.print(message);
+    return message;
+  }
+
+  static #getReversedResultMap(resultArray) {
+    return new Map(resultArray.reverse());
   }
 
   static printProfitRate(profitRate) {

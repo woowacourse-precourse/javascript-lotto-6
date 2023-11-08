@@ -30,8 +30,8 @@ class LottoPurchaser {
     return sortedLottos;
   }
 
-  getResultMap() {
-    return this.#winningResults.getReversedResultMap();
+  getResultArray() {
+    return this.#winningResults.getResultArray();
   }
 
   getProfitRate() {

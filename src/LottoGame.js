@@ -18,15 +18,15 @@ class LottoGame {
     await this.#saveWinningLotto();
     this.#lottoPurchaser.check(this.#winningLotto);
 
-    this.#showResults();
-    this.#showProfitRate();
+    View.printWinningResults(this.#lottoPurchaser.getResultArray());
+    View.printProfitRate(this.#lottoPurchaser.getProfitRate());
   }
 
   async #purchaseLottos() {
     try {
       new LottoShop().sellTo(
         this.#lottoPurchaser,
-        await this.#askPurchaseAmount(),
+        await View.askPurchaseAmount(),
       );
     } catch (error) {
       View.print(error.message);
@@ -34,41 +34,16 @@ class LottoGame {
     }
   }
 
-  async #askPurchaseAmount() {
-    const purchaseAmount = await View.askPurchaseAmount();
-    return purchaseAmount;
-  }
-
   async #saveWinningLotto() {
     try {
       this.#winningLotto = new WinningLotto(
-        new Lotto(await this.#askWinningNumbers()),
-        await this.#askBonusNumber(),
+        new Lotto(await View.askWinningNumbers()),
+        await View.askBonusNumber(),
       );
     } catch (error) {
       View.print(error.message);
       await this.#saveWinningLotto();
     }
-  }
-
-  async #askWinningNumbers() {
-    const winningNumbers = await View.askWinningNumbers();
-    return winningNumbers;
-  }
-
-  async #askBonusNumber() {
-    const bonusNumber = await View.askBonusNumber();
-    return bonusNumber;
-  }
-
-  #showResults() {
-    const resultMap = this.#lottoPurchaser.getResultMap();
-    View.printWinningResults(resultMap);
-  }
-
-  #showProfitRate() {
-    const profitRate = this.#lottoPurchaser.getProfitRate();
-    View.printProfitRate(profitRate);
   }
 }
 

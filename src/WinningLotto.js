@@ -11,11 +11,11 @@ class WinningLotto {
     this.#bonusNumber = bonusNumber;
   }
 
-  countMatchingWith(numbers) {
+  countMatchingWith(otherLotto) {
     const { FIVE, BONUS_FIVE } = MATCHING_COUNT;
 
-    const matchingCount = numbers.countMatchingWith(this.#lotto);
-    if (matchingCount === FIVE && numbers.includes(this.#bonusNumber)) {
+    const matchingCount = otherLotto.countMatchingWith(this.#lotto);
+    if (matchingCount === FIVE && otherLotto.includes(this.#bonusNumber)) {
       return BONUS_FIVE;
     }
     return matchingCount;

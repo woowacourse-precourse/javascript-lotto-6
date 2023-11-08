@@ -13,9 +13,9 @@ class Lotto {
     return this.#numbers.includes(number);
   }
 
-  countMatchingWith(winningNumbers) {
+  countMatchingWith(otherLotto) {
     const matchingCount = this.#numbers.filter((number) =>
-      winningNumbers.includes(number),
+      otherLotto.includes(number),
     ).length;
     return matchingCount;
   }

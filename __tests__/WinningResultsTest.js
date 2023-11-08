@@ -4,17 +4,6 @@ describe('당첨 결과 클래스 테스트', () => {
   const winningResults = new WinningResults();
   winningResults.saveResultBy(3);
 
-  test('getReversedResultMap()', () => {
-    const map = new Map([
-      [5, 1],
-      [4, 0],
-      [3, 0],
-      [2, 0],
-      [1, 0],
-    ]);
-    expect(winningResults.getReversedResultMap()).toStrictEqual(map);
-  });
-
   describe('총 수익률에 대한 테스트', () => {
     test('구입금액이 8000원이고 로또 당첨 결과가 5등 1개라면 수익률은 62.5%', () => {
       const winningResults = new WinningResults();

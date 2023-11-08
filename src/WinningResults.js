@@ -16,9 +16,8 @@ class WinningResults {
     this.#resultMap.set(ranking, rankingCount + 1);
   }
 
-  getReversedResultMap() {
-    const reversedResultArray = [...this.#resultMap].reverse();
-    return new Map(reversedResultArray);
+  getResultArray() {
+    return [...this.#resultMap];
   }
 
   getProfitRate(amount) {
