@@ -24,16 +24,12 @@ export function isNotDuplicate(numbers) {
   }
 }
 
-export function exceedLength(numbers, length) {
-  if (numbers.length > length) {
-    throw new Error(ErrorMessages.TOO_MANY_NUMBERS);
+export function validLength(numbers, length) {
+  if (numbers.length !== length) {
+    throw new Error(ErrorMessages.OUTSIDE_SET_NUMBER);
   }
 }
-export function lessLength(numbers, length) {
-  if (numbers.length < length) {
-    throw new Error(ErrorMessages.TOO_LESS_NUMBERS);
-  }
-}
+
 export function isOneNumber(value) {
   if (isNaN(value)) {
     throw new Error(ErrorMessages.ONLY_ONE_NUMBER);

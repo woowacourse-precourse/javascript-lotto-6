@@ -15,8 +15,7 @@ class LottoValidator {
       Utils.outNumberRange(number);
     });
     Utils.isNotDuplicate(numbers);
-    Utils.exceedLength(numbers, 6);
-    Utils.lessLength(numbers, 6);
+    Utils.validLength(numbers, 6);
   }
 
   validateWinningNumbers(winningNumbers) {
