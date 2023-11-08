@@ -10,7 +10,6 @@ class BonusNumber {
   }
 
   #validateBonusNumber(winningNumberArray, bonusNumberString) {
-    console.log(winningNumberArray);
     if (!Validator.isInLottoNumberRange(bonusNumberString)) {
       throw new Error(PRIZE.ERROR.BONUS_NUMBER_RANGE_NUMBER);
     }

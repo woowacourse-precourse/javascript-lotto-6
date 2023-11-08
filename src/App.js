@@ -82,19 +82,22 @@ class App {
     });
   }
 
+  #printLottoPrizeResult() {
+    const rankResult = this.#calculateLottoRankResult();
+    const profitRate = this.#calculateProfitRate(rankResult);
+
+    OutputHandler.printPrizeResult({ rankResult, profitRate });
+  }
+
   async play() {
     await this.#initializeLottoController();
     this.#printLottoTickets();
 
     await this.#initializeWinningNumberController();
     await this.#initializeBonusNumberController();
-
     await this.#initializePrizeManager();
 
-    const rankResult = this.#calculateLottoRankResult();
-    const profitRate = this.#calculateProfitRate(rankResult);
-
-    OutputHandler.printPrizeResult({ rankResult, profitRate });
+    this.#printLottoPrizeResult();
   }
 }
 

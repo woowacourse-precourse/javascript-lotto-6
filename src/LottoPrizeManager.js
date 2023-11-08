@@ -1,6 +1,18 @@
 import PRIZE from "./constant/PRIZE.js";
 
 class LottoPrizeManager {
+  #rankResult;
+
+  constructor() {
+    this.#initializeRankResult();
+  }
+
+  #initializeRankResult() {
+    this.#rankResult = Object.fromEntries(
+      Object.keys(PRIZE.RANK).map((rank) => [rank, 0])
+    );
+  }
+
   #filterMatchingNumbers({ winningNumbers, bonusNumber, numberArray }) {
     const matchedNumber = numberArray.filter((number) =>
       winningNumbers.includes(number)
@@ -28,10 +40,6 @@ class LottoPrizeManager {
   }
 
   calculateAllLottoRank({ winningNumbers, bonusNumber, lottoArray }) {
-    const rankResult = Object.fromEntries(
-      Object.keys(PRIZE.RANK).map((rank) => [rank, 0])
-    );
-
     lottoArray.forEach((lotto) => {
       const prizeRank = this.#getPrizeRank({
         winningNumbers,
@@ -39,10 +47,10 @@ class LottoPrizeManager {
         numberArray: lotto,
       });
       if (!prizeRank) return;
-      rankResult[prizeRank]++;
+      this.#rankResult[prizeRank]++;
     });
 
-    return rankResult;
+    return this.#rankResult;
   }
 
   static calculateProfitRate({ rankResult, totalMoney }) {
