@@ -29,14 +29,14 @@ class App {
     return '[' + arrayString + ']';
   }
 
-  printLottoArray() { //test code 없음
+  printLottoArray() { 
     this.lottoRandomNumber.forEach(lottoArray => {
       const string = this.removeSpace(lottoArray);
       Console.print(string);
     });
   }
 
-  printLottoResult(lottoResult, lottoRate) { //test code 없음
+  printLottoResult(lottoResult, lottoRate) { 
     Console.print(PRINT_MESSAGE.MATCH_STATS);
     Console.print(PRINT_MESSAGE.LINE);
     Console.print(PRINT_MESSAGE.THREE_MATCHES(lottoResult[0]));
@@ -47,7 +47,7 @@ class App {
     Console.print(PRINT_MESSAGE.TOTAL_RATE(lottoRate));
   }
 
-  getLottoNumberArray(userLottoNumber) { //test code 없음
+  getLottoNumberArray(userLottoNumber) { 
     return userLottoNumber.split(',').map(value => Number(value));
   }
 
@@ -58,7 +58,7 @@ class App {
     return randomNumberArray;
   }
 
-  printPurchaseAmount(lottoTicket) { //test code 없음
+  printPurchaseAmount(lottoTicket) { 
     Console.print(PRINT_MESSAGE.PURCHASE(lottoTicket));
   }
 

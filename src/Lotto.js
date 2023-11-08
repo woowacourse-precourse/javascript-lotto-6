@@ -10,14 +10,13 @@ class Lotto {
   }
 
   #validate(numbers) {
-    // test code
     if (numbers.length === CONSTANT.ZERO) throw new Error(ERROR_MESSAGE.LOTTO_EMPTY);
     if (numbers.length !== CONSTANT.NUMBER_MAX_LENGTH) throw new Error(ERROR_MESSAGE.SIX_NUMBERS);
     if (this.checkRange(numbers)) throw new Error(ERROR_MESSAGE.LOTTO_RANGE);
     const numbersSet = this.getNumbersSet(numbers);
     if ([...numbersSet].length !== CONSTANT.NUMBER_MAX_LENGTH) throw new Error(ERROR_MESSAGE.SAME_NUMBERS);
   }
-  // test code
+
   checkRange(numbers) {
     return numbers.filter(value => CONSTANT.NUMBER_MIN_RANGE > value || value > CONSTANT.NUMBER_MAX_RANGE).length;
   }
@@ -25,16 +24,16 @@ class Lotto {
   getNumbersSet(numbers) {
     return new Set(numbers.map(Number));
   }
-  // test code
+
   countEqualNumbers(randomNumberArray, userLottoNumber) {
     return randomNumberArray.filter(number => userLottoNumber.includes(number))
       .length;
   }
-  // test code
+
   compareBonusNumber(randomNumberArray, userBonusNumber) {
     return randomNumberArray.includes(userBonusNumber);
   }
-  // test code
+
   getLottoResult(equalNumber, bonusResult) {
     let result = [0, 0, 0, 0, 0];
     if (equalNumber === CONSTANT.MATCH_THREE) result[0] += CONSTANT.ONE;
@@ -44,7 +43,7 @@ class Lotto {
     if (equalNumber === CONSTANT.MATCH_SIX) result[4] += CONSTANT.ONE;
     return result;
   }
-  // test code
+
   checkBonusNumber(randomNumberArray, equalNumber, userBonusNumber) {
     if (equalNumber === CONSTANT.MATCH_FIVE) {
       return this.compareBonusNumber(randomNumberArray, userBonusNumber);
