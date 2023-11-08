@@ -2,12 +2,24 @@ import { ERROR, OPTIONS } from '../constants/Constants.js';
 
 class Validator {
   static purchasePrice(input) {
+    Validator.checkValidNumber(input);
+    Validator.checkMinimumPrice(input);
+    Validator.checkPriceUnit(input);
+  }
+
+  static checkValidNumber(input) {
     if (Number.isNaN(input)) {
       throw new Error(ERROR.invalidPriceNumber);
     }
+  }
+
+  static checkMinimumPrice(input) {
     if (input < OPTIONS.priceUnit) {
       throw new Error(ERROR.invalidPriceLeast);
     }
+  }
+
+  static checkPriceUnit(input) {
     if (input % OPTIONS.priceUnit !== 0) {
       throw new Error(ERROR.invalidPriceUnit);
     }
