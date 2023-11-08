@@ -15,11 +15,9 @@ class Money {
   }
 
   static create(money) {
-    // 화폐 단위로 나뉠 수 있으므로 팩토리 메서드 사용
     return new Money(money);
   }
 
-  // 이 클래스가 1000원, 500원 이렇게 구분 단위가 생긴다면 출력이 번거로워질 수 있으므로 DTO에 책임 인가
   get() {
     return MoneyDto.getResponse(this.#money);
   }
