@@ -24,6 +24,9 @@ class InputView {
 
   async AmountOfMoney() {
     const playerInputMoney = await Console.readLineAsync(INPUT_PURCHASING_AMOUNT);
+    if (isNaN(playerInputMoney)) {
+      throw new Error('[ERROR] 금액은 숫자로 입력해주세요.');
+    }
     this.playerMoney = Number(playerInputMoney);
   }
 
