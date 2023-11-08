@@ -4,8 +4,6 @@ import LOTTO from '../constants/lotto.js';
 import PRIZE_SERVICE from '../constants/prizeService.js';
 
 class PrizeService {
-  static #defaultPrize = {};
-
   getPrize({ lotto, winningLotto }) {
     const { matchCount, matchBonus } = this.#matchLottoNumber({
       lotto,
@@ -46,7 +44,7 @@ class PrizeService {
         PRIZE_SERVICE.prize.countUnit;
 
       return acc;
-    }, PrizeService.#defaultPrize);
+    }, {});
   }
 
   #matchLottoNumber({ lotto, winningLotto }) {
