@@ -1,6 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
 const WINNING_PRICE = [5000, 50000, 1500000, 30000000, 2000000000];
+const MAX_NUMBER = 45;
+const MIN_NUMBER = 1;
 const PRICE_UNIT = 1000;
 
 const INPUT = ["8000", "1,2,3,4,5,6", "7"];
@@ -9,14 +11,15 @@ class App {
   async play() {
     let price;
     let winning_number;
+    let bonus_number;
     // let bonus_number;
     //구매금액 입력
     MissionUtils.Console.print("구입금액을 입력해 주세요.");
     while (true) {
       try {
         let input = await MissionUtils.Console.readLineAsync();
-        is_not_number(input);
-        is_not_multiple_of_priceunit(input);
+        check_number_format(input);
+        check_multiple_of_price_unit(input);
         price = input;
         break;
       } catch (error) {
@@ -50,12 +53,20 @@ class App {
 
     //보너스 번호 입력
     MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
-    const bonus_number = await MissionUtils.Console.readLineAsync();
-    // const bonus_number = INPUT[2];
-    is_not_number(bonus_number);
+    while (true) {
+      try {
+        let input = await MissionUtils.Console.readLineAsync();
+        check_number_format(input);
+        check_number_in_range(input);
+        bonus_number = parseInt(input);
+        break;
+      } catch (error) {
+        MissionUtils.Console.print(error.message);
+        continue;
+      }
+    }
 
-    //로또들 당첨 총액 확인
-    //총 수익률은 62.5%입니다.
+    //로또들 당첨액 출력
     MissionUtils.Console.print(
       `총 수익률은 ${(check_winning_price() / price) * 100}%입니다.`
     );
@@ -109,14 +120,19 @@ class App {
     }
 
     //숫자 확인 함수
-    function is_not_number(input) {
+    function check_number_format(input) {
       if (isNaN(input)) {
         throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
       }
     }
-    function is_not_multiple_of_priceunit(input) {
+    function check_multiple_of_price_unit(input) {
       if (parseInt(input) % PRICE_UNIT != 0 || parseInt(input) < PRICE_UNIT) {
         throw new Error(`[ERROR] ${PRICE_UNIT}원 단위로 입력해 주세요`);
+      }
+    }
+    function check_number_in_range(input) {
+      if (parseInt(input) < MIN_NUMBER || parseInt(input) > MAX_NUMBER) {
+        throw new Error("[ERROR] 1~45까지의 번호를 입력해 주세요");
       }
     }
 
