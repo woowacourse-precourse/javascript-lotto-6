@@ -1,4 +1,63 @@
-# 미션 - 로또
+<div align='center'>
+  <h2>🎰 로또</h2>
+</div>
+
+> 로또 게임을 구현한 프로그램입니다.
+
+## 📌 게임 규칙
+
+로또 게임은 아래와 같은 규칙으로 진행됩니다.
+
+```
+- 로또 번호의 숫자 범위는 1~45까지이다.
+- 1개의 로또를 발행할 때 중복되지 않는 6개의 숫자를 뽑는다.
+- 당첨 번호 추첨 시 중복되지 않는 숫자 6개와 보너스 번호 1개를 뽑는다.
+- 당첨은 1등부터 5등까지 있다. 당첨 기준과 금액은 아래와 같다.
+    - 1등: 6개 번호 일치 / 2,000,000,000원
+    - 2등: 5개 번호 + 보너스 번호 일치 / 30,000,000원
+    - 3등: 5개 번호 일치 / 1,500,000원
+    - 4등: 4개 번호 일치 / 50,000원
+    - 5등: 3개 번호 일치 / 5,000원
+```
+
+## ⚙️ 실행 방법
+
+### 1. Node.js 설치
+
+- 18.17.1 버전 이상의 Node.js를 설치합니다.
+  - [Node.js 공식 홈페이지](https://nodejs.org/en)에서 설치할 수 있습니다.
+
+### 2. git clone & checkout
+
+```bash
+git clone https://github.com/kangju2000/javascript-lotto-6.git
+git checkout kangju2000
+```
+
+### 3. 패키지 설치
+
+```bash
+npm install
+```
+
+### 4. 실행
+
+```bash
+npm start
+```
+
+### 5. 테스트
+
+```bash
+npm test
+```
+
+<details>
+<summary>과제 요구사항 확인하기</summary>
+
+## 🎯 기능 목록
+
+[여기](/docs/README.md)에서 자세한 기능 목록을 확인할 수 있습니다.
 
 ## 🔍 진행 방식
 
@@ -237,3 +296,5 @@ class Lotto {
 - **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다.
   - [커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 가이드를 참고해 커밋 메시지를 작성한다.
 - 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.
+
+</details>
