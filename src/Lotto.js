@@ -21,6 +21,11 @@ class Lotto {
   getNumber() {
     return this.#numbers;
   }
+
+  match(winNumber) {
+    return this.#numbers.filter(number => winNumber.includes(number)).length;
+  }
+  
 }
 
 export default Lotto;
