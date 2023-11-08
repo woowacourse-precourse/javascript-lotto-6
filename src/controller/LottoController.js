@@ -22,37 +22,58 @@ class LottoController {
   }
 
   async start() {
-    try {
-      await this.#inputAmount();
-      this.#printUserLottos();
+    await this.#inputUntilValid(this.#inputAmount.bind(this));
+    this.#printUserLottos();
+    await this.#inputUntilValid(this.#inputWinningNumbers.bind(this));
+    await this.#inputUntilValid(this.#inputBonusNumber.bind(this));
 
-      await this.#inputWinningNumbers();
-      await this.#inputBonusNumber();
-
-      this.#calculateStatistics();
-      this.#printStatistics();
-      this.#printRateOfReturn();
-    } catch (e) {
-      printMessage(e.message);
-    }
+    this.#calculateStatistics();
+    this.#printStatistics();
+    this.#printRateOfReturn();
   }
 
   async #inputAmount() {
+    if (this.#userLottoModel.getAmount()) {
+      return;
+    }
+
     const amount = await this.#inputView.inputAmount();
 
     this.#userLottoModel.setAmount(amount);
   }
 
   async #inputWinningNumbers() {
+    if (this.#lottoManageModel.getWinningNumbers()) {
+      return;
+    }
+
     const numbers = await this.#inputView.inputWinningNumbers();
 
     this.#lottoManageModel.setWinningNumbers(numbers);
   }
 
   async #inputBonusNumber() {
+    if (this.#lottoManageModel.getBonusNumber()) {
+      return;
+    }
+
     const bonusNumber = await this.#inputView.inputBonusNumber();
 
     this.#lottoManageModel.setBonusNumber(bonusNumber);
+  }
+
+  async #inputUntilValid(callback) {
+    let isValid = false;
+
+    while (!isValid) {
+      try {
+        await callback();
+
+        isValid = true;
+      } catch (e) {
+        printMessage(e.message);
+      }
+    }
   }
 
   #printUserLottos() {
