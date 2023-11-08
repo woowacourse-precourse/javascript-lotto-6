@@ -8,6 +8,13 @@ class UserInputView {
     );
     return purchasePrice;
   }
+
+  static async inputWinningNumbers() {
+    const winningNumber = await MissionUtils.Console.readLineAsync(
+      MESSAGE.enterWinningNumbers,
+    );
+    return winningNumber;
+  }
 }
 
 export default UserInputView;
