@@ -36,6 +36,7 @@ class Lotto {
     try {
       const input = await Console.readLineAsync(INPUT.DRAW);
       const number = input.split(",");
+      this.#drawNumbers = number;
       return this.#validateDraw(number).map(Number);
     } catch (error) {
       Console.print(error.message);
@@ -65,7 +66,7 @@ class Lotto {
       throw new Error(ERROR.NOT_SIX);
     }
     if (this.isDuplicate(numbers)) {
-      throw new Error(ERROR.DUPLICATE);
+      throw new Error(ERROR.DUPLICATE_DRAW);
     }
     return numbers;
   }
@@ -80,6 +81,9 @@ class Lotto {
 
     if (this.isNotOne(bonus)) {
       throw new Error(ERROR.NOT_ONE);
+    }
+    if (this.bonusIncludeDraw(this.#drawNumbers, bonus)) {
+      throw new Error(ERROR.DUPLICATE_BONUS);
     }
     return bonus;
   }
@@ -101,9 +105,14 @@ class Lotto {
     return set.size !== numbers.length;
   };
 
+  bonusIncludeDraw = (drew, bonus) => {
+    return drew.includes(bonus[0]);
+  };
+
   resultOfDraw(random, drew, bonus) {
     let result = this.matchCountCheck(random, drew);
     let isBonus = this.matchBonusCheck(random, bonus);
+
     if (result < 3) {
       return (this.rank = 0);
     }

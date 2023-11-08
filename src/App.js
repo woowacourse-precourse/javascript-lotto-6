@@ -8,6 +8,7 @@ class App {
     this.Profit = new Profit();
     this.Lotto = new Lotto();
   }
+
   async play() {
     const credit = await this.Purchase.getCredit();
     const amountOfLotto = await this.Purchase.getAmountOfLotto(credit);
