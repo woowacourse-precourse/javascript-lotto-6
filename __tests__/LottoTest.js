@@ -1,5 +1,6 @@
 import Lotto from "../src/Lotto.js";
 import validatePrice from "../src/validatePrice.js";
+import validateLottoNumSet from "../src/validateLottoNumSet.js";
 
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -93,5 +94,17 @@ describe("구매 금액 유효성 테스트", () => {
     expect(() => {
       validatePrice("1500");
     }).toThrow("[ERROR]");
+  });
+});
+
+describe("로또 번호 세트 유효성 테스트", () => {
+  test("로또 번호 세트의 번호가 서로 모두 같으면, 로또 번호 세트를 다시 생성한다.", () => {
+    const lottoNumSets = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+    ];
+    const uniqueLottoNumSets = validateLottoNumSet(lottoNumSets);
+    expect(uniqueLottoNumSets).toHaveLength(2);
+    expect(uniqueLottoNumSets[0]).not.toEqual(uniqueLottoNumSets[1]);
   });
 });

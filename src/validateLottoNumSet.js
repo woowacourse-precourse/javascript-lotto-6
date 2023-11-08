@@ -12,8 +12,9 @@ const validateLottoNumSet = (lottoNumSets) => {
         newLottoNumSet = Random.pickUniqueNumbersInRange(1, 45, 6);
       } while(lottoNumSets.some(numSet => isAllEqual(numSet, newLottoNumSet)));
       uniqueLottoNumSets.push(newLottoNumSet);
+    } else { // else를 사용하는 게 더 깔끔해 보입니다!
+      uniqueLottoNumSets.push(anotherLottoNumSet);
     }
-    uniqueLottoNumSets.push(anotherLottoNumSet);
   });
 
   return uniqueLottoNumSets;
