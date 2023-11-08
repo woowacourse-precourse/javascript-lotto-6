@@ -24,6 +24,13 @@ class LottoManager {
 
     return lottoNumberArray;
   }
+
+  generateLottoTickets(money) {
+    this.#money = money;
+    this.#count = parseInt(money / 1000);
+    const arr = Array(this.#count).fill(null);
+    this.#lottoArray = arr.map(() => new Lotto(this.generateLottoNumber()));
+  }
 }
 
 export default LottoManager;
