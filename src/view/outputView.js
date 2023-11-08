@@ -12,13 +12,13 @@ class OutputView {
     Console.print('');
   }
 
-  static showLottoCount(lottoTickets) {
+  static showLottoCount(lottoCount) {
     this.showEmptyLine();
-    Console.print(MESSAGE.LOTTO_TICKET(lottoTickets.length));
+    Console.print(MESSAGE.LOTTO_TICKET(lottoCount));
   }
   
   static showLottoNumbers (lottoTickets) {
-    this.showLottoCount(lottoTickets);
+    this.showLottoCount(lottoTickets.legnth);
 
     lottoTickets.forEach((lotto) => {
       Console.print(`[${String(lotto.getNumbers()).split(DELIMITER).join(DELIMITER_SPACE)}]`);
