@@ -23,7 +23,10 @@ class App {
   validateMoney(money) {
     if (isNaN(money)) {
       MissionUtils.Console.print("[ERROR] 숫자만 입력해주세요.\n");
-    } else if (money % 1000 !== 0) {
+    }else if(money < 1000){
+      MissionUtils.Console.print("[ERROR] 최소 1000 이상을 입력해야 합니다.\n");
+    } 
+    else if (money % 1000 !== 0) {
       MissionUtils.Console.print("[ERROR] 1000원 단위로 입력해주세요.\n");
     } else return true;
   }
