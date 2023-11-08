@@ -2,11 +2,14 @@ import { Console } from "@woowacourse/mission-utils";
 import Input from "../Input/Input";
 import LottoCount from "../Main/LottoCount";
 import Output from "../Output/Output";
-import Lottos from "../domain/Lottos";
+import Lottos from "../Main/Lottos";
+import WinningNumber from "../Main/WinningNumber";
+import BonusNumber from "../domain/BonusNumber";
 
 class LottoController {
   #lottoCount;
   #lottos;
+  #winningNumber;
 
   constructor() {}
 
@@ -32,8 +35,14 @@ class LottoController {
 
   async requestWinningNumber() {
     const winningNumber = await Input.lottoWinningNumber();
-    Console.print(winningNumber);
-    Console.print(typeof winningNumber);
+    this.#winningNumber = new WinningNumber(winningNumber);
+    Console.print(this.#winningNumber.getWinningNumber());
+  }
+
+  async requestBonusNumber() {
+    const bonusNumber = await Input.lottoBonusNumber();
+    this.#winningNumber = new BonusNumber(bonusNumber);
+    Console.print(this.#winningNumber.getBonusNumber());
   }
 }
 

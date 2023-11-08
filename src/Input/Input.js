@@ -18,6 +18,13 @@ const Input = {
     Validator.InputWinningNumber(winningNumber);
     return winningNumber;
   },
+
+  async lottoBonusNumber(winningNumber) {
+    const bonusNumber = await Console.readLineAsync(
+      PRINT_MESSAGE.REQUEST_BONUS_NUMBER
+    );
+    return bonusNumber;
+  },
 };
 
 export default Input;
