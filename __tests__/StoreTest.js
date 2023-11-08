@@ -14,6 +14,24 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const getRankCountMap = () => {
+  const rankCountMapOutput = new Map([
+    [1, 1],
+    [2, 0],
+    [3, 0],
+    [4, 0],
+    [5, 1],
+  ]);
+  return rankCountMapOutput;
+};
+
+function lottoIssue(store, randomMockInput, lottoMockAmount) {
+  mockRandoms(randomMockInput);
+  store.calculateLottoAmount = jest.fn().mockReturnValue(lottoMockAmount);
+  store.issueLotto();
+  Random.pickUniqueNumbersInRange.mockClear();
+}
+
 describe("스토어 클래스 테스트", () => {
   test("구입 금액에 따른 로또 개수를 올바르게 구하는지 테스트", async () => {
     const store = new Store();
@@ -33,9 +51,7 @@ describe("스토어 클래스 테스트", () => {
       [3, 5, 11, 16, 32, 38],
     ];
 
-    mockRandoms(RANDOM_INPUT);
-    store.calculateLottoAmount = jest.fn().mockReturnValue(LOTTO_AMOUNT);
-    store.issueLotto();
+    lottoIssue(store, RANDOM_INPUT, LOTTO_AMOUNT);
 
     for (const output of outputs) {
       expect(logSpy).toHaveBeenCalledWith(output);
@@ -58,5 +74,22 @@ describe("스토어 클래스 테스트", () => {
     for (const output of outputs) {
       expect(logSpy).toHaveReturnedWith(output);
     }
+  });
+
+  test("등수 통계 산출하기 테스트", async () => {
+    const store = new Store();
+    const rankCountMapOutput = getRankCountMap();
+
+    const LOTTO_AMOUNT = 2;
+    const RANDOM_INPUT = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 11, 12, 13],
+    ];
+
+    lottoIssue(store, RANDOM_INPUT, LOTTO_AMOUNT);
+
+    expect(store.calculateRankStatistics([1, 2, 3, 4, 5, 6], 7)).toEqual(
+      rankCountMapOutput
+    );
   });
 });
