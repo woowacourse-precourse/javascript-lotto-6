@@ -23,7 +23,7 @@ class LottoOutput {
       const lottoRandomNum = Random.pickUniqueNumbersInRange(1, 45, 6);
       lottoRandomNum.sort((a, b) => a - b);
 
-      Console.print(lottoRandomNum);
+      Console.print(`[${lottoRandomNum.join(", ")}]`);
       this.lottoNumArr.push(lottoRandomNum);
     }
   }
