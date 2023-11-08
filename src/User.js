@@ -15,14 +15,14 @@ class User {
             const money = await Console.readLineAsync(
                 `${CONSTANT.MONEY_INPUT_ASK}\n`
             );
-            this.#validate(money);
+            this.#validateMoney(money);
             this.#money = Number(money);
         } catch (e) {
             Console.print(e.message);
             await this.setMoney();
         }
     }
-    #validate(money) {
+    #validateMoney(money) {
         if (Number(money) % 1000 != 0) throw new Error(CONSTANT.ERROR);
     }
 
