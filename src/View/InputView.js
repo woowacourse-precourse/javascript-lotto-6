@@ -3,62 +3,85 @@ import { MissionUtils } from '@woowacourse/mission-utils'
 const InputView = {
     // 사용자로부터 금액 받기
     async getMoney(){
-        const input = await MissionUtils.Console.readLineAsync('구입금액을 입력해주세요.')
-        this.checkMoneyValidity(input)
+        try{
+            const input = await MissionUtils.Console.readLineAsync('구입금액을 입력해주세요.')
+            this.checkIsNumber(Number(input))
+            this.checkIsInteger(Number(input))
+            this.checkUnit(Number(input))
+            this.checkMoneyRange(Number(input))
 
-        return Number(input)
+            return Number(input)
+        }
+        catch(error){
+            MissionUtils.Console.print('[ERROR]')
+        }
+        
     },
 
-    // 금액의 유효성 체크
-    checkMoneyValidity(money){
-        // checkNumberValidity 활용하기
-        if(isNaN(money)) throw new Error('[ERROR] 숫자를 입력하세요.')
+    checkIsNumber(number){
+        if (isNaN(number)) {
+            throw new Error('[ERROR]')
+        }
+    },
 
-        const money_num = Number(money)
-        if(!Number.isInteger(money_num)) throw new Error('[ERROR] 정수로 금액을 입력해주세요.')
+    checkIsInteger(number){
+        if(!Number.isInteger(number)){
+            throw new Error('[ERROR]')
+        }
+    },
 
-        if(money_num <= 0) throw new Error('[ERROR] 금액을 양수로 입력해주세요.')
+    checkUnit(number){
+        if(number%1000 !== 0){
+            throw new Error('[ERROR]')
+        }
+    },
 
-        if(money_num%1000 !== 0) throw new Error('[ERROR] 1000원 단위로 금액을 입력해주세요.')
+    checkMoneyRange(number){
+        if(number < 1000){
+            throw new Error('[ERROR]')
+        }
     },
 
     // 사용자로부터 당첨번호 받기
     async getWinningLotto(){
-        const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.')
-        const splitInput = input.split(',')
-        this.checkLottoValidity(splitInput)
+        try{
+            const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.')
+            const splitInput = input.split(',').map(Number)
+            this.checkLottoValidity(splitInput)
+    
+            const sortedInput = splitInput.sort((a, b) => a - b)
+            return sortedInput
+        }
+        catch(error){
+            MissionUtils.Console.print('[ERROR]')
+        }
 
-        const numberInput = splitInput.map(Number)
-        const sortedInput = numberInput.sort((a, b) => a - b)
-        return [...sortedInput]
     },
 
     // 당첨번호 유효성 확인
     checkLottoValidity(lotto){
         if(lotto.length !== 6) throw new Error('[ERROR] 숫자를 6개 입력하세요.')
 
+        this.checkDuplicate(lotto)
+
         lotto.forEach(lotto => {
-            this.checkNumberValidity(lotto)
+            this.checkIsNumber(Number(lotto))
+            this.checkIsInteger(Number(lotto))
         })
     },
+
+    checkDuplicate(array){
+        const set = new Set(array)
+
+        return set.length !== array.length
+    }, 
 
     // 사용자로부터 보너스번호 받기
     async getBonus(){
         const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.')
-        this.checkNumberValidity(input)
 
         return Number(input)
-    },
-
-    // 보너스번호 유효성 확인
-    checkNumberValidity(number){
-        if(isNaN(number)) throw new Error('[ERROR] 숫자를 입력하세요.')
-
-        const temp = Number(number)
-        if(!Number.isInteger(temp)) throw new Error('[ERROR] 정수를 입력하세요.')
-
-        if(temp <= 0) throw new Error('[ERROR] 양수를 입력하세요.')
-    },
+    }
 }
 
 module.exports = InputView
