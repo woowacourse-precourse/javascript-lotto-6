@@ -19,6 +19,14 @@ class LottoResult {
     description: '6개 일치',
     prize: 2000000000,
   };
+
+  static getPrize = (count, isBonus) => {
+    if (count == 3) return LottoResult.CASE_3;
+    if (count == 4) return LottoResult.CASE_4;
+    if (count == 5 && !isBonus) return LottoResult.CASE_5;
+    if (count == 5 && isBonus) return LottoResult.CASE_5_BONUS;
+    if (count == 6) return LottoResult.CASE_6;
+  };
 }
 
 export default LottoResult;
