@@ -12,17 +12,25 @@ class LottoController {
 
   #rateOfReturn;
 
-  constructor() {}
+  constructor() {
+    this.#lottos = [];
+    this.#winningStatistics = [];
+    this.#rateOfReturn = '';
+  }
 
   async gameStart() {
     const purchaseAmount = await this.#inputPurchaseAmount();
     const count = this.#getCount(purchaseAmount);
+
     this.#generateLottos(count);
     this.#printLottos(count);
+
     const winningNumbers = await this.#inputWinningNumbers();
     const bonusNumber = await this.#inputBonusNumber();
+
     this.#generateWinningStatistics(winningNumbers, bonusNumber);
     this.#printWinningStatistics();
+    
     this.#generateRateOfReturn(this.#winningStatistics.getWinningStatistics(), purchaseAmount);
     this.#printRateOfReturn();
   }
@@ -34,7 +42,7 @@ class LottoController {
   async #inputWinningNumbers() {
     return InputView.readWinningNumbers();
   }
-
+  
   async #inputBonusNumber() {
     return InputView.readbonusNumber();
   }
