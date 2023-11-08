@@ -17,24 +17,33 @@ export class Input {
   }
 
   async getWinningNumber() {
-    const winningNumberInput = await Console.readLineAsync(
-      MESSAGE.inputWinningNumber
-    );
-    const winningNumbers = winningNumberInput
-      .split(',')
-      .map((number) => Number(number.trim()));
-
-    try {
-      new Lotto(winningNumbers);
-    } catch (error) {
-      throw error;
+    while (true) {
+      try {
+        const winningNumberInput = await Console.readLineAsync(
+          MESSAGE.inputWinningNumber
+        );
+        const winningNumbers = winningNumberInput
+          .split(',')
+          .map((number) => Number(number.trim()));
+        new Lotto(winningNumbers);
+        return winningNumbers;
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
-    return winningNumbers;
   }
 
   async getBonusNumber() {
-    const bonusNumber = await Console.readLineAsync(MESSAGE.inputBonusNumber);
-    validBonusNumber(bonusNumber);
-    return Number(bonusNumber);
+    while (true) {
+      try {
+        const bonusNumber = await Console.readLineAsync(
+          MESSAGE.inputBonusNumber
+        );
+        validBonusNumber(bonusNumber);
+        return Number(bonusNumber);
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
   }
 }
