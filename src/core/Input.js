@@ -24,7 +24,7 @@ export default class Input {
     while (true) {
       try {
         const response = await Console.readLineAsync(
-          "구입금액을 입력해 주세요.\n"
+          "\n구입금액을 입력해 주세요.\n"
         );
 
         purchaseValue = parseInt(response);
@@ -46,7 +46,7 @@ export default class Input {
     while (true) {
       try {
         const response = await Console.readLineAsync(
-          "당첨 번호를 입력해주세요.\n"
+          "\n당첨 번호를 입력해주세요.\n"
         );
 
         this.#winningNumbers = parseToCommaSeperatedIntegers(response);
@@ -59,5 +59,27 @@ export default class Input {
     }
 
     return this.#winningNumbers;
+  }
+
+  /**
+   * @returns {Promise<number>}
+   */
+  async askBounsNumber() {
+    let bonusNumber;
+    while (true) {
+      try {
+        const response = await Console.readLineAsync(
+          "\n보너스 번호를 입력해 주세요.\n"
+        );
+
+        bonusNumber = parseInt(response);
+        this.#assert.assertBounsNumber(bonusNumber, this.#winningNumbers);
+
+        break;
+      } catch (error) {
+        Console.print(error.message + "\n");
+      }
+    }
+    return bonusNumber;
   }
 }
