@@ -2,7 +2,6 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Lotto {
   #numbers;
-  q2;
 
   constructor(numbers) {
     this.#validate(numbers);
