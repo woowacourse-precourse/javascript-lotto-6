@@ -96,3 +96,9 @@ describe("로또 테스트", () => {
   });
 });
 
+describe("inputPurchaseAmount 테스트", () => {
+  test("1000원 단위의 금액을 입력하지 않으면 에러가 발생", async () => {
+    await runException("500"); // 1000원 단위가 아닌 입력
+  });
+})
+
