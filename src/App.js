@@ -38,35 +38,49 @@ class App {
   }
 
   async createLotto(lottoQuantity) {
-    while (this.lottos.length < lottoQuantity) {
+    let lottos = this.lottos;
+    while (lottos.length < lottoQuantity) {
       const lottoNumber = lottoRandomNumber(LOTTO.MIN, LOTTO.MAX, LOTTO.LENGTH);
-      this.lottos.push(new Lotto(lottoNumber));
+      lottos.push(new Lotto(lottoNumber));
     }
     print(MESSAGE.PURCHASE_QUANTITY(lottoQuantity));
-    this.lottos.forEach((lotto) => lotto.printLottos());
-    this.winningNumber();
+    lottos.forEach((lotto) => lotto.printLottos());
+    this.winningNumber(lottos);
   }
 
-  async winningNumber() {
+  async winningNumber(lottos) {
     const inputWinningNumber = await winningNumberInput();
-    this.createWinningNumber(inputWinningNumber);
+    this.createWinningNumber(lottos, inputWinningNumber);
   }
-  async createWinningNumber(inputWinningNumber) {
+
+  async createWinningNumber(lottos, inputWinningNumber) {
     validateWinningInput(inputWinningNumber);
     const winningNumber = inputWinningNumber
       .split(",")
       .map((number) => Number(number));
     validateWinningNumber(winningNumber);
-    this.bonusNumber(winningNumber);
+    this.bonusNumber(lottos, winningNumber);
   }
 
-  async bonusNumber(winningNumber) {
+  async bonusNumber(lottos, winningNumber) {
     const inputBonusNumber = Number(await bonusNumberInput());
     this.createBonusNumber(inputBonusNumber, winningNumber);
+    this.lottoMatch(lottos, winningNumber, inputBonusNumber);
   }
 
   async createBonusNumber(inputBonusNumber, winningNumber) {
     validateBonusNumberInput(inputBonusNumber, winningNumber);
+  }
+
+  async lottoMatch(lottos, winningNumber, inputBonusNumber) {
+    let matchLottoCount = [];
+    let matchLottoBonus = [];
+    lottos.forEach((lotto) => {
+      matchLottoCount.push(lotto.matchLotto(winningNumber));
+      matchLottoBonus.push(lotto.matchLottoBonus(inputBonusNumber));
+    });
+    console.log(matchLottoCount);
+    console.log(matchLottoBonus);
   }
 }
 

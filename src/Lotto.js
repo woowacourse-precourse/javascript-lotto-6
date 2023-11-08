@@ -20,6 +20,14 @@ class Lotto {
     lottoSort(this.#numbers);
     print(`[${this.#numbers.join(", ")}]`);
   };
+
+  matchLotto = (winningNumber) => {
+    const matchValue = this.#numbers.filter((v) => winningNumber.includes(v));
+    return matchValue.length;
+  };
+  matchLottoBonus = (inputBonusNumber) => {
+    return this.#numbers.includes(inputBonusNumber);
+  };
 }
 
 export default Lotto;
