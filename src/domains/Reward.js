@@ -1,4 +1,5 @@
 import { REWARD_MESSAGES } from '../constants/rewardMessage.js';
+import Lotto from '../Lotto.js';
 
 class Reward {
   /**
@@ -169,7 +170,7 @@ class Reward {
       Reward.INITIAL_STATISTICS,
     );
 
-    const totalSpent = lottos.length * 1000;
+    const totalSpent = lottos.length * Lotto.LOTTO_PRICE;
     const rateOfReturn = ((totalPrize / totalSpent) * 100).toFixed(1);
 
     return this.formatOutput(updatedStatistics, rateOfReturn);
