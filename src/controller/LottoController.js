@@ -12,10 +12,14 @@ class LottoController {
     this.#lottoCount = lottoCount;
   }
 
-  inputLottoPrice() {
-    const price = Input.readPrice();
+  async inputLottoPrice() {
+    const price = await Input.readPrice();
     const validation = new Validation(price);
-    validation.validatePrice();
+    try {
+      validation.validatePrice();
+    } catch {
+      await this.inputLottoPrice();
+    }
     this.setLottoCount(price / 1000);
   }
 }
