@@ -1,6 +1,7 @@
 const message = Object.freeze({
   invalidAmountFormat: '[ERROR] 입력하신 로또 구입금액이 잘못된 형식입니다.',
   lessMinimumAmount: '[ERROR] 최소 1,000원 이상 입력해주세요.',
+  notDivisible: '[ERROR] 로또 구입 금액은 1,000원 단위로 입력해야 합니다.',
 
   length: '[ERROR] 당첨 번호는 6개 입력해야 합니다.',
   notNumber: '[ERROR] 당첨 번호는 숫자를 입력해야 합니다.',

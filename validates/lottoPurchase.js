@@ -12,3 +12,9 @@ export const validateMinimumAmount = (amount) => {
     throw new Error(ERROR_MESSAGES.message.lessMinimumAmount);
   }
 };
+
+export const validateUndivided = (amount) => {
+  if (amount % 1000 !== 0) {
+    throw new Error(ERROR_MESSAGES.message.notDivisible);
+  }
+};

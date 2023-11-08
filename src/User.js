@@ -3,6 +3,7 @@ import { MESSAGES } from '../constants/messages.js';
 import {
   validateFormat,
   validateMinimumAmount,
+  validateUndivided,
 } from '../validates/lottoPurchase.js';
 import {
   checkDuplicate,
@@ -34,8 +35,9 @@ class User {
 
         validateFormat(amount);
         validateMinimumAmount(amount);
+        validateUndivided(amount);
 
-        this.#lottoCount = Math.floor(amount / 1000);
+        this.#lottoCount = amount / 1000;
         Console.print(`\n${this.#lottoCount}${MESSAGES.output.lottoPurchased}`);
         return this.#lottoCount;
       } catch (error) {
