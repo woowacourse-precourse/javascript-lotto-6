@@ -1,11 +1,15 @@
 //@ts-check
 
-import { WINNING_NUMBER_AMOUNT, LOTTO_NUMBER_RANGE, MONEY_UNIT } from "./const";
+import {
+  WINNING_NUMBER_AMOUNT,
+  LOTTO_NUMBER_RANGE,
+  MONEY_UNIT,
+} from "./const.js";
 import {
   BonusNumberError,
   PurchaseValueError,
   WinningNumberError,
-} from "../utils/Error";
+} from "../utils/Error.js";
 
 export default class Assert {
   constructor() {}

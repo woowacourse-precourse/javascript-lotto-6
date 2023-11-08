@@ -1,9 +1,9 @@
-import Assert from "../src/core/Assert";
+import Assert from "../src/core/Assert.js";
 import {
   BonusNumberError,
   PurchaseValueError,
   WinningNumberError,
-} from "../src/utils/Error";
+} from "../src/utils/Error.js";
 
 describe("Assert 클래스 테스트", () => {
   /** @type {Assert} */
