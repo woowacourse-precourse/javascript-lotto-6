@@ -25,7 +25,6 @@ class Lotto {
   async compareWith(randomNum) {
     // 보너스 번호 비교및 중복체크(올바른지 여부도 체크)
     const bonus = await new Create().userBonusNumber();
-
     const userNum = { user: this.#numbers, bonus };
 
     const check = new CheckNumber({ randomNum, userNum });
