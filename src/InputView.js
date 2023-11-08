@@ -27,7 +27,7 @@ class InputView {
     this.playerMoney = Number(playerInputMoney);
   }
 
-  async inputBonusNumber() {
+  async BonusNumber() {
     const playerInputBonus = await Console.readLineAsync(INPUT_BONUST_NUMBER);
     this.bonusNumber = Number(playerInputBonus);
     return this.bonusNumber;

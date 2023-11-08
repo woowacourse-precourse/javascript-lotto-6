@@ -1,5 +1,5 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-
+import { Console, MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 class LottoGenerator {
   constructor() {
     this.LottoNumbers = [];

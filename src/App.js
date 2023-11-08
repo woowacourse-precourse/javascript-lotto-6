@@ -23,6 +23,7 @@ class App {
 
     const amountLotto = machine.CalculatorOfLottoAmount(inputview.playerMoney);
     const purchase = lottoGerner.purchaseLotto(amountLotto);
+    
 let inputLottoNumber = 0;
     while(true){
       try {
@@ -32,6 +33,7 @@ let inputLottoNumber = 0;
         Console.print(error.message);
       }
     }
+    
     
     const winningNumber = inputview.toNumberArray(inputLottoNumber);
     const lotto = new Lotto(winningNumber);

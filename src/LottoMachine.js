@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Machine {
   CalculatorOfLottoAmount(money) {
     const amount = Math.floor(money / 1000);
@@ -5,3 +7,5 @@ class Machine {
     return amount;
   }
 }
+
+export default Machine;
