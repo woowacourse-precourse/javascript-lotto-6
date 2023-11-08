@@ -54,7 +54,7 @@ class Controller {
   }
 
   async #getPurchaseAmount() {
-    const inputLottoPurchaseAmount = Number(await InputView.readLottoPurchaseAmount());
+    const inputLottoPurchaseAmount = await InputView.readLottoPurchaseAmount();
     this.#purchaseAmount = new Purchaser(inputLottoPurchaseAmount).purchaseAmount;
   }
 
@@ -87,7 +87,7 @@ class Controller {
   }
 
   async #getBonusNumber() {
-    const inputBonusNumber = Number(await InputView.readLottoBonusNumber());
+    const inputBonusNumber = await InputView.readLottoBonusNumber();
     this.#bonusNumber = new Bonus(this.#winningNumbers, inputBonusNumber).bonusNumber;
   }
 
