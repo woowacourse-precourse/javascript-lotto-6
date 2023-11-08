@@ -30,11 +30,11 @@ class Result {
 
   getResults(boughtLottos) {
     for (let lotto of boughtLottos) {
-      this.getResult(lotto);
+      this.#getResult(lotto);
     }
   }
 
-  getResult(boughtLotto) {
+  #getResult(boughtLotto) {
     let winning = 0;
     let bonus = 0;
     for (let number of boughtLotto.numbers) {
