@@ -37,4 +37,9 @@ describe("App", () => {
       
         await expect(app.requestWinningNumbers()).rejects.toThrow(ErrorMessages.INVALID_NUMBER_FORMAT);
       });
+
+    test('로또 번호에 1부터 45 범위 밖의 숫자가 포함된 경우 에러를 발생시킨다', () => {
+        const outOfRangeNumbers = [46, 2, 3, 4, 5, 6];
+        expect(() => app.validateLottoNumbers(outOfRangeNumbers)).toThrow(ErrorMessages.OUT_OF_RANGE_LOTTO_NUMBER);
+    })
 });

@@ -58,6 +58,9 @@ class App {
     if (uniqueNumbers.size !== numbers.length) {
       throw new LottoError(ErrorMessages.DUPLICATE_LOTTO_NUMBERS);
     }
+    if (numbers.some(number => number <1 || number >45)) {
+      throw new LottoError(ErrorMessages.OUT_OF_RANGE_LOTTO_NUMBER);
+    }
   }
 
   #printLottos() {
@@ -74,22 +77,29 @@ class App {
 
   async #requestNumbers (promptMessage, isBonus = false) {
     MissionUtils.Console.print(promptMessage);
-    let input = await MissionUtils.Console.readLineAsync();
+    const input = await MissionUtils.Console.readLineAsync();
 
-    if(!isBonus && !/^(\d+,)+\d+$/.test(input)) {
-      throw new LottoError(ErrorMessages.INVALID_NUMBER_FORMAT)
+    if(!isBonus) {
+      return this.#parseNumbers(input);
+    }
+    return this.#parseBonusNumber(input);
+  }
+
+  #parseNumbers(input) {
+    if (!/^(\d+,)+\d+$/.test(input)) {
+      throw new LottoError(ErrorMessages.INVALID_NUMBER_FORMAT);
     }
 
-    if (isBonus) {
-      const bonusNumber = parseInt(input.trim(), 10);
-      MissionUtils.Console.print(`${bonusNumber}\n`)
-      return bonusNumber;
-    } else {
-      let numbers = input.split(',').map (s => parseInt(s.trim(), 10));
-      MissionUtils.Console.print(`${numbers.join(',')}\n`)
-      const lotto = new Lotto(numbers);
-      return lotto.numbers;
-    }
+    const numbers = input.split(',').map (s => parseInt(s.trim(), 10));
+    MissionUtils.Console.print(`${numbers.join(',')}\n`);
+    const lotto = new Lotto(numbers);
+    return lotto.numbers;
+  }
+
+  #parseBonusNumber(input) {
+    const bonusNumber = parseInt(input.trim(), 10);
+    MissionUtils.Console.print(`${bonusNumber}\n`);
+    return bonusNumber;
   }
 
   #calculatePrize(winningNumbers) {
