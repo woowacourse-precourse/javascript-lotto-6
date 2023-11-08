@@ -11,6 +11,20 @@ const validation = {
         return 0;
     },
 
+    checkLottoNum(input) {
+        input.forEach((num) => {
+            if (num < LOTTO.MIN_RANGE || num > LOTTO.MAX_RANGE)
+                throw new Error(ERROR_MSG.NUM_RANGE);
+        });
+        if (input.length !== LOTTO.LENGTH)
+            throw new Error(ERROR_MSG.NUM_LENGTH);
+
+        if (new Set(input).size !== input.length)
+            throw new Error(ERROR_MSG.NUM_DUPE);
+
+        return 0;
+    },
+
     checkWinningNum(input) {
         input.forEach((num) => {
             if (isNaN(num))
