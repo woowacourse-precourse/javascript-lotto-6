@@ -77,6 +77,22 @@ class LottoGame {
     })
   }
 
+  async inputAnswerLotto() {
+    const answerLotto = await Console.readLineAsync("\n당첨 번호를 입력해주세요.\n");
+    const answerLottoArray = answerLotto.split(',').map((item) => Number(item.trim()));
+    this.#answerLotto = new Lotto(answerLottoArray);
+  }
+
+  async inputBonusLotto() {
+    const bonusLotto = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
+    const answerLotto = this.#answerLotto.getNumbers();
+    this.#bonusLotto = new BonusLotto(bonusLotto, answerLotto);
+  }
+
+  async getLottoTickets() {
+    return this.#lottoTickets;
+  }
+
   
 }
 
