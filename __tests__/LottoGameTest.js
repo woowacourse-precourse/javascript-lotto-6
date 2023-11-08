@@ -7,7 +7,7 @@ describe('로또 게임 테스트', () => {
     for (let i = 0; i < lottoGame.count; i++) {
       lottoGame.addLotto(new Lotto([1, 2, 3, 4, 5, 6]));
     }
-    lottoGame.addWinningNumbers([1, 2, 3, 4, 5, 6]);
+    lottoGame.addWinningNumbers('1,2,3,4,5,6');
     lottoGame.addBonusNumber(9);
 
     lottoGame.calculateLottoResult();
@@ -24,7 +24,7 @@ describe('로또 게임 테스트', () => {
   test('당첨 숫자만 포함된 2차원 배열을 반환하는지 검사', () => {
     const lottoGame = new LottoGame(5000);
 
-    lottoGame.addWinningNumbers([1, 2, 3, 4, 5, 6]);
+    lottoGame.addWinningNumbers('1,2,3,4,5,6');
     lottoGame.addBonusNumber(9);
 
     // 1등
@@ -50,7 +50,7 @@ describe('로또 게임 테스트', () => {
   test('5, 4, 3, 2, 1 등이 한장씩 있을 경우', () => {
     const lottoGame = new LottoGame(5000);
 
-    lottoGame.addWinningNumbers([1, 2, 3, 4, 5, 6]);
+    lottoGame.addWinningNumbers('1,2,3,4,5,6');
     lottoGame.addBonusNumber(9);
 
     // 1등
@@ -84,7 +84,7 @@ describe('로또 게임 테스트', () => {
   test('application test 검증', () => {
     const lottoGame = new LottoGame(8000);
 
-    lottoGame.addWinningNumbers([1, 2, 3, 4, 5, 6]);
+    lottoGame.addWinningNumbers('1,2,3,4,5,6');
     lottoGame.addBonusNumber(7);
 
     // 1등
