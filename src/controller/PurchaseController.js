@@ -1,4 +1,3 @@
-import { Random, Console } from '@woowacourse/mission-utils';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import { ERROR_MESSEGE } from '../constant/messages.js';
@@ -10,21 +9,21 @@ class PurchaseController {
     while (true) {
       try {
         purchaseAmount = await InputView.inputPurchaseAmount();
-        this.validatePurchaseAmount(purchaseAmount);
+        this.#validatePurchaseAmount(purchaseAmount);
         break;
       } catch (error) {
         OutputView.printError(error.message);
       }
     }
-    return this.buyLottos(purchaseAmount);
+    return this.#buyLottos(purchaseAmount);
   }
 
-  buyLottos(purchaseAmount) {
+  #buyLottos(purchaseAmount) {
     const lottos = new Lottos(purchaseAmount).getLottos();
     return lottos;
   }
 
-  validatePurchaseAmount(purchaseAmount) {
+  #validatePurchaseAmount(purchaseAmount) {
     if (!purchaseAmount) {
       throw new Error(ERROR_MESSEGE.notInput);
     }
