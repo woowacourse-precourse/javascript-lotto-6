@@ -13,7 +13,7 @@ describe('Validators 테스트', () => {
     test('음수 -1이 false인지 테스트', () => {
       expect(Validator.isDecimalChar('-1')).toBeFalsy();
     });
-  });
+});
 
   describe('isValidateNumber 테스트', () => {
     test('123이 정상 처리되는지 테스트', () => {
