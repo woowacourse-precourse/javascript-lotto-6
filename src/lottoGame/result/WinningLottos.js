@@ -18,13 +18,8 @@ export class WinningLottosResult {
     this.#userMoney = userMoney;
   }
 
-  #setWinningLottos(lottoResult) {
-    this.#winningLottosResult.forEach((winningLotto) => {
-      if (lottoResult.isWin(winningLotto.condition)) {
-        winningLotto.count += 1;
-        winningLotto.profit += winningLotto.prize;
-      }
-    });
+  getWinningLottosResult() {
+    return this.#winningLottosResult;
   }
 
   getTotalProfitRate() {
@@ -35,6 +30,28 @@ export class WinningLottosResult {
 
     const rate = (totalProfit / this.#userMoney) * 100;
     return getRoundedNumber(rate);
+  }
+
+  #setWinningLottos(lottoResult) {
+    this.#winningLottosResult.forEach((winningLotto) => {
+      const { condition } = winningLotto;
+      const { winningNumbersCount, bonusNumberType: winningBonusNumberType } = condition;
+
+      if (lottoResult.isWin()) {
+        const { countOfWinningNumbers, bonusNumberType } = lottoResult.get();
+
+        if (
+          winningNumbersCount === countOfWinningNumbers &&
+          winningBonusNumberType === bonusNumberType
+        )
+          this.#increaseWinningLottoCountAndProfit(winningLotto);
+      }
+    });
+  }
+
+  #increaseWinningLottoCountAndProfit(winningLotto) {
+    winningLotto.count += 1;
+    winningLotto.profit += winningLotto.prize;
   }
 
   print() {
