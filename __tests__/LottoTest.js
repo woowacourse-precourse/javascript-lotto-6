@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
-import getWinningStatistics from '../src/utils/getWinningStatistics.js';
 import Lottos from '../src/domain/Lottos.js';
-import getRateOfReturn from '../src/utils/getRateOfReturn.js';
+import RateOfReturn from '../src/domain/RateOfReturn.js';
+import WinningStatistics from '../src/domain/WinningStatistics.js';
 
 const mockRandoms = numbers => {
   Random.pickUniqueNumbersInRange = jest.fn();
@@ -39,15 +39,16 @@ describe('로또 기능 테스트', () => {
     ];
     mockRandoms(random);
     const lottos = new Lottos(count).getLottos();
-
-    expect(getWinningStatistics(lottos, winningNumbers, bonusNumber)).toStrictEqual(expectedValue);
+    const winningStatistics = new WinningStatistics(lottos, winningNumbers, bonusNumber).getWinningStaticsString();
+    expect(winningStatistics).toStrictEqual(expectedValue);
   });
 
   test('총 수익률을 계산하는 기능', () => {
     const purchaseAmount = 8000;
-    const returns = [5000];
+    const winningStatistics = [0, 0, 3];
     const expectedValue = '62.5%';
+    const rateOfReturn = new RateOfReturn(winningStatistics, purchaseAmount).getRateOfReturn();
 
-    expect(getRateOfReturn(purchaseAmount, returns)).toBe(expectedValue);
+    expect(rateOfReturn).toBe(expectedValue);
   });
 });
