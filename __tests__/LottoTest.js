@@ -37,7 +37,7 @@ describe("로또 클래스 테스트", () => {
       Lotto.printLottos(lottos);
       expect(consoleSpy).toHaveBeenCalledWith("3개를 구매했습니다.");
       lottos.forEach(lotto => {
-        expect(consoleSpy).toHaveBeenCalledWith(`[ ${lotto.numbers.join(', ')} ]`);
+        expect(consoleSpy).toHaveBeenCalledWith(`[${lotto.numbers.join(', ')}]`);
       });
       consoleSpy.mockRestore();
     });
