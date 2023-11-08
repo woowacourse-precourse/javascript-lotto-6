@@ -8,7 +8,6 @@ class LottoGame {
   #winningNumber;
   #bonusNumber;
 
-  //로또를 발행하기
   generateLottoTickets(purchaseMoney) {
     this.#purchaseMoney = purchaseMoney;
     this.#lottoCount = this.calculateLottoCount();
