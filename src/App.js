@@ -52,22 +52,38 @@ class App {
     });
   }
 
-  async play() {
-    let count = await this.calculateLottoCount();
+  calculateTotalPrize = (stats) => {
+    let total = 0;
+    total += stats[0] * 5000;
+    total += stats[1] * 50000;
+    total += stats[2] * 1500000;
+    total += stats[3] * 30000000;
+    total += stats[4] * 2000000000;
+    return total;
+  }
+  earningsRate = (stats, count) => {
+    const totalPrize = this.calculateTotalPrize(stats);
+    return (totalPrize / (count * 1000) * 100).toFixed(1);
+  }
 
+  createLotto = (count) => {
     const lottoList = [];
     while(count--) {
       lottoList.push(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b));
     }
+    return lottoList;
+  }
+  
+  async play() {
+    let count = await this.calculateLottoCount();
+    const lottoList = this.createLotto(count);
     this.printLottoNumbers(lottoList);
-
     const win = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     const lotto = new Lotto(win.split(',').map(v=>Number(v)));
-
     const bonus = await this.inputBonus(win);
-
     const result = lotto.stats(lottoList, bonus);
     this.printResult(result);
+    MissionUtils.Console.print(`총 수익률은 ${this.earningsRate(result, count)}%입니다.`);
   }
 }
 
