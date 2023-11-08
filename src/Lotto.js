@@ -1,4 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import ExceptionList from './ExceptionList';
 
 class Lotto {
   #numbers;
@@ -13,6 +14,12 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+    const exception=new ExceptionList();
+    exception.sameNumberError(numbers);
+    numbers.forEach((number)=>{
+      exception.isNaNError(number);
+      exception.numberRangeError(number);
+    })
   }
   printNumbers() {
     let stringNumber=`[${this.#numbers.join(', ')}]`
