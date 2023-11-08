@@ -23,21 +23,35 @@ class InputView {
     return playerWinningNumber;
   }
 
-  async inputAmountOfMoney() {
-    const playerInputMoney = await Console.readLineAsync(INPUT_PURCHASING_AMOUNT);
-    if (isNaN(playerInputMoney)) {
-      throw new Error('[ERROR] 금액은 숫자로 입력해주세요.');
-    }
-    this.playerMoney = Number(playerInputMoney);
-  }
+  async getPlayerInputMoney() {
+    while (true) {
+      try {
+        const playerInputMoney = await Console.readLineAsync(INPUT_PURCHASING_AMOUNT);
+        if (isNaN(playerInputMoney)) {
+          throw new Error('[ERROR] 금액은 숫자로 입력해주세요.');
+        }
 
-  async inputBonusNumber() {
-    const playerInputBonus = await Console.readLineAsync(INPUT_BONUST_NUMBER);
-    if (isNaN(this.bonusNumber)) {
-      throw new Error('[ERROR] 보너스 숫자는 숫자로 입력해주세요.');
+        return Number(playerInputMoney);
+      } catch (error) {
+        Console.print(error.message);
+      }
     }
-    this.bonusNumber = Number(playerInputBonus);
-    return this.bonusNumber;
+  }
+    
+  async inputBonusNumber() {
+    while (true) {
+      try {
+        const playerInputBonus = await Console.readLineAsync(INPUT_BONUST_NUMBER);
+        if (!isNaN(playerInputBonus)) {
+          this.bonusNumber = Number(playerInputBonus);
+          return this.bonusNumber;
+        } else {
+          Console.print('[ERROR] 보너스 숫자는 숫자로 입력해주세요.');
+        }
+      } catch (error) {
+        Console.print(`[ERROR] ${error.message}`);
+      }
+    }
   }
 
   stringToNumberArray(inputNumber) {
