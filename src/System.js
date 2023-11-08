@@ -137,6 +137,11 @@ class System {
 
     return prize;
   }
+
+  calculateProfitPercentage(money, prize) {
+    const percentage = ((prize / money) * 100).toFixed(1);
+    return percentage;
+  }
 }
 
 export default System;

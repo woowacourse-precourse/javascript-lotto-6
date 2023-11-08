@@ -27,6 +27,7 @@ class App {
     );
     consolePrint.printPrize(winningCounts);
     const prize = system.calculateTotalWinningMoney(winningCounts);
+    const percentage = system.calculateProfitPercentage(money, prize);
   }
 }
 
