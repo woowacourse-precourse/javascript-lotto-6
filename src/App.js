@@ -33,13 +33,7 @@ class App {
       };
     }
     let check = new Check();
-    checkLotto.forEach((item) => {
-      check.checkCount(item);
-    });
-    check.earnTotal(check.countArray);
-    check.calculateEarnRatio(newMoney.payedMoney);
-    check.printCount(check.countArray);
-    check.printEarnRatio();
+    check.checkLotto(checkLotto,newMoney.payedMoney)
   }
 }
 

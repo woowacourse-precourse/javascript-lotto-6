@@ -70,5 +70,14 @@ class Check {
     MissionUtils.Console.print(this.fiveBonusCorrect(countArray.shift()));
     MissionUtils.Console.print(this.sixCorrect(countArray.shift()));
   }
+  checkLotto(lottoArray,payedMoney){
+    lottoArray.forEach((item) => {
+      this.checkCount(item);
+    });
+    this.earnTotal(this.countArray);
+    this.calculateEarnRatio(payedMoney);
+    this.printCount(this.countArray);
+    this.printEarnRatio();
+  }
 }
 export default Check;
