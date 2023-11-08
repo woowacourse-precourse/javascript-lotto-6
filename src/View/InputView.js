@@ -60,8 +60,7 @@ const InputView = {
 
     // 당첨번호 유효성 확인
     checkLottoValidity(lotto){
-        if(lotto.length !== 6) throw new Error('[ERROR] 숫자를 6개 입력하세요.')
-
+        this.checkLength(lotto)
         this.checkDuplicate(lotto)
 
         lotto.forEach(lotto => {
@@ -70,17 +69,27 @@ const InputView = {
         })
     },
 
+    checkLength(array){
+        if(array.length !== 6) throw new Error('[ERROR] 숫자를 6개 입력하세요.')
+    },
+
     checkDuplicate(array){
         const set = new Set(array)
-
-        return set.length !== array.length
+        if(set.size !== array.length) throw new Error('[ERROR]')
     }, 
 
     // 사용자로부터 보너스번호 받기
     async getBonus(){
-        const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.')
+        try{
+            const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.')
+            this.checkIsNumber(Number(input))
 
-        return Number(input)
+            return Number(input)
+        }
+        catch(error){
+            MissionUtils.Console.print('[ERROR]')
+        }
+
     }
 }
 
