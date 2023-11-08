@@ -198,4 +198,42 @@ describe('Formattor getEqulsElementsCount', () => {
   });
 });
 
+describe('Formattor multiplyValue', () => {
+  test('multiplyValue Function type이다 ', () => {
+    expect(typeof (Formattor.multiplyValue)).toBe('function');
+  })
+  test('multiplyValue 인자 유효성 검사, NaN을 제외한 number가 아니면 에러를 throw한다 ', () => {
+    NUMBER_LIST.errorNumberTestCases.forEach((input) => {
+      const input_dup = input;
+      expect(() => {
+        Formattor.multiplyValue(input, input_dup);
+      }).toThrow(new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER));
+    });
+  });
+  test(`multiplyValue 기능 검사, 두 인자를 곱한 값을 리턴한다. `, () => {
+    const input1 = 2;
+    const input2 = 3;
+    const expected = 6;
+      expect(Formattor.multiplyValue(input1, input2)).toStrictEqual(expected);
+  });
+});
 
+describe('Formattor divideValue', () => {
+  test('divideValue Function type이다 ', () => {
+    expect(typeof (Formattor.divideValue)).toBe('function');
+  })
+  test('divideValue 인자 유효성 검사, NaN을 제외한 number가 아니면 에러를 throw한다 ', () => {
+    NUMBER_LIST.errorNumberTestCases.forEach((input) => {
+      const input_dup = input;
+      expect(() => {
+        Formattor.divideValue(input, input_dup);
+      }).toThrow(new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER));
+    });
+  });
+  test(`divideValue 기능 검사, 두 인자를 나눈 값을 리턴한다. `, () => {
+    const input1 = 6;
+    const input2 = 3;
+    const expected = 2;
+      expect(Formattor.divideValue(input1, input2)).toStrictEqual(expected);
+  });
+});

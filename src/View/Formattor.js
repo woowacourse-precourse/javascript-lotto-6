@@ -95,6 +95,27 @@ const getEqulsValueCount = (input, inpinputArray) => {
   return(0);
 }
 
+const multiplyValue = (value1, value2) => {
+  if (!Number.isInteger(value1)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+  if (!Number.isInteger(value2)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+
+  return (value1 * value2);
+}
+
+const divideValue = (value1, value2) => {
+  if (!Number.isInteger(value1)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+  if (!Number.isInteger(value2)) {
+    throw new ValidationError(ERROR_CONSTANT.NOT_A_NUMBER);
+  }
+
+  return (value1 / value2);
+}
 
 export default {
   formatStringToInteger,
@@ -105,4 +126,6 @@ export default {
   sortAscendingArray,
   getEqulsElementsCount,
   getEqulsValueCount,
+  multiplyValue,
+  divideValue,
 };
