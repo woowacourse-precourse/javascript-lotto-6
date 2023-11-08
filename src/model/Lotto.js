@@ -18,6 +18,9 @@ class Lotto {
       if (number < 1 || number > 45) {
         throw (ERROR_MESSAGE.NUM_RANGE);
       }
+      if (numbers.indexOf(number)) {
+        throw (ERROR_MESSAGE.NUM_RANGE);
+      }
     })
   }
 
