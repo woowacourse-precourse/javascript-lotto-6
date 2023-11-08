@@ -1,6 +1,5 @@
 class Lotto {
   #numbers;
-  #count;
 
   constructor(numbers) {
     this.#numbers = numbers;
