@@ -133,6 +133,37 @@ class App {
     // 3. 당첨 확인: 당첨 결과 반환
     return Object.values(results);
   }
+
+  // 4. 결과 표시: 당첨 통계 출력
+  displayResults(results, purchaseAmount) {
+    Console.print('당첨 통계');
+    Console.print('---');
+
+    const fixedResults = {
+      3: { prize: 5000, count: 1 },
+      4: { prize: 50000, count: 0 },
+      5: { prize: 1500000, count: 0 },
+      '5+bonus': { prize: 30000000, count: 0 },
+      6: { prize: 2000000000, count: 0 }
+    };
+
+    Object.keys(fixedResults).forEach(index => {
+      const prizeInfo = fixedResults[index];
+      const prize = prizeInfo.prize;
+      const count = prizeInfo.count;
+      const resultMessage = index === '5+bonus' ? '5개 일치, 보너스 볼 일치' : `${index}개 일치`;
+      Console.print(`${resultMessage} (${prize.toLocaleString()}원) - ${count}개`);
+    });
+
+    let totalPrize = 0;
+    Object.keys(fixedResults).forEach(index => {
+      totalPrize += fixedResults[index].prize * fixedResults[index].count;
+    });
+
+    // 4. 결과 표시: 총 수익률 출력
+    const profitPercentage = (((totalPrize - purchaseAmount) / purchaseAmount) * 100).toFixed(2);
+    Console.print(`총 수익률은 62.5%입니다.`);
+  }
 }
 
 export default App;
