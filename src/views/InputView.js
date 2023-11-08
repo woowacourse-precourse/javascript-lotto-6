@@ -11,7 +11,7 @@ class InputView {
     const input = await Console.readLineAsync(INPUT_MESSAGE.winningNumber);
     const numberList = input
       .split(',')
-      .map((number) => number.trim())
+      .map((number) => parseInt(number.trim()))
       .filter((number) => number !== '');
     return numberList;
   }
