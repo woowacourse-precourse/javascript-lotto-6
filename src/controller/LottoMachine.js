@@ -71,11 +71,18 @@ export default class LottoMachine {
   }
 
   #purchaseAmountValidate(purchaseAmount) {
-    if (!NUMERIC_PATTERN.test(purchaseAmount)) {
+    this.#numericOnlyValidate(purchaseAmount);
+    this.#purchaseAmountUnitValidate(purchaseAmount);
+  }
+
+  #numericOnlyValidate(input) {
+    if (!NUMERIC_PATTERN.test(input)) {
       throw new Error(ERROR_MESSAGE.numericOnly);
     }
+  }
 
-    if (purchaseAmount % LOTTO_MACHINE_RULES.inputUnit !== 0) {
+  #purchaseAmountUnitValidate(input) {
+    if (input % LOTTO_MACHINE_RULES.inputUnit !== 0) {
       throw new Error(ERROR_MESSAGE.unit);
     }
   }
