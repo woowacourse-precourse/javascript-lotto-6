@@ -79,3 +79,21 @@ describe('getPurchaseAmount 메서드 테스트', () => {
     expect(PurchaseAmount).toBe(5);
   });
 });
+
+describe('printLottoCounts 메서드 테스트', () => {
+  test('printLottoCounts 메서드는 로또를 몇개 구매하였는지 출력해야한다.', async () => {
+    //given
+    const logSpy = getLogSpy();
+    const inputWithString = ["13000"];
+
+    mockQuestions(inputWithString);
+
+    //when
+    const app = new App();
+    const PurchaseAmount = await app.getPurchaseAmount();
+    app.printLottoCounts(PurchaseAmount);
+
+    //then
+    expect(logSpy).toHaveBeenCalledWith("13개를 구매했습니다.");
+  });
+});
