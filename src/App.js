@@ -1,21 +1,18 @@
-// App.js
-import Input from "./Input.js";
-import Result from "./Result.js";
+import * as lottoUtil from './lottoUtil.js';
 
 class App {
-  async play() {
-    const { purchaseAmount, lottoNumbersArray } = await Input.inputMoney();
-    const userLottoNumbers = await Input.inputNumber();
-    const userBonusNumber = await Input.bonusNumber();
+    async play() {
+        const lottoPay = await lottoUtil.inputLottoPay();
+        lottoUtil.validateLottoPay(lottoPay);
 
-    await Result.showResult(
-      lottoNumbersArray,
-      userLottoNumbers,
-      userBonusNumber,
-      purchaseAmount
-    );
-  }
+        const lottos = lottoUtil.lottoGenerate(lottoPay / 1000);
+        lottoUtil.printLottoNumbers(lottos);
+
+        const winLotto = await lottoUtil.winLottoGenerate();
+
+        const rankMap = lottoUtil.runCalculate(lottos, winLotto);
+        lottoUtil.printStatistics(lottoPay, rankMap);
+    }
 }
 
-const app = new App();
-app.play();
+export default App;
