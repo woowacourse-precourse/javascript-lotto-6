@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { OUTPUT } from '../constant/index.js';
 
 class OutputView {
   static print(message) {
@@ -6,7 +7,7 @@ class OutputView {
   }
 
   static printNewLine() {
-    Console.print('');
+    Console.print(OUTPUT.NEW_LINE);
   }
 }
 

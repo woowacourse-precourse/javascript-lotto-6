@@ -3,11 +3,11 @@ import { ERROR, LOTTO } from '../constant/index.js';
 class Validator {
   static validateBuyingPrice(number) {
     if (number <= 0) {
-      throw new Error('[ERROR] 0보다 커야 합니다.');
+      throw new Error(ERROR.BUYING_PRICE.POSITIVE_INTEGER);
     }
 
     if (number % 1000 !== 0) {
-      throw new Error('[ERROR] 1,000원 단위로 입력하세요.');
+      throw new Error(ERROR.BUYING_PRICE.UNIT);
     }
   }
 
@@ -25,7 +25,7 @@ class Validator {
 
   static #validateLottoNumberRange(number) {
     if (number < LOTTO.MIN_NUMBER || number > LOTTO.MAX_NUMBER) {
-      throw new Error(ERROR.LOTTO_NUMBERS.RANGE);
+      throw new Error(ERROR.LOTTO_NUMBER_RANGE);
     }
   }
 
@@ -33,9 +33,7 @@ class Validator {
     Validator.#validateLottoNumberRange(bonus);
 
     if (numbers.includes(bonus)) {
-      throw new Error(
-        '[ERROR] 당첨 번호에 있는 숫자는 보너스 번호가 될 수 없습니다.'
-      );
+      throw new Error(ERROR.BONUS_NUMBER.UNIQE);
     }
   }
 }

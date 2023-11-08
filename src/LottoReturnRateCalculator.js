@@ -1,5 +1,5 @@
 class LottoReturnRateCalculator {
-  static #prize = {
+  static #PRIZE = {
     first: 2000000000,
     second: 30000000,
     third: 1500000,
@@ -22,7 +22,7 @@ class LottoReturnRateCalculator {
   }
 
   #calculateTotalProfit() {
-    return Object.entries(LottoReturnRateCalculator.#prize).reduce(
+    return Object.entries(LottoReturnRateCalculator.#PRIZE).reduce(
       (result, [rank, prize]) => result + prize * this.#lottoResult[rank],
       0
     );

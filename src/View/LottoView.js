@@ -1,4 +1,4 @@
-import { INPUT } from '../constant/index.js';
+import { INPUT, OUTPUT } from '../constant/index.js';
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import Validator from '../validator/Validator.js';
@@ -46,7 +46,7 @@ class LottoView {
 
   static printBuyingLottos(lottos) {
     OutputView.printNewLine();
-    OutputView.print(`${lottos.length}개를 구매했습니다.`);
+    OutputView.print(OUTPUT.BUY_TICKET(lottos));
     lottos.forEach(lotto =>
       OutputView.print(`[${lotto.getNumbers().join(', ')}]`)
     );
@@ -57,15 +57,15 @@ class LottoView {
     OutputView.printNewLine();
     OutputView.print('당첨 통계');
     OutputView.print('---');
-    OutputView.print(`3개 일치 (5,000원) - ${fifth}개`);
-    OutputView.print(`4개 일치 (50,000원) - ${fourth}개`);
-    OutputView.print(`5개 일치 (1,500,000원) - ${third}개`);
-    OutputView.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${second}개`);
-    OutputView.print(`6개 일치 (2,000,000,000원) - ${first}개`);
+    OutputView.print(OUTPUT.FIFTH_PRIZE(fifth));
+    OutputView.print(OUTPUT.FOURTH_PRIZE(fourth));
+    OutputView.print(OUTPUT.THIRD_PRIZE(third));
+    OutputView.print(OUTPUT.SECOND_PRIZE(second));
+    OutputView.print(OUTPUT.FIRST_PRIZE(first));
   }
 
   static printLottoReturnRate(rate) {
-    OutputView.print(`총 수익률은 ${rate}%입니다.`);
+    OutputView.print(OUTPUT.RETURN_RATE(rate));
   }
 }
 

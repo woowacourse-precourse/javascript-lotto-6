@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { ERROR } from '../constant/index.js';
 
 class InputView {
   static async #readLine(message) {
@@ -18,7 +19,7 @@ class InputView {
 
   static #validateNumber(value) {
     if (InputView.#isNaN(value)) {
-      throw new Error('[ERROR] 숫자를 입력하세요.');
+      throw new Error(ERROR.NUMBER);
     }
   }
 
