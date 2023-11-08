@@ -176,6 +176,9 @@
   - 보너스 번호가 당첨 번호와 중복값이 경우
   - 보너스 번호의 범위가 1 ~ 45 사이에 있지 않은 경우
   - `WinningLotto`가 잘 만들어 지는 경우
+- `WinningMachineTest`
+  - 당첨에 관련된 기능을 담당하는 클래스
+  - `calculateStatistic` 메서드가 정상 장독 하는지에 대한 테스트
 
 
 
@@ -188,7 +191,7 @@
 -  [X] else를 지양한다.
     - if 조건절에서 값을 return하는 방식으로 구현하면 else를 사용하지 않아도 된다.
     - 때로는 if/else, switch문을 사용하는 것이 더 깔끔해 보일 수 있다. 어느 경우에 쓰는 것이 적절할지 스스로 고민해 본다.
--  [ ] 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 제외한다.
+-  [X] 도메인 로직에 단위 테스트를 구현해야 한다. 단, UI(Console.readLineAsync, Console.print) 로직에 대한 단위 테스트는 제외한다.
     - 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다.
 -  [X] 제공된 `Lotto` 클래스를 활용해 구현해야 한다.
     - `numbers`의 `#` prefix를 변경할 수 없다.
