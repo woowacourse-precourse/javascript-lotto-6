@@ -7,6 +7,7 @@ import LottoBonusValidator from "../validator/lotto-bonus-validator.js";
 class InputView {
     async readPurchaseAmount() {
         const inputPrice = await Console.readLineAsync(INPUT_MESSAGE.inputPurchaseAmount);
+
         InputValidator.purchaseRangeValidation(inputPrice);
         InputValidator.inputPurchaseValidation(inputPrice);
         return inputPrice / 1000;
@@ -15,6 +16,7 @@ class InputView {
     async readWinningNumber() {
         const input = await Console.readLineAsync(INPUT_MESSAGE.inputWinningNumbers);
         const winningNumbers = input.split(",").map(Number);
+
         LottoValidator.lottoLengthValidation(winningNumbers);
         LottoValidator.lottoDuplicatedValidation(winningNumbers);
         LottoValidator.lottoRangeValidation(winningNumbers);
@@ -23,11 +25,13 @@ class InputView {
     }
 
     async readBonusNumber() {
-        const bonusNumber = await Console.readLineAsync(INPUT_MESSAGE.inputBonusNumber);
+        const input = await Console.readLineAsync(INPUT_MESSAGE.inputBonusNumber);
+        const bonusNumber = input.split(",").map(Number);
+
         LottoBonusValidator.bonusLengthValidation(bonusNumber);
         LottoBonusValidator.bonusRangeValidation(bonusNumber);
-        LottoBonusValidator.bonusTypeValidation(bonusNumber);
-        return bonusNumber;
+        LottoBonusValidator.bonusTypeValidation(bonusNumber[0]);
+        return bonusNumber[0];
     }
 }
 

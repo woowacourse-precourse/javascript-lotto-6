@@ -1,8 +1,8 @@
 import { ERROR_MESSAGE } from "../constants/constants.js";
 
 class LottoBonusValidator {
-    static bonusLengthValidation(numbers) {
-        if (numbers.length !== 1) {
+    static bonusLengthValidation(number) {
+        if (number.length !== 1) {
             throw new Error(ERROR_MESSAGE.bonusLengthError);
         }
     }
