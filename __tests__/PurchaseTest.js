@@ -1,4 +1,4 @@
-import Purchase from "../src/purchase";
+import Purchase from "../src/Purchase";
 
 describe("구매금액 클래스 테스트", () => {
     test("구매금액이 숫자가 아니면 예외가 발생한다.", () => {
