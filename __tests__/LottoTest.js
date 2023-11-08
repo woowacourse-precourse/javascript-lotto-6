@@ -1,6 +1,5 @@
-import Lotto from '../src/Lotto.js';
-import { LOTTO } from '../src/config.js';
-import WinningLotto from '../src/WinningLotto.js';
+import { Lotto, LottoCalculator, LottoValidation } from '../src/domain/index.js';
+import { FIXED_POINT, LOTTO, RATE } from '../src/constant/index.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -39,175 +38,225 @@ describe('로또 클래스 테스트', () => {
     const lottos = Lotto.createLottos(input);
     expect(lottos.length).toBe(input / LOTTO.PRICE);
   });
+});
 
-  test.each([
-    [''],
-    [1, 2, 3, '', 4, 5],
-    [1, 2, 3, , 4, 5],
-    [1000, 2, 3, 4, 5, 6],
-    [-1, 2, 3, 4, 5, 6],
-    [1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5],
-  ])('로또 번호 유효성 검사 테스트', (input) => {
-    expect(() => {
-      new Lotto(input);
-    }).toThrow('[ERROR]');
+describe('로또 유효성 검사 클래스 테스트', () => {
+  describe('로또 번호 유효성 검사 테스트', () => {
+    test.each([[[]], [[1, 2, 3, 4, 5]], [[1, 2, 3, 4, 5, 6, 7]]])(
+      '로또 번호 길이가 맞지 않을 시 예외가 발생한다',
+      (input) => {
+        expect(() => LottoValidation.lotto(input)).toThrow('[ERROR]');
+      },
+    );
+    test('로또 번호가 양의 정수가 아닐 시 예외가 발생한다', () => {
+      expect(() => LottoValidation.lotto([1, 2, 3, 4, 5, -1])).toThrow('[ERROR]');
+    });
+    test('로또 번호가 1~45 사이의 숫자가 아닐 시 예외가 발생한다', () => {
+      expect(() => LottoValidation.lotto([1, 2, 3, 4, 5, 46])).toThrow('[ERROR]');
+    });
+
+    test('로또 번호가 중복될 시 예외가 발생한다', () => {
+      expect(() => LottoValidation.lotto([1, 2, 3, 4, 5, 5])).toThrow('[ERROR]');
+    });
+  });
+
+  describe('로또 구매 금액 유효성 검사 테스트', () => {
+    test('로또 구매 금액이 양의 정수가 아닐 시 예외가 발생한다', () => {
+      expect(() => LottoValidation.amount(-1)).toThrow('[ERROR]');
+    });
+    test('로또 구매 금액이 1000원 미만일 시 예외가 발생한다', () => {
+      expect(() => LottoValidation.amount(999)).toThrow('[ERROR]');
+    });
+    test('로또 구매 금액이 1000원 단위가 아닐 시 예외가 발생한다', () => {
+      expect(() => LottoValidation.amount(1001)).toThrow('[ERROR]');
+    });
+  });
+
+  describe('보너스 번호 유효성 검사 테스트', () => {
+    test('보너스 번호가 양의 정수가 아닐 시 예외가 발생한다', () => {
+      expect(() => LottoValidation.bonus(-1)).toThrow('[ERROR]');
+    });
+    test('보너스 번호가 1~45 사이의 숫자가 아닐 시 예외가 발생한다', () => {
+      expect(() => LottoValidation.bonus(46)).toThrow('[ERROR]');
+    });
+    test('보너스 번호가 로또 번호와 중복될 시 예외가 발생한다', () => {
+      const winningNumbers = [1, 2, 3, 4, 5, 6];
+      expect(() => LottoValidation.bonus(winningNumbers, 1)).toThrow('[ERROR]');
+    });
   });
 });
 
-describe('당첨 로또 클래스 테스트', () => {
-  const { FIRST, SECOND, THIRD, FOURTH, FIFTH, NONE } = LOTTO.WIN;
+describe('로또 당첨 결과 테스트', () => {
+  const { FIRST, SECOND, THIRD, FOURTH, FIFTH, NONE } = LOTTO.WINNING;
   const winningNumbers = [1, 2, 3, 4, 5, 6];
   const bonusNumber = 7;
-  const winningLotto = new WinningLotto(winningNumbers);
-  winningLotto.setBonusNumber(bonusNumber);
-
-  test.each([
-    [''],
-    ['abcd'],
-    [1, 2, 3, , 4, 5],
-    [1, 2, 3, 'a', 4, 5],
-    [1000, 2, 3, 4, 5, 6],
-    [-1, 2, 3, 4, 5, 6],
-    [1, 2, 3, 4, 5, 6, 7],
-    [0, 1, 2, 3, 4, 5],
-  ])('로또 번호 유효성 검사 테스트', (input) => {
-    expect(() => {
-      new WinningLotto(input);
-    }).toThrow('[ERROR]');
-  });
-
-  test.each([1, 0, 46, -1, 'a', ''])('보너스 번호 유효성 검사 테스트', (input) => {
-    expect(() => {
-      winningLotto.setBonusNumber(input);
-    }).toThrow('[ERROR]');
-  });
+  const firstNumbers = [1, 2, 3, 4, 5, 6];
+  const secondNumbers = [1, 2, 3, 4, 5, 7];
+  const thirdNumbers = [1, 2, 3, 4, 5, 8];
+  const fourthNumbers = [1, 2, 3, 4, 9, 10];
+  const fifthNumbers = [1, 2, 3, 8, 9, 10];
+  const noneNumbers = [10, 11, 12, 13, 14, 15];
 
   test.each([
     {
-      numbers: [1, 2, 3, 4, 5, 6],
-      result: FIRST,
+      numbers: firstNumbers,
+      result: FIRST.PRIZE,
     },
     {
-      numbers: [1, 2, 3, 4, 5, 7],
-      result: SECOND,
+      numbers: secondNumbers,
+      result: SECOND.PRIZE,
     },
     {
-      numbers: [1, 2, 3, 4, 5, 8],
-      result: THIRD,
+      numbers: thirdNumbers,
+      result: THIRD.PRIZE,
     },
     {
-      numbers: [1, 2, 3, 4, 8, 9],
-      result: FOURTH,
+      numbers: fourthNumbers,
+      result: FOURTH.PRIZE,
     },
     {
-      numbers: [1, 2, 3, 8, 9, 10],
-      result: FIFTH,
+      numbers: fifthNumbers,
+      result: FIFTH.PRIZE,
     },
     {
-      numbers: [1, 2, 8, 9, 10, 11],
-      result: NONE,
+      numbers: noneNumbers,
+      result: NONE.PRIZE,
     },
   ])('당첨 금액 계산 테스트', (input) => {
     const { numbers, result } = input;
     const lotto = new Lotto(numbers);
 
-    const lottoResult = winningLotto.calculatePrizeAmount(lotto);
+    const lottoResult = LottoCalculator.calculatePrizeAmount(lotto, winningNumbers, bonusNumber);
     expect(lottoResult).toBe(result);
   });
 
   test.each([
     {
-      numbers: [
-        [1, 2, 3, 4, 5, 6],
-        [1, 2, 3, 4, 5, 7],
-      ],
+      lottosNumbers: [firstNumbers, secondNumbers, thirdNumbers, fourthNumbers, fifthNumbers],
       result: {
-        [FIRST]: 1,
-        [SECOND]: 1,
-        [THIRD]: 0,
-        [FOURTH]: 0,
-        [FIFTH]: 0,
+        [FIRST.PRIZE]: 1,
+        [SECOND.PRIZE]: 1,
+        [THIRD.PRIZE]: 1,
+        [FOURTH.PRIZE]: 1,
+        [FIFTH.PRIZE]: 1,
       },
     },
     {
-      numbers: [
-        [1, 2, 3, 4, 5, 8],
-        [1, 2, 3, 4, 8, 9],
-      ],
+      lottosNumbers: [firstNumbers, secondNumbers, thirdNumbers, fourthNumbers, noneNumbers],
       result: {
-        [FIRST]: 0,
-        [SECOND]: 0,
-        [THIRD]: 1,
-        [FOURTH]: 1,
-        [FIFTH]: 0,
+        [FIRST.PRIZE]: 1,
+        [SECOND.PRIZE]: 1,
+        [THIRD.PRIZE]: 1,
+        [FOURTH.PRIZE]: 1,
+        [FIFTH.PRIZE]: 0,
       },
     },
     {
-      numbers: [
-        [1, 2, 3, 8, 9, 10],
-        [1, 2, 8, 9, 10, 11],
-      ],
+      lottosNumbers: [firstNumbers, secondNumbers, thirdNumbers, noneNumbers, noneNumbers],
       result: {
-        [FIRST]: 0,
-        [SECOND]: 0,
-        [THIRD]: 0,
-        [FOURTH]: 0,
-        [FIFTH]: 1,
+        [FIRST.PRIZE]: 1,
+        [SECOND.PRIZE]: 1,
+        [THIRD.PRIZE]: 1,
+        [FOURTH.PRIZE]: 0,
+        [FIFTH.PRIZE]: 0,
       },
     },
-  ])('통계 테스트', (input) => {
-    const { numbers, result } = input;
-    const lottos = numbers.map((numbers) => new Lotto(numbers));
-    const lottoResult = winningLotto.getStatistics(lottos);
-    expect(lottoResult).toEqual(result);
+    {
+      lottosNumbers: [firstNumbers, secondNumbers, noneNumbers, noneNumbers, noneNumbers],
+      result: {
+        [FIRST.PRIZE]: 1,
+        [SECOND.PRIZE]: 1,
+        [THIRD.PRIZE]: 0,
+        [FOURTH.PRIZE]: 0,
+        [FIFTH.PRIZE]: 0,
+      },
+    },
+    {
+      lottosNumbers: [firstNumbers, noneNumbers, noneNumbers, noneNumbers, noneNumbers],
+      result: {
+        [FIRST.PRIZE]: 1,
+        [SECOND.PRIZE]: 0,
+        [THIRD.PRIZE]: 0,
+        [FOURTH.PRIZE]: 0,
+        [FIFTH.PRIZE]: 0,
+      },
+    },
+    {
+      lottosNumbers: [noneNumbers, noneNumbers, noneNumbers, noneNumbers, noneNumbers],
+      result: {
+        [FIRST.PRIZE]: 0,
+        [SECOND.PRIZE]: 0,
+        [THIRD.PRIZE]: 0,
+        [FOURTH.PRIZE]: 0,
+        [FIFTH.PRIZE]: 0,
+      },
+    },
+    {
+      lottosNumbers: [firstNumbers, firstNumbers, firstNumbers, firstNumbers, firstNumbers],
+      result: {
+        [FIRST.PRIZE]: 5,
+        [SECOND.PRIZE]: 0,
+        [THIRD.PRIZE]: 0,
+        [FOURTH.PRIZE]: 0,
+        [FIFTH.PRIZE]: 0,
+      },
+    },
+  ])('당첨 통계 테스트', (input) => {
+    const { lottosNumbers, result } = input;
+    const lottos = lottosNumbers.map((numbers) => new Lotto(numbers));
+    const statistics = LottoCalculator.calculateStatistics(lottos, winningNumbers, bonusNumber);
+
+    expect(statistics).toEqual(result);
   });
 
-  const first = [1, 2, 3, 4, 5, 6];
-  const second = [1, 2, 3, 4, 5, 7];
-  const third = [1, 2, 3, 4, 5, 8];
-  const fourth = [1, 2, 3, 4, 9, 10];
-  const fifth = [1, 2, 3, 8, 9, 10];
-  const none = [10, 11, 12, 13, 14, 15];
   function calculateProfitRate(amount, count) {
-    return ((amount * 100) / (count * LOTTO.PRICE)).toFixed(1);
+    return ((amount * RATE) / (count * LOTTO.PRICE)).toFixed(FIXED_POINT);
   }
   test.each([
-    [
-      {
-        lottoNumbers: [first, second, third, fourth, fifth],
-        profit: calculateProfitRate(FIRST + SECOND + THIRD + FOURTH + FIFTH, 5),
-      },
-      {
-        lottoNumbers: [first, second, third, fourth, none],
-        profit: calculateProfitRate(FIRST + SECOND + THIRD + FOURTH, 5),
-      },
-      {
-        lottoNumbers: [first, second, third, none, none],
-        profit: calculateProfitRate(FIRST + SECOND + THIRD, 5),
-      },
-      {
-        lottoNumbers: [first, second, none, none, none],
-        profit: calculateProfitRate(FIRST + SECOND, 5),
-      },
-      {
-        lottoNumbers: [first, none, none, none, none],
-        profit: calculateProfitRate(FIRST, 5),
-      },
-      {
-        lottoNumbers: [none, none, none, none, none],
-        profit: calculateProfitRate(0, 5),
-      },
-      {
-        lottoNumbers: [fifth, none, none, none, none, none, none, none],
-        profit: calculateProfitRate(FIFTH, 8),
-      },
-    ],
-  ])('수익률 테스트', (input) => {
-    const { lottoNumbers, profit } = input;
-    const lottos = lottoNumbers.map((numbers) => new Lotto(numbers));
-    const statistics = winningLotto.getStatistics(lottos);
-    const lottoResult = winningLotto.getProfitRate(statistics, lottoNumbers.length * LOTTO.PRICE);
-    expect(lottoResult).toBe(profit);
+    {
+      lottosNumbers: [firstNumbers, secondNumbers, thirdNumbers, fourthNumbers, fifthNumbers],
+      result: calculateProfitRate(FIRST.PRIZE + SECOND.PRIZE + THIRD.PRIZE + FOURTH.PRIZE + FIFTH.PRIZE, 5),
+    },
+    {
+      lottosNumbers: [firstNumbers, secondNumbers, thirdNumbers, fourthNumbers, noneNumbers],
+      result: calculateProfitRate(FIRST.PRIZE + SECOND.PRIZE + THIRD.PRIZE + FOURTH.PRIZE, 5),
+    },
+    {
+      lottosNumbers: [firstNumbers, secondNumbers, thirdNumbers, noneNumbers, noneNumbers],
+      result: calculateProfitRate(FIRST.PRIZE + SECOND.PRIZE + THIRD.PRIZE, 5),
+    },
+    {
+      lottosNumbers: [firstNumbers, secondNumbers, noneNumbers, noneNumbers, noneNumbers],
+      result: calculateProfitRate(FIRST.PRIZE + SECOND.PRIZE, 5),
+    },
+    {
+      lottosNumbers: [firstNumbers, noneNumbers, noneNumbers, noneNumbers, noneNumbers],
+      result: calculateProfitRate(FIRST.PRIZE, 5),
+    },
+    {
+      lottosNumbers: [noneNumbers, noneNumbers, noneNumbers, noneNumbers, noneNumbers],
+      result: calculateProfitRate(0, 5),
+    },
+    {
+      lottosNumbers: [
+        fifthNumbers,
+        noneNumbers,
+        noneNumbers,
+        noneNumbers,
+        noneNumbers,
+        noneNumbers,
+        noneNumbers,
+        noneNumbers,
+      ],
+      result: calculateProfitRate(FIFTH.PRIZE, 8),
+    },
+  ])('수익률 계산 테스트', (input) => {
+    const { lottosNumbers, result } = input;
+    const lottos = lottosNumbers.map((numbers) => new Lotto(numbers));
+    const statistics = LottoCalculator.calculateStatistics(lottos, winningNumbers, bonusNumber);
+    const purchaseAmount = lottos.length * LOTTO.PRICE;
+    const profitRate = LottoCalculator.calculateProfitRate(statistics, purchaseAmount);
+
+    expect(profitRate).toBe(result);
   });
 });
