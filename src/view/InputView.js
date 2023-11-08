@@ -6,8 +6,9 @@ class InputView {
 		return await Console.readLineAsync(Statics.message.input.purchaseBudget);
 	}
 
-	static async inputWinningNumbers() {
-		return await Console.readLineAsync(Statics.message.input.winningNumber);
+	static async inputWinningNumber() {
+		const winningNumber = await Console.readLineAsync(Statics.message.input.winningNumber);
+		return winningNumber.split(',')
 	}
 
 	static async inputBonusNumber() {
