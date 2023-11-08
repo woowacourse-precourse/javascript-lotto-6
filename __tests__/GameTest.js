@@ -61,6 +61,6 @@ describe("Game 클래스 테스트", () => {
       purchasePrice
     );
 
-    expect(earningRate).toBe(62.5);
+    expect(earningRate).toBe("62.5");
   });
 });
