@@ -10,12 +10,13 @@ class LottoAnswer {
     LottoAnswer.#validateIsLotto(answerLotto);
     this.#answerLotto = answerLotto;
     const parsedBonusNumber = LottoAnswer.#parseSingleLottoNumber(bonusNumber);
-    this.#validateNotInLottoAnswer(parsedBonusNumber);
+    LottoAnswer.#validateNotInLottoAnswer(parsedBonusNumber, this.#answerLotto);
     this.#bonusNumber = parsedBonusNumber;
   }
 
   grade(lotto) {
-    const { correctCount, isGotBonus } = this.#getLottoResult(lotto);
+    const result = LottoAnswer.#getLottoResult(lotto, this.#answerLotto, this.#bonusNumber);
+    const { correctCount, isGotBonus } = result;
     if (correctCount === 5 && isGotBonus) return "2등";
     const PRIZE_FOR_COUNT = {
       6: "1등",
@@ -36,19 +37,19 @@ class LottoAnswer {
     return LottoNumbersParser.parse(input)[0];
   }
 
-  #validateNotInLottoAnswer(number) {
-    if (this.#answerLotto.has(number)) {
+  static #validateNotInLottoAnswer(number, answerLotto) {
+    if (answerLotto.has(number)) {
       throw new Error("[ERROR] 보너스 번호는 당첨 번호와 겹칠 수 없습니다.");
     }
   }
 
-  #getLottoResult(lotto) {
+  static #getLottoResult(lotto, answerLotto, bonusNumber) {
     const lottoNumbers = lotto.getNumbers();
-    const answerNumbers = this.#answerLotto.getNumbers();
+    const answerNumbers = answerLotto.getNumbers();
 
     return {
       correctCount: LottoAnswer.#countIntersection(lottoNumbers, answerNumbers),
-      isGotBonus: lottoNumbers.includes(this.#bonusNumber),
+      isGotBonus: lottoNumbers.includes(bonusNumber),
     };
   }
 

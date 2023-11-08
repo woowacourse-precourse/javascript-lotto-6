@@ -4,6 +4,12 @@ const typeValidator = {
       throw new Error("[ERROR] 값이 유효한 숫자 형태가 아닙니다");
     }
   },
+
+  isArray(value) {
+    if (!Array.isArray(value)) {
+      throw new Error("[ERROR] 배열 타입의 값이 아닙니다.");
+    }
+  },
 };
 
 const validateNumberInRange = (number, minInclusive, maxInclusive) => {
