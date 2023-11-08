@@ -1,5 +1,6 @@
 import * as lottoUtil from '../src/lottoUtil.js';
 import Lotto from '../src/Lotto.js';
+import WinLotto from '../src/WinLotto.js';
 
 describe('단위 테스트', () => {
     test('로또 구입 금액이 숫자가 아니라면 예외가 발생한다.', () => {
@@ -74,6 +75,39 @@ describe('단위 테스트', () => {
             expect(() => {
                 new Lotto(input);
             }).toThrow('[ERROR] 오름차순 정렬이 되어있지 않은 배열입니다.');
+        });
+    });
+
+    test('보너스 번호가 숫자가 아닌 경우 예외가 발생한다.', () => {
+        const lottoNumbers = [1, 2, 3, 4, 5, 6];
+        const inputs = ['문자', '', '7'];
+
+        inputs.forEach(input => {
+            expect(() => {
+                new WinLotto(new Lotto(lottoNumbers), input);
+            }).toThrow('[ERROR] 보너스 번호는 1부터 45 사이의 숫자만 사용 가능합니다.');
+        });
+    });
+
+    test('보너스 번호가 1부터 45 사이의 숫자가 아닌 경우 예외가 발생한다.', () => {
+        const lottoNumbers = [1, 2, 3, 4, 5, 6];
+        const inputs = [-1, 0, 46];
+
+        inputs.forEach(input => {
+            expect(() => {
+                new WinLotto(new Lotto(lottoNumbers), input);
+            }).toThrow('[ERROR] 보너스 번호는 1부터 45 사이의 숫자만 사용 가능합니다.');
+        });
+    });
+
+    test('보너스 번호가 당첨 번호 숫자와 중복된 경우 예외가 발생한다.', () => {
+        const lottoNumbers = [1, 2, 3, 4, 5, 6];
+        const inputs = [1, 2, 3, 4, 5, 6];
+
+        inputs.forEach(input => {
+            expect(() => {
+                new WinLotto(new Lotto(lottoNumbers), input);
+            }).toThrow('[ERROR] 당첨 번호로 사용된 번호는 보너스 번호로 사용할 수 없습니다.');
         });
     });
 });
