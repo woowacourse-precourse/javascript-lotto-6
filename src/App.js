@@ -50,6 +50,22 @@ export async function enterWinningNumbers() {
   }
 }
 
+export async function enterBonusNumber() {
+  try {
+    let bonusNumber = await MissionUtils.Console.readLineAsync(
+      "보너스 번호를 입력해 주세요.\n"
+      );
+    bonusNumber = Number(bonusNumber);
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 보너스 번호는 1에서 45 사이의 숫자여야 합니다.");
+    }
+    return bonusNumber;
+  } catch (error) {
+    MissionUtils.Console.print(error.message);
+    return await enterBonusNumber();
+  }
+}
+
 class App {
   async play() {}
 }
