@@ -505,9 +505,20 @@ ErrorCheck.purchasePrice('10000', 1000);
 
 **예외**
 
-양의 정수가 아닌 경우
+`string`이 문자열이 아닌 경우
+
+`string`이 양의 정수로 바뀔 수 없는 경우
 
 `Number(string)`이 `lottoPrice`의 배수가 아닌 경우
+
+### `lottoNumbersString(string)`
+
+- `string`을 `','`로 구분한 숫자들이 로또 수(1~45사이의 정수)이면서, 중복되는 수가 없는 길이가 6인 배열인지 확인 후, 아니라면 예외를 던짐 
+
+```jsx
+ErrorCheck.lottoNumbersString('1,2,3,4,5,6');
+```
+
 
 
 

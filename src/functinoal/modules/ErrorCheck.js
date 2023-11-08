@@ -21,23 +21,23 @@ class ErrorCheck {
   }
 
   static lottoNumbersString(string) {
-    const arrayFromString = string.split(LOTTO_NUMBERS_SEPARATOR);
+    const arrayFromString = string.split(LOTTO_NUMBERS_SEPARATOR).map(Number);
     ErrorCheck.arrayLikeLength(arrayFromString, NUMBER_OF_LOTTO_NUMBERS);
-    arrayFromString.forEach(ErrorCheck.lottoNumberString);
+    arrayFromString.forEach(ErrorCheck.lottoNumber);
     ErrorCheck.differentElementArray(arrayFromString);
   }
 
   static bonusNumberString(string, winningNumbers) {
-    ErrorCheck.lottoNumberString(string);
+    ErrorCheck.lottoNumber(string);
     const winningNumbersAddedNumber = [...winningNumbers];
     winningNumbersAddedNumber.push(Number(string));
     ErrorCheck.differentElementArray(winningNumbersAddedNumber);
   }
 
-  static lottoNumberString(string) {
-    ErrorCheck.positiveIntegerString(string);
+  static lottoNumber(number) {
+    ErrorCheck.positiveIntegerString(number.toString());
     ErrorCheck.numberInRange(
-      Number(string),
+      Number(number),
       LOTTO_NUMBER_LOWER,
       LOTTO_NUMBER_UPPER
     );

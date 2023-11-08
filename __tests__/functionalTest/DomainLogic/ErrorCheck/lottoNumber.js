@@ -16,7 +16,7 @@ test.each([
   ['46', true],
   ['0', true],
 ])('lottoNumberString()', (input, isThrowing) => {
-  const targetFunction = () => ErrorCheck.lottoNumberString(input);
+  const targetFunction = () => ErrorCheck.lottoNumber(input);
   if (isThrowing) expect(targetFunction).toThrow(ERROR_HEADER);
   if (!isThrowing) expect(targetFunction).not.toThrow();
 });
