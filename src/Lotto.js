@@ -14,8 +14,6 @@ class Lotto {
     }
   }
 
-  setNumbers(numbers) {
-    this.#numbers = numbers;
   #validateDuplicationNumber(numbers) {
     const seen = {};
 
@@ -37,6 +35,10 @@ class Lotto {
 
   getNumbers() {
     return this.#numbers;
+  }
+
+  setNumbers(numbers) {
+    this.#numbers = numbers;
   }
 }
 
