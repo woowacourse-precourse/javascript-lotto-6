@@ -10,14 +10,10 @@ export default class BonusNumber {
 
   #validate(number, lottoNumber) {
     this.#isNumber(number);
-    this.#isNotEmpty(number);
     this.#isNotZero(number);
+    this.#isNotEmpty(number);
     this.#isInRange(number);
     this.#isNotSameLottoNumber(number, lottoNumber);
-  }
-
-  #isNotEmpty(number) {
-    if (/\s/.test(String(number))) throw new Error(errorConstants.NOT_EMPTY);
   }
 
   #isNumber(number) {
@@ -25,7 +21,11 @@ export default class BonusNumber {
   }
 
   #isNotZero(number) {
-    if (number === magicNumber.ZERO) throw new Error(errorConstants.NOT_ZERO);
+    if (!number) throw new Error(errorConstants.NOT_ZERO);
+  }
+
+  #isNotEmpty(number) {
+    if (/\s/.test(String(number))) throw new Error(errorConstants.NOT_EMPTY);
   }
 
   #isInRange(number) {
