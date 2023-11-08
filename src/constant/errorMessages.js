@@ -2,7 +2,7 @@ const ERROR_MESSAGES = {
   paymentAmount: {
     isntNumber: '[ERROR] 구입 금액은 숫자여야 합니다.',
     isntInteger: '[ERROR] 구입 금액은 정수여야 합니다.',
-    outOfRange: '[ERROR] 구입 금액은 1000원 이상이어야 합니다.',
+    outOfUnit: '[ERROR] 구입 금액은 1000원 단위여야 합니다.',
   },
 
   winningNumbers: {

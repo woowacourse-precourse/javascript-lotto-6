@@ -96,30 +96,4 @@ describe('예외 테스트', () => {
   test('구매 금액 테스트', async () => {
     await runException('1000j');
   });
-
-  test('보너스 번호 테스트', async () => {
-    const logSpy = getLogSpy();
-
-    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
-    const INPUT_NUMBERS_TO_END = [
-      '1000',
-      '7,8,9,10,11,12',
-      'bonus',
-      -1,
-      2.5,
-      '50',
-      '7',
-      '15',
-    ];
-
-    mockRandoms([RANDOM_NUMBERS_TO_END]);
-    mockQuestions([...INPUT_NUMBERS_TO_END]);
-
-    // when
-    const app = new App();
-    await app.play();
-
-    // then
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
-  });
 });

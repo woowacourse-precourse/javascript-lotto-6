@@ -7,7 +7,7 @@ const onError = (subject, type) => {
 
 const paymentAmountValidater = {
   isntNumber: paymentAmount => {
-    if (Number.isNaN(Number(paymentAmount))) {
+    if (Number.isNaN(Number(paymentAmount)) || !Number(paymentAmount)) {
       onError('paymentAmount', 'isntNumber');
     }
   },
@@ -16,9 +16,9 @@ const paymentAmountValidater = {
       onError('paymentAmount', 'isntInteger');
     }
   },
-  outOfRange: paymentAmount => {
-    if (paymentAmount < MIN_NUMBER) {
-      onError('paymentAmount', 'outOfRange');
+  outOfUnit: paymentAmount => {
+    if (paymentAmount % 1000 !== 0) {
+      onError('paymentAmount', 'outOfUnit');
     }
   },
 };
@@ -28,7 +28,11 @@ const winningNumbersValidater = {
     if (winningNumbers.length !== 6) onError('winningNumbers', 'length');
   },
   isntNumber: winningNumbers => {
-    if (winningNumbers.some(number => Number.isNaN(Number(number)))) {
+    if (
+      winningNumbers.some(
+        number => Number.isNaN(Number(number)) || !Number(number)
+      )
+    ) {
       onError('winningNumbers', 'isntNumber');
     }
   },
@@ -57,7 +61,7 @@ const winningNumbersValidater = {
 
 const bonusNumberValidater = {
   isntNumber: bonusNumber => {
-    if (Number.isNaN(Number(bonusNumber))) {
+    if (Number.isNaN(Number(bonusNumber)) || !Number(bonusNumber)) {
       onError('bonusNumber', 'isntNumber');
     }
   },
