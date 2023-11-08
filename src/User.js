@@ -11,12 +11,15 @@ class User {
 
     async setPurchaseAmount() {
         const money = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
-        this.#validate(Number(money));
+        this.#validate(money);
         this.#purchaseAmount = Number(money);
         this.#numberOfPurchases = Number(money) / this.#DIVIDE_NUMBER;
     }
 
     #validate(money) {
+        if (money.trim() === '') {
+            throw new Error('[ERROR] 구입 금액은 숫자로 입력해야합니다.');
+        }
         if (Number.isNaN(Number(money))) {
             throw new Error('[ERROR] 구입 금액은 숫자로 입력해야합니다.');
         }

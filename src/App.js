@@ -11,8 +11,6 @@ class App {
 
   async play() {
     await this.#user.setPurchaseAmount();
-    const purchaseAmount = await Console.readLineAsync('구입 금액을 입력해 주세요.\n');
-    const purchaseCount = purchaseAmount / 1000;
 
     Console.print(`\n${purchaseCount}개를 구매했습니다.`);
     const lottoRandomNumbers = [];
