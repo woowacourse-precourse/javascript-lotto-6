@@ -4,12 +4,12 @@ import WinningLottoError from '../error/WinningLottoError.js';
 import InputValidator from './InputValidator.js';
 
 const validateLotto = (lotto) => {
-  const lottoArr = lotto.map((lottoNumber) => lottoNumber.get());
+  const decapsulatedLotto = lotto.map((lottoNumber) => lottoNumber.get());
 
-  if (InputValidator.isArrayHaveNan(lottoArr))
+  if (InputValidator.isArrayHaveNan(decapsulatedLotto))
     throw new WinningLottoError(ERROR.isNan);
   if (lotto.length !== LOTTO.count) throw new WinningLottoError(ERROR.count);
-  if (InputValidator.isDuplicated(lottoArr))
+  if (InputValidator.isDuplicated(decapsulatedLotto))
     throw new WinningLottoError(ERROR.duplicated);
 };
 
