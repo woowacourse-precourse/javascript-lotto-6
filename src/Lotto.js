@@ -26,7 +26,6 @@ class Lotto {
   }
 
   #validate(numbers) {
-    // TODO: 예외처리
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
@@ -108,7 +107,6 @@ class Lotto {
 
   calculateMatchingStatistics() {
     const result = [];
-    MissionUtils.Console.print("\n당첨 통계\n---");
 
     for (const [grade, count] of this.matchingCounts) {
       let index = !this.TEXT[grade - 3] ? 4 : grade - 3;

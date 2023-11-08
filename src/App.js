@@ -37,24 +37,17 @@ class App {
 
   getLottoQuantity(money) {
     const quantity = money / 1000;
-    return quantity;
+    return +quantity;
   }
 
   async checkPrice() {
-    let price;
-    while (true) {
-      const validatedPrice = await this.tryCatchPrice(price);
-      if (validatedPrice) return validatedPrice;
-    }
-  }
-
-  async tryCatchPrice(price) {
     try {
-      price = await this.getMoney();
+      const price = await this.getMoney();
       const validatedPrice = this.priceConditionalSentence(price);
-      return validatedPrice;
+      return +validatedPrice;
     } catch (error) {
       MissionUtils.Console.print(error.message);
+      return await this.checkPrice();
     }
   }
 
@@ -72,34 +65,14 @@ class App {
     return +price;
   }
 
-  async checkCommaSeparated(numbers) {
-    let winningNumber;
-
-    while (true) {
-      const result = await this.tryCatchNumber(winningNumber, numbers);
-      if (result) return result.split(",");
-    }
-  }
-
-  checkCommaLoop(string) {
+  async checkCommaSeparated(string) {
     for (let s of string) {
       if (isNaN(s) && s !== ",") {
         this.displayErrorMessage(this.error.INVALID_STRING);
         return null;
       }
     }
-
-    return string;
-  }
-
-  async tryCatchNumber(winningNumber, numbers) {
-    try {
-      const result = this.checkCommaLoop(numbers);
-      return result;
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      winningNumber = await this.getWinningNumber();
-    }
+    return string.split(",");
   }
 
   setLotto(quantity) {
@@ -116,20 +89,24 @@ class App {
     return purchasedLottos;
   }
 
-  async setWinnigAndBonusNumber(quantity, purchasedLottos, money) {
-    const winningNumber = await this.getWinningNumber();
-    const winningNumberArray = await this.checkCommaSeparated(winningNumber);
-    const userLotto = new Lotto(winningNumberArray);
-    userLotto.setWinningNumber(winningNumberArray);
+  async setWinnigArray() {
+    try {
+      const winningNumber = await this.getWinningNumber();
+      return await this.checkCommaSeparated(winningNumber);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return await this.setWinnigArray();
+    }
+  }
 
-    const bonusNumber = await this.getBonusNumber();
-    userLotto.setBonusNumber(bonusNumber);
-    await this.getMatchingStatisticsAndRate(
-      quantity,
-      purchasedLottos,
-      userLotto,
-      money
-    );
+  async updateBonusNumber(userLotto) {
+    try {
+      const bonusNumber = await this.getBonusNumber();
+      userLotto.setBonusNumber(bonusNumber);
+    } catch (error) {
+      MissionUtils.Console.print(`\n${error.message}`);
+      return await this.getBonusNumber();
+    }
   }
 
   async getMatchingStatisticsAndRate(
@@ -141,6 +118,7 @@ class App {
     for (let i = 0; i < quantity; i += 1) {
       userLotto.updateMatchingCount(purchasedLottos[i]);
     }
+    MissionUtils.Console.print("\n당첨 통계\n---");
     const result = await userLotto.calculateMatchingStatistics();
     for (let score of result) MissionUtils.Console.print(score);
     await userLotto.calculateMatchingRate(money);
@@ -150,8 +128,16 @@ class App {
     const money = await this.checkPrice();
     const quantity = this.getLottoQuantity(money);
     const purchasedLottos = this.setLotto(quantity);
-
-    await this.setWinnigAndBonusNumber(quantity, purchasedLottos, money);
+    const winningNumberArray = await this.setWinnigArray();
+    const userLotto = new Lotto(winningNumberArray);
+    userLotto.setWinningNumber(winningNumberArray);
+    await this.updateBonusNumber(userLotto);
+    await this.getMatchingStatisticsAndRate(
+      quantity,
+      purchasedLottos,
+      userLotto,
+      money
+    );
   }
 }
 
