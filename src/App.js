@@ -20,7 +20,7 @@ class App {
 
     game.printLottoResult(winInfoAry, lottoCnt);
 
-
+    game.printRateOfReturn(winInfoAry, lottoCnt);
   }
 }
 
