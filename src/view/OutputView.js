@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../constants/messages';
-import { WINNING_DESCRIPTION } from '../constants/description';
+import { WINNING_DESCRIPTION } from '../constants/winning';
 import { SYMBOL } from '../constants/symbol';
 
 class OutputView {
@@ -15,8 +15,12 @@ class OutputView {
     Console.print(`${OUTPUT_MESSAGE.enter}${OUTPUT_MESSAGE.result}`);
     Console.print(`${SYMBOL.contour}`);
     for (let i = 0; i < 5; i++) {
-      Console.print(`${WINNING_DESCRIPTION[i]} - ${winnings[i]}개`);
+      Console.print(`${WINNING_DESCRIPTION[i]} - ${winnings[i]}${OUTPUT_MESSAGE.count}`);
     }
+  }
+
+  static printRevenueRate(rate) {
+    Console.print(`${OUTPUT_MESSAGE.totalProfit}${rate.toFixed(1)}${OUTPUT_MESSAGE.percentage}`);
   }
 }
 

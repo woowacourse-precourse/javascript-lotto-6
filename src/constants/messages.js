@@ -7,6 +7,9 @@ const INPUT_MESSAGE = Object.freeze({
 const OUTPUT_MESSAGE = Object.freeze({
   purchase: '개를 구매했습니다.',
   result: '당첨 통계',
+  totalProfit: '총 수익률은 ',
+  percentage: '%입니다.',
+  count: '개',
   enter: '\n',
 });
 

@@ -2,6 +2,7 @@ import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import Lotto from '../domain/Lotto.js';
 import Winning from '../domain/Winning.js';
+import CirculateRate from '../utils/CirculateRate.js';
 
 class LottoController {
   constructor() {
@@ -9,6 +10,7 @@ class LottoController {
     this.winningNumbers = [];
     this.bonusNumber = 0;
     this.Lottos = [];
+    this.winnings = [];
   }
 
   generateLottoNumber() {
@@ -27,6 +29,15 @@ class LottoController {
     OutputView.printWinningStatistics(this.winnings);
   }
 
+  printWinningStatistics() {
+    OutputView.printWinningStatistics(this.winnings);
+  }
+
+  printRevenueRate() {
+    const rate = CirculateRate.revenueRate(this.winnings, this.purchaseAmount);
+    OutputView.printRevenueRate(rate);
+  }
+
   async gameStart() {
     this.purchaseAmount = await InputView.readPurchaseAmount();
     this.generateLottoNumber();
@@ -35,6 +46,7 @@ class LottoController {
     this.bonusNumber = await InputView.readBonusNumber();
     this.countWinning();
     this.printWinningStatistics();
+    this.printRevenueRate();
   }
 }
 
