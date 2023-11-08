@@ -1,5 +1,6 @@
 export const CONSTANTS = Object.freeze({
-    PURCHASE_UNIT_PRICE : 1000,
+    ERROR_PRIFIX : '[ERROR]',
+    PURCHASE_UNIT_PRICE : Number(1000).toLocaleString(),
     MIN_VALUE : 1,
     MAX_VALUE : 45,
     LOTTO_NUMBER_LENGTH : 6,
