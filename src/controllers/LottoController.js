@@ -3,6 +3,7 @@ import BudgetValidation from "../validation/BudgetValidation";
 import GetLotto from "../models/GetLotto";
 import OutputView from "../views/OutputView";
 import Lotto from "../Lotto";
+import Score from "../models/Score";
 
 class LottoController {    
     budget = 0;
@@ -10,6 +11,7 @@ class LottoController {
     lottos = [];
     winningNum = [];
     bonusNum = 0;
+    result;
 
     async getBudget() {
         //입력받은 값을 유효성 검사를 위해 넘겨줌
@@ -57,12 +59,17 @@ class LottoController {
         this.lottos.forEach(numbers => print.printLottoNum(numbers));
     }
 
+
     async getWinningNumber() {
         //당첨 숫자 입력받음
         const winning = new inputView();
         const inputWinning = await winning.inputLottoWinningNumber();
         const inputBonusNumber = await this.getBonusNumber();
-        new Lotto(inputWinning, inputBonusNumber);
+        const lotto = new Lotto(inputWinning, inputBonusNumber);
+
+        //당첨 번호, 보너스 번호 돌려받음
+        this.winningNum = lotto.getNumbers();
+        this.bonusNum = lotto.getBonusNumber();
     }
 
     async getBonusNumber() {
@@ -71,10 +78,17 @@ class LottoController {
         return await bonus.inputLottoBonusNumber();
     }
 
+    calculateScore() {
+        //로또 당첨 계산
+        const score = new Score();
+        this.result = score.checkLotto(this.lottos, this.winningNum, this.bonusNum);
+    }
+
     async start() {
         await this.getBudget();
         this.purchaseLottoTickets();
         this.makeRandomLotto();
+        this.calculateScore();
     }
 }
 
