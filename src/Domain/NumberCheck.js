@@ -24,7 +24,7 @@ class CheckNumber {
   matchingNumber(num, { user, bonus }) {
     const sameNum = num.filter((cur) => user.includes(cur));
 
-    if (sameNum.length === 5 && num.includes(this.#bonusNumber(bonus))) {
+    if (sameNum.length === 5 && num.includes(this.#convertToNumber(bonus))) {
       return MATCHED.NUMBER_COUNT['2nd'];
     }
     if (sameNum.length === 5 || sameNum.length > 2) {
@@ -34,7 +34,7 @@ class CheckNumber {
     return null;
   }
 
-  #bonusNumber(number) {
+  #convertToNumber(number) {
     return Number(number);
   }
 
