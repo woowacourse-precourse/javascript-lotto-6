@@ -29,7 +29,7 @@ class App {
       bonusNumber,
     );
     // 7.
-    const winningProfit = Lotto.calculatePrizeProfit(money, winningRank);
+    const winningProfit = Lotto.calculateProfit(money, winningRank);
     this.printResult(winningRank, winningProfit);
   }
 

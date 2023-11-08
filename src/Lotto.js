@@ -87,7 +87,7 @@ class Lotto {
   }
 
   //  수익률 계산
-  static calculatePrizeProfit(money, winningRank) {
+  static calculateProfit(money, winningRank) {
     const profit = (this.totalPrize(winningRank) / money) * 100;
     return profit.toFixed(1);
   }
