@@ -1,10 +1,10 @@
 import { LOTTO } from './System.js';
 
-export const INPUT_MESSAGE = {
+export const INPUT_MESSAGE = Object.freeze({
   purchaseAmount: '구입금액을 입력해 주세요.\n',
-};
+});
 
-export const OUTPUT_MESSAGE = {
+export const OUTPUT_MESSAGE = Object.freeze({
   winningNumbers: '\n당첨 번호를 입력해 주세요.\n',
   bonusNumber: '\n보너스 번호를 입력해 주세요.\n',
   statistics: Object.freeze([
@@ -15,7 +15,7 @@ export const OUTPUT_MESSAGE = {
     '6개 일치 (2,000,000,000원) - ',
   ]),
   statisticsMessage: '\n당첨 통계\n---',
-};
+});
 
 export const OUTPUT_MESSAGE_FUNCTION = {
   userLottos(userLottos) {
@@ -35,7 +35,7 @@ export const OUTPUT_MESSAGE_FUNCTION = {
   },
 };
 
-export const ERROR_MESSAGE = {
+export const ERROR_MESSAGE = Object.freeze({
   prefix: '\n[ERROR]',
   emptyString: '빈문자열은 입력하실 수 없습니다.\n',
   number: '숫자 외의 문자가 포함되어있습니다.\n',
@@ -43,7 +43,7 @@ export const ERROR_MESSAGE = {
   duplication: '중복되는 숫자는 입력하실 수 없습니다.\n',
   count: '로또 번호는 6개여야 합니다.\n',
   winningDuplication: '당첨번호와 중복되는 숫자가 있습니다.\n',
-};
+});
 
 export const ERROR_MESSAGE_FUNCTION = {
   divide(divisor) {
