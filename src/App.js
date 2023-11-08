@@ -8,6 +8,8 @@ import { CONSTANTS } from "./util/constants.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 class App {
+  lottoCount = 0;
+
   async winningNumberInput() {
     const winningNumbers = await Console.readLineAsync(
       INPUTMESSAGES.WINNING_NUMBER
@@ -23,7 +25,7 @@ class App {
 
   async moneyInput() {
     try {
-      const moneys = await Console.readLineAsync("구입금액을 입력해 주세요.");
+      const moneys = await Console.readLineAsync(INPUTMESSAGES.MONEY);
       const money = await new Money(moneys);
       return money;
     } catch (e) {
@@ -82,29 +84,30 @@ class App {
     this.returnOutput(moneys);
   }
 
-  async purchaseListOutput(number, lottos) {
-    await Console.print(`${number}개를 구매했습니다.`);
+  purchaseListOutput(number, lottos) {
+    Console.print(`${number}개를 구매했습니다.`);
     lottos.map((lotto) => {
       Console.print(`[${lotto.join(", ")}]`);
     });
   }
 
   async start() {
+    // 돈 입력
     const moneys = await this.moneyInput();
-    const lottoCount = moneys.getMoney / CONSTANTS.MONEY_UNIT;
-
-    const buyLotto = new BuyLotto(lottoCount);
+    this.lottoCount = moneys.getMoney / CONSTANTS.MONEY_UNIT;
+    // 입력된 돈으로 로또 구매
+    const buyLotto = new BuyLotto(this.lottoCount);
     buyLotto.buyLottos();
-    this.purchaseListOutput(lottoCount, buyLotto.getBoughtLotto);
-
+    this.purchaseListOutput(this.lottoCount, buyLotto.getBoughtLotto);
+    // 당첨 번호, 보너스 번호 입력
     const lotto = await this.lottoInput();
     const bonusLotto = await this.bonusLottoInput(await lotto.getNumbers);
-
+    // 당첨 번호, 보너스 번호, 구매한 로또, 구매한 로또 개수를 통해 당첨 통계 계산
     const matchLottoNumber = new MatchLottoNumber(
       lotto.getNumbers,
       bonusLotto.getBonusNumbers,
       buyLotto.getBoughtLotto,
-      lottoCount
+      this.lottoCount
     );
     moneys.rankingMoney(matchLottoNumber.getRank);
     this.lottoResultOutput(moneys);
