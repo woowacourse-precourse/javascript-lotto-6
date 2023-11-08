@@ -24,6 +24,33 @@ class Lotto {
       throw new Error('[ERROR]');
     }
   }
+  getNumbers() {
+    return [...this.#numbers]; // 배열 복사본을 반환하여 원본을 보호합니다.
+  }
+
+  compare(winningNumbers, bonusNumber) {
+    const userNumbers = new Set(this.#numbers);
+    const matchingNumbers = winningNumbers.filter((num) => userNumbers.has(num));
+    const isBonusNumberMatch = this.#numbers.includes(bonusNumber);
+    const matchingCount = matchingNumbers.length;
+
+    if (matchingCount === 6) {
+      return '6개 일치 (2,000,000,000원)';
+    } if (matchingCount === 5 && isBonusNumberMatch) {
+      return '5개 일치, 보너스 볼 일치 (30,000,000원)';
+    } if (matchingCount === 5) {
+      return '5개 일치 (1,500,000원)';
+    } if (matchingCount === 4) {
+      return '4개 일치 (50,000원)';
+    } if (matchingCount === 3) {
+      return '3개 일치 (5,000원)';
+    }
+    return '0';
+  }
+}
+
+export default Lotto;
+
 
   // TODO: 추가 기능 구현
 }
