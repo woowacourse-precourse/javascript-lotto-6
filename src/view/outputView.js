@@ -1,4 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
+import { THREE, FOUR, FIVE, BONUS, SIX } from '../constants/constants.js';
+
 import {
   MESSAGE_OUTPUT_COINS,
   MESSAGE_LOTTO_RESULT,
@@ -44,11 +46,11 @@ export default class OutputView {
   }
 
   matchedAll(digit, value) {
-    if (digit === 'three') this.matchedThree(value);
-    if (digit === 'four') this.matchedFour(value);
-    if (digit === 'five') this.matchedFive(value);
-    if (digit === 'bonus') this.matchedBonus(value);
-    if (digit === 'six') this.matchedSix(value);
+    if (digit === THREE) this.matchedThree(value);
+    if (digit === FOUR) this.matchedFour(value);
+    if (digit === FIVE) this.matchedFive(value);
+    if (digit === BONUS) this.matchedBonus(value);
+    if (digit === SIX) this.matchedSix(value);
   }
 
   profit(result) {

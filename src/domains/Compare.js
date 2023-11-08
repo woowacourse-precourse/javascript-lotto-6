@@ -9,7 +9,7 @@ export default class Compare {
   constructor(winningNumber, bonusNumber) {
     this.#winningNumber = winningNumber.getNumbers();
     this.#bonusNumber = bonusNumber;
-    this.#machedNumber = { three: 0, four: 0, five: 0, bonus: 0, six: 0 };
+    this.#machedNumber = { THREE: 0, FOUR: 0, FIVE: 0, BONUS: 0, SIX: 0 };
   }
 
   getMathced(boughtLottos) {
@@ -25,33 +25,26 @@ export default class Compare {
   }
 
   countMachedNumbers(matchedNumbersLength, lotto) {
-    if (matchedNumbersLength === 3) this.#machedNumber.three += 1;
-    if (matchedNumbersLength === 4) this.#machedNumber.four += 1;
+    if (matchedNumbersLength === 3) this.#machedNumber.THREE += 1;
+    if (matchedNumbersLength === 4) this.#machedNumber.FOUR += 1;
     if (matchedNumbersLength === 5) {
       if (lotto.includes(this.#bonusNumber)) {
-        this.#machedNumber.bonus += 1;
+        this.#machedNumber.BONUS += 1;
+
         return;
       }
-      this.#machedNumber.five += 1;
+      this.#machedNumber.FIVE += 1;
     }
-    if (matchedNumbersLength === 6) this.#machedNumber.six += 1;
+    if (matchedNumbersLength === 6) this.#machedNumber.SIX += 1;
   }
 
   getProfit(result, coin) {
     let totalProfit = 0;
-    // const result = this.getMatchedAll(boughtLottos);
+
     result.forEach((count, index) => {
       totalProfit += count * PROFIT[index];
     });
+
     return ((totalProfit / (coin * KRW_UNIT)) * 100).toFixed(1);
   }
 }
-
-// getProfit(boughtLottos, coin) {
-//   let totalProfit = 0;
-//   const result = this.getMatchedAll(boughtLottos);
-//   result.forEach((count, index) => {
-//     totalProfit += count * PROFIT[index];
-//   });
-//   return ((totalProfit / (coin * KRW_UNIT)) * 100).toFixed(1);
-// }

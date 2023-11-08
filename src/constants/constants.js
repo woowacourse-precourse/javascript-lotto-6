@@ -2,12 +2,13 @@ export const START_NUMBER = 1;
 export const END_NUMBER = 45;
 export const SIZE = 6;
 
-export const THREE = 3;
-export const FOUR = 4;
-export const FIVE = 5;
-export const SIX = 6;
-
 export const KRW_UNIT = 1000;
+
+export const THREE = 'THREE';
+export const FOUR = 'FOUR';
+export const FIVE = 'FIVE';
+export const BONUS = 'BONUS';
+export const SIX = 'SIX';
 
 export const THREE_PROFIT = 5000;
 export const FOUR_PROFIT = 50000;
