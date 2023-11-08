@@ -12,7 +12,6 @@ import {
   validateCashInteger,
   validateCashNone,
 } from "../src/CoreLogic/Validate/Cash.js";
-//입력받은 값을 검증하고, 해당 값을 가지고 연산을 수행해서 결과값을 도출하는 것
 
 describe("입력 금액 검증 테스트", () => {
   test("입력 금액 타입 테스트", async () => {

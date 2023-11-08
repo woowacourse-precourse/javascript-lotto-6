@@ -5,7 +5,6 @@ export function validateCashCollection(INPUT_CASH) {
   validateCashNone(INPUT_CASH);
 }
 
-//얘네도 넣어야 함.
 export function validateCashInteger(INPUT_CASH) {
   if (+INPUT_CASH % 1000 === 0) {
     return INPUT_CASH;
