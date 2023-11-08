@@ -5,8 +5,8 @@ class Rank {
   #rankStatistic;
 
   constructor(lottos) {
-    this.#rankStatistic = Array(NUMBER.lottoRank).fill(0);
     this.#lottos = lottos;
+    this.#rankStatistic = Array(NUMBER.lottoRank).fill(0);
   }
 
   #getSameNumberCount(lotto, winningNumber) {
