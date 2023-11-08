@@ -1,13 +1,14 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { purchaseSize } from "./utils/purchaseSize.js";
 import { earningRate } from "./utils/earningRate.js";
-import { RANGE, INITIAL } from "./constant/NUMBER.js";
+import { ranking } from "./utils/rank.js";
+import { RANGE, INITIAL, BONUS, MIN_MATCHING } from "./constant/NUMBER.js";
 import PurchasePrice from "./PurchasePrice.js";
 
 class Game {
   constructor() {
     this.lottoNumbers = [];
-    this.matchResults = Array.from({ length: 5 }, () => INITIAL);
+    this.ranking = Array.from({ length: ranking() }, () => INITIAL);
   }
 
   #generateLotto() {
@@ -32,8 +33,8 @@ class Game {
   }
 
   #countWinnings(counts, prizeResult) {
-    if (counts >= 3 && counts <= 6) {
-      return prizeResult[counts - 3]++;
+    if (counts >= MIN_MATCHING) {
+      return prizeResult[counts - MIN_MATCHING]++;
     }
   }
 
@@ -44,19 +45,22 @@ class Game {
   getLottoResults(lotto, drawingLottoArray, bonus) {
     drawingLottoArray.forEach((drawingLotto) => {
       const matchCounts = this.#countMatch(lotto, drawingLotto);
-      this.#countWinnings(matchCounts, this.matchResults);
+      this.#countWinnings(matchCounts, this.ranking);
 
-      if (matchCounts === 5 && this.#isMatchedBonus(bonus, drawingLotto)) {
-        this.matchResults[4]++;
+      if (
+        matchCounts === BONUS.CONDITION &&
+        this.#isMatchedBonus(bonus, drawingLotto)
+      ) {
+        this.ranking[ranking() - 1]++;
       }
     });
 
-    return this.matchResults;
+    return this.ranking;
   }
 
-  getEarningRate(prize, matchResults, purchasePrice) {
+  getEarningRate(prize, ranking, purchasePrice) {
     const totalEarnings = prize.reduce((sum, element, index) => {
-      return sum + element * matchResults[index];
+      return sum + element * ranking[index];
     }, INITIAL);
 
     return earningRate(totalEarnings, purchasePrice);
