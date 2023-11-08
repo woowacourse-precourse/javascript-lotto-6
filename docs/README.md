@@ -68,11 +68,20 @@ calculateLottoCount
 
 <br/>
 
-setWinningNumbers
-- [ ] 당첨 번호를 설정
+calculateNumberOfMatchingNumbers
+- [x]
 
-setBonumsNumbers
-- [ ] 보너스 당첨 번호를 설정
+isBonusNumberMatched
+- [x]
+
+determinePrizeCategory
+- [x]
+
+countAndPrintResult
+- [x]
+
+checkWinning
+- [x] 주어진 로또 번호가 당첨 번호와 일치하는지 확인
 
 validateNumbers
 - [ ] 당첨 번호의 유효성을 검사
@@ -87,8 +96,6 @@ validateBonusNumbers
   - [ ] 숫자가 로또 번호로서 1~45 범위 내에 있는지 확인
   - [ ] 당첨 번호들과 중복되지 않아야 한다.
 
-checkWinning
-- [ ] 주어진 로또 번호가 당첨 번호와 일치하는지 확인
 
 <br/>
 
@@ -129,7 +136,7 @@ printLottos
   `[3, 5, 11, 16, 32, 38]` ...
 
 printLottoResult
-- [ ] 당첨 결과를 화면에 출력하기
+- [x] 당첨 결과를 화면에 출력하기
 - `당첨 통계` <br/>
   `---` <br/>
   `3개 일치 (5,000원) - 1개` <br/>

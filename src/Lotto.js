@@ -13,6 +13,8 @@ class Lotto {
     for (let i = 0; i < lottoCount; i += 1) {
       const lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
       this.sortLottoNumbers(lottoNumber);
+
+      // this.lottoNumbersArray.push(lottoNumber);
     }
 
     return this.lottoNumbersArray;

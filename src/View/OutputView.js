@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { GAME_MESSAGES } from '../utils/Constants.js';
+import { GAME_MESSAGES, RANK_MESSAGES,  } from '../utils/Constants.js';
 
 class OutputView {
   constructor() {}
@@ -14,6 +14,16 @@ class OutputView {
       Console.print(lotto);
     })
     Console.print('');
+  }
+
+  printWinningResult(counts) {
+    Console.print(GAME_MESSAGES.STATICS_HEADER);
+    Console.print(GAME_MESSAGES.DIVIDER);
+
+    for (let rank = 5; rank >= 1; rank -= 1) {
+      const message = RANK_MESSAGES[rank] + `${counts[rank]}` + GAME_MESSAGES.MESSSAGE_SUFFIX;
+      Console.print(message);
+    }
   }
 }
 

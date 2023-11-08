@@ -2,6 +2,7 @@ import Lotto from "./Lotto.js";
 import OutputView from "./View/OutputView.js";
 import LottoController from "./Controller/LottoController.js";
 import LottoMachine from "./Model/LottoMachine.js";
+import WinningLotto from "./Model/WinningLotto.js";
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
@@ -9,6 +10,7 @@ class App {
     this.lotto = new Lotto();
     this.outputView = new OutputView();
     this.lottoMachine = new LottoMachine();
+    this.winningLotto = new WinningLotto();
     this.lottoController = new LottoController();
   }
 
@@ -24,7 +26,12 @@ class App {
     this.outputView.printLottoNumbers(lottoNumbersArray);
 
     const winningNumbers = await this.lottoController.handleLottoWinningNumbers();
-    Console.print(winningNumbers)
+  
+    const lottoResult = lottoNumbersArray.map(lottoNumbers => {
+      return this.winningLotto.checkWinning(lottoNumbers, winningNumbers);
+    })
+    
+    this.winningLotto.countAndPrintResult(lottoResult);
   }
 }
 
