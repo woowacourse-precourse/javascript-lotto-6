@@ -1,8 +1,8 @@
 import ERROR from '../constants/Error';
 import GAME from '../constants/Game';
 
-function checkWinningNumber(winningNumbers){
-    if (winningNumbers.length !== GAME.LOTTO_LENGTH){
+function checkWinningNumber(winningNumbers) {
+    if (winningNumbers.length !== GAME.LOTTO_LENGTH) {
         throw new Error(ERROR.IS_SIX);
     }
 

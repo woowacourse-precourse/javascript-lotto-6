@@ -1,7 +1,7 @@
 import ERROR from '../constants/Error';
 import GAME from '../constants/Game';
 
-function checkBonus(bonus){
+function checkBonus(bonus) {
     if (bonus < GAME.LOTTO_MIN || bonus > GAME.LOTTO_MAX) {
         throw new Error(ERROR.RANGE);
     }

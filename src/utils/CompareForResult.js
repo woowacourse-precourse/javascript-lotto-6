@@ -1,4 +1,4 @@
-function compareForResult(winningNumbers,bonus,lottos){
+function compareForResult(winningNumbers,bonus,lottos) {
   let winningList = [0,0,0,0,0];
   lottos.forEach((lotto) => {
     const count = countMatchingNumbers(lotto, winningNumbers);
@@ -7,12 +7,12 @@ function compareForResult(winningNumbers,bonus,lottos){
       winningList[0]++;
       return;
     }
-    
+
     if (count === 4) {
       winningList[1]++;
       return;
     }
-    
+
     if (count === 5) {
       if (lotto.includes(bonus)) {
         winningList[3]++;
@@ -21,7 +21,7 @@ function compareForResult(winningNumbers,bonus,lottos){
       }
       return;
     }
-    
+
     if (count === 6) {
       winningList[4]++;
     }

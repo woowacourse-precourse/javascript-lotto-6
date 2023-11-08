@@ -32,7 +32,7 @@ class Lotto {
   #sortLotto(numbers) {
     return numbers.sort((a, b) => a - b);
   }
-  #printLotto(numbers){
+  #printLotto(numbers) {
     Console.print(numbers);
   }
 }
