@@ -1,7 +1,7 @@
 import validator from '../Validator/validator.js';
 
 class Lotto {
-  #numbers; // 당첨 번호?
+  #numbers;
 
   constructor(numbers) {
     try {
