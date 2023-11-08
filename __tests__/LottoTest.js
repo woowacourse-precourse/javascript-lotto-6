@@ -1,4 +1,5 @@
 import Lotto from '../src/Lotto';
+import WinningLotto from '../src/domain/WinningLotto';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -22,13 +23,13 @@ describe('로또 클래스 테스트', () => {
 
   test('로또 번호와 보너스 번호가 중복이면 예외가 발생한다.', () => {
     expect(() => {
-      new Lotto([1, 2, 3, 4, 5, 6]).getBonus(6);
+      new WinningLotto([1, 2, 3, 4, 5, 6]).getBonus(6);
     }).toThrow('[ERROR]');
   });
 
   test('로또 번호의 범위에 보너스 번호가 없다면 예외가 발생한다.', () => {
     expect(() => {
-      new Lotto([1, 2, 3, 4, 5, 6]).getBonus(46);
+      new WinningLotto([1, 2, 3, 4, 5, 6]).getBonus(46);
     }).toThrow('[ERROR]');
   });
 });
