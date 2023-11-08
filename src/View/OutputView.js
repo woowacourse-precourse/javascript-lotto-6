@@ -1,4 +1,4 @@
-import { INPUT_MESSAGES, OUPUT_MESSAGES } from '../Constants';
+import { INPUT_MESSAGES, OUPUT_MESSAGES, WINNING_NUMBERS } from '../Constants';
 
 class OuputView {
   constructor() {}
@@ -18,7 +18,15 @@ class OuputView {
   }
 
   // 당첨 현황 출력
-  printWinningStatus() {}
+  printWinningStatus(winningStatus) {
+    Console.print(OUPUT_MESSAGES.PLACE_HOLDER);
+    for (const i in WINNING_NUMBERS) {
+      const matchingCount = WINNING_NUMBERS[i];
+      Console.print(
+        OUPUT_MESSAGES.WINNING_STATUS(matchingCount, winningStatus),
+      );
+    }
+  }
   // 수익률 출력
   printProfit(profit) {
     Console.print(OUPUT_MESSAGES.PROFIT(profit));

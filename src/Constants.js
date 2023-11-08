@@ -6,6 +6,14 @@ const LOTTO_RULE = Object.freeze({
   LENGTH: 6,
   UNIT: 1000,
 });
+const WINNING_NUMBERS = [3, 4, 5, 'bonus', 6];
+const WINNING_PROFITS = {
+  3: 5000,
+  4: 50000,
+  5: 1500000,
+  bonus: 30000000,
+  6: 2000000000,
+};
 
 const INPUT_MESSAGES = Object.freeze({
   BUY_INPUT: '구입금액을 입력해주세요',
@@ -21,6 +29,13 @@ const OUPUT_MESSAGES = Object.freeze({
   },
   BUY_LOTTOS(lottos) {
     return `[${lottos.join(',')}]`;
+  },
+  WINNING_STATUS(matchingCount, winningStatus) {
+    const winingProfit = WINNING_PROFITS[matchingCount].toLocaleString();
+    if (matchingCount === 'bonus') {
+      return `5개 일치, 보너스 볼 일치(${winingProfit}원) - ${winningStatus[matchingCount]}개`;
+    }
+    return `${matchingCount}개 일치,(${winingProfit}원) - ${winningStatus[matchingCount]}개`;
   },
   PROFIT(profit) {
     return `총 수익률은 ${profit}%입니다.`;
@@ -50,4 +65,11 @@ const ERROR_MESSAGES = Object.freeze({
   },
 });
 
-export { LOTTO_RULE, INPUT_MESSAGES, OUPUT_MESSAGES, ERROR_MESSAGES };
+export {
+  LOTTO_RULE,
+  INPUT_MESSAGES,
+  WINNING_NUMBERS,
+  WINNING_PROFITS,
+  OUPUT_MESSAGES,
+  ERROR_MESSAGES,
+};
