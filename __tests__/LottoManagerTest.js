@@ -1,3 +1,4 @@
+import Lotto from "../src/core/Lotto.js";
 import LottoManager from "../src/core/managers/LottoManager.js";
 
 describe("LottoManager 클래스 테스트", () => {
