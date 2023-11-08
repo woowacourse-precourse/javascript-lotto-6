@@ -8,7 +8,7 @@ export function printLottoAmount(amount) {
 
 export function printLottoNumbers(numbers) {
   for (let index = 0; index < numbers.length; index += 1) {
-    MissionUtils.Console.print(numbers[index]);
+    MissionUtils.Console.print(`[${numbers[index].join(', ')}]`);
   }
 }
 
@@ -27,8 +27,8 @@ export function printLottoStatistics(matchedCounts) {
   matchedCounts.forEach((count) => {
     if (winningCountData[count.toString()]) winningCountData[count.toString()].value += 1;
   });
-  const result = Object.keys(winningCountData).sort().map(key => `${winningCountData[key].text} - ${winningCountData[key].value}개`);
-  MissionUtils.Console.print(result);
+  const results = Object.keys(winningCountData).sort().map(key => `${winningCountData[key].text} - ${winningCountData[key].value}개`);
+  results.forEach(result => MissionUtils.Console.print(result));
 
   return winningCountData;
 }
