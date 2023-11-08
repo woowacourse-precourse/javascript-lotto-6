@@ -1,3 +1,4 @@
+import { PRIZE } from "./constant/NUMBER.js";
 import { Input } from "./Input.js";
 import { Output } from "./Output.js";
 import PurchasePrice from "./PurchasePrice.js";
@@ -71,6 +72,8 @@ class App {
       matchingResults,
       this.purchasePrice
     );
+
+    await Output.winningReport(matchingResults, earningRate);
   }
 }
 
