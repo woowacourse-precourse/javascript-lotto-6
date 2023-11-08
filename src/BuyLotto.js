@@ -10,29 +10,40 @@ class BuyLotto {
   constructor(lottoPrice, dailyLimitPrice, numberCheck) {
     this.LOTTO_PRICE = lottoPrice;
     this.DAILY_LIMIT_PRICE = dailyLimitPrice;
-    this.NUMBER_CHECK = numberCheck;
   }
 
-  async inputPurchaseAmount() {
-    const purchaseAmout = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+  // async inputPurchaseAmount() {
+  //   const purchaseAmount = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
 
-    return purchaseAmout;
-  }
+  //   return purchaseAmount;
+  // }
 
-  async validateInputPurchaseAmount(purchaseAmout) {
-    if (!this.NUMBER_CHECK.test(purchaseAmout)) {
+  validateInputPurchaseAmount(parsedAmount) {
+    if (isNaN(parsedAmount)) {
       throw new InputError(ERROR_MESSAGE.notNumber);
-    } else if (purchaseAmout < this.LOTTO_PRICE) {
+    } else if (parsedAmount < this.LOTTO_PRICE) {
       throw new InputError(ERROR_MESSAGE.oneThousandMore);
-    } else if (purchaseAmout > this.DAILY_LIMIT_PRICE) {
+    } else if (parsedAmount > this.DAILY_LIMIT_PRICE) {
       throw new InputError(ERROR_MESSAGE.dailyLimitExceeded);
-    } else if (purchaseAmout % this.LOTTO_PRICE != 0) {
+    } else if (parsedAmount % this.LOTTO_PRICE != 0) {
       throw new InputError(ERROR_MESSAGE.oneThousandUnit);
     }
   }
 
-  async getLottoNumbers(purchaseAmout) {
-    const lottoQuantity = purchaseAmout / 1000;
+  async inputPurchaseAmount() {
+    const parsedAmount = await MissionUtils.Console.readLineAsync('\n구입금액을 입력해 주세요.\n');
+
+    try {
+      this.validateInputPurchaseAmount(parsedAmount);
+      return parsedAmount;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return this.inputPurchaseAmount();
+    }
+  }
+
+  async getLottoNumbers(purchaseAmount) {
+    const lottoQuantity = purchaseAmount / 1000;
     const lottoNumberArray = [];
 
     MissionUtils.Console.print(`\n${lottoQuantity}개를 구매했습니다.`);
@@ -50,9 +61,8 @@ class BuyLotto {
   }
 
   async start() {
-    const purchaseAmount = await this.inputPurchaseAmount();
-    await this.validateInputPurchaseAmount(purchaseAmount);
-    const lottoNumbers = await this.getLottoNumbers(purchaseAmount);
+    const inputPurchaseAmount = await this.inputPurchaseAmount();
+    const lottoNumbers = await this.getLottoNumbers(inputPurchaseAmount);
 
     return lottoNumbers;
   }

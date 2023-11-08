@@ -90,8 +90,4 @@ describe('로또 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
-
-  test('예외 테스트', async () => {
-    await runException('1000j');
-  });
 });

@@ -18,17 +18,14 @@ class App {
   }
 
   async play() {
-    const buyLotto = new BuyLotto(
-      CONSTANT_VALUE.lottoPrice,
-      CONSTANT_VALUE.dailyLimitPrice,
-      CONSTANT_VALUE.numberCheck,
-    );
+    const buyLotto = new BuyLotto(CONSTANT_VALUE.lottoPrice, CONSTANT_VALUE.dailyLimitPrice);
 
     const lottoNumbers = await buyLotto.start();
 
     const winningNumbers = await this.generateWinningNumbers();
-    const bonusNumber = await this.generateBonusNumber();
+
     const lotto = new Lotto(winningNumbers);
+    const bonusNumber = await this.generateBonusNumber();
 
     lotto.validateBonus(bonusNumber);
     lotto.printEarnings(lottoNumbers, winningNumbers, bonusNumber);
