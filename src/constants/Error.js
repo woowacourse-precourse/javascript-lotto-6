@@ -8,7 +8,7 @@ const ERROR = Object.freeze({
     INVALID_PRICE_UNIT: '로또 구입 금액은 1,000원 단위여야 합니다.',
   },
 
-  INPUT_WINNING_NUMBERS: {
+  INPUT_NUMBERS: {
     INVALID_CHARACTER:
       '당첨 번호에는 공백 없이 1부터 45 사이의 숫자와 쉼표만 입력할 수 있습니다.',
     INVALID_FORMAT:
