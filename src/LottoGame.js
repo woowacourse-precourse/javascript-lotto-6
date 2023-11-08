@@ -33,7 +33,7 @@ class LottoGame {
       this.validate(money);
     } catch (error) {
       OutputView.print(error.message);
-      await this.buyLottos();
+      return await this.buyLottos();
     }
 
     this.#lottoArray.set(money);
