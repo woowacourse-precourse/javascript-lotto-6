@@ -8,6 +8,9 @@ class App {
   async play() {
     // 초기화
     lottoRanking.initializeRanking();
+
+    // 구입 금액 입력
+    const payment = await inputHandlers.inputPayment();
   }
 }
 
