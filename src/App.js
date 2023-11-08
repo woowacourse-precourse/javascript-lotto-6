@@ -12,29 +12,38 @@ class App {
     this.user = new User();
   }
 
-  async play() {
+  async getUserInputs() {
     const { user } = this;
-
     await user.inputMoney();
-
-    this.lottoList = new LottoList(user.lottoCount);
-
+    this.generateLottoList();
     await user.inputWinningNumbers();
     await user.inputBonusNumber();
+  }
 
+  generateLottoList() {
+    this.lottoList = new LottoList(this.user.lottoCount);
+  }
+
+  calculateResults() {
     this.lottoResult = new LottoResultCalculator({
       userLottos: this.lottoList.allLottoNumbers,
-      winningNumbers: user.winningNumbers,
-      bonusNumber: user.bonusNumber,
+      winningNumbers: this.user.winningNumbers,
+      bonusNumber: this.user.bonusNumber,
     });
+  }
 
-    this.lottoResult.printResults();
-
+  calculateProfits() {
     this.calculateProfit = new CalculateProfit({
       results: this.lottoResult.results,
-      moneySpent: user.lottoCount * 1000,
+      moneySpent: this.user.lottoCount * 1000,
     });
+  }
 
+  async play() {
+    await this.getUserInputs();
+    this.calculateResults();
+    this.lottoResult.printResults();
+    this.calculateProfits();
     this.calculateProfit.printResults();
   }
 }
