@@ -25,6 +25,11 @@ const Validate = {
       throw new Error(ERROR.lottoRange);
     }
   },
+  checkNumberType(number) {
+    if (typeof number !== 'number') {
+      throw new Error(ERROR.lottoIsNumberType);
+    }
+  },
   checkIncludeComma(numbers) {
     if (!numbers.includes(',')) {
       throw new Error(ERROR.lottoContainComma);
