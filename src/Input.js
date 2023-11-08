@@ -7,7 +7,6 @@ class Input {
       const purchaseAmount =
         await Console.readLineAsync('구입금액을 입력해 주세요.\n');
       const amount = parseInt(purchaseAmount);
-
       this.validateGetPurchaseAmount(amount);
       return amount;
     } catch (error) {
@@ -15,11 +14,11 @@ class Input {
     }
   }
 
-  validateGetPurchaseAmount(purchaseAmount) {
-    if (isNaN(purchaseAmount)) {
+  validateGetPurchaseAmount(amount) {
+    if (isNaN(amount)) {
       throw new Error('[ERROR] 구입금액은 숫자여야 합니다.');
     }
-    if (purchaseAmount % 1000 !== 0) {
+    if (amount % 1000 !== 0) {
       throw new Error('[ERROR] 구입금액은 1000의 배수여야 합니다.');
     }
   }
@@ -29,11 +28,18 @@ class Input {
       const input = await Console.readLineAsync(
         '\n당첨 번호를 입력해 주세요.\n',
       );
+
+      if (!/^(\d+,){5}\d+$/.test(input)) {
+        throw new Error('[ERROR] 쉼표(,) 외에 문자는 입력할 수 없습니다.');
+      }
+
       const numbers = input.split(',').map(Number);
       this.validateWinningNumbers(input, numbers);
       return numbers;
     } catch (error) {
-      return Promise.reject(error);
+      // return Promise.reject(error);
+      console.log(error.message);
+      return null;
     }
   }
 
