@@ -1,3 +1,5 @@
+import Validation from './domain/Validation';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,43 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    Validation.isLottoNumbersValidated(numbers);
+    return this;
   }
 
-  // TODO: 추가 기능 구현
+  getLottoNumbers() {
+    return [...this.#numbers];
+  }
+
+  #matchCount(ticket) {
+    return ticket.filter(number => this.#numbers.includes(number)).length;
+  }
+
+  #evaluateEachLottoTicket(ticket, bonusNumber, lottoResult) {
+    const updatedResult = { ...lottoResult };
+    const matchingNumber = this.#matchCount(ticket);
+    const bonusMatch = ticket.includes(bonusNumber);
+
+    if (matchingNumber === 6) updatedResult.first += 1;
+    if (matchingNumber === 5 && bonusMatch) updatedResult.second += 1;
+    if (matchingNumber === 5 && !bonusMatch) updatedResult.third += 1;
+    if (matchingNumber === 4) updatedResult.forth += 1;
+    if (matchingNumber === 3) updatedResult.fifth += 1;
+
+    return updatedResult;
+  }
+
+  evaluateLottoTickets(lottoTickets, bonusNumber, lottoResult) {
+    let evaluatedResult = { ...lottoResult };
+    lottoTickets.forEach(ticket => {
+      evaluatedResult = this.#evaluateEachLottoTicket(
+        ticket,
+        bonusNumber,
+        evaluatedResult,
+      );
+    });
+    return evaluatedResult;
+  }
 }
 
 export default Lotto;
