@@ -2,7 +2,6 @@ import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_MESSAGE, NUMBERS } from '../Constants/Constants.js';
 import VALIDATION from '../Controller/Validation.js';
 import OUTPUT_VIEW from './outputView.js';
-import Lotto from '../Lotto.js';
 
 const INPUT_VIEW = {
   async inputPrice() {

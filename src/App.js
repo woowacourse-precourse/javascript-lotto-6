@@ -29,6 +29,8 @@ class App {
     const ranking = publish.getRank(this.WINNIG_LOTTO, BONUS_NUM);
     // console.log(ranking);
     OUTPUT_VIEW.outputRank(ranking);
+    const statistics = publish.getStatistics(this.BUY_COUNT, ranking);
+    OUTPUT_VIEW.outputStatistics(statistics);
   }
 }
 

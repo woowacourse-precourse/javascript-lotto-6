@@ -7,10 +7,9 @@ const LOTTO_MESSAGE = Object.freeze({
   RANKING_5: (rank) => `3개 일치 (5,000원) - ${rank}개`,
   RANKING_4: (rank) => `4개 일치 (50,000원) - ${rank}개`,
   RANKING_3: (rank) => `5개 일치 (1,500,000원) - ${rank}개`,
-  RANKING_2: (rank) => `5개 일치, 보너스 볼 일치 (30,000,000)원 - ${rank}개`,
+  RANKING_2: (rank) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${rank}개`,
   RANKING_1: (rank) => `6개 일치 (2,000,000,000원) - ${rank}개`,
-  LOTTO_STATISTICS: '총 수익률은',
-  PERCENTAGE: '%입니다.',
+  LOTTO_STATISTICS: (statistics) => `총 수익률은 ${statistics}%입니다.`,
 });
 
 const ERROR_MESSAGE = Object.freeze({
@@ -30,5 +29,10 @@ const NUMBERS = {
   MAX_LOTTO: 45,
   LOTTO_PRICE: 1000,
   LOTTO_SELECT_NUM: 6,
+  FIRST_AMOUNT: 2000000000,
+  SECOND_AMOUNT: 30000000,
+  THIRD_AMOUNT: 1500000,
+  FOURTH_AMOUNT: 50000,
+  FIFTH_AMOUT: 5000,
 };
 export { LOTTO_MESSAGE, ERROR_MESSAGE, NUMBERS };

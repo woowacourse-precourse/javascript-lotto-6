@@ -18,6 +18,10 @@ const OUTPUT_VIEW = {
       );
     }
   },
+
+  async outputStatistics(statistics) {
+    Console.print(LOTTO_MESSAGE.LOTTO_STATISTICS(statistics));
+  },
 };
 
 export default OUTPUT_VIEW;
