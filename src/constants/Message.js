@@ -6,3 +6,9 @@ export const ERRORS = Object.freeze({
 	INVALID_UNIT_INPUT: "[ERROR] 1,000원 단위로 금액을 입력해주세요.",
 	INVALID_NUMBER: "[ERROR] 숫자를 입력해주세요.",
 });
+
+export const OUTPUT_MESSAGES = Object.freeze({
+	OUTPUT_LOTTO_COUNT: (lottoCount) => {
+		return `\n${lottoCount}개를 구매했습니다.`;
+	},
+});
