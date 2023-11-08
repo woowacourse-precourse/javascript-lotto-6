@@ -5,7 +5,7 @@ import { writeView } from '../view/OutputView.js';
 import LottoCount from '../model/LottoCount.js';
 import Lotto from '../model/Lotto.js';
 import Bonus from '../model/Bonus.js';
-import { standard } from '../constants/Standard.js';
+import { STANDARD } from '../constants/Standard.js';
 
 class LottoController {
   #lottoCount;
@@ -66,7 +66,7 @@ class LottoController {
   }
 
   async calculateLotto() {
-    this.#winningCount = standard.WINNING_CORRECT_INIT;
+    this.#winningCount = STANDARD.WINNING_CORRECT_INIT;
 
     const lottoArr = this.#lottoCount.getLottoArr();
     const winnings = this.#winningNumbers;
@@ -91,14 +91,14 @@ class LottoController {
 
   printWinningCorrect() {
     this.#winningCount.map((item, index) => {
-      writeView(GAME.WINNING_CORRECT[index] + ' (' + standard.WINNING_CORRECT_PRICE[index] + '원) - ' + item + '개');
+      writeView(GAME.WINNING_CORRECT[index] + ' (' + STANDARD.WINNING_CORRECT_PRICE[index] + '원) - ' + item + '개');
     });
   }
 
   printRate() {
     let totalSum = 0;
     this.#winningCount.map((item, index) => {
-      totalSum += item * parseInt(standard.WINNING_CORRECT_PRICE[index].replace(/,/g, ''));
+      totalSum += item * parseInt(STANDARD.WINNING_CORRECT_PRICE[index].replace(/,/g, ''));
     });
 
     const totalRate = (totalSum / this.#lottoCount.getBuyPrice()) * 100;

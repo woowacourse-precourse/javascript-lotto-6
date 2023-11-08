@@ -1,5 +1,5 @@
 import { ERROR } from '../constants/Message.js';
-import { standard } from '../constants/Standard.js';
+import { STANDARD } from '../constants/Standard.js';
 
 class Lotto {
   #numbers;
@@ -31,14 +31,14 @@ class Lotto {
   }
 
   #validateLength(numbers) {
-    if (numbers.length !== standard.LOTTO_MAX_COUNT) {
+    if (numbers.length !== STANDARD.LOTTO_MAX_COUNT) {
       throw new Error(ERROR.LENGTH);
     }
   }
 
   #validateRange(numbers) {
     const isAllCorrectRange = numbers.every(
-      (item) => item >= standard.LOTTO_MIN_NUMBER && item <= standard.LOTTO_MAX_NUMBER
+      (item) => item >= STANDARD.LOTTO_MIN_NUMBER && item <= STANDARD.LOTTO_MAX_NUMBER
     );
 
     if (!isAllCorrectRange) {

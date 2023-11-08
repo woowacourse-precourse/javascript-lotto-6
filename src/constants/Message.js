@@ -1,11 +1,11 @@
-import { standard } from './Standard.js';
+import { STANDARD } from './Standard.js';
 
 export const ERROR = {
-  DIVIDE: `[ERROR] 로또 구입 금액이 ${standard.LOTTO_PRICE}원으로 나누어 떨어지지 않습니다.`,
-  LENGTH: `[ERROR] 당첨 번호는 ${standard.LOTTO_MAX_COUNT}개 입니다.`,
+  DIVIDE: `[ERROR] 로또 구입 금액이 ${STANDARD.LOTTO_PRICE}원으로 나누어 떨어지지 않습니다.`,
+  LENGTH: `[ERROR] 당첨 번호는 ${STANDARD.LOTTO_MAX_COUNT}개 입니다.`,
   DUPLICATION: '[ERROR] 중복되는 당첨 번호가 있습니다.',
   NUMBER: '[ERROR] 입력 값은 숫자여야 합니다.',
-  RANGE: `[ERROR] ${standard.LOTTO_MIN_NUMBER}부터 ${standard.LOTTO_MAX_NUMBER} 사이의 숫자여야 합니다.`,
+  RANGE: `[ERROR] ${STANDARD.LOTTO_MIN_NUMBER}부터 ${STANDARD.LOTTO_MAX_NUMBER} 사이의 숫자여야 합니다.`,
 };
 
 export const GAME = {

@@ -1,4 +1,4 @@
-export const standard = Object.freeze({
+export const STANDARD = Object.freeze({
   LOTTO_PRICE: 1000,
   LOTTO_MAX_COUNT: 6,
   LOTTO_MIN_NUMBER: 1,

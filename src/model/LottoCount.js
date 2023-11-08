@@ -1,5 +1,5 @@
 import { ERROR, GAME } from '../constants/Message.js';
-import { standard } from '../constants/Standard.js';
+import { STANDARD } from '../constants/Standard.js';
 import { writeView } from '../view/OutputView.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
@@ -42,9 +42,9 @@ class LottoCount {
   #getRandomLotto() {
     for (let i = 0; i < this.#buyLottoCount; i++) {
       const lottoNumber = MissionUtils.Random.pickUniqueNumbersInRange(
-        standard.LOTTO_MIN_NUMBER,
-        standard.LOTTO_MAX_NUMBER,
-        standard.LOTTO_MAX_COUNT
+        STANDARD.LOTTO_MIN_NUMBER,
+        STANDARD.LOTTO_MAX_NUMBER,
+        STANDARD.LOTTO_MAX_COUNT
       );
       const lotto = new Lotto(lottoNumber).getLottoNumbers();
       this.#lottoArr.push(lotto);

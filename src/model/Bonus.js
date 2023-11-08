@@ -1,4 +1,4 @@
-import { ERROR } from '../constants/Message';
+import { ERROR } from '../constants/Message.js';
 
 class Bonus {
   #bonusNumber;
