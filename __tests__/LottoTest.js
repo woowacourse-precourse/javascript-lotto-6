@@ -76,5 +76,6 @@ describe("로또 클래스 테스트", () => {
     MissionUtils.Console.print = jest.fn();
     printProfitRate(amount, winningData);
     expect(MissionUtils.Console.print).toHaveBeenCalledWith("총 수익률은 12,541.7%입니다.");
+    jest.clearAllMocks();
   });
 });
