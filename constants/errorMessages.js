@@ -6,8 +6,11 @@ const message = Object.freeze({
   notNumber: '[ERROR] 당첨 번호는 숫자를 입력해야 합니다.',
   notRange: '[ERROR] 당첨 번호는 1~45 사이의 값을 입력해야 합니다.',
   duplicate: '[ERROR] 당첨 번호에 중복된 숫자가 입력되었습니다.',
-  
-  invalidBonusNumber: '[ERROR] 보너스 번호는 숫자여야 합니다.',
+
+  bonusNotNumber: '[ERROR] 보너스 번호는 숫자여야 합니다.',
+  bonusNotRange: '[ERROR] 보너스 번호는 1~45 사이의 값을 입력해야 합니다.',
+  bonusDuplicate:
+    '[ERROR] 보너스 번호는 당첨 번호와 중복된 숫자를 입력하면 안됩니다.',
 });
 
 const lotto = Object.freeze({

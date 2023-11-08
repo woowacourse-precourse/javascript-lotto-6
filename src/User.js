@@ -9,13 +9,19 @@ import {
   checkLength,
   checkTypeAndRange,
 } from '../validates/winningNumber.js';
-import { checkBonusNumber } from '../validates/bonusNumber.js';
+import {
+  checkBonusNumberRange,
+  checkBonusNumberType,
+  checkBonusNumberDuplicate,
+} from '../validates/bonusNumber.js';
 
 class User {
   #lottoCount;
+  #winningNumbers;
 
   constructor() {
     this.#lottoCount = null;
+    this.#winningNumbers = [];
   }
 
   async calculateLottoCount() {
@@ -44,15 +50,15 @@ class User {
         MESSAGES.input.winningNumbers,
       );
 
-      const winningNumbers = winningNumbersInput
+      this.#winningNumbers = winningNumbersInput
         .split(',')
         .map((num) => parseInt(num));
 
-      checkLength(winningNumbers);
-      checkDuplicate(winningNumbers);
-      checkTypeAndRange(winningNumbers);
+      checkLength(this.#winningNumbers);
+      checkDuplicate(this.#winningNumbers);
+      checkTypeAndRange(this.#winningNumbers);
 
-      return winningNumbers;
+      return this.#winningNumbers;
     } catch (error) {
       Console.print(error.message);
       return this.getWinningNumbers();
@@ -67,7 +73,9 @@ class User {
 
       const bonusNumber = parseInt(bonusNumberInput);
 
-      checkBonusNumber(bonusNumber);
+      checkBonusNumberType(bonusNumber);
+      checkBonusNumberRange(bonusNumber);
+      checkBonusNumberDuplicate(bonusNumber, this.#winningNumbers);
 
       return bonusNumber;
     } catch (error) {
