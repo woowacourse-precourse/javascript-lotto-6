@@ -130,15 +130,9 @@ class App {
     }
   }
   countBonuses(randomArrs) {
-    const bonusArray = Array.from({ length: randomArrs.length }, () => 0);
-
-    for (let i = 0; i < randomArrs.length; i++) {
-      if (randomArrs[i].getNumbers().includes(this.bonusNumber)) {
-        bonusArray[i] += 1;
-      }
-    }
-
-    return bonusArray;
+    return randomArrs.map((randomArr) =>
+      randomArr.getNumbers().includes(this.bonusNumber) ? 1 : 0
+    );
   }
   calculateTotalProfit() {
     const totalProfit =
