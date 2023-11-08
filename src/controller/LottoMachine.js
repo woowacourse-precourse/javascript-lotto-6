@@ -82,13 +82,17 @@ export default class LottoMachine {
     while (this.#INFINITE) {
       try {
         const winningNumbersInput = await InputView.readWinningNumbers();
-        const parseWinningNumber = winningNumbersInput.split(',').map((number) => Number(number));
 
-        return new WinningNumbers(parseWinningNumber);
+        return new WinningNumbers(this.#splitAndParseNumbers(winningNumbersInput));
       } catch (e) {
         Console.print(e.message);
       }
     }
+  }
+
+  #splitAndParseNumbers(input) {
+    const COMMA = ',';
+    return input.split(COMMA).map((number) => Number(number));
   }
 
   async #getBonusNumber() {
