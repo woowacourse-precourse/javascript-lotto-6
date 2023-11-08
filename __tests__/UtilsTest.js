@@ -1,5 +1,5 @@
 import sortNumberArray from '../src/domain/utils/sortNumberArray';
-import wrapParenthesis from '../src/domain/utils/wrapParentheses';
+import convertWinningAmount from '../src/domain/utils/convertWinningAmount';
 
 describe('Sorting Test', () => {
   test('숫자로 이루어진 배열 정렬 테스트', () => {
@@ -10,11 +10,11 @@ describe('Sorting Test', () => {
   });
 });
 
-describe('String Test', () => {
-  test('괄호를 씌워주는 함수 테스트', () => {
-    const input = '내용물';
-    const result = '(내용물)';
+describe('Winning Amount Test', () => {
+  test('상금 금액을 출력해주는 함수 테스트', () => {
+    const input = 100000;
+    const result = '(100,000)원';
 
-    expect(wrapParenthesis(input)).toEqual(result);
+    expect(convertWinningAmount(input)).toEqual(result);
   });
 });
