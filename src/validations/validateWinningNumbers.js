@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES } from '../constants/messages.js';
-import CONSTANT_VALIDATE_NUMBER from '../constants/validate.js';
+import LOTTO_CONSTANT_NUMBER from '../constants/lotto.js';
 import CustomError from '../errors/CustomError.js';
 
 const validateWinningNumbers = (winningNumbers) => {
@@ -26,21 +26,21 @@ const checkDuplicate = (winningNumbers) => {
 };
 
 const checkLength = (winningNumbers) => {
-  const lengthFlag = winningNumbers.length !== CONSTANT_VALIDATE_NUMBER.winningNumbersLength;
+  const lengthFlag = winningNumbers.length !== LOTTO_CONSTANT_NUMBER.winningNumbersLength;
   if (lengthFlag) throw new CustomError(ERROR_MESSAGES.winningNumbersAndBonusNumber.winningNumbersLength);
 
   return true;
 };
 
 const checkMin = (winningNumbers) => {
-  const minFlag = winningNumbers.every((number) => number >= CONSTANT_VALIDATE_NUMBER.min);
+  const minFlag = winningNumbers.every((number) => number >= LOTTO_CONSTANT_NUMBER.min);
   if (!minFlag) throw new CustomError(ERROR_MESSAGES.winningNumbersAndBonusNumber.min);
 
   return true;
 };
 
 const checkMax = (winningNumbers) => {
-  const maxFlag = winningNumbers.every((number) => number <= CONSTANT_VALIDATE_NUMBER.max);
+  const maxFlag = winningNumbers.every((number) => number <= LOTTO_CONSTANT_NUMBER.max);
   if (!maxFlag) throw new CustomError(ERROR_MESSAGES.winningNumbersAndBonusNumber.max);
 
   return true;

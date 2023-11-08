@@ -1,4 +1,4 @@
-import LOTTO_CONSTANT from '../constants/lotto.js';
+import LOTTO_CONSTANT_NUMBER from '../constants/lotto.js';
 import Lotto from '../Lotto.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
@@ -10,11 +10,15 @@ class Counter {
   }
 
   #calculateLottoTicketNumber(inputAmount) {
-    this.#lottoTicketNumber = inputAmount / LOTTO_CONSTANT.price;
+    this.#lottoTicketNumber = inputAmount / LOTTO_CONSTANT_NUMBER.price;
   }
 
   #generateLotto() {
-    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(LOTTO_CONSTANT.min, LOTTO_CONSTANT.max, LOTTO_CONSTANT.count);
+    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
+      LOTTO_CONSTANT_NUMBER.min,
+      LOTTO_CONSTANT_NUMBER.max,
+      LOTTO_CONSTANT_NUMBER.winningNumbersLength
+    );
     lottoNumbers.sort((a, b) => a - b);
 
     return lottoNumbers;

@@ -1,4 +1,4 @@
-import RANK from '../constants/rank';
+import RANK from '../constants/rank.js';
 
 const compareLottoNumbers = (lotto, winningNumbers, bonusNumber, rank) => {
   let rankFlag = 0;
