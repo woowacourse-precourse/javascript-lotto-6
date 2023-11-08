@@ -1,4 +1,3 @@
-import { WINNING_AMOUNTS } from './constants/constants'
 import LottoTickets from './LottoTickets';
 import BonusNumber from './BonusNumber'
 import Input from './view/Input';
@@ -66,23 +65,12 @@ class App {
 
   requestResult() {
     this.lotto = new Lotto(this.#winningNumbers);
-    const STATS = this.lotto.calculateWinningStats(this.#lottos, this.#winningNumbers,  this.#bonusNumber);
+    const STATS = this.lotto.calculateWinningStats(this.#lottos, [...this.#winningNumbers, this.#bonusNumber]);
+    const profits = this.lotto.getProfits(STATS)
+    const rate = this.lotto.calculateRate(profits, this.#money)
     
     this.output.printStats(STATS)
-    this.requestRate(STATS, this.#money)
-  }
-
-  requestRate(STATS, money) {
-    const PRIZE_MONEYS = Object.values(WINNING_AMOUNTS).map(Number)
-    let profits = 0;
-
-    STATS.forEach((n, i) => {
-      if (n > 0) {
-        profits += PRIZE_MONEYS[4 - i]
-      }
-    })
-
-    this.output.printRate(profits / money);
+    this.output.printRate(rate);
   }
 }
 
