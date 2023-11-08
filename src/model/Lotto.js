@@ -15,7 +15,11 @@ class Lotto {
     if (numbers.length !== new Set(numbers).size) {
       throw new Error(ERROR.duplicatedNumber);
     }
-    if (numbers.some((num) => num > VALUE.maxLottoNumber || num < VALUE.minLottoNumber)) {
+    if (
+      numbers.some(
+        (num) => num > VALUE.maxLottoNumber || num < VALUE.minLottoNumber,
+      )
+    ) {
       throw new Error(ERROR.invalidLength);
     }
   }
@@ -30,11 +34,13 @@ class Lotto {
     ).length;
     const bonus = this.#numbers.includes(bonusNumbers);
 
-    return [winning + bonus, bonus];
+    const allCount = winning + bonus;
+
+    return { allCount, bonus };
   }
 
   determineRanking(winningNumbers, bonusNumbers) {
-    const [allCount, bonus] = this.getNumbersCount(
+    const { allCount, bonus } = this.getNumbersCount(
       winningNumbers,
       bonusNumbers,
     );

@@ -26,7 +26,8 @@ describe('Lotto 클래스 테스트', () => {
     const winningNumber = [1, 2, 3, 4, 5, 7];
     const bonusLottoNumber = 6;
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
-    lotto.getNumbersCount = jest.fn(() => [6, true]);
+    const obj = { allCount: 6, bonus: true };
+    lotto.getNumbersCount = jest.fn(() => obj);
 
     expect(lotto.determineRanking(winningNumber, bonusLottoNumber)).toBe('2등');
   });
@@ -36,9 +37,9 @@ describe('Lotto 클래스 테스트', () => {
     const winningNumber = [1, 2, 3, 4, 5, 7];
     const bonusLottoNumber = 6;
 
-    expect(lotto.getNumbersCount(winningNumber, bonusLottoNumber)).toEqual([
-      6,
-      true,
-    ]);
+    expect(lotto.getNumbersCount(winningNumber, bonusLottoNumber)).toEqual({
+      allCount: 6,
+      bonus: true,
+    });
   });
 });
