@@ -1,18 +1,18 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE_NOTIFICATION } from '../constants/Message.js';
-import { isValidBuyAmount } from '../validator/BuyMoneyValidator.js';
+import { isValidBuyMoney } from '../validator/BuyMoneyValidator.js';
 import { isValidWinningLotto } from '../validator/WinningLottoValidator.js';
 import { isValidBounsNumber } from '../validator/BounsNumberValidator.js';
 import { COMMA } from '../constants/GameSetting.js';
 
-export async function inputBuyAmount() {
+export async function inputBuyMoney() {
   try {
     const inputValue = await Console.readLineAsync(MESSAGE_NOTIFICATION.buyAmount);
-    isValidBuyAmount(inputValue);
+    isValidBuyMoney(inputValue);
     return Number(inputValue);
   } catch (err) {
     Console.print(err.message);
-    return inputBuyAmount();
+    return inputBuyMoney();
   }
 }
 

@@ -14,7 +14,7 @@ const isDividedByThousand = (input) => {
   }
 };
 
-export function isValidBuyAmount(input) {
+export function isValidBuyMoney(input) {
   isNumber(input);
   isDividedByThousand(input);
 }

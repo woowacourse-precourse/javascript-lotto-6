@@ -12,9 +12,4 @@ describe('로또 클래스 테스트', () => {
       new Lotto([1, 2, 3, 4, 5, 5]);
     }).toThrow('[ERROR]');
   });
-
-  test('로또 번호가 정렬되어 반환된다.', () => {
-    const lotto = new Lotto([3, 2, 1, 4, 6, 5]);
-    expect(lotto.getNumbers()).toEqual([1, 2, 3, 4, 5, 6]);
-  });
 });

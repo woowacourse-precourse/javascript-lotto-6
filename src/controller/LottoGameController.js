@@ -1,10 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import Lotto from '../Lotto.js';
-import { LOTTO_PRICE } from '../constants/GameSetting.js';
 import { checkLottoResult } from '../utils/CheckLottoResult.js';
 import { incomingProfits } from '../utils/IncomingProfits.js';
-import { getRandomNumberSort } from '../utils/RandomNumber.js';
-import { inputBounsNumber, inputBuyAmount, inputWinningLotto } from '../view/InputView.js';
+import { inputBounsNumber, inputBuyMoney, inputWinningLotto } from '../view/InputView.js';
 import {
   printBuyLotto,
   printLottoArray,
@@ -12,11 +9,11 @@ import {
   printResult,
   printResultDetail,
 } from '../view/OutputView.js';
+import MakeLottoService from '../service/MakeLottoService.js';
 
 export default class LottoGameController {
   #buyLottoMoney;
-  #buyLottoCnt;
-  #createdLottoNumbers = [];
+  #lottoService;
   #winningLottoNumbers;
   #bonusNumber;
   #profitRate;
@@ -35,27 +32,14 @@ export default class LottoGameController {
   }
 
   async buyLottoMoney() {
-    this.#buyLottoMoney = await inputBuyAmount();
-    this.#countLotto();
-    this.#buyLotto();
+    this.#buyLottoMoney = await inputBuyMoney();
+    this.#lottoService = new MakeLottoService(this.#buyLottoMoney);
+    this.#printLotto();
   }
 
-  #countLotto() {
-    this.#buyLottoCnt = this.#buyLottoMoney / LOTTO_PRICE;
-  }
-
-  //   FIXME: 컨트롤러에서 하는게 맞는지? / 분리할 필요가 있을까?
-  #buyLotto() {
-    printBuyLotto(this.#buyLottoCnt);
-    for (let i = 0; i < this.#buyLottoCnt; i++) {
-      this.#createdLottoNumbers.push(this.#makeLotto());
-    }
-    printLottoArray(this.#createdLottoNumbers);
-  }
-
-  #makeLotto() {
-    const lotto = new Lotto(getRandomNumberSort());
-    return lotto.getNumbers();
+  #printLotto() {
+    printBuyLotto(this.#lottoService.getLottoCount());
+    printLottoArray(this.#lottoService.getLottoNumbers());
   }
 
   async giveLottoNumbers() {
@@ -68,7 +52,7 @@ export default class LottoGameController {
 
   checkLotto() {
     const result = checkLottoResult(
-      this.#createdLottoNumbers,
+      this.#lottoService.getLottoNumbers(),
       this.#winningLottoNumbers,
       this.#bonusNumber,
     );

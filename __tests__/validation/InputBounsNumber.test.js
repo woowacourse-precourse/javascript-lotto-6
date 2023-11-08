@@ -1,4 +1,4 @@
-import { isValidBounsNumber } from '../../src/utils/Validation';
+import { isValidBounsNumber } from '../../src/validator/BounsNumberValidator';
 
 describe('보너스번호 검증 테스트', () => {
   test.each([

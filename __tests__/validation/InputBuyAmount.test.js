@@ -1,4 +1,4 @@
-import { isValidBuyAmount } from '../../src/utils/Validation.js';
+import { isValidBuyMoney } from '../../src/validator/BuyMoneyValidator.js';
 
 describe('구입 기능', () => {
   describe('예외 처리', () => {
@@ -8,7 +8,7 @@ describe('구입 기능', () => {
 
       // then
       buyAmount.forEach((amount) => {
-        expect(() => isValidBuyAmount(amount)).toThrow('[ERROR] 1000원 단위로 입력해 주세요.');
+        expect(() => isValidBuyMoney(amount)).toThrow('[ERROR] 1000원 단위로 입력해 주세요.');
       });
     });
 
@@ -18,7 +18,7 @@ describe('구입 기능', () => {
 
       // then
       buyAmount.forEach((amount) => {
-        expect(() => isValidBuyAmount(amount)).toThrow('[ERROR] 숫자를 입력해 주세요.');
+        expect(() => isValidBuyMoney(amount)).toThrow('[ERROR] 숫자를 입력해 주세요.');
       });
     });
   });

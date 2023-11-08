@@ -1,4 +1,4 @@
-import { isValidWinningLotto } from '../../src/utils/Validation.js';
+import { isValidWinningLotto } from '../../src/validator/WinningLottoValidator';
 
 describe('로또 생성 번호 검증 테스트', () => {
   test('번호와 쉼표(,) 유효성', () => {
