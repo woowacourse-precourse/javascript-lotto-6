@@ -1,14 +1,14 @@
 import LottosList from './LottosList.js';
 
-import tryEnterPurchaseAmount from './Input/tryEnterPurchaseAmount.js';
-import tryEnterWinningNumbers from './Input/tryEnterWinningNumbers.js';
-import tryEnterBonusNumber from './Input/tryEnterBonusNumber.js';
-import printPurchasedLottoAmount from './Output/printPurchasedLottoAmount.js';
-import printLottosList from './Output/printLottosList.js';
-import calculateStatistics from './Process/calculateStatistics.js';
-import printStatistics from './Output/printStatistics.js';
-import calculateGrossReturn from './Process/calculateGrossReturn.js';
-import printGrossReturn from './Output/printGrossReturn.js';
+import tryEnterPurchaseAmount from './input/tryEnterPurchaseAmount.js';
+import tryEnterWinningNumbers from './input/tryEnterWinningNumbers.js';
+import tryEnterBonusNumber from './input/tryEnterBonusNumber.js';
+import printPurchasedLottoAmount from './output/printPurchasedLottoAmount.js';
+import printLottosList from './output/printLottosList.js';
+import calculateStatistics from './process/calculateStatistics.js';
+import printStatistics from './output/printStatistics.js';
+import calculateGrossReturn from './process/calculateGrossReturn.js';
+import printGrossReturn from './output/printGrossReturn.js';
 
 class App {
   async play() {
