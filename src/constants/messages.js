@@ -9,5 +9,5 @@ export const MESSAGES = Object.freeze({
   FIVE_SAME: (count) => `5개 일치 (1,500,000원) - ${count}개`,
   BONUS_SAME: (count) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개`,
   SIX_SAME: (count) => `6개 일치 (2,000,000,000원) - ${count}개`,
-  PROFIT_RATE: (value) => `총 수익률은 ${count}%입니다.`,
+  PROFIT_RATE: (value) => `총 수익률은 ${value}%입니다.`,
 });

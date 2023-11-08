@@ -1,4 +1,5 @@
 import generateLotto from "../utils/generateLotto.js";
+import { PRICE } from "../constants/price.js";
 
 export default class LottoModel {
   #purchaseAmount;
@@ -43,7 +44,7 @@ export default class LottoModel {
     this.#bonusNumber = bonusNumber;
   }
 
-  getWinningStatistic() {
+  getWinningStatistics() {
     const winningStatistics = new Map([
       [3, 0],
       [4, 0],
@@ -51,16 +52,10 @@ export default class LottoModel {
       ["5+bonus", 0],
       [6, 0],
     ]);
+    this.addCount(winningStatistics);
+    const roundedProfit = this.getRoundedProfit(winningStatistics);
 
-    this.#lottoArray.forEach((lotto) => {
-      const count = this.#winningNumber.filter((number) =>
-        lotto.includes(number)
-      ).length;
-      const bonusCount = lotto.includes(this.#bonusNumber) ? 1 : 0;
-      this.checkWinningLotto(count, bonusCount, winningStatistics);
-    });
-
-    return winningStatistics;
+    return { winningStatistics, roundedProfit };
   }
 
   checkWinningLotto(count, bonusCount, winningStatistics) {
@@ -72,5 +67,28 @@ export default class LottoModel {
 
     if (count === 6)
       winningStatistics.set(count, winningStatistics.get(count) + 1);
+  }
+
+  addCount(winningStatistics) {
+    this.#lottoArray.forEach((lotto) => {
+      const count = this.#winningNumber.filter((number) =>
+        lotto.includes(number)
+      ).length;
+      const bonusCount = lotto.includes(this.#bonusNumber) ? 1 : 0;
+      this.checkWinningLotto(count, bonusCount, winningStatistics);
+    });
+  }
+
+  getRoundedProfit(winningStatistics) {
+    let totalPrice = 0;
+
+    winningStatistics.forEach(
+      (value, key) => (totalPrice += PRICE.PRICE_LIST[key] * value)
+    );
+
+    const totalProfit = (totalPrice / this.#purchaseAmount) * 100;
+    const roundedProfit = Math.round(totalProfit * 10) / 10;
+
+    return roundedProfit;
   }
 }
