@@ -17,6 +17,10 @@ class Inputs {
     if (!(numericPrice % 1000 === 0) || isNaN(numericPrice) || !numericPrice) {
       throw new Error("[ERROR] 1,000원 단위의 숫자를 입력해주세요.");
     }
+
+    if (numericPrice < 1000) {
+      throw new Error("[ERROR] 최소 구매 금액은 1,000원입니다.");
+    }
     return numericPrice;
   }
 
