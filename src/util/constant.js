@@ -7,6 +7,9 @@ export const REWARD = Object.freeze({
   first: 2000000000,
 });
 
-// module.exports = {
-//   REWARD,
-// };
+export const LOTTO = Object.freeze({
+  price: "1,000",
+  minimum: 1,
+  maximum: 45,
+  numLength: 6,
+});

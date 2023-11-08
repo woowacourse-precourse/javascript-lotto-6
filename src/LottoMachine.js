@@ -1,4 +1,4 @@
-import { REWARD } from "./constant.js";
+import { REWARD } from "./util/constant.js";
 class LottoMachine {
   #winningNumbers;
   #bonusNumber;
@@ -8,7 +8,7 @@ class LottoMachine {
     this.#bonusNumber = bonusNumber;
   }
 
-  // rankCounsts 배열을 받는다.
+  // results = rankCounsts
   getProfitRate(results) {
     let amount = results.length * 1000;
     let rewards = results.map((rank) => this.getReward(rank));
@@ -16,7 +16,7 @@ class LottoMachine {
     return ((sumReward / amount) * 100).toFixed(1);
   }
 
-  // Lottos 는 Lotto 인스턴스 배열
+  // Lottos = Lotto 인스턴스 배열
   getLottoRanks(Lottos) {
     const results = [];
     Lottos.forEach((Lotto) => {
@@ -25,7 +25,7 @@ class LottoMachine {
     return results;
   }
 
-  // 당첨순위를 저장한 배열
+  // results = 당첨순위를 저장한 배열
   getResultRankCounts(results) {
     let rankCount = { fifth: 0, fourth: 0, third: 0, second: 0, first: 0 };
     results.forEach((rank) => {
