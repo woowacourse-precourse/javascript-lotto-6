@@ -30,7 +30,7 @@ export const checkPurchaseAmount = (amount) => {
     if (isNaN(amount)) {
         throw new Error(ERROR.INVALID_AMOUNT_MESSAGE);
     }
-    if (amount === ZERO) {
+    if (amount === ZERO || amount < ZERO) {
         throw new Error(ERROR.INVALID_AMOUNT_MESSAGE);
     }
     if (amount % LOTTO_PRICE !== ZERO) {
