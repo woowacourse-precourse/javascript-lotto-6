@@ -4,16 +4,20 @@ import { CreateLottoNum } from "./LottoGame/CreateLottoNum.js";
 import { CreateWinNum } from "./LottoGame/CreateWinnum.js";
 
 class App {
-  constructor() {
-    this.computer = new Computer();
-    this.createLottoNum = new CreateLottoNum();
-  }
-  
-  async play() {
-    const lottoNum = await this.createLottoNum.start();
-    this.createWinNum = new CreateWinNum(lottoNum);
-    await this.createWinNum.start();
-  }
+    constructor() {
+      this.computer = new Computer();
+      this.createLottoNum = new CreateLottoNum();
+    }
+    
+    async play() {
+      try {
+          const lottoNum = await this.createLottoNum.start();
+          this.createWinNum = new CreateWinNum(lottoNum.numbers);
+          await this.createWinNum.start();
+      } catch (error) {
+          MissionUtils.Console.print(error.message);
+      }
+    }
 }
 
 export default App;
