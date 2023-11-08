@@ -10,10 +10,10 @@ class LottoController {
 
   async getLottoPrice() {
     const LOTTO_PRICE = await Input.lottoPrice();
-    await this.purchasedLottoCount(LOTTO_PRICE);
+    await this.getLottoCount(LOTTO_PRICE);
   }
 
-  async purchasedLottoCount(input) {
+  async getLottoCount(input) {
     
   }
 }

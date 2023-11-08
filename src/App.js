@@ -8,7 +8,12 @@ class App {
   }
 
   async play() {
-    await this.#lotto.LottoStart();
+    try {
+      await this.#lotto.LottoStart();
+    } catch(error) {
+      Console.print(error.message);
+    }
+
   }
 
 }
