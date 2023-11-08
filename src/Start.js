@@ -7,23 +7,9 @@ export class Start {
     this.lottoGame = new LottoGame();
   }
   async run() {
-    try {
-      await this.lottoGame.buyLottos();
-    } catch (error) {
-      return; // 종료
-    }
-
-    try {
-      await this.lottoGame.winLottos();
-    } catch (error) {
-      return; // 종료
-    }
-
-    try {
-      await this.lottoGame.isBonusNumber();
-    } catch (error) {
-      return; // 종료
-    }
+    await this.lottoGame.buyLottos();
+    await this.lottoGame.winLottos();
+    await this.lottoGame.isBonusNumber();
 
     const statistics = new LottoStatistics(
       this.lottoGame.playerLottos,
