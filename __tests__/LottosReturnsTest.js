@@ -28,13 +28,13 @@ describe('로또 수익률 테스트', () => {
       fourth: 1,
       fifth: 2,
     };
-    const PRICE = 100000;
+    const PRICE = 70000;
 
     // when
     const lottosReturns = new LottosRetruns(LOTTOS_RESULT_COUNT);
     const result = lottosReturns.getLottosReturns(PRICE);
 
     // then
-    expect(result).toBe(60);
+    expect(result).toBe(85.7);
   });
 });
