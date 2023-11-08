@@ -1,4 +1,6 @@
-import { Lotto, CashCount, LottoMachine, LottoGame } from '../src/Lotto.js';
+import { Lotto } from '../src/Lotto.js';
+import { CashCount } from '../src/CashCount.js';
+import { LottoMachine } from '../src/LottoMachine.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 describe('로또 클래스 테스트', () => {
