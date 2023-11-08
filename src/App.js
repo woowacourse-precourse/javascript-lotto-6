@@ -49,10 +49,10 @@ class App {
   }
 
   calcReturn(purchase) {
-    let prize = 0;
-    for (const key in this.#results) {
-      prize += this.#results[key] * key;
-    }
+    const prize = Object.keys(this.#results).reduce(
+      (total, key) => total + this.#results[key] * key,
+      0
+    );
     return ((prize / purchase) * 100).toFixed(1);
   }
 
