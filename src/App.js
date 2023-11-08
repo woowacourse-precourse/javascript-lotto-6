@@ -18,12 +18,14 @@ class App {
   }
 
   validatePriceInput(priceInput) {
-    if (!Price.isValidPrice(priceInput)) {
-      throw new Error(
-        isNaN(priceInput)
-          ? ERROR_MESSAGE.FORMAT_ERROR
-          : ERROR_MESSAGE.PRICE_UNIT_ERROR
-      );
+    const numberInput = Number(priceInput);
+
+    if (Number.isNaN(numberInput)) {
+      throw new Error(ERROR_MESSAGE.FORMAT_ERROR);
+    }
+
+    if (!Price.isValidPrice(numberInput)) {
+      throw new Error(ERROR_MESSAGE.PRICE_UNIT_ERROR);
     }
   }
 
