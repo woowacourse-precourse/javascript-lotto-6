@@ -1,3 +1,4 @@
+import { Console, Random } from "@woowacourse/mission-utils";
 class Lotto {
   #numbers;
 
@@ -10,9 +11,20 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+
+    if (new Set(numbers).size !== 6) {
+      throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
+    }
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
+
+  static generate() {
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+    return new Lotto(numbers);
+  }
 }
 
 export default Lotto;
