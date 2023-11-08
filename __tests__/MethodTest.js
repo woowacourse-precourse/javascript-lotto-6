@@ -97,3 +97,43 @@ describe('printLottoCounts 메서드 테스트', () => {
     expect(logSpy).toHaveBeenCalledWith("13개를 구매했습니다.");
   });
 });
+
+describe('createUniqueRandomNums 메서드 테스트', () => {
+  test('createUniqueRandomNums 메서드는 COUNT 개수만큼 로또의 배열을 리턴해야한다.', async () => {
+    //given
+    const count = 5;
+
+    //when
+    const app = new App();
+    const lottos = app.createUniqueRandomNums(count);
+
+    //then
+    expect(lottos).toBeInstanceOf(Array);
+    expect(lottos).toHaveLength(count);
+    lottos.forEach((lotto) => {
+      expect(lotto).toBeInstanceOf(Array);
+      expect(lotto).toHaveLength(6);
+    });
+  });
+
+  test('createUniqueRandomNums 메서드는 로또의 배열을 오름차순으로 리턴해야한다.', async () => {
+    //given
+    const count = 3;
+
+    //when
+    const app = new App();
+    const lottos = app.createUniqueRandomNums(count);
+
+    //then
+    expect(lottos).toBeInstanceOf(Array);
+    expect(lottos).toHaveLength(count);
+
+    lottos.forEach((lotto) => {
+      expect(lotto).toBeInstanceOf(Array);
+      expect(lotto).toHaveLength(6);
+
+      const sortedLotto = [...lotto].sort((a, b) => a - b);
+      expect(lotto).toEqual(sortedLotto);
+    });
+  });
+});
