@@ -19,6 +19,13 @@ class App {
     }
     return lottos;
   }
+  // 구매한 로또 수량 및 번호 출력
+  printLottos(lottos) {
+    MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
+    for (let i=0; i<lottos.length; i++) {
+      MissionUtils.Console.print(lottos[i])
+    }
+  }
 }
 
 export default App;
