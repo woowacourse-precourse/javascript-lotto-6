@@ -5,11 +5,12 @@ import PrintLottoNumber from './Utils/PrintLottoNumber.js';
 import ValidateBonusNumber from './Validation/ValidateBonusNumber.js';
 import CalculatePrize from './Utils/CalculatePrize.js';
 import CalculateTotalMoney from './Utils/CalculateTotalMoney.js';
+import { MESSAGE } from './Constants/constant.js';
 
 class App {
   async play() {
     let money = Number(
-      await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n'),
+      await MissionUtils.Console.readLineAsync(MESSAGE.GET_MONEY),
     );
 
     let calculatedMoney = 0;
@@ -22,18 +23,16 @@ class App {
         MissionUtils.Console.print(error.message);
 
         money = Number(
-          await MissionUtils.Console.readLineAsync(
-            '구입금액을 입력해 주세요.\n',
-          ),
+          await MissionUtils.Console.readLineAsync(MESSAGE.GET_MONEY),
         );
       }
     }
 
-    MissionUtils.Console.print(`\n${calculatedMoney}개를 구매했습니다.`);
+    MissionUtils.Console.print(`\n${calculatedMoney}${MESSAGE.BUY_LOTTO}`);
     const LOTTO_ARRAY = PrintLottoNumber(calculatedMoney);
 
     let userNumber = (
-      await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n')
+      await MissionUtils.Console.readLineAsync(MESSAGE.GET_LOTTO_NUMBER)
     ).split(',');
 
     while (true) {
@@ -44,15 +43,13 @@ class App {
         MissionUtils.Console.print(error.message);
 
         userNumber = (
-          await MissionUtils.Console.readLineAsync(
-            '\n당첨 번호를 입력해 주세요.\n',
-          )
+          await MissionUtils.Console.readLineAsync(MESSAGE.GET_LOTTO_NUMBER)
         ).split(',');
       }
     }
 
     let bonusNumber = await MissionUtils.Console.readLineAsync(
-      '\n보너스 번호를 입력해 주세요.\n',
+      MESSAGE.GET_BONUS_NUMBER,
     );
 
     while (true) {
@@ -74,17 +71,13 @@ class App {
 
     const EARNING_LATE = (TOTAL_PRIZE_MONEY / money) * 100;
 
-    MissionUtils.Console.print('\n당첨 통계');
+    MissionUtils.Console.print(MESSAGE.WINNING_STATISTICS);
     MissionUtils.Console.print('---');
-    MissionUtils.Console.print(`3개 일치 (5,000원) - ${PRIZE_ARRAY[4]}개`);
-    MissionUtils.Console.print(`4개 일치 (50,000원) - ${PRIZE_ARRAY[3]}개`);
-    MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${PRIZE_ARRAY[2]}개`);
-    MissionUtils.Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${PRIZE_ARRAY[1]}개`,
-    );
-    MissionUtils.Console.print(
-      `6개 일치 (2,000,000,000원) - ${PRIZE_ARRAY[0]}개`,
-    );
+    MissionUtils.Console.print(`${MESSAGE.FIFTH} - ${PRIZE_ARRAY[4]}개`);
+    MissionUtils.Console.print(`${MESSAGE.FOURTH} - ${PRIZE_ARRAY[3]}개`);
+    MissionUtils.Console.print(`${MESSAGE.THIRD} - ${PRIZE_ARRAY[2]}개`);
+    MissionUtils.Console.print(`${MESSAGE.SECOND} - ${PRIZE_ARRAY[1]}개`);
+    MissionUtils.Console.print(`${MESSAGE.FIRST} - ${PRIZE_ARRAY[0]}개`);
     MissionUtils.Console.print(
       `총 수익률은 ${EARNING_LATE.toFixed(1)}%입니다.`,
     );

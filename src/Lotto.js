@@ -1,3 +1,5 @@
+import { MESSAGE } from './Constants/constant';
+
 class Lotto {
   #numbers;
 
@@ -8,17 +10,17 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6 || numbers.includes('')) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(MESSAGE.ERROR.LENGTH);
     }
 
     for (const NUMBER of numbers) {
       if (Number(NUMBER) < 1 || Number(NUMBER) > 45 || isNaN(Number(NUMBER))) {
-        throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+        throw new Error(MESSAGE.ERROR.RANGE);
       }
     }
     const NUMBERS_SET = new Set(numbers);
     if (NUMBERS_SET.size !== 6) {
-      throw new Error('[ERROR] 로또 번호는 중복되면 안됩니다.');
+      throw new Error(MESSAGE.ERROR.DUPLICATE);
     }
   }
 }
