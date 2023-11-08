@@ -40,11 +40,7 @@ class LottoMachine {
     const winningNumbers = await LottoView.getUserInput(
       ENTER_MESSAGE.winning_number
     );
-
-    if (!Validation.isProperWinningNumbers(winningNumbers)) {
-      throw new Error(ERROR_MESSAGE.winning_number);
-    }
-
+    Validation.isProperWinningNumbers(winningNumbers);
     this.#winningNumbers = winningNumbers.split(',').map(Number);
   }
 

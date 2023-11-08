@@ -1,6 +1,5 @@
 import LottoView from './LottoView.js';
 import LottoMachine from './LottoMachine.js';
-import Validation from './Validation.js';
 import { ENTER_MESSAGE } from './constants/message.js';
 class Customer {
   #money;

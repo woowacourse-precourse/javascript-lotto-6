@@ -2,6 +2,7 @@ import {
   LOTTO_PRICE,
   LOTTO_RANGE_MIN,
   LOTTO_RANGE_MAX,
+  LOTTO_DIGIT,
 } from './constants/gameinfo.js';
 import { ERROR_MESSAGE } from './constants/message.js';
 class Validation {
@@ -53,19 +54,19 @@ class Validation {
   static isProperWinningNumbers(userInput) {
     const winningNumbers = userInput.split(',');
     if (winningNumbers.length === 0) {
-      return false;
+      throw new Error(ERROR_MESSAGE.winning_number_length);
     }
 
-    if (winningNumbers.length !== 6) {
-      return false;
+    if (winningNumbers.length !== LOTTO_DIGIT) {
+      throw new Error(ERROR_MESSAGE.winning_number_length);
     }
 
     if (!Validation.hasProperRange(winningNumbers)) {
-      return false;
+      throw new Error(ERROR_MESSAGE.winning_number_range);
     }
 
     if (Validation.hasDuplication(winningNumbers)) {
-      return false;
+      throw new Error(ERROR_MESSAGE.winning_number_duplicate);
     }
 
     return true;
