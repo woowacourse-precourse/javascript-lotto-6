@@ -1,3 +1,5 @@
+import { Data } from "./DB";
+
 class Lotto {
   #numbers;
 
@@ -33,6 +35,7 @@ class Lotto {
   getNumArr() {
     return this.#numbers;
   }
+
 }
 
 export default Lotto;
