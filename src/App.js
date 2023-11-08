@@ -17,7 +17,7 @@ class App {
 
       // 구매한 로또 출력
       const lottoNumbers = player.getLottoNumbers();
-      LottoConsole.printLottosNumber(lottoNumbers);
+      LottoConsole.printLottoNumbers(lottoNumbers);
 
       // 당첨번호 입력
       const winningNumbers = await LottoConsole.getLottoNumbersUntilSuccess();
