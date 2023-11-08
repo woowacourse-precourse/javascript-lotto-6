@@ -5,11 +5,18 @@ class App {
   async play() {
     //구입 금액 입력받는 함수
     async function getUserCostInput() {
+      const isNumber = (pVal) => {
+        if (isEmpty(pVal)) {
+          return false;
+        }
+        return !isNaN(pVal);
+      };
       MissionUtils.Console.print("구입금액을 입력해 주세요.");
       const totalCost = await MissionUtils.Console.readLineAsync("");
 
-      //구입 금액 예외 처리 - 1) 숫자가 아닐 때
-      if (isNaN(totalCost) === true) {
+      // 구입 금액 예외 처리 - 1) 숫자가 아닐 때
+
+      if (!Number(totalCost)) {
         throw new Error("[ERROR] 숫자를 입력해야 합니다.");
       }
 
@@ -37,7 +44,9 @@ class App {
     //로또 출력 함수
     function printNewLotto(boughtLottoCount, totalLottoNumList) {
       MissionUtils.Console.print(`${boughtLottoCount}개를 구매했습니다.`);
-      totalLottoNumList.forEach((lotto) => MissionUtils.Console.print(lotto));
+      totalLottoNumList.forEach((lotto) =>
+        MissionUtils.Console.print(`[${lotto.join(", ")}]`)
+      );
     }
 
     // 당첨 번호 입력 받는 함수
@@ -45,6 +54,7 @@ class App {
       MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
       const winnigNum = await MissionUtils.Console.readLineAsync("");
       const winningNumList = winnigNum.split(",");
+
       return winningNumList;
     }
 
@@ -66,6 +76,7 @@ class App {
 
       for (let j = 0; j < boughtLottoCount; j++) {
         let lotto = new Lotto(totalLottoNumList[j]);
+
         let tempWinningNum = lotto.checkWinningCount(winningNumList);
         let tempIsBonusTrue = lotto.isBonusTrue(bonusNum);
         let tempGetMoney = lotto.calcGetMoney(tempWinningNum, tempIsBonusTrue);

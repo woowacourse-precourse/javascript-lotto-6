@@ -15,4 +15,9 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  // test("로또가 3개 일치하면 checkWinningCount가 3을 반환", () => {
+  //   expect(() => {
+  //     new Lotto([1, 2, 3, 4, 5, 6]).checkWinningCount([1, 2, 3, 10, 11, 12]);
+  //   }).toBe(3);
+  // });
 });

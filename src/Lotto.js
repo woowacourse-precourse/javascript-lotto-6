@@ -5,12 +5,20 @@ export class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+
     this.#numbers = numbers;
   }
 
   #validate(numbers) {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+    for (let n = 0; n < numbers.length; n++) {
+      for (let m = n + 1; m < numbers.length; m++) {
+        if (numbers[m] === numbers[n]) {
+          throw new Error("[ERROR] 중복된 숫자를 입력하면 안됩니다.");
+        }
+      }
     }
   }
 
