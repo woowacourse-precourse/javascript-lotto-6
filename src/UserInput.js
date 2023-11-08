@@ -12,6 +12,11 @@ class UserInput {
     return this.amount;
   }
 
+  async winningNumbersInput() {
+    this.winningNumbers = await Console.readLineAsync("");
+    await Console.print("")
+    return this.winningNumbers;
+  }
 }
 
 export default UserInput;

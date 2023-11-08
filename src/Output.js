@@ -13,6 +13,10 @@ class Output {
       Console.print(array[i])
     }
   }
+
+  async printWinnerNumber() {
+    await Console.print(OUTPUT_MSG.WINNER_NUMBER)
+  }
 }
 
 export default Output

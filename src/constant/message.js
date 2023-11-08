@@ -1,7 +1,7 @@
 export const OUTPUT_MSG= {
   PURCHASE_AMOUNT : "구입금액을 입력해 주세요.",
   PURCHASE_ITEM_COUNT: "개를 구매했습니다.",
-  WINNER_NUMBER: "당첨 번호를 입력해 주세요.",
+  WINNER_NUMBER: "\n당첨 번호를 입력해 주세요.",
   WINNER_BOUNS_NUMBER: "보너스 번호를 입력해 주세요.",
   WIN_RESULT: "당첨 통계",
   LINE: "---",

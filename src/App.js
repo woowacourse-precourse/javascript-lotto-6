@@ -2,6 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 import Output from './Output.js';
 import UserInput from './UserInput.js';
 import Validate from './Validate.js';
+import Lotto from './Lotto.js';
 
 class App {
   Output = new Output();
@@ -9,10 +10,12 @@ class App {
   Input = new UserInput();
 
   Validate = new Validate();
-  
+
   amonut;
 
   lottoList = [];
+
+  winningNumbers = [];
   
   async play() {
     return this.getLottoCount()
@@ -33,7 +36,14 @@ class App {
       this.lottoList.push(randomArray)
     }
     await this.Output.printLottoArray(this.amonut, this.lottoList)
+    await this.winningNumber()
+  }
 
+  async winningNumber() {
+    this.Output.printWinnerNumber()
+    const inputNum = await this.Input.winningNumbersInput();
+    const lotto = new Lotto(inputNum.split(","));
+    this.winningNumber = inputNum.split(",").map(Number);
   }
 }
 
