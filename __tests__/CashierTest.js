@@ -6,11 +6,16 @@ import User from '../src/User';
 
 describe('Cashier 클래스 테스트', () => {
   const TEST_ERROR_MESSAGE = getErrorMessage(ERROR_MESSAGE.payment);
+  let cashier;
+
+  beforeEach(() => {
+    const user = new User();
+    cashier = new Cashier(user);
+  });
 
   test('Cashier는 NaN이 아닌 숫자만 파라미터로 받는다. 그렇지 않을 경우 예외가 발생한다.', () => {
     const INPUT_ARRAY = ['1000원', NaN];
-    const user = new User();
-    const cashier = new Cashier(user);
+
     INPUT_ARRAY.forEach((v) =>
       expect(() => cashier.isNumber(v)).toThrow(
         getErrorMessage(ERROR_MESSAGE.isNotNumber),
@@ -19,23 +24,19 @@ describe('Cashier 클래스 테스트', () => {
   });
 
   test('손님이 지불한 금액이 1000원 미만이면 예외가 발생한다', () => {
-    const user = new User();
     expect(() => {
-      new Cashier(user).validatePayment(500);
+      cashier.validatePayment(500);
     }).toThrow(TEST_ERROR_MESSAGE);
   });
 
   test('손님이 지불한 금액이 1000원 단위로 떨어지지 않으면  예외가 발생한다', () => {
-    const user = new User();
     expect(() => {
-      new Cashier(user).validatePayment(1500);
+      cashier.validatePayment(1500);
     }).toThrow(TEST_ERROR_MESSAGE);
   });
 
   test('손님이 지불한 금액이 유효하지 않으면,[ERROR]로 시작하는 문구를 출력한 후 유효한 입력값을 다시 받는다.', async () => {
     const INPUT_VALUE_ARRAY = ['1500', '1000원', '1000'];
-    const user = new User();
-    const cashier = new Cashier(user);
     const logSpy = getLogSpy();
 
     mockQuestions(INPUT_VALUE_ARRAY);
@@ -52,9 +53,7 @@ describe('Cashier 클래스 테스트', () => {
     const { price } = LOTTO_FORM;
     const PAYMENT_ARRAY = [price * 1, price * 3, price * 4];
     const NUMBER_OF_TICKETS_ARRAY = [1, 3, 4];
-    const user = new User();
     PAYMENT_ARRAY.forEach((v, i) => {
-      const cashier = new Cashier(user);
       const number = cashier.getNumberOfTickets(v);
       expect(number).toEqual(NUMBER_OF_TICKETS_ARRAY[i]);
     });
@@ -69,10 +68,9 @@ describe('Cashier 클래스 테스트', () => {
       [7, 11, 12, 8, 9, 10],
       [13, 14, 10, 16, 17, 1],
     ];
-    const user = new User();
 
     mockRandoms(RANDOM_NUMBERS);
-    const cashier = new Cashier(user);
+
     cashier.getNumberOfTickets(PAYMENT_AMOUNT);
     const lottos = cashier.issueLottos();
     const lottoNumbers = lottos.map((v) => v.getLottoNumbers());

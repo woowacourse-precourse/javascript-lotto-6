@@ -6,8 +6,11 @@ import { sortNumbers } from '../src/utils';
 import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils';
 
 describe('App 클래스 테스트', () => {
+  let app;
+  beforeEach(() => {
+    app = new App();
+  });
   test('로또 구매 후 구매 금액 만큼 로또 발행', async () => {
-    const app = new App();
     const RANDOM_NUMBERS = [
       [1, 9, 8, 4, 5, 6],
       [7, 8, 9, 10, 11, 12],
@@ -29,7 +32,6 @@ describe('App 클래스 테스트', () => {
   test('당첨 로또, 보너스 번호 뽑기', async () => {
     const WINNING_NUMBERS = '13,6,25,7,15,5';
     const BONUS_NUMBER = '19';
-    const app = new App();
 
     mockQuestions([WINNING_NUMBERS, BONUS_NUMBER]);
 
@@ -61,7 +63,6 @@ describe('App 클래스 테스트', () => {
       { rank: CORRECT_NUMBER.six, number: 0 },
     ];
     const EXPECTED_RATE_OF_RETURN = 1000166.7;
-    const app = new App();
 
     const { winningResult, rateOfReturn } = app.checkLottos(
       winningLotto,
@@ -93,7 +94,6 @@ describe('App 클래스 테스트', () => {
     mockRandoms([RANDOM_NUMBERS]);
     mockQuestions(INPUT_VALUES);
 
-    const app = new App();
     await app.play();
 
     const logs = [

@@ -4,7 +4,6 @@ import { getErrorMessage } from '../src/utils';
 
 describe('BonusBall 클래스 테스트', () => {
   const LOTTO_NUMBERS = [1, 2, 3, 4, 5, 6];
-
   test('보너스 번호는 숫자여야 한다. 그렇지 않을 경우 예외가 발생한다.', () => {
     const TEST_ITEMS = [
       '하나',
