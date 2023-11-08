@@ -22,7 +22,7 @@ class Lotto {
   }
 
   #checkInRange(numbers) {
-    const ISINRANGE = numbers.every(num => 1 <= num <= 45);
+    const ISINRANGE = numbers.every(num => {1 <= num && num <= 45});
     if(!ISINRANGE) {
       throw new Error("[ERROR] 로또 번호는 1이상, 45이하의 숫자여야 합니다.");
     }
