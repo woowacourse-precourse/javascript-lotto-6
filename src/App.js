@@ -22,7 +22,8 @@ class App {
     lottoObj.printWinningMoney(moneyArr);
 
     // 수익률 계산 및 출력
-    this.#calculateReturn(purchaseAmount, moneyArr);
+    const resultNum = this.calculateReturn(purchaseAmount, moneyArr);
+    printMethod(uiConstants.RETURN + resultNum + uiConstants.END);
   }
 
   async #printGameNumber() {
@@ -76,7 +77,7 @@ class App {
     return moneyArr;
   }
 
-  #calculateReturn(purchaseAmount, moneyArr) {
+  calculateReturn(purchaseAmount, moneyArr) {
     let sumMoney = magicNumber.ZERO;
     moneyArr.forEach((cnt, idx) => {
       const sum = magicNumber.ZERO;
@@ -90,7 +91,7 @@ class App {
       Math.round(resultNum * magicNumber.TEN).toPrecision(
         magicNumber.FLOATING_POINT,
       ) / magicNumber.TEN;
-    printMethod(uiConstants.RETURN + resultNum + uiConstants.END);
+    return resultNum;
   }
 
   async #createObj(type, lotto) {
