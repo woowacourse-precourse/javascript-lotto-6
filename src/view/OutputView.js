@@ -6,7 +6,7 @@ export default class OutputView {
     MissionUtils.Console.print(`${message}`);
   }
 
-  printPurchased(quantity) {
+  printPurchasedQuantity(quantity) {
     MissionUtils.Console.print(`\n${quantity}${INFO_MESSAGES.PURCHASED}`);
   }
 

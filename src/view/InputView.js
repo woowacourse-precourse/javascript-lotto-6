@@ -2,7 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { INFO_MESSAGES } from '../constant.js';
 
 export default class InputView {
-  async readAmount() {
+  async readPurchaseAmount() {
     return this.readLine(INFO_MESSAGES.AMOUNT);
   }
 

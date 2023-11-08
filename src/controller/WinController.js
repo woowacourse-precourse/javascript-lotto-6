@@ -2,20 +2,21 @@ import { WINNING_AMOUNT, WINNING_MESSAGES } from '../constant.js';
 import OutputView from '../view/OutputView.js';
 
 export default class WinController {
-  #amount;
-  #lottoNumbers;
+  outputView = new OutputView();
+  #purchaseAmount;
+  #winningNumbers;
   #bonusNumber;
   #purchasedLottos;
   #WinningCount = [0, 0, 0, 0, 0, 0, 0];
   #Win5andBonus = 0;
   #profitRate;
-  outputView = new OutputView();
 
-  constructor(amount, lottoNumbers, bonusNumber, purchasedLottos) {
-    this.#amount = amount;
-    this.#lottoNumbers = lottoNumbers;
+  constructor(purchaseAmount, winningNumbers, bonusNumber, purchasedLottos) {
+    this.#purchaseAmount = purchaseAmount;
+    this.#winningNumbers = winningNumbers;
     this.#bonusNumber = bonusNumber;
     this.#purchasedLottos = purchasedLottos;
+
     this.checkWinResults();
   }
 
@@ -45,7 +46,7 @@ export default class WinController {
   countMatchingNumbers(pLottoNumbers) {
     let count = 0;
     for (let i = 0; i < pLottoNumbers.length; i++) {
-      if (this.#lottoNumbers.includes(pLottoNumbers[i].toString())) {
+      if (pLottoNumbers.includes(parseInt(this.#winningNumbers[i], 10))) {
         count++;
       }
     }
@@ -74,9 +75,11 @@ export default class WinController {
   }
 
   calculateProfitRate() {
-    this.calculateWinningAmount() / this.#amount;
+    this.calculateWinningAmount() / this.#purchaseAmount;
     this.#profitRate =
-      Math.round((this.calculateWinningAmount() / this.#amount) * 10000) / 100;
+      Math.round(
+        (this.calculateWinningAmount() / this.#purchaseAmount) * 10000
+      ) / 100;
   }
 
   calculateWinningAmount() {

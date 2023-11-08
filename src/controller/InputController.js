@@ -10,44 +10,44 @@ export default class InputController {
   outputView = new OutputView();
   validateController = new ValidateController();
   purchaseController = new PurchaseController();
-  amount = 0;
-  winningNumbers = [];
-  bonusNumber = 0;
-  lotto = {};
+  #purchaseAmount = 0;
+  #winningNumbers = [];
+  #bonusNumber = 0;
+  // #winningLotto = {};
 
   async inputStart() {
-    await this.receiveAmount();
+    await this.receivePurchaseAmount();
     await this.receiveWinningNumbers();
     await this.receiveBonusNumber();
 
     this.winController = new WinController(
-      this.amount,
-      this.lotto.getNumbers(),
-      this.bonusNumber,
+      this.#purchaseAmount,
+      this.#winningNumbers,
+      this.#bonusNumber,
       this.purchaseController.getPurchasedLottos()
     );
   }
 
-  async receiveAmount() {
+  async receivePurchaseAmount() {
     while (true) {
       try {
-        this.amount = await this.inputView.readAmount();
-        this.validateController.validateAmount(this.amount);
+        this.#purchaseAmount = await this.inputView.readPurchaseAmount();
+        this.validateController.validateAmount(this.#purchaseAmount);
         break;
       } catch (error) {
         this.outputView.printMessage(error);
       }
     }
 
-    this.purchaseController.issueLottos(this.amount / 1000);
+    this.purchaseController.purchaseLottos(this.#purchaseAmount / 1000);
   }
 
   async receiveWinningNumbers() {
     while (true) {
       try {
         const numberString = await this.inputView.readWinningNumbers();
-        this.winningNumbers = numberString.split(',');
-        this.lotto = new Lotto(this.winningNumbers);
+        this.#winningNumbers = numberString.split(',');
+        new Lotto(this.#winningNumbers);
         break;
       } catch (error) {
         this.outputView.printMessage(error);
@@ -58,8 +58,8 @@ export default class InputController {
   async receiveBonusNumber() {
     while (true) {
       try {
-        this.bonusNumber = await this.inputView.readBonusNumber();
-        this.validateController.validateBonusNumber(this.bonusNumber);
+        this.#bonusNumber = await this.inputView.readBonusNumber();
+        this.validateController.validateBonusNumber(this.#bonusNumber);
         break;
       } catch (error) {
         this.outputView.printMessage(error);
