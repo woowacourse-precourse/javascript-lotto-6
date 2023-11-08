@@ -37,17 +37,17 @@ class Lotto {
     const isBonusNumberMatched = this.#numbers.includes(bonusNumber);
 
     if (matchedNumbers.length === 6) {
-      return 1;
+      return 1; // 1등
     } else if (matchedNumbers.length === 5 && isBonusNumberMatched) {
-      return 2;
+      return 2; // 2등
     } else if (matchedNumbers.length === 5) {
-      return 3;
+      return 3; // 3등
     } else if (matchedNumbers.length === 4) {
-      return 4;
+      return 4; // 4등
     } else if (matchedNumbers.length === 3) {
-      return 5;
+      return 5; // 5등
     } else {
-      return 0;
+      return 0; // 꽝
     }
   }
 }
