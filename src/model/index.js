@@ -40,16 +40,20 @@ class LottoModel {
     }, new Map());
   }
 
-  #calculateRateOfReturn(result) {
+  #calculateRateOfReturn(ranks) {
+    const totalPrizeMoney = LottoModel.#calculateTotalPrizeMoney(ranks);
+
+    return (totalPrizeMoney / (this.#userLottos.length * LOTTO.price)) * 100;
+  }
+
+  static #calculateTotalPrizeMoney(ranks) {
     let totalPrizeMoney = 0;
 
-    result.forEach((count, rank) => {
+    ranks.forEach((count, rank) => {
       totalPrizeMoney += LottoModel.LOTTO_PRIZE[rank] * count;
     });
 
-    const rateOfReturn = (totalPrizeMoney / (this.#userLottos.length * LOTTO.price)) * 100;
-
-    return rateOfReturn;
+    return totalPrizeMoney;
   }
 }
 
