@@ -155,7 +155,7 @@ describe("displayPurchasedLottos", () => {
 });
 
 describe("inputWinningNumbers 테스트", () => {
-  it("유효한 당첨 번호를 올바르게 입력받아야 합니다", async () => {
+  test("유효한 당첨 번호를 올바르게 입력받아야 합니다", async () => {
     // given
     const validInput = "1, 2, 3, 4, 5, 6"; // 유효한 당첨 번호 입력
     MissionUtils.Console.readLineAsync.mockResolvedValueOnce(validInput);
@@ -172,7 +172,7 @@ describe("inputWinningNumbers 테스트", () => {
 })
 
 describe("inputBonusNumber 테스트", () => {
-  it("유효한 보너스 번호를 올바르게 입력받아야 합니다", async () => {
+  test("유효한 보너스 번호를 올바르게 입력받아야 합니다", async () => {
     // given
     const validInput = "7"; // 유효한 보너스 번호 입력
     MissionUtils.Console.readLineAsync.mockResolvedValueOnce(validInput);
@@ -187,7 +187,7 @@ describe("inputBonusNumber 테스트", () => {
 })
 
 describe("checkLottoResults 테스트", () => {
-  it("로또 티켓별로 당첨 여부 확인 및 결과 반환", () => {
+  test("로또 티켓별로 당첨 여부 확인 및 결과 반환", () => {
     // given
     const app = new App();
     const lottos = [
@@ -207,6 +207,42 @@ describe("checkLottoResults 테스트", () => {
 
     // then
     expect(results).toEqual(expectedResults);
+  });
+});
+
+describe("displayResults 테스트", () => {
+  test("당첨 통계를 올바르게 출력하고 총 수익률을 확인", () => {
+    // given
+    const app = new App();
+    const purchaseAmount = 8000; // 로또 구입 금액
+    const results = [
+      { prize: 5000, count: 1 }, // 3개 일치
+      { prize: 50000, count: 0 }, // 4개 일치
+      { prize: 1500000, count: 0 }, // 5개 일치
+      { prize: 30000000, count: 0 }, // 5개 일치 + 보너스 볼 일치
+      { prize: 2000000000, count: 0 }, // 6개 일치
+    ];
+
+    // when
+    const logSpy = jest.spyOn(MissionUtils.Console, "print");
+    logSpy.mockClear();
+    app.displayResults(results, purchaseAmount);
+
+    // then
+    const expectedMessages = [
+      "당첨 통계",
+      "---",
+      "3개 일치 (5,000원) - 1개",
+      "4개 일치 (50,000원) - 0개",
+      "5개 일치 (1,500,000원) - 0개",
+      "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
+      "6개 일치 (2,000,000,000원) - 0개",
+      "총 수익률은 62.5%입니다.",
+    ];
+
+    expectedMessages.forEach((message) => {
+      expect(logSpy).toHaveBeenCalledWith(message);
+    });
   });
 });
 
