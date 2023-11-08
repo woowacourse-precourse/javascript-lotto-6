@@ -9,11 +9,17 @@ class App {
   basedAmount;
   winningNumbers;
   winningBonusNumber;
+  winningCounts;
+  totalPrice;
+  prizeMoney;
 
   constructor() {
     this.basedAmount = 1000;
+    this.totalPrice = 0;
     this.randomNumbers = Array.from({length: 45}, (_, i) => i + 1);;
     this.lottoArray = new Array();
+    this.winningCounts = new Array(6).fill(0);
+    this.prizeMoney = [0, 2000000000, 30000000, 1500000, 50000, 5000];
   }
 
   async play() {
@@ -52,7 +58,36 @@ class App {
     Util.validateLottoNumbers(this.winningNumbers, this.winningBonusNumber);
   }
 
+  #matchLotto() {
+    this.lottoArray.forEach(lotto => {
+      let rank = Lotto.confirmWinning(winningNumbers,winningBonusNumber);
+      this.winningCounts[rank] += 1;
+    })
+  }
 
+  #calculateTotalPrice() {
+    for (let i = 1 ; i <= 5 ; i += 1) {
+      this.totalPrice += this.prizeMoney[i] * this.winningCounts[i];
+    }
+  }
+
+  #calculateProfit() {
+    const userPrice = this.purchaseAmount * this.basedAmount;
+    return ((this.totalPrice - userPrice) / userPrice * 100).toFixed(1);
+  }
+
+  printWinningResults() {
+    Console.print("당첨 통계");
+    Console.print("---")
+    Console.print("3개 일치 (5,000원) - " + this.winningCounts[5] + "개");
+    Console.print("4개 일치 (50,000원) - " + this.winningCounts[4] + "개");
+    Console.print("5개 일치 (1,500,000원) - " + this.winningCounts[3] + "개");
+    Console.print("5개 일치, 보너스 볼 일치 (30,000,000원) - " + this.winningCounts[2] + "개");
+    Console.print("6개 일치 (2,000,000,000원) - " + this.winningCounts[1] + "개");
+    
+    this.#calculateTotalPrice();
+    Console.print("총 수익률은 " + this.#calculateProfit() + "입니다.");
+  }
 }
 
 export default App;

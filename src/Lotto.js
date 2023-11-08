@@ -16,8 +16,30 @@ class Lotto {
     Console.print("[" + this.#numbers + "]");
   }
 
-  confirmWinning(winningNumbers) {
-    
+  #ranking(winningCount, doesBonusMatch) {
+    if (winningCount == 3) { return 5; }
+    else if (winningCount == 4) { return 4; }
+    else if (winningCount == 5 && !doesBonusMatch) { return 3; }
+    else if (winningCount == 5 && doesBonusMatch) { return 2; }
+    else if (winningCount == 6) { return 1;}
+    else { return 0; }
+  }
+
+  confirmWinning(winningNumbers,winningBonusNumber) {
+    let winningCount = 0;
+    let doesBonusMatch = false;
+
+    this.#numbers.forEach(number => {
+      if (winningNumbers.includes(number)) {
+        winningCount += 1;
+      }
+    })
+
+    if (this.#numbers.includes(winningBonusNumber)) {
+      doesBonusMatch = true;
+    }
+
+    return this.#ranking(winningCount, doesBonusMatch);
   }
 }
 
