@@ -33,7 +33,7 @@ class Lotto {
   #validateNumberRange(numbers) {
     numbers.forEach(number => {
       if (number < 1 || number > 45) {
-        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIQUENESS);
+        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
       }
     });
   }
