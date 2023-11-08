@@ -3,7 +3,7 @@ const IN_GAME_MESSAGE = Object.freeze({
   amount: "개를 구매했습니다.",
   getNumbers: "\n당첨 번호를 입력해 주세요.\n",
   getBonusNumber: "\n보너스 번호를 입력해 주세요.\n",
-  lottoResults: "\n당첨 통계\n---\n",
+  lottoResults: "\n당첨 통계\n---",
 });
 
 const UNIT = Object.freeze(1000);
