@@ -1,4 +1,6 @@
-### 구현 목록
+## 3주차 미션 - 로또
+
+### ⚙️ 구현 목록
 
 메세지 출력
 
@@ -39,7 +41,7 @@ ValidatorManager
 - 당첨 로또 번호 입력 값 검증 함수
 - 당첨 보너스 로또 번호 입력 값 검증 함수
 
-### 테스트 케이스
+### 📑 테스트 케이스
 
 <details>
 <summary>Varification</summary>
@@ -125,7 +127,7 @@ ValidatorManager
 - 로또 구입 금액, 로또 번호, 보너스 번호 입력시, LottoCycle 인스턴스가 생성된다.
 </details>
 
-폴더 구조
+### 📂 폴더 구조
 
 ```
 📂__test__
