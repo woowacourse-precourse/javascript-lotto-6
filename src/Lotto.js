@@ -35,10 +35,11 @@ class Lotto {
     return [...this.#numbers]; // 배열 복사본을 반환하여 원본을 보호합니다.
   }
 
-  compare(winningNumbers, bonusNumber) {
+  compare(lottoNumber, bonusNumber) {
     const userNumbers = new Set(this.#numbers);
-    const matchingNumbers = winningNumbers.filter((num) => userNumbers.has(num));
-    const isBonusNumberMatch = this.#numbers.includes(bonusNumber);
+    const matchingNumbers = lottoNumber.filter((num) => userNumbers.has(num));
+    const isBonusNumberMatch = userNumbers.has(bonusNumber); // 보너스 번호도 사용자 번호에 포함되는지 확인
+
     const matchingCount = matchingNumbers.length;
 
     if (matchingCount === 6) {
