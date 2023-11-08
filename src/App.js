@@ -2,6 +2,8 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 
 class App {
+  #PRICE;
+
   #USER_PRICE;
 
   #USER_LOTTOS;
@@ -14,13 +16,23 @@ class App {
 
   #MAX_LENGTH;
 
+  #WINNING_COUNT;
+
+  #TMP_WINNING_COUNT;
+
+  #AWARD_PRICE;
+
   constructor() {
+    this.#PRICE = [2000000000, 30000000, 1500000, 50000, 5000];
     this.#USER_PRICE = 0;
     this.#USER_LOTTOS = [];
     this.#WINNING_NUMBERS = [];
     this.#LOTTOS_MAX = 0;
     this.#BONUS_NUMBER = 0;
     this.#MAX_LENGTH = 6;
+    this.#WINNING_COUNT = [0, 0, 0, 0, 0];
+    this.#TMP_WINNING_COUNT = [];
+    this.#AWARD_PRICE = 0;
   }
 
   async getInputPrice() {
@@ -145,13 +157,59 @@ class App {
     return tmpString;
   }
 
+  checkLotto() {
+    this.#USER_LOTTOS.forEach((userLotto, index) => {
+      this.checkEachLotto(userLotto, index);
+    });
+  }
+
+  checkEachLotto(eachLotto) {
+    let checkBonus = false;
+    let winningCount = eachLotto.filter((number) =>
+      this.#WINNING_NUMBERS.includes(number),
+    ).length;
+
+    if (eachLotto.includes(this.#BONUS_NUMBER)) {
+      if (winningCount === 5) {
+        checkBonus = true;
+      } else if (winningCount < 5) {
+        winningCount += 1;
+      }
+    }
+    this.#TMP_WINNING_COUNT.push({ count: winningCount, bonus: checkBonus });
+  }
+
+  //   3개 일치 (5,000원) - 1개
+  // 4개 일치 (50,000원) - 0개
+  // 5개 일치 (1,500,000원) - 0개
+  // 5개 일치, 보너스 볼 일치 (30,000,000원) - 0개
+  // 6개 일치 (2,000,000,000원) - 0개
+  // 총 수익률은 62.5%입니다.
+  calculateResults() {
+    this.calculateAwardPrice();
+  }
+
+  calculateAwardPrice() {
+    this.#TMP_WINNING_COUNT.forEach((result) => {
+      if (result.count > 2 && result.count < 6 && !result.bonus) {
+        this.#AWARD_PRICE += this.#PRICE[this.#MAX_LENGTH - result.count + 1];
+        this.#WINNING_COUNT[this.#MAX_LENGTH - result.count + 1] += 1;
+      } else if (result.bonus || result.count === 6) {
+        this.#AWARD_PRICE += this.#PRICE[this.#MAX_LENGTH - result.count];
+        this.#WINNING_COUNT[this.#MAX_LENGTH - result.count] += 1;
+      }
+    });
+  }
 
   async play() {
     await this.getInputPrice();
     this.makeLottoArray();
-    this.printLottoArray();
     await this.getInputWinningNumber();
     await this.getInputBonusNumber();
+
+    this.printLottoArray();
+    this.checkLotto();
+    this.calculateResults();
   }
 }
 
