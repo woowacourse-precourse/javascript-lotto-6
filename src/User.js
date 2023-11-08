@@ -40,6 +40,14 @@ class User {
             Console.print(randomNumber);
         }
     }
+
+    getLottoNumbers() {
+        return this.#lottoNumbers;
+    }
+
+    getPurchaseAmount() {
+        return this.#purchaseAmount;
+    }
 }
 
 export default User;
