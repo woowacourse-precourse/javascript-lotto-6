@@ -24,7 +24,7 @@ class App {
 		this.#validator = Validator;
 		this.#lottoList = new LottoList();
 		this.#winningLottoCounter = new WinningLotoCounter();
-		this.#profitCalculator = new ProfitCalculator();
+		this.#profitCalculator = ProfitCalculator;
 	}
 
 	async play() {
