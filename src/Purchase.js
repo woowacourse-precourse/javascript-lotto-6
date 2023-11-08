@@ -1,4 +1,4 @@
-class Purchase {
+export default class Purchase {
     #amount;
 
     constructor(amount) {
@@ -36,5 +36,3 @@ class Purchase {
         return this.#amount;
     }
 }
-
-export default Purchase;

@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 
-class WinningNumbers {
+export default class WinningNumbers {
     #numbers;
     #bonusNumber;
 
@@ -29,5 +29,3 @@ class WinningNumbers {
         return this.#bonusNumber;
     }
 }
-
-export default WinningNumbers;
