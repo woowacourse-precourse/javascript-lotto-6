@@ -1,4 +1,4 @@
-import { PRICE, RANGE } from "../constants/NUMBER.js";
+import { PRICE, RANGE } from "../constant/NUMBER.js";
 
 export const validateNumber = {
   isDivideThousand(number) {
