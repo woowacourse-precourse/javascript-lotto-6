@@ -23,7 +23,7 @@ class Lotto {
 
     #checkElements(array){
         array.forEach(element => {
-            if(isNaN(element)) throw new Error('[ERROR]')
+            if(isNaN(element)) throw new Error('[ERROR] 로또 번호는 숫자여야 합니다.')
         })
     }
 
