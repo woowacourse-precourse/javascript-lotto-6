@@ -20,7 +20,7 @@ export const PURCHASE_AMOUNT_ERROR_MESSAGE = Object.freeze({
 
 export const LOTTO_NUMBERS_ERROR_MESSAGE = Object.freeze({
   notSixNumbers: "[ERROR] 로또 번호는 6개여야 합니다.",
-  duplicatedNumber: "[ERROR] 로또 번호에 중복된 숫자가 있습니다."
+  duplicatedNumber: "[ERROR] 로또 번호에 중복된 숫자가 있습니다.",
 });
 
 export const WINNING_NUMBERS_ERROR_MESSAGE = Object.freeze({
