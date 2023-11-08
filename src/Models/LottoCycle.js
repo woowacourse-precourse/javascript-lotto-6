@@ -88,8 +88,24 @@ class LottoCycle {
 		Console.print(`총 수익률은 ${earnRate}%입니다.`);
 	}
 
+	get purchaseCost() {
+		return this.#purchaseCost;
+	}
+
 	get scoreCount() {
 		return this.#scoreCount;
+	}
+
+	get userLottos() {
+		return this.#userLottos;
+	}
+
+	get winnerLotto() {
+		return this.#winnerLotto;
+	}
+
+	get bonusLotto() {
+		return this.#bonusLotto;
 	}
 }
 
