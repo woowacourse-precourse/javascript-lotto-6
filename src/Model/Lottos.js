@@ -7,6 +7,14 @@ class Lottos {
     this.#lottoTickets = [];
   }
 
+  getLottoTickets() {
+    return this.#lottoTickets;
+  }
+
+  getLottoQuantity() {
+    return this.#lottoQuantity;
+  }
+
   calculateLottoQuantity(purchaseAmount) {
     this.validatePurchaseAmount(purchaseAmount);
     this.#lottoQuantity = purchaseAmount / 1000;
