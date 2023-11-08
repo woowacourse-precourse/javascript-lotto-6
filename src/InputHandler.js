@@ -38,8 +38,14 @@ class InputHandler {
   }
 
   async inputWinningNumbers() {
-    this.#winningNumbers = await Console.readLineAsync(
-      INPUT_MESSAGES.INPUT_WINNING_NUMBERS
+    this.#winningNumbers = await this.#getUserInput(
+      INPUT_MESSAGES.INPUT_WINNING_NUMBERS,
+      (input) => {
+        const numbers = input.split(',').map(Number);
+        LottoValidator.validateNumbers(numbers);
+
+        return numbers;
+      }
     );
 
     return this.#winningNumbers;

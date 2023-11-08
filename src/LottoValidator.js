@@ -7,6 +7,17 @@ class LottoValidator {
     }
   }
 
+  static validateLottoNumber(number, errorMessage) {
+    if (
+      isNaN(number) ||
+      number < LOTTO_GAME.MIN_NUMBER ||
+      number > LOTTO_GAME.MAX_NUMBER ||
+      !Number.isInteger(number)
+    ) {
+      LottoValidator.throwError(errorMessage);
+    }
+  }
+
   static throwError(message) {
     throw new Error(`${ERROR_MESSAGES.PREFIX} ${message}`);
   }
@@ -16,6 +27,23 @@ class LottoValidator {
 
     if (userInput <= 0 || userInput % LOTTO_GAME.PRICE_UNIT !== 0) {
       LottoValidator.throwError(ERROR_MESSAGES.INVALID_AMOUNT_RANGE);
+    }
+  }
+
+  static validateNumbers(numbers) {
+    if (numbers.length !== LOTTO_GAME.TOTAL_NUMBERS) {
+      LottoValidator.throwError(ERROR_MESSAGES.INVALID_NUMBER_COUNT);
+    }
+
+    numbers.some((number) =>
+      LottoValidator.validateLottoNumber(
+        number,
+        ERROR_MESSAGES.INVALID_NUMBER_RANGE
+      )
+    );
+
+    if (new Set(numbers).size !== LOTTO_GAME.TOTAL_NUMBERS) {
+      LottoValidator.throwError(ERROR_MESSAGES.DUPLICATE_NUMBERS);
     }
   }
 }
