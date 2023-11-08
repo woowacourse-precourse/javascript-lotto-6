@@ -37,4 +37,5 @@ export const LOTTO_RESULT_MESSAGES = Object.freeze({
     `${matchCount}개 일치 (${prizeMoney.toLocaleString()}원) - ${count}개`,
   MATCHING_NUMBERS_WITH_BONUS: (prizeMoney, count) =>
     `5개 일치, 보너스 볼 일치 (${prizeMoney.toLocaleString()}원) - ${count}개`,
+  RETURN_RATE: (rate) => `총 수익률은 ${rate}%입니다.`,
 });

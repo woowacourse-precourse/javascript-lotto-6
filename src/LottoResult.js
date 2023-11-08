@@ -1,5 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PRIZE_VALUES, LOTTO_RESULT_MESSAGES } from './utils/constants.js';
+import {
+  PRIZE_VALUES,
+  LOTTO_RESULT_MESSAGES,
+  LOTTO_GAME,
+} from './utils/constants.js';
 
 class LottoResult {
   #results;
@@ -72,6 +76,23 @@ class LottoResult {
       return result.bonus ? '5B' : '5';
     }
     return String(result.count);
+  }
+
+  calculateReturnRate(userInput) {
+    const prizeSum = this.#calculateTotalPrize();
+    const rawReturnRate =
+      (prizeSum / (userInput * LOTTO_GAME.PRICE_UNIT)) * 100;
+    const roundedReturnRate = parseFloat(rawReturnRate.toFixed(2));
+    Console.print(LOTTO_RESULT_MESSAGES.RETURN_RATE(roundedReturnRate));
+  }
+
+  #calculateTotalPrize() {
+    return Array.from(this.#prizes.entries())
+      .filter(([key, value]) => value > 0 && PRIZE_VALUES[key])
+      .reduce(
+        (totalPrize, [key, value]) => totalPrize + PRIZE_VALUES[key] * value,
+        0
+      );
   }
 }
 

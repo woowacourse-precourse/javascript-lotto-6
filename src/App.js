@@ -27,6 +27,7 @@ class App {
       this.#bonusNumber
     );
     this.#lottoResult.displayPrizes();
+    this.#lottoResult.calculateReturnRate(userAmount);
   }
 }
 
