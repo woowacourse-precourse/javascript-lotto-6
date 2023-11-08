@@ -1,5 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
-import OutputView from "../../src/view/OutputView.js";
+import OutputView from "../../src/views/OutputView.js";
 
 describe("OutputView 객체 테스트", () => {
   beforeEach(() => {

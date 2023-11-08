@@ -1,4 +1,4 @@
-import GameManager from "./controller/GameManager";
+import GameManager from "./controllers/GameManager.js";
 
 class App {
   // eslint-disable-next-line class-methods-use-this

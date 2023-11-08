@@ -1,4 +1,4 @@
-import LottoList from "../model/LottoMaker.js";
+import LottoList from "../models/LottoList.js";
 
 class GameManager {
   playLottoGame() {}
