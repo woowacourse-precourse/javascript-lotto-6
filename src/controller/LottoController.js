@@ -27,16 +27,17 @@ class LottoController {
   }
 
   async start() {
-    while (true) {
+    const startGame = async () => {
       try {
         await this.#initGame();
         await this.#runGame();
-        break;
       } catch (error) {
         printMessage(error.message);
+        await startGame();
       }
     }
-  }
+    await startGame();
+  };
 
   async #initGame() {
     await this.#getInputMoney();
@@ -73,32 +74,33 @@ class LottoController {
   };
 
   async #getWinningNumbers() {
-    while (true) {
+    const validateWinningNumbers = async () => {
       try {
         const inputNumber = await InputView.getWinningNumbers();
         const winningNumberValidator = new WinningNumberValidator(inputNumber);
         winningNumberValidator.validate();
-
         const lotto = new Lotto(inputNumber.split(UTILS.comma).map(Number));
         this.#winningNumbers = lotto.getNumbers();
-        break;
       } catch (error) {
         printMessage(error.message);
+        await validateWinningNumbers();
       }
-    }
+    };
+    await validateWinningNumbers();
   };
 
   async #getBonusNumber() {
-    while (true) {
+    const validateBonusNumber = async () => {
       try {
         const inputNumber = await InputView.getBonusNumber();
         const bonusNumberValidator = new BonusNumberValidator(inputNumber);
         this.#bonusNumber = bonusNumberValidator.validate(this.#winningNumbers);
-        break;
       } catch (error) {
         printMessage(error.message);
+        await validateBonusNumber();
       }
-    }
+    };
+    await validateBonusNumber();
   };
 
   #printStatistics() {
