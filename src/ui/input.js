@@ -8,12 +8,17 @@ const printError = (error) => {
 
 export const inputMoney = async () => {
   const money = await Console.readLineAsync(inputMessages.MONEY);
-  try{
+  try {
     validateMoney(money);
   } catch (error) {
     printError(error);
-    return await inputMoney();
+    return inputMoney();
   }
-  
+
   return money;
+};
+
+export const inputWinningLotto = async () => {
+  const winningLottoNumbers = await Console.readLineAsync(inputMessages.WINNING_LOTTO);
+  return winningLottoNumbers.split(',').map((number) => Number(number));
 };
