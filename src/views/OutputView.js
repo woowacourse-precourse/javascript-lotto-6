@@ -8,6 +8,11 @@ class OutputView {
     });
   }
 
+  static printFinalResult(results, profit) {
+    this.printResults(results);
+    this.printProfit(profit);
+  }
+
   static printResults(results) {
     const order = [3, 4, 5, '5+1', 6];
     Console.print('당첨 통계');
