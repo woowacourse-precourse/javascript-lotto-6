@@ -29,6 +29,10 @@ class Lotto {
     stringNum = `${stringNum}${this.#numbers[this.#numbers.length - 1]}`;
     return stringNum;
   }
+
+  getNumArr() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

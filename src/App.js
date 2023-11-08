@@ -4,6 +4,7 @@ class App {
   async play() {
     const view = new PlayView();
     view.viewFunction();
+    
   }
 }
 

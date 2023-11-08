@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { CONST_VALUE, STAGES, Data } from './Db.js';
+import { CONST_VALUE, STAGES, Data } from './DB.js';
 import Lotto from './Lotto.js';
 
 const methodForService = {

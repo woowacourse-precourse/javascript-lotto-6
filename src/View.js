@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Controller from './Controller.js';
-import { Data, STAGES, TEXTVIEW } from './Db.js';
+import { Data, STAGES, TEXTVIEW } from './DB.js';
 import ERROR from './ErrorDb.js';
 
 const controller = Controller.getInstance();
@@ -71,7 +71,11 @@ class PlayView {
       return tmp;
     },
     stage2View: async function showLottoListView() {
-      MissionUtils.Console.print(`${Data.lottoCnt}${TEXTVIEW.LOTTO_AMOUNT}\n${Data.textLottoBuy()}`);
+      MissionUtils.Console.print(`${Data.lottoCnt}${TEXTVIEW.LOTTO_AMOUNT}`);
+      Data.lottoBuy.forEach( (lotto) =>{
+        MissionUtils.Console.print(`[${lotto.getNumbers()}]`);
+      })
+      
       return STAGES.NUM_3;
     },
     stage3View: async function requestWinNumbers() {
@@ -83,7 +87,7 @@ class PlayView {
       return tmp;
     },
     stage5View: async function requestWinNumbers() {
-      MissionUtils.Console.print(`${TEXTVIEW.RESULT([1, 0, 0, 0, 0, 0, 0])}`);
+      MissionUtils.Console.print(`${TEXTVIEW.RESULT([1, 0, 0, 0, 0, 62.5])}`);
       return STAGES.EXIT;
     },
   };

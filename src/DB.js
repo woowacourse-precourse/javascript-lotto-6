@@ -11,7 +11,7 @@ const STAGES = Object.freeze({
 });
 
 const TEXTVIEW = Object.freeze({
-  REQUEST_MONEYINPUT: '구입금액을 입력해 주세요. ',
+  REQUEST_MONEYINPUT: '구입금액을 입력해 주세요.\n',
   LOTTO_AMOUNT: '개를 구매했습니다.',
   REQUEST_LOTTOWIN: '당첨 번호를 입력해주세요.\n',
   REQUEST_LOTTOBONUS: '보너스 번호를 입력해주세요.\n',

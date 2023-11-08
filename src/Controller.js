@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { STAGES, TEXTVIEW, CONST_VALUE } from './Db.js';
+import { STAGES, TEXTVIEW, CONST_VALUE } from './DB.js';
 import ERROR from './ErrorDb.js';
 import Service from './Service.js';
 
