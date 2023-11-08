@@ -12,7 +12,14 @@ class LottoGame {
     this.lottoGameHost = new LottoGameHost();
   }
 
+  async buyAndIssueLottos() {
+    await this.lottoStore.setLottoStore();
+    this.lottoCenter = new LottoCenter(this.lottoStore.publishLottos());
+    this.lottoCenter.tryPrintAllLottoNumbers();
+  }
+
   async playLottoGame() {
+    await this.buyAndIssueLottos();
   }
 }
 

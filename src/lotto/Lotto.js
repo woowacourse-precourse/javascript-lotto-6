@@ -2,6 +2,7 @@ import { print } from '../utility/console.js';
 import {
   LOTTO_CONSTANT,
   ERROR_MESSAGE,
+  FORMATTER,
 } from '../constant/constant.js';
 
 class Lotto {
@@ -20,6 +21,10 @@ class Lotto {
     if (new Set(numbers).size !== numbers.length) {
       throw new Error(ERROR_MESSAGE.wrongLottoNumberInput);
     }
+  }
+
+  printNumbers() {
+    print(FORMATTER.lottoPrintFormatter(this.#numbers));
   }
 }
 

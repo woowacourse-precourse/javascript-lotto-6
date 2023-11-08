@@ -13,6 +13,12 @@ class LottoCenter {
       fifth: 0,
     };
   }
+
+  tryPrintAllLottoNumbers() {
+    this.#publishedLottoList.forEach((lotto) => {
+      lotto.printNumbers();
+    });
+  }
 }
 
 export default LottoCenter;
