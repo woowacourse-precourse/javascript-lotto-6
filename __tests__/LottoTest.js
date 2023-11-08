@@ -21,4 +21,12 @@ describe("로또 클래스 테스트", () => {
       expect(lottos).toHaveLength(amount / 1000);
     });
   });
+
+  describe("T-2-2 로또 번호 중복 없이 생성 테스트", () => {
+    test("각 로또 번호는 6개이며 서로 중복되지 않아야 한다", () => {
+      const numbers = Lotto.generateNumbers();
+      expect(numbers).toHaveLength(6);
+      expect(new Set(numbers).size).toBe(6);
+    });
+  });
 });
