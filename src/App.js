@@ -2,10 +2,9 @@ import { Console } from '@woowacourse/mission-utils';
 import InputView from './view/InputView.js';
 import OutputView from './View/OutputView.js';
 import IssuedLotto from './model/IssuedLotto.js';
-import Lotto from './model/Lotto.js';
+import Lotto from './Lotto.js';
 import Bonus from './model/Bonus.js';
 import Computer from './model/Computer.js';
-import Validate from './validation/Validate.js';
 
 class App {
   amount;
@@ -27,8 +26,11 @@ class App {
   async getPurchaseAmount() {
     this.amount = await InputView.purchaseAmount();
     try {
-      Validate.isItNumber(this.amount);
-      Validate.isItUnitOf1000(this.amount);
+      if (/[^0-9]/g.test(this.amount)) {
+        throw new Error('[ERROR] 숫자를 입력해 주세요.');
+      } else if (this.amount % 1000 !== 0) {
+        throw new Error('[ERROR] 1,000단위로 입력해주세요');
+      }
       this.issuedLotto = new IssuedLotto(this.amount / 1000);
     } catch (err) {
       Console.print(err.message);

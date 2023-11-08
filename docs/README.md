@@ -51,16 +51,14 @@
 
 ```bash
 📦src
-┣ 📂model
-┃ ┣ 📜Bonus.js
-┃ ┣ 📜Computer.js
-┃ ┣ 📜IssuedLotto.js
-┃ ┗ 📜Lotto.js
-┣ 📂validation
-┃ ┗ 📜Validate.js
-┣ 📂view
-┃ ┣ 📜InputView.js
-┃ ┗ 📜OutputView.js
-┣ 📜App.js // Controller
-┗ 📜index.js
+ ┣ 📂model
+ ┃ ┣ 📜Bonus.js
+ ┃ ┣ 📜Computer.js
+ ┃ ┗ 📜IssuedLotto.js
+ ┣ 📂view
+ ┃ ┣ 📜InputView.js
+ ┃ ┗ 📜OutputView.js
+ ┣ 📜App.js // controller
+ ┣ 📜index.js
+ ┗ 📜Lotto.js // model
 ```
