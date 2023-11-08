@@ -1,26 +1,37 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
+import { DIVIDER, REQUEST, RESPONSE, STATISTICS } from './constants';
+import Validator from './Validator';
+import Computer from './Computer';
+
 class App {
 	async play() {
-		const money = Console.readLineAsync('구입금액을 입력해주세요'); // 구입금액을 입력해주세요 출력 및 인풋받기
-		Console.print(money); // 받은 금액 출력하기
-		Console.print(''); // \n
-		Console.print(money / 1000); //amount 개를 구매했습니다.
-		Console.print(Random.pickUniqueNumbersInRange(1, 45, 6)); // *amount
-		Console.print('')
-		const input = Console.readLineAsync('당첨 번호를 입력해주세요.');
-		const numbers = input.split(',');
-		Console.print(...numbers);
-		Console.print('');
-		const bonusNumber = Console.readLineAsync('보너스 번호를 입력해주세요.');
-		Console.print(bonusNumber);
-		Console.print('')
-		Console.print('당첨 통계\n---')//당첨 통계 출력 , --- 출력
-		Console.print('3개 일치 (5,000원) - 0개 출력')//3개 일치 (5,000원) - 0개 출력
-		Console.print('4개 일치 (50,000원) - 0개 출력')	//4개 일치 (50,000원) - 0개 출력
-		Console.print('5개 일치 (1,500,000원) - 0개  출력')//5개 일치 (1,500,000원) - 0개  출력
-		Console.print('5개 일치, 보너스 볼 일치 (30,000,000원) - 0개  출력')//5개 일치, 보너스 볼 일치 (30,000,000원) - 0개  출력
-		Console.print('6개 일치 (2,000,000,000원) - 0개  출력')//6개 일치 (2,000,000,000원) - 0개  출력
-		Console.print('총 수익률 nn%입니다')//총 수익률 nn%입니다. 출력
+		Console.print(REQUEST.MONEY);
+		const moneyInput = await Console.readLineAsync(REQUEST.MONEY);
+		const money = Validator.validateMoney(moneyInput);
+		Console.print(`${money}`);
+		const amount = Computer.calculateAmount(money);
+		Console.print(RESPONSE.AMOUNT_IS(amount));
+		const map = Computer.createRandomArraysMap(amount);
+		Console.print(REQUEST.NUMBERS);
+		const numbersInput = await Console.readLineAsync(REQUEST.NUMBERS);
+		const numbersArr = numbersInput.split(DIVIDER).map((number) => +number);
+		const numbers = Validator.validateArr(numbersArr);
+		Console.print(numbers);
+		Console.print(REQUEST.BONUS);
+		const bonusInput = await Console.readLineAsync(REQUEST.BONUS);
+		const bonus = Validator.validateBonus(bonusInput);
+		Console.print(bonus);
+		const [amountArr, bonusAmount] = Computer.getAmountArrayAndBonus(map, numbers, bonus);
+		const result = Computer.getResultArr(amountArr);
+		Console.print(STATISTICS.RESULT_IS);
+		Console.print(STATISTICS.THREE_SAME(result[0]));
+		Console.print(STATISTICS.FOUR_SAME(result[1]));
+		Console.print(STATISTICS.FIVE_SAME(result[2]));
+		Console.print(STATISTICS.BONUS(bonusAmount));
+		Console.print(STATISTICS.SIX_SAME(result[3]));
+		const profitsRate = Computer.calculateProfitsRate(result, bonusAmount, money);
+		Console.print(`총 수익률 ${profitsRate}%입니다`);
+		return;
 	}
 }
 
