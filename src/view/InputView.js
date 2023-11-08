@@ -1,11 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 import MoneyValidator from '../validator/MoneyValidator.js';
 import LottoValidator from '../validator/LottoValidator.js';
+import { READ_MESSAGE } from '../constants/message.js';
 
 class InputView {
   static async readMoney() {
     try {
-      const money = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      const money = await Console.readLineAsync(READ_MESSAGE.money);
       MoneyValidator.isValidMoney(money);
       return parseInt(money);
     } catch (err) {
@@ -16,8 +17,7 @@ class InputView {
 
   static async readWinNumbers() {
     try {
-      const numbersInput =
-        await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
+      const numbersInput = await Console.readLineAsync(READ_MESSAGE.winNumbers);
       const winNumbers = numbersInput.split(',').map(number => number.trim());
       LottoValidator.isValidNumbers(winNumbers);
       return winNumbers.map(number => parseInt(number));
@@ -29,9 +29,7 @@ class InputView {
 
   static async readBonusNumber(winNumbers) {
     try {
-      const bonusNumber = await Console.readLineAsync(
-        '\n보너스 번호를 입력해 주세요.\n',
-      );
+      const bonusNumber = await Console.readLineAsync(READ_MESSAGE.bonusNumber);
       LottoValidator.isValidBonus(winNumbers, bonusNumber);
       return parseInt(bonusNumber);
     } catch (err) {
