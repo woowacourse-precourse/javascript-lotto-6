@@ -89,4 +89,28 @@ describe('컴퓨터 기능 테스트', () => {
 
     expect(computer.getTotalWinnings()).toEqual(expected);
   });
+
+  test.each([
+    { input: 5000, expected: '총 수익률은 6.3%입니다.' },
+    { input: 10000, expected: '총 수익률은 12.5%입니다.' },
+    { input: 15000, expected: '총 수익률은 18.8%입니다.' },
+    { input: 1500000, expected: '총 수익률은 1,875.0%입니다.' },
+    { input: 30000000, expected: '총 수익률은 37,500.0%입니다.' },
+    { input: 20000000000, expected: '총 수익률은 25,000,000.0%입니다.' },
+  ])('총 수익률 출력 테스트', ({ input, expected }) => {
+    const computer = new Computer();
+
+    const mockGetTotalWinnings = (result) => {
+      computer.getTotalWinnings = jest.fn();
+      computer.getTotalWinnings.mockReturnValueOnce(result);
+    };
+
+    mockGetTotalWinnings(input);
+    const logSpy = getLogSpy();
+
+    computer.purchaseAmount = 80000;
+    computer.printTotalRateOfReturn();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(expected));
+  });
 });

@@ -10,8 +10,8 @@ export default class Computer {
   }
 
   async issueLottoForUserInput() {
-    const purchaseAmount = await UserInput.getPurchaseAmount();
-    const lottoCnt = purchaseAmount / 1000;
+    this.purchaseAmount = await UserInput.getPurchaseAmount();
+    const lottoCnt = this.purchaseAmount / 1000;
     Console.print(MESSAGE.PURCHASE_COUNT(lottoCnt));
 
     for (let count = 0; count < lottoCnt; count++) {
@@ -52,6 +52,16 @@ export default class Computer {
     }
   }
 
+  printTotalRateOfReturn() {
+    const totalWinnings = this.getTotalWinnings();
+    const rateOfReturn = Number(((totalWinnings / this.purchaseAmount) * 100).toFixed(1));
+    const commaRateOfReturn = NumberConverter.splitIntoThreeDigitWithCommaContainingDecimalPoint(
+      rateOfReturn,
+      1,
+    ).toString();
+    Console.print(MESSAGE.TOTAL_RATE_OF_RETURN(commaRateOfReturn));
+  }
+
   getLottoResults() {
     return this.lottos.reduce((result, lotto) => {
       const newResult = [...result];
@@ -76,8 +86,9 @@ export default class Computer {
   }
 
   resetLotto() {
-    this.winningNumbers = [];
+    this.purchaseAmount = 0;
     this.bonusNumber = 0;
+    this.winningNumbers = [];
     this.lottos = [];
     this.result = [];
   }
