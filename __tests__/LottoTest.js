@@ -110,7 +110,7 @@ describe('당첨 로또 클래스 테스트', () => {
     const { numbers, result } = input;
     const lotto = new Lotto(numbers);
 
-    const lottoResult = winningLotto.calculate(lottos);
+    const lottoResult = winningLotto.calculate(lotto);
     expect(lottoResult).toBe(result);
   });
 });
