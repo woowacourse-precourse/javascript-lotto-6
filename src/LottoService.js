@@ -26,6 +26,25 @@ class LottoService {
         }
     }
 
+    getResult(){
+        const result = [0,0,0,0,0,0,0,0];
+        let winning = 0;
+        for(let i=0;i<this.db.length;i++){
+            const matchCount = this.db[i].getMatchCount(this.numbers)
+            if(matchCount === 5 && this.db[i].getBonusNumberIsInclude(this.bonusNumber)){
+                result[7] += 1;
+                winning += this.prize["b"];
+                continue;
+            }
+            
+            if(matchCount >= 3) {
+                result[matchCount] += 1;
+                winning += this.prize[matchCount];
+            }
+        }
+        return [result, winning];
+    }
+
     setNumber(numbers) {
         this.numbers = numbers;
     }
