@@ -20,10 +20,10 @@ class Rank {
   #getRank(lotto, props) {
     const count = this.#getSameNumberCount(lotto, props.winningNumber);
     const rankMapping = {
-      3: NUMBER.fifthPlace,
-      4: NUMBER.fourthPlace,
-      5: lotto.includes(props.bonusNumber) ? NUMBER.secondPlace : NUMBER.thirdPlace,
-      6: NUMBER.firstPlace,
+      3: NUMBER.fifthRank,
+      4: NUMBER.fourthRank,
+      5: lotto.includes(props.bonusNumber) ? NUMBER.secondRank : NUMBER.thirdRank,
+      6: NUMBER.firstRank,
     };
     return rankMapping[count];
   }

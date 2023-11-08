@@ -6,11 +6,12 @@ const NUMBER = Object.freeze({
   price: 1_000,
   percent: 100,
   roundDigit: 1,
-  firstPlace: 1,
-  secondPlace: 2,
-  thirdPlace: 3,
-  fourthPlace: 4,
-  fifthPlace: 5,
+  firstRank: 1,
+  secondRank: 2,
+  thirdRank: 3,
+  fourthRank: 4,
+  fifthRank: 5,
 });
 
 export default NUMBER;
+

@@ -1,6 +1,8 @@
+import NUMBER from '../constants/Number.js';
+
 function RangeFilter(inputNumbers) {
   return inputNumbers.some((number) => {
-    return number < 1 || number > 45;
+    return number < NUMBER.lottoStart || number > NUMBER.lottoEnd;
   });
 }
 

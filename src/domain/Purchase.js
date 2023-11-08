@@ -1,3 +1,4 @@
+import NUMBER from '../constants/Number.js';
 import WINNING_REWARD from '../constants/WinningReward.js';
 
 class Purchase {
@@ -5,7 +6,7 @@ class Purchase {
   #revenue;
 
   constructor(amount) {
-    this.#amount = Number(amount) / 1000;
+    this.#amount = Number(amount) / NUMBER.price;
     this.#revenue = 0;
   }
 
@@ -14,12 +15,12 @@ class Purchase {
   }
 
   getRevenueRate(winningStatistic) {
-    const purchasePrice = this.#amount * 1000;
+    const purchasePrice = this.#amount * NUMBER.price;
     winningStatistic.forEach((count, index) => {
       this.#revenue += WINNING_REWARD[index] * count;
     });
 
-    return ((this.#revenue / purchasePrice) * 100).toFixed(1);
+    return ((this.#revenue / purchasePrice) * NUMBER.percent).toFixed(NUMBER.roundDigit);
   }
 }
 
