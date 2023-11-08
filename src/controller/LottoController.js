@@ -1,16 +1,16 @@
 import Input from '../view/Input.js';
 import Output from '../view/Output.js';
 
-import generateMoney from '../utils/generateMoney.js';
+import generateMoney from '../utils/GenerateMoney.js';
 import Money from '../model/Money.js';
 
-import generateLottos from '../utils/generateLottos.js';
+import generateLottos from '../utils/GenerateLottos.js';
 import LottoSet from '../model/LottoSet.js';
 
 import {
   generateWinningNumbers,
   generateBonusNumber,
-} from '../utils/generateWinningLotto.js';
+} from '../utils/GenerateWinningLotto.js';
 import WinningLotto from '../model/WinningLotto.js';
 
 class LottoController {

@@ -1,5 +1,5 @@
 import Lotto from './Lotto.js';
-import { isMadeWithUniqueNumber } from '../validator/lottoValidate.js';
+import { isMadeWithUniqueNumber } from '../validator/LottoValidate.js';
 
 class WinningLotto {
   #winningNumbers;

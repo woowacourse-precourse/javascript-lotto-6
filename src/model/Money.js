@@ -1,4 +1,4 @@
-import { isMoney, isDividedByLottoPrice } from '../validator/moneyValidate.js';
+import { isMoney, isDividedByLottoPrice } from '../validator/MoneyValidate.js';
 import { LOTTO_PRICE } from '../constants/LottoConstants.js';
 
 class Money {

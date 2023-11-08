@@ -1,7 +1,7 @@
 import {
   isValidLottoLength,
   isMadeWithUniqueNumber,
-} from '../validator/lottoValidate.js';
+} from '../validator/LottoValidate.js';
 
 class Lotto {
   #numbers;
