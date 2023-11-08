@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { WINNING_CATEGORY } from '../constants.js';
 
 class OutputView {
   static printLottoTicketCount(count) {
@@ -11,6 +12,18 @@ class OutputView {
     });
 
     OutputView.printBlankLine();
+  }
+
+  static printWinningResult(winningCount) {
+    OutputView.printBlankLine();
+    Console.print('당첨 통계\n---');
+
+    for (let ranking = 5; ranking >= 1; ranking--) {
+      const category = WINNING_CATEGORY[ranking];
+      const count = winningCount[ranking];
+
+      Console.print(`${category} - ${count}개`);
+    }
   }
 
   static printBlankLine() {

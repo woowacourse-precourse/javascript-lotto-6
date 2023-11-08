@@ -8,7 +8,7 @@ import { pickRandomLottoNumbers } from './utils/random.js';
 import InputView from './view/inputView.js';
 import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
-import { WINNING_CATEGORY, WINNINGS } from './constants.js';
+import { WINNINGS } from './constants.js';
 
 class App {
   constructor() {
@@ -32,6 +32,7 @@ class App {
     );
 
     const lottoWinningCountList = this.getWinningCount(this.lottoRankingResult);
+    OutputView.printWinningResult(lottoWinningCountList);
   }
 
   async getLottoAmount() {
