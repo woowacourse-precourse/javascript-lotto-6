@@ -14,5 +14,10 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test("로또 번호 가져오기", () => {
+    const input = [1, 2, 3, 4, 5, 10];
+    const output = new Lotto(input).getNumbers();
+
+    expect(output).toEqual(input);
+  });
 });
