@@ -1,6 +1,6 @@
 import Lotto from './Lotto.js';
-import Input from './utils/inputOutput/Input.js';
-import Output from './utils/inputOutput/Output.js';
+import Input from './utils/inputOutput/input.js';
+import Output from './utils/inputOutput/output.js';
 import { parsedNumber, validateNumber, isIncludedBonusNumbers, validatedPrice } from './utils/validation/validation.js';
 import { changeParseInt, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers } from './utils/lottoNumber/number.js';
 import { calculateProfit, calculateProfitRate, countIncludeNumbers } from './utils/calculate/calculate.js';
@@ -70,8 +70,8 @@ class StartGame {
     this.#bonusNumber = await this.getValidatedBonusNumberInput(MESSAGE.BONUS_NUMBER);
   }
 
-  async getValidatedWinningNumbersInput(message) {
-    const inputWinningNumbers = await Input.readLineAsync(message);
+  async getValidatedWinningNumbersInput(textMessage) {
+    const inputWinningNumbers = await Input.readLineAsync(textMessage);
     const winningNumbersStringArray = inputWinningNumbers.replace('[', '').replace(']', '').split(',');
     const winningNumbers = changeParseInt(winningNumbersStringArray);
 
@@ -82,12 +82,12 @@ class StartGame {
     } catch (error) {
       Output.print(error.message);
 
-      return this.getValidatedWinningNumbersInput(message);
+      return this.getValidatedWinningNumbersInput(textMessage);
     }
   }
 
-  async getValidatedBonusNumberInput(message) {
-    const inputBonusNumber = await Input.readLineAsync(message);
+  async getValidatedBonusNumberInput(textMessage) {
+    const inputBonusNumber = await Input.readLineAsync(textMessage);
 
     try {
       validateNumber(inputBonusNumber);
@@ -98,7 +98,7 @@ class StartGame {
     } catch (error) {
       Output.print(error.message);
 
-      return this.getValidatedBonusNumberInput(message);
+      return this.getValidatedBonusNumberInput(textMessage);
     }
   }
 
