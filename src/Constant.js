@@ -38,6 +38,17 @@ const MESSAGE = {
   MATCH_RESULT: '\n당첨 통계\n---',
 };
 
+const ERROR_MESSAGE = {
+  CHECK_MONEY:
+    '[ERROR] 입력하신 값을 다시 확인 해주세요. 1000원 단위의 숫자로 입력해 주세요.',
+  CHECK_WIN_NUMBER:
+    '[ERROR] 입력하신 값을 다시 확인 해주세요. 당첨 번호는 1에서 45 사이의 서로 다른 숫자만 입력 가능합니다.',
+  CHECK_BONUS_NUMBER:
+    '[ERROR] 입력하신 값을 다시 확인 해주세요. 보너스 번호는 1에서 45 사이의 당첨 번호가 아닌 숫자만 입력 가능합니다.',
+  CHECK_LOTTO_NUMBER_DUPLICATE: '[ERROR] 로또 숫자는 중복될 수 없습니다.',
+  CHECK_LOTTO_NUMBER: '[ERROR] 로또 숫자는 숫자이어야 합니다.',
+};
+
 const TICKET_UNIT = 1000;
 
-export { RANK, MESSAGE, TICKET_UNIT };
+export { RANK, MESSAGE, TICKET_UNIT, ERROR_MESSAGE };
