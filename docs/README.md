@@ -65,8 +65,8 @@
 
 ### 당첨 내역
 
-- [ ] 사용자가 구매한 로또 번호와 당첨 번호를 비교해 당첨 내역을 출력한다.
-  - [ ] 일치하는 복권의 숫자에 따라 당첨된 등수를 +1 카운트해 준다.
+- [x] 사용자가 구매한 로또 번호와 당첨 번호를 비교해 당첨 내역을 출력한다.
+  - [x] 일치하는 복권의 숫자에 따라 당첨된 등수를 +1 카운트해 준다.
 
 ```
 3개 일치 (5,000원) - 1개
@@ -117,7 +117,7 @@
 
 ### 당첨 내역
 
-- [ ] 여러 로또에 대한 당첨 여부를 올바르게 계산하는지 확인한다.
+- [x] 여러 로또에 대한 당첨 여부를 올바르게 계산하는지 확인한다.
 
 ### 수익률
 
@@ -127,14 +127,17 @@
 
 ### /view/InputView.js (사용자 입력 View)
 
-`async readPurchaseAmount()`: **구입 금액을 입력 받는 메소드**
-`async readWinningNumbers()`: **당첨 번호를 입력 받는 메소드**
+`async readPurchaseAmount()`: **구입 금액을 입력 받는 메소드**  
+`async readWinningNumbers()`: **당첨 번호를 입력 받는 메소드**  
 `async readBonusNumber()`: **보너스 번호를 입력 받는 메소드**
 
 ### /view/OutputView.js (출력 View)
 
-`printLotto(purchaseLotto)`: **발행한 로또를 출력하는 메소드**
+`printLotto(purchaseLotto)`: **발행한 로또를 출력하는 메소드**  
 `purchaseLotto`: 발행된 로또 배열
+
+`printWinningStatistics(winnings)`: **로또 당첨 내역을 출력하는 메소드**  
+`winnings`: 당첨 내역 배열
 
 ### /utils/Validator.js (사용자 입력 검증)
 
@@ -153,8 +156,17 @@
 
 ### /domain/Lotto.js (로또 발행)
 
-`generateLottoNumber(numbers)`: **구입 금액에 해당하는 만큼 로또를 발행하는 매소드**
+`generateLottoNumber(numbers)`: **구입 금액에 해당하는 만큼 로또를 발행하는 매소드**  
 `numbers`: 입력 받은 구입 금액
+
+### /domain/Winning.js (로또 당첨)
+
+`countMatchNumber(lottos, winningNumbers, bonusNumber)`: **당첨 번호와 일치하는 번호가 몇 개인지 반환하는 메소드**
+`countWinning(lottoss, winningNumbers, bonusNumber)`: **당첨 횟수를 카운트하는 메소드**
+
+`lottos`: 발행한 로또  
+`winningNumbers`: 입력 받은 당첨 번호  
+`bonusNumber`: 입력 받은 보너스 번호
 
 ### /constants/messages.js (메시지 상수화)
 
