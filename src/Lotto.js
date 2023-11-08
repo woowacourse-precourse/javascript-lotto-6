@@ -4,8 +4,9 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.#validateIsNum(numbers);
     this.#validateDuplicate(numbers);
+    this.#validate(numbers);
     this.#numbers = numbers;
   }
 
@@ -16,6 +17,14 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  #validateIsNum(numbers) {
+    numbers.forEach(element => {
+      if (isNaN(element)) {
+        throw new Error("[ERROR] 숫자를 입력해 주세요.");
+      }
+    });
+  }
+
   #validateDuplicate(numbers) {
     const set = new Set(numbers);
 
