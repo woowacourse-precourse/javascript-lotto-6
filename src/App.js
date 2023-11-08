@@ -1,6 +1,28 @@
 import Lotto from "./Lotto.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
+getUserInput = async () => {
+  let userInput = '';
+
+  await MissionUtils.Console.readLineAsync('')
+    .then((input) => {
+      userInput = input;
+    })
+    .catch((err) => {
+      throw new Error('[ERROR] : fail to get user input by console.');
+    })
+
+  return userInput;
+}
+
+stringToNumber = (numberString) => {
+  const number = Number(numberString);
+
+  if(isNaN(number)) throw new Error("[ERROR] : input is not a number.");
+
+  return number;
+}
+
 class App {
   #winningNumbers = [];
 
@@ -10,28 +32,6 @@ class App {
       this.#winningNumbers.push(false);
       count++;
     }
-  }
-
-  getUserInput = async () => {
-    let userInput = '';
-
-    await MissionUtils.Console.readLineAsync('')
-      .then((input) => {
-        userInput = input;
-      })
-      .catch((err) => {
-        throw new Error('[ERROR] : fail to get user input by console.');
-      })
-
-    return userInput;
-  }
-
-  stringToNumber = (userInput) => {
-    const number = Number(userInput);
-
-    if(isNaN(number)) throw new Error("[ERROR] : input is not a number.");
-
-    return number;
   }
 
   checkIsValidPrice = (userInputNum) => {
@@ -45,6 +45,21 @@ class App {
     const sortedLottoNumbers = lottoNumbers.sort((o1, o2) => o1 - o2);
 
     return sortedLottoNumbers;
+  }
+
+  generateLottoOrder = (orderQuantity) => {
+    let count = 0;
+    let lottoOrder = [];
+
+    while(count < orderQuantity) {
+      const lottoNumbers = this.generateLottoNumbers();
+        
+      lottoOrder.push(lottoNumbers);
+
+      count++;
+    }
+
+    return lottoOrder;
   }
 
   lottoNumbersToString = (lottoNumbers) => {
@@ -65,7 +80,7 @@ class App {
     const parsedString = userInputWinningNumbers.split(',');
 
     const parsedWinnigNumbers = parsedString.map((string) => {
-      return this.stringToNumber(string);
+      return stringToNumber(string);
     })
 
     return parsedWinnigNumbers;
@@ -146,21 +161,6 @@ class App {
     return rateOfEarn.toFixed(3);
   }
 
-  generateLottoOrder = (orderQuantity) => {
-    let count = 0;
-    let lottoOrder = [];
-
-    while(count < orderQuantity) {
-      const lottoNumbers = this.generateLottoNumbers();
-        
-      lottoOrder.push(lottoNumbers);
-
-      count++;
-    }
-
-    return lottoOrder;
-  }
-
   getUserInputPrice = async () => {
     let userInputPrice;
 
@@ -168,8 +168,8 @@ class App {
       try{
         MissionUtils.Console.print('\n구입금액을 입력해 주세요.');
   
-        const userInput = await this.getUserInput();
-        userInputPrice = this.stringToNumber(userInput);
+        const userInput = await getUserInput();
+        userInputPrice = stringToNumber(userInput);
   
         this.checkIsValidPrice(userInputPrice);
         break;
@@ -188,7 +188,7 @@ class App {
       try {
         MissionUtils.Console.print('\n당첨 번호를 입려해 주세요.');
   
-        const userInputWinningNumbers = await this.getUserInput();
+        const userInputWinningNumbers = await getUserInput();
         const parsedWinnigNumbers = this.parseWinningNumbers(userInputWinningNumbers);
         lotto = new Lotto(parsedWinnigNumbers);
 
@@ -208,8 +208,8 @@ class App {
       try {
         MissionUtils.Console.print('\n보너스 번호를 입력해 주세요.');
     
-        const userInputBonusNumber = await this.getUserInput();
-        bonusNumber = this.stringToNumber(userInputBonusNumber);
+        const userInputBonusNumber = await getUserInput();
+        bonusNumber = stringToNumber(userInputBonusNumber);
 
         this.checkBonusNumber(bonusNumber);
         break;
@@ -222,17 +222,17 @@ class App {
   }
 
   async play() {
-    const orderPrice = await this.getUserInputPrice();
+    const orderPrice = await getUserInputPrice();
     const orderQuantity = orderPrice / 1000;
     const lottoOrder = this.generateLottoOrder(orderQuantity);
 
     this.printLottoOrder(lottoOrder);
 
-    const lotto = await this.getUserInputWinningNumbers();
+    const lotto = await getUserInputWinningNumbers();
 
     this.setWinningNumbers(lotto.getNumbers());
 
-    const bonusNumber = await this.getUserInputBonusNumber();
+    const bonusNumber = await getUserInputBonusNumber();
     const lottoStat = this.getLottoStat(lottoOrder, bonusNumber);
     const prizeMoney = this.getPrizeMoney(lottoStat);
     const rateOfEarn = this.getRateOfEarn(prizeMoney, orderPrice);
