@@ -1,5 +1,5 @@
+import { Console, Random } from "@woowacourse/mission-utils";
 import LottoValidation from "./LottoValidation.js";
-import { Random } from "@woowacourse/mission-utils";
 
 export const LOTTO_PRICE = 1000;
 export const LOTTO_NUMBER_RANGE = Object.freeze({
@@ -20,6 +20,11 @@ class Lotto {
 
   get numbers() {
     return this.#numbers;
+  }
+
+  printNumbers() {
+    const SEPERATOR = ", ";
+    Console.print(`[${this.#numbers.join(SEPERATOR)}]`);
   }
 
   static calculateQuantityFromPrice(price) {

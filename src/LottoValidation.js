@@ -1,4 +1,4 @@
-import { InputError } from "./errors/index.js";
+import { LottoNumbersError } from "./errors/index.js";
 import { LOTTO_NUMBER_COUNT, LOTTO_NUMBER_RANGE } from "./Lotto.js";
 
 export const ERROR_MESSAGES = Object.freeze({
@@ -16,15 +16,15 @@ class LottoValidation {
         LOTTO_NUMBER_RANGE.MAX
       )
     ) {
-      throw new InputError(ERROR_MESSAGES.NUMBER_NOT_IN_RANGE);
+      throw new LottoNumbersError(ERROR_MESSAGES.NUMBER_NOT_IN_RANGE);
     }
 
     if (!this.#isLengthMatch(numbers, LOTTO_NUMBER_COUNT)) {
-      throw new InputError(ERROR_MESSAGES.LENGTH_NOT_MATCHED);
+      throw new LottoNumbersError(ERROR_MESSAGES.LENGTH_NOT_MATCHED);
     }
 
     if (!this.#hasUniqueElements(numbers)) {
-      throw new InputError(ERROR_MESSAGES.DUPLICATED_NUMBERS);
+      throw new LottoNumbersError(ERROR_MESSAGES.DUPLICATED_NUMBERS);
     }
   }
 
