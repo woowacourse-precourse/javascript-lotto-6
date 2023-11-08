@@ -1,4 +1,4 @@
-import CustomError from './customs/CustomError.js';
+import CustomError from './exceptions/CustomError.js';
 import ERROR_MESSAGE from './constants/error.js';
 import ArrayValidator from './validators/ArrayValidator.js';
 import { LOTTO_COUNT, LOTTO_RANGE } from './constants/number.js';

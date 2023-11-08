@@ -5,7 +5,7 @@ import { LOTTO_RANGE, LOTTO_COUNT, LOTTO_PRICE } from './constants/number.js';
 import Input from './utils/Input.js';
 import PROMPT from './constants/prompt.js';
 import NumberValidator from './validators/NumberValidator.js';
-import CustomError from './customs/CustomError.js';
+import CustomError from './exceptions/CustomError.js';
 import ERROR_MESSAGE from './constants/error.js';
 import WinningNumbers from './WinningNumbers.js';
 import reTryCatch from './exceptions/reTryCatch.js';

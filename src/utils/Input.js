@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import CustomError from '../customs/CustomError.js';
+import CustomError from '../exceptions/CustomError.js';
 import ERROR_MESSAGE from '../constants/error.js';
 import { TypeValidator, StringValidator } from '../validators/index.js';
 import reTryCatch from '../exceptions/reTryCatch.js';

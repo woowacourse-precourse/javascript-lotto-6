@@ -1,4 +1,4 @@
-import CustomError from '../customs/CustomError.js';
+import CustomError from '../exceptions/CustomError.js';
 import TypeValidator from './TypeValidator.js';
 
 class NumberValidator {
