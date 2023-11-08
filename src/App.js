@@ -77,9 +77,19 @@ class App {
     return results;
   }
 
-  #calculateResult(lottos, winningNums, bonusNum) {
+  #calculateResult(lottos, winningNums, bonusNum, price) {
     const results = this.#calculateWinning(lottos, winningNums, bonusNum);
     const totalWinnings = this.#calculateTotalWinning(results);
+    const percentage = this.#calculatePercentage(price, totalWinnings);
+    MissionUtils.Console.print(
+      `당첨 통계\n---\n` +
+        `3개 일치 (5,000원) - ${results[3]}개\n` +
+        `4개 일치 (50,000원) - ${results[4]}개\n` +
+        `5개 일치 (1,500,000원) - ${results[5]}개\n` +
+        `5개 일치, 보너스 볼 일치 (30,000,000원) - ${results["5.5"]}개\n` +
+        `6개 일치 (2,000,000,000원) - ${results[6]}개\n` +
+        `총 수익률은 ${percentage}%입니다.`,
+    );
   }
 
   #calculateTotalWinning(results) {
@@ -94,6 +104,10 @@ class App {
       const count = parseFloat(key);
       return winning + results[count] * prizeObject[count];
     }, 0);
+  }
+
+  #calculatePercentage(price, totalWinnings) {
+    return (((totalWinnings - price) / price) * 100).toFixed(2);
   }
 }
 
