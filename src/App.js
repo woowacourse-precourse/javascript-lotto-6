@@ -9,28 +9,28 @@ import {
 
 class App {
   async play() {
-    const inputs = new Inputs();
+    const INPUTS = new Inputs();
 
     // 1. 구입 금액 입력
-    const buyingAmount = await inputs.inputPrice();
+    const BUYING_PRICE = await INPUTS.inputPrice();
 
     // 2. 로또 번호 생성
-    const numberOfLottos = Math.floor(buyingAmount / 1000);
-    const lottos = lottoNumbersGenerator(numberOfLottos);
-    printBuyingLottoNumbers(lottos);
+    const NUMBER_OF_LOTTOS = Math.floor(BUYING_PRICE / 1000);
+    const USER_LOTTOS = lottoNumbersGenerator(NUMBER_OF_LOTTOS);
+    printBuyingLottoNumbers(USER_LOTTOS);
 
     // 3. 당첨 번호와 보너스 번호 입력
-    const winningNumbers = await inputs.inputWinningNumbers();
-    const bonusNumber = await inputs.inputBonusNumber(winningNumbers);
+    const WINNING_LOTTO = await INPUTS.inputWinningNumbers();
+    const BONUS_NUMBER = await INPUTS.inputBonusNumber(WINNING_LOTTO);
 
     // 4. 당첨 결과 계산
-    const result = calculator(lottos, winningNumbers, bonusNumber);
+    const RESULT = calculator(USER_LOTTOS, WINNING_LOTTO, BONUS_NUMBER);
 
     // 5. 당첨 결과 출력
-    printResult(result);
+    printResult(RESULT);
 
     // 6. 수익률 출력
-    profit(buyingAmount, result);
+    profit(BUYING_PRICE, RESULT);
   }
 }
 

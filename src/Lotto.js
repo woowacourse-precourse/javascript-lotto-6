@@ -11,8 +11,8 @@ class Lotto {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
 
-    const setNumbers = new Set(numbers);
-    if (setNumbers.size !== 6) {
+    const SET_NUMBERS = new Set(numbers);
+    if (SET_NUMBERS.size !== 6) {
       throw new Error("[ERROR] 중복된 숫자를 가질 수 없습니다.");
     }
 
