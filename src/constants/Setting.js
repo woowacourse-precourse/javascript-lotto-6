@@ -2,6 +2,7 @@ const LOTTO_SETTING = Object.freeze({
   minNumber: 1,
   maxNumber: 45,
   maxNumbersLength: 6,
+  pricePerLotto: 1000,
 });
 
 const WINNING_CRETERIA = Object.freeze({

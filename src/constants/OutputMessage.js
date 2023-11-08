@@ -6,7 +6,8 @@ const OUTPUT_MESSAGE = Object.freeze({
   winningResultThirdPrize: '5개 일치 (1,500,000원)',
   winningResultFourthPrize: '4개 일치 (50,000원)',
   winningResultFifthPrize: '3개 일치 (5,000원)',
-  earningRatio: `총 수익률은 ${earningRatioNumber}% 입니다.`,
+  earningRatioHeader: '총 수익률은 ',
+  earningRatioFooter: '% 입니다.',
 });
 
 export { OUTPUT_MESSAGE };
