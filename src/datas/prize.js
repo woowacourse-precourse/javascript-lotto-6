@@ -33,7 +33,6 @@ const prizeConditionArr = [
   { key: { mathNumber: 6, isMatchBonus: false }, value: FIRST },
   { key: { mathNumber: 5, isMatchBonus: true }, value: SECOND },
   { key: { mathNumber: 5, isMatchBonus: false }, value: THIRD },
-  { key: { mathNumber: 5, isMatchBonus: true }, value: THIRD },
   { key: { mathNumber: 4, isMatchBonus: false }, value: FOURTH },
   { key: { mathNumber: 4, isMatchBonus: true }, value: FOURTH },
   { key: { mathNumber: 3, isMatchBonus: false }, value: FIFTH },
