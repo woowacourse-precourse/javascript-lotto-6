@@ -1,4 +1,3 @@
-/* eslint-disable no-return-await */
 import DongHang from './DongHang.js';
 import Statistics from './Statistics.js';
 import User from './User.js';
@@ -9,7 +8,7 @@ class App {
     this.user = new User();
     await reTryCatch(async () => this.user.buy());
 
-    const winningNumbers = await reTryCatch(async () => DongHang.makeWinningNumbers());
+    const winningNumbers = await DongHang.makeWinningNumbers();
     const results = this.user.checkAll(winningNumbers);
 
     const statistics = new Statistics(results);

@@ -8,6 +8,7 @@ import NumberValidator from './validators/NumberValidator.js';
 import CustomError from './customs/CustomError.js';
 import ERROR_MESSAGE from './constants/error.js';
 import WinningNumbers from './WinningNumbers.js';
+import reTryCatch from './exceptions/reTryCatch.js';
 
 /**
  * @classdesc 복권 발급처
@@ -45,8 +46,21 @@ class DongHang {
    * @returns {Promise<WinningNumbers>}
    */
   static async makeWinningNumbers() {
-    const mainInput = await this.inputMainNumbers();
-    const bonusInput = await Input.readIntegerAsync(PROMPT.BONUS_NUMBER);
+    const main = await reTryCatch(async () => DongHang.inputWinningNumbers());
+    const bonus = await reTryCatch(async () => DongHang.inputBonusNumber(main));
+
+    return new WinningNumbers(main, bonus);
+  }
+
+  static async inputWinningNumbers() {
+    const mainInput = await Input.readCommaSeparatedAsync(PROMPT.WINNING_NUMBERS);
+    const main = new Lotto(mainInput.sort((a, b) => a - b));
+
+    return main;
+  }
+
+  static async inputBonusNumber(mainInput) {
+    const bonusInput = await reTryCatch(async () => Input.readIntegerAsync(PROMPT.BONUS_NUMBER));
 
     if (!NumberValidator.isInRange(bonusInput, LOTTO_RANGE)) {
       throw new CustomError(ERROR_MESSAGE.NOT_IN_RANGE);
@@ -55,17 +69,7 @@ class DongHang {
       throw new CustomError(ERROR_MESSAGE.DUPLICATED_NUMBER);
     }
 
-    return new WinningNumbers(mainInput, bonusInput);
-  }
-
-  static async inputMainNumbers() {
-    const mainInput = await Input.readCommaSeparatedIntegerAsync(PROMPT.WINNING_NUMBERS);
-    if (mainInput.length !== LOTTO_COUNT) {
-      throw new CustomError(ERROR_MESSAGE.NOT_IN_LOTTO_COUNT);
-    }
-    const sorted = mainInput.sort((a, b) => a - b);
-
-    return sorted;
+    return bonusInput;
   }
 }
 
