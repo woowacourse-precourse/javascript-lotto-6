@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import Input from './view/input.js';
 import Lotto from './Lotto.js';
 import Output from './view/output.js';
@@ -13,6 +14,8 @@ class App {
 
     const statistics = winningLotto.getStatistics(lottos);
     Output.winningStatistics(statistics);
+    const profitRate = winningLotto.getProfitRate(statistics, amount);
+    Output.profitRate(profitRate);
   }
 }
 

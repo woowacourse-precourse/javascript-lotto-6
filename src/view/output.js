@@ -6,6 +6,7 @@ const MESSAGE = Object.freeze({
   LOTTO_NUMBER: (numbers) => `[${numbers.join(', ')}]`,
   WINNING_STATISTICS: '당첨 통계',
   WINNING_COUNT: (amount, count) => `(${amount.toLocaleString()}원) - ${count}개`,
+  PROFIT_RATE: (rate) => `총 수익률은 ${rate}%입니다.`,
 });
 export default class Output {
   static purchasedLottoNumbers(lottos) {
@@ -29,5 +30,9 @@ export default class Output {
     Console.print(`5개 일치 ${MESSAGE.WINNING_COUNT(THIRD, result[THIRD])}`);
     Console.print(`5개 일치, 보너스 볼 일치 ${MESSAGE.WINNING_COUNT(SECOND, result[SECOND])}`);
     Console.print(`6개 일치 ${MESSAGE.WINNING_COUNT(FIRST, result[FIRST])}`);
+  }
+
+  static profitRate(rate) {
+    Console.print(MESSAGE.PROFIT_RATE(rate));
   }
 }
