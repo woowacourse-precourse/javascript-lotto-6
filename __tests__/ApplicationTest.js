@@ -93,6 +93,10 @@ describe('로또 테스트', () => {
   test('예외 테스트', async () => {
     await runException('1000j');
   });
+  test('예외 테스트', async () => {
+    await runException('1001');
+  });
+
 
 
 
@@ -104,4 +108,7 @@ describe('로또 테스트', () => {
 
     expect(result).toEqual([1, 2, 3, 4, 5, 6]);
   });
+
+
+
 });

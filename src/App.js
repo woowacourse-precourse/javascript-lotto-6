@@ -17,24 +17,30 @@ class App {
     this.printLottoResult(MONEY, RESULT);
   }
 
-  // eslint-disable-next-line max-lines-per-function
   async inputMoney() {
-    let flag = 1;
-    let money;
-    while (flag) {
-      try {
-        // eslint-disable-next-line no-await-in-loop
-        money = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
-        this.checkMoney(money);
-        flag = 0;
-      } catch (e) {
-        flag = 1;
-        Console.print('[ERROR] 로또 금액은 정수여야 합니다.');
-      }
+    let flagMoney = [0, 1];
+    while (flagMoney[1]) {
+      // eslint-disable-next-line no-await-in-loop
+      flagMoney = await this.tryInputMoney();
     }
-    const LOTTO_CNT = Math.floor(Number(money) / 1000);
+    const LOTTO_CNT = Math.floor(Number(flagMoney[0]) / 1000);
     this.printMoney(LOTTO_CNT);
     return LOTTO_CNT;
+  }
+
+  async tryInputMoney() {
+    let flag;
+    let money;
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      money = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      this.checkMoney(money);
+      flag = 0;
+    } catch (e) {
+      flag = 1;
+      Console.print('[ERROR] 로또 금액은 정수여야 합니다.');
+    }
+    return [money, flag];
   }
 
   // eslint-disable-next-line class-methods-use-this
