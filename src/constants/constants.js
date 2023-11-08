@@ -19,3 +19,19 @@ export const LOTTO_NUMBER = Object.freeze({
   END_RANGE: 45,
   NUMBERS_TO_PICK: 6,
 });
+
+export const RANK = Object.freeze({
+  first: 6,
+  second: 5,
+  third: 5,
+  fourth: 4,
+  fifth: 3,
+});
+
+export const PRIZE_INFO = Object.freeze({
+  first: `${RANK.first}개 일치 (2,000,000,000원)`,
+  second: `${RANK.second}개 일치, 보너스 볼 일치 (30,000,000원)`,
+  third: `${RANK.third}개 일치 (1,500,000원)`,
+  fourth: `${RANK.fourth}개 일치 (50,000원)`,
+  fifth: `${RANK.fifth}개 일치 (5,000원)`,
+});

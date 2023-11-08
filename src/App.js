@@ -25,7 +25,7 @@ class App {
       winningNumbers,
       bonusNumber
     );
-    console.log(winningCounts);
+    consolePrint.printPrize(winningCounts);
   }
 }
 
