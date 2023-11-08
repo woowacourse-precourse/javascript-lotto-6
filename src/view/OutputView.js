@@ -14,10 +14,10 @@ const OutputView = {
     Console.print(MESSAGES.lottoString(lotto));
   },
 
-  result(rankMap, earningsPercent) {
+  result(ranks, earningsPercent) {
     Console.print(MESSAGES.winning);
     Console.print(MESSAGES.resultBarLine);
-    Console.print(MESSAGES.winningResult(rankMap));
+    Console.print(MESSAGES.winningResult(ranks));
     Console.print(MESSAGES.earningsPercent(earningsPercent));
   },
 };

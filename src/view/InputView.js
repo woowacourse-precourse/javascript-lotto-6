@@ -7,9 +7,9 @@ const InputView = {
     return amount;
   },
 
-  async winningNumber() {
-    const winningNumber = await Console.readLineAsync(MESSAGES.winningNumber);
-    return winningNumber;
+  async winningNumbers() {
+    const winningNumbers = await Console.readLineAsync(MESSAGES.winningNumbers);
+    return winningNumbers;
   },
 
   async bonusNumber() {

@@ -25,7 +25,7 @@ describe("로또 클래스 테스트", () => {
     const lotto = new Lotto([1, 2, 3, 4, 5, 6]).getNumbers();
 
     expect(() => {
-      Lotto.validateBonusNumberInWinningNumber(lotto, 1);
+      Lotto.validateBonusNumberInWinningNumbers(lotto, 1);
     }).toThrow('[ERROR]');
   });
 });

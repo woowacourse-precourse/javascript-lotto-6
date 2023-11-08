@@ -19,11 +19,11 @@ class LottoManager {
     lottos.map((lotto) => this.#lottos.push(lotto));
   }
 
-  #compareWinningNumber(winningNumber) {
+  #compareWinningNumbers(winningNumbers) {
     const result = [];
 
     this.#lottos.map((lotto) => {
-      const winning = lotto.filter((number) => winningNumber.includes(number));
+      const winning = lotto.filter((number) => winningNumbers.includes(number));
       result.push(winning.length);
     });
 
@@ -41,16 +41,16 @@ class LottoManager {
     return result;
   }
   
-  #rank(winningNumber, bonusNumber) {
-    if (winningNumber === RANK_NUMBER.six) return RANK_WINNING_NUMBER.one;
-    if (winningNumber === RANK_NUMBER.five && bonusNumber) return RANK_WINNING_NUMBER.two;
-    if (winningNumber === RANK_NUMBER.five) return RANK_WINNING_NUMBER.three;
-    if (winningNumber === RANK_NUMBER.four) return RANK_WINNING_NUMBER.four;
-    if (winningNumber === RANK_NUMBER.three) return RANK_WINNING_NUMBER.five;
+  #rank(winningNumbers, bonusNumber) {
+    if (winningNumbers === RANK_NUMBER.six) return RANK_WINNING_NUMBER.one;
+    if (winningNumbers === RANK_NUMBER.five && bonusNumber) return RANK_WINNING_NUMBER.two;
+    if (winningNumbers === RANK_NUMBER.five) return RANK_WINNING_NUMBER.three;
+    if (winningNumbers === RANK_NUMBER.four) return RANK_WINNING_NUMBER.four;
+    if (winningNumbers === RANK_NUMBER.three) return RANK_WINNING_NUMBER.five;
   }
 
-  drawingLotto(winningNumber, bonusNumber) {
-    const winnings = this.#compareWinningNumber(winningNumber);
+  drawingLotto(winningNumbers, bonusNumber) {
+    const winnings = this.#compareWinningNumbers(winningNumbers);
     const bonusNumbers = this.#compareBonusNumber(bonusNumber);
 
     winnings.map((winning, ticket) => {

@@ -42,7 +42,7 @@ class App {
 
   async getWinningNumbers(buyLotto) {
     try {
-      const userWinningNumbers = await InputView.winningNumber();
+      const userWinningNumbers = await InputView.winningNumbers();
       Validator.winningNumbersType(userWinningNumbers);
       Validator.commaSeparatedWinningNumbers(userWinningNumbers);
 
@@ -63,7 +63,7 @@ class App {
       const bonusNumber = await InputView.bonusNumber();
       Validator.numberType(bonusNumber);
       Lotto.validateLottoNumber(bonusNumber);
-      Lotto.validateBonusNumberInWinningNumber(winningNumbers, bonusNumber);
+      Lotto.validateBonusNumberInWinningNumbers(winningNumbers, bonusNumber);
 
       return this.drawLotto(buyLotto, winningNumbers, bonusNumber);
     } catch (error) {

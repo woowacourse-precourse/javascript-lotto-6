@@ -32,7 +32,7 @@ class Lotto {
     if (number < NUMBER.minNumber || number > NUMBER.maxNumber) throw (ERROR.lottoNumberRange);
   }
 
-  static validateBonusNumberInWinningNumber(WinningNumbers, BonusNumber) {
+  static validateBonusNumberInWinningNumbers(WinningNumbers, BonusNumber) {
     if (WinningNumbers.includes(BonusNumber)) throw (ERROR.bonusNumberInWinningNumber);
   }
 
