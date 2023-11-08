@@ -5,13 +5,8 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    try {
-      Console.print(Array.isArray(numbers));
-      this.#validate(numbers);
-      this.#numbers = numbers;
-    } catch(error) {
-      Console.print(error.message);
-    }
+    this.#validate(numbers);
+    this.#numbers = numbers;
   }
 
   async start(validPrice, lottoNumSets) { 
