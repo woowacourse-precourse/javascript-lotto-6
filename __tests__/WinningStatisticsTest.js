@@ -12,17 +12,14 @@ describe('당첨 통계 클래스 테스트', () => {
     [4, 5, 6, 7, 8, 9],
   ];
   const result = new winningStatistics(lottos, bonusNum, winningNum, buyMoney);
-  console.log(result);
   test('보너스 번호 일치 여부를 알 수 있다.', () => {
     const expectBonusStatus = [false, true, false, true, true]; //7 포함시 보너스 번호 포함
-    console.log(expectBonusStatus, result.winningBonusNum);
     expect(expectBonusStatus).toEqual(result.winningBonusNum);
   });
 
   test('등 수 별로 당첨된 로또의 개수를 알 수 있다.', () => {
     const expectRank = [0, 1, 1, 1, 1, 1]; //index값대로 등수 설정
 
-    console.log(result.rank), expectRank;
     expect(result.rank).toEqual(expectRank);
   });
 
@@ -43,8 +40,6 @@ describe('당첨 통계 클래스 테스트', () => {
   });
   test('수익률을 소수점 둘째자리에서 반올림 할 수 있다.', () => {
     const roundedValue = result.calculateRevenue(11.55);
-    console.log(roundedValue);
-
     expect(roundedValue).toEqual(11.6);
   });
 });
