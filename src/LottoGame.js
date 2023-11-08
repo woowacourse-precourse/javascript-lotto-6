@@ -1,7 +1,8 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import GameManager from './GameManager.js';
-import { MESSAGE, TICKET_UNIT } from './Constant.js';
+import { ERROR_MESSAGE, MESSAGE, TICKET_UNIT } from './Constant.js';
+import CheckValid from './CheckValid.js';
 
 class LottoGame {
   money;
@@ -21,18 +22,26 @@ class LottoGame {
     this.buyLottoTicket();
     this.printPurchasedTicket();
     await this.setWinNumber();
-    console.log(this.winNumbers);
     await this.setBonusNumber();
     this.getRankResult();
   }
 
   async getUserMoney() {
-    this.money = await Console.readLineAsync(MESSAGE.INPUT_MONEY);
-    this.numberOfLotto = Number(this.money) / TICKET_UNIT;
+    while (true) {
+      try {
+        const inputMoney = await Console.readLineAsync(MESSAGE.INPUT_MONEY);
+        CheckValid.checkMoney(inputMoney);
+        this.money = inputMoney;
+        this.numberOfLotto = Number(this.money) / TICKET_UNIT;
+        break;
+      } catch (error) {
+        Console.print(`${error.message}`);
+      }
+    }
   }
 
   buyLottoTicket() {
-    Console.print(`\n${this.numberOfLotto}개 구매했습니다.`);
+    Console.print(`\n${this.numberOfLotto}개를 구매했습니다.`);
     for (let i = 0; i < Number(this.numberOfLotto); i++) {
       const lotto = new Lotto(GameManager.getRandomNumber());
       this.purchasedTicket.push(lotto);
@@ -44,13 +53,29 @@ class LottoGame {
   }
 
   async setWinNumber() {
-    const winNumberArray = await Console.readLineAsync(MESSAGE.INPUT_WIN);
-    this.winNumbers = GameManager.splitWinNumber(winNumberArray);
+    while (true) {
+      try {
+        const winNumberArray = await Console.readLineAsync(MESSAGE.INPUT_WIN);
+        CheckValid.checkWinNumber(winNumberArray);
+        this.winNumbers = GameManager.splitWinNumber(winNumberArray);
+        break;
+      } catch (error) {
+        Console.print(`${error.message}`);
+      }
+    }
   }
 
   async setBonusNumber() {
-    const bonus = await Console.readLineAsync(MESSAGE.INPUT_BONUS);
-    this.bonusNumber = Number(bonus);
+    while (true) {
+      try {
+        const bonus = await Console.readLineAsync(MESSAGE.INPUT_BONUS);
+        CheckValid.checkBonusNumber(bonus, this.winNumbers);
+        this.bonusNumber = Number(bonus);
+        break;
+      } catch (error) {
+        Console.print(`${error.message}`);
+      }
+    }
   }
 
   getRankResult() {
