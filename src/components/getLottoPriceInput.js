@@ -4,7 +4,8 @@ async function getLottoPriceInput() {
   MissionUtils.Console.print("구입금액을 입력해 주세요.");
   const inputPrice = await MissionUtils.Console.readLineAsync("");
   checkPriceInput(inputPrice);
-  return inputPrice;
+  MissionUtils.Console.print("");
+  return inputPrice / 1000;
 }
 
 export function checkPriceInput(inputPrice) {
