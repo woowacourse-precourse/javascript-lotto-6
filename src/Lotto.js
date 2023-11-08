@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -10,30 +12,40 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+    if (new Set(numbers).size !== 6) {
+      throw new Error("[ERROR] 로또 번호에 중복된 숫자가 있습니다.");
+    }
+    if (!numbers.every((number) => typeof number === "number")) {
+      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+    }
+    if (numbers.some((number) => isNaN(Number(number)))) {
+      throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
+    }
   }
 
   // TODO: 
   getNumbers() {
+    return this.#numbers;
+  }
+
+  getNumbersString() {
     return this.#numbers.join(", ");
   }
 
-  judgingLotto(answerLotto) { 
-    const result = [];
-    this.#numbers.forEach((number) => {
-      if (answerLotto.includes(number)) {
-        result.push(1);
-      }
-      else {
-        result.push(0);
-      }
-    })
-    return result;
+  judgeLotto(answerLotto) { 
+    const lottoResult = this.#numbers.filter((number) => 
+      answerLotto.includes(number)
+    );
+    //Console.print('lottoResult : '+lottoResult);
+    const lottoResultCount = lottoResult.length;
+    return lottoResultCount;
   }
   
-  judgingBonus(bonusLotto) {
-    if (bonusLotto.includes(number)) {
+  judgeBonus(bonusLotto) {
+    if (this.#numbers.includes(bonusLotto)) {
       return 1;
     }
+    return 0;
   }
 }
 
