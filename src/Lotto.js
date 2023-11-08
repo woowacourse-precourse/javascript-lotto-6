@@ -21,6 +21,10 @@ class Lotto {
     if(numbers.some(num => num < 1 || num > 45)) {
       throw new Error('[ERROR] 로또 번호는 1과 45 사이의 값이어야 합니다.');
     }
+
+    numbers.forEach((num) => {
+      if(!Number.isInteger(num)) throw new Error('[ERROR] 로또 번호는 정수여야 합니다.');
+    });
     
   }
 
@@ -40,14 +44,13 @@ class Lotto {
   }
 
   hasBonusNumber(bonus_number) {
+    let result = false;
     this.#numbers.forEach(num => {
-      if(num === bonus_number) return true;
+      if(num === bonus_number) result = true;
     });
 
-    return false;
+    return result;
   }
-
-
 }
 
 export default Lotto;
