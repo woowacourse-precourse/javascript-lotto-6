@@ -6,7 +6,7 @@ export const LOTTO_GAME_RULE = Object.freeze({
 export const ERRORS = Object.freeze({
   error: "[ERROR]",
   emptyInputError: "입력값이 비어 있습니다.",
-  invalidAmountError: "구입금액은 1000원 단위로 입력해야 합니다.",
+  invalidAmountError: `구입금액은 ${LOTTO_GAME_RULE.lottoAmount}원 단위로 입력해야 합니다.`,
   nonNumericError: "숫자가 아닌 값이 입력되었습니다.",
   negativNumberError: "0 이하의 음수를 입력할 수 없습니다.",
   outOfRangeNumberError: "로또번호는 1~45까지의 값만 입력할 수 있습니다.",
@@ -25,10 +25,12 @@ export const LOTTO_RANK = Object.freeze({
   rankNames: ["fifth", "fourth", "third", "second", "first"],
   startMessage: "당첨 통계\n---",
   rankResultMessage: [
-    "3개 일치 (5,000원)",
-    "4개 일치 (50,000원)",
-    "5개 일치 (1,500,000원)",
-    "5개 일치, 보너스 볼 일치 (30,000,000원)",
-    "6개 일치 (2,000,000,000원)",
+    `3개 일치 (${LOTTO_GAME_RULE.prize[0].toLocaleString("ko-KR")}원)`,
+    `4개 일치 (${LOTTO_GAME_RULE.prize[1].toLocaleString("ko-KR")}원)`,
+    `5개 일치 (${LOTTO_GAME_RULE.prize[2].toLocaleString("ko-KR")}원)`,
+    `5개 일치, 보너스 볼 일치 (${LOTTO_GAME_RULE.prize[3].toLocaleString(
+      "ko-KR"
+    )}원)`,
+    `6개 일치 (${LOTTO_GAME_RULE.prize[4].toLocaleString("ko-KR")}원)`,
   ],
 });

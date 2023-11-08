@@ -67,9 +67,9 @@ class LottoGame {
       case 5:
         if (lottoNumbers.includes(this.#winningLotto.getBonusNumber())) {
           this.#rank.secondPlace++;
-        } else {
-          this.#rank.thirdPlace++;
+          break;
         }
+        this.#rank.thirdPlace++;
         break;
       case 4:
         this.#rank.fourthPlace++;
