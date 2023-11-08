@@ -39,8 +39,8 @@ describe("로또 클래스 테스트", () => {
         const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
         const winningNumber = "1,2,3,4,5,6";
         const bonusNumber = "7";
-        const lottoResult = ["fiveMatch"];
-        const result = lottoResult.push("sixMatch");
+        const lottoResult = ["5bonus"];
+        const result = ["5bonus", 6];
 
         await expect(
             lotto.calculateLottoResult(winningNumber, bonusNumber, lottoResult)
