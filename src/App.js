@@ -17,7 +17,13 @@ const LOTTO_RANK = [
 ];
 
 class App {
-  async play() {}
+  async play() {
+    const MONEY = await this.getUserInput(async () => await this.getUserMoney());
+    const LOTTOS = this.buyLottos(MONEY);
+    const WINNING_NUMBERS = await this.getUserInput(async () => await this.getWinningLotto());
+    const BONUS_NUMBER = await this.getUserInput(async () => await this.getBonusNumber(WINNING_NUMBERS));
+    this.printResult(LOTTOS, WINNING_NUMBERS, BONUS_NUMBER);
+  }
 
   /**
    * 로또 구입 금액을 입력 받습니다
