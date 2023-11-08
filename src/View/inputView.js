@@ -29,8 +29,20 @@ const INPUT_VIEW = {
     return LOTTO_SPLIT;
   },
 
-  async inputBonus() {
-    const BONUS_NUM = await Console.readLineAsync(LOTTO_MESSAGE.INPUT_BONUS);
+  async inputBonus(numbers) {
+    let VAL = false;
+    let BONUS_NUM = 0;
+    while (!VAL) {
+      const input = await Console.readLineAsync(LOTTO_MESSAGE.INPUT_BONUS);
+
+      try {
+        VALIDATION.bonusValidation(numbers, input);
+        BONUS_NUM = input;
+        VAL = true;
+      } catch (error) {
+        Console.print(error);
+      }
+    }
     return Number(BONUS_NUM);
   },
 };

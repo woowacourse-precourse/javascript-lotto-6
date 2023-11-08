@@ -19,9 +19,10 @@ const ERROR_MESSAGE = Object.freeze({
   INPUT_NOTHING: '[ERROR] 값을 입력해주세요.',
   NOT_LOTTO_NUM: '[ERROR] 로또 번호는 1부터 45 사이의 숫자로 입력해주세요.',
   NOT_SIX: '[ERROR] 로또 번호는 6개의 숫자를 쉼표(,)로 구분하여 입력해주세요.',
-  NOT_BOMUS_NUM:
+  NOT_BONUS_NUM:
     '[ERROR] 보너스 번호는 1부터 45 사이의 숫자를 1개만 입력해주세요.',
   DUPLICATE_NUMBER: '[ERROR] 중복되지 않은 값을 입력해주세요.',
+  BONUS_DUPLIDATE: '[ERROR] 로또 번호와 중복되지 않은 숫자를 입력해주세요.',
 });
 
 const NUMBERS = {

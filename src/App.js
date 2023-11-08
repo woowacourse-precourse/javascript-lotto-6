@@ -25,7 +25,7 @@ class App {
         Console.print(error);
       }
     }
-    const BONUS_NUM = await INPUT_VIEW.inputBonus();
+    const BONUS_NUM = await INPUT_VIEW.inputBonus(this.WINNIG_LOTTO);
     const ranking = publish.getRank(this.WINNIG_LOTTO, BONUS_NUM);
     // console.log(ranking);
     OUTPUT_VIEW.outputRank(ranking);

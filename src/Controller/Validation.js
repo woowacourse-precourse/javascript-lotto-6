@@ -51,6 +51,12 @@ const VALIDATION = {
     return true;
   },
 
+  // 보너스 번호가 input 번호와 중복
+  isDuplicateBonus(input, bonus) {
+    if (input.includes(Number(bonus))) return false;
+    return true;
+  },
+
   priceValidation(price) {
     if (!this.inputNothing(price)) throw ERROR_MESSAGE.INPUT_NOTHING;
     if (!this.isNum(price)) throw ERROR_MESSAGE.NOT_NUMBERS;
@@ -58,9 +64,16 @@ const VALIDATION = {
   },
 
   lottoNumValidation(numbers) {
-    if (!this.isSix(numbers)) throw Error(ERROR_MESSAGE.NOT_SIX);
-    if (!this.isDuplicate(numbers)) throw Error(ERROR_MESSAGE.DUPLICATE_NUMBER);
-    if (!this.isLottoNum(numbers)) throw Error(ERROR_MESSAGE.NOT_LOTTO_NUM);
+    if (!this.isSix(numbers)) throw ERROR_MESSAGE.NOT_SIX;
+    if (!this.isDuplicate(numbers)) throw ERROR_MESSAGE.DUPLICATE_NUMBER;
+    if (!this.isLottoNum(numbers)) throw ERROR_MESSAGE.NOT_LOTTO_NUM;
+  },
+
+  bonusValidation(input, bonus) {
+    if (!this.isDuplicateBonus(input, bonus))
+      throw ERROR_MESSAGE.BONUS_DUPLIDATE;
+    if (!this.inputNothing(bonus)) throw ERROR_MESSAGE.INPUT_NOTHING;
+    if (!this.isNum(bonus)) throw ERROR_MESSAGE.NOT_NUMBERS;
   },
 };
 
