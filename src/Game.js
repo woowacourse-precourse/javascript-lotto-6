@@ -72,6 +72,16 @@ class Game {
     }
   }
 
+  printRateOfReturn(winInfoArray, lottoCount) {
+    const investedMoney = lottoCount * 1000;
+    const totalPrize = winInfoArray.reduce(
+      (accumulator, count, i) => accumulator + count * this.winPrizes[i],
+      0
+    );
+    const rateOfReturn = Math.round((totalPrize / investedMoney) * 10000) / 100;
+    InputOutput.print(`총 수익률은 ${rateOfReturn}%입니다.`);
+  }
+
 }
 
 export default Game;
