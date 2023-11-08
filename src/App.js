@@ -1,21 +1,12 @@
-import BuyLotto from './BuyLotto.js';
+import IssuedLotteryTicket from './IssuedLotteryTicket.js';
 import Validator from './Validator.js';
-import Compare from './Compare.js';
 import PlayerInput from './PlayerInput.js';
 import Output from './Output.js';
-import { result } from './constants/message.js';
-import error from './constants/error.js';
 import Lotto from './Lotto.js';
+import Compare from './Compare.js';
+import { result } from './constants/message.js';
 
 class App {
-  playerInput = new PlayerInput();
-
-  buyLotto = new BuyLotto();
-
-  output = new Output();
-
-  validator = new Validator();
-
   expense;
 
   lotteryTicket;
@@ -30,29 +21,17 @@ class App {
 
   lottoRateOfReturn;
 
+  constructor() {
+    this.playerInput = new PlayerInput();
+    this.issuedLotteryTicket = new IssuedLotteryTicket();
+  }
+
   async play() {
     await this.inputAmount();
-
-    this.makeLotto();
-    this.printLotto();
-
     await this.inputWinning();
-
     await this.inputBonus();
-
     this.compareLotto();
-    this.winningResultPrint();
-
-    this.lottoRateOfReturn = this.compare.RateOfReturn(
-      this.resultLotto,
-      this.expense,
-    );
-
-    this.output.resultRorPrint(
-      result.RATE_OF_RETURN,
-      this.lottoRateOfReturn,
-      result.PERCENT,
-    );
+    this.rateOfReturn();
   }
 
   async inputAmount() {
@@ -60,30 +39,26 @@ class App {
     this.expense = Number(this.expense);
 
     try {
-      this.validator.validationExpense(this.expense);
+      Validator.validationExpense(this.expense);
+
+      this.lotteryTicket = this.issuedLotteryTicket.makeLotto(this.expense);
+      this.printLotto();
     } catch (e) {
-      this.output.print(e.message);
+      Output.print(e.message);
       await this.inputAmount();
     }
-  }
-
-  makeLotto() {
-    const lotteryTicketCount = this.buyLotto.buyLottoCount(this.expense);
-
-    this.output.buyLottoPrint(lotteryTicketCount, result.PURCHASE);
-
-    this.lotteryTicket = this.buyLotto.issuedLotto(lotteryTicketCount);
   }
 
   printLotto() {
     this.lotteryTicket.forEach((lottoElement) => {
       const formatLottoElement = lottoElement.join(', ');
-      this.output.print(`[${formatLottoElement}]`);
+      Output.print(`[${formatLottoElement}]`);
     });
   }
 
   async inputWinning() {
     const numberInput = await this.playerInput.winningNumberInput();
+
     try {
       const inputArray = numberInput
         .split(',')
@@ -91,7 +66,7 @@ class App {
 
       this.winningNumber = new Lotto(inputArray).getNumber();
     } catch (e) {
-      this.output.print(e.message);
+      Output.print(e.message);
       await this.inputWinning();
     }
   }
@@ -100,11 +75,11 @@ class App {
     const bonusInput = await this.playerInput.bonusNumberInput();
     const number = Number(bonusInput);
     try {
-      this.validator.validationBonusNumber(this.winningNumber, number);
+      Validator.validationBonusNumber(this.winningNumber, number);
 
       this.bonusNumber = number;
     } catch (e) {
-      this.output.print(e.message);
+      Output.print(e.message);
       await this.inputBonus();
     }
   }
@@ -117,40 +92,54 @@ class App {
     );
 
     this.resultLotto = this.compare.compareNumber();
+    this.winningResultPrint();
   }
 
   winningResultPrint() {
-    this.output.print(result.STATISTIC);
-    this.output.print(result.LINE);
+    Output.print(result.STATISTIC);
+    Output.print(result.LINE);
 
-    this.output.resultLottoPrint(
+    Output.resultLottoPrint(
       result.WINNING.THREE_MATCHES,
-      this.resultLotto.fivePlace.sameCount,
+      this.resultLotto.fifthPlace.sameCount,
       result.COUNT,
     );
 
-    this.output.resultLottoPrint(
+    Output.resultLottoPrint(
       result.WINNING.FOUR_MATCHES,
       this.resultLotto.fourthPlace.sameCount,
       result.COUNT,
     );
 
-    this.output.resultLottoPrint(
+    Output.resultLottoPrint(
       result.WINNING.FIVE_MATCHES,
       this.resultLotto.thirdPlace.sameCount,
       result.COUNT,
     );
 
-    this.output.resultLottoPrint(
+    Output.resultLottoPrint(
       result.WINNING.FIVE_AND_BONUS_MATCHES,
       this.resultLotto.secondPlace.sameCount,
       result.COUNT,
     );
 
-    this.output.resultLottoPrint(
+    Output.resultLottoPrint(
       result.WINNING.SIX_MATCHES,
       this.resultLotto.firstPlace.sameCount,
       result.COUNT,
+    );
+  }
+
+  rateOfReturn() {
+    this.lottoRateOfReturn = this.compare.RateOfReturn(
+      this.resultLotto,
+      this.expense,
+    );
+
+    Output.resultRorPrint(
+      result.RATE_OF_RETURN,
+      this.lottoRateOfReturn,
+      result.PERCENT,
     );
   }
 }

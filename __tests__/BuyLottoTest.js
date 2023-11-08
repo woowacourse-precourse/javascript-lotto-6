@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import BuyLotto from '../src/BuyLotto';
+import IssuedLotteryTicket from '../src/IssuedLotteryTicket';
 
 const mockRandoms = (numbers) => {
   Random.pickUniqueNumbersInRange = jest.fn();
@@ -9,10 +9,10 @@ const mockRandoms = (numbers) => {
 };
 
 describe('로또 발행 기능 테스트', () => {
-  let buyLotto;
+  let issuedLotteryTicket;
 
   beforeEach(() => {
-    buyLotto = new BuyLotto();
+    issuedLotteryTicket = new IssuedLotteryTicket();
   });
 
   test('구매한 개수 구하기 테스트', () => {
@@ -21,7 +21,7 @@ describe('로또 발행 기능 테스트', () => {
     const output = 8;
 
     // when
-    const lottoCount = buyLotto.buyLottoCount(input);
+    const lottoCount = IssuedLotteryTicket.buyLottoCount(input);
 
     // then
     expect(lottoCount).toBe(output);
@@ -53,7 +53,7 @@ describe('로또 발행 기능 테스트', () => {
     ];
 
     // when
-    const lottoArray = buyLotto.issuedLotto(input);
+    const lottoArray = issuedLotteryTicket.issuedLotto(input);
 
     // then
     expect(lottoArray).toEqual(output);

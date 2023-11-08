@@ -1,3 +1,5 @@
+import error from './constants/error.js';
+
 class CustomError extends Error {
   constructor(message, name) {
     super(`[ERROR] ${message}`);
@@ -5,15 +7,15 @@ class CustomError extends Error {
   }
 
   static expense(message) {
-    return new CustomError(message, 'expense input error');
+    return new CustomError(message, error.name.EXPENSE);
   }
 
   static number(message) {
-    return new CustomError(message, 'number input error');
+    return new CustomError(message, error.name.NUMBER);
   }
 
   static BonusNumber(message) {
-    return new CustomError(message, 'BonusNumber input error');
+    return new CustomError(message, error.name.BONUSNUMVER);
   }
 }
 export default CustomError;

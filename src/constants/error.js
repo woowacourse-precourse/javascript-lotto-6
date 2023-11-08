@@ -1,4 +1,10 @@
 const error = {
+  name: {
+    EXPENSE: 'expense input error',
+    NUMBER: 'number input error',
+    BONUSNUMVER: 'BonusNumber input error',
+  },
+
   CORRECT_INTEGER: '금액을 제대로 입력해주세요.\n',
   CORRECT_BETWEEN: '1 ~ 45 사이의 값을 입력해주세요.\n',
 

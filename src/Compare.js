@@ -1,6 +1,6 @@
 class Compare {
   sameNumber = {
-    fivePlace: { sameCount: 0, winningMoney: 5000 },
+    fifthPlace: { sameCount: 0, winningMoney: 5000 },
     fourthPlace: { sameCount: 0, winningMoney: 50000 },
     thirdPlace: { sameCount: 0, winningMoney: 1500000 },
     secondPlace: { sameCount: 0, winningMoney: 30000000 },
@@ -13,14 +13,14 @@ class Compare {
     this.lotto = lotto;
     this.winningNumber = winningNumber;
     this.bonusNumber = bonusNumber;
-  }
+      }
 
   compareNumber() {
     this.lotto.forEach((lottoElement) => {
       const winningCounting = this.includesWinningNumber(lottoElement);
       const bonusCounting = this.includesBonusNumber(lottoElement);
 
-      if (winningCounting === 3) {
+            if (winningCounting === 3) {
         this.sameNumber.fivePlace.sameCount += 1;
       }
 
@@ -39,7 +39,7 @@ class Compare {
       if (winningCounting === 6) {
         this.sameNumber.firstPlace.sameCount += 1;
       }
-    });
+          });
 
     return this.sameNumber;
   }
@@ -70,23 +70,28 @@ class Compare {
     this.sumWinningMoney(resultLotto);
 
     const ror = (this.totalWinningMoney / expense) * 100;
-    const refineRor = Number(ror.toFixed(1)).toLocaleString();
+    const refineRor = Compare.commaAfterRounding(ror);
 
     return refineRor;
   }
 
   sumWinningMoney(resultLotto) {
     const winningMoneyArray = [];
+    let sum;
 
     Object.values(resultLotto).map((values) =>
       winningMoneyArray.push(values.sameCount * values.winningMoney),
     );
 
     this.totalWinningMoney = winningMoneyArray.reduce((arr, n) => {
-      const sum = arr + n;
-
+      sum = arr + n;
       return sum;
     });
+    return sum;
+  }
+
+  static commaAfterRounding(ror) {
+    return Number(ror.toFixed(1)).toLocaleString();
   }
 }
 export default Compare;

@@ -1,19 +1,19 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class Output {
-  print(message) {
+  static print(message) {
     Console.print(message);
   }
 
-  buyLottoPrint(buyCount, message) {
+  static buyLottoPrint(buyCount, message) {
     Console.print(`\n${buyCount}${message}`);
   }
 
-  resultLottoPrint(matchesMessage, sameCount, countMessage) {
+  static resultLottoPrint(matchesMessage, sameCount, countMessage) {
     Console.print(`${matchesMessage} ${sameCount}${countMessage}`);
   }
 
-  resultRorPrint(rorMessage, ror, percentMessage) {
+  static resultRorPrint(rorMessage, ror, percentMessage) {
     Console.print(`${rorMessage}${ror}${percentMessage}`);
   }
 }
