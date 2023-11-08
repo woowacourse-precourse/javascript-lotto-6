@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { ERROR, MESSAGE } from "./util/Message";
-import { LOTTO } from "./util/constant";
+import { INPUT, LOTTO, STR_REWARD } from "./util/constant";
 
 class View {
   async getLottoPurchaseAmount() {
@@ -22,7 +22,7 @@ class View {
     while (true) {
       try {
         let userInput = await this.readLine(MESSAGE.inputWinningNumber);
-        winningNumbers = userInput.split(",").map(Number);
+        winningNumbers = userInput.split(INPUT.lottoNumSep).map(Number);
         this.validateWinningNumbers(winningNumbers);
         break;
       } catch (error) {
@@ -48,7 +48,7 @@ class View {
   }
 
   amountValidate(amount) {
-    if (amount % 1000 !== 0) {
+    if (amount % LOTTO.price !== 0) {
       throw new Error(ERROR.inputAmount);
     }
   }
@@ -73,25 +73,21 @@ class View {
   }
 
   validateDuplicate(numbers) {
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== LOTTO.numLength) {
       throw new Error(ERROR.lottoNumDuplicate);
     }
-  }
-
-  getLottos(user) {
-    user.printLottos();
   }
 
   getLottoResult(prize, profitRate) {
     Console.print("\n당첨 통계");
     Console.print("---");
-    Console.print(`3개 일치 (5,000원) - ${prize.fifth}개`);
-    Console.print(`4개 일치 (50,000원) - ${prize.fourth}개`);
-    Console.print(`5개 일치 (1,500,000원) - ${prize.third}개`);
+    Console.print(`3개 일치 (${STR_REWARD.fifth}}원) - ${prize.fifth}개`);
+    Console.print(`4개 일치 (${STR_REWARD.fourth}원) - ${prize.fourth}개`);
+    Console.print(`5개 일치 (${STR_REWARD.third}원) - ${prize.third}개`);
     Console.print(
-      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${prize.second}개`
+      `5개 일치, 보너스 볼 일치 (${STR_REWARD.second}원) - ${prize.second}개`
     );
-    Console.print(`6개 일치 (2,000,000,000원) - ${prize.first}개`);
+    Console.print(`6개 일치 (${STR_REWARD.first}원) - ${prize.first}개`);
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 

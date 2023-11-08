@@ -27,7 +27,7 @@ class User {
       this.#myLottos.push(new Lotto(nums));
     }
 
-    this.#myLottos;
+    return this.#myLottos;
   }
 
   printLottos() {

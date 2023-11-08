@@ -1,4 +1,4 @@
-import { REWARD } from "./util/constant.js";
+import { LOTTO, REWARD } from "./util/constant.js";
 class LottoMachine {
   #winningNumbers;
   #bonusNumber;
@@ -10,7 +10,7 @@ class LottoMachine {
 
   // results = rankCounsts
   getProfitRate(results) {
-    let amount = results.length * 1000;
+    let amount = results.length * LOTTO.price;
     let rewards = results.map((rank) => this.getReward(rank));
     const sumReward = rewards.reduce((acc, current) => acc + current, 0);
     return ((sumReward / amount) * 100).toFixed(1);
@@ -44,6 +44,7 @@ class LottoMachine {
     return rankCount;
   }
 
+  // 로또 순위 반환
   #getLottoRank(Lotto) {
     const result = Lotto.filter((num) =>
       this.#winningNumbers.includes(num)
@@ -65,6 +66,7 @@ class LottoMachine {
     }
   }
 
+  // 상금 반환
   getReward(rank) {
     let money;
     switch (rank) {
