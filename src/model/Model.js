@@ -4,10 +4,10 @@ import Lotto from "../Lotto.js";
 
 class Model {
   #lottos;
-  #purchaseBudget;
+  // #purchaseBudget;
 
   constructor(purchaseBudget) {
-    this.#purchaseBudget = purchaseBudget;
+    // this.#purchaseBudget = purchaseBudget;
     this.#lottos = this.purchaseLottos(purchaseBudget)
   }
   
@@ -19,6 +19,8 @@ class Model {
       ).sort((a, b) => a - b))
     })
   }
+
+  getNumbersInLottos() { return this.#lottos.map(lotto => lotto.getNumbers()); }
 }
 
 export default Model;

@@ -21,9 +21,11 @@ const Statics = {
       isUnNatural: '[ERROR] 로또 숫자가 잘못된 형식입니다.'
     },
     output: {
-      printMAXpurchasableAmount: MAXpurchasableAmount => `${MAXpurchasableAmount}개를 구입했습니다.`,
+      printMAXpurchasableAmount: MAXpurchasableAmount => `
+      ${MAXpurchasableAmount}개를 구입했습니다.
+      `,
       printArrayAsString: array => `[${array.join(', ')}]`,
-      
+
     },
 
   }

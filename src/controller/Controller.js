@@ -10,6 +10,7 @@ class Controller {
 
   async run() {
     await this.purchaseLottos();
+    
   }
 
   async purchaseLottos (){
@@ -17,11 +18,12 @@ class Controller {
     do {
       try {
         this.#model = new Model(await this.getPurchaseBudget());
-        OutputView
+        OutputView.printLottos(this.#model.getNumbersInLottos());
+        isPurchaseSuccess = true;
       } catch (error) {
-        
+        OutputView.printError(error.message)
       }
-    } while (condition);
+    } while (!isPurchaseSuccess);
   }
 
   async getPurchaseBudget() {
