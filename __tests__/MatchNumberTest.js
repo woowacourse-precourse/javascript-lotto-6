@@ -33,13 +33,7 @@ describe('App', () => {
         for (const [match, count] of Object.entries(expectedMatchedCounts)) {
             expect(app.matchedCount[match]).toBe(count);
         }
-
-        // expect(app.matchedCount[3]).toBe(0);
-        // expect(app.matchedCount[4]).toBe(0);
-        // expect(app.matchedCount[5]).toBe(0);
-        // expect(app.matchedCount['5B']).toBe(0);
-        // expect(app.matchedCount[6]).toBe(1);
-
+        
         expect(app.prizeMoney).toBe(2000000000);
     });
 });
