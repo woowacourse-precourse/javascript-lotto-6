@@ -7,6 +7,10 @@ export default class OutputView {
     Console.print('');
   }
 
+  /**
+   * 발급 받은 로또 번호를 출력합니다.
+   * @param {Lotto[]} lottoTickets
+   */
   static printLottoTickets(lottoTickets) {
     Console.print(lottoTickets.length + OUTPUT_MESSAGE.purchaseAmount);
     const START_SQUARE_BRACKET = '[';
@@ -24,12 +28,22 @@ export default class OutputView {
     Console.print(OUTPUT_MESSAGE.winningStats);
   }
 
+  /**
+   * 당첨 금액의 천 단위 마다 쉼표(,)를 찍어 반환합니다.
+   * @param {number} price
+   * @returns {string} [당첨 금액]
+   */
   static foramtPrice(price) {
     const KOREAN_FORMAT = 'ko-KR';
 
     return price.toLocaleString(KOREAN_FORMAT);
   }
 
+  /**
+   * 당첨 통계를 출력합니다.
+   * @param {string} rank
+   * @param {number} correctCounts
+   */
   static printCorrectCounts(rank, correctCounts) {
     const parsingPrice = OutputView.foramtPrice(RANK_RULES[rank].prize);
     const MATCH_COUNTS = `${RANK_RULES[rank].matches}개 일치`;
