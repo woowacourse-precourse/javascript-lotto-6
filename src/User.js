@@ -61,7 +61,7 @@ class User {
       winningNumber = inputNumber.split(',').map(number => parseInt(number));
 
       try {
-        new Lotto(winningNumber);
+        new Lotto(winningNumber); // 사용자가 입력한 당첨 번호 예외 처리
         isValidInput = true;
       } catch (e) {
         Console.print(e.message);
