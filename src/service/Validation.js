@@ -11,6 +11,7 @@ const Validation = {
 
   isNonDuplicatedNumber: (numbers) => {
     const nonDuplicatedNumbers = new Set(numbers);
+
     if (nonDuplicatedNumbers.size !== numbers.length) {
       throw new Error(`${MESSAGE.prefix} ${MESSAGE.duplicatedNumber}`);
     }
