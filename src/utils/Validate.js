@@ -34,8 +34,8 @@ const Validate = {
       throw Error(ERROR_MESSAGE.INVALID_DUPLICATE_WINNING_NUMBERS);
   },
 
-  isDuplicateBonusNumber(winningNumers, bonusNumber) {
-    if (winningNumers.includes(bonusNumber))
+  isDuplicateBonusNumber(winningNumbers, bonusNumber) {
+    if (winningNumbers.includes(bonusNumber))
       throw Error(ERROR_MESSAGE.INVALID_DUPLICATE_BONUS_NUMBER);
   },
 };
