@@ -23,32 +23,25 @@ class Output {
   }
 
   singleWinningResult(prize, results) {
-    return prize === PRIZE.SECOND_PRIZE
-      ? Console.print(OUTPUT.second_prize(prize.match, prize.reward, results[prize.rank]))
-      : Console.print(OUTPUT.default_prize(prize.match, prize.reward, results[prize.rank]));
+    if (prize === PRIZE[2]) {
+      Console.print(OUTPUT.second_prize(prize.match, prize.reward, results[prize.rank]));
+    }
+
+    if (prize !== PRIZE[0]) {
+      Console.print(OUTPUT.default_prize(prize.match, prize.reward, results[prize.rank]));
+    }
   }
 
   totalWinningResult(results) {
     Console.print(OUTPUT.divider);
-
-    const prizeList = [
-      PRIZE.FIFTH_PRIZE,
-      PRIZE.FOURTH_PRIZE,
-      PRIZE.THIRD_PRIZE,
-      PRIZE.SECOND_PRIZE,
-      PRIZE.FIRST_PRIZE,
-    ];
-
-    prizeList.forEach((prize) => this.singleWinningResult(prize, results));
+    [...PRIZE].reverse().forEach((prize) => this.singleWinningResult(prize, results));
   }
 
   totalReturnResult(totalReturn) {
     Console.print(OUTPUT.total_return(totalReturn));
   }
 
-  gameResult(result) {
-    const { results, totalReturn } = result;
-
+  gameResult({ results, totalReturn }) {
     this.totalWinningResult(results);
     this.totalReturnResult(totalReturn);
   }

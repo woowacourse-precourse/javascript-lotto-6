@@ -24,15 +24,13 @@ class Lotto {
 
   compareMatchNumberWithPrize(matchNumberCount, bonusNumber) {
     const resultMap = {
-      [PRIZE.FIRST_PRIZE.match]: PRIZE.FIRST_PRIZE.rank,
-      [PRIZE.SECOND_PRIZE.match]: this.#numbers.includes(bonusNumber)
-        ? PRIZE.SECOND_PRIZE.rank
-        : PRIZE.THIRD_PRIZE.rank,
-      [PRIZE.FOURTH_PRIZE.match]: PRIZE.FOURTH_PRIZE.rank,
-      [PRIZE.FIFTH_PRIZE.match]: PRIZE.FIFTH_PRIZE.rank,
+      [PRIZE[1].match]: PRIZE[1].rank,
+      [PRIZE[2].match]: this.#numbers.includes(bonusNumber) ? PRIZE[2].rank : PRIZE[3].rank,
+      [PRIZE[4].match]: PRIZE[4].rank,
+      [PRIZE[5].match]: PRIZE[5].rank,
     };
 
-    return resultMap[matchNumberCount] || PRIZE.NO_PRIZE.rank;
+    return resultMap[matchNumberCount] || PRIZE[0].rank;
   }
 
   calculateLottoResult(winningNumbers, bonusNumber) {

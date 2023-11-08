@@ -45,14 +45,7 @@ const NO_PRIZE = {
   reward: 0,
 };
 
-export const PRIZE = {
-  FIRST_PRIZE,
-  SECOND_PRIZE,
-  THIRD_PRIZE,
-  FOURTH_PRIZE,
-  FIFTH_PRIZE,
-  NO_PRIZE,
-};
+export const PRIZE = [NO_PRIZE, FIRST_PRIZE, SECOND_PRIZE, THIRD_PRIZE, FOURTH_PRIZE, FIFTH_PRIZE];
 
 export const TOTAL_RETURN = {
   multiplier: 1000,

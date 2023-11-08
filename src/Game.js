@@ -68,14 +68,10 @@ class Game {
   }
 
   calculateTotalWinningResults(tickets) {
-    const results = {
-      [PRIZE.NO_PRIZE.rank]: 0,
-      [PRIZE.FIRST_PRIZE.rank]: 0,
-      [PRIZE.SECOND_PRIZE.rank]: 0,
-      [PRIZE.THIRD_PRIZE.rank]: 0,
-      [PRIZE.FOURTH_PRIZE.rank]: 0,
-      [PRIZE.FIFTH_PRIZE.rank]: 0,
-    };
+    const results = PRIZE.reduce((obj, prize) => {
+      obj[prize.rank] = 0;
+      return obj;
+    }, {});
 
     tickets.forEach((ticket) => {
       const rank = ticket.calculateLottoResult(this.#winningNumbers, this.#bonusNumber);
@@ -86,12 +82,9 @@ class Game {
   }
 
   calculateTotalReturn(money, results) {
-    const total =
-      results[PRIZE.FIRST_PRIZE.rank] * PRIZE.FIRST_PRIZE.reward +
-      results[PRIZE.SECOND_PRIZE.rank] * PRIZE.SECOND_PRIZE.reward +
-      results[PRIZE.THIRD_PRIZE.rank] * PRIZE.THIRD_PRIZE.reward +
-      results[PRIZE.FOURTH_PRIZE.rank] * PRIZE.FOURTH_PRIZE.reward +
-      results[PRIZE.FIFTH_PRIZE.rank] * PRIZE.FIFTH_PRIZE.reward;
+    const total = PRIZE.reduce((acc, prize) => {
+      return acc + results[prize.rank] * prize.reward;
+    }, 0);
 
     return Math.round((total / money) * TOTAL_RETURN.multiplier) / TOTAL_RETURN.divider;
   }
