@@ -1,10 +1,10 @@
-import Money from "../domain/Money.js";
-import InputView from "../view/InputView.js";
-import LottoSeller from "../domain/LottoSeller.js";
 import Lotto from "../Lotto.js";
+import Money from "../domain/Money.js";
+import LottoSeller from "../domain/LottoSeller.js";
 import LottoNumbersParser from "../domain/LottoNumbersParser.js";
 import LottoAnswer from "../domain/LottoAnswer.js";
-import LottoResultChecker from "../domain/LottoResultChecker.js";
+import LottoResultCalculator from "../domain/LottoResultCalculator.js";
+import InputView from "../view/InputView.js";
 import OutputView from "../view/OutputView.js";
 import { repeatUntillComplete } from "../utils/repeatUntillComplete.js";
 
@@ -14,7 +14,7 @@ class LottoController {
     LottoController.printLottos(lottos);
 
     const answerLotto = await repeatUntillComplete(this.getAnswerLottoFromUser)();
-    const answer = await repeatUntillComplete(this.attachBonusNumberToLottoAnswer)(answerLotto);
+    const answer = await repeatUntillComplete(this.readBonusNumberForLottoAnswer)(answerLotto);
 
     const result = await LottoController.getLottoResult(lottos, answer);
     LottoController.printResult(result);
@@ -29,7 +29,7 @@ class LottoController {
 
   static printLottos(lottos) {
     OutputView.printBlankLine();
-    OutputView.printLottoLength(lottos);
+    OutputView.printLottoCount(lottos);
     OutputView.printLottos(lottos);
     OutputView.printBlankLine();
   }
@@ -37,20 +37,20 @@ class LottoController {
   async getAnswerLottoFromUser() {
     const lottoAnswerInput = await InputView.readLottoAnswer();
     const parsedLottoAnwerInput = LottoNumbersParser.parse(lottoAnswerInput);
-    const lottoAnwer = new Lotto(parsedLottoAnwerInput);
-    return lottoAnwer;
+    const answerLotto = new Lotto(parsedLottoAnwerInput);
+    return answerLotto;
   }
 
-  async attachBonusNumberToLottoAnswer(answerLotto) {
+  async readBonusNumberForLottoAnswer(answerLotto) {
     const bonusNumber = await InputView.readBonusNumber();
-    const answer = new LottoAnswer(answerLotto, bonusNumber);
-    return answer;
+    const lottoAnswer = new LottoAnswer(answerLotto, bonusNumber);
+    return lottoAnswer;
   }
 
   static async getLottoResult(lottos, answer) {
-    const checker = new LottoResultChecker(lottos);
+    const checker = new LottoResultCalculator(lottos);
     const prizes = checker.calculatePrizes(answer);
-    const profitRate = checker.checkProfitRate(prizes);
+    const profitRate = checker.calculateProfitRate(prizes);
     return { prizes, profitRate };
   }
 

@@ -5,7 +5,7 @@ class Money {
   #amount = 0;
 
   constructor(amount) {
-    Money.#testPositiveIntRegex(amount);
+    Money.#validatePositiveInt(amount);
     this.#amount = Money.#parse(amount);
   }
 
@@ -13,8 +13,8 @@ class Money {
     return this.#amount;
   }
 
-  static #testPositiveIntRegex(value) {
-    if (!REGEX.onlyPositiveInt.test(value)) {
+  static #validatePositiveInt(value) {
+    if (!REGEX.onlyInt.test(value) && value > 0) {
       throw new Error(ERROR_MESSAGE.notPostiveInt);
     }
   }

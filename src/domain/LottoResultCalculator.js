@@ -1,11 +1,11 @@
 import Lotto from "../Lotto.js";
 import { PROFIT_FOR_PRIZE } from "../constants/lottoPrize.js";
 
-class LottoResultChecker {
+class LottoResultCalculator {
   #lottos;
 
   constructor(lottos) {
-    LottoResultChecker.#validateLottos(lottos);
+    LottoResultCalculator.#validateLottos(lottos);
     this.#lottos = lottos;
   }
 
@@ -17,7 +17,7 @@ class LottoResultChecker {
       .filter((element) => element !== undefined);
   }
 
-  checkProfitRate(prizes) {
+  calculateProfitRate(prizes) {
     const LOTTO_PRICE = 1000;
     const investment = LOTTO_PRICE * this.#lottos.length;
 
@@ -40,4 +40,4 @@ class LottoResultChecker {
   }
 }
 
-export default LottoResultChecker;
+export default LottoResultCalculator;

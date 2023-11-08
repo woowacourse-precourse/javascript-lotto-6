@@ -7,8 +7,6 @@ const typeValidator = {
 };
 
 const validateNumberInRange = (number, minInclusive, maxInclusive) => {
-  typeValidator.isValidNumber(number);
-
   if (!(minInclusive <= number && number <= maxInclusive)) {
     throw new Error(
       `[ERROR] 로또 번호는 ${minInclusive}부터 ${maxInclusive} 사이의 숫자여야 합니다.`

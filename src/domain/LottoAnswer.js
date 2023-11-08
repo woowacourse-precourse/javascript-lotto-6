@@ -9,29 +9,30 @@ class LottoAnswer {
   constructor(answerLotto, bonusNumber) {
     LottoAnswer.#validateIsLotto(answerLotto);
     this.#answerLotto = answerLotto;
-    const parsedBonusNumber = LottoAnswer.#parseBonusNumber(bonusNumber);
+    const parsedBonusNumber = LottoAnswer.#parseSingleLottoNumber(bonusNumber);
     this.#validateBonusNumber(parsedBonusNumber);
     this.#bonusNumber = parsedBonusNumber;
   }
 
   grade(lotto) {
-    const { answerCount, isBonus } = this.#compare(lotto);
-    if (answerCount === 5 && isBonus) return "2등";
-    const GRADE_FOR_COUNT = {
+    const { correctCount, isGotBonus } = this.#getLottoResult(lotto);
+    if (correctCount === 5 && isGotBonus) return "2등";
+    const PRIZE_FOR_COUNT = {
       6: "1등",
       5: "3등",
       4: "4등",
       3: "5등",
     };
-    return GRADE_FOR_COUNT[answerCount];
+    return PRIZE_FOR_COUNT[correctCount];
   }
 
-  #compare(lotto) {
+  #getLottoResult(lotto) {
     const lottoNumbers = lotto.getNumbers();
     const answerNumbers = this.#answerLotto.getNumbers();
+
     return {
-      answerCount: LottoAnswer.#countIntersection(lottoNumbers, answerNumbers),
-      isBonus: lottoNumbers.includes(this.#bonusNumber),
+      correctCount: LottoAnswer.#countIntersection(lottoNumbers, answerNumbers),
+      isGotBonus: lottoNumbers.includes(this.#bonusNumber),
     };
   }
 
@@ -45,7 +46,7 @@ class LottoAnswer {
     }
   }
 
-  static #parseBonusNumber(input) {
+  static #parseSingleLottoNumber(input) {
     return LottoNumbersParser.parse(input)[0];
   }
 

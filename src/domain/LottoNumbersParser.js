@@ -2,17 +2,17 @@ import REGEX from "../constants/Regex.js";
 
 const LottoNumbersParser = {
   parse(input) {
-    const inputArray = this.splitByComma(input).map((value) => value.trim());
-    this.validateOnlyPositiveInt(inputArray);
-    return this.parseInts(inputArray);
+    const splittedInput = this.splitByComma(input).map((value) => value.trim());
+    this.validateHasOnlyPositiveInt(splittedInput);
+    return this.parseInts(splittedInput);
   },
 
   splitByComma(value) {
     return value.split(",");
   },
 
-  validateOnlyPositiveInt(array) {
-    const isAllInt = array.every((value) => REGEX.onlyPositiveInt.test(value));
+  validateHasOnlyPositiveInt(array) {
+    const isAllInt = array.every((value) => REGEX.onlyInt.test(value) && value > 0);
     if (!isAllInt) {
       throw new Error("[ERROR] 입력 값은 모두 양의 정수 형태여야 합니다.");
     }

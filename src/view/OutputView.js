@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
 const OutputView = {
-  printLottoLength(lottos) {
+  printLottoCount(lottos) {
     Console.print(`${lottos.length}개를 구매했습니다.`);
   },
 

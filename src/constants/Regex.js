@@ -1,5 +1,5 @@
 const REGEX = {
-  onlyPositiveInt: /^\d+$/,
+  onlyInt: /^\d+$/,
 };
 
 export default REGEX;
