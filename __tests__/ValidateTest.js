@@ -14,7 +14,7 @@ describe('입력값에 대한 유효성 검사기능 테스트', () => {
     });
   });
 
-  test('당첨번호 입력에 대한 유효성 기능테스트 (WinningNumbers)', () => {
+  test('당첨번호 입력에 대한 유효성기능 테스트 (WinningNumbers)', () => {
     //given
     const incorrectInputs = [
       [1, 1, 3, 5, 6, 7],

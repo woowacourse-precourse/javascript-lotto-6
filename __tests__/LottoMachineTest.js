@@ -9,7 +9,7 @@ const mockRandoms = (numbers) => {
 };
 
 describe('로또 머신 객체 테스트', () => {
-  test('지불 가격에 맞게 로또를 발행해주는지 테스트', () => {
+  test('지불 가격에 맞게 로또를 발행해주는가', () => {
     //given
     const mockPurchaseAmount = 3000;
     const mockResult = [
