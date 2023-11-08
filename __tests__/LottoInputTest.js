@@ -99,6 +99,20 @@ describe('LottoInput.getWinningNumbers 테스트', () => {
   });
 });
 
+describe('LottoInput.getBonusNumber 테스트', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  test('유저가 올바른 보너스 번호를 입력하면 숫자를 반환한다.', async () => {
+    mockQuestions(['15']);
+
+    const BONUS_NUMBER = await LottoInput.getBonusNumber();
+
+    expect(BONUS_NUMBER).toBe(15);
+  });
+});
+
 // LottoMachine 로직에 대한 테스트 - 숫자들 배열에 대한 테스트
 describe('LottoInput.validateNumbersArray 테스트', () => {
   beforeEach(() => {
@@ -139,5 +153,30 @@ describe('LottoInput.validateNumbersArray 테스트', () => {
     expect(() => {
       LottoInput.validateNumbersArray([11, 16, 17, 18, 19]);
     }).toThrow('[ERROR] 입력은 1~45사이의 숫자이고, 6개의 숫자여야 합니다.');
+  });
+});
+
+// LottoMachine 로직에 대한 테스트 - 단일 숫자에 대한 유효성 검사
+describe('LottoInput.validateNumber 테스트', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  test('유효한 숫자면 에러를 발생시키지 않는다.', () => {
+    expect(() => {
+      LottoInput.validateNumber(10);
+    }).not.toThrow();
+  });
+
+  test('숫자가 1~45 범위를 벗어나면 에러를 발생시킨다. - 45 초과인 경우', () => {
+    expect(() => {
+      LottoInput.validateNumber(46);
+    }).toThrow('[ERROR] 입력은 1~45사이의 숫자여야 합니다.');
+  });
+
+  test('숫자가 1~45 범위를 벗어나면 에러를 발생시킨다. - 1 미만인 경우', () => {
+    expect(() => {
+      LottoInput.validateNumber(0);
+    }).toThrow('[ERROR] 입력은 1~45사이의 숫자여야 합니다.');
   });
 });
