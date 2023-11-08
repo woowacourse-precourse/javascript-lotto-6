@@ -14,7 +14,7 @@ class Lotto {
       Validator.validateLottoLength(numbers);
       Validator.validateLottoDuplicate(numbers);
     } catch (error) {
-      Console.print(error);
+      throw new Error(error);
     }
   }
 
