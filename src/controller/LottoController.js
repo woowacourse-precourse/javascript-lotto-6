@@ -1,7 +1,7 @@
 import { LOTTO, UTILS } from '../common/constants.js';
 
 import { printMessage } from '../common/utils.js';
-import Lotto from '../model/Lotto.js';
+import Lotto from '../Lotto.js';
 import Money from '../model/Money.js';
 import BonusNumberValidator from '../service/BonusNumberValidator.js';
 import LottoService from '../service/LottoService.js';
@@ -27,11 +27,14 @@ class LottoController {
   }
 
   async start() {
-    try {
-      await this.#initGame();
-      await this.#runGame();
-    } catch (error) {
-      printMessage(error.message);
+    while (true) {
+      try {
+        await this.#initGame();
+        await this.#runGame();
+        break;
+      } catch (error) {
+        printMessage(error.message);
+      }
     }
   }
 
@@ -70,19 +73,32 @@ class LottoController {
   };
 
   async #getWinningNumbers() {
-    const inputNumber = await InputView.getWinningNumbers();
-    const winningNumberValidator = new WinningNumberValidator(inputNumber);
-    winningNumberValidator.validate();
+    while (true) {
+      try {
+        const inputNumber = await InputView.getWinningNumbers();
+        const winningNumberValidator = new WinningNumberValidator(inputNumber);
+        winningNumberValidator.validate();
 
-    const lotto = new Lotto(inputNumber.split(UTILS.comma).map(Number));
-    this.#winningNumbers = lotto.getNumbers();
+        const lotto = new Lotto(inputNumber.split(UTILS.comma).map(Number));
+        this.#winningNumbers = lotto.getNumbers();
+        break;
+      } catch (error) {
+        printMessage(error.message);
+      }
+    }
   };
 
   async #getBonusNumber() {
-    const inputNumber = await InputView.getBonusNumber();
-    const bonusNumberValidator = new BonusNumberValidator(inputNumber);
-  
-    this.#bonusNumber = bonusNumberValidator.validate(this.#winningNumbers);
+    while (true) {
+      try {
+        const inputNumber = await InputView.getBonusNumber();
+        const bonusNumberValidator = new BonusNumberValidator(inputNumber);
+        this.#bonusNumber = bonusNumberValidator.validate(this.#winningNumbers);
+        break;
+      } catch (error) {
+        printMessage(error.message);
+      }
+    }
   };
 
   #printStatistics() {
