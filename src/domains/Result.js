@@ -1,4 +1,4 @@
-import { RESULT, resultOrder } from "../constant/gameMessge.js";
+import { GAME, RESULT_ORDER } from "../constant/gameMessge.js";
 
 class Result {
   constructor(lottos, winningRate) {
@@ -7,18 +7,11 @@ class Result {
   }
 
   calcResults() {
-    const results = this.lottos.reduce(
-      (results, lotto) => {
-        return this.updateResults(results, lotto);
-      },
-      {
-        [resultOrder[0]]: 0,
-        [resultOrder[1]]: 0,
-        [resultOrder[2]]: 0,
-        [resultOrder[3]]: 0,
-        [resultOrder[4]]: 0,
-      },
-    );
+    const results = RESULT_ORDER.reduce((obj, key) => ({ ...obj, [key]: 0 }), {});
+
+    for (const lotto of this.lottos) {
+      this.updateResults(results, lotto);
+    }
 
     const investment = this.lottos.length * 1000;
     const totalPrize = this.calcTotalPrize(results);
@@ -32,7 +25,7 @@ class Result {
     const isMatchBonus = this.winningRate.isMatchBonusNumber(lotto);
 
     if (count >= 3) {
-      let targetResultKey = isMatchBonus ? resultOrder[3] : count;
+      let targetResultKey = isMatchBonus ? RESULT_ORDER[3] : count;
       results[targetResultKey] = results[targetResultKey] + 1;
     }
 
@@ -41,11 +34,11 @@ class Result {
 
   calcTotalPrize(results) {
     return (
-      results[resultOrder[0]] * RESULT.prizeMap[resultOrder[0]] +
-      results[resultOrder[1]] * RESULT.prizeMap[resultOrder[1]] +
-      results[resultOrder[2]] * RESULT.prizeMap[resultOrder[2]] +
-      results[resultOrder[3]] * RESULT.prizeMap[resultOrder[3]] +
-      results[resultOrder[4]] * RESULT.prizeMap[resultOrder[4]]
+      results[RESULT_ORDER[0]] * GAME.prizeMap[RESULT_ORDER[0]] +
+      results[RESULT_ORDER[1]] * GAME.prizeMap[RESULT_ORDER[1]] +
+      results[RESULT_ORDER[2]] * GAME.prizeMap[RESULT_ORDER[2]] +
+      results[RESULT_ORDER[3]] * GAME.prizeMap[RESULT_ORDER[3]] +
+      results[RESULT_ORDER[4]] * GAME.prizeMap[RESULT_ORDER[4]]
     );
   }
 

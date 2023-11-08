@@ -1,3 +1,30 @@
+const RESULT_ORDER = [3, 4, 5, "5bonus", 6];
+
+const GAME = Object.freeze({
+  settings: {
+    numberLength: 6,
+    minNumber: 1,
+    maxNumber: 45,
+    unit: 1000,
+  },
+
+  resultMessages: {
+    3: "3개 일치",
+    4: "4개 일치",
+    5: "5개 일치",
+    "5bonus": "5개 일치, 보너스 볼 일치",
+    6: "6개 일치",
+  },
+
+  prizeMap: {
+    3: 5000,
+    4: 50000,
+    5: 1500000,
+    "5bonus": 30000000,
+    6: 2000000000,
+  },
+});
+
 const MESSAGE = Object.freeze({
   purchase: {
     amount: "구입 금액을 입력해주세요.\n",
@@ -30,24 +57,4 @@ const ERROR = Object.freeze({
   },
 });
 
-const resultOrder = [3, 4, 5, "5bonus", 6];
-
-const RESULT = Object.freeze({
-  resultMessages: {
-    3: "3개 일치",
-    4: "4개 일치",
-    5: "5개 일치",
-    "5bonus": "5개 일치, 보너스 볼 일치",
-    6: "6개 일치",
-  },
-
-  prizeMap: {
-    3: 5000,
-    4: 50000,
-    5: 1500000,
-    "5bonus": 30000000,
-    6: 2000000000,
-  },
-});
-
-export { MESSAGE, ERROR, resultOrder, RESULT };
+export { RESULT_ORDER, GAME, MESSAGE, ERROR };

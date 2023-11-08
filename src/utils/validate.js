@@ -1,7 +1,7 @@
-import { ERROR } from "../constant/gameMessge.js";
+import { ERROR, GAME } from "../constant/gameMessge.js";
 
 function validatePurchaseAmountMinimun(amount) {
-  if (amount < 1000) {
+  if (amount < GAME.settings.unit) {
     throw new Error(ERROR.purchase.minimunAmount);
   }
 }
@@ -13,20 +13,20 @@ function validatePurchaseAmountNumeric(amount) {
 }
 
 function validateAmountUnit(amount) {
-  if (amount % 1000 !== 0) {
+  if (amount % GAME.settings.unit !== 0) {
     throw new Error(ERROR.purchase.amountUnit);
   }
 }
 
 function validLength(numbers) {
-  if (numbers.length !== 6) {
+  if (numbers.length !== GAME.settings.numberLength) {
     throw new Error(ERROR.lotto.length);
   }
 }
 
 function validNumberRange(numbers) {
   for (const number of numbers) {
-    if (!(1 <= number && number <= 45)) {
+    if (!(GAME.settings.minNumber <= number && number <= GAME.settings.maxNumber)) {
       throw new Error(ERROR.lotto.numberRange);
     }
   }
@@ -58,7 +58,7 @@ function validBonusNumberType(bonusNumber) {
   }
 }
 function validBonusNumberRange(bonusNumber) {
-  if (!(1 <= bonusNumber && bonusNumber <= 45)) {
+  if (!(GAME.settings.minNumber <= bonusNumber && bonusNumber <= GAME.settings.maxNumber)) {
     throw new Error(ERROR.lotto.numberRange);
   }
 }

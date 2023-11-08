@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { ERROR } from "./constant/gameMessge.js";
+import { GAME } from "./constant/gameMessge.js";
 import { validateLotto } from "./utils/validate.js";
 
 class Lotto {
@@ -11,27 +11,22 @@ class Lotto {
     numbers.sort((current, next) => current - next);
   }
 
-  static NUMBER_LENTH = 6;
-  static NUMBER_MIN = 1;
-  static NUMBER_MAX = 45;
-  static UNIT = 1000;
-
   #validate(numbers) {
     validateLotto(numbers);
   }
 
   static generateLottoNumber() {
     const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
-      Lotto.NUMBER_MIN,
-      Lotto.NUMBER_MAX,
-      Lotto.NUMBER_LENTH,
+      GAME.settings.minNumber,
+      GAME.settings.maxNumber,
+      GAME.settings.numberLength,
     );
 
     return new Lotto(numbers);
   }
 
   static buyLottoTickets(money) {
-    const purchaseAmount = money / Lotto.UNIT;
+    const purchaseAmount = money / GAME.settings.unit;
 
     return Array.from({ length: purchaseAmount }).map(() => Lotto.generateLottoNumber());
   }
