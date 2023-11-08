@@ -5,6 +5,8 @@ import PublishView from "./PublishView.js";
 import LottoView from "./LottoView.js";
 import DrawView from "./DrawView.js";
 import DrawController from "./DrawController.js";
+import WinningController from "./WinningController.js";
+import WinningResultView from "./WinningResultView.js";
 
 class App {
   async play() {
@@ -15,11 +17,12 @@ class App {
     let bonusNumber = 0;
     let isWinningNumberFinished = false;
     let isBonusNumberFinished = false;
+    let purchasePrice = 0;
 
     while(!isPublished) {
-      const price = await PurchaseController.purchase();
+      purchasePrice = await PurchaseController.purchase();
       try {
-        quantity = PublishController.calculateLottoQuantity(price);
+        quantity = PublishController.calculateLottoQuantity(purchasePrice);
         lottos = PublishController.publish(quantity);
         isPublished = true;
       } catch (error) {
@@ -54,6 +57,11 @@ class App {
         ErrorView.printErrorMessage(error.message);
       }
     }
+
+    const ranks = WinningController.countRanks({ lottos, winningNumbers, bonusNumber });
+    const prize = WinningController.calculatePrize(ranks);
+
+    WinningResultView.printWinningStatistics({ ranks, purchasePrice, prize });
   }
 }
 

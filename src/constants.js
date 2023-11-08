@@ -10,7 +10,7 @@ export const MESSAGES = {
   winningNumbersCountError: "[ERROR] 당첨 번호를 6개보다 적게 선택했습니다.",
   winningNumberRangeError: "[ERROR] 범위(1~45)를 벗어난 당첨 번호가 있습니다.",
   duplicatedWinningNumbersError: "[ERROR] 중복된 당첨 번호가 있습니다.",
-  bonusNumberQuestion: "보너스 번호를 입력해 주세요.",
+  bonusNumberQuestion: "\n보너스 번호를 입력해 주세요.",
   bonusNumberNotAllowedCharacterError: "[ERROR] 숫자만 입력할 수 있습니다",
   bonusNumberRangeError: "[ERROR] 범위(1~45)를 벗어났습니다.",
   winningBonusIncludeError: "[ERROR] 당첨 번호에 없는 숫자를 입력해주세요.",
