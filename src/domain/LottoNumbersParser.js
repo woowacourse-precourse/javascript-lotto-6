@@ -1,10 +1,11 @@
 import REGEX from "../constants/Regex.js";
 import { LOTTO_BUSINESS_RULES } from "../constants/lotto.js";
 import { ERROR_MESSAGE } from "../constants/messages.js";
-import { validateNumberInRange } from "../utils/validators.js";
+import { TypeValidator, validateNumberInRange } from "../utils/validators.js";
 
 const LottoNumbersParser = {
   parse(input) {
+    TypeValidator.isString(input);
     const splittedInput = this.splitByComma(input).map((value) => value.trim());
     this.validateInput(splittedInput);
 
@@ -12,6 +13,7 @@ const LottoNumbersParser = {
   },
 
   parseSingle(input) {
+    TypeValidator.isString(input);
     this.validateSingle(input);
     return this.parse(input)[0];
   },

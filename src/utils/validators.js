@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE } from "../constants/messages.js";
 
-const typeValidator = {
+const TypeValidator = {
   isValidNumber(value) {
     if (!(typeof value === "number" && !Number.isNaN(value))) {
       throw new Error(ERROR_MESSAGE.notValidNumber);
@@ -12,6 +12,12 @@ const typeValidator = {
       throw new Error(ERROR_MESSAGE.notArray);
     }
   },
+
+  isString(value) {
+    if (typeof value !== "string") {
+      throw new Error(ERROR_MESSAGE.notString);
+    }
+  },
 };
 
 const validateNumberInRange = (number, minInclusive, maxInclusive) => {
@@ -20,4 +26,4 @@ const validateNumberInRange = (number, minInclusive, maxInclusive) => {
   }
 };
 
-export { typeValidator, validateNumberInRange };
+export { TypeValidator, validateNumberInRange };

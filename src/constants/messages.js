@@ -30,6 +30,7 @@ const ERROR_MESSAGE = Object.freeze({
   notPostiveInt: errorString("값이 양의 정수 외의 값이 포함될 수 없습니다."),
   hasNotOnlyPostiveInt: errorString("값이 양의 정수가 아닌 값이 포함될 수 없습니다."),
   notValidNumber: errorString("값이 유효한 숫자 형태가 아닙니다"),
+  notString: errorString("스트링 형태의 값이 아닙니다."),
   notInNumberRange: (minInclusive, maxInclusive) =>
     errorString(`입력한 값이 ${minInclusive}부터 ${maxInclusive} 사이의 숫자가 아닙니다.`),
   notArray: errorString("배열 타입의 값이 아닙니다."),

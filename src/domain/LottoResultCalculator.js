@@ -2,7 +2,7 @@ import Lotto from "../Lotto.js";
 import { LOTTO_PRICE, PROFIT_FOR_PRIZE } from "../constants/lotto.js";
 import { ERROR_MESSAGE } from "../constants/messages.js";
 import SCALE from "../constants/Scale.js";
-import { typeValidator } from "../utils/validators.js";
+import { TypeValidator } from "../utils/validators.js";
 
 class LottoResultCalculator {
   #lottos;
@@ -29,7 +29,7 @@ class LottoResultCalculator {
   }
 
   static #validateLottos(value) {
-    typeValidator.isArray(value);
+    TypeValidator.isArray(value);
     LottoResultCalculator.#validateHasElement(value);
     LottoResultCalculator.#validateHasOnlyLotto(value);
   }
