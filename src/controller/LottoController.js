@@ -5,6 +5,7 @@ import RandomNumGenerator from "../utils/calc/RandomNumGenerator.js";
 import Sort from "../utils/calc/Sort.js";
 import { RANK } from "../static/Static.js";
 import Calculator from "../utils/calc/Calculator.js";
+import Converter from "../utils/Converter.js";
 class LottoController {
   #lottoList = [];
   #purchaseQty;
@@ -56,13 +57,9 @@ class LottoController {
   showLottoList() {
     this.#lottoList.map((lotto) => {
       Sort.sortNumArrASC(lotto);
-      const lottoString = this.convertToString(lotto);
+      const lottoString = Converter.convertArrToStr(lotto);
       OutputView.printLotto(lottoString);
     });
-  }
-
-  convertToString(Arr) {
-    return `[${Arr[0]}, ${Arr[1]}, ${Arr[2]}, ${Arr[3]}, ${Arr[4]}, ${Arr[5]}]`;
   }
 
   async setWinningNums() {
