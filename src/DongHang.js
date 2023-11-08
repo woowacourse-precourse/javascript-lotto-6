@@ -10,6 +10,7 @@ import ERROR_MESSAGE from './constants/error.js';
 import WinningNumbers from './WinningNumbers.js';
 import reTryCatch from './exceptions/reTryCatch.js';
 import ArrayValidator from './validators/ArrayValidator.js';
+import TypeValidator from './validators/TypeValidator.js';
 
 /**
  * @classdesc 복권 발급처
@@ -57,7 +58,7 @@ class DongHang {
     const mainInput = await Input.readCommaSeparatedAsync(PROMPT.WINNING_NUMBERS);
 
     const message = ArrayValidator.validateLottoNumbers(mainInput);
-    if (message.length > 0) throw new CustomError(message);
+    if (!TypeValidator.isEmpty(message)) throw new CustomError(message);
 
     return mainInput;
   }
