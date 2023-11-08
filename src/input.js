@@ -11,6 +11,11 @@ class Input {
     const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.');
     return input;
   }
+
+  async getBonus () {
+    const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해주세요.');
+    return input;
+  }
 }
   
   export default Input;
