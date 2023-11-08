@@ -5,7 +5,11 @@ function validateLottoNumbers(numbers) {
     (item) => item >= num.LOTTO_LOWER_LIMIT && item <= num.LOTTO_UPPER_LIMIT
   );
 
-  if (isWithinRange) {
+  const isRightLength = numbers.length === 6;
+
+  const isWithoutRecurrences = numbers.length === [...new Set(numbers)].length;
+
+  if (isWithinRange && isRightLength && isWithoutRecurrences) {
     return true;
   }
 
