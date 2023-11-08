@@ -95,4 +95,3 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 });
-
