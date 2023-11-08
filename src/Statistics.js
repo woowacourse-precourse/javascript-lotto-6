@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import Output from './view/Output.js';
 
 class Statistics {

@@ -2,7 +2,6 @@ import Input from './view/Input.js';
 import InputError from './domain/InputError.js';
 import Output from './view/Output.js';
 import LottoMachine from './domain/LottoMachine.js';
-import Statistics from './Statistics.js';
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
