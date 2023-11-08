@@ -1,39 +1,39 @@
 import { Console } from "@woowacourse/mission-utils";
 import { GUIDE_MESSAGE, WINNING_RESULT_DETAILS } from "../constants/Message";
 
-export default class OutputView {
-  static printInsertMoneyMessage() {
+const OutputView = {
+  printInsertMoneyMessage() {
     Console.print(GUIDE_MESSAGE.insertMoney);
-  }
+  },
 
-  static printInsertWinningNumbersMessage() {
+  printInsertWinningNumbersMessage() {
     Console.print(GUIDE_MESSAGE.insertWinningNumbers);
-  }
+  },
 
-  static printInsertBonusNumberMessage() {
+  printInsertBonusNumberMessage() {
     Console.print(GUIDE_MESSAGE.insertBonusNumber);
-  }
-  static printLottoCount(lottoCount) {
-    Console.print(`${lottoCount}${GUIDE_MESSAGE.totalTickets}`);
-  }
+  },
 
-  static printLottos(lottos) {
+  printLottoCount(lottoCount) {
+    Console.print(`${lottoCount}${GUIDE_MESSAGE.totalTickets}`);
+  },
+
+  printLottos(lottos) {
     for (let lotto of lottos) {
       const numbers = lotto.getNumbers();
       Console.print(`[${numbers.join(", ")}]`);
     }
-  }
+  },
 
-  static printError(error) {
+  printError(error) {
     if (error.message.startsWith('[ERROR]')) {
-        Console.print(error.message); 
-        return; 
+      Console.print(error.message); 
+      return; 
     }
     throw error;  
-  }
-  
+  },
 
-  static printResult(roi, result) {
+  printResult(roi, result) {
     Console.print(GUIDE_MESSAGE.winningStatistics);
     Console.print(GUIDE_MESSAGE.divider);
 
@@ -52,4 +52,6 @@ export default class OutputView {
       ),
     );
   }
-}
+};
+
+export default OutputView;
