@@ -126,8 +126,8 @@ class LottoGame {
       await this.getWinningNumbers();
       await this.getBonusNumber();
       this.printWinningStats();
-    } catch (error) {
-      throw new Error(error);
+    } catch {
+      MissionUtils.Console.print(Messages.ERROR_DEFAULT);
     }
   };
 }
