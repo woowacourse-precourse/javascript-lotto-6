@@ -1,3 +1,4 @@
+import CONSTRAINTS from '../constants/Constraints';
 import ERROR_MESSAGE from '../constants/ErrorMessage';
 
 class Validation {
@@ -21,7 +22,7 @@ class Validation {
   }
 
   #isCheckThousandUnit() {
-    return this.#number % 1000 === 0;
+    return this.#number % CONSTRAINTS.PRICE_UNIT === 0;
   }
 
   #isCheckDigit() {
