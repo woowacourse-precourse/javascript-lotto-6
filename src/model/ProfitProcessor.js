@@ -17,7 +17,8 @@ class ProfitProcessor {
     for (const key in result) {
       profit += result[key] * PRIZE[key];
     }
-    this.#profitPercentage = (profit / purchaseAmount) * 100;
+    const percentageResult = (profit / purchaseAmount) * 100;
+    this.#profitPercentage = Math.floor(percentageResult * 100) / 100;
   }
 }
 
