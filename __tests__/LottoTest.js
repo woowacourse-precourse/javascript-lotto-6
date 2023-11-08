@@ -32,4 +32,16 @@ describe("로또 클래스 예외 테스트", () => {
     }).toThrow("[ERROR]");
   });
 });
+
+describe("로또 클래스 기능 테스트", () => {
+  test("로또 번호를 정상적으로 생성하는지 확인", () => {
+    const lotto = new Lotto();
+    const numbers = lotto.getLottoNumbers(5);
+    expect(numbers.length).toBe(5);
+    numbers.forEach((lottoNumber) => {
+      expect(lottoNumber.length).toBe(6);
+      expect(lottoNumber.every((num) => num >= 1 && num <= 45)).toBe(true);
+      expect(new Set(lottoNumber).size).toBe(6);
+    });
+  });
 });
