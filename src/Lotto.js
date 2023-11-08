@@ -17,7 +17,22 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  stats(lottoList, bonus) {
+    const result = [0, 0, 0, 0, 0];
+    lottoList.forEach((lotto) => {
+      switch(new Set([...lotto, ...this.#numbers]).size) {
+        case(9): result[0]++; break;
+        case(8): result[1]++; break;
+        case(7): {
+          if (lotto.includes(bonus)) result[3]++;
+          else result[2]++;
+          break;
+        }
+        case(6): result[4]++; break;
+      }
+    })
+    return result;
+  }
 }
 
 export default Lotto;
