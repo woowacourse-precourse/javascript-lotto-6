@@ -6,7 +6,8 @@ class App {
     const COUNT = await this.getPurchaseAmount();
     const TICKETS = this.createUniqueRandomNums(COUNT);
     const WINNINGNUMS = await this.getWinningNum();
-    const BONUS = await this.getBonusNum()
+    const BONUS = await this.getBonusNum();
+    const WINLOG = this.calculateWin(TICKETS, WINNINGNUMS, BONUS);
   }
 
   // 사용자로부터 구입금액을 입력 받는 메서드
@@ -58,8 +59,37 @@ class App {
     return BONUS;
   }
 
-  // printWinningStatistics
+  // 당첨 여부를 계산해주는 메서드
+  calculateWin(TICKETS, WINNINGNUMS, BONUS) {
+    const WINLOG = [0, 0, 0, 0, 0];
+
+    TICKETS.forEach(ticket => {
+      const TICKETNUM = ticket.returnNumbers();
+      const MATCHED = this.countMatchedNumbers(TICKETNUM, WINNINGNUMS);
+
+      if (MATCHED >= 3 && MATCHED <= 6) {
+        if (MATCHED === 5 && TICKETNUM.includes(BONUS)) {
+          WINLOG[4]++;
+        } else {
+          WINLOG[MATCHED - 3]++;
+        }
+      }
+    });
+
+    return WINLOG;
+  }
+
+
+  // 몇개의 숫자가 일치하는지 계산해주는 메서드
+  countMatchedNumbers(ticketNumbers, WINNINGNUMS) {
+    return ticketNumbers.filter(number => WINNINGNUMS.includes(number)).length;
+  }
+
   // 당첨 통계를 출력해주는 메서드
+  printWinningStatistics(TICKETS, WINNINGNUMS, BONUS) {
+
+  }
+
   // calculateProfit
   // 총 수익률을 계산해주는 메서드
 }
