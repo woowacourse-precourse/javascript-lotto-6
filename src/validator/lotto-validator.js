@@ -8,10 +8,10 @@ class LottoValidator {
     }
 
     static lottoDuplicatedValidation(numbers) {
-        const isDup = numbers.some(function(x) {
+        const isDuplicated = numbers.some(function(x) {
             return numbers.indexOf(x) !== numbers.lastIndexOf(x);
         });
-        if (isDup) {
+        if (isDuplicated) {
             throw new Error(ERROR_MESSAGE.lottoDuplicatedError);
         }
     }
@@ -22,6 +22,15 @@ class LottoValidator {
         });
         if (isOutOfRange) {
             throw new Error(ERROR_MESSAGE.lottoRangeError);
+        }
+    }
+
+    static lottoTypeValidation(numbers) {
+        const isTypeValid = numbers.every((element) => {
+            return Number.isInteger(element);
+        });
+        if (!isTypeValid) {
+            throw new Error(ERROR_MESSAGE.lottoTypeError);
         }
     }
 }

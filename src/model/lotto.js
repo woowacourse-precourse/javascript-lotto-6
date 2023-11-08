@@ -12,6 +12,7 @@ class Lotto {
     LottoValidator.lottoLengthValidation(numbers);
     LottoValidator.lottoDuplicatedValidation(numbers);
     LottoValidator.lottoRangeValidation(numbers);
+    LottoValidator.lottoTypeValidation(numbers);
   }
 
   // TODO: 추가 기능 구현
