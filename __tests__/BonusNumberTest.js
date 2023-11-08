@@ -30,21 +30,21 @@ describe('보너스 번호 입력 테스트', () => {
 
   test('보너스 번호가 정수가 아니면 예외가 발생한다.', () => {
     expect(() => {
-      const number = Convert.convertToList('3.5');
+      const number = Convert.convertToNumber('3.5');
       Validate.isInteger(number);
     }).toThrow(ERROR_MESSAGE.INVALID_INTEGER);
   });
 
   test('보너스 번호가 음수면 예외가 발생한다.', () => {
     expect(() => {
-      const number = Convert.convertToList('-3');
+      const number = Convert.convertToNumber('-3');
       Validate.isPositive(number);
     }).toThrow(ERROR_MESSAGE.INVALID_POSITIVE);
   });
 
   test('보너스 번호가 1부터 45 사이의 값이 아니면 예외가 발생한다.', () => {
     expect(() => {
-      const number = Convert.convertToList('333');
+      const number = Convert.convertToNumber('333');
       Validate.isNumberInRange(number);
     }).toThrow(ERROR_MESSAGE.INVALID_RANGE);
   });
