@@ -97,6 +97,10 @@ class LottoGame {
     });
   }
 
+  getRewardCount() {
+    return this.#rewardCount;
+  }
+
   #matchingOneLottery(lotto, winningNumbers, bonusNumber) {
     const matchCount = lotto.filter((num) =>
       winningNumbers.includes(num),
