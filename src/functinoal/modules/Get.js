@@ -36,12 +36,12 @@ class Get {
     const result = new Array(NUMBER_OF_LOTTO_NUMBERS * HIT_STATE + 1).fill(
       ZERO
     );
-    lottoArray.forEach(lotto => result[Get.lottoCheck(lotto, lottoBoard)]++);
+    lottoArray.forEach(lotto => result[Get.lottoValue(lotto, lottoBoard)]++);
 
     return Object.freeze(result);
   }
 
-  static lottoCheck(lotto, lottoBoard) {
+  static lottoValue(lotto, lottoBoard) {
     return lotto
       .getNumbers()
       .reduce((previous, current) => previous + lottoBoard[current], ZERO);
