@@ -1,5 +1,8 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import * as MoneyConstants from "./constants/MoneyConstants";
+import * as MessageConstants from "./constants/MessageConstants.js";
+import * as LottoConstants from "./constants/LottoConstant.js";
 
 class Store {
   #money;
@@ -12,18 +15,18 @@ class Store {
 
   static #moneyValidate(money) {
     if (isNaN(money)) {
-      throw new Error("[ERROR] 1,000원 단위의 숫자를 입력해주세요.");
+      throw new Error(MessageConstants.NOT_MONEY_ERROR_MESSAGE);
     }
-    if (money % 1000 !== 0) {
-      throw new Error(
-        "[ERROR] 올바르지 않은 금액입니다. 1,000원 단위로 입력해주세요."
-      );
+    if (money % MoneyConstants.LOTTO_MONEY_UNIT !== 0) {
+      throw new Error(MessageConstants.UNIT_ERROR_MESSAGE);
     }
   }
 
   static async inputMoney() {
     try {
-      const money = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
+      const money = await Console.readLineAsync(
+        MessageConstants.MONEY_INPUT_MESSAGE
+      );
       Store.#moneyValidate(money);
       return money;
     } catch (error) {
@@ -44,7 +47,7 @@ class Store {
   }
 
   calculateLottoAmount() {
-    const lottoAmount = this.#money / 1000;
+    const lottoAmount = this.#money / MoneyConstants.LOTTO_MONEY_UNIT;
     Console.print(`${lottoAmount}개를 구매했습니다.`);
     return lottoAmount;
   }
@@ -58,7 +61,11 @@ class Store {
   issueLotto() {
     const lottoAmount = this.calculateLottoAmount();
     for (let i = 0; i < lottoAmount; i++) {
-      const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const lottoNumbers = Random.pickUniqueNumbersInRange(
+        LottoConstants.LOWER_LIMIT,
+        LottoConstants.UPPER_LIMIT,
+        LottoConstants.NUMBER_COUNT
+      );
       this.#lottoList.push(new Lotto(lottoNumbers.sort((a, b) => a - b)));
     }
     this.#printLottoList();
@@ -66,21 +73,24 @@ class Store {
 
   #numberValidate(number, winningNumbersMap) {
     if (isNaN(number)) {
-      throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해주세요.");
+      throw new Error(MessageConstants.NOT_NUMBER_ERROR_MESSAGE);
     }
-    if (number < 1 || number > 45) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    if (
+      number < LottoConstants.LOWER_LIMIT ||
+      number > LottoConstants.UPPER_LIMIT
+    ) {
+      throw new Error(MessageConstants.OUT_OF_RANGE_ERROR_MESSAGE);
     }
     if (winningNumbersMap.has(number)) {
-      throw new Error("[ERROR] 중복 번호 없이 입력해주세요.");
+      throw new Error(MessageConstants.DUPLICATE_NUMBER_ERROR_MESSAGE);
     }
     winningNumbersMap.set(number, true);
   }
 
   #winningNumbersValidate(winningNumbers, winningNumbersMap) {
     winningNumbersMap.clear();
-    if (winningNumbers.length !== 6) {
-      throw new Error("[ERROR] 숫자는 6개여야 합니다.");
+    if (winningNumbers.length !== LottoConstants.NUMBER_COUNT) {
+      throw new Error(MessageConstants.INVALID_NUM_COUNT_ERROR_MESSAGE);
     }
     for (const number of winningNumbers) {
       this.#numberValidate(number, winningNumbersMap);
@@ -90,13 +100,16 @@ class Store {
 
   #bonusNumberValidate(bonusNumber, winningNumbersMap) {
     if (isNaN(bonusNumber)) {
-      throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해주세요.");
+      throw new Error(MessageConstants.NOT_NUMBER_ERROR_MESSAGE);
     }
-    if (bonusNumber < 1 || bonusNumber > 45) {
-      throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+    if (
+      bonusNumber < LottoConstants.LOWER_LIMIT ||
+      bonusNumber > LottoConstants.UPPER_LIMIT
+    ) {
+      throw new Error(MessageConstants.OUT_OF_RANGE_ERROR_MESSAGE);
     }
     if (winningNumbersMap.has(bonusNumber)) {
-      throw new Error("[ERROR] 당첨 번호과 중복되지 않는 번호를 입력해주세요.");
+      throw new Error(MessageConstants.DUPLICATE_BONUS_ERROR_MESSAGE);
     }
   }
 
@@ -104,7 +117,7 @@ class Store {
     while (true) {
       try {
         const winningNumbersInput = await Console.readLineAsync(
-          "당첨 번호를 입력해 주세요.\n"
+          MessageConstants.NUMBER_INPUT_MESSAGE
         );
         const winningNumbers = Array.from(winningNumbersInput.split(",")).map(
           Number
@@ -121,7 +134,7 @@ class Store {
     while (true) {
       try {
         const bonusNumberInput = await Console.readLineAsync(
-          "보너스 번호를 입력해 주세요.\n"
+          MessageConstants.BONUS_INPUT_MESSAGE
         );
         const bonusNumber = Number(bonusNumberInput);
         this.#bonusNumberValidate(bonusNumber, winningNumbersMap);
@@ -169,11 +182,11 @@ class Store {
   static generateWinningMessage(rankCountMap) {
     let winningMessage = "";
     const messageByRank = new Map([
-      [1, "6개 일치 (2,000,000,000원)"],
-      [2, "5개 일치, 보너스 볼 일치 (30,000,000원)"],
-      [3, "5개 일치 (1,500,000원)"],
-      [4, "4개 일치 (50,000원)"],
-      [5, "3개 일치 (5,000원)"],
+      [1, MessageConstants.FIRST_RANK_MESSAGE],
+      [2, MessageConstants.SECOND_RANK_MESSAGE],
+      [3, MessageConstants.THIRD_RANK_MESSAGE],
+      [4, MessageConstants.FOURTH_RANK_MESSAGE],
+      [5, MessageConstants.FIFTH_RANK_MESSAGE],
     ]);
 
     for (let rank = 5; rank > 0; rank--) {
@@ -187,11 +200,11 @@ class Store {
   static #caculateProfit(rankCountMap) {
     let lottoProfit = 0;
     const profitByRank = new Map([
-      [1, 2000000000],
-      [2, 30000000],
-      [3, 1500000],
-      [4, 50000],
-      [5, 5000],
+      [1, MoneyConstants.FIRST_PRIZE],
+      [2, MoneyConstants.SECOND_PRIZE],
+      [3, MoneyConstants.THIRD_PRIZE],
+      [4, MoneyConstants.FOURTH_PRIZE],
+      [5, MoneyConstants.FIFTH_PRIZE],
     ]);
     for (let rank = 5; rank > 0; rank--) {
       const rankCount = rankCountMap.get(rank);
@@ -209,7 +222,7 @@ class Store {
 
   printLottoResult(rankCountMap) {
     const profitRate = this.calculateProfitRate(rankCountMap);
-    Console.print("\n당첨 통계\n---");
+    Console.print(MessageConstants.RESULT_PRINT_MESSAGE);
     Console.print(Store.generateWinningMessage(rankCountMap));
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
