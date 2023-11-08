@@ -7,4 +7,10 @@ describe("ValidateTest", () => {
       ERROR_MESSAGE.moneyUnit
     );
   });
+
+  test("입력금액에 공백이 포함되어있으면 예외가 발생한다.", () => {
+    expect(() => Validator.validateInputMoney("15 00")).toThrow(
+      ERROR_MESSAGE.moneyValue
+    );
+  });
 });
