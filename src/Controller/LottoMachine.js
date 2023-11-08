@@ -1,5 +1,6 @@
 import LottoTicket from '../Model/LottoTicket.js';
 import Interface from '../View/Interface.js';
+import Printer from '../View/Printer.js';
 
 class LottoMachine {
   #lottoTicket;

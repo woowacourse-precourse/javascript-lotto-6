@@ -2,6 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import TicketMachine from '../src/Controller/TicketMachine.js';
 import LottoTicket from '../src/Model/LottoTicket.js';
 import Lotto from '../src/Lotto.js';
+import App from '../src/App.js';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -13,6 +14,18 @@ const mockQuestions = (inputs) => {
   });
 };
 
+const getBuyTicketSpy = (module) => {
+  const buyTicket = jest.spyOn(module, 'buyTicket');
+  buyTicket.mockClear();
+  return buyTicket;
+};
+
+const getBuyticketErrorSpy = (module) => {
+  const buyticketErrorSpy = jest.spyOn(module, 'buyTicketErrorHandler');
+  buyticketErrorSpy.mockClear();
+  return buyticketErrorSpy;
+};
+
 describe('로또 티켓 클래스에 대한 단위 테스트', () => {
   /* eslint-disable no-await-in-loop */
   beforeEach(() => {
@@ -21,6 +34,14 @@ describe('로또 티켓 클래스에 대한 단위 테스트', () => {
 
   const lottoTicket = LottoTicket.getInstance();
   const ticketMachine = new TicketMachine();
+  test('잘못된 티켓 구매 금액을 요청할 경우 예외가 발생하는가?', async () => {
+    const inputs = ['1003', '100', '4020'];
+
+    mockQuestions(inputs);
+
+    await expect(() => ticketMachine.buyTicket()).rejects.toThrow('[ERROR]');
+  });
+
   test('티켓이 구매 가능한 갯수 만큼 로또 줄이 작성되는가?', async () => {
     const inputs = ['2000', '3000'];
     const expectedAnswer = [2, 3];
@@ -59,5 +80,27 @@ describe('로또 티켓 클래스에 대한 단위 테스트', () => {
         expect(JSON.stringify(ticket[i].numbers) === JSON.stringify(ticket[j].numbers)).toBeFalsy();
       }
     }
+  });
+
+  test('로또 티켓 구매 중 예외 발생시 에러 핸들러를 호출하는가?', async () => {
+    const inputs = ['123', '1 2 3 4 5 6', '1000'];
+    const app = new App();
+    const errorSpy = getBuyticketErrorSpy(app);
+
+    mockQuestions(inputs);
+
+    await app.buyTicket();
+    expect(errorSpy).toHaveBeenCalledTimes(2);
+  });
+
+  test('로또 티켓 구매 중 예외 발생시 다시 보너스 번호를 입력 받는가?', async () => {
+    const inputs = ['123', '1 2 3 4 5 6', '1000'];
+    const app = new App();
+    const buyTicketSpy = getBuyTicketSpy(app);
+
+    mockQuestions(inputs);
+
+    await app.buyTicket();
+    expect(buyTicketSpy).toHaveBeenCalledTimes(3);
   });
 });

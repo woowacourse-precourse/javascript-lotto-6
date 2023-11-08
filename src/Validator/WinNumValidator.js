@@ -6,7 +6,7 @@ class WinNumsValidator extends Validator {
 
     this.checkAllNumsInWinningNum(splitedValues);
     if (!this.isValidLength(splitedValues)) {
-      throw new Error('올바른 당첨 번호를 입력하세요');
+      throw new Error('[ERROR] : 올바른 당첨 번호를 입력하세요');
     }
 
     return splitedValues.map((value) => Number(value));
@@ -16,7 +16,7 @@ class WinNumsValidator extends Validator {
     values.forEach((value) => {
       const numberValue = Number(value);
       if (!this.isValidRangeNum(numberValue)) {
-        throw new Error('당첨 번호의 숫자들은 1~45 사이의 숫자로 구성되어야 합니다.');
+        throw new Error('[ERROR] : 당첨 번호의 숫자들은 1~45 사이의 숫자로 구성되어야 합니다.');
       }
     });
   }

@@ -12,13 +12,13 @@ class BonusNumberValidator extends Validator {
 
   checkIsValidValue(value) {
     if (!this.isValidValue(value)) {
-      throw new Error('숫자이외의 문자나 공백을 포함한 문자를 입력하지 마세요.');
+      throw new Error('[ERROR] : 숫자이외의 문자나 공백을 포함한 문자를 입력하지 마세요.');
     }
   }
 
   checkIsValidRangeNum(value) {
     if (!this.isValidRangeNum(value)) {
-      throw new Error('1~45 범위 내의 숫자를 입력하세요.');
+      throw new Error('[ERROR] : 1~45 범위 내의 숫자를 입력하세요.');
     }
   }
 
@@ -28,7 +28,7 @@ class BonusNumberValidator extends Validator {
 
   checkIsExcludedFromWinningNums(value, winningNum) {
     if (this.isExcludedFromWinningNums(value, winningNum)) {
-      throw new Error('당첨 번호에 포함되는 보너스 문자를 입력하지 마세요.');
+      throw new Error('[ERROR] : 당첨 번호에 포함되는 보너스 문자를 입력하지 마세요.');
     }
   }
 
