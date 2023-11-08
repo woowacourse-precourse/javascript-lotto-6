@@ -31,23 +31,23 @@ class LottoTicket {
    * @param { number | number[]} data
    */
   saveSpecificTypeData(type, data) {
-    const vertifiedData = this.vertifyData(type, data);
+    const verifiedData = this.#verifyData(type, data);
     switch (type) {
-      case ('ticket'):
-        this.#ticket = vertifiedData;
+      case 'ticket':
+        this.#ticket = verifiedData;
         break;
-      case ('win'):
-        this.#winNums = vertifiedData;
+      case 'win':
+        this.#winNums = verifiedData;
         break;
-      case ('bonus'):
-        this.#bonusNum = vertifiedData;
+      case 'bonus':
+        this.#bonusNum = verifiedData;
         break;
       default:
-        throw new Error('[ERROR]');
+        throw new Error("[ERROR] : 로또 티켓이 저장할 수 있는 타입의 데이터는 'win','bonus','ticket'의 데이터만 저장이 가능합니다.");
     }
   }
 
-  vertifyData(type, data) {
+  #verifyData(type, data) {
     if (type === 'ticket') return data;
 
     const validator = ValidatorFactory.initialize(type);
