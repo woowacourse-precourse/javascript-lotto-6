@@ -3,13 +3,19 @@ import { MESSAGE_INPUT } from "../constants/Constant";
 
 class LottoInput {
   async priceInput() {
-    const price = await Console.readLineAsync(MESSAGE_INPUT.PRICE);
-    this.validPrice(Number(price));
-    return Number(price);
+    try {
+      const price = await Console.readLineAsync(MESSAGE_INPUT.PRICE);
+      this.validPrice(price);
+      return Number(price);
+    } catch (error) {
+      return this.priceInput();
+    }
   }
 
   validPrice(price) {
-    if (price % 1000 !== 0)
+    if (isNaN(price))
+      throw new Error("[ERROR] 구입 금액은 숫자로 입력해주세요.");
+    else if (Number(price) % 1000 !== 0 || Number(price) <= 0)
       throw new Error("[ERROR] 구입 금액은 1,000원 단위로 입력해주세요.");
   }
 
