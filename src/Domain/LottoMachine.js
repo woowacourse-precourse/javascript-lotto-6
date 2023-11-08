@@ -1,4 +1,3 @@
-import LottoUi from '../Ui/LottoUi';
 import { Random } from '@woowacourse/mission-utils';
 
 const LottoMachine = {

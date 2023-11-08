@@ -1,4 +1,3 @@
-import LottoUi from './Ui/LottoUi';
 import COMMON_VALUE from './constants/\bcommonValue';
 
 class Lotto {
@@ -8,18 +7,14 @@ class Lotto {
     this.#numbers = numbers;
   }
 
-  showResultOfLotto(winningNumbers, bonusNumber) {
+  result(winningNumbers, bonusNumber) {
     const winningStatus = this.calculateWinningStatus(
       winningNumbers,
       bonusNumber
     );
-    LottoUi.printWinningStatus(winningStatus);
+    const rateOfReturn = this.calculateRateOfReturn(winningStatus);
 
-    const rateOfReturn = this.calculateRateOfReturn(
-      winningStatus,
-      this.#numbers.length
-    );
-    LottoUi.printRateOfReturn(rateOfReturn);
+    return { winningStatus, rateOfReturn };
   }
 
   calculateWinningStatus(winningNumbers, bonusNumber) {
@@ -35,11 +30,11 @@ class Lotto {
       }
     });
 
-    return winStatus;
+    return winStatus.reverse();
   }
 
-  calculateRateOfReturn(winningStatus, purchaseAmount) {
-    const investmentAmount = purchaseAmount * 1000;
+  calculateRateOfReturn(winningStatus) {
+    const investmentAmount = this.#numbers.length * 1000;
     const reward = this.calculateReward(winningStatus);
     const rateOfReturn =
       Math.round((reward / investmentAmount) * 100 * 10) / 10;

@@ -42,8 +42,12 @@ const LottoUi = {
     }
   },
 
+  printResultOfLotto(winningStatus, rateOfReturn) {
+    this.printWinningStatus(winningStatus);
+    this.printRateOfReturn(rateOfReturn);
+  },
+
   printWinningStatus(winningStatus) {
-    winningStatus.reverse();
     winningStatus.forEach((rank, idx) => {
       Console.print(`${MESSAGE.WINNING_STATICS[idx]} - ${rank}개`);
     });
