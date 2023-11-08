@@ -93,7 +93,7 @@ describe('당첨번호 유효성 검사', () => {
       lottoShop.prizeNumber = prizeNumber;
     }).not.toThrow();
     expect(lottoShop.prizeNumber).toStrictEqual(prizeNumber);
-  })
+  });
 });
 
 describe('보너스 번호 유효성 검사', () => {
@@ -137,5 +137,5 @@ describe('보너스 번호 유효성 검사', () => {
       lottoShop.bonusNumber = bonusNumber;
     }).not.toThrow();
     expect(lottoShop.bonusNumber).toBe(bonusNumber);
-  })
+  });
 });
