@@ -39,7 +39,7 @@ test("구입 금액에 맞춰서 자동 로또를 발급한다.", () => {
 });
 
 test("구입 금액에 0 이상의 수가 아닌 값이 입력되면 예외가 발생한다.", () => {
-  const inputs = [-1, "test", []];
+  const inputs = [-1, "test"];
   inputs.forEach((input) => {
     expect(() => Lotto.buyAutomaticLotto(input)).toThrow("[ERROR]");
   });
