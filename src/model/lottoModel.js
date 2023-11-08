@@ -42,4 +42,35 @@ export default class LottoModel {
   setBonusNumber(bonusNumber) {
     this.#bonusNumber = bonusNumber;
   }
+
+  getWinningStatistic() {
+    const winningStatistics = new Map([
+      [3, 0],
+      [4, 0],
+      [5, 0],
+      ["5+bonus", 0],
+      [6, 0],
+    ]);
+
+    this.#lottoArray.forEach((lotto) => {
+      const count = this.#winningNumber.filter((number) =>
+        lotto.includes(number)
+      ).length;
+      const bonusCount = lotto.includes(this.#bonusNumber) ? 1 : 0;
+      this.checkWinningLotto(count, bonusCount, winningStatistics);
+    });
+
+    return winningStatistics;
+  }
+
+  checkWinningLotto(count, bonusCount, winningStatistics) {
+    if (count < 6 && count > 2 && bonusCount === 0)
+      winningStatistics.set(count, winningStatistics.get(count) + 1);
+
+    if (count === 5 && bonusCount === 1)
+      winningStatistics.set("5+bonus", winningStatistics.get("5+bonus") + 1);
+
+    if (count === 6)
+      winningStatistics.set(count, winningStatistics.get(count) + 1);
+  }
 }

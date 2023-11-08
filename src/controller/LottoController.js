@@ -17,6 +17,7 @@ export default class LottoController {
     this.model.setWinningNumber(winningNumber);
     const bonusNumber = await this.inputView.getBonusNumber();
     this.model.setBonusNumber(bonusNumber);
-    console.log(winningNumber, bonusNumber);
+    const winningStatistics = this.model.getWinningStatistic();
+    this.outputView.printWinningStatistics(winningStatistics);
   }
 }
