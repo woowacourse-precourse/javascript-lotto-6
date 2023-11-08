@@ -11,12 +11,13 @@ class App {
 
   constructor() {
     this.InputView = new InputView();
+    this.OutputView = new OutputView();
   }
 
   async getLotto() {
     const money = await this.InputView.getPurchaseAmout();
     this.#lottos = Lotto.purchaseLotto(money);
-    OutputView.printPurchaseAmout(this.#lottos);
+    this.OutputView.printPurchaseAmout(this.#lottos);
   }
 
   async getWinningNumbers() {
@@ -35,7 +36,7 @@ class App {
   getResults() {
     const resultCalculator = new Result(this.#lottos, this.#winningNumbers);
     const { results, roi } = resultCalculator.getResults();
-    OutputView.printResults(results, roi);
+    this.OutputView.printResults(results, roi);
   }
 
   async play() {

@@ -1,13 +1,13 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { MESSAGE, GAME, RESULT_KEY } from "../constant/GameConfig.js";
 
-const OutputView = {
+class OutputView {
   printPurchaseAmout(lottos) {
     MissionUtils.Console.print(MESSAGE.output.amount(lottos.length));
     lottos.forEach((lotto) => {
       MissionUtils.Console.print(lotto.toPrintableString());
     });
-  },
+  }
 
   printResults(results, roi) {
     MissionUtils.Console.print(MESSAGE.output.statistics);
@@ -20,7 +20,7 @@ const OutputView = {
       );
     }
     MissionUtils.Console.print(MESSAGE.output.roi(roi));
-  },
-};
+  }
+}
 
 export default OutputView;
