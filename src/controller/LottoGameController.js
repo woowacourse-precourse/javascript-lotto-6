@@ -99,7 +99,7 @@ class LottoGameController {
 
 	/** 게임 결과 분석 로직을 담당한다. */
 	#handleAnalyzeResult() {
-		this.#lottoGame.evaluateTicketMatches();
+		this.#lottoGame.evaluateTickets();
 		// TODO: 수익률
 	}
 

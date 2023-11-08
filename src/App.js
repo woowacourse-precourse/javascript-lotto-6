@@ -12,6 +12,7 @@ class App {
   async play() {
     await this.#gameController.handlePurchaseTickets();
     await this.#gameController.handleSetWinningNumbers();
+    this.#gameController.handleGameResult();
   }
 }
 

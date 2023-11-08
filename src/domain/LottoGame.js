@@ -5,11 +5,11 @@ const ASC = (a, b) => a - b;
 
 // TODO: 상수화
 const lotto_prize = [
-  { match: 6, PRIZE: 2000000000 },
-  { match: 5, bonusMatch: true, PRIZE: 30000000 },
-  { match: 5, PRIZE: 1500000 },
-  { match: 4, PRIZE: 50000 },
-  { match: 3, PRIZE: 5000 },
+  { rank: 1, match: 6, prize: 2000000000 },
+  { rank: 2, match: 5, bonusMatch: true, prize: 30000000 },
+  { rank: 3, match: 5, prize: 1500000 },
+  { rank: 4, match: 4, prize: 50000 },
+  { rank: 5, match: 3, prize: 5000 }
 ]
 
 class LottoGame {
@@ -32,6 +32,7 @@ class LottoGame {
   /** @type {number} : 수익률(%) */
   #earningsRate = null;
 
+  /** 구입 금액에 따른 구입 가능 수량을 계산하여 저장한다. */
   calculatePurchaseQuantity() {
     // TODO: 상수 사용
     this.#purchaseQuantity = this.#purchaseAmount / 1000;
@@ -39,18 +40,26 @@ class LottoGame {
 
   /** 랜덤 번호를 가진 로또 티켓을 구입 수량만큼 생성한다. */
   generateTickets() {
-    for (let i = 0; i < this.#purchaseQuantity; i++) {
-      // TODO: 상수 사용
-      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(ASC);
-      this.#tickets.push(new Lotto(numbers));
-    }
+    //TEST:
+    this.#tickets.push(new Lotto([1, 2, 3, 4, 5, 6]));
+    this.#tickets.push(new Lotto([1, 2, 3, 4, 5, 7]));
+    this.#tickets.push(new Lotto([1, 2, 3, 4, 5, 8]));
+    this.#tickets.push(new Lotto([1, 2, 3, 4, 8, 8]));
+    this.#tickets.push(new Lotto([1, 2, 3, 8, 8, 8]));
+    this.#tickets.push(new Lotto([1, 2, 8, 8, 8, 8]));
+    // for (let i = 0; i < this.#purchaseQuantity; i++) {
+    //   // TODO: 상수 사용
+    //   const numbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(ASC);
+    //   this.#tickets.push(new Lotto(numbers));
+    // }
   }
 
   /** 각 티켓을 당첨번호와 비교하여 "일치개수", "보너스번호일치여부"를 계산한다. */
-  evaluateTicketMatches() {
+  evaluateTickets() {
     this.#tickets.forEach((ticket) => {
       ticket.setMatch(this.#countMatchingNumbers(ticket));
       ticket.setBonusMatch(this.#hasBonusNumber(ticket));
+      ticket.setPrizeRank(this.#determinePrizeRank(ticket));
     });
   }
 
@@ -61,7 +70,7 @@ class LottoGame {
    */
   #countMatchingNumbers(ticket) {
     return this.#winningNumbers.filter((winningNumber) => {
-      ticket.getNumbers().includes(winningNumber)
+      return ticket.getNumbers().includes(winningNumber)
     }).length;
   }
 
@@ -74,9 +83,30 @@ class LottoGame {
     return ticket.getNumbers().includes(this.#bonusNumber);
   }
 
+  /**
+   * 티켓의 당첨 등수를 계산하여 반환한다.
+   * @param {Lotto} ticket 구입한 로또 티켓
+   * @returns {number} 당첨 등수 (0 : 낙첨)
+   */
+  #determinePrizeRank(ticket) {
+    for (const prize of lotto_prize) {
+      if (this.#isPrizeMatch(ticket, prize)) {
+        return prize.rank;
+      }
+    }
+    return 0;
+  }
 
-  #determinePrize(match, bonusMatch) {
-
+  /**
+   * 특정 등수에 대한 티켓의 당첨 여부를 반환한다.
+   * @param {Lotto} ticket 로또 티켓
+   * @param {} prize 당첨 기준
+   * @returns 
+   */
+  #isPrizeMatch(ticket, prize) {
+    const numberMatchs = ticket.getMatch() === prize.match;
+    const bonusMatch = prize.bonusMatch === true ? ticket.getBonusMatch() : true;
+    return numberMatchs && bonusMatch;
   }
 
   /** @param {number} 구입 금액 */

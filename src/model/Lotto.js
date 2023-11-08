@@ -1,13 +1,16 @@
 class Lotto {
 
-  /** @type {Array<number>} Lotto 번호 배열 */
+  /** @type {Array<number>} : Lotto 번호 배열 */
   #numbers = null;
 
-  /** @type {number} 당첨번호 일치 숫자 개수 */
+  /** @type {number} : 당첨번호 일치 숫자 개수 */
   #match = null;
 
-  /** @type {boolean} 보너스 번호 일치 여부 */
+  /** @type {boolean} : 보너스 번호 일치 여부 */
   #bonusMatch = null;
+
+  /** @type {number} : 등수 (0 : 낙첨) */
+  #prizeRank = null;
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -38,6 +41,14 @@ class Lotto {
 
   getBonusMatch() {
     return this.#bonusMatch;
+  }
+
+  setPrizeRank(prizeRank) {
+    this.#prizeRank = prizeRank;
+  }
+
+  getPrizeRank() {
+    return this.#prizeRank;
   }
 }
 
