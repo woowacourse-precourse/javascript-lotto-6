@@ -3,7 +3,7 @@ import {
   LOTTO_MIN_NUMBER,
   LOTTO_MAX_NUMBER,
   LOTTO_NUMBERS_LENGTH,
-} from '../Constants.js';
+} from '../Constant/Constants.js';
 
 export const isNumber = (input) => {
   const regex = /^[0-9]+$/;

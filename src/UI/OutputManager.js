@@ -4,8 +4,8 @@ import {
   NUMBER_OF_PURCHASED_LOTTO_MESSAGE,
   RATE_OF_RETURN_OUTPUT_FORMAT,
   WINNING_DESCRIPTION_BY_COUNT,
-} from '../Constants.js';
-import { converttNumberWithCommas } from '../Utils.js';
+} from '../Constant/Constants.js';
+import { converttNumberWithCommas } from '../Util/Utils.js';
 
 class OutputManager {
   async printInputErrorMessage(errorMessage) {

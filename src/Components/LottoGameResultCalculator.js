@@ -6,7 +6,7 @@ import {
   PERCENT_CONVERSION_NUMBER,
   WINNING_NUMBER_WEIGHT,
   WINNING_PRIZE_BY_COUNT,
-} from '../Constants.js';
+} from '../Constant/Constants.js';
 
 class LottoGameResultCalculator {
   getGameResult({ lottos, winningNumbers, bonusNumber, purchaseAmount }) {

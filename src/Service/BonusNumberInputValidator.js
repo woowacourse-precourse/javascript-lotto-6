@@ -1,4 +1,4 @@
-import { BONUS_NUMBER_ERROR_MESSAGES } from '../Constants.js';
+import { BONUS_NUMBER_ERROR_MESSAGES } from '../Constant/Constants.js';
 import {
   isNumber,
   isOutOfRange,

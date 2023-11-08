@@ -1,7 +1,7 @@
 import {
   LOTTO_NUMBERS_ERROR_MESSAGES,
   LOTTO_NUMBERS_LENGTH,
-} from '../Constants.js';
+} from '../Constant/Constants.js';
 import { isArrayType, isAllNumeric, isOutOfRange } from './Common.js';
 
 class LottoNumbersValidator {

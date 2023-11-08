@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { GUIDE_MESSAGES } from '../Constants.js';
+import { GUIDE_MESSAGES } from '../Constant/Constants.js';
 
 class InputManager {
   async enterPurchaseAmount() {

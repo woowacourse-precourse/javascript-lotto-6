@@ -1,4 +1,4 @@
-import { PURCHASE_AMOUNT_ERROR_MESSAGES } from '../Constants.js';
+import { PURCHASE_AMOUNT_ERROR_MESSAGES } from '../Constant/Constants.js';
 import {
   isNumber,
   isStartWithZero,

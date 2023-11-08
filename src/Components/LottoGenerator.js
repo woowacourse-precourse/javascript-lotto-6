@@ -3,8 +3,8 @@ import {
   LOTTO_MIN_NUMBER,
   LOTTO_MAX_NUMBER,
   LOTTO_NUMBERS_LENGTH,
-} from '../Constants.js';
-import { generateRandomNumbers } from '../Utils.js';
+} from '../Constant/Constants.js';
+import { generateRandomNumbers } from '../Util/Utils.js';
 import Lotto from '../Lotto.js';
 
 class LottoGenerator {
