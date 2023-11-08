@@ -20,7 +20,9 @@ class App {
       try {
         this.price = await this.#readPrice();
         this.lottos = this.#buyLotto(this.price / 1000);
-        await this.#readWinningNums();
+        const winningNums = await this.#readWinningNumbers();
+        const bonusNum = await this.#readBonusNumber();
+        this.#calculateResult(this.lottos, winningNums, bonusNum, this.price);
         break;
       } catch (error) {
         MissionUtils.Console.print(error.message);
@@ -34,7 +36,7 @@ class App {
     if (isNaN(price) || price % 1000 !== 0) {
       throw new Error(ERROR_PRICE_INPUT);
     }
-    return price;
+    return Number(input);
   }
 
   #buyLotto(count) {
@@ -53,14 +55,14 @@ class App {
     return lottos;
   }
 
-  async #readWinningNums() {
+  async #readWinningNumbers() {
     const input_winningNums =
       await MissionUtils.Console.readLineAsync(WINNING_NUMBERS);
-    let winningNums = input_winningNums
-      .split(",")
-      .map((num) => Number(num.trim()));
-    const bonusNum = await MissionUtils.Console.readLineAsync(BONUS_NUM);
-    this.#calculateResult(this.lottos, winningNums, bonusNum, this.price);
+    return input_winningNums.split(",").map((num) => Number(num.trim()));
+  }
+
+  async #readBonusNumber() {
+    return await MissionUtils.Console.readLineAsync(BONUS_NUM);
   }
 
   #matchCount(lotto, winningNums, bonusNum) {
@@ -80,7 +82,6 @@ class App {
   #calculateResult(lottos, winningNums, bonusNum, price) {
     const results = this.#calculateWinning(lottos, winningNums, bonusNum);
     const totalWinnings = this.#calculateTotalWinning(results);
-    const percentage = this.#calculatePercentage(price, totalWinnings);
     MissionUtils.Console.print(
       `당첨 통계\n---\n` +
         `3개 일치 (5,000원) - ${results[3]}개\n` +
@@ -88,7 +89,7 @@ class App {
         `5개 일치 (1,500,000원) - ${results[5]}개\n` +
         `5개 일치, 보너스 볼 일치 (30,000,000원) - ${results["5.5"]}개\n` +
         `6개 일치 (2,000,000,000원) - ${results[6]}개\n` +
-        `총 수익률은 ${percentage}%입니다.`,
+        `총 수익률은 ${this.#calculatePercentage(price, totalWinnings)}입니다.`,
     );
   }
 
@@ -107,7 +108,9 @@ class App {
   }
 
   #calculatePercentage(price, totalWinnings) {
-    return (((totalWinnings - price) / price) * 100).toFixed(2);
+    const percentage = (totalWinnings / price) * 100;
+    const roundedPercentage = Math.round(percentage * 100) / 100;
+    return roundedPercentage.toFixed(1);
   }
 }
 
