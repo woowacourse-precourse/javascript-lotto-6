@@ -1,7 +1,3 @@
-import ERROR from '../../src/constant/Error.js';
-import LOTTO from '../../src/constant/Lotto.js';
-import Lotto from '../../src/domain/Lotto.js';
-import Money from '../../src/domain/Money.js';
 import Parser from '../../src/parser/Parser.js';
 
 describe('형변환을 위한 Parser 테스트', () => {
