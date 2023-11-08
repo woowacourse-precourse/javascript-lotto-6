@@ -12,7 +12,7 @@ export const PURCHASE_OPTIONS = {
 };
 
 export const STATISTICS_STANDARD = {
-  bonuesMatchCount: 5,
+  bonusMatchCount: 5,
 
   matchCountRank: new Map([
     [0, '순위 외'],
