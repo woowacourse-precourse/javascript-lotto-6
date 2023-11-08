@@ -1,7 +1,8 @@
+import { Random } from '@woowacourse/mission-utils';
 import User from './User.js';
 import Lotto from './Lotto.js';
 import LottoResult from './LottoResult.js';
-import { Random } from '@woowacourse/mission-utils';
+import { LOTTO_NUMBER_MAX, LOTTO_NUMBER_MIN, THE_NUMBER_OF_LOTTO_NUMBER } from './constant/constants.js';
 
 class App {
   issueLotto(theNumberOfLotto) {
@@ -9,7 +10,7 @@ class App {
 
     let count = 0;
     while (count < theNumberOfLotto) {
-      const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const lottoNumbers = Random.pickUniqueNumbersInRange(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX, THE_NUMBER_OF_LOTTO_NUMBER);
 
       const lotto = new Lotto(lottoNumbers);
       lotto.sortLottoNumbers();

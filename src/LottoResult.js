@@ -1,42 +1,49 @@
+import { 
+  LOTTO_PRICE, 
+  RANKING_REWARD, 
+  RANKING_THE_NUMBER_OF_MATCHES,
+  RANKING_HAVE_BONUS_NUMBER
+} from "./constant/constants.js";
+
 const allLottoResult = {
   Ranking5: {
     rankingDetail: {
-      theNumberOfMatches: 3,
-      haveBonusNumber: false
+      theNumberOfMatches: RANKING_THE_NUMBER_OF_MATCHES.ranking5,
+      haveBonusNumber: RANKING_HAVE_BONUS_NUMBER.ranking5
     },
-    reward: 5000,
+    reward: RANKING_REWARD.ranking5,
     count: 0
   },
   Ranking4: {
     rankingDetail: {
-      theNumberOfMatches: 4,
-      haveBonusNumber: false
+      theNumberOfMatches: RANKING_THE_NUMBER_OF_MATCHES.ranking4,
+      haveBonusNumber: RANKING_HAVE_BONUS_NUMBER.ranking4
     },
-    reward: 50000,
+    reward: RANKING_REWARD.ranking4,
     count: 0
   },
   Ranking3: {
     rankingDetail: {
-      theNumberOfMatches: 5,
-      haveBonusNumber: false
+      theNumberOfMatches: RANKING_THE_NUMBER_OF_MATCHES.ranking3,
+      haveBonusNumber: RANKING_HAVE_BONUS_NUMBER.ranking3
     },
-    reward: 1500000,
+    reward: RANKING_REWARD.ranking3,
     count: 0
   },
   Ranking2: {
     rankingDetail: {
-      theNumberOfMatches: 5,
-      haveBonusNumber: true
+      theNumberOfMatches: RANKING_THE_NUMBER_OF_MATCHES.ranking2,
+      haveBonusNumber: RANKING_HAVE_BONUS_NUMBER.ranking2
     },
-    reward: 30000000,
+    reward: RANKING_REWARD.ranking2,
     count: 0
   },
   Ranking1: {
     rankingDetail: {
-      theNumberOfMatches: 6,
-      haveBonusNumber: false
+      theNumberOfMatches: RANKING_THE_NUMBER_OF_MATCHES.ranking1,
+      haveBonusNumber: RANKING_HAVE_BONUS_NUMBER.ranking1
     },
-    reward: 2000000000,
+    reward: RANKING_REWARD.ranking1,
     count: 0
   }
 };
@@ -83,7 +90,7 @@ class LottoResult {
 
   calculateProfitRate(allLottoResult, theNumberOfLotto) {
     let profit = 0;
-    const theAmountOfLotto = theNumberOfLotto * 1000;
+    const theAmountOfLotto = theNumberOfLotto * LOTTO_PRICE;
 
     Object.values(allLottoResult).forEach(value => {
       const {rankingDetail, reward, count} = value;

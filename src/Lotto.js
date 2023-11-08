@@ -1,3 +1,9 @@
+import { 
+  VALIDATION_THE_NUMBER_OF_LOTTO_NUMBER,
+  VALIDATION_LOTTO_NUMBER_RANGE,
+  VALIDATION_LOTTO_NUMBER_OVERLAP
+} from "./constant/message.js";
+
 class Lotto {
   #numbers;
 
@@ -9,16 +15,16 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(VALIDATION_THE_NUMBER_OF_LOTTO_NUMBER);
     }
 
     const lottoNumbers = [];
     numbers.forEach(number => {
-      if (number <1 || number > 45) {
-        throw new Error("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+      if (number < 1 || number > 45) {
+        throw new Error(VALIDATION_LOTTO_NUMBER_RANGE);
       }
       if (lottoNumbers.includes(number)) {
-        throw new Error("[ERROR] 로또 번호는 중복되지 않아야 합니다.");
+        throw new Error(VALIDATION_LOTTO_NUMBER_OVERLAP);
       }
 
       lottoNumbers.push(number);
