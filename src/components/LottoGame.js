@@ -5,6 +5,7 @@ import InputMoney from './InputMoney.js';
 import RandomLotto from './RandomLotto.js';
 import InputLotto from './InputLotto.js';
 import Lotto from './Lotto.js';
+import Result from './Result.js';
 
 export default class LottoGame {
   #money;
@@ -35,7 +36,7 @@ export default class LottoGame {
     await this.outputRandom();
     await this.inputLottos();
     await this.lotto();
-    await this.incomeRate();
+    await this.winningResult();
   }
 
   async inputMoney() {
@@ -67,15 +68,7 @@ export default class LottoGame {
     });
   }
 
-  async incomeRate() {
-    let income = 0;
-    Object.entries(this.result).forEach(([key, value]) => {
-      income += parseInt(value.reward.replace(/,/g, ''), 10) * value.count;
-      Console.print(
-        gameMessage.OUTPUT.RESULT(value.match, value.reward, value.count),
-      );
-    });
-    const rate = ((income / this.#money) * 100).toFixed(1);
-    Console.print(gameMessage.OUTPUT.INCOME(rate));
+  async winningResult() {
+    new Result().output(this.result, this.#money);
   }
 }
