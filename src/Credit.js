@@ -2,19 +2,22 @@ import { Console } from "@woowacourse/mission-utils";
 import { ERROR, INPUT } from "./Message.js";
 
 class Purchase {
-  constructor() {
-    this.credit = 0;
-  }
+  constructor() {}
 
-  async getAmountOfLotto() {
+  async getCredit(input) {
     try {
-      this.credit = await Console.readLineAsync(INPUT.CREDIT);
-      const credit = this.isDividedBy1000(Number(this.credit));
-      return credit;
+      const credit = await Console.readLineAsync(INPUT.CREDIT);
+      const validCredit = this.isDividedBy1000(Number(credit));
+      return validCredit;
     } catch (error) {
       Console.print(error.message);
-      await this.getAmountOfLotto();
+      await this.getCredit();
     }
+  }
+
+  async getAmountOfLotto(credit) {
+    const amountOfLotto = credit / 1000;
+    return amountOfLotto;
   }
 
   isDividedBy1000(credit) {
@@ -24,7 +27,7 @@ class Purchase {
     if (credit % 1000 !== 0) {
       throw new Error(ERROR.NOT_DIVIDED_BY_1000);
     }
-    return credit / 1000;
+    return credit;
   }
 
   printAmountOfLotto(amount) {
