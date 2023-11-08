@@ -19,7 +19,7 @@ class Lotto {
   }
 
   getNumbers() {
-    return this.#numbers;
+    return `[${this.#numbers.join(', ')}]`;
   }
 
   checkResult(winningNumbers, bonusNumber) {
