@@ -27,10 +27,11 @@ export default class OutputView {
   static printError(error) {
     if (error.message.startsWith('[ERROR]')) {
         Console.print(error.message); 
-    } else {
-        throw error;  
+        return; 
     }
+    throw error;  
   }
+  
 
   static printResult(roi, result) {
     Console.print(GUIDE_MESSAGE.winningStatistics);
