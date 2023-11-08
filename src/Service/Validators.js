@@ -1,4 +1,4 @@
-import PurchaseAmountInputValidator from './PurChaseAmountInputValidator.js';
+import PurchaseAmountInputValidator from './PurchaseAmountInputValidator.js';
 import BonusNumberInputValidator from './BonusNumberInputValidator.js';
 import WinningNumbersInputValidator from './WinningNumbersInputValidator.js';
 
