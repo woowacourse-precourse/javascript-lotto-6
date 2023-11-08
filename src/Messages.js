@@ -5,6 +5,7 @@ const Messages = {
   BONUS_NUMBER_INPUT: '\n보너스 번호를 입력해 주세요.\n',
   WINNING_STATISTICS_PRINT: '\n당첨 통계\n---',
 
+  ERROR_IS_BLANK: '[ERROR] 1000원 단위로 입력해주세요.',
   ERROR_ISNAN: '[ERROR] 숫자를 입력해 주세요.',
   ERROR_PURCHASE_AMOUNT_NOT_DIVIDED:
     '[ERROR] 구입금액은 1000원 단위로 입력해 주세요.',
