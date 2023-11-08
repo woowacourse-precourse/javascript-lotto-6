@@ -52,5 +52,13 @@ function publishLottos() {
   }
 }
 
+function printLottos() {
+  Console.print(`${this.lottos.length}개를 구매했습니다.`);
+  for (const lotto of this.lottos) {
+    const numbers = lotto.getNumbers().sort((a, b) => a - b);
+    Console.print(`[${numbers.join(", ")}]`);
+  }
+}
+
 
 export default App;
