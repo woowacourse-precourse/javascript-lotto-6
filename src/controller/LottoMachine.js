@@ -25,9 +25,7 @@ export default class LottoMachine {
     this.#makeLottoNumbers(this.#player.getPurchaseAmount());
     OutputView.printLottoTickets(this.#player.getLottoTickets());
     this.#winningNumbers = await this.#getWinningNumbers();
-    OutputView.printNewLine();
     this.#bonusNumber = await this.#getBonusNumber();
-    OutputView.printNewLine();
     this.#findMatchCount();
     this.#calculateWinningStats();
     this.#calculateProfit();
@@ -82,6 +80,7 @@ export default class LottoMachine {
   }
 
   async #getWinningNumbers() {
+    OutputView.printNewLine();
     while (this.#INFINITE) {
       try {
         const winningNumbersInput = await InputView.readWinningNumbers();
@@ -94,6 +93,7 @@ export default class LottoMachine {
   }
 
   async #getBonusNumber() {
+    OutputView.printNewLine();
     while (this.#INFINITE) {
       try {
         const bonusNumberInput = await InputView.readBonusNumber();
