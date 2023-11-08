@@ -20,7 +20,6 @@ class App {
     await this.#controller.startGame();
   }
 }
-
 const app = new App();
 app.play();
 

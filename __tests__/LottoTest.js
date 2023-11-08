@@ -3,6 +3,7 @@ import Lotto from '../src/Lotto.js';
 import WinningLotto from '../Domain/WinningLotto.js';
 import WinningJudge from '../Domain/WinningJudge.js';
 import Random from '../utils/random.js';
+import ERROR from '../constants/error.js';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
@@ -61,5 +62,15 @@ describe('로또 클래스 테스트', () => {
 
     const winningJudge = new WinningJudge();
     expect(winningJudge.calculateRateOfReturn(testWinner, passInput)).toEqual(62.5);
+  });
+
+  test('보너스 번호의 범위가 1에서 45 이내를 벗어날 경우 오류 발생', () => {
+    expect(() => {
+      const passInput = 1;
+      const wrongInput = 46;
+
+      expect(Validation.isWithinRange(passInput)).not.toThrow();
+      expect(Validation.isWithinRange(wrongInput)).toThrow(ERROR.withinRange);
+    });
   });
 });
