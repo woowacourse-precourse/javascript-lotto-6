@@ -1,9 +1,26 @@
+import { Console } from "@woowacourse/mission-utils";
+import { IN_GAME_MESSAGE } from "../models/Constants.js";
+
 const InputView = {
-  receiveMoney() {},
+  async receiveCost() {
+    const cost = await Console.readLineAsync(IN_GAME_MESSAGE.getCost);
 
-  receiveNumbers() {},
+    return cost;
+  },
 
-  receiveBonusNumber() {},
+  async receiveNumbers() {
+    const numbers = await Console.readLineAsync(IN_GAME_MESSAGE.getNumbers);
+
+    return numbers;
+  },
+
+  async receiveBonusNumber() {
+    const bonusNumber = await Console.readLineAsync(
+      IN_GAME_MESSAGE.getBonusNumber
+    );
+
+    return bonusNumber;
+  },
 };
 
 export default InputView;
