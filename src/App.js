@@ -133,6 +133,14 @@ function printWinningResult() {
   const profitRate = this.getProfitRate();
   Console.print(`총 수익률은 ${profitRate}%입니다.`);
 }
+function getProfitRate() {
+  let totalWinningMoney = 0;
+  for (let i = 1; i <= 5; i++) {
+    totalWinningMoney += this.winningResult[i] * this.WINNING_MONEY[i];
+  }
+  const profitRate = (totalWinningMoney / this.purchaseAmount) * 100;
+  return profitRate.toFixed(1);
+}
 
 
 
