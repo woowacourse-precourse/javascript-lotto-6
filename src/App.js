@@ -84,18 +84,17 @@ class App {
       temp = await input.getMoney();
       input.validateMoney(temp);
       temp = input.convertToNumber(temp);
-      return temp;
     } else if (mode === MODE.WINNING_NUMBERS) {
       temp = await input.getWinningNumbers();
       input.validateWinningNumbers(temp);
       temp = input.convertToArray(temp);
-      return temp;
     } else if (mode === MODE.BONUS_NUMBER) {
       temp = await input.getBonusNumber();
       input.validateBonusNumber(temp, winningNumbers);
       temp = input.convertToNumber(temp);
-      return temp;
     }
+
+    return temp;
   }
 
   async untilValueAvailable(value, mode, winningNumbers) {
