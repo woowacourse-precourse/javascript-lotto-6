@@ -7,6 +7,7 @@ class LottoGame {
   #lottos = [];
   #count;
   #winningLotto;
+  #bonusNumber;
 
   async start() {
     await this.#inputPurchaseCount();
@@ -15,6 +16,7 @@ class LottoGame {
     this.#printLottos();
 
     await this.#inputWinningLotto();
+    await this.#inputBonusNumber();
   }
 
   async #inputPurchaseCount() {
@@ -46,6 +48,10 @@ class LottoGame {
       Screen.printErrorMessage(message);
       await this.#inputWinningLotto();
     }
+  }
+
+  async #inputBonusNumber() {
+    this.#bonusNumber = await Screen.inputBonusNumber();
   }
 }
 

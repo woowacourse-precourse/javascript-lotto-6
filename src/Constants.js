@@ -4,6 +4,7 @@ export const MESSAGES = Object.freeze({
   purchaseMoneyInputMessage: '구입금액을 입력해 주세요.',
   purchaseLottoCountsMessage: '개를 구매했습니다.',
   winningLottoInputMessage: '당첨 번호를 입력해 주세요.',
+  bonusNumberInputMessage: '보너스 번호를 입력해 주세요.',
 });
 
 export const ERROR = Object.freeze({

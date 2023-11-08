@@ -32,6 +32,13 @@ class Screen {
       .split(STRINGS.winningDelimiter)
       .map((number) => Number(number.trim()));
   }
+
+  static async inputBonusNumber() {
+    Console.print(MESSAGES.bonusNumberInputMessage);
+    const number = Number(await Console.readLineAsync());
+
+    return number;
+  }
 }
 
 export default Screen;
