@@ -82,13 +82,11 @@ class Winners {
       const correct = this.countCorrect(lottos[i].getLottoNumbers());
       this.addPrize(correct, this.isBonusRight(lottos[i].getLottoNumbers()));
     }
-    console.log(this.#prize);
   }
 
   calculateRateOfReturns(money) {
     const totalPrize = this.calculateTotalPrize();
     this.#returns = Math.round((totalPrize / money) * 1000) / 10;
-    console.log(this.#returns);
   }
 
   calculateTotalPrize() {
