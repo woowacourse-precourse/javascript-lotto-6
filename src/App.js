@@ -1,7 +1,8 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-import { REWARD_INFOS } from './constants.js';
+import { LOTTO_PRIZE, REWARD_INFOS } from './constants.js';
 import ReadInput from './ReadInput.js';
+import LottoMachine from './LottoMachine.js';
 
 class App {
   generatRandomLottos(purchaseAmount) {
@@ -31,33 +32,13 @@ class App {
     return ((lottoReturn / purchaseAmount) * 100).toFixed(1);
   }
 
-  printWinnigStatistics(lottos, purchaseAmount, winningNumbers, bonusNumber) {
-    const wonStats = [
-      { rank: 5, count: 0 },
-      { rank: 4, count: 0 },
-      { rank: 3, count: 0 },
-      { rank: 2, count: 0 },
-      { rank: 1, count: 0 },
-    ];
-    lottos.forEach((lotto) => {
-      const reward = lotto.findReward(winningNumbers, bonusNumber);
-      if (reward)
-        wonStats.find((wonStat) => wonStat.rank === reward.RANK).count++;
-    });
+  printWinnigStatistics(lottos, winningNumbers, bonusNumber) {
+    const lottoMachine = new LottoMachine(lottos, winningNumbers, bonusNumber);
 
     Console.print('당첨 통계\n---');
-    wonStats.forEach((wonStat) => {
-      const info = REWARD_INFOS.find(
-        (rewardInfo) => rewardInfo.RANK === wonStat.rank
-      );
-      Console.print(
-        `${info.MATCH_COUNT}개 일치${
-          info.BONUS ? ', 보너스 볼 일치' : ''
-        } (${Intl.NumberFormat().format(info.REWARD)}원) - ${wonStat.count}개`
-      );
-    });
+    lottoMachine.printWonStats();
 
-    const returnRate = this.calculatReturnRate(wonStats, purchaseAmount);
+    const returnRate = lottoMachine.calculatReturnRate();
     Console.print(`총 수익률은 ${returnRate}%입니다.`);
   }
 
@@ -67,12 +48,7 @@ class App {
     const winningNumbers = await ReadInput.readWinningNumbers();
     const bonusNumber = await ReadInput.readBonusNumber(winningNumbers);
 
-    this.printWinnigStatistics(
-      lottos,
-      purchaseAmount,
-      winningNumbers,
-      bonusNumber
-    );
+    this.printWinnigStatistics(lottos, winningNumbers, bonusNumber);
   }
 }
 
