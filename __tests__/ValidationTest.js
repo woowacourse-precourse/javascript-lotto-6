@@ -23,4 +23,17 @@ describe('숫자 확인 함수 테스트', () => {
 
     expect(() => validateLottoPurchase(inputs[0])).toThrowError('[ERROR]');
   });
+
+  test('보너스번호가 당첨번호에 겹칠시 예외 처리', () => {
+    const lottoNumbers = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+    ];
+    const bonusNumber = [1, 3, 5];
+
+    lottoNumbers.forEach((_, index) => {
+      expect(() => ensureBonusNumberIsNotIncluded(lottoNumbers[index], bonusNumber[index])).toThrowError('[ERROR]');
+    });
+  });
 });
