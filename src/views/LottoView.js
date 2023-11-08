@@ -12,6 +12,10 @@ const LottoView = {
 
     printPurchaseLottoNumbers(lottoNumber){
         return Console.print(lottoNumber);
+    },
+
+    getUserLottoNumber(){
+        return Console.readLineAsync(PROMPT.WINNING_NUMBER);
     }
 }
 export default LottoView;

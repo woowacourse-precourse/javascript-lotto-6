@@ -18,6 +18,31 @@ class Validation{
 
         return true;
     }
+
+    static isUserInputLottoNumberValidate(userLottoNumber){
+        if(!userLottoNumber){
+            throw new Error(ERROR_MESSAGE.INVALID_NULL);
+        }
+
+        const lottoNumberArray = userLottoNumber.split(',');
+        if(lottoNumberArray.length !== CONSTANTS.LOTTO_NUMBER_LENGTH){
+            throw new Error(ERROR_MESSAGE.INVALID_LOTTO_NUMBER_LENGTH);
+        }
+        
+        if(new Set(lottoNumberArray).size !== lottoNumberArray.length){
+            throw new Error(ERROR_MESSAGE.INVALID_DUPLICATE_LOTTO_NUMBER);
+        }
+
+        if(lottoNumberArray.some(number => number < CONSTANTS.MIN_VALUE || number > CONSTANTS.MAX_VALUE)){
+            throw new Error(ERROR_MESSAGE.INVALID_LOTTO_NUMBER_RANGE);
+        }
+        
+        if(lottoNumberArray.some(number => isNaN(Number(number)))){
+            throw new Error(ERROR_MESSAGE.INVALID_NOT_A_NUMBER);
+        }
+
+        return true;
+    }
 }
 
 export default Validation;
