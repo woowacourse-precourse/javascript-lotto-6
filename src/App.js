@@ -5,15 +5,12 @@ class App {
     const util = new Utility();
     const purchaseQuantity = await util.getPurchaseQuantity();
     const myLottoArr = await util.getLottoNumbers(purchaseQuantity, 1, 45, 6);
-    myLottoArr.map((lotto) => {
-      const lottoStr = lotto.join(", ");
-      Console.print("[" + lottoStr + "]");
-    });
+    util.printLottoNumbers(myLottoArr);
     const mainLottoArr = await util.getWinningLotto();
     const bonusLotto = await util.getBonusLotto(mainLottoArr);
     const winningLottoArr = [mainLottoArr, bonusLotto];
-    const sameNumbers = util.compareNumbers(myLottoArr, winningLottoArr);
-    const places = util.statisticsOfWinningLotto(sameNumbers);
+    const matchedNumbers = util.compareNumbers(myLottoArr, winningLottoArr);
+    const places = util.statisticsOfWinningLotto(matchedNumbers);
     const rateOfReturn = util.rateOfReturn(places, purchaseQuantity);
     Console.print("총 수익률은 " + rateOfReturn + "%입니다.");
   }

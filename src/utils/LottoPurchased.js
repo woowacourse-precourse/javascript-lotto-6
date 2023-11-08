@@ -4,6 +4,7 @@ import Purchase from "../errors/Purchase.js";
 class LottoPurchased {
   async getPurchaseQuantity() {
     let purchaseAmount;
+
     while (true) {
       try {
         purchaseAmount = await Console.readLineAsync(
@@ -23,12 +24,21 @@ class LottoPurchased {
 
   async getLottoNumbers(quantity, min, max, count) {
     let myLottos = [];
-    for (let i = 0; i < quantity; i++) {
+
+    for (let count = 0; count < quantity; count++) {
       const myLotto = await Random.pickUniqueNumbersInRange(min, max, count);
       myLotto.sort((a, b) => a - b);
       myLottos.push(myLotto);
     }
+
     return myLottos;
+  }
+
+  printLottoNumbers(lottoArr) {
+    lottoArr.map((lotto) => {
+      const lottoStr = lotto.join(", ");
+      Console.print("[" + lottoStr + "]");
+    });
   }
 }
 
