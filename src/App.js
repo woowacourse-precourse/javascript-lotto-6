@@ -16,6 +16,7 @@ import {
 class App {
   constructor() {
     this.lottos = [];
+    this.purchaseAmount = 0;
   }
 
   async play() {
@@ -24,6 +25,7 @@ class App {
 
   async startLotto() {
     const inputPurchaseAmount = await purchaseAmountInput();
+    this.purchaseAmount = inputPurchaseAmount;
     this.purchaseQuantity(inputPurchaseAmount);
   }
 
@@ -115,10 +117,15 @@ class App {
     lottoSum += lottoResultArray[LOTTO.THIRD_PLACE] * LOTTO.THIRD_PLACE_PRIZE;
     lottoSum += lottoResultArray[LOTTO.FOURTH_PLACE] * LOTTO.FOURTH_PLACE_PRIZE;
     lottoSum += lottoResultArray[LOTTO.FIFTH_PLACE] * LOTTO.FIFTH_PLACE_PRIZE;
-    this.printLootoResult(lottoResultArray);
+    this.totalLottoSumRetrun(lottoResultArray, lottoSum);
   }
 
-  async printLootoResult(lottoResultArray) {
+  async totalLottoSumRetrun(lottoResultArray, lottoSum) {
+    const lottoSumReturn = ((lottoSum / this.purchaseAmount) * 100).toFixed(1);
+    this.printLootoResult(lottoResultArray, lottoSumReturn);
+  }
+
+  async printLootoResult(lottoResultArray, lottoSumReturn) {
     print(MESSAGE.WINNING_STATISTICS);
     print(MESSAGE.UNDERLINE);
     print(
@@ -146,6 +153,7 @@ class App {
         MESSAGE.EA
       }`
     );
+    print(MESSAGE.TOTAL_RETURN(lottoSumReturn));
   }
 }
 
