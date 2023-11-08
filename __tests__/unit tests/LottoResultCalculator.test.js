@@ -52,7 +52,7 @@ describe('LottoResultCalculator 클래스', () => {
       const profitRate = calculator.calculateProfitRate(moneySpent);
 
       const expectedProfitRate = (2000000000 / moneySpent) * 100;
-      expect(profitRate).toBe(expectedProfitRate.toFixed(1));
+      expect(profitRate).toBe(expectedProfitRate);
     });
   });
 });

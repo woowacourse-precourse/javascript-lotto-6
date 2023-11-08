@@ -64,10 +64,7 @@ describe('LottoService - LottoResultCalculator 통합 테스트', () => {
     const profitRate = resultCalculator.calculateProfitRate(moneyAmount);
 
     const expectedTotalPrizes = 2030000000;
-    const expectedProfitRate = (
-      (expectedTotalPrizes / moneyAmount) *
-      100
-    ).toFixed(1);
+    const expectedProfitRate = (expectedTotalPrizes / moneyAmount) * 100;
 
     expect(profitRate).toBe(expectedProfitRate);
   });

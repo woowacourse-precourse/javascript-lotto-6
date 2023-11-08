@@ -50,7 +50,7 @@ class LottoResultCalculator {
   calculateProfitRate(moneyAmount) {
     const totalPrizeMoney = this.#calculateTotalPrizeMoney();
     const profitRate = (totalPrizeMoney / moneyAmount) * 100;
-    return profitRate.toFixed(1);
+    return profitRate;
   }
 
   #calculateTotalPrizeMoney() {
