@@ -27,7 +27,7 @@ class Controller {
     try {
       const amount = await this.tiketBooth.takePaymentForTickets();
       this.#lottoBundle = new LottoBundle(amount);
-      this.announcer.printLottoBundle(this.#lottoBundle, amount);
+      this.announcer.printLottoBundle(this.#lottoBundle);
     } catch (error) {
       await this.handleErrorAndRetry(error, this.purchaseLotto.bind(this));
     }

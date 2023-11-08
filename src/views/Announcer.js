@@ -7,10 +7,9 @@ const formatLotto = (lotto) => `[${lotto.join(', ')}]`;
 const profitRate = (rate) => `총 수익률은 ${rate}%입니다.`;
 
 class Announcer {
-  printLottoBundle(lottoBundle, amount) {
+  printLottoBundle(lottoBundle) {
     const lottoList = lottoBundle.getLottoBundle();
-
-    Console.print(purchase(amount));
+    Console.print(purchase(lottoList.length));
     lottoList.forEach((lotto) => {
       Console.print(formatLotto(lotto.getLotto()));
     });
