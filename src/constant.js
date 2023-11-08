@@ -1,3 +1,9 @@
+const LOTTO = {
+  MIN_NUMBER: 1,
+  MAX_NUMBER: 45,
+  THE_NUMBER: 6,
+};
+
 const LOTTO_MESSAGE = {
   MONEY_INPUT: '구입금액을 입력해 주세요.\n',
   WINNING_INPUT: '\n당첨 번호를 입력해 주세요.\n',
@@ -21,4 +27,4 @@ const PRIZE_MONEY = {
   FIFTH: 5000,
 };
 
-export { LOTTO_MESSAGE, ERROR_MESSAGE, PRIZE_MONEY };
+export { LOTTO, LOTTO_MESSAGE, ERROR_MESSAGE, PRIZE_MONEY };

@@ -1,5 +1,5 @@
 import { Random, Console } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE } from './constant.js';
+import { ERROR_MESSAGE, LOTTO } from './constant.js';
 
 class Lotto {
   #numbers;
@@ -10,7 +10,7 @@ class Lotto {
   }
 
   static createLottoNumbers() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(LOTTO.MIN_NUMBER, LOTTO.MAX_NUMBER, LOTTO.THE_NUMBER);
   }
 
   #validate(numbers) {

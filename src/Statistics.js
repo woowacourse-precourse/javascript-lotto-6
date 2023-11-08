@@ -26,7 +26,7 @@ class Statistics {
   }
 
   #calculateEarningRate(numberOfLotto) {
-    this.#earningRate = (
+    const earningRate = (
       ((this.#first * PRIZE_MONEY.FIRST +
         this.#second * PRIZE_MONEY.SECOND +
         this.#third * PRIZE_MONEY.THIRD +
@@ -35,6 +35,12 @@ class Statistics {
         (numberOfLotto * 1000)) *
       100
     ).toFixed(1);
+    // .0로 끝나는 경우 Number 변환 시 뒤에 0이 사라지는 것을 방지
+    if (earningRate.includes('.0')) {
+      this.#earningRate = `${Number(earningRate).toLocaleString('ko-KR')}.0`;
+      return;
+    }
+    this.#earningRate = Number(earningRate).toLocaleString('ko-KR');
   }
 
   #calculateStatistics(winningNumber, bonusNumber, lottos) {
