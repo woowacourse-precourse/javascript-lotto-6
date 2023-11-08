@@ -11,6 +11,10 @@ export const SYMBOLS = {
   closeSquareBracket: ']',
 };
 
+export const LANG = {
+  korea: 'ko-KR',
+};
+
 export const REWARD_MESSAGE = {
   fifth: '5,000',
   fourth: '50,000',

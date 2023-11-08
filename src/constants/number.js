@@ -1,5 +1,8 @@
 export const NUMBER = {
+  one: 1,
+  decimalPoint: 1,
   lottoCount: 6,
+  percentage: 100,
   lottoPurchaseUnit: 1000,
 };
 
