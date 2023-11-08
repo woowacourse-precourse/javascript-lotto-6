@@ -1,4 +1,4 @@
-import { lottoLengthValidation, lottoDuplicatedValidation } from "../validation/lotto-validation.js";
+import { lottoLengthValidation, lottoDuplicatedValidation, lottoRangeValidation } from "../validation/lotto-validation.js";
 
 class Lotto {
   #numbers;
@@ -11,6 +11,7 @@ class Lotto {
   #validate(numbers) {
     lottoLengthValidation(numbers);
     lottoDuplicatedValidation(numbers);
+    lottoRangeValidation(numbers);
   }
 
   // TODO: 추가 기능 구현

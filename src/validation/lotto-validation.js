@@ -13,4 +13,13 @@ export const lottoDuplicatedValidation = (numbers) => {
     if (isDup) {
         throw new Error(ERROR_MESSAGE.lottoDuplicatedError);
     }
-}
+};
+
+export const lottoRangeValidation = (numbers) => {
+    const isOutOfRange = numbers.some(function(number) {
+        return number < 1 || number > 45;
+    });
+    if (isOutOfRange) {
+        throw new Error(ERROR_MESSAGE.lottoRangeError);
+    }
+};

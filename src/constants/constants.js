@@ -7,4 +7,5 @@ export const ERROR_MESSAGE = {
     perchaseRangeError : "[ERROR] 구입 금액 범위는 양수인 정수입니다.",
     lottoLengthError : "[ERROR] 로또 번호는 6개여야 합니다.",
     lottoDuplicatedError : "[ERROR] 로또 번호는 중복될 수 없습니다.",
+    lottoRangeError : "[ERROR] 로또 번호의 범위는 1~45 폐구간 입니다."
 };
