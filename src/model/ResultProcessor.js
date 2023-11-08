@@ -1,4 +1,4 @@
-import { LOTTO_RESULT } from "../constants/Constants";
+import { LOTTO_RESULT } from "../constants/Constants.js";
 
 class ResultProcessor {
   #userLottoNumbers;
