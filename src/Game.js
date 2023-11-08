@@ -17,6 +17,19 @@ class Game {
             }
         }
 
+        const count = purchaseAmount / 1000;
+        Console.print(`${count}개를 구매했습니다.`);
+
+        let numList = [];
+        let lottoList = [];
+
+        for (let i = 0; i < count; i++) {
+            const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+            numList.push(numbers);
+            lottoList.push(new Lotto(numbers));
+            Console.print(`[${numbers.join(", ")}]`);
+        }
+
     }
 }
 
