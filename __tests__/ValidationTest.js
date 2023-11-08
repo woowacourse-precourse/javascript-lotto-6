@@ -1,5 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import view from '../src/utils/view.js';
+import App from '../src/App.js';
+import ERROR from '../src/constants/Error.js';
 
 const mockQuestions = inputs => {
   Console.readLineAsync = jest.fn();
@@ -10,16 +12,21 @@ const mockQuestions = inputs => {
   });
 };
 
+const errorMessage = message => {
+  return `[ERROR] ${message}`;
+};
+
 describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예외 처리', () => {
   test('test1: 입력 값이 비어있을 경우', async () => {
     // given
-    const input = [''];
-    mockQuestions(input);
+    const inputs = [''];
+    mockQuestions(inputs);
+
+    // when
+    const userInput = view.readPurchaseLottos();
 
     // then
-    await expect(view.readPurchaseAmount()).rejects.toThrow(
-      '[ERROR] 입력 값이 없습니다. 값을 입력해주세요',
-    );
+    await expect(userInput).rejects.toThrow(errorMessage(ERROR.EMPTY_INPUT));
   });
 
   test.each([[['3abc']], [[' 32000']], [['..10000']]])(
@@ -28,9 +35,12 @@ describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예�
       // given
       mockQuestions(inputs);
 
+      // when
+      const inputPurchaseAmount = view.readPurchaseLottos();
+
       // then
-      await expect(view.readPurchaseAmount()).rejects.toThrow(
-        '[ERROR] 로또 구매 금액에는 숫자만 입력할 수 있습니다.',
+      await expect(inputPurchaseAmount).rejects.toThrow(
+        errorMessage(ERROR.INPUT_PURCHASE_AMOUNT.INVALID_FORMAT),
       );
     },
   );
@@ -41,9 +51,12 @@ describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예�
       // given
       mockQuestions(inputs);
 
+      // when
+      const inputPurchaseAmount = view.readPurchaseLottos();
+
       // then
-      await expect(view.readPurchaseAmount()).rejects.toThrow(
-        '[ERROR] 로또는 최소 1,000원부터 최대 100,000원까지 구매할 수 있습니다.',
+      await expect(inputPurchaseAmount).rejects.toThrow(
+        errorMessage(ERROR.INPUT_PURCHASE_AMOUNT.INVALID_PRICE_RANGE),
       );
     },
   );
@@ -54,23 +67,43 @@ describe('로또 구매 금액(purchaseAmount) 입력 값 Validation 관련 예�
       // given
       mockQuestions(inputs);
 
+      // when
+      const inputPurchaseAmount = view.readPurchaseLottos();
+
       // then
-      await expect(view.readPurchaseAmount()).rejects.toThrow(
-        '[ERROR] 로또 구입 금액은 1,000원 단위여야 합니다.',
+      await expect(inputPurchaseAmount).rejects.toThrow(
+        errorMessage(ERROR.INPUT_PURCHASE_AMOUNT.INVALID_PRICE_UNIT),
       );
     },
   );
+
+  // test.each([
+  //   [{ input: [['3000']], output: '3개를 구매했습니다.' }],
+  //   [{ input: [['10000']], output: '10개를 구매했습니다.' }],
+  // ])('test5: 입력 금액이 올바르게 입력된 경우', async ({ input, output }) => {
+  //   // given
+  //   mockQuestions(input);
+
+  //   // when
+  //   const app = new App();
+
+  //   // then
+  //   expect(app.setLottoGameConfig()).toHaveBeenCalledWith(output);
+  // });
 });
 
 describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처리', () => {
   test('test1: 입력 값이 비어있을 경우', async () => {
     // given
-    const input = [''];
-    mockQuestions(input);
+    const inputs = [''];
+    mockQuestions(inputs);
+
+    // when
+    const inputWinningNumbers = view.readWinningNumbers();
 
     // then
-    await expect(view.readWinningNumbers()).rejects.toThrow(
-      '[ERROR] 입력 값이 없습니다. 값을 입력해주세요',
+    await expect(inputWinningNumbers).rejects.toThrow(
+      errorMessage(ERROR.EMPTY_INPUT),
     );
   });
 
@@ -84,9 +117,12 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       // given
       mockQuestions(inputs);
 
+      // when
+      const inputWinningNumbers = view.readWinningNumbers();
+
       // then
-      await expect(view.readWinningNumbers()).rejects.toThrow(
-        '[ERROR] 당첨 번호에는 공백 없이 1부터 45 사이의 숫자와 쉼표만 입력할 수 있습니다.',
+      await expect(inputWinningNumbers).rejects.toThrow(
+        errorMessage(ERROR.INPUT_WINNING_NUMBERS.INVALID_CHARACTER),
       );
     },
   );
@@ -97,9 +133,12 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       // given
       mockQuestions(inputs);
 
+      // when
+      const inputWinningNumbers = view.readWinningNumbers();
+
       // then
-      await expect(view.readWinningNumbers()).rejects.toThrow(
-        '[ERROR] 번호 사이에 쉼표를 한 개만 입력할 수 있습니다.\n(입력 값은 숫자로 끝나야 합니다.)',
+      await expect(inputWinningNumbers).rejects.toThrow(
+        errorMessage(ERROR.INPUT_WINNING_NUMBERS.INVALID_FORMAT),
       );
     },
   );
@@ -110,9 +149,12 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       // given
       mockQuestions(inputs);
 
+      // when
+      const inputWinningNumbers = view.readWinningNumbers();
+
       // then
-      await expect(view.readWinningNumbers()).rejects.toThrow(
-        '[ERROR] 당첨 번호는 총 6개를 입력해야 합니다.',
+      await expect(inputWinningNumbers).rejects.toThrow(
+        errorMessage(ERROR.INPUT_WINNING_NUMBERS.INVALID_LENGTH),
       );
     },
   );
@@ -123,9 +165,12 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       // given
       mockQuestions(inputs);
 
+      // when
+      const inputWinningNumbers = view.readWinningNumbers();
+
       // then
-      await expect(view.readWinningNumbers()).rejects.toThrow(
-        '[ERROR] 각 번호는 1부터 45 사이의 숫자여야 합니다.',
+      await expect(inputWinningNumbers).rejects.toThrow(
+        errorMessage(ERROR.INPUT_WINNING_NUMBERS.INVALID_NUMBER_RANGE),
       );
     },
   );
@@ -136,24 +181,30 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       // given
       mockQuestions(inputs);
 
+      // when
+      const inputWinningNumbers = view.readWinningNumbers();
+
       // then
-      await expect(view.readWinningNumbers()).rejects.toThrow(
-        '[ERROR] 각 번호는 중복되지 않아야 합니다.',
+      await expect(inputWinningNumbers).rejects.toThrow(
+        errorMessage(ERROR.INPUT_WINNING_NUMBERS.DUPLICATE_VALUE),
       );
     },
   );
 });
 
-describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처리', () => {
+describe('보너스 번호(bonusNumbers) 입력 값 Validation 관련 예외 처리', () => {
   test('test1: 입력 값이 비어있을 경우', async () => {
     // given
-    const input = [''];
+    const inputs = [''];
     const winningNumbers = [1, 2, 3, 4, 5, 6];
-    mockQuestions(input);
+    mockQuestions(inputs);
+
+    // when
+    const inputBonusNumber = view.readBonusNumber(winningNumbers);
 
     // then
-    await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
-      '[ERROR] 입력 값이 없습니다. 값을 입력해주세요',
+    await expect(inputBonusNumber).rejects.toThrow(
+      errorMessage(ERROR.EMPTY_INPUT),
     );
   });
 
@@ -164,9 +215,12 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       const winningNumbers = [1, 2, 3, 4, 5, 6];
       mockQuestions(inputs);
 
+      // when
+      const inputBonusNumber = view.readBonusNumber(winningNumbers);
+
       // then
-      await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
-        '[ERROR] 보너스 번호에는 1부터 45 사이의 숫자만 입력할 수 있습니다.',
+      await expect(inputBonusNumber).rejects.toThrow(
+        errorMessage(ERROR.INPUT_BONUS_NUMBER.INVALID_FORMAT),
       );
     },
   );
@@ -178,9 +232,12 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       const winningNumbers = [1, 2, 3, 4, 5, 6];
       mockQuestions(inputs);
 
+      // when
+      const inputBonusNumber = view.readBonusNumber(winningNumbers);
+
       // then
-      await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
-        '[ERROR] 보너스 번호에는 1부터 45 사이의 숫자만 입력할 수 있습니다.',
+      await expect(inputBonusNumber).rejects.toThrow(
+        errorMessage(ERROR.INPUT_BONUS_NUMBER.INVALID_FORMAT),
       );
     },
   );
@@ -192,9 +249,12 @@ describe('당첨 번호(winningNumbers) 입력 값 Validation 관련 예외 처�
       const winningNumbers = [1, 2, 3, 4, 5, 6];
       mockQuestions(inputs);
 
+      // when
+      const inputBonusNumber = view.readBonusNumber(winningNumbers);
+
       // then
-      await expect(view.readBonusNumber(winningNumbers)).rejects.toThrow(
-        '[ERROR] 보너스 번호는 당첨 번호에 포함되어 있지 않아야 합니다.',
+      await expect(inputBonusNumber).rejects.toThrow(
+        errorMessage(ERROR.INPUT_BONUS_NUMBER.INCLUDE_WINNING_NUMBERS),
       );
     },
   );
