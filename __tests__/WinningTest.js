@@ -1,4 +1,5 @@
 import WinningLotto from "../src/models/WinningLotto.js";
+import Reward from "../src/models/Reward.js";
 import { Random } from "@woowacourse/mission-utils";
 
 describe("당첨 번호 클래스 테스트", () => {
@@ -52,5 +53,12 @@ describe("당첨 번호 클래스 테스트", () => {
     expect(result.get('5')).toBe(0);
     expect(result.get('4')).toBe(0);
     expect(result.get('3')).toBe(1);
+  });
+
+  test('당첨 결과를 바탕으로 올바른 수익률을 반환한다.', () => {
+    const matchCountsesult = new Map([['3', 2],['4', 0],['5', 0], ['5+', 1],['6', 1]]);
+    const purchaseAmount = 4000;
+    const EarningRate = Reward.getEarningRate(matchCountsesult, purchaseAmount);
+    expect(EarningRate).toBe("50750250.0");
   });
 });
