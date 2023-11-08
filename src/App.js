@@ -59,6 +59,18 @@ class App {
 
     await this.getLottoNumbers();
     await this.getBonusNumber();
+
+    const matchingResults = this.game.calculateAllLottoMatches(
+      this.lotto,
+      drawingLotto,
+      this.bonusNumber
+    );
+
+    const earningRate = this.game.getEarningRate(
+      PRIZE,
+      matchingResults,
+      this.purchasePrice
+    );
   }
 }
 
