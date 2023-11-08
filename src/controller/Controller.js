@@ -4,7 +4,7 @@ import Announcer from '../views/Announcer.js';
 import LottoBundle from '../models/LottoBundle.js';
 import WinLotto from '../models/WinLotto.js';
 import Analyzer from '../models/Analyzer.js';
-import { ERROR } from '../constants/messages.js';
+import { ERROR_MESSEGE } from '../constants/messages.js';
 
 class Controller {
   #lottoBundle;
@@ -29,8 +29,7 @@ class Controller {
       this.#lottoBundle = new LottoBundle(amount);
       this.announcer.printLottoBundle(this.#lottoBundle, amount);
     } catch (error) {
-      Console.print(error.message + ERROR.invalideInput);
-      await this.purchaseLotto();
+      await this.handleErrorAndRetry(error, this.purchaseLotto.bind(this));
     }
   }
 
@@ -38,8 +37,7 @@ class Controller {
     try {
       await this.tiketBooth.receiveWinNumbers();
     } catch (error) {
-      Console.print(error.message + ERROR.invalideInput);
-      await this.drawWinNumbers();
+      await this.handleErrorAndRetry(error, this.drawWinNumbers.bind(this));
     }
   }
 
@@ -47,9 +45,13 @@ class Controller {
     try {
       await this.tiketBooth.receiveBonusNumber();
     } catch (error) {
-      Console.print(error.message + ERROR.invalideInput);
-      await this.drawBonusNumber();
+      await this.handleErrorAndRetry(error, this.drawBonusNumber.bind(this));
     }
+  }
+
+  async handleErrorAndRetry(error, retryProcess) {
+    Console.print(error.message + ERROR_MESSEGE.invalideInput);
+    await retryProcess();
   }
 
   processLottoResults() {
