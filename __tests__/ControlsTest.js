@@ -36,4 +36,26 @@ describe('컨트롤러 테스트', () => {
       );
     }
   );
+
+  test.each([
+    [['1,2,3,4,5', '45']],
+    [['1,2,3,4,5,a', '45']],
+    [['1,2,3,4,5,0', '45']],
+  ])('잘못된 당첨 번호 예외 처리', async (inputs) => {
+    mockQuestions(inputs);
+    await expect(async () => await Controls.writeWin()).rejects.toThrow(
+      '[ERROR]'
+    );
+  });
+
+  test.each([
+    [['1,2,3,4,5,6', '1']],
+    [['1,2,3,4,5,6', '0']],
+    [['1,2,3,4,5,6', '!']],
+  ])('잘못된 보너스 번호 예외 처리', async (inputs) => {
+    mockQuestions(inputs);
+    await expect(async () => await Controls.writeWin()).rejects.toThrow(
+      '[ERROR]'
+    );
+  });
 });
