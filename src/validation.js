@@ -1,11 +1,15 @@
 const isMoneyValid = (input) => {
-  if (Number.isNaN(+input)) {
+  const numberInput = Number(input);
+  if (Number.isNaN(numberInput)) {
     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
   }
   if (input !== input.trim()) {
     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
   }
-  if (Number(input) < 0) {
+  if (numberInput < 0) {
+    throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+  }
+  if (numberInput % 1000 !== 0) {
     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
   }
 };
