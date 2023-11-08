@@ -25,13 +25,13 @@ class Lotto {
   }
 
   saveCompareResult(compareResult, lottoBoard) {
-    const [sameCnt, bonusCnt] = compareResult;
+    const [sameCnt, hasBonusNumber] = compareResult;
 
     if (sameCnt === 3) {
       lottoBoard.threeSame += 1;
     } else if (sameCnt === 4) {
       lottoBoard.fourSame += 1;
-    } else if (sameCnt === 5 && bonusCnt === 1) {
+    } else if (sameCnt === 5 && hasBonusNumber === true) {
       lottoBoard.fiveAndBonusSame += 1;
     } else if (sameCnt === 5) {
       lottoBoard.fiveSame += 1;
