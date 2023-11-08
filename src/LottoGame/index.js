@@ -1,5 +1,5 @@
 import Validator from '../Validator/index.js';
-import { MESSAGE } from '../constants/index.js';
+import { MESSAGE, NUMBER, SYMBOLS } from '../constants/index.js';
 import { Input, Output } from '../View/index.js';
 import LottoMachine from '../LottoMachine/index.js';
 import WinningNumberValidator from '../Validator/WinningNumbersValidator/index.js';
@@ -26,7 +26,9 @@ class LottoGame {
   }
 
   async purchase(amount) {
+    const lottoCount = Number(amount) / NUMBER.lottoPurchaseUnit;
     const lottos = this.#lottoMachine.buy(amount);
+    Output.log(`${lottoCount}${MESSAGE.purchase}`);
     Output.log(lottos);
 
     await this.askWinningNumbers();
@@ -52,6 +54,7 @@ class LottoGame {
 
   prize() {
     const result = this.#lottoMachine.makeResult();
+    Output.log(`${MESSAGE.winningStatistics}${SYMBOLS.boundary}`);
     Output.log(result);
   }
 }
