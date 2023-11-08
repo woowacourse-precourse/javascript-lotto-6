@@ -53,10 +53,10 @@ class App {
       const winningNumbers = await MissionUtils.Console.readLineAsync(
         "당첨 번호를 입력해 주세요.\n",
       );
-      const checkWinningNumbers = new Lotto(winningNumbers);
-      const getWinningNumber = checkWinningNumbers.getNumbers();
+      const winningNumbersArray = winningNumbers.split(",");
+      const checkWinningNumbers = new Lotto(winningNumbersArray);
 
-      return getWinningNumber;
+      return winningNumbersArray;
     } catch (error) {
       MissionUtils.Console.print(error.message);
 
@@ -84,7 +84,7 @@ class App {
     let hit = 0;
     let bonusHit = false;
 
-    winningNumber.split(",").forEach((winningNumber) => {
+    winningNumber.forEach((winningNumber) => {
       if (lottoNumber.includes(Number(winningNumber))) hit++;
     });
 
