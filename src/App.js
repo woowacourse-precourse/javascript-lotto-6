@@ -66,6 +66,28 @@ export async function enterBonusNumber() {
   }
 }
 
+export function calculatePrizes(matchCount, prizeList, lottoTicket, bonusNumber) {
+  switch (matchCount) {
+    case 3:
+      prizeList[0] += 5000;
+      break;
+    case 4:
+      prizeList[1] += 50000;
+      break;
+    case 5:
+      if (lottoTicket.includes(bonusNumber)) {
+        prizeList[3] += 30000000;
+      } else {
+        prizeList[2] += 1500000;
+      }
+      break;
+    case 6:
+      prizeList[4] += 2000000000;
+      break;
+  }
+  return prizeList;
+}
+
 class App {
   async play() {}
 }
