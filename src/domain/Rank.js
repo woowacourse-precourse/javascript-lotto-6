@@ -2,10 +2,10 @@ import NUMBER from '../constants/Number.js';
 
 class Rank {
   #lottos;
-  #rankStatistic;
+  #rankResult;
 
   constructor(lottos) {
-    this.#rankStatistic = Array(NUMBER.lottoRank).fill(0);
+    this.#rankResult = Array(NUMBER.lottoRank).fill(0);
     this.#lottos = lottos;
   }
 
@@ -13,10 +13,6 @@ class Rank {
     return winningNumber.map(Number).filter((number) => lotto.includes(number)).length;
   }
 
-  /**
-   * @param Object props { winningNumber: 당첨 번호 배열, bonusNumber: 보너스 번호 }
-   * @returns {number} 구매한 로또 당첨 등수
-   */
   #getRank(lotto, props) {
     const count = this.#getSameNumberCount(lotto, props.winningNumber);
     const rankMapping = {
@@ -28,12 +24,12 @@ class Rank {
     return rankMapping[count];
   }
 
-  getRankStatistic(props) {
+  getRankResult(props) {
     this.#lottos.forEach((lotto) => {
       const rank = this.#getRank(lotto, props);
-      if (rank) this.#rankStatistic[rank - 1] += 1;
+      if (rank) this.#rankResult[rank - 1] += 1;
     });
-    return this.#rankStatistic;
+    return this.#rankResult;
   }
 }
 

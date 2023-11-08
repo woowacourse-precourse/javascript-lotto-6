@@ -11,7 +11,7 @@ class Game {
   #lottos;
   #winningNumbers;
   #bonusNumber;
-  #winningStatistic;
+  #winningResult;
   #revenueRate;
 
   constructor() {}
@@ -42,17 +42,17 @@ class Game {
   async #askBonusNumber() {
     const bonusNumber = await InputView.readBonusNumbers(this.#winningNumbers.getWinningNumber());
     this.#bonusNumber = new BonusNumber(bonusNumber);
-    this.#winningStatistic = new Rank(this.#lottos.getLottos());
+    this.#winningResult = new Rank(this.#lottos.getLottos());
     this.#displayResult();
   }
 
   #displayResult() {
-    const winningStatistic = this.#winningStatistic.getRankStatistic({
+    const winningResult = this.#winningResult.getRankResult({
       winningNumber: this.#winningNumbers.getWinningNumber(),
       bonusNumber: this.#bonusNumber.getBonusNumber(),
     });
-    OutputView.printResultStatistic(winningStatistic);
-    this.#revenueRate = this.#quantity.getRevenueRate(winningStatistic);
+    OutputView.printResult(winningResult);
+    this.#revenueRate = this.#quantity.getRevenueRate(winningResult);
     OutputView.printRevenueResult(this.#revenueRate);
     return;
   }

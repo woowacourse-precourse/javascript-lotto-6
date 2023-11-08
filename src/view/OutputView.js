@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import STATIC_RESULT from '../constants/StaticResult.js';
 import MESSAGES from '../constants/messages.js';
+import RESULT_MESSAGE from '../constants/StaticResult.js';
 
 const OutputView = {
   printPurchaseAmount(amount) {
@@ -17,10 +17,10 @@ const OutputView = {
     MissionUtils.Console.print(`${MESSAGES.revenueFront} ${revenue}${MESSAGES.revenueBack}`);
   },
 
-  printResultStatistic(winningStatic) {
+  printResult(winningStatic) {
     MissionUtils.Console.print(MESSAGES.resultHead);
     for (let i = 0; i < winningStatic.length; i++) {
-      MissionUtils.Console.print(`${STATIC_RESULT[i]}${winningStatic[4 - i]}${MESSAGES.quantity}`);
+      MissionUtils.Console.print(`${RESULT_MESSAGE[i]}${winningStatic[4 - i]}${MESSAGES.quantity}`);
     }
   },
 };
