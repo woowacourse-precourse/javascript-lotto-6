@@ -26,13 +26,17 @@ class Lotto {
     const count = this.countMatchNumbers(randomNumbers);
     if (count === 6) {
       this.prizes[1].matchCount += 1;
-    } else if (count === 5 && randomNumbers.includes(bonusNumber)) {
+    }
+    if (count === 5 && randomNumbers.includes(bonusNumber)) {
       this.prizes[2].matchCount += 1;
-    } else if (count === 5) {
+    }
+    if (count === 5) {
       this.prizes[3].matchCount += 1;
-    } else if (count === 4) {
+    }
+    if (count === 4) {
       this.prizes[4].matchCount += 1;
-    } else if (count === 3) {
+    }
+    if (count === 3) {
       this.prizes[5].matchCount += 1;
     }
   }
@@ -47,7 +51,7 @@ class Lotto {
     return count;
   }
   getMatchCount(rank) {
-    // 등수별 당첨 개수 구하기
+    // 등수별 당첨 개수 반환
     return this.prizes[rank].matchCount;
   }
 
@@ -65,9 +69,9 @@ class Lotto {
     // 수익률 구하기
     let totalWinningMoney = 0;
     for (let i = 1; i <= 5; i++) {
-      totalWinningMoney += this.prizes[i].matchCount * this.prizes[i].winningMoney;
+      totalWinningMoney += this.getMatchCount(i) * this.prizes[i].winningMoney;
     }
-    return (totalWinningMoney / inputPrice) * 100;
+    return Math.round((totalWinningMoney / inputPrice) * 100);
   }
 
   printCalculateRate(inputPrice) {
