@@ -52,14 +52,7 @@ class LottoMachine {
     const bonusNumber = await LottoView.getUserInput(
       ENTER_MESSAGE.bonus_number
     );
-    if (!Validation.hasProperRange(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.bonus_number);
-    }
-
-    if (Validation.isDuplicateBonusNumber(this.#winningNumbers, bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.bonus_duplicate);
-    }
-
+    Validation.isProperBonusNumber(this.#winningNumbers, bonusNumber);
     this.#bonusNumber = Number(bonusNumber);
   }
 

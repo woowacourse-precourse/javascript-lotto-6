@@ -5,23 +5,6 @@ import {
 } from './constants/gameinfo.js';
 import { ERROR_MESSAGE } from './constants/message.js';
 class Validation {
-  static hasDuplication([...numbers]) {
-    const set = new Set(numbers);
-    if (numbers.length !== set.size) {
-      return true;
-    }
-
-    return false;
-  }
-
-  static hasProperRange([...numbers]) {
-    return numbers
-      .map(Number)
-      .every(
-        (number) => LOTTO_RANGE_MIN <= number && number <= LOTTO_RANGE_MAX
-      );
-  }
-
   static isProperPurchaseAmount(price) {
     const purchaseAmount = Number(price);
 
@@ -36,8 +19,35 @@ class Validation {
     return true;
   }
 
-  static isDuplicateBonusNumber([...numbers], bonusNumber) {
-    return numbers.includes(bonusNumber);
+  static isProperBonusNumber(winningNumbers, bonusNumber) {
+    if (!Validation.hasProperRange(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.bonus_number_range);
+    }
+
+    if (Validation.isDuplicateBonusNumber(winningNumbers, bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.bonus_duplicate);
+    }
+  }
+
+  static hasProperRange([...numbers]) {
+    return numbers
+      .map(Number)
+      .every(
+        (number) => LOTTO_RANGE_MIN <= number && number <= LOTTO_RANGE_MAX
+      );
+  }
+
+  static isDuplicateBonusNumber([...winningNumbers], bonusNumber) {
+    return winningNumbers.includes(bonusNumber);
+  }
+
+  static hasDuplication([...numbers]) {
+    const set = new Set(numbers);
+    if (numbers.length !== set.size) {
+      return true;
+    }
+
+    return false;
   }
 
   static isProperWinningNumbers(userInput) {

@@ -6,7 +6,7 @@ const ERROR_MESSAGE = {
   cant_divide_purchase_amount:
     '[ERROR] 로또 구입 금액은 1000원 단위로 나누어 떨어져야 합니다.',
   winning_number: '[ERROR] 당첨 번호 입력이 잘못되었습니다.',
-  bonus_number: '[ERROR] 보너스 번호 입력이 잘못되었습니다.',
+  bonus_number_range: '[ERROR] 보너스 번호는 1~45 범위여야 합니다.',
   bonus_duplicate: '[ERROR] 중복된 보너스번호 입니다.',
 };
 
