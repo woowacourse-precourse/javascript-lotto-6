@@ -38,8 +38,8 @@ class Input {
         .split(",")
         .map((number) => parseInt(number, 10));
       
-      // Validate lottoNumbers using the Lotto class
-      Lotto.validateLottoNumbers(lottoNumbers);
+      // Use the Lotto class constructor to perform validation
+      const lotto = new Lotto(lottoNumbers);
       
       return lottoNumbers;
     } catch (error) {
@@ -63,7 +63,7 @@ class Input {
       }
   
       const bonusNumber = bonusNumbers[0];
-      return bonusNumber; // 보너스 번호를 반환
+      return bonusNumber;
     } catch (error) {
       Console.print(`${error.message}`);
       process.exit(1);
