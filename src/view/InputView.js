@@ -11,6 +11,7 @@ const InputView = {
         const purchasePrice = await Console.readLineAsync(
           MESSAGE_ASK.purchasePrice
         );
+        InputValidator.validateEmptyString(purchasePrice);
         InputValidator.validatePurchasePrice(purchasePrice);
         const purchaseQuantity = Calculator.calcPurchaseQuantity(purchasePrice);
         return purchaseQuantity;
@@ -27,6 +28,7 @@ const InputView = {
         const winningNums = await Console.readLineAsync(
           MESSAGE_ASK.winningNums
         );
+        InputValidator.validateEmptyString(winningNums);
         const winningNumArr = InputValidator.validateWinningNums(winningNums);
         return winningNumArr;
       } catch (error) {
@@ -40,6 +42,7 @@ const InputView = {
     while (true) {
       try {
         const bonusNum = await Console.readLineAsync(MESSAGE_ASK.bonusNum);
+        InputValidator.validateEmptyString(bonusNum);
         InputValidator.validateBonusNum(bonusNum, winningNums);
         return bonusNum;
       } catch (error) {
