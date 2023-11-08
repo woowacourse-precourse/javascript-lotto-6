@@ -17,7 +17,7 @@ class Lotto {
     if (new Set(numbers).size !== LOTTO_CONSTANT.numberCount) {
       throw new Error(ERROR_MESSAGES.duplicateLottoNumbers);
     }
-    if (numbers.some((num) => Number.isNaN(num))) {
+    if (numbers.some((num) => Number.isNaN(num) || typeof num !== "number")) {
       throw new Error(ERROR_MESSAGES.lottoNumberNotNumber);
     }
     if (numbers.some((num) => num < LOTTO_CONSTANT.minNumber || num > LOTTO_CONSTANT.maxNumber)) {
