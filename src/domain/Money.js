@@ -3,9 +3,8 @@ import Parser from '../parser/Parser.js';
 import validateMoney from '../validator/validateMoney.js';
 
 class Money {
-  #money; // 추후 입금, 출금이 있을 수 있으므로 멤버 변수로 관리해야한다.
+  #money;
 
-  // TODO: 에러 캐치 필요
   constructor(money) {
     const parsedMoney = Parser.parseInt(money);
 
