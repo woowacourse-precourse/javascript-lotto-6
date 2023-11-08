@@ -7,6 +7,12 @@ class Output {
     await Console.print(OUTPUT_MSG.PURCHASE_AMOUNT)
   }
 
+  async printLottoArray(amount, array) {
+    await Console.print(`\n${amount}${OUTPUT_MSG.PURCHASE_ITEM_COUNT}`)
+    for(let i=0; i<array.length; i += 1) {
+      Console.print(array[i])
+    }
+  }
 }
 
 export default Output
