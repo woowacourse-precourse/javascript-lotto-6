@@ -20,7 +20,7 @@ class LottoController {
   }
 
   async #getAndValidateInputs() {
-    const purchaseCost = await this.getPurchaseCost();
+    const purchaseCost = await this.#getPurchaseCost();
     this.#lottos = this.#createLottos(purchaseCost);
     const winningNumbers = await this.#getWinningNumbers();
     const bonusNumber = await this.#getBonusNumber(winningNumbers);
@@ -33,7 +33,7 @@ class LottoController {
     OutputView.printFinalResult(results, profit);
   }
 
-  async getPurchaseCost() {
+  async #getPurchaseCost() {
     while (true) {
       try {
         const inputCost = await InputView.inputParchaseCost();

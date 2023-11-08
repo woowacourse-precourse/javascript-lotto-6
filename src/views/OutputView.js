@@ -18,9 +18,8 @@ class OutputView {
     const order = [3, 4, 5, '5+1', 6];
     printMessage(OutputMessage.RESULT_HEADER);
 
-    order.map(key => {
-      const { count } = results[key];
-      const { prize } = results[key];
+    order.forEach(key => {
+      const { count, prize } = results[key];
       printMessage(OutputMessage.RESULT(key, prize, count));
     });
   }
