@@ -16,6 +16,8 @@ class User {
 
   async inputLottoWinningNumber() {
     const winningNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    const winningNumbers = winningNumber.split(',').map(number => parseInt(number));
+    Console.print(winningNumbers)
     return winningNumber;
   }
 

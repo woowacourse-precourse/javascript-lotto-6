@@ -11,10 +11,9 @@ class App {
       const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
 
       const lotto = new Lotto(lottoNumbers);
-      const sortedLotto = lotto.sortLottoNumbers();
-
-      lottos.push(sortedLotto);
+      lotto.sortLottoNumbers();
       
+      lottos.push(lotto);
       count++;
     }
     
