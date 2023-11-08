@@ -22,9 +22,7 @@ class App {
     Console.print(resultMessage.FIFTH + rank.fifth + resultMessage.END);
     Console.print(resultMessage.FOURTH + rank.fourth + resultMessage.END);
     Console.print(resultMessage.THIRD + rank.third + resultMessage.END);
-    Console.print(
-      resultMessage.SECOND + rank.second + resultMessage.END
-    );
+    Console.print(resultMessage.SECOND + rank.second + resultMessage.END);
     Console.print(resultMessage.FIRST + rank.first + resultMessage.END);
   }
 
