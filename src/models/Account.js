@@ -1,6 +1,4 @@
-import OPTION from '../constants/option.js';
-import MESSAGE from '../constants/message.js';
-import InputError from '../error/InputError.js';
+import InputValidator from '../Validator/InputValidator.js';
 
 class Account {
   #purchaseAmount;
@@ -13,12 +11,8 @@ class Account {
   }
 
   #validate(purchaseAmount) {
-    if (!Number.isSafeInteger(purchaseAmount) || purchaseAmount < 0) {
-      throw new InputError(MESSAGE.error.purchaseAmountMustBePositiveInteger);
-    }
-    if (purchaseAmount === 0 || purchaseAmount % OPTION.lotto.amountUnit) {
-      throw new InputError(MESSAGE.error.purchaseAmountMustBeAmountUnit);
-    }
+    InputValidator.isPurchaseAmountPositiveInteger(purchaseAmount);
+    InputValidator.isPurchaseAmountInAmountUnit(purchaseAmount);
   }
 
   setPurchaseAmount(purchaseAmount) {

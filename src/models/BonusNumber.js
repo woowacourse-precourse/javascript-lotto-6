@@ -1,7 +1,4 @@
-import OPTION from '../constants/option.js';
-import MESSAGE from '../constants/message.js';
-import { numberInRange } from '../utils/number.js';
-import InputError from '../error/InputError.js';
+import InputValidator from '../Validator/InputValidator.js';
 
 class BonusNumber {
   #number;
@@ -12,18 +9,8 @@ class BonusNumber {
   }
 
   #validate(number, winningNumbers) {
-    if (
-      !numberInRange(
-        number,
-        OPTION.lotto.minLottoNumber,
-        OPTION.lotto.maxLottoNumber,
-      )
-    ) {
-      throw new InputError(MESSAGE.error.bonuseNumberMustBeInRange);
-    }
-    if (winningNumbers.includes(number)) {
-      throw new InputError(MESSAGE.error.bonusNumberMustBeUnique);
-    }
+    InputValidator.isBonusNumberInRange(number);
+    InputValidator.isBonusNumberUnique(number, winningNumbers);
   }
 
   getNumber() {
