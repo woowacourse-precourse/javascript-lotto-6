@@ -13,6 +13,10 @@ class Lotto {
       throw new Error('[ERROR] 로또 번호는 6개의 숫자를 쉼표를 사용하여 구분하여 입력해야 합니다.');
     }
 
+    if (new Set(numbers).length !== 6) {
+      throw new Error('[ERROR] 중복된 숫자는 입력할 수 없습니다.');
+    }
+
     numbers.forEach(number => {
       if (number.trim() === '') {
         throw new Error('[ERROR] 로또 번호는 숫자만 입력해주세요.');
