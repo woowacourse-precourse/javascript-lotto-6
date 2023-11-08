@@ -59,6 +59,17 @@ function printLottos() {
     Console.print(`[${numbers.join(", ")}]`);
   }
 }
+async function inputWinningNumbers() {
+  const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+  const numbers = input.split(",").map((number) => Number(number));
+  if (numbers.length !== this.NUMBER_COUNT) {
+    throw new Error("[ERROR] 당첨 번호는 6개여야 합니다.");
+  }
+  for (const number of numbers) {
+    this.validateNumber(number);
+  }
+  this.winningNumbers = numbers;
+}
 
 
 export default App;
