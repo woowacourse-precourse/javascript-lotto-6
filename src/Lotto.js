@@ -8,26 +8,22 @@ class Lotto {
   }
 
   #validate(numbers) {
-    console.log(numbers);
     if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.NOT_NUMBER_6);
     }
     if (new Set(numbers).size !== numbers.length)
       throw new Error(ERROR_MESSAGE.DUPLICATE_NUMBER);
-    if (this.hasBoolean(numbers))
-      throw new Error(ERROR_MESSAGE.CONTAIN_BOOLEAN);
     if (this.hasText(numbers)) throw new Error(ERROR_MESSAGE.CONTAIN_TEXT);
     if (this.hasSpaces(numbers)) throw new Error(ERROR_MESSAGE.CONTAIN_SPACES);
     if (this.hasSpecialCharacter(numbers))
       throw new Error(ERROR_MESSAGE.CONTAIN_SPECIAL_CHARACTER);
     if (this.hasValueOutsideRange(numbers)) {
-      console.log(1);
       throw new Error(ERROR_MESSAGE.NOT_NUMBER_IN_1_TO_45);
     }
   }
 
   hasSpaces(arr) {
-    const foundItem = arr.find((v) => typeof v === "string" && v.includes(" "));
+    const foundItem = arr.find((v) => v.includes(" ") || v === "");
     return foundItem !== undefined ? true : false;
   }
   hasSpecialCharacter(arr) {
@@ -38,12 +34,6 @@ class Lotto {
   hasText(arr) {
     const regex = /[A-Za-z가-힣]/;
     const foundItem = arr.find((v) => regex.test(v));
-    return foundItem !== undefined ? true : false;
-  }
-  hasBoolean(arr) {
-    const foundItem = arr.find(
-      (v) => typeof v === "boolean" && v !== 1 && v !== 0
-    );
     return foundItem !== undefined ? true : false;
   }
   hasValueOutsideRange(arr) {
