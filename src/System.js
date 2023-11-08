@@ -91,7 +91,7 @@ class System {
     }
   }
 
-  calculateLottoStats(lottos, winningNumbers, bonusNumber) {
+  getWinningCounts(lottos, winningNumbers, bonusNumber) {
     const winningCounts = {
       first: 0,
       second: 0,
@@ -100,6 +100,16 @@ class System {
       fifth: 0,
     };
 
+    this.calculateLottoStats(
+      lottos,
+      winningNumbers,
+      winningCounts,
+      bonusNumber
+    );
+    return winningCounts;
+  }
+
+  calculateLottoStats(lottos, winningNumbers, winningCounts, bonusNumber) {
     lottos.forEach((lotto) => {
       const lottoNumbers = lotto.getNumbers();
       const matchedCount = lotto.getMatchedCount(winningNumbers);

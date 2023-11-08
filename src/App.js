@@ -20,7 +20,7 @@ class App {
     const lotto = await system.getLotto();
     const bonusNumber = await system.getBonusNumber(lotto);
     const winningNumbers = lotto.getNumbers();
-    const winningCounts = system.calculateLottoStats(
+    const winningCounts = system.getWinningCounts(
       lottos,
       winningNumbers,
       bonusNumber
