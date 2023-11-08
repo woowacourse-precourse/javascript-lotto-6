@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import PromptMessage from '../constants/PromptMessage.js';
 import LottoConstants from '../constants/LottoConstants.js';
-import Lotto from '../model/Lotto.js';
+import Lotto from '../Lotto.js';
 
 class OutputView {
   static printLotto(price, arr) {

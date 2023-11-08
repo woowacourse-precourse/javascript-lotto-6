@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import Exception from '../utils/Exception.js';
+import Exception from './utils/Exception.js';
 
 class Lotto {
   #numbers;
