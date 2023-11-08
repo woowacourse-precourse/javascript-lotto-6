@@ -17,15 +17,18 @@ class LottoController{
 
     #winningLotto;
 
+    #boughtLottoNumber;
+
     constructor(){
         this.#money = -1;
         this.#lottoSet = -1;
         this.#winningLotto = -1;
+        this.#boughtLottoNumber = -1;
     }
 
     async run(){
-        const boughtLottoNumber = await this.buyLotto();
-        this.writeLotto(boughtLottoNumber);
+        await this.buyLotto();
+        this.writeLotto();
         await this.makeWinningLotto();
         this.printResult()
     }
@@ -36,9 +39,9 @@ class LottoController{
                 const moneyString = await Input.inputMoney();
                 const money = generateMoney(moneyString);
                 this.#money = new Money(money);
-                const boughtLottoNumber = this.#money.buyLottos();
-                Output.outputBoughtLottoNumber(boughtLottoNumber);
-                return boughtLottoNumber;
+                this.#boughtLottoNumber = this.#money.buyLottos();
+                Output.outputBoughtLottoNumber(this.#boughtLottoNumber);
+                break;
             }
             catch(e){
                 Output.outputError(e);
@@ -46,10 +49,10 @@ class LottoController{
         }
     }
 
-    writeLotto(boughtLottoNumber){
+    writeLotto(){
         while(true){
             try {
-                const lottos = generateLottos(boughtLottoNumber);
+                const lottos = generateLottos(this.#boughtLottoNumber);
                 this.#lottoSet = new LottoSet(lottos);
                 Output.outputLottoSetNumbers(this.#lottoSet.toString());
                 break;
