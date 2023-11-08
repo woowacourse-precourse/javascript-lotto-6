@@ -1,4 +1,6 @@
 import NumberGenerator from './util/NumberGenerator.js';
+import ERROR from './Constants/Error.js';
+import { NUMBER } from './Constants/Lotto.js';
 
 class Lotto {
   #numbers;
@@ -9,7 +11,7 @@ class Lotto {
   }
 
   static generateLottos(ticket) {
-    return Array(ticket).fill().map(() => new Lotto(NumberGenerator.generator(1, 45, 6)).getNumbers());
+    return Array(ticket).fill().map(() => new Lotto(NumberGenerator.generator(NUMBER.minNumber, NUMBER.maxNumber, NUMBER.defaultLength)).getNumbers());
   }
 
   #validate(numbers) {
@@ -19,19 +21,19 @@ class Lotto {
   }
 
   validateLength(numbers) {
-    if (numbers.length !== 6) throw ('[ERROR] 로또 번호는 6개여야 합니다.');
+    if (numbers.length !== NUMBER.defaultLength) throw (ERROR.lottoLength);
   }
 
   validateDuplicate(numbers) {
-    if (new Set(numbers).size !== numbers.length) throw ('[ERROR] 로또 번호는 중복되지 않아야 합니다.');
+    if (new Set(numbers).size !== NUMBER.defaultLength) throw (ERROR.lottoDuplicate);
   }
 
   static validateLottoNumber(number) {
-    if (number < 1 || number > 45) throw ('[ERROR] 로또 번호는 1 ~ 45의 숫자여야합니다.');
+    if (number < NUMBER.minNumber || number > NUMBER.maxNumber) throw (ERROR.lottoNumberRange);
   }
 
   static validateBonusNumberInWinningNumber(WinningNumbers, BonusNumber) {
-    if (WinningNumbers.includes(BonusNumber)) throw ('[ERROR] 당첨번호와 보너스 번호는 중복되지 않아야 합니다.')
+    if (WinningNumbers.includes(BonusNumber)) throw (ERROR.bonusNumberInWinningNumber);
   }
 
   getNumbers() {
@@ -40,3 +42,4 @@ class Lotto {
 }
 
 export default Lotto;
+

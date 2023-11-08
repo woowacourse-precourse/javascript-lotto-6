@@ -112,8 +112,8 @@
 - Constants
   - messages
     > 안내문 상수 담당
-  - numberTpye
-    > 넘버값 상수 담당
+  - lotto
+    > lotto에서 사용되는 넘버값, 구분값 상수 담당
   - error
     > 예외사항 상수 담당
     > 프로젝트 내에서 사용되는 상수 담당

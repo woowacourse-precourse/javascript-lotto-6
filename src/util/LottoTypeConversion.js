@@ -1,10 +1,12 @@
+import { DELIMITER } from '../Constants/Lotto.js';
+
 const LottoTypeConversion = {
   issuedLotto(lotto) {
-    return lotto.sort((a, b) => a - b).join(', ');
+    return lotto.sort((a, b) => a - b).join(DELIMITER.issuedLotto);
   },
 
   winningNumbers(winningNumbers) {
-    return winningNumbers.split(',');
+    return winningNumbers.split(DELIMITER.winningNumbers);
   },
 
   Numbers(numbers) {

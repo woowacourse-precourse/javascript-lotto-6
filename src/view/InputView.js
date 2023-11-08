@@ -1,18 +1,19 @@
+import MESSAGES from '../Constants/Messages.js';
 import { Console } from '@woowacourse/mission-utils';
 
 const InputView = {
   async buyLotto() {
-    const amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+    const amount = await Console.readLineAsync(MESSAGES.buyLottoPrice);
     return amount;
   },
 
   async winningNumber() {
-    const winningNumber = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
+    const winningNumber = await Console.readLineAsync(MESSAGES.winningNumber);
     return winningNumber;
   },
 
   async bonusNumber() {
-    const bonusNumber = await Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+    const bonusNumber = await Console.readLineAsync(MESSAGES.bonusNumber);
     return bonusNumber;
   }
 }

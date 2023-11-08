@@ -1,12 +1,14 @@
+import { NUMBER, PRIZEMONEY_NUMBER } from './Constants/Lotto.js';
+
 class PrizeMoneyManager {
   #prizeMoneys
   
   constructor() {
-    this.#prizeMoneys = [5000, 50000, 1500000, 3000000, 2000000];
+    this.#prizeMoneys = PRIZEMONEY_NUMBER.prizeMoneys;
   }
 
   calculateTotalPrizeMoney(ranks) {
-    let money = 0;
+    let money = NUMBER.zero;
 
     ranks.map((rank, winning) => {
       money += this.#prizeMoneys[winning] * rank;
@@ -16,7 +18,7 @@ class PrizeMoneyManager {
   }
 
   calculateEarningsPercent(money, amount) {
-    return ((money / amount) * 100).toFixed(1);
+    return ((money / amount) * PRIZEMONEY_NUMBER.percent).toFixed(PRIZEMONEY_NUMBER.roundPosition);
   }
 }
 

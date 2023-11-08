@@ -1,12 +1,14 @@
+import { NUMBER, RANK_RULL_NUMBER, RANK_NUMBER, RANK_WINNING_NUMBER } from './Constants/Lotto.js';
+
 class LottoManager {
   #lottoPrice
   #lottos
   #ranks
 
   constructor() {
-    this.#lottoPrice = 1000;
+    this.#lottoPrice = NUMBER.price;
     this.#lottos = [];
-    this.#ranks = Array(5).fill(0);
+    this.#ranks = Array(RANK_RULL_NUMBER.defaultLength).fill(NUMBER.zero);
   }
 
   lottoTicketExchange(amount) {
@@ -40,11 +42,11 @@ class LottoManager {
   }
   
   #rank(winningNumber, bonusNumber) {
-    if (winningNumber === 6) return 4;
-    if (winningNumber === 5 && bonusNumber) return 3;
-    if (winningNumber === 5) return 2;
-    if (winningNumber === 4) return 1;
-    if (winningNumber === 3) return 0;
+    if (winningNumber === RANK_NUMBER.six) return RANK_WINNING_NUMBER.one;
+    if (winningNumber === RANK_NUMBER.five && bonusNumber) return RANK_WINNING_NUMBER.two;
+    if (winningNumber === RANK_NUMBER.five) return RANK_WINNING_NUMBER.three;
+    if (winningNumber === RANK_NUMBER.four) return RANK_WINNING_NUMBER.four;
+    if (winningNumber === RANK_NUMBER.three) return RANK_WINNING_NUMBER.five;
   }
 
   drawingLotto(winningNumber, bonusNumber) {
@@ -54,7 +56,7 @@ class LottoManager {
     winnings.map((winning, ticket) => {
       const rank = this.#rank(winning, bonusNumbers[ticket]);
       if (rank !== undefined) {
-        this.#ranks[rank] += 1;
+        this.#ranks[rank] += RANK_NUMBER.plus;
       }
     })
   }
