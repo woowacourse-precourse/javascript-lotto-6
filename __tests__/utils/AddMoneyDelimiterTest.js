@@ -1,5 +1,4 @@
 import addMoneyDelimiter from '../../src/utils/addMoneyDelimiter.js';
-import calcMatchCount from '../../src/utils/calcMatchCount.js';
 
 describe('숫자 자료형의 돈이 구분자로 구분된 문자열로 출력되는지 테스트', () => {
   test('100원 단위로 구분자가 추가되지 않는 상황 테스트', () => {
