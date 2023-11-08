@@ -1,4 +1,4 @@
-import inputValidators from '../src/inputValidators.js'
+import inputValidators from '../src/input/inputValidators.js'
 
 describe('구입 금액에 대한 예외처리', () =>{
   test.each([["천원"],["1million"],["1000j"]])('구입 금액은 숫자여야 한다.',

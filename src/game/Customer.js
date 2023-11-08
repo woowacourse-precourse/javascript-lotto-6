@@ -1,6 +1,6 @@
 import Lotto from './Lotto.js';
 import lottoRanking from './lottoRanking.js';
-import { MESSAGES, CONSTANTS } from './constants.js';
+import { MESSAGES, CONSTANTS } from '../output/Constants.js';
 import { Console } from "@woowacourse/mission-utils";
 
 class Customer {

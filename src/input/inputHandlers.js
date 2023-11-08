@@ -1,4 +1,4 @@
-import { ERROR, MESSAGES } from './constants.js';
+import { ERROR, MESSAGES } from '../output/Constants.js';
 import inputValidators from './inputValidators.js';
 import { Console } from '@woowacourse/mission-utils';
 

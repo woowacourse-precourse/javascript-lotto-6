@@ -1,4 +1,4 @@
-import Customer from "../src/Customer";
+import Customer from "../src/game/Customer";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const mockRandoms = (numbers) => {
