@@ -22,7 +22,7 @@ class DrawnLotto extends Lotto {
   setBonusNumber(bonusNumber) {
     const drawnLottoValidator = new DrawnLottoValidator();
     drawnLottoValidator.validateBonusNumber(this.getNumbers(), bonusNumber);
-    this.#bonusNumber = bonusNumber;
+    this.#bonusNumber = Number(bonusNumber);
   }
 }
 
