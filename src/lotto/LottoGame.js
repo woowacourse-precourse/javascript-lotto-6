@@ -1,6 +1,7 @@
 import LottoCenter from './LottoCenter.js';
 import LottoGameHost from './LottoGameHost.js';
 import LottoStore from './LottoStore.js';
+import { print } from '../utility/console.js';
 import {
   LOTTO_CONSTANT,
   LOTTO_RANK,
@@ -83,6 +84,7 @@ class LottoGame {
     await this.lottoGameHost.setLottoWinningNumbers();
 
     this.getAndPrintResults();
+    this.getAndPrintReturnRate(this.lottoCenter.getLottoResultsList());
   }
 }
 
