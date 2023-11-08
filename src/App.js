@@ -2,18 +2,30 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from "./Lotto.js";
 
 class App {
-  async getUserMoney() {
-    const MONEY = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    if(
-      MONEY === null 
-      || MONEY === '0'
-      || MONEY.match(/\D/) 
-      || isNaN(parseInt(MONEY))
-      || parseInt(MONEY) % 1000 != 0
-    ) {
-      throw new Error('[ERROR] 잘못된 금액을 입력하셨습니다.');
-    }
+  checkValidMoney(MONEY) {
+    if(MONEY === null) throw new Error('[ERROR] 금액을 입력받지 못했습니다.');
+    if(MONEY <= 0) throw new Error('[ERROR] 잘못된 금액을 입력하셨습니다.');
+    if(MONEY % 1000 !== 0) throw new Error('[ERROR] 구입금액은 1000원 단위로 입력해주세요.');
+  }
 
+  stringToNum(str) {
+    const num = Number(str);
+    if(isNaN(num)) throw new Error('[ERROR] 숫자를 입력해야합니다.');
+
+    return num;
+  }
+
+  async getUserMoney() {
+    let MONEY;
+    try {
+      const input = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      MONEY = this.stringToNum(input);
+      this.checkValidMoney(MONEY);
+    } catch(error) {
+      MissionUtils.Console.print(error.message);
+      MONEY = await this.getUserMoney();
+    }
+    
     return MONEY;
   }
 
@@ -31,11 +43,10 @@ class App {
   async getWinningNum() {
     const input = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
     const winning_number = new Lotto(input.split(',').map(Number));
-
     return winning_number;
   }
 
-  async getBonusNum() {
+  async getBonusNum(winning_number) {
     const num = await MissionUtils.Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
     if(
       num === null
@@ -43,6 +54,7 @@ class App {
       || isNaN(parseInt(num))
       || parseInt(num) < 1 
       || parseInt(num) > 45
+      || winning_number.hasBonusNumber(parseInt(num))
     ) {
       throw new Error('[ERROR] 잘못된 번호를 입력하셨습니다.');
     }
@@ -121,7 +133,7 @@ class App {
       ticket.printNum();
     })
     const winning_number = await this.getWinningNum();
-    const bonus_number = await this.getBonusNum();
+    const bonus_number = await this.getBonusNum(winning_number);
     
     const winning_stats = this.winningStats(winning_number, bonus_number, tickets);
     this.printWinningStats(winning_stats);
