@@ -87,7 +87,8 @@ class Winners {
 
   calculateRateOfReturns(money) {
     const totalPrize = this.calculateTotalPrize();
-    this.#returns = Math.round((totalPrize / money) * 100) / 100;
+    this.#returns = Math.round((totalPrize / money) * 1000) / 10;
+    console.log(this.#returns);
   }
 
   calculateTotalPrize() {
