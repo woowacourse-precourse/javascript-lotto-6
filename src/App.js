@@ -1,8 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 import User from "./User.js";
-import Input from "../views/Input.js";
-import Output from "../views/Output.js";
+import Input from "./views/Input.js";
+import Output from "./views/Output.js";
 
 class App {
 	constructor() {

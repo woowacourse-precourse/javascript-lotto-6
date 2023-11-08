@@ -1,4 +1,4 @@
-import Input from "../views/Input";
+import Input from "../src/views/Input";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {

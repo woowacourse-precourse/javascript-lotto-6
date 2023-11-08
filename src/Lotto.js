@@ -1,5 +1,5 @@
 import LottoMachine from "./LottoMachine.js";
-import ValidatorUtil from "../validators/ValidatorUtil.js";
+import ValidatorUtil from "./validators/ValidatorUtil.js";
 
 class Lotto {
 	#numbers;

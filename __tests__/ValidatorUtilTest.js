@@ -1,4 +1,4 @@
-import ValidatorUtil from "../validators/ValidatorUtil.js";
+import ValidatorUtil from "../src/validators/ValidatorUtil";
 
 describe("예외처리 테스트", () => {
 	test.each([[["a"], ["1000j"]]])(

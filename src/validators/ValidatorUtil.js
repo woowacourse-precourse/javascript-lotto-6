@@ -1,4 +1,4 @@
-import { ErrorMessages } from "../src/constants/Messages";
+import { ErrorMessages } from "../constants/Messages";
 
 class ValidatorUtil {
 	static isNumber(input) {
