@@ -10,10 +10,18 @@ class Controls {
     const bet = await read(TEXT.BET);
     Validator.validateBet(bet);
 
-    return bet / 1000;
+    return bet;
   }
 
-  static print;
+  static printLottos(lottos) {
+    const amount = lottos.length;
+    write(`${amount}개를 구매했습니다.`);
+
+    for (const lotto of lottos) {
+      const numbers = lotto.getNumbers().join(', ');
+      write(`[${numbers}]`);
+    }
+  }
 }
 
 export default Controls;
