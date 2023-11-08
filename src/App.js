@@ -76,7 +76,7 @@ class App {
   drawLotto(buyLotto, winningNumbers, bonusNumber) {
     const prizeMoneyManager = new PrizeMoneyManager();
 
-    this.LottoManager.drawingLotto(LottoTypeConversion.Numbers(winningNumbers, bonusNumber));
+    this.LottoManager.drawingLotto(LottoTypeConversion.numbers(winningNumbers), bonusNumber);
 
     const totalMoney = prizeMoneyManager.calculateTotalPrizeMoney(this.LottoManager.getRanks());
     const earningsPercen = prizeMoneyManager.calculateEarningsPercent(totalMoney, buyLotto);
@@ -87,7 +87,7 @@ class App {
   result(earningsPercen) {
     OutputView.result(
       this.LottoManager.getRanks(),
-      LottoTypeConversion.NumberCommas(earningsPercen),
+      LottoTypeConversion.numberCommas(earningsPercen),
     );
   }
 }

@@ -9,11 +9,15 @@ const LottoTypeConversion = {
     return winningNumbers.split(DELIMITER.winningNumbers);
   },
 
-  Numbers(numbers) {
+  number(number) {
+    return Number(number);
+  },
+
+  numbers(numbers) {
     return numbers.map((number) => Number(number));
   },
 
-  NumberCommas(str) {
+  numberCommas(str) {
     return Number(str).toLocaleString();
   },
 };

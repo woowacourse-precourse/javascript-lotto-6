@@ -1,3 +1,4 @@
+import LottoTypeConversion from './util/LottoTypeConversion.js';
 import { NUMBER, RANK_RULL_NUMBER, RANK_NUMBER, RANK_WINNING_NUMBER } from './Constants/LottoGame.js';
 
 class LottoManager {
@@ -34,7 +35,7 @@ class LottoManager {
     const result = [];
 
     this.#lottos.map((lotto) => {
-      const bonus = lotto.includes(bonusNumber);
+      const bonus = lotto.includes(LottoTypeConversion.number(bonusNumber));
       result.push(bonus);
     })
 
