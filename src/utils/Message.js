@@ -4,6 +4,7 @@ import { LOTTO_STATISTICS, LOTTO_STATISTICS_TITLE } from '../constants/number.js
 
 class Message {
   /**
+   * 에러 객체를 받아 에러 메시지를 출력하는 메서드
    * @param {Error} error
    */
   static error(error) {
@@ -11,6 +12,7 @@ class Message {
   }
 
   /**
+   * 몇 개를 구매했는지 출력하는 메서드
    * @param {number} count
    */
   static youBought(count) {
@@ -25,6 +27,11 @@ class Message {
     Console.print(Format.array(arr));
   }
 
+  /**
+   * 등수 별 당첨 횟수와 수익률을 출력하는 메서드
+   * @param {number[]} rankCount 등수 별 당첨 횟수
+   * @param {number} profitRate 수익률
+   */
   static showStatistics(rankCount, profitRate) {
     Console.print(LOTTO_STATISTICS_TITLE);
     LOTTO_STATISTICS.forEach((statistics, index) => {
