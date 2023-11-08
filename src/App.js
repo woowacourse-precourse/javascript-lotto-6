@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import Game, { RANK } from './Game.js';
+import Game, { TICKET_PRICE } from './Game.js';
 import {
   validateAmountInput,
   validateWinningInput,
@@ -20,7 +20,6 @@ class App {
   async play() {
     try {
       const amount = await this.getAmountInput();
-      const ticketNumber = amount / 1000;
 
       const game = new Game(amount);
       game.getLottoTickets();

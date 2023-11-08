@@ -4,11 +4,21 @@ import App, { MESSAGES } from './App.js';
 import Lotto from './Lotto.js';
 
 export const RANK = Object.freeze({
-  _5th: '5th',
-  _4th: '4th',
-  _3rd: '3rd',
-  _2nd: '2nd',
-  _1st: '1st',
+  5: '5th',
+  4: '4th',
+  3: '3rd',
+  2: '2nd',
+  1: '1st',
+});
+
+export const TICKET_PRICE = 1000;
+
+const REWARD = Object.freeze({
+  5: 5000,
+  4: 50000,
+  3: 1500000,
+  2: 30000000,
+  1: 2000000000,
 });
 
 class Game {
@@ -16,18 +26,18 @@ class Game {
     this.amount = amount;
     this.tickets = [];
     this.drawInfo = {
-      [RANK._5th]: { count: 0, reward: 5000 },
-      [RANK._4th]: { count: 0, reward: 50000 },
-      [RANK._3rd]: { count: 0, reward: 1500000 },
-      [RANK._2nd]: { count: 0, reward: 30000000 },
-      [RANK._1st]: { count: 0, reward: 2000000000 },
+      [RANK[5]]: { count: 0, reward: REWARD[5] },
+      [RANK[4]]: { count: 0, reward: REWARD[4] },
+      [RANK[3]]: { count: 0, reward: REWARD[3] },
+      [RANK[2]]: { count: 0, reward: REWARD[2] },
+      [RANK[1]]: { count: 0, reward: REWARD[1] },
     };
   }
 
   getLottoTickets() {
-    const ticketNumber = this.amount / 1000;
+    const ticketNum = this.amount / TICKET_PRICE;
 
-    for (let i = 0; i < ticketNumber; i++) {
+    for (let i = 0; i < ticketNum; i++) {
       const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
         (a, b) => a - b
       );
@@ -53,7 +63,7 @@ class Game {
   }
 
   printTickets() {
-    Console.print(MESSAGES.OUTPUT_BUY_TICKETS(this.amount / 1000));
+    Console.print(MESSAGES.OUTPUT_BUY_TICKETS(this.amount / TICKET_PRICE));
     this.tickets.forEach((ticket) => Console.print(ticket.info));
   }
 
@@ -62,20 +72,20 @@ class Game {
 
     switch (matchCount) {
       case 6:
-        return RANK._1st;
+        return RANK[1];
 
       case 5:
         if (isBonusMatched) {
-          return RANK._2nd;
+          return RANK[2];
         }
 
-        return RANK._3rd;
+        return RANK[3];
 
       case 4:
-        return RANK._4th;
+        return RANK[4];
 
       case 3:
-        return RANK._5th;
+        return RANK[5];
     }
   }
 
