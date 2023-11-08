@@ -4,6 +4,16 @@ export const INPUTMESSAGES = Object.freeze({
   BONUS_NUMBER: "보너스 번호를 입력해 주세요.",
 });
 
+export const OUTPUTMESSAGES = Object.freeze({
+  WINNING_STATICS: [
+    "3개 일치 (5,000원)",
+    "4개 일치 (50,000원)",
+    "5개 일치 (1,500,000원)",
+    "5개 일치, 보너스 볼 일치 (30,000,000원)",
+    "6개 일치 (2,000,000,000원)",
+  ],
+});
+
 export const ERRORMESSAGES = Object.freeze({
   NOT_A_NUMBER: "[ERROR] 숫자가 아닙니다.",
   LOTTO_NUMBER_LENGTH: "[ERROR] 로또 번호는 6개여야 합니다.",

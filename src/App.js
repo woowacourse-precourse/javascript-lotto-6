@@ -5,7 +5,9 @@ import BonusLotto from "../src/BonusLotto.js";
 import WinningLotto from "./WinningLotto.js";
 import { INPUTMESSAGES } from "./util/Message.js";
 import { MONEY_CONSTANTS } from "./util/constants.js";
-const { LOTTO_PRICE, WINNINGS_OUTPUTS } = MONEY_CONSTANTS;
+import { OUTPUTMESSAGES } from "./util/Message.js";
+const { WINNING_STATICS } = OUTPUTMESSAGES;
+const { LOTTO_PRICE } = MONEY_CONSTANTS;
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Console } = MissionUtils;
 class App {
@@ -62,21 +64,11 @@ class App {
   }
 
   winningStatisticsOutput(moneys) {
-    Console.print(
-      `3개 일치 (${WINNINGS_OUTPUTS[4]}원) - ${moneys.getRankingCounts[4]}개`
-    );
-    Console.print(
-      `4개 일치 (${WINNINGS_OUTPUTS[3]}원) - ${moneys.getRankingCounts[3]}개`
-    );
-    Console.print(
-      `5개 일치 (${WINNINGS_OUTPUTS[2]}원) - ${moneys.getRankingCounts[2]}개`
-    );
-    Console.print(
-      `5개 일치, 보너스 볼 일치 (${WINNINGS_OUTPUTS[1]}원) - ${moneys.getRankingCounts[1]}개`
-    );
-    Console.print(
-      `6개 일치 (${WINNINGS_OUTPUTS[0]}원) - ${moneys.getRankingCounts[0]}개`
-    );
+    Console.print(`${WINNING_STATICS[0]} - ${moneys.getRankingCounts[4]}개`);
+    Console.print(`${WINNING_STATICS[1]} - ${moneys.getRankingCounts[3]}개`);
+    Console.print(`${WINNING_STATICS[2]} - ${moneys.getRankingCounts[2]}개`);
+    Console.print(`${WINNING_STATICS[3]} - ${moneys.getRankingCounts[1]}개`);
+    Console.print(`${WINNING_STATICS[4]} - ${moneys.getRankingCounts[0]}개`);
   }
 
   returnOutput(moneys) {
