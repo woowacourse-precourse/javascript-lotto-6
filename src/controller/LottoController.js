@@ -1,9 +1,9 @@
 import { LOTTO, UTILS } from '../common/constants.js';
 
-import { printMessage } from '../common/utils.js';
 import Lotto from '../Lotto.js';
+import { printMessage } from '../common/utils.js';
+import BonusNumber from '../model/BonusNumber.js';
 import Money from '../model/Money.js';
-import BonusNumberValidator from '../service/BonusNumberValidator.js';
 import LottoService from '../service/LottoService.js';
 import WinningNumberValidator from '../service/WinningNumberValidator.js';
 import InputView from '../view/InputView.js';
@@ -20,9 +20,6 @@ class LottoController {
   #lottoService;
 
   constructor() {
-    this.#money = 0;
-    this.#winningNumbers = [];
-    this.#bonusNumber = 0;
     this.#lottoService = new LottoService();
   }
 
@@ -66,7 +63,7 @@ class LottoController {
     await this.#getWinningNumbers();
     await this.#getBonusNumber();
 
-    this.#lottoService.compareLotto(this.#winningNumbers, this.#bonusNumber);
+    this.#lottoService.compareLotto(this.#winningNumbers, this.#bonusNumber.getValue());
     this.#printStatistics();
     
     this.#lottoService.calculateProfit(this.#money.getAmount());
@@ -76,10 +73,11 @@ class LottoController {
   async #getWinningNumbers() {
     const validateWinningNumbers = async () => {
       try {
-        const inputNumber = await InputView.getWinningNumbers();
-        const winningNumberValidator = new WinningNumberValidator(inputNumber);
-        winningNumberValidator.validate();
-        const lotto = new Lotto(inputNumber.split(UTILS.comma).map(Number));
+        const winningNumbers = await InputView.getWinningNumbers();
+        const winningNumberValidator = new WinningNumberValidator(winningNumbers);
+        const validatedWinningNumbers = winningNumberValidator.validate();
+
+        const lotto = new Lotto(validatedWinningNumbers);
         this.#winningNumbers = lotto.getNumbers();
       } catch (error) {
         printMessage(error.message);
@@ -92,9 +90,8 @@ class LottoController {
   async #getBonusNumber() {
     const validateBonusNumber = async () => {
       try {
-        const inputNumber = await InputView.getBonusNumber();
-        const bonusNumberValidator = new BonusNumberValidator(inputNumber);
-        this.#bonusNumber = bonusNumberValidator.validate(this.#winningNumbers);
+        const bonusNumber = await InputView.getBonusNumber();
+        this.#bonusNumber = new BonusNumber(bonusNumber, this.#winningNumbers);
       } catch (error) {
         printMessage(error.message);
         await validateBonusNumber();
