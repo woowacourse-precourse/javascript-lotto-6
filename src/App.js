@@ -1,5 +1,11 @@
+import lottoGame from './interactions/lottoGame.module.js';
+
 class App {
-  async play() {}
+  #lottoGame = lottoGame;
+
+  async play() {
+    await this.#lottoGame.run();
+  }
 }
 
 export default App;
