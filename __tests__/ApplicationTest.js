@@ -170,4 +170,23 @@ describe("로또 테스트", () => {
 
     expect(counts).toEqual([6, 5, 0]);
   });
+
+  test("일치하는 번호 개수를 기반으로 각 경우의 수 계산 테스트", () => {
+    const lottoResultChecker = new LottoResultChecker();
+    const counts = [3, 4, 5, 5, 6]; // 일치하는 번호 개수
+    const includedbonusArr = [0, 1, 0, 1, 0]; //보너스 번호 포함 여부 (0 또는 1)
+
+    const matchingCountsResult = lottoResultChecker.getMatchingCounts(
+      counts,
+      includedbonusArr
+    );
+
+    expect(matchingCountsResult).toEqual({
+      three: 1,
+      four: 1,
+      five: 1,
+      fiveAndBonus: 1,
+      six: 1,
+    });
+  });
 });
