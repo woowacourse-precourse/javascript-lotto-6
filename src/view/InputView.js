@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import Validator from '../utils/Validator.js';
 import { INPUT_MESSAGE } from '../constants/messages';
+import Validator from '../utils/Validator';
 
 class InputView {
   static async readPurchaseAmount() {

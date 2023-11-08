@@ -8,7 +8,7 @@ class OutputView {
   static printLotto(purchaseLotto) {
     const lottoCount = purchaseLotto.length;
 
-    Console.print(`${OUTPUT_MESSAGE.enter}${lottoCount}${OUTPUT_MESSAGE.purchase}`);
+    Console.print(`\n${lottoCount}${OUTPUT_MESSAGE.purchase}`);
     purchaseLotto.forEach((num) => Console.print(`[${num.join(SYMBOL.comma).toString()}]`));
   }
 

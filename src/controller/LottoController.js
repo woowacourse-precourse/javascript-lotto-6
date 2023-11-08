@@ -1,8 +1,8 @@
-import InputView from '../view/InputView.js';
-import OutputView from '../view/OutputView.js';
-import Lotto from '../domain/Lotto.js';
-import Winning from '../domain/Winning.js';
-import CirculateRate from '../utils/CirculateRate.js';
+import InputView from '../view/InputView';
+import OutputView from '../view/OutputView';
+import Lotto from '../domain/Lotto';
+import Winning from '../domain/Winning';
+import CirculateRate from '../utils/CirculateRate';
 
 class LottoController {
   constructor() {
@@ -23,10 +23,6 @@ class LottoController {
 
   countWinning() {
     this.winnings = Winning.countWinning(this.Lottos, this.winningNumbers, this.bonusNumber);
-  }
-
-  printWinningStatistics() {
-    OutputView.printWinningStatistics(this.winnings);
   }
 
   printWinningStatistics() {

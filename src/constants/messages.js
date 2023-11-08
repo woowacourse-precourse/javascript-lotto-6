@@ -6,11 +6,10 @@ const INPUT_MESSAGE = Object.freeze({
 
 const OUTPUT_MESSAGE = Object.freeze({
   purchase: '개를 구매했습니다.',
-  result: '당첨 통계',
+  result: '\n당첨 통계\n',
   totalProfit: '총 수익률은 ',
   percentage: '%입니다.',
   count: '개',
-  enter: '\n',
 });
 
 const ERROR_MESSAGE = Object.freeze({
