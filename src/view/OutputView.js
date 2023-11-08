@@ -22,4 +22,8 @@ export default class OutputView {
     });
     this.print(`총 수익률은 ${earningsRate}%입니다.`);
   }
+
+  static printError(error) {
+    this.print(error);
+  }
 }

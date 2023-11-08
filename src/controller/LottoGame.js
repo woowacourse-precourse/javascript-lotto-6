@@ -7,14 +7,27 @@ import Lotto from '../model/Lotto.js';
 
 export default class LottoGame {
   async run() {
-    const purchaseAmount = await this.#requirePurchaseAmount();
+    const purchaseAmount = await this.#handleErrorAndRetry(() => this.#requirePurchaseAmount());
     const lottoList = this.#generateLotto(purchaseAmount);
     this.#printLottoList(lottoList);
-    const winningLotteryNumbers = await this.#requireLotteryNumbers();
-    const bonusNumber = await this.#requireBonusNumber(winningLotteryNumbers);
+    const winningLotteryNumbers = await this.#handleErrorAndRetry(() =>
+      this.#requireLotteryNumbers(),
+    );
+    const bonusNumber = await this.#handleErrorAndRetry(() =>
+      this.#requireBonusNumber(winningLotteryNumbers),
+    );
     const lotteryResult = this.#confirmLotteryResult(lottoList, winningLotteryNumbers, bonusNumber);
     const earningsRate = this.#calculateEarningsRate(purchaseAmount, lotteryResult);
     this.#printPrizeResult(lotteryResult, earningsRate);
+  }
+
+  async #handleErrorAndRetry(callback) {
+    try {
+      return await callback();
+    } catch (error) {
+      OutputView.printError(error.message);
+      return this.#handleErrorAndRetry(callback);
+    }
   }
 
   async #requirePurchaseAmount() {
