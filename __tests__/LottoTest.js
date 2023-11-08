@@ -18,4 +18,12 @@ describe("로또 클래스 테스트", () => {
       new Lotto([1, 2, 3, 4, 5, 50]);
     }).toThrow("[ERROR]");
   });
+
+  test("발행된 로또 번호를 오름차순으로 정렬한다.", () => {
+    const lotto = new Lotto([29, 15, 30, 2, 3, 28]);
+
+    lotto.sortLottoNumbers();
+
+    expect(lotto.myNumbers).toEqual([2, 3, 15, 28, 29, 30]);
+  })
 });
