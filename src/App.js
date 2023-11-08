@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import LottoController from './controller/LottoController';
 
 class App {
@@ -8,7 +9,12 @@ class App {
   }
 
   async play() {
-    await this.#lottoController.play();
+    try{
+      await this.#lottoController.play();
+    } catch (err) {
+      Console.print(err.message);
+    }
+    
   }
 }
 

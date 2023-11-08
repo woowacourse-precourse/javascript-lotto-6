@@ -1,3 +1,4 @@
+
 import { LOTTO_VAL, REGEX} from '../constants/constant'
 import { ERR_MESSAGE } from '../constants/message'
 
