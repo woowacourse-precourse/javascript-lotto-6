@@ -53,6 +53,19 @@ class App {
 
     Console.print(GAME_MESSAGES.WINNING_STATISTICS);
     this.printWinningResult(winningResultArray);
+    this.printRateOfReturn(winningResultArray, lottos.length);
+  }
+
+  printRateOfReturn(winningResultArray, quantity) {
+    let money = 0;
+    money =
+      winningResultArray[1] * 2000000000 +
+      winningResultArray[2] * 30000000 +
+      winningResultArray[3] * 1500000 +
+      winningResultArray[4] * 50000 +
+      winningResultArray[5] * 5000;
+    let rateOfReturn = Math.round((money / (quantity * 1000)) * 1000) / 10;
+    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   }
 
   printWinningResult(winningResultArray) {
