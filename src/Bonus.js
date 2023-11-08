@@ -7,7 +7,7 @@ class Bonus {
     }
   
     #validate(number, winning) {
-      this.#validateNumber(num);
+      this.#validateNumber(number);
       for(let i=0; i<6; i++) {
         const num = winning[i];
         this.#validateDuplicate(number, num);
