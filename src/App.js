@@ -5,7 +5,7 @@ import Lotto from "./Lotto.js";
 class App {
   #money;
 
-  #lottos = [];
+  lottos = [];
 
   #winningNumbers;
 
@@ -13,13 +13,13 @@ class App {
 
   #winningList = [0, 0, 0, 0, 0];
 
-  static #isPositiveInteger(input) {
+  static isPositiveInteger(input) {
     const regex = /^\d+$/;
     return regex.test(input);
   }
 
-  static #validateMoney(money) {
-    if (!App.#isPositiveInteger(money)) {
+  static validateMoney(money) {
+    if (!App.isPositiveInteger(money)) {
       MissionUtils.Console.print("[ERROR] 숫자가 잘못된 형식입니다.");
       return false;
     }
@@ -38,56 +38,56 @@ class App {
 
     while (!isValidInput) {
       money = await MissionUtils.Console.readLineAsync("");
-      isValidInput = await App.#validateMoney(money);
+      isValidInput = await App.validateMoney(money);
     }
 
     this.#money = Number(money);
   }
 
   purchaseLotto() {
-    this.#lottos.push(
+    this.lottos.push(
       new Lotto(MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6)),
     );
   }
 
   printLottoList() {
-    MissionUtils.Console.print(`\n${this.#lottos.length}개를 구매했습니다.`);
-    for (let i = 0; i < this.#lottos.length; i += 1) {
-      this.#lottos[i].printNumbers();
+    MissionUtils.Console.print(`\n${this.lottos.length}개를 구매했습니다.`);
+    for (let i = 0; i < this.lottos.length; i += 1) {
+      this.lottos[i].printNumbers();
     }
     MissionUtils.Console.print("\n");
   }
 
-  static #isNumbers(numbers) {
+  static isNumbers(numbers) {
     const regex = /^\d+(,\d+){5}$/;
     return regex.test(numbers);
   }
 
-  static #isLottoNumber(number) {
+  static isLottoNumber(number) {
     if (number < 1 || number > 45) {
       return false;
     }
     return true;
   }
 
-  static #isLottoNumbers(numbers) {
+  static isLottoNumbers(numbers) {
     for (let i = 0; i < numbers.length; i += 1) {
-      if (!this.#isLottoNumber(numbers[i])) {
+      if (!this.isLottoNumber(numbers[i])) {
         return false;
       }
     }
     return true;
   }
 
-  static #validateWinningNumbers(numbers) {
-    if (!App.#isNumbers(numbers)) {
+  static validateWinningNumbers(numbers) {
+    if (!App.isNumbers(numbers)) {
       MissionUtils.Console.print(
         "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
       );
       return false;
     }
     const splitedNumbers = numbers.split(",").map(Number);
-    if (!App.#isLottoNumbers(splitedNumbers)) {
+    if (!App.isLottoNumbers(splitedNumbers)) {
       MissionUtils.Console.print(
         "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
       );
@@ -102,16 +102,16 @@ class App {
 
     while (!isValidInput) {
       numbers = await MissionUtils.Console.readLineAsync("");
-      isValidInput = App.#validateWinningNumbers(numbers);
+      isValidInput = App.validateWinningNumbers(numbers);
     }
 
     this.#winningNumbers = new Set(numbers.split(",").map(Number));
   }
 
-  static #validateBonusNumber(bonusNumber, winningNumbers) {
+  static validateBonusNumber(bonusNumber, winningNumbers) {
     if (
-      !App.#isPositiveInteger(bonusNumber) ||
-      !App.#isLottoNumber(Number(bonusNumber)) ||
+      !App.isPositiveInteger(bonusNumber) ||
+      !App.isLottoNumber(Number(bonusNumber)) ||
       winningNumbers.has(Number(bonusNumber))
     ) {
       MissionUtils.Console.print(
@@ -128,10 +128,7 @@ class App {
 
     while (!isValidInput) {
       bonusNumber = await MissionUtils.Console.readLineAsync("");
-      isValidInput = App.#validateBonusNumber(
-        bonusNumber,
-        this.#winningNumbers,
-      );
+      isValidInput = App.validateBonusNumber(bonusNumber, this.#winningNumbers);
     }
 
     this.#bonusNumber = Number(bonusNumber);
@@ -176,8 +173,8 @@ class App {
   }
 
   checkLottos() {
-    for (let i = 0; i < this.#lottos.length; i += 1) {
-      this.checkLotto(this.#lottos[i]);
+    for (let i = 0; i < this.lottos.length; i += 1) {
+      this.checkLotto(this.lottos[i]);
     }
   }
 
