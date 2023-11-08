@@ -1,5 +1,6 @@
 import ERROR from './constants/Error.js';
 import { Console } from '@woowacourse/mission-utils';
+import GAME from '../constants/Game';
 class Lotto {
   #numbers;
 
@@ -11,20 +12,20 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error(ERROR.isSix);
+    if (numbers.length !== GAME.LOTTO_LENGTH) {
+      throw new Error(ERROR.IS_SIX);
     }
 
     if (numbers.some((el) => isNaN(el))) {
-      throw new Error(ERROR.isNan);
+      throw new Error(ERROR.IS_NAN);
     }
 
     if (numbers.length > new Set(numbers).size) {
-      throw new Error(ERROR.notDuplicate);
+      throw new Error(ERROR.NOT_DUPLICATE);
     }
 
-    if (numbers.some((el) => el > 45 || el < 1)) {
-      throw new Error(ERROR.range);
+    if (numbers.some((el) => el > LOTTO_MAX || el < LOTTO_MIN)) {
+      throw new Error(ERROR.RANGE);
     }
   }
   // TODO: 추가 기능 구현
