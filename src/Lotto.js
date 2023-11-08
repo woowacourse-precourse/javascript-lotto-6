@@ -17,11 +17,12 @@ class Lotto {
       throw new Error(ErrorMessage.ERROR_DUPLICATE_NUMBERS);
     }
 
-    for (let number of uniqueNumbers) {
-      if (number < 1 || number > 45) {
-        throw new Error(ErrorMessage.ERROR_INVALID_RANGE);
+    if (uniqueNumbers.size !== 6)
+      for (let number of uniqueNumbers) {
+        if (number < 1 || number > 45) {
+          throw new Error(ErrorMessage.ERROR_INVALID_RANGE);
+        }
       }
-    }
 
     if (numbers.some((number) => !Number.isInteger(Number(number))))
       throw new Error(ErrorMessage.ERROR_NOT_NUMBER);
