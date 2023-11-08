@@ -1,6 +1,6 @@
 import { MissionUtils, Console } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-import Purchase from "./purchase.js";
+import Purchase from "./Purchase.js";
 import WinningNumbers from "./WinningNumbers.js";
 class App {
     async play() {
