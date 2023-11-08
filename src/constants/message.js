@@ -12,9 +12,9 @@ export const PRINT_MESSAGE = Object.freeze({
   divide: '---',
   lottosCount: (count) => `${count}개를 구매했습니다.`,
   lotto: (lotto) => `[${lotto.join(', ')}]`,
-  bonusNumber: ', 보너스 볼 일치',
-  includesCount: (count) => `${count}개 일치`,
-  prize: (prize) => ` (${utils.numberFormat(prize)}원) - `,
+  containBonusNumberResultDescription: (count, prize) =>
+    `${count}개 일치, 보너스 볼 일치 (${utils.numberFormat(prize)}원) - `,
+  resultDescription: (count, prize) => `${count}개 일치 (${utils.numberFormat(prize)}원) - `,
   resultCount: (count) => `${count}개`,
   returns: (returns) => `총 수익률은 ${returns}%입니다.`,
 });

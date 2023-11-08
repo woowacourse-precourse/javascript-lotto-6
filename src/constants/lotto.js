@@ -14,7 +14,7 @@ export const LOTTO_RESULT = Object.freeze({
   second: {
     prize: 30000000,
     includesCount: 5,
-    isSecond: true,
+    hasBonusNumber: true,
   },
   third: {
     prize: 1500000,

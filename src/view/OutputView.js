@@ -1,7 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { PRINT_MESSAGE } from '../constants/message.js';
 import { LOTTO_RESULT } from '../constants/lotto.js';
-import { COMMON } from '../constants/common.js';
 
 class OutputView {
   printLottosCount(count) {
@@ -15,24 +14,21 @@ class OutputView {
   }
 
   getLottoResultDescription(rank) {
-    let isSecond = COMMON.blank;
+    if (rank.hasBonusNumber)
+      return PRINT_MESSAGE.containBonusNumberResultDescription(rank.includesCount, rank.prize);
 
-    if (rank.isSecond) isSecond = PRINT_MESSAGE.bonusNumber;
-
-    return (
-      PRINT_MESSAGE.includesCount(rank.includesCount) + isSecond + PRINT_MESSAGE.prize(rank.prize)
-    );
+    return PRINT_MESSAGE.resultDescription(rank.includesCount, rank.prize);
   }
 
   printLottoResult(count) {
     Console.print(PRINT_MESSAGE.prizesDescription);
     Console.print(PRINT_MESSAGE.divide);
 
-    const ranksKey = Object.keys(count).reverse();
+    const ranks = Object.keys(count).reverse();
 
-    ranksKey.forEach((key) => {
+    ranks.forEach((rank) => {
       Console.print(
-        this.getLottoResultDescription(LOTTO_RESULT[key]) + PRINT_MESSAGE.resultCount(count[key]),
+        this.getLottoResultDescription(LOTTO_RESULT[rank]) + PRINT_MESSAGE.resultCount(count[rank]),
       );
     });
   }
