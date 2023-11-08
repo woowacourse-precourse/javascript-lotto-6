@@ -33,8 +33,9 @@ export default class PromptPrinter {
   }
 
   drawResult(result, _ = paramType(result, Object)) {
-    const drawDetailsHTML = Object.entries(result).reduce(
-      (drawDetailsString, [grade, count], idx, currentArray) => {
+    const drawDetailsHTML = Object.entries(result)
+      .reverse()
+      .reduce((drawDetailsString, [grade, count], idx, currentArray) => {
         const gradeMessage = this.#drawResultMessageTemplete({
           grade,
           count,
@@ -42,10 +43,8 @@ export default class PromptPrinter {
           lastIdx: currentArray.length - 1,
         });
         return (drawDetailsString += gradeMessage);
-      },
-      '',
-    );
-
+      }, '');
+    this.#onPrint('\n당첨 통계\n---');
     this.#onPrint(drawDetailsHTML);
   }
 
@@ -71,14 +70,14 @@ export default class PromptPrinter {
     _3 = paramType(lastIdx, 'number'),
   ) {
     if (this.#isSecondGradeWithBonusNumber(grade)) {
-      return `${PromptPrinter.GRADE_CORRECT_COUNT[grade]}개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개\n`;
+      return `\n${PromptPrinter.GRADE_CORRECT_COUNT[grade]}개 일치, 보너스 볼 일치 (30,000,000원) - ${count}개`;
     }
 
-    return `${this.#insertLineAlignOnlyFirstIndex(idx)}${
+    return `${this.#insertLineAlignNotFirstIndex(idx)}${
       PromptPrinter.GRADE_CORRECT_COUNT[grade]
     }개 일치 (${krwCurrencyAsWonFormat(
       LottoReward.GRADE_PRIZE[grade],
-    )}) - ${count}개${this.#insertLineAlignNotLastIndex(idx, lastIdx)}`;
+    )}) - ${count}개`;
   }
 
   #profitRateMessageTemplete(profitRate, _ = paramType(profitRate, 'string')) {
@@ -89,20 +88,10 @@ export default class PromptPrinter {
     return grade === String(GRADE.SECOND);
   }
 
-  #insertLineAlignOnlyFirstIndex(idx, _ = paramType(idx, 'number')) {
+  #insertLineAlignNotFirstIndex(idx, _ = paramType(idx, 'number')) {
     const START_INDEX = 0;
-    if (idx === START_INDEX) return '\n';
+    if (idx !== START_INDEX) return '\n';
     return '';
-  }
-
-  #insertLineAlignNotLastIndex(
-    idx,
-    lastIdx,
-    _0 = paramType(idx, 'number'),
-    _1 = paramType(lastIdx, 'number'),
-  ) {
-    if (idx === lastIdx) return '';
-    return '\n';
   }
 
   #onPrint(message, _ = paramType(message, 'string')) {

@@ -20,7 +20,7 @@ export default class Lotto {
   }
 
   getNumbers() {
-    return [...this.#numbers].sort(this.#sortCallback);
+    return [...this.#numbers].sort((a, b) => a - b);
   }
 
   #validate(numbers) {
