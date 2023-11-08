@@ -1,3 +1,5 @@
+import { validateBonusNumber, validateWinnigNumber } from './utils.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,21 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    validateWinnigNumber(numbers);
   }
 
-  // TODO: 추가 기능 구현
+  validateBonusNumber(bonusNumber) {
+    validateBonusNumber(bonusNumber, this.#numbers);
+  }
+
+  countMatchedNumbers(lotto) {
+    return this.#numbers.filter((number) => lotto.includes(parseInt(number)))
+      .length;
+  }
+
+  isBonusNumberMatch(lotto, bonusNumber) {
+    return lotto.includes(parseInt(bonusNumber));
+  }
 }
 
 export default Lotto;
