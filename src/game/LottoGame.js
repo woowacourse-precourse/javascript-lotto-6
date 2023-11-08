@@ -1,5 +1,6 @@
 import Lotto from "./Lotto.js";
 import RandomGenerator from "../utils/Random.js";
+import WinningChecker from "./WinningChecker.js";
 import LOTTO from "../constants/LOTTO.js";
 import NUMBER from "../constants/NUMBER.js";
 
@@ -41,6 +42,35 @@ class LottoGame {
       lottos.push(this.#createLotto());
     }
     this.#lottos = lottos;
+    return this;
+  }
+
+  #calculateResult(winningNumbers, bonusNumber) {
+    const winningChecker = new WinningChecker(winningNumbers, bonusNumber);
+    const results = {
+      FIFTH: 0,
+      FOURTH: 0,
+      THIRD: 0,
+      SECOND: 0,
+      FIRST: 0,
+    };
+
+    this.#lottos.forEach((lotto) => {
+      if (winningChecker.getWinningResult(lotto.numbers) === "NONE") return;
+      results[winningChecker.getWinningResult(lotto.numbers)]++;
+    });
+    this.#results = this.#convertObjectToArray(results);
+  }
+
+  #convertObjectToArray(results) {
+    return Object.keys(results).map((key) => ({
+      rank: key,
+      count: results[key],
+    }));
+  }
+
+  calculateResult(winningNumbers, bonusNumber) {
+    this.#calculateResult(winningNumbers, bonusNumber);
     return this;
   }
 }
