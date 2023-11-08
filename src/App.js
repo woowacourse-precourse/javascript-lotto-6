@@ -29,7 +29,8 @@ class App {
   }
 
   async enterPurchaseAmount() {
-    let userPrice = await Console.readLineAsync("구입금액을 입력해 주세요.");
+    let inputPrice = await Console.readLineAsync("구입금액을 입력해 주세요.");
+    let userPrice = Number(inputPrice);
     Util.validatePurchasePrice(userPrice,this.basedAmount);
     this.purchaseAmount = userPrice / this.basedAmount;
   }
@@ -52,7 +53,7 @@ class App {
   }
 
   async enterWinningNumbers() {
-    this.winningNumbers = (await Console.readLineAsync("당첨 번호를 입력해 주세요.")).split(",");
+    this.winningNumbers = (await Console.readLineAsync("당첨 번호를 입력해 주세요.")).split(",").map(Number);
     this.winningBonusNumber = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
     Util.validateLottoNumbers(this.winningNumbers, this.winningBonusNumber);
   }
@@ -72,7 +73,7 @@ class App {
 
   #calculateProfit() {
     const userPrice = this.purchaseAmount * this.basedAmount;
-    return ((this.totalPrice - userPrice) / userPrice * 100).toFixed(1);
+    return (this.totalPrice / userPrice * 100).toFixed(1);
   }
 
   printWinningResults() {
