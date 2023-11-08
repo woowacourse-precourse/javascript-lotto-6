@@ -1,6 +1,6 @@
 import Bonus from '../Bonus.js';
 import Lotto from '../Lotto.js';
-import { LOTTO } from '../constants/System.js';
+import { LOTTO, LOTTO_PROCESS } from '../constants/System.js';
 import LottoModel from '../model/index.js';
 import Converter from '../utils/Converter.js';
 import InputView from '../view/InputView.js';
@@ -29,10 +29,8 @@ class LottoController {
       const userLottos = this.#model.generateLotto(purchaseAmount);
 
       return userLottos;
-    } catch (error) {
-      OutputView.print(error.message);
-
-      return this.#purchaseLotto();
+    } catch ({ message }) {
+      return this.#onError(message);
     }
   }
 
@@ -48,10 +46,8 @@ class LottoController {
       const winningNumbers = await InputView.readWinningNumbers();
 
       return Lotto.of(Converter.split(winningNumbers, LOTTO.delimiter));
-    } catch (error) {
-      OutputView.print(error.message);
-
-      return this.#getWinningNumbers();
+    } catch ({ message }) {
+      return this.#onError(message, LOTTO_PROCESS.winning);
     }
   }
 
@@ -60,11 +56,27 @@ class LottoController {
       const bonusNumber = await InputView.readBonusNumber();
 
       return Bonus.of(bonusNumber, winningNumbers);
-    } catch (error) {
-      OutputView.print(error.message);
-
-      return this.#getBonusNumber(winningNumbers);
+    } catch ({ message }) {
+      return this.#onError(message, LOTTO_PROCESS.bonus, winningNumbers);
     }
+  }
+
+  #onError(message, process, arg) {
+    LottoController.#printError(message);
+
+    if (process === LOTTO_PROCESS.bonus) {
+      return this.#getBonusNumber(arg);
+    }
+
+    if (process === LOTTO_PROCESS.winning) {
+      return this.#getWinningNumbers();
+    }
+
+    return this.#purchaseLotto();
+  }
+
+  static #printError(message) {
+    OutputView.print(message);
   }
 }
 

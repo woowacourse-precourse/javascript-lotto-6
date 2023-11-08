@@ -18,3 +18,8 @@ export const LOTTO = {
     undefined: '꽝',
   },
 };
+
+export const LOTTO_PROCESS = {
+  bonus: 'bonus',
+  winning: 'winning',
+};
