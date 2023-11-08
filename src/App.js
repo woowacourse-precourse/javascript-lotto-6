@@ -120,7 +120,7 @@ class App {
       this.checkIsIncludes(inputBonus, winningNumsList);
       
       return Number(inputBonus);
-      
+
     } catch (error) {
       Console.print(ERROR_MESSAGE.INPUT_ERROR);
       await this.getBonus(winningNumsList);
@@ -147,26 +147,7 @@ class App {
       if (this.userRandomList[i].includes(bonus)) {
         isBonus = true;
       }
-
-      switch (winningCount) {
-        case 3:
-          this.winningThree++;
-          break;
-        case 4:
-          if (isBonus) {
-            this.winningBonus++;
-            break
-          }
-          this.winningFour++;
-        case 5:
-          this.winningFive++;
-          break
-        case 6:
-          this.winningSix++;
-          break
-        default:
-          break
-      }
+      this.calcWinningCount(winningCount);
     }
 
     Console.print(MESSAGE_INPUT(this.winningThree).RANK_THREE);
@@ -177,7 +158,27 @@ class App {
     
     const rate = this.getRate();
     Console.print(MESSAGE_INPUT(rate).RATE);
-  }
+  };
+
+  calcWinningCount(winningCount) {
+    switch (winningCount) {
+      case 3:
+        this.winningThree++;
+        return;
+      case 4:
+        if (isBonus) {
+          this.winningBonus++;
+          return;
+        }
+        this.winningFour++;
+      case 5:
+        this.winningFive++;
+        return;
+      case 6:
+        this.winningSix++;
+        return;
+    }
+  };
 
   getRate() {
     const sums = PRIZE.THREE * this.winningThree 
