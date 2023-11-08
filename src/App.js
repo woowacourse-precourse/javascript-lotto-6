@@ -60,6 +60,35 @@ class App {
     );
     return { winningNumbers, bonusNumber };
   }
+
+  calculateResults(winningNumbers, bonusNumber) {
+    const results = {
+      3: 0,
+      4: 0,
+      5: 0,
+      "5b": 0,
+      6: 0,
+    };
+
+    this.lottoList.forEach((lotto) => {
+      const matchingNumbers = lotto.getMatchingNumbers(winningNumbers);
+      const isBonusMatch = lotto.isBonusMatch(bonusNumber);
+
+      if (matchingNumbers === 6) {
+        results["6"]++;
+      } else if (matchingNumbers === 5 && isBonusMatch) {
+        results["5b"]++;
+      } else if (matchingNumbers === 5) {
+        results["5"]++;
+      } else if (matchingNumbers === 4) {
+        results["4"]++;
+      } else if (matchingNumbers === 3) {
+        results["3"]++;
+      }
+    });
+
+    return results;
+  }
 }
 
 export default App;
