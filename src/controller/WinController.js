@@ -1,4 +1,4 @@
-import { WINNING_MESSAGES } from '../constant.js';
+import { WINNING_AMOUNT, WINNING_MESSAGES } from '../constant.js';
 import OutputView from '../view/OutputView.js';
 
 export default class WinController {
@@ -81,11 +81,11 @@ export default class WinController {
 
   calculateWinningAmount() {
     return (
-      this.#WinningCount[3] * 5000 +
-      this.#WinningCount[4] * 50000 +
-      this.#WinningCount[5] * 1500000 +
-      this.#Win5andBonus * 30000000 +
-      this.#WinningCount[6] * 2000000000
+      this.#WinningCount[3] * WINNING_AMOUNT.MATCHING_3 +
+      this.#WinningCount[4] * WINNING_AMOUNT.MATCHING_4 +
+      this.#WinningCount[5] * WINNING_AMOUNT.MATCHING_5 +
+      this.#Win5andBonus * WINNING_AMOUNT.MATCHING_5_BONUS +
+      this.#WinningCount[6] * WINNING_AMOUNT.MATCHING_6
     );
   }
 
