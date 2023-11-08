@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import { error, condition } from '../consts.js';
 
 const isInteger = (number) => {
@@ -14,57 +15,92 @@ const validateLottoRange = (number) => {
 
 const Validator = {
   validateInput(input) {
-    if (input.trim().length === condition.inputEmptyLength) {
-      throw error.inputEmptyError;
+    try {
+      if (input.trim().length === condition.inputEmptyLength) {
+        throw error.inputEmptyError;
+      }
+    } catch (err) {
+      Console.print(err);
     }
   },
 
   validatePurchaseAmount(purchaseAmount) {
-    isInteger(purchaseAmount);
-    if (purchaseAmount % condition.oneLottoPrice !== condition.correctRemain) {
-      throw error.purchaseAmountError;
+    try {
+      isInteger(purchaseAmount);
+      if (
+        purchaseAmount % condition.oneLottoPrice !==
+        condition.correctRemain
+      ) {
+        throw error.purchaseAmountError;
+      }
+    } catch (err) {
+      Console.print(err);
     }
   },
 
   validateLottoLength(numbers) {
-    if (!numbers || numbers.length !== condition.lottoNumbersLength) {
-      throw error.LottoNumbersLengthError;
+    try {
+      if (!numbers || numbers.length !== condition.lottoNumbersLength) {
+        throw error.LottoNumbersLengthError;
+      }
+    } catch (err) {
+      Console.print(err);
     }
   },
 
   validateLottoDuplicate(numbers) {
-    if (new Set(numbers).size !== condition.lottoNumbersLength) {
-      throw error.LottoNumbersDuplicationError;
+    try {
+      if (new Set(numbers).size !== condition.lottoNumbersLength) {
+        throw error.LottoNumbersDuplicationError;
+      }
+    } catch (err) {
+      Console.print(err);
     }
   },
 
   validateWinnigNumbersString(winningNumbers) {
-    if (!Number(winningNumbers.split(condition.separator).join(''))) {
-      throw error.winningNumbersSeparatorError;
+    try {
+      if (!Number(winningNumbers.split(condition.separator).join(''))) {
+        throw error.winningNumbersSeparatorError;
+      }
+    } catch (err) {
+      Console.print(err);
     }
   },
 
   validateWinningNumbers(winningNumbers) {
-    this.validateLottoLength(winningNumbers);
-    this.validateLottoDuplicate(winningNumbers);
-    winningNumbers.forEach((number) => {
-      isInteger(number);
-      validateLottoRange(number);
-    });
+    try {
+      this.validateLottoLength(winningNumbers);
+      this.validateLottoDuplicate(winningNumbers);
+      winningNumbers.forEach((number) => {
+        isInteger(number);
+        validateLottoRange(number);
+      });
+    } catch (err) {
+      Console.print(err);
+    }
   },
 
   validateBonusNumber(bonusNumber) {
-    isInteger(bonusNumber);
-    validateLottoRange(bonusNumber);
+    try {
+      isInteger(bonusNumber);
+      validateLottoRange(bonusNumber);
+    } catch (err) {
+      Console.print(err);
+    }
   },
 
   validateBonusNumberDuplicate(winningNumbers, bonusNumber) {
-    const totalNumbers = [...winningNumbers, bonusNumber];
-    const totalNumbersLength =
-      condition.lottoNumbersLength + condition.bonusNumberLength;
+    try {
+      const totalNumbers = [...winningNumbers, bonusNumber];
+      const totalNumbersLength =
+        condition.lottoNumbersLength + condition.bonusNumberLength;
 
-    if (new Set(totalNumbers).size !== totalNumbersLength) {
-      throw error.LottoNumbersDuplicationError;
+      if (new Set(totalNumbers).size !== totalNumbersLength) {
+        throw error.LottoNumbersDuplicationError;
+      }
+    } catch (err) {
+      Console.print(err);
     }
   },
 };

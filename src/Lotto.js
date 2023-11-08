@@ -10,12 +10,8 @@ class Lotto {
   }
 
   #validate(numbers) {
-    try {
-      Validator.validateLottoLength(numbers);
-      Validator.validateLottoDuplicate(numbers);
-    } catch (error) {
-      throw new Error(error);
-    }
+    Validator.validateLottoLength(numbers);
+    Validator.validateLottoDuplicate(numbers);
   }
 
   sortAscending() {

@@ -57,7 +57,7 @@ class LottoGameController {
       Validator.validatePurchaseAmount(purchaseAmount);
       return purchaseAmount;
     } catch (error) {
-      throw new Error(error);
+      throw new Error('[ERROR]');
     }
   }
 
@@ -81,7 +81,7 @@ class LottoGameController {
       Validator.validateWinningNumbers(winningNumbers);
       return winningNumbers;
     } catch (error) {
-      throw new Error(error);
+      throw new Error('[ERROR]');
     }
   }
 
@@ -94,7 +94,7 @@ class LottoGameController {
       Validator.validateBonusNumberDuplicate(this.#winningNumbers, bonusNumber);
       return bonusNumber;
     } catch (error) {
-      throw new Error(error);
+      throw new Error('[ERROR]');
     }
   }
 
