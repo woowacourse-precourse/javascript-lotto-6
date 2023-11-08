@@ -8,8 +8,7 @@ class LottoNumber {
     }
 
     #validate(number){
-        if(isNaN(number)){
-            console.log(number);
+        if(isNaN(number)||(typeof number === "string")){
             throw new Error(this.ERROR_MESSEGE_NON_NUMBER);
         }
         if(number < 1 || number > 45){
