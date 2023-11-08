@@ -22,5 +22,8 @@ describe("ErrorMessages 클래스 테스트", () => {
     expect(result).toBe("[ERROR] 로또 형식에 부합하지 않습니다.");
   });
 
-
+  it("lottoNumberRangeError 메서드가 올바른 에러 메시지를 반환해야 합니다.", () => {
+    const result = ErrorMessages.lottoNumberRangeError();
+    expect(result).toBe("[ERROR] 1~45 사이 수를 입력하세요");
+  });
 });
