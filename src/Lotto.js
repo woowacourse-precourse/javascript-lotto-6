@@ -48,8 +48,11 @@ class Lotto {
 
   validateNumberCheck(numbers) {
     this.#numbers = numbers.map(num => {
+      if (!Number.isInteger(Number(num))) {
+        throw new LottoError(LottoError.ERROR_MSG.noNumber);
+      }
       const intNum = parseInt(num, 10);
-      if (Number.isNaN(intNum) || !Number.isInteger(intNum)) {
+      if (Number.isNaN(intNum)) {
         throw new LottoError(LottoError.ERROR_MSG.noNumber);
       }
       if (intNum < 1 || intNum > 45) {

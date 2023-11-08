@@ -73,12 +73,16 @@ class ProcessLotto {
   }
 
   validateBonusNumber(number) {
+    if (!Number.isInteger(Number(number))) {
+      throw new LottoError(LottoError.ERROR_MSG.bonus);
+    }
+
     const intBonus = parseInt(number, 10);
     if (Number.isNaN(intBonus) || intBonus < 1 || intBonus > 45) {
       throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
 
-    if (this.#winningNumber.includes(number) || !Number.isInteger(intBonus)) {
+    if (this.#winningNumber.includes(String(intBonus))) {
       throw new LottoError(LottoError.ERROR_MSG.bonus);
     }
   }
