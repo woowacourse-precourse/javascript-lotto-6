@@ -42,6 +42,20 @@ const runException = async (input) => {
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
 }
 
+const customRunException = async (input) => {
+  const logSpy = getLogSpy();
+
+  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+
+  mockRandoms([RANDOM_NUMBERS_TO_END]);
+  mockQuestions(input);
+
+  const app = new App();
+  await app.play();
+
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+}
+
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
@@ -101,6 +115,10 @@ describe("로또 테스트", () => {
 
   test("구입금액이 1000의 배수가 아닌 경우 예외를 던져야 합니다", async () => {
     await expect(runException("500")).rejects.toThrow("[ERROR] 구입금액은 반드시 1000원 단위이여야 합니다.");
+  });
+
+  test("보너스 번호가 1부터 45 사이의 숫자가 아닌 경우 예외를 던져야 합니다", async () => {
+    await expect(customRunException(["1000", "1,2,3,4,5,6", "7j"])).rejects.toThrow("[ERROR] 보너스 번호는 1부터 45의 숫자만 사용하실 수 있습니다.");
   });
   
 });

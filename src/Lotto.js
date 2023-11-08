@@ -47,6 +47,10 @@ class Lotto {
     this.#validate(winningNumbers.split(','));
   }
   checkWinningNumbers(lottoArr, winningNumbers, bonusNumber) {
+    if (Number.isNaN(Number(bonusNumber)) || bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error("[ERROR] 보너스 번호는 1부터 45의 숫자만 사용하실 수 있습니다.");
+    }
+    
     const winningCnt = [0, 0, 0, 0, 0];
   
     for(let i = 0 ; i < lottoArr.length ; i++) {
