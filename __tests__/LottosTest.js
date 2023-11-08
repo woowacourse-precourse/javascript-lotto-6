@@ -1,6 +1,6 @@
 import Lottos from "../src/Model/Lottos.js";
 
-describe("Lottos", () => {
+describe("Lottos 클래스 테스트", () => {
   let lottos;
 
   beforeEach(() => {
