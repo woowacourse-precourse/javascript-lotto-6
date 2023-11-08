@@ -20,13 +20,7 @@ class LottoResultChecker {
   }
 
   getResult() {
-    const {
-      firstPrize, secondPrize, thirdPrize, fourthPrize, lastPrize,
-    } = this.#result;
-
-    return {
-      firstPrize, secondPrize, thirdPrize, fourthPrize, lastPrize,
-    };
+    return this.#result;
   }
 
   getProfitRate() {
