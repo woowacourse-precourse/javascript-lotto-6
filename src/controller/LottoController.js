@@ -8,6 +8,8 @@ import WinningLotto from '../domain/WinningLotto.js';
 class LottoController {
   #buyer;
 
+  #lottoWinResult;
+
   async handleBuyLottos() {
     const money = await InputView.readMoney();
     this.#buyer = new Buyer(money);
@@ -18,6 +20,9 @@ class LottoController {
   async handleCreateWinResult() {
     const winningNumbers = await InputView.readWinningNumbers();
     const bonusNumber = await InputView.readBonusNumber();
+
+    const winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+    this.#lottoWinResult = new LottoWinResult(winningLotto);
   }
 }
 
