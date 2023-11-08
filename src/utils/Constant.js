@@ -4,5 +4,6 @@ const Constant = {
   MAX: 45,
   NUM_COUNT: 6,
   REGEX_SPACE: /\s/g,
+  REGEX_IS_NUM: /^\d+$/,
 };
 export default Constant;
