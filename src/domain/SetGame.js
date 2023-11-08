@@ -1,8 +1,8 @@
-import { LOTTO_RULE, WINNING_PROFITS } from './Constants.js';
+import { LOTTO_RULE, WINNING_PROFITS } from '../Constants.js';
 import Lotto from './Lotto.js';
 import LottoUtils from './LottoUtils.js';
-import Utils from './Utils.js';
-import { Validation } from './Validation/Validation.js';
+import Utils from '../Utils.js';
+import Validation from '../Validation/Validation.js';
 
 class SetGame {
   #lottos;

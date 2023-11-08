@@ -1,4 +1,4 @@
-import Utils from './Utils';
+import Utils from '../Utils';
 
 class LottoUtils {
   constructor(lottos) {
@@ -35,6 +35,13 @@ class LottoUtils {
       return 'bonus';
     }
     return '5';
+  }
+
+  // 당첨결과 확인
+  checkGameResult(object) {
+    let result = { ...object };
+    result = Utils.removeLessThanThree(result);
+    return result;
   }
 }
 export default LottoUtils;
