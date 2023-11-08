@@ -13,13 +13,13 @@ class Lotto {
     this.validateNumbers(numbers);
     this.validateDuplicates(numbers);
   }
-  
+
   validateLength(numbers) {
     if (numbers.length !== 6) {
       throw new Error(ERROR_MESSAGE.INVALID_NUMBERS_LENGTH);
     }
   }
-  
+
   validateNumbers(numbers) {
     numbers.forEach((number) => {
       if (typeof number !== 'number' || Number.isNaN(number)) {
@@ -30,7 +30,7 @@ class Lotto {
       }
     });
   }
-  
+
   validateDuplicates(numbers) {
     const setOfNumbers = new Set(numbers);
     if (setOfNumbers.size !== numbers.length) {
