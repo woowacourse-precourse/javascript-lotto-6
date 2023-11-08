@@ -1,9 +1,9 @@
 const IN_GAME_MESSAGE = Object.freeze({
   getCost: "구입금액을 입력해 주세요.\n",
-  amount: "개를 구매했습니다.\n",
+  amount: "개를 구매했습니다.",
   getNumbers: "\n당첨 번호를 입력해 주세요.\n",
   getBonusNumber: "\n보너스 번호를 입력해 주세요.\n",
-  lottoResults: "당첨 통계\n---\n",
+  lottoResults: "\n당첨 통계\n---\n",
 });
 
 const UNIT = Object.freeze(1000);
@@ -19,13 +19,7 @@ const NUMBER_RANGE = Object.freeze({
   max: 45,
 });
 
-const PLACE = Object.freeze({
-  first: 1,
-  second: 2,
-  third: 3,
-  fourth: 4,
-  fifth: 5,
-});
+const PLACE = Object.freeze([6, 5, 5, 4, 3]);
 
 const INPUT_ERROR = Object.freeze({
   null: `${PREFIX} 아무것도 입력하지 않았습니다.\n`,
