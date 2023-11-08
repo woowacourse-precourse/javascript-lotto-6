@@ -23,16 +23,18 @@ class Output {
   }
 
   async printLottoResult(key, value) {
-    if(key ==="3") {
-      Console.print(OUTPUT_MSG.WIN_RESULT)
-      Console.print(OUTPUT_MSG.LINE)
-      Console.print(`${MATCH_DATA.THREE} ${value}개`)
-    }
-    
-    if(key === "4") Console.print(`${MATCH_DATA.FOUR} ${value}개`)
-    if(key === "5") Console.print(`${MATCH_DATA.FIVE} ${value}개`)
-    if(key === "bonus") Console.print(`${MATCH_DATA.BONUS} ${value}개`)
-    if(key === "6") Console.print(`${MATCH_DATA.SIX} ${value}개`)
+    const consoleMessages = [];
+    if (key === "3") consoleMessages.push(OUTPUT_MSG.WIN_RESULT, OUTPUT_MSG.LINE);
+    if (key === "4") consoleMessages.push(MATCH_DATA.FOUR);
+    if (key === "5") consoleMessages.push(MATCH_DATA.FIVE);
+    if (key === "bonus") consoleMessages.push(MATCH_DATA.BONUS);
+    if (key === "6") consoleMessages.push(MATCH_DATA.SIX);
+    consoleMessages.push(`${value}개`);
+    Console.print(consoleMessages.join(" "));
+  }
+  
+  async printYieldCalculation(total) {
+    await Console.print(`${OUTPUT_MSG.TOTAL_MONEY} ${total}${OUTPUT_MSG.PERCENT}`)
   }
 }
 
