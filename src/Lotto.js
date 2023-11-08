@@ -1,6 +1,3 @@
-/* eslint-disable default-case */
-import App from './App.js';
-
 class Lotto {
   #numbers;
 
