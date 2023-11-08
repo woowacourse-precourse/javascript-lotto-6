@@ -53,12 +53,12 @@ class Statistics {
   }
 
   getROI() {
-    const reword = [5000, 50000, 1500000, 30000000, 2000000000];
+    const REWORD = [5000, 50000, 1500000, 30000000, 2000000000];
     const investment = this.#lottoNumber.length * 1000;
     let profit = 0;
 
     for (let i = 0; i < this.#result.length; i += 1) {
-      profit += this.#result[i] * reword[i];
+      profit += this.#result[i] * REWORD[i];
     }
 
     const roi = (profit / investment) * 100;
