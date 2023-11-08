@@ -1,20 +1,7 @@
-import { num } from '../Constants.js';
+import calculateTotalPrizeMoney from './calculateTotalPrizeMoney.js';
 
 function calculateGrossReturn(purchaseAmount, statistics) {
-  const statisticsArray = Object.values(statistics);
-
-  const prizeMoneyArray = [
-    num.MATCH_3,
-    num.MATCH_4,
-    num.MATCH_5,
-    num.MATCH_5_PLUS_BONUS,
-    num.MATCH_6,
-  ];
-
-  const totalPrizeMoney = prizeMoneyArray.reduce(
-    (acc, cur, idx) => acc + cur * statisticsArray[idx],
-    0
-  );
+  const totalPrizeMoney = calculateTotalPrizeMoney(statistics);
 
   let grossReturn = String(Math.round((totalPrizeMoney / purchaseAmount) * 100 * 10) / 10);
 
