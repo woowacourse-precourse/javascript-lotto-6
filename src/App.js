@@ -2,7 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import AmountInput from "./View/AmountInput";
 import numberInput from "./View/numberInput";
 import printResult from "./View/printResult";
-import calculateLottoNumber from "./calculateLottoNumber";
+import calculateLottoNumber from "./CalculateLottoNumber";
 import calculateProfit from "./calculateProfit";
 import buyLotto from "./buyLotto";
 import getStatistics from "./getStatistics";
