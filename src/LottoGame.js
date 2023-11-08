@@ -1,14 +1,18 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { validateInputMoney } from "./Validator.js";
+import { validateBonusNumber, validateInputMoney } from "./Validator.js";
 import Lotto from "./Lotto.js";
 
 class LottoGame {
   #gameCount;
   #lottoList;
+  #winningNumber;
+  #bonusNumber;
 
   constructor() {
     this.#gameCount = 0;
     this.#lottoList = [];
+    this.#winningNumber = [];
+    this.#bonusNumber = 0;
   }
 
   async getUserInputMoney() {
@@ -48,10 +52,26 @@ class LottoGame {
   }
 
   async getWinningNumber() {
-    const WinningInput = await Console.readLineAsync(
-      "\n당첨 번호를 입력해 주세요.\n"
-    );
-    const WinningLotto = new Lotto(WinningInput.split(",").map(Number));
+    try {
+      const WinningInput = await Console.readLineAsync(
+        "\n당첨 번호를 입력해 주세요.\n"
+      );
+      this.#winningNumber = new Lotto(WinningInput.split(",").map(Number));
+      await this.getBonusNumber();
+    } catch (error) {
+      Console.print(error.message);
+    }
+  }
+
+  async getBonusNumber() {
+    try {
+      this.#bonusNumber = await Console.readLineAsync(
+        "\n보너스 번호를 입력해 주세요.\n"
+      );
+      validateBonusNumber(this.#bonusNumber);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 }
 
