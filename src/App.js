@@ -95,7 +95,7 @@ class App {
         sum += item.true.price * item.true.count;
       }
     });
-    const totalReturnRate = (sum / Number(this.#inputMoney)) * 100;
+    const totalReturnRate = ((sum / Number(this.#inputMoney)) * 100).toFixed(1);
     MissionUtils.Console.print(`총 수익률은 ${totalReturnRate}%입니다.`);
   }
 }
