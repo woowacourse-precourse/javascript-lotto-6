@@ -86,6 +86,10 @@ class WinnigStatistics {
 
     this.printMargin(profitPercentage.toFixed(1));
   }
+
+  printMargin(profitPercentage) {
+    Console.print(`총 수익률은 ${profitPercentage}%입니다.`);
+  }
 }
 
 export default WinnigStatistics;
