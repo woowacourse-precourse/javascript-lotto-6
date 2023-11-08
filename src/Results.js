@@ -19,6 +19,7 @@ export class Results {
       model.winningResults.push(result);
     }
 
+    model.totalPrize = 0;
     this.#lottoResultsCounter(model.winningResults);
   }
 
