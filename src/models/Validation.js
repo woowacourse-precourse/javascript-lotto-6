@@ -1,3 +1,6 @@
+import { ERROR_MESSAGE } from "../constants/ErrorMessage.js";
+import { CONSTANTS } from "../constants/GameConstant.js";
+
 class Validation{
     static isPurchasePriceValidate(purchasePrice){
         const MIN_VALUE = 0;
@@ -5,7 +8,7 @@ class Validation{
             throw new Error(ERROR_MESSAGE.INVALID_PRICE);
         }
 
-        if(isNaN(Number(purchasePrice)) || Number(purchasePrice).isInteger()===false){
+        if(isNaN(Number(purchasePrice))){
             throw new Error(ERROR_MESSAGE.INVALID_NOT_A_NUMBER);
         }
 
