@@ -7,7 +7,7 @@ export const INPUT_MESSAGE = Object.freeze({
 });
 
 export const OUTPUT_MESSAGE = Object.freeze({
-  buy: (lottoCount) => `${lottoCount}개를 구매했습니다.`,
+  lottoCount: (lottoCount) => `${lottoCount}개를 구매했습니다.`,
   lottoNumbers: (lottoNumbers) => `[${lottoNumbers.join(DELIMITER.joinDelimiter)}]`,
   resultTitle: '당첨 통계',
   resultDivider: '---',
