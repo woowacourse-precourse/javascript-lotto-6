@@ -1,4 +1,4 @@
-import lottoCompare from '../utils/lottoCompare.js';
+import compareLottoNumbers from '../utils/compareLottoNumbers.js';
 import RANK from '../constants/rank.js';
 import RATE from '../constants/rate.js';
 import PRIZE from '../constants/prize.js';
@@ -30,7 +30,7 @@ class LottoComparison {
   }
 
   #compare(lottos) {
-    lottos.forEach((lotto) => lottoCompare(lotto, this.#winningNumbers, this.#bonusNumber, this.#rank));
+    lottos.forEach((lotto) => compareLottoNumbers(lotto, this.#winningNumbers, this.#bonusNumber, this.#rank));
   }
 
   #printResult(lottoTicketNumber, ranks) {

@@ -1,6 +1,6 @@
 import RANK from '../constants/rank';
 
-const lottoCompare = (lotto, winningNumbers, bonusNumber, rank) => {
+const compareLottoNumbers = (lotto, winningNumbers, bonusNumber, rank) => {
   let rankFlag = 0;
   lotto.forEach((number) => {
     if (winningNumbers.includes(number)) rankFlag += 1;
@@ -17,4 +17,4 @@ const lottoCompare = (lotto, winningNumbers, bonusNumber, rank) => {
   rank.set(rankFlag, rank.get(rankFlag) + 1);
 };
 
-export default lottoCompare;
+export default compareLottoNumbers;

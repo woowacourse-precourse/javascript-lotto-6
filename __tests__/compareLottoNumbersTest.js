@@ -1,6 +1,6 @@
-import lottoCompare from '../src/utils/lottoCompare';
+import compareLottoNumbers from '../src/utils/compareLottoNumbers';
 
-describe('lottoCompare() 함수 테스트', () => {
+describe('compareLottoNumbers() 함수 테스트', () => {
   test('로또 번호를 당첨 번호와 보너스 번호와 비교하여 올바른 결과를 기록한다.', () => {
     // Arrange
     const lotto = [1, 2, 3, 4, 5, 6];
@@ -15,7 +15,7 @@ describe('lottoCompare() 함수 테스트', () => {
     ]);
 
     // Act
-    lottoCompare(lotto, winningNumbers, bonusNumber, rank);
+    compareLottoNumbers(lotto, winningNumbers, bonusNumber, rank);
 
     // Assert
     const expectedRank = new Map([
