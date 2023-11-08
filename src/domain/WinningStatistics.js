@@ -1,5 +1,4 @@
 import CONSTANTS from '../constants/constants.js';
-import swap from '../utils/swap.js';
 import MESSAGE from '../constants/message.js';
 
 class WinningStatistics {
@@ -8,7 +7,7 @@ class WinningStatistics {
   #winningStatisticsString;
 
   #lottos;
-  
+
   constructor(lottos, winningNumbers, bonusNumber) {
     this.#lottos = lottos;
     this.#winningStatistics = this.#generateWinningStatistics(
@@ -37,8 +36,15 @@ class WinningStatistics {
       const count = matchCounts.filter(winningstatistic => winningstatistic === Number(key)).length;
       return `${MESSAGE.winningStatistics[key]}${count}개`;
     });
-    swap(winningStatisticsString);
+    this.#swapWinningStatisticsString(winningStatisticsString);
     return winningStatisticsString;
+  }
+
+  #swapWinningStatisticsString(winningStatisticsString) {
+    const threeMatchValue = winningStatisticsString[CONSTANTS.match.threeMatch];
+    winningStatisticsString[CONSTANTS.match.threeMatch] =
+      winningStatisticsString[CONSTANTS.match.fourMatch];
+    winningStatisticsString[CONSTANTS.match.fourMatch] = threeMatchValue;
   }
 
   #getMatchingNumbersCounts(lottos, winningNumbers) {
