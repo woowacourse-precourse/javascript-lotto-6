@@ -80,6 +80,12 @@ class WinnigStatistics {
 
     return resultArray.sort();
   }
+
+  calculrateMargin(purchaseMoney) {
+    const profitPercentage = (this.#prizeMoney / purchaseMoney) * 100;
+
+    this.printMargin(profitPercentage.toFixed(1));
+  }
 }
 
 export default WinnigStatistics;
