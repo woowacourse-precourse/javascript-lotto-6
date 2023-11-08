@@ -43,25 +43,24 @@ const OUPUT_MESSAGES = Object.freeze({
 });
 
 const ERROR_MESSAGES = Object.freeze({
-  PREFIX: '[ERROR]',
   LOTTO: {
-    NO_NUMBER: '로또 번호는 숫자여야 합니다.',
-    NO_LENGTH: `로또 번호는 ${LOTTO_RULE.LENGTH}개여야 합니다.`,
-    NO_UNIQUE: '로또 번호는 유일해야 합니다.',
-    NO_POSITIVE: '로또 번호는 양수여야 합니다.',
-    NO_INTEGER: '로또 번호는 정수여야 합니다.',
-    NO_RANGE: `로또 번호는 ${LOTTO_RULE.RANGE.MIN}부터 ${LOTTO_RULE.RANGE.MAX} 사이의 숫자여야 합니다.`,
+    NO_NUMBER: '[ERROR] 로또 번호는 숫자여야 합니다.',
+    NO_LENGTH: `[ERROR] 로또 번호는 ${LOTTO_RULE.LENGTH}개여야 합니다.`,
+    NO_UNIQUE: '[ERROR] 로또 번호는 유일해야 합니다.',
+    NO_POSITIVE: '[ERROR] 로또 번호는 양수여야 합니다.',
+    NO_INTEGER: '[ERROR] 로또 번호는 정수여야 합니다.',
+    NO_RANGE: `[ERROR] 로또 번호는 ${LOTTO_RULE.RANGE.MIN}부터 ${LOTTO_RULE.RANGE.MAX} 사이의 숫자여야 합니다.`,
   },
   INPUT: {
-    IS_EMPTY: '입력값이 없습니다.',
-    NO_NUMBER: '입력값은 숫자여야 합니다.',
-    NO_POSITIVE: '입력값은 양수여야 합니다.',
-    NO_INTEGER: '입력값은 정수여야 합니다.',
+    IS_EMPTY: '[ERROR] 입력값이 없습니다.',
+    NO_NUMBER: '[ERROR] 입력값은 숫자여야 합니다.',
+    NO_POSITIVE: '[ERROR] 입력값은 양수여야 합니다.',
+    NO_INTEGER: '[ERROR] 입력값은 정수여야 합니다.',
   },
   BUY: {
-    NO_NUMBER: '구매금액은 숫자여야 합니다.',
-    NO_POSITIVE: '구매금액은 양수여야 합니다.',
-    BUY_UNIT: `구매 금액은 ${LOTTO_RULE.UNIT}원 단위로 가능합니다.`,
+    NO_NUMBER: '[ERROR] 구매금액은 숫자여야 합니다.',
+    NO_POSITIVE: '[ERROR] 구매금액은 양수여야 합니다.',
+    BUY_UNIT: `[ERROR] 구매 금액은 ${LOTTO_RULE.UNIT}원 단위로 가능합니다.`,
   },
 });
 
