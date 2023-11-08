@@ -1,8 +1,8 @@
 /* eslint-disable */
 import { MissionUtils } from '@woowacourse/mission-utils';
-import LottoController from '../controller/LottoController';
-import TotalPrice from '../model/TotalPrice';
-import Lotto from '../model/Lotto';
+import LottoController from '../src/controller/LottoController';
+import TotalPrice from '../src/model/TotalPrice';
+import Lotto from '../src/model/Lotto';
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();

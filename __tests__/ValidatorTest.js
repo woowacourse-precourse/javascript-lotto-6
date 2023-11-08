@@ -1,6 +1,6 @@
 /* eslint-disable */
-import Validator from '../utils/Validator';
-import Exception from '../utils/Exception';
+import Validator from '../src/utils/Validator';
+import Exception from '../src/utils/Exception';
 
 describe('기본 예외 검증 테스트', () => {
   let input;

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Lotto from '../model/Lotto.js';
+import Lotto from '../src/model/Lotto.js';
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
