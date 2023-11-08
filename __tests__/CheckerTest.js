@@ -1,4 +1,4 @@
-import Checker from "./Checker";
+import Checker from "../src/Checker.js";
 
 describe("Checker", () => {
   let checker;
@@ -67,10 +67,6 @@ describe("Checker", () => {
     test("유효하지 않은 보너스 번호를 입력하면 에러를 던져야 합니다", () => {
       expect(() => {
         checker.checkBonus([1, 2, 3, 4, 5, 6], 0);
-      }).toThrowError("[ERROR] : 잘못된 로또 입력값입니다");
-
-      expect(() => {
-        checker.checkBonus([1, 2, 3, 4, 5, 6], 7);
       }).toThrowError("[ERROR] : 잘못된 로또 입력값입니다");
 
       expect(() => {
