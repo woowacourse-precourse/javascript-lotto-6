@@ -10,6 +10,13 @@ class App {
     this.lotto;
   }
 
+  /**
+   * 1. 유저의 구매금액 입력 및 유저 생성
+   * 2. 금액에 해당하는 갯수의 랜덤숫자 출력
+   * 3. 로또 번호 입력 및 로또 생성
+   * 4. 로또 결과 생성
+   * 5. 로또 통계 결과 출력
+   */
   async play() {
     await this.userInputController();
     this.userNumbersOutputController();

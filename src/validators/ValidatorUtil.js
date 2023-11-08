@@ -27,6 +27,10 @@ class ValidatorUtil {
   static duplicationValidate(input, bonusNumber) {
     const inputToSet = new Set(input);
 
+    /**
+     * 1. 로또번호 6자리 내에서 중복 발생하는 경우
+     * 2. 보너스 번호가 로또번호와 중복 발생하는 경우
+     */
     if (inputToSet.size !== input.length)
       throw new Error(ErrorMessages.NOT_QNIQUE_NUMBERS);
     if (input.includes(bonusNumber))

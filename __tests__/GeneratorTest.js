@@ -36,7 +36,7 @@ describe('제네레이터 클래스 테스트', () => {
   test.each([
     [randomInputs[0], lottoNumbers[0], 3],
     [randomInputs[1], lottoNumbers[1], 6],
-    [randomInputs[2], lottoNumbers[2], null],
+    [randomInputs[2], lottoNumbers[2], 0],
   ])(
     '유저 숫자와 로또 숫자 비교 테스트',
     (userNumbers, lottoNumbers, count) => {

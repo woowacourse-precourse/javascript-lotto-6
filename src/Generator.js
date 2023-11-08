@@ -1,5 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import { LottoConstants, LottoPrizes } from './constants/Constants.js';
+
 class Generator {
   static randomNumbersGenerator(purchaseAmount) {
     const result = [];
@@ -9,7 +10,10 @@ class Generator {
         LottoConstants.MIN_NUM,
         LottoConstants.MAX_NUM,
         LottoConstants.LENGTH
-      ).sort((num1, num2) => num1 - num2);
+      ).sort(
+        // 오름차순 정렬을 위한 sort
+        (num1, num2) => num1 - num2
+      );
       result.push(sortedRandomNumbers);
     }
 
@@ -17,10 +21,11 @@ class Generator {
   }
 
   static lottoCountGenerator(userNumbers, lottoNumbers) {
+    //userNumbers와 lottoNumbers의 공통 번호 추출
     const countNumbers = userNumbers.filter((number) =>
       lottoNumbers.includes(number)
     );
-    const count = countNumbers.length < 3 ? null : countNumbers.length;
+    const count = countNumbers.length;
 
     return count;
   }
