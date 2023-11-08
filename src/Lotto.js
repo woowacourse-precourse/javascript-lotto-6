@@ -1,13 +1,16 @@
 class Lotto {
   #numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
+  constructor(numbers, isBonus = false) {
+    this.#validate(numbers, isBonus);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
+  #validate(numbers, isBonus) {
+    if(numbers.some(num => num < 1 || num > 45)){
+        throw new Error("[ERROR] 입력 값은 1~45 까지의 숫자입니다");
+    }
+    if (!isBonus && numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
     const uniqueNumbers = new Set(numbers);
@@ -18,14 +21,6 @@ class Lotto {
 
   getNumbers() {
     return this.#numbers;
-  }
-
-  match(winNumbers) {
-    let matchCount = 0;
-    this.#numbers.forEach(number => {
-      if (winNumbers.includes(number)) matchCount++;
-    });
-    return matchCount;
   }
 }
 
