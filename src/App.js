@@ -11,7 +11,7 @@ class App {
     const lottoList = functions.buyLottoByAmount(amount);
    const winningNumbers = await Inoutput.getWinningNumber();
    const bounsNumber = await Inoutput.getBounsNumber(winningNumbers);
-   const a = functions.lottoStart(lottoList,winningNumbers,bounsNumber,amount);
+   functions.lottoStart(lottoList,winningNumbers,bounsNumber,amount);
    
    
   }

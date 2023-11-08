@@ -102,11 +102,7 @@ class Functions {
     const results = [];
 
     for (const lottoNumber of lottoNumbers) {
-      const matchCount = this.getMatchCount(
-        lottoNumber,
-        winningNumbers,
-        bonusNumber
-      );
+      const matchCount = this.getMatchCount(lottoNumber,winningNumbers,bonusNumber);
       const hasBonus = matchCount === 5 && lottoNumber.includes(bonusNumber);
       results.push(this.calculateResult(matchCount, hasBonus));
     }

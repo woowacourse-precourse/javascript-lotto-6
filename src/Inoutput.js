@@ -18,9 +18,7 @@ class Inoutput {
 
     while (true) {
       try {
-        const winningNumberInput = await Console.readLineAsync(
-          WINNING_NUMBERS_MESSAGE + "\n"
-        );
+        const winningNumberInput = await Console.readLineAsync(WINNING_NUMBERS_MESSAGE + "\n");
         winningNumbers = winningNumberInput.split(SPLIT).map((number) => parseInt(number, 10));
         if (winningNumbers.length !== 6 ||winningNumbers.some(isInvalidWinningNumber) ||duplicateNumbers(winningNumbers)
         ) {
@@ -37,29 +35,23 @@ class Inoutput {
 
   static async getBounsNumber(winningNumbers) {
     let bounsNumber;
-
     while (true) {
       try {
         const bounsNumberInput = await Console.readLineAsync(BOUNS_NUMBER + "\n" );
         Console.print("");
-       
         bounsNumber = parseInt(bounsNumberInput, 10);
-
         if (isInvalidWinningNumber(bounsNumber) ||winningNumbers.includes(bounsNumber)) 
         {
           throw new Error(ERROR_MESSAGE_BOUNS);
         }
-
         Console.print("");
         break; 
       } catch (error) {
         Console.print(error.message); 
       }
     }
-
     return bounsNumber;
   }
-
   
 }
 function isInvalidWinningNumber(number) {
