@@ -5,8 +5,8 @@ import InputValidator from "../validator/input-validator.js";
 class InputVeiw{
     async readPurchaseAmount() {
         const inputPrice = await Console.readLineAsync(INPUT_MESSAGE.inputPurchaseAmount);
-        InputValidator.perchaseRangeValidation(inputPrice);
-        InputValidator.inputPerChaseValidation(inputPrice);
+        InputValidator.purchaseRangeValidation(inputPrice);
+        InputValidator.inputPurchaseValidation(inputPrice);
         return inputPrice / 1000;
     }
 
