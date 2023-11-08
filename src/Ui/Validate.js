@@ -13,11 +13,11 @@ const Validate = {
   WinningNumbers(winningNumbers) {
     if (winningNumbers.includes(NaN)) {
       throw new Error(ERROR_MESSAGE.INPUT_NON_NUMB);
-    } else if (this.checkSameNumber(winningNumbers)) {
+    } else if (!this.checkSameNumber(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.INPUT_SAME_NUMB);
     } else if (winningNumbers.length < 6 || winningNumbers.length > 6) {
       throw new Error(ERROR_MESSAGE.NOT_INPUT_6);
-    } else if (this.checkBounds(winningNumbers)) {
+    } else if (!this.checkBounds(winningNumbers)) {
       throw new Error(ERROR_MESSAGE.OUT_OF_BOUNDS);
     }
   },
@@ -34,14 +34,14 @@ const Validate = {
   },
 
   checkSameNumber(winningNumbers) {
-    return [...new Set(winningNumbers)].length < 6 ? true : false;
+    return [...new Set(winningNumbers)].length < 6 ? false : true;
   },
 
   checkBounds(winningNumbers) {
-    let result = false;
+    let result = COMMON_VALUE.SUCCESS;
     winningNumbers.forEach((number) => {
       if (number < COMMON_VALUE.MIN || number > COMMON_VALUE.MAX) {
-        result = true;
+        result = COMMON_VALUE.FAIL;
       }
     });
 
