@@ -1,24 +1,29 @@
 import { Console } from '@woowacourse/mission-utils';
-import { countLottoTickets } from './utils/countLottoTickets';
 import validateMoney from './validation/validateMoney';
 import validateLotto from './validation/validateLotto';
+import LottoManager from './LottoManager';
+import Lotto from './Lotto';
 
 const inputUserMoney = async () => {
   const userMoney = await Console.readLineAsync('구입 금액을 입력해 주세요.');
-
   validateMoney(userMoney);
-  countLottoTickets(userMoney);
+
+  return userMoney;
 };
 
-const inputLottoNumber = async () => {
-  const lottoNumber = await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+const inputUserLottoArray = async () => {
+  const userLottoNumber = await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+  const userLottoNumberToArray = userLottoNumber.split(',').map(Number);
 
-  validateLotto(lottoNumber);
+  validateLotto(userLottoNumberToArray);
+
+  return userLottoNumberToArray;
 };
 
-const inputBonusNumber = async () => {
-  const bonusNumber =
-    await Console.readLineAsync('보너스 번호를 입력해 주세요.');
+const inputUserBonusNumber = async () => {
+  const bonusNumber = await Console.readLineAsync('보너스 번호를 입력해 주세요.');
+
+  return bonusNumber;
 };
 
-module.exports = { inputUserMoney, inputLottoNumber, inputBonusNumber };
+module.exports = { inputUserMoney, inputUserLottoArray, inputUserBonusNumber };
