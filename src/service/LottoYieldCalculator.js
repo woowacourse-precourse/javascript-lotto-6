@@ -4,9 +4,10 @@ export default class LottoYieldCalculator {
   constructor() {
     this.setting = new LottoSettings();
   }
-  caculateYieldRate(result, money) {
+  calculateYieldRate(result, money) {
     const totalPrize = this.getTotalPrize(result);
-    const yieldRate = Number(((totalPrize / money) * 100).toFixed(2));
+    const yieldRate = Number(((totalPrize / money) * 100).toFixed(1));
+
     return yieldRate;
   }
 

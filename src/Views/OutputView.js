@@ -18,8 +18,16 @@ export default class OutputView {
         result[key]
       }개\n`;
     }
-    resultMessages += `총 수익률은 ${yieldRate}%입니다.`;
+    const formatedYiel = this.formatYield(yieldRate);
+    resultMessages += `총 수익률은 ${formatedYiel}%입니다.`;
     Console.print(resultMessages);
+  }
+
+  static formatYield(yieldRate) {
+    return parseFloat(yieldRate).toLocaleString(undefined, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    });
   }
 
   static printLottos(lottosArray) {
