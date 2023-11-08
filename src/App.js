@@ -47,6 +47,8 @@ class App {
 			VarirficationManager.checkPurchaseCost,
 		);
 
+		this.initialUserLotto(purchaseCost);
+
 		let lottoWinningNumber = await InputOutputManager.getUserInput(
 			SYSTEM_MESSAGE.askWinnerLottoNumber,
 			VarificationManager.checkLottoNumber,
@@ -63,8 +65,6 @@ class App {
 
 	async initialLottoCycle() {
 		const { purchaseCost, lottoWinningNumber, lottoBonusNumber } = await this.getUserLottoValues();
-
-		this.initialUserLotto(purchaseCost);
 
 		const lotto = new Lotto(lottoWinningNumber);
 		const bonusLotto = new LottoBonus(Number(lottoBonusNumber), lottoWinningNumber);
