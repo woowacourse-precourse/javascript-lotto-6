@@ -42,6 +42,11 @@ class LottoController {
     );
     const bonusNumber = await this.#inputView.readBonusNumber();
     this.#bonus = new Bonus(bonusNumber, this.#lotto.getLottoNumber());
+    await this.#generateWinningResult();
+  }
+
+  async #generateWinningResult() {
+    await this.#outputView.printWinningMessage();
   }
 }
 

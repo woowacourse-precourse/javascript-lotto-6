@@ -10,6 +10,10 @@ class OutputView {
       await Console.print(value);
     }
   }
+
+  async printWinningMessage() {
+    await Console.print("당첨 통계\n---");
+  }
 }
 
 export default OutputView;
