@@ -4,17 +4,17 @@ export class Bonus {
   #number;
 
   constructor(number, winningNumbers) {
-    this.#bonusNumberValidater(number);
-    this.#bonusNumberRangeValidater(number);
-    this.#bonusNumberDuplicateValidater(number, winningNumbers);
+    const validateNumber = this.#bonusNumberValidater(number);
+    this.#bonusNumberRangeValidater(validateNumber);
+    this.#bonusNumberDuplicateValidater(validateNumber, winningNumbers);
+    
     this.#number = number;
-
     model.bonus = this.#number;
   }
 
   #bonusNumberValidater(number) {
     if (/^[+]?[1-9]\d*$/.test(number)) {
-      return true;
+      return Number(number);
     } 
     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
   }

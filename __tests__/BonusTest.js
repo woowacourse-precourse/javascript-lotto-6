@@ -15,8 +15,8 @@ describe("보너스 번호 입력 테스트", () => {
   });
 
   test("당첨 번호가 1~45 사이가 아닐 경우, 에러가 발생한다.", () => {
-    const winningInput = ["1","2","3","4","5","6"];
-    const BONUS_INPUT = 46;
+    const winningInput = [1,2,3,4,5,6];
+    const BONUS_INPUT = "46";
 
     expect(()=> {
       new Bonus(BONUS_INPUT, winningInput)
