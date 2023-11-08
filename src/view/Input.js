@@ -14,13 +14,11 @@ export const getUserAmount = async () => {
 }
 
 export const getWinningNumber = async () => {
-  try {
+  
     const input = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.WIN_NUM);
     const winningNumbersArray = changeArrayStringIntoNumber(input.split(","));
     return winningNumbersArray;
-  } catch (error) {
-    throw error;
-  }
+
 }
 
 export const getBonusNumber = async () => {
