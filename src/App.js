@@ -88,7 +88,6 @@ class App {
   }
 
   validateBonusNumber(bonusNumber) {
-    const winningNumbers = this.winningNumbers;
     if (isNaN(bonusNumber)) {
       MissionUtils.Console.print("[ERROR] 숫자만 입력해주세요.\n");
     } else if (bonusNumber < 1 || bonusNumber > 45) {
@@ -129,11 +128,7 @@ class App {
   computeTotalResult(lottos) {
     const result = { "1등": 0, "2등": 0, "3등": 0, "4등": 0, "5등": 0, 꽝: 0 };
     for (const lotto of lottos) {
-      const rank = this.computeRank(
-        lotto,
-        this.winningNumbers,
-        this.bonusNumber
-      );
+      const rank = this.computeRank(lotto);
       result[rank]++;
     }
     return result;
@@ -170,11 +165,7 @@ class App {
     this.printLottos(lottos);
     await this.inputNumbers();
     await this.inputBonusNumber();
-    const result = this.computeTotalResult(
-      lottos,
-      this.winningNumbers,
-      this.mber
-    );
+    const result = this.computeTotalResult(lottos);
     this.printResult(result);
     const profit = this.computeProfit(result, money);
     this.printProfit(profit);
