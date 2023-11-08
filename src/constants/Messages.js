@@ -14,7 +14,7 @@ export const OUTPUT = {
     `${match}개 일치 (${reward.toLocaleString('ko-KR')}원) - ${count}개`,
   second_prize: (match, reward, count) =>
     `${match}개 일치, 보너스 볼 일치 (${reward.toLocaleString('ko-KR')}원) - ${count}개`,
-  total_return: (value) => `총 수익률은 ${value}%입니다.`,
+  total_return: (value) => `총 수익률은 ${value.toFixed(1)}%입니다.`,
 };
 
 export const INPUT_ERROR = {

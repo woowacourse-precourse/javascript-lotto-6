@@ -55,6 +55,6 @@ export const PRIZE = {
 };
 
 export const TOTAL_RETURN = {
-  multiplier: 10000,
-  divider: 100,
+  multiplier: 1000,
+  divider: 10,
 };
