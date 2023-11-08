@@ -2,7 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import { LOTTO_PRICE } from '../../constants/constants.js';
 import { ensureIsNumberString } from '../validation/validation.js';
 
-const changeParseInt = numbersStringArray => {
+const parseStringsToIntegers = numbersStringArray => {
   return numbersStringArray.map(numberString => {
     if (typeof numberString === 'string') {
       ensureIsNumberString(numberString);
@@ -27,4 +27,4 @@ const sortLottoNumbers = numbers => {
   return sortedNumbers;
 };
 
-export { changeParseInt, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers };
+export { parseStringsToIntegers, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers };

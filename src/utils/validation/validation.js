@@ -15,15 +15,15 @@ const validateLottoPurchase = inputPrice => {
   }
 };
 
-const isIncludedBonusNumbers = (lottoNumbers, bonusNumber) => {
+const ensureBonusNumberIsNotIncluded = (lottoNumbers, bonusNumber) => {
   if (lottoNumbers.includes(bonusNumber)) {
     throw new Error(ERROR.includedBonusNumber);
   }
 };
 
-const validatedPrice = inputPrice => {
+const validateAndEnsurePrice = inputPrice => {
   ensureIsNumberString(inputPrice);
   validateLottoPurchase(inputPrice);
 };
 
-export { ensureIsNumberString, isIncludedBonusNumbers, validatedPrice };
+export { ensureIsNumberString, ensureBonusNumberIsNotIncluded, validateAndEnsurePrice };
