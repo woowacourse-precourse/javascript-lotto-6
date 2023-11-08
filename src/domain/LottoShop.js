@@ -19,6 +19,8 @@ class LottoShop {
   #bonusNumber;
 
   set income(income) {
+    isNumber(income);
+    isNaturalNumber(income);
     isDivideMinCost(income);
     this.#income = income;
   }
@@ -38,8 +40,12 @@ class LottoShop {
     isNumber(bonus);
     isNaturalNumber(bonus);
     isLottoNumberRange(bonus);
-    isUniqueBonus(bonus);
+    isUniqueBonus(this.#prizeNumbers, bonus);
     this.#bonusNumber = Number(bonus);
+  }
+
+  get income() {
+    return this.#income;
   }
 
   get prizeNumber() {
