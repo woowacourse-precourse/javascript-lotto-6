@@ -34,7 +34,14 @@ class LottoController {
   async requestWinningNumber() {
     const winningNumber = await Input.lottoWinningNumber();
     this.#winningNumber = new WinningNumber(winningNumber);
-    Console.print(this.#winningNumber.getWinningNumber());
+
+    await this.requestBonusNumber();
+  }
+
+  async requestBonusNumber() {
+    const bonusNumber = await Input.lottoBonusNumber();
+    Console.print(bonusNumber);
+    Console.print(typeof bonusNumber);
   }
 }
 

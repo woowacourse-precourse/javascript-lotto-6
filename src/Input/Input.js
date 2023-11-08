@@ -18,6 +18,13 @@ const Input = {
     Validator.InputWinningNumber(winningNumber);
     return winningNumber;
   },
+
+  async lottoBonusNumber(winningNumber) {
+    const bonusNumber = await Console.readLineAsync(
+      "\n보너스 번호를 입력해 주세요.\n"
+    );
+    return bonusNumber;
+  },
 };
 
 export default Input;
