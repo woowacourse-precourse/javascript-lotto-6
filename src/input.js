@@ -5,7 +5,7 @@ class Input {
   async inputMoney() {
     const inputMoney = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
 
-    return Number(inputMoney);
+    return inputMoney;
   }
 
   async getWinningNum() {

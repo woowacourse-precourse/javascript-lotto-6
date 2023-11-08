@@ -16,7 +16,6 @@ class BonusCycle {
   }
 
   async validCheck(winning) {
-    Console.print(winning);
     let newBonus;
     let bonus = await this.#bonusNum.getBonusNum();
     let valid = true;

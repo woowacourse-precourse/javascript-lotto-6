@@ -19,12 +19,13 @@ class MoneyCycle {
   }
 
   async validCheck() {
+    let inputMoneySting;
     let inputMoney;
     let valid = true;
 
     while (valid) {
-      inputMoney = await this.#money.inputMoney();
-
+      inputMoneySting = await this.#money.inputMoney();
+      inputMoney = Number(inputMoneySting);
       try {
         new Money(inputMoney);
         valid = false;

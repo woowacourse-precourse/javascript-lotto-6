@@ -4,9 +4,10 @@ import { Console } from '@woowacourse/mission-utils';
 class CalculationOfResult {
   run(numOfBuy, arrayofLotto, winningNum, bonusNum) {
     const countOfWinning = this.calculatePrize(arrayofLotto, winningNum, bonusNum);
-    const allIncome = this.#calculatePrizemoney(countOfWinning);
-    const yeild = this.#calculateYeild(numOfBuy, allIncome);
-    this.#printOfResult(countOfWinning, yeild);
+    const allIncome = this.calculatePrizemoney(countOfWinning);
+    const calculateYield = this.calculateYeild(numOfBuy, allIncome);
+
+    return [countOfWinning, [calculateYield]];
   }
 
   calculatePrize(arrayofLotto, winningNum, bonusNum) {
@@ -26,7 +27,7 @@ class CalculationOfResult {
     return countOfWinning;
   }
 
-  #calculatePrizemoney(countOfWinning) {
+  calculatePrizemoney(countOfWinning) {
     const FIRST = 2000000000;
     const SECOND = 30000000;
     const THIRD = 1500000;
@@ -44,14 +45,15 @@ class CalculationOfResult {
     return allIncome;
   }
 
-  #calculateYeild(numOfBuy, allIncome) {
+  calculateYeild(numOfBuy, allIncome) {
     const investment = numOfBuy * 1000;
-    const yeild = ((allIncome / investment) * 100).toFixed(1);
+    const calculateYield = ((allIncome / investment) * 100).toFixed(1);
 
-    return yeild;
+    return calculateYield;
   }
 
-  #printOfResult(countOfWinning, yeild) {
+  // jest mock 연습을 위한 DangchemTest 용
+  printOfResult(countOfWinning, calculateYield) {
     Console.print(`당첨 통계
 ---
 3개 일치 (5,000원) - ${countOfWinning[4]}개
@@ -59,7 +61,7 @@ class CalculationOfResult {
 5개 일치 (1,500,000원) - ${countOfWinning[2]}개
 5개 일치, 보너스 볼 일치 (30,000,000원) - ${countOfWinning[1]}개
 6개 일치 (2,000,000,000원) - ${countOfWinning[0]}개
-총 수익률은 ${yeild}%입니다.`);
+총 수익률은 ${calculateYield}%입니다.`);
   }
 }
 
