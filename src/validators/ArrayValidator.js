@@ -56,6 +56,11 @@ class ArrayValidator {
     );
   }
 
+  /**
+   * 로또 번호를 검사하는 메서드
+   * @param {number[]} numbers 검사할 로또 번호
+   * @returns {string} 에러 메시지
+   */
   static validateLottoNumbers(numbers) {
     let message = '';
 
