@@ -3,7 +3,7 @@ import InputView from '../view/InputView.js';
 import LottoPlayer from '../model/LottoPlayer.js';
 import Lotto from '../Lotto.js';
 import OutputView from '../view/OutputView.js';
-import { LOTTO_MACHINE_RULES, LOTTO_RULES } from '../constants/Rules.js';
+import { LOTTO_MACHINE_RULES, LOTTO_RULES, NUMERIC_PATTERN } from '../constants/Rules.js';
 import { ERROR_MESSAGE } from '../constants/Messages.js';
 import WinningNumbers from '../model/WinningNumbers.js';
 
@@ -30,7 +30,6 @@ export default class LottoMachine {
   }
 
   #makeOneLotto() {
-    // 추후 리팩토링 시 분리 고려
     const pickRandomUniqueNumbers = Random.pickUniqueNumbersInRange(
       LOTTO_RULES.minNumber,
       LOTTO_RULES.maxNumber,
@@ -72,6 +71,10 @@ export default class LottoMachine {
   }
 
   #purchaseAmountValidate(purchaseAmount) {
+    if (!NUMERIC_PATTERN.test(purchaseAmount)) {
+      throw new Error(ERROR_MESSAGE.numericOnly);
+    }
+
     if (purchaseAmount % LOTTO_MACHINE_RULES.inputUnit !== 0) {
       throw new Error(ERROR_MESSAGE.unit);
     }

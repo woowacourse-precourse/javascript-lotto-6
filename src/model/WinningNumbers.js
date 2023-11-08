@@ -1,6 +1,6 @@
 import Lotto from '../Lotto.js';
 import { ERROR_MESSAGE } from '../constants/Messages.js';
-import { LOTTO_RULES } from '../constants/Rules.js';
+import { LOTTO_RULES, NUMERIC_PATTERN } from '../constants/Rules.js';
 
 export default class WinningNumbers extends Lotto {
   #bonusNumber;
@@ -20,14 +20,14 @@ export default class WinningNumbers extends Lotto {
   }
 
   #validateBonusNumber(bonusNumber) {
-    this.#validateOnlyDigit(bonusNumber);
+    this.#validateNumericOnly(bonusNumber);
     this.#valideIncludeWinningNumbers(bonusNumber);
     this.#validateLottoNumberRange(bonusNumber);
   }
 
-  #validateOnlyDigit(bonusNumber) {
-    if (!this.DIGITS_ONLY_PATTERN.test(bonusNumber)) {
-      throw new Error(ERROR_MESSAGE.notNumber);
+  #validateNumericOnly(bonusNumber) {
+    if (!NUMERIC_PATTERN.test(bonusNumber)) {
+      throw new Error(ERROR_MESSAGE.numericOnly);
     }
   }
 

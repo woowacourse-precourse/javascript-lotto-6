@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from './constants/Messages.js';
-import { LOTTO_RULES } from './constants/Rules.js';
+import { LOTTO_RULES, NUMERIC_PATTERN } from './constants/Rules.js';
 
 class Lotto {
   #numbers;
@@ -32,10 +32,9 @@ class Lotto {
   }
 
   #numericValidate(numbers) {
-    const DIGITS_ONLY_PATTERN = /^\d+$/;
     numbers.forEach((number) => {
-      if (!DIGITS_ONLY_PATTERN.test(number)) {
-        throw new Error(ERROR_MESSAGE.lottoNumber.onlyDigit);
+      if (!NUMERIC_PATTERN.test(number)) {
+        throw new Error(ERROR_MESSAGE.numericOnly);
       }
     });
   }

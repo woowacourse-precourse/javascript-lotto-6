@@ -1,3 +1,5 @@
+const NUMERIC_PATTERN = /^\d+$/;
+
 const LOTTO_RULES = {
   minNumber: 1,
   maxNumber: 45,
@@ -32,4 +34,4 @@ const RANK_RULES = {
   },
 };
 
-export { LOTTO_RULES, LOTTO_MACHINE_RULES, RANK_RULES };
+export { LOTTO_RULES, LOTTO_MACHINE_RULES, RANK_RULES, NUMERIC_PATTERN };

@@ -14,12 +14,11 @@ const OUTPUT_MESSAGE = {
 
 const ERROR_MESSAGE = {
   unit: `${ERROR}1,000원 단위만 입력 가능합니다.`,
-  notNumber: `${ERROR}숫자만 입력해주세요`,
+  numericOnly: `${ERROR}숫자만 입력해주세요`,
   duplication: `${ERROR}당첨 숫자에 포함되지 않은 숫자를 입력하세요.`,
   lottoNumber: {
     count: `${ERROR}로또 번호는 6개여야 합니다.`,
     duplication: `${ERROR}로또 번호가 중복되지 않아야 합니다.`,
-    onlyDigit: `${ERROR}로또 번호는 숫자여야 합니다.`,
     notInt: `${ERROR}로또 번호는 정수여야 합니다.`,
     notInRange: `${ERROR}로또 번호는 1~45 사이의 숫자여야 합니다.`,
   },
