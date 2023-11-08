@@ -61,9 +61,6 @@ sortLottoNumbers
 calculateLottoCount
 - [x] 지불한 금액으로 구매할 수 있는 로또의 수를 계산
 
-printLottoNumbers
-- [x] 구매한 로또의 번호를 출력
-
 <br/>
 
 ## WinningLotto.js
@@ -104,12 +101,15 @@ checkWinning
 
 promptPurchaseAmount
 - [x] 사용자에게 구입 금액을 입력받기
+- `구입금액을 입력해 주세요.`
 
 promptWinnningNumbers
-- [ ] 사용자에게 당첨 번호를 입력받기
+- [x] 사용자에게 당첨 번호(배열)를 입력받기
+- `당첨 번호를 입력해 주세요.`
 
 promptBonusNumber
-- [ ] 사용자에게 보너스 번호를 입력받기
+- [x] 사용자에게 보너스 번호(숫자)를 입력받기
+- `보너스 번호를 입력해 주세요.`
 
 <br/>
 
@@ -147,23 +147,6 @@ printProfitRates
 # Utils
 ## Constants.js 
 > Enum 관리(게임 메세지, 에러 메세지, 각 등수별 상금 정보)
-
-<br/>
-
-## InputHandler.js 
-> 사용자로부터의 입력을 받고 검증하는 함수들을 관리
-
-getPurchaseAmount
-- [ ] 로또를 구입하기 위해 지불할 금액 입력받기
-- `구입금액을 입력해 주세요.`
-
-getLottoWinningNumber
-- [ ] 당첨 번호 입력 (배열)
-- `당첨 번호를 입력해 주세요.`
-
-getLottoBonusWinningNumber
-- [ ] 보너스 번호 입력 (숫자)
-- `보너스 번호를 입력해 주세요.`
 
 <br/>
 

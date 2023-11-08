@@ -17,8 +17,9 @@ class LottoController {
 
   async handleLottoWinningNumbers() {
     const winningNumbers = await this.inputView.promptWinningNumbers();
-    
-    return winningNumbers;
+    const bonusNumbers = await this.inputView.promptBonusNumber();
+
+    return [winningNumbers, bonusNumbers];
   }
 }
 

@@ -14,8 +14,15 @@ class InputView {
 
   async promptWinningNumbers() {
     const winningNumbers = await this.getUserInput(GAME_MESSAGES.ENTER_WINNING_NUMBERS);
+    const winningNumbersArray = winningNumbers.split(',').map((number) => number.trim());
     //validation 처리할 예정
-    return winningNumbers;
+    return winningNumbersArray;
+  }
+
+  async promptBonusNumber() {
+    const bonusNumber = await this.getUserInput(GAME_MESSAGES.ENTER_BONUS_NUMBER);
+    //validation 처리할 예정
+    return bonusNumber;
   }
 }
 
