@@ -1,4 +1,5 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console, Random } from "@woowacourse/mission-utils";
+
 
 class App { 
 
@@ -10,7 +11,14 @@ class App {
         
     }
 
-    
+    generateLottoNumber(quantity) {
+        let lotto = [];
+        
+        for (let i = 0; i < quantity; i += 1) {
+            lotto = Random.pickUniqueNumbersInRange(1, 45, 6);
+            Console.print(lotto.sort((a,b) => a - b));
+        }
+    }
     
     // 입력값이 1000으로 나누어 떨어지지 않는 경우 예외 처리한다. if %1000 !== 0 return throw [ERROR]
         
