@@ -36,6 +36,12 @@ class Validation {
     this.validateRepeatedNumbers(randomNumbers);
   }
 
+  static validateRangeNumbers(bonusNumber){
+    if (bonusNumber < 1 || bonusNumber > 45){
+      throw new Error(STRINGS.ERROR_RANGE);
+    }
+  }
+
 }
 
 export default Validation;
