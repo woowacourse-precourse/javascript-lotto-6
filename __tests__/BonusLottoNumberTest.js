@@ -19,7 +19,7 @@ describe('보너스 로또 넘버 클래스 테스트', () => {
     }).toThrow('[ERROR]');
   });
 
-  test('기존 로또 번호와 일치하면 예외가 발생한다.', () => {
+  test('기존 로또 번호와 중복되면 예외가 발생한다.', () => {
     expect(() => {
       BonusLottoNumber.validate(6, [1, 2, 3, 4, 5, 6]);
     }).toThrow('[ERROR]');

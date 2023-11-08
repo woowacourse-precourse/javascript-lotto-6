@@ -5,14 +5,16 @@ import OutputView from '../view/OutputView.js';
 class WinningNumbers {
   static getWinningLottoNumbers(purchaseAmount) {
     const winningNumbers = [];
-    const perchaseQuentity = parseInt(
+    const purchaseQuentity = parseInt(
       purchaseAmount / NUMBERS.purchaseUnit,
       10,
     );
 
-    OutputView.printPurchaseHeader(perchaseQuentity);
+    OutputView.printPurchaseHeader(purchaseQuentity);
+
     let count = 0;
-    while (count < perchaseQuentity) {
+
+    while (count < purchaseQuentity) {
       const lottoNumbers = Random.pickUniqueNumbersInRange(
         NUMBERS.minLottoNumber,
         NUMBERS.maxLottoNumber,
@@ -23,6 +25,7 @@ class WinningNumbers {
       OutputView.printWinningNumber(winningNumber);
       count += 1;
     }
+
     return winningNumbers;
   }
 }

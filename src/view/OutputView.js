@@ -19,8 +19,10 @@ class OutputView {
     Console.print(MESSAGES.divisionLine);
   }
 
-  static printLottoResult(message, result) {
-    Console.print(`${message}${result}개`);
+  static printLottoResult(index, result) {
+    Console.print(
+      `${MESSAGES.matchResult[index]}${MESSAGES.matchQuantity(result)}`,
+    );
   }
 
   static printProfitRate(profitRate) {
