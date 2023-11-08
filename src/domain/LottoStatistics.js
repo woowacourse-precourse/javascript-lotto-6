@@ -31,15 +31,14 @@ class LottoStatistics {
   #rankingUpdate() {
     this.#rankArray.forEach((rank) => {
       this.#rankingStatusBoard[rank] += 1;
-    })
+    });
   }
 
   #getFinalAmount() {
-    const finalAmount = this.#prizeArray.reduce((acc,cur,index) => {
-      return acc + (cur * this.#rankingStatusBoard[index + 1]);
-    }, 0);
+    const finalAmount = this.#prizeArray
+      .reduce((acc, cur, index) => acc + (cur * this.#rankingStatusBoard[index + 1]), 0);
 
-    return finalAmount;
+    return finalAmount;   
   }
 
   getResult() { 
