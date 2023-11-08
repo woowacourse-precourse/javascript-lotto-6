@@ -1,18 +1,22 @@
+import { ERROR } from './constants/constants.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.validate(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  validate(numbers) {
+    if (numbers.length !== 6) throw new Error(ERROR.notSixNumbers);
+    if (numbers.length !== new Set(numbers).size) throw new Error(ERROR.duplicatedNumbers);
+    if (!numbers.every((number) => number >= 1 && number <= 45)) throw new Error(ERROR.outOfNumberRange);
   }
 
-  // TODO: 추가 기능 구현
+  getLottoNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
