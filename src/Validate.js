@@ -5,7 +5,7 @@ class Validate {
   }
 
   checkNumbersType(numbers) {
-    if (numbers.some(Number.isNaN)) throw new Error("[ERROR] 숫자를 인력해주세요.");
+    if (numbers.some(isNaN)) throw new Error('[ERROR] 숫자를 입력해주세요.');
   }
   
   checkNumberRange(numbers) {
