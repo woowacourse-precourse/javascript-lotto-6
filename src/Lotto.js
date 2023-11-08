@@ -6,7 +6,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = numbers.map(Number);
   }
 
   #validate(numbers) {
@@ -47,14 +47,14 @@ class Lotto {
     }
   }
 
-  calculateLottoResult(userLottoNumbers, winningNumbers, bonusNumber) {
+  calculateLottoResult(userLottoNumbers, bonusNumber) {
     const results = [0, 0, 0, 0, 0];
 
     userLottoNumbers.forEach(lottoNumber => {
       let count = 0;
       // 로또 번호 안에 당첨 번호가 있는지 확인
       lottoNumber.forEach(number => {
-        if (winningNumbers.indexOf(number) !== -1) {
+        if (this.#numbers.indexOf(number) !== -1) {
           count += 1;
         }
       });
