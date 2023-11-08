@@ -38,4 +38,22 @@ describe('결과 생성', () => {
     const rewardCount = lottoGame.getRewardCount();
     expect(rewardCount).toEqual({ 3: 1, 4: 1, 5: 1, 6: 1, '5b': 1 });
   });
+  test('총 수익률 계산', async () => {
+    const money = 18000;
+    const lottoGame = new LottoGame();
+    const rewardCount = lottoGame.getRewardCount();
+
+    rewardCount[3] = 10;
+    rewardCount[4] = 5;
+    rewardCount[5] = 2;
+    rewardCount['5b'] = 1;
+    rewardCount[6] = 0;
+
+    lottoGame.result();
+    const myWinningMoney = lottoGame.getMyWinningMoney();
+
+    const myBenefit = (myWinningMoney / money) * 100;
+
+    expect(myBenefit).toEqual(185000);
+  });
 });
