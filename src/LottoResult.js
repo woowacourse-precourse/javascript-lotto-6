@@ -1,28 +1,10 @@
-import { LOTTO_COUNT, LOTTO_PRIZE } from './constants/number.js';
+import LOTTO_MATCHERS from './constants/function.js';
+import { LOTTO_PRIZE } from './constants/number.js';
 
 /**
  * @classdesc 로또 결과를 담당하는 클래스
  */
 class LottoResult {
-  /**
-   * @type {Function[]} 등수를 판별하는 함수들
-   * @example
-   * [
-   *  1등 - 6개 일치,
-   *  2등 - 5개 일치, 보너스 볼 일치,
-   *  3등 - 5개 일치,
-   *  4등 - 4개 일치,
-   *  5등 - 3개 일치,
-   * ]
-   */
-  #matcher = [
-    (mainMatched) => mainMatched === LOTTO_COUNT - 3,
-    (mainMatched) => mainMatched === LOTTO_COUNT - 2,
-    (mainMatched, isBonusMatched) => !isBonusMatched && mainMatched === LOTTO_COUNT - 1,
-    (mainMatched, isBonusMatched) => isBonusMatched && mainMatched === LOTTO_COUNT - 1,
-    (mainMatched) => mainMatched === LOTTO_COUNT,
-  ];
-
   mainMatchCount = 0;
 
   isBonusMatched = false;
@@ -41,6 +23,7 @@ class LottoResult {
   }
 
   /**
+   * 당첨금을 반환하는 메서드
    * @returns {number} 당첨금
    */
   getPrize() {
@@ -64,7 +47,7 @@ class LottoResult {
    * @param {boolean} winnningNumbers.isBonusMatched
    */
   getRank() {
-    return this.#matcher.findIndex((test) => test(this.mainMatchCount, this.isBonusMatched));
+    return LOTTO_MATCHERS.findIndex((test) => test(this.mainMatchCount, this.isBonusMatched));
   }
 }
 
