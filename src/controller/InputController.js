@@ -32,7 +32,7 @@ export default class InputController {
     while (true) {
       try {
         this.#purchaseAmount = await this.inputView.readPurchaseAmount();
-        this.validateController.validateAmount(this.#purchaseAmount);
+        this.validateController.validatePurchaseAmount(this.#purchaseAmount);
         break;
       } catch (error) {
         this.outputView.printMessage(error);

@@ -1,7 +1,7 @@
 import { ERROR_MESSAGES } from '../constant.js';
 
 export default class ValidateController {
-  validateAmount(amount) {
+  validatePurchaseAmount(amount) {
     const REGEX = /[^0-9]/;
 
     if (REGEX.test(amount) || amount % 1000 || amount == 0) {
