@@ -3,22 +3,18 @@ import Lotto from "./Lotto.js";
 
 class lottoGame {
 
-    async lottoMoneyInput(){
-        let validInput = false;
-        let LOTTO_MONEY;
-
-        while (!validInput) {
+    async lottoMoneyInput(){  
+        while (true) {
             try {
-                LOTTO_MONEY = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+                let LOTTO_MONEY = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
                 if (LOTTO_MONEY % 1000 !== 0 || LOTTO_MONEY.match(/[^0-9]/)) {
                     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
                 }
-                validInput = true; 
+                return LOTTO_MONEY / 1000;
             } catch (error) {
                 MissionUtils.Console.print(error.message);
             }
         }
-        return LOTTO_MONEY / 1000;
     }
 
 
@@ -43,8 +39,7 @@ class lottoGame {
 
 
     async lottoBonusNuber(LOTTO_WIN_NUMBER) {
-        let validInput = false;
-        while (!validInput) {
+        while (true) {
             try {
                 const BONUS_NUMBER = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
                 this.lottoNumberError(BONUS_NUMBER);
@@ -52,8 +47,6 @@ class lottoGame {
                 if (LOTTO_WIN_NUMBER.includes(BONUS_NUMBER)) {
                     throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
                 }
-
-                validInput = true;
                 return BONUS_NUMBER; // 올바른 입력을 받았을 때 반환
             } catch (error) {
                 MissionUtils.Console.print(error.message);
