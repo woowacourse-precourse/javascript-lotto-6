@@ -24,6 +24,7 @@ class Lotto {
     #checkElements(array){
         array.forEach(element => {
             if(isNaN(element)) throw new Error('[ERROR] 로또 번호는 숫자여야 합니다.')
+            if(!Number.isInteger(element)) throw new Error('[ERROR] 로또 번호는 정수여야 합니다.')
             if(element<1 && element>45) throw new Error('[ERROR] 로또 번호는 1-45 사이여야 합니다.')
         })
     }

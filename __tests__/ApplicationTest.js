@@ -24,7 +24,7 @@ const mockQuestions = (inputs) => {
         return logSpy;
     };
 
-    const runException = async (input) => {
+    const runMoneyException = async (input) => {
         // given
         const logSpy = getLogSpy();
       
@@ -40,7 +40,25 @@ const mockQuestions = (inputs) => {
       
         // then
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-      }
+    }
+
+    const runBonusException = async (input) => {
+        // given
+        const logSpy = getLogSpy();
+      
+        const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+        const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6"];
+      
+        mockRandoms([RANDOM_NUMBERS_TO_END]);
+        mockQuestions([...INPUT_NUMBERS_TO_END, input]);
+      
+        // when
+        const app = new App();
+        await app.play();
+      
+        // then
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
+    }
 
     describe("로또 테스트", () => {
         beforeEach(() => {
@@ -92,19 +110,36 @@ const mockQuestions = (inputs) => {
         });
 
         test("구매 금액이 숫자가 아닌 경우 예외 테스트", async () => {
-            await runException("1000j")
+            await runMoneyException("1000j")
         })
 
         test("구매 금액이 정수가 아닌 경우 예외 테스트", async () => {
-            await runException("1000.5")
+            await runMoneyException("1000.5")
         })
 
         test("구매 금액이 1000원 단위가 아닌 경우 예외 테스트", async () => {
-            await runException("1500")
+            await runMoneyException("1500")
         })
 
         test("구매 금액이 1000원 이하이거나 음수인 경우 예외 테스트", async () => {
-            await runException("500")
+            await runMoneyException("500")
         })
+
+        test("보너스 번호가 숫자가 아닌 경우 예외 테스트", async () => {
+            await runMoneyException("7j")
+        })
+
+        test("보너스 번호가 정수가 아닌 경우 예외 테스트", async () => {
+            await runMoneyException("7.5")
+        })
+
+        test("보너스 번호가 당첨 번호와 중복되는 경우 예외 테스트", async () => {
+            await runMoneyException("1")
+        })
+
+        test("보너스 번호가 1-45 사이가 아닌 경우 예외 테스트", async () => {
+            await runMoneyException("46")
+        })
+    
     });
 
