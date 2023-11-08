@@ -1,6 +1,6 @@
 import InputView from '../view/InputView.js';
-import Purchase from '../domain/Purchase.js';
 import OutputView from '../view/OutputView.js';
+import Purchase from '../domain/Purchase.js';
 import Lottos from '../domain/Lottos.js';
 import WinningNumber from '../domain/WinningNumber.js';
 import BonusNumber from '../domain/BonusNumber.js';
@@ -17,10 +17,10 @@ class Game {
   constructor() {}
 
   async playGame() {
-    await this.#purchase();
+    await this.#inputPurchase();
   }
 
-  async #purchase() {
+  async #inputPurchase() {
     const amount = await InputView.readPurchasePrice();
     await this.#handlePurchase(amount);
   }

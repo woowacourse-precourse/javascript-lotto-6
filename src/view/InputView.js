@@ -1,10 +1,11 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Validator from '../utils/Validator.js';
+import MESSAGES from '../constants/messages.js';
 
 const InputView = {
   async readPurchasePrice() {
     try {
-      const amount = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      const amount = await MissionUtils.Console.readLineAsync(MESSAGES.purchase);
 
       Validator.inputPurchaseAmount(amount);
 
@@ -21,9 +22,7 @@ const InputView = {
 
   async readWinningNumbers() {
     try {
-      const winningNumbers = await MissionUtils.Console.readLineAsync(
-        '\n당첨 번호를 입력해 주세요.\n',
-      );
+      const winningNumbers = await MissionUtils.Console.readLineAsync(MESSAGES.winningNumber);
 
       Validator.inputWinningNumber(winningNumbers);
 
@@ -40,9 +39,7 @@ const InputView = {
 
   async readBonusNumbers(winningNumber) {
     try {
-      const bonusNumber = await MissionUtils.Console.readLineAsync(
-        '\n보너스 번호를 입력해 주세요.\n',
-      );
+      const bonusNumber = await MissionUtils.Console.readLineAsync(MESSAGES.bonusNumber);
 
       Validator.inputBonusNumber(bonusNumber, winningNumber);
 
