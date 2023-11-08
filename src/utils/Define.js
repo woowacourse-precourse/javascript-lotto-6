@@ -17,6 +17,7 @@ const ERROR_MESSAGE = Object.freeze({
   invalidInputBonusNumber:
     '[ERROR] 입력이 유효하지 않습니다. 보너스 번호는 숫자여야 합니다.',
   notUniqueNumbers: '[ERROR] 중복되는 숫자가 있습니다.',
+  notUniqueBonusNumber: `[ERROR] 보너스 넘버가 중복되는 숫자입니다.`,
   notNumberCountSix: '[ERROR] 로또 번호는 6개여야 합니다.',
   outOfRange: '[ERROR] 숫자가 주어진 범위를 벗어났습니다. 범위는 1~45 입니다.',
 });
