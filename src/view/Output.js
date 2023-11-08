@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { GUIDE_MESSAGE, WINNING_RESULT_DETAILS } from "../constants/constants";
+import { GUIDE_MESSAGE, WINNING_RESULT_DETAILS } from "../constants/constants.js";
 
 class Output {
   print(message) {
