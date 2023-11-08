@@ -19,6 +19,7 @@ const calculateCounts = (result, count) => {
   }
   return result;
 };
+
 const calculateProfitRatio = (result) => {
   const money = {
     zero: 0,

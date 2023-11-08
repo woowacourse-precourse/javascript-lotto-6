@@ -43,7 +43,6 @@ const inputMoney = async (amount) => {
     const lottosInfo = lottos
       .map((lotto) => `[${lotto.join(", ")}]`)
       .join("\n");
-
     Console.print(`${amount}개를 구매했습니다.`);
     Console.print(lottosInfo);
     return lottos;
