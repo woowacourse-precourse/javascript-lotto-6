@@ -11,6 +11,7 @@ const INPUT_ERROR_MESSAGES = {
   INVALID_BONUS_NUMBER_RANGE: '[ERROR] 보너스 숫자는 1-45 사이에서 입력해주세요.',
   INVALID_WINNING_NUMBERS: '[ERROR] 쉼표는 중복되거나 시작 또는 끝에 있어서는 안됩니다.',
   NOT_ALLOW_BLANK: '[ERROR]숫자는 쉼표로 구분해 주세요.',
+  ONLY_NUMBER: '[ERROR]보너스 숫자는 하나만 입력 해 주세요.',
 
 };
 
@@ -67,6 +68,9 @@ class InputView {
     }
     if (bonusNumber > 45) {
       throw new Error(INPUT_ERROR_MESSAGES.INVALID_BONUS_NUMBER_RANGE);
+    }
+    if (bonusNumber.legnth > 2) {
+      throw new Error(INPUT_ERROR_MESSAGES.ONLY_NUMBER);
     }
   }
 
