@@ -12,6 +12,8 @@ const inputPurchasePrice = async () => {
   if (!isMultipleOfThousand(input)) {
     throw new InputError(ERROR_MESSAGES.NOT_MULTIPLE_OF_THOUSAND);
   }
+
+  return input;
 };
 
 const isMultipleOfThousand = (str) => {

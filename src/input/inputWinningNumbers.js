@@ -54,6 +54,8 @@ const inputWinningNumbers = async () => {
   if (!LottoValidation.hasUniqueElements(winningNumbers)) {
     throw new InputError(LOTTO_VALIDATION_ERROR_MESSAGES.DUPLICATED_NUMBERS);
   }
+
+  return input;
 };
 
 const isEmptyString = (str) => {
