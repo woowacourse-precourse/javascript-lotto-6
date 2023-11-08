@@ -32,7 +32,7 @@ class LottoChecker {
         totalAmount += amount * count;
       }
     }
-    console.log('totalAmount = ', totalAmount);
+
     this.revenue = totalAmount;
   }
 

@@ -10,6 +10,7 @@ class LottoMachine {
   async issueTicket() {
     const numbers = await Random.pickUniqueNumbersInRange(1, 45, 6);
     const ticket = new Lotto(numbers).issue();
+
     return ticket;
   }
 

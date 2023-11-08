@@ -11,9 +11,10 @@ class App {
     const machine = new LottoMachine(purchaseCount);
     LottoPrinter.printPurchaseComplete(purchaseCount);
     const tickets = await machine.getTickets(purchaseCount);
-    const winningNumbers = await player.enterWinningNumbers();
 
-    const checker = new LottoChecker(tickets, winningNumbers);
+    const winningNumbers = await player.enterWinningNumbers();
+    const bonusNumber = await player.enterBonusNumber();
+    const checker = new LottoChecker(tickets, winningNumbers, bonusNumber);
     const matches = checker.getMatches();
     LottoPrinter.printStaticsHeadLine();
     LottoPrinter.printStaticsSeperator();

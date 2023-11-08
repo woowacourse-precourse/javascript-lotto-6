@@ -36,6 +36,7 @@ class LottoPlayer {
   async enterBonusNumber() {
     const bonusNumber = await Console.readLineAsync(messages.number.bonus);
     this.#validateNumber(bonusNumber);
+
     return bonusNumber;
   }
 }
