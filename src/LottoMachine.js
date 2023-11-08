@@ -1,5 +1,7 @@
 class Machine {
   CalculatorOfLottoAmount(money) {
-    return Math.floor(money / 1000);
+    const amount = Math.floor(money / 1000);
+    Console.print(`${amount}개를 구매했습니다.`);
+    return amount;
   }
 }
