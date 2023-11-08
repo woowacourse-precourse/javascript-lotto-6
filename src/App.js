@@ -8,6 +8,12 @@
  * @type {LottoInfo[]}
  * @constant */
 const LOTTO_RANK = [
+  {rank: 1, winningMoney: 2_000_000_000, message: '6개 일치 (2,000,000,000원)'},
+  {rank: 2, winningMoney: 30_000_000, message: '5개 일치, 보너스 볼 일치 (30,000,000원)'},
+  {rank: 3, winningMoney: 1_500_000, message: '5개 일치 (1,500,000원)'},
+  {rank: 4, winningMoney: 50_000, message: '4개 일치 (50,000원)'},
+  {rank: 5, winningMoney: 5_000, message: '3개 일치 (5,000원)'},
+  {rank: 6, winningMoney: 0, message: '해당 없음'},
 ];
 
 class App {
