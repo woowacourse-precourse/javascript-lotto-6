@@ -24,11 +24,23 @@ class Lotto {
   }
 
   printLottoNumbers() {
-    const str = this.#numbers.join(", "); // 로또 번호 배열을 쉼표와 공백으로 구분하여 문자열로 변환합니다.
-    MissionUtils.Console.print(`[${str}]`); // 문자열을 대괄호로 묶고 출력합니다.
+    const str = this.#numbers.join(", ");
+    MissionUtils.Console.print(`[${str}]`);
   }
 
-  // TODO: 추가 기능 구현
+  calculateLottoRank(winningNumbers, bonusNumber) {
+    const matchingCount = winningNumbers.reduce(
+      (count, number) => this.#numbers.includes(number) ? count + 1 : count,
+      0
+    );
+
+    if (matchingCount === 6) return 1;
+    if (matchingCount === 5 && this.#numbers.includes(bonusNumber)) return 2;
+    if (matchingCount === 5) return 3;
+    if (matchingCount === 4) return 4;
+    if (matchingCount === 3) return 5;
+    return 6;
+  }
 }
 
 export default Lotto;
