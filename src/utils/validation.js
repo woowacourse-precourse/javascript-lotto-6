@@ -1,7 +1,7 @@
 import { ERROR, OPTIONS } from '../constants/Constants.js';
 
-const Validator = {
-  purchasePrice(input) {
+class Validator {
+  static purchasePrice(input) {
     if (Number.isNaN(input)) {
       throw new Error(ERROR.invalidPriceNumber);
     }
@@ -11,7 +11,7 @@ const Validator = {
     if (input % OPTIONS.priceUnit !== 0) {
       throw new Error(ERROR.invalidPriceUnit);
     }
-  },
-};
+  }
+}
 
 export default Validator;

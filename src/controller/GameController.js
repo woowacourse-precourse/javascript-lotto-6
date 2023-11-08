@@ -4,23 +4,29 @@ import UserInputView from '../view/UserInputView.js';
 import { MESSAGE, OPTIONS } from '../constants/Constants.js';
 
 class GameController {
-  #purchasePrice;
+  #purchasePrice = 0;
 
-  #tickectsCount;
+  #ticketCount = 0;
 
-  async startGame() {
-    const inputPurchasePrice = Number(await UserInputView.inputPrice());
+  async inputPurchasePrice() {
+    const price = Number(await UserInputView.inputPrice());
     try {
-      Validator.purchasePrice(inputPurchasePrice);
-      this.#purchasePrice = inputPurchasePrice;
-      this.#tickectsCount = inputPurchasePrice / OPTIONS.priceUnit;
-      MissionUtils.Console.print(
-        `${this.#tickectsCount}${MESSAGE.purchaseAmount}`,
-      );
+      Validator.purchasePrice(price);
+      this.#purchasePrice = price;
     } catch (error) {
       MissionUtils.Console.print(error.message);
-      await this.startGame();
+      await this.inputPurchasePrice();
     }
+  }
+
+  calculateTicketCount() {
+    this.#ticketCount = this.#purchasePrice / OPTIONS.priceUnit;
+    MissionUtils.Console.print(`${this.#ticketCount}${MESSAGE.purchaseAmount}`);
+  }
+
+  async startGame() {
+    await this.inputPurchasePrice();
+    this.calculateTicketCount();
   }
 }
 
