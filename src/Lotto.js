@@ -7,7 +7,7 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#numbers = this.#sortNumbers(numbers);
   }
 
   #validate(numbers) {
@@ -17,6 +17,10 @@ class Lotto {
     if (!Validate.isLottoNumbersFormat(numbers)) {
       throw new Error(ErrorMessages.lottoFormatError);
     }
+  }
+
+  #sortNumbers(numbers) {
+    return numbers.slice().sort((a, b) => a - b);
   }
 
   // TODO: 추가 기능 구현
