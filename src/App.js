@@ -1,10 +1,10 @@
-import { Console } from '@woowacourse/mission-utils';
-import InputView from './view/InputView.js';
-import OutputView from './View/OutputView.js';
-import IssuedLotto from './model/IssuedLotto.js';
-import Lotto from './Lotto.js';
-import Bonus from './model/Bonus.js';
-import Computer from './model/Computer.js';
+import { Console } from "@woowacourse/mission-utils";
+import InputView from "./view/InputView.js";
+import OutputView from "./view/OutputView.js";
+import IssuedLotto from "./model/IssuedLotto.js";
+import Lotto from "./Lotto.js";
+import Bonus from "./model/Bonus.js";
+import Computer from "./model/Computer.js";
 
 class App {
   amount;
@@ -35,7 +35,7 @@ class App {
 
   async getSixWinningNumber() {
     let numbers = await InputView.sixWinningNumbers();
-    numbers = numbers.split(',');
+    numbers = numbers.split(",");
     try {
       this.lotto = new Lotto(numbers);
     } catch (err) {
