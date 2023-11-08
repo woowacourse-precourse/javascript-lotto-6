@@ -35,11 +35,11 @@ class InputView {
         "\n보너스 번호를 입력해 주세요.\n"
       );
       const bonusNumber = Number(input);
-      this.validator.validateBonusNumber([bonusNumber], winningNumbers);
+      this.validator.validateBonusNumber(bonusNumber, winningNumbers);
       return bonusNumber;
     } catch (e) {
       Console.print(e.message);
-      return this.askBonusNumber();
+      return this.askBonusNumber(winningNumbers);
     }
   }
 }

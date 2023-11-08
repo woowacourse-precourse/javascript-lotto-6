@@ -4,7 +4,7 @@ import InputView from "./InputView.js";
 import LottoValidator from "./Validator.js";
 import CalculateWinners from "./CalculateWinners.js";
 import calculateProfit from "./CalculateProfit.js";
-import { Console, Random } from "@woowacourse/mission-utils";
+import { Random } from "@woowacourse/mission-utils";
 
 class LottoController {
   constructor() {
