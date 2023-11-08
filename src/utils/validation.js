@@ -10,13 +10,15 @@ const {
 } = ERROR_MESSAGE;
 
 export const isNumber = (num) => {
+  num = Number(num);
   if (Number.isNaN(num)) {
     throw new Error(not_number);
   }
 }
 
 export const isNaturalNumber = (num) => {
-  if (Number(num) % 1 !== 0) {
+  num = Number(num);
+  if (!Number.isInteger(num) || num <= 0) {
     throw new Error(not_natural_number);
   }
 }
