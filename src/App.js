@@ -113,18 +113,22 @@ class App {
   }
 
   async play() {
-    const lottoAmount = await this.getLottoAmount();
-    this.validateLottoAmount(lottoAmount);
-    const lottoCount = this.calculateLottoCount(lottoAmount);
-    this.printLottoCount(lottoCount);
-    this.generateLottoNumbers(lottoCount);
-    this.printLottoNumbers();
-    const winningLotto = await this.getWinningNumbers();
-    const bonusNumber = await this.getBonusNumber();
-    const winningStatistics = this.calculateWinningStatistics(winningLotto, bonusNumber);
-    this.printWinningStatistics(winningStatistics);
-    const profitRate = this.calculateProfitRate(lottoAmount, winningStatistics);
-    this.printProfitRate(profitRate);
+    try {
+      const lottoAmount = await this.getLottoAmount();
+      this.validateLottoAmount(lottoAmount);
+      const lottoCount = this.calculateLottoCount(lottoAmount);
+      this.printLottoCount(lottoCount);
+      this.generateLottoNumbers(lottoCount);
+      this.printLottoNumbers();
+      const winningLotto = await this.getWinningNumbers();
+      const bonusNumber = await this.getBonusNumber();
+      const winningStatistics = this.calculateWinningStatistics(winningLotto, bonusNumber);
+      this.printWinningStatistics(winningStatistics);
+      const profitRate = this.calculateProfitRate(lottoAmount, winningStatistics);
+      this.printProfitRate(profitRate);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 }
 
