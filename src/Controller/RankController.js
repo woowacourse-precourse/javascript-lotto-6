@@ -1,7 +1,7 @@
 import {RANK_DATA} from "../constants/message.js";
 import RankModel from "../Model/RankModel.js";
 
-class Rank {
+class RankController {
     #ranks;
 
     constructor() {
@@ -16,14 +16,14 @@ class Rank {
     }
 
     choose(count, hasBonus) {
-        this.#ranks.forEach((rankmodel) => {
-            rankmodel.win(count, hasBonus);
+        this.#ranks.forEach((rankModel) => {
+            rankModel.win(count, hasBonus);
         });
     }
 
     findTotalWinnings() {
         return this.#ranks.reduce(
-            (accumulator, rankmodel) => accumulator + rankmodel.getWinnings(),
+            (accumulator, rank) => accumulator + rank.getWinnings(),
             0
         );
     }
@@ -33,4 +33,4 @@ class Rank {
     }
 }
 
-export default Rank;
+export default RankController;

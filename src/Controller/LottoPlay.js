@@ -3,7 +3,7 @@ import OutputView from '../View/Output.js';
 
 import LottoController from "./LottoController.js";
 import WinningLotto from "../Model/Winning.js";
-import Rank from "../Model/RankModel.js";
+import RankController from "./RankController.js";
 import Lotto from "../Model/Lotto.js";
 import BonusBall from "../Model/BonusBall.js";
 
@@ -12,12 +12,12 @@ import Validator from "../Model/Validator.js";
 class LottoPlay {
     #LottoController;
     #WinningLotto;
-    #ranks;
+    #rank;
 
     constructor() {
         this.#LottoController = new LottoController();
-        this.#WinningLotto;
-        this.#ranks = new Rank();
+        this.#WinningLotto = new WinningLotto();
+        this.#rank = new RankController();
     }
 
     async buyLottos() {
@@ -69,13 +69,13 @@ class LottoPlay {
     }
 
     setWinningLotto(lotto, bonusBall) {
-        this.#winningLotto = new WinningLotto(lotto, bonusBall);
+        this.#WinningLotto = new WinningLotto(lotto, bonusBall);
     }
 
     createWinningResult() {
-        this.#LottoController.checkWinning(this.#winningLotto, this.#ranks);
-        const winningsRate = this.#LottoController.calculateWinnings(this.#ranks);
-        OutputView.printWinningResult(this.#ranks.get(), winningsRate);
+        this.#LottoController.checkWinning(this.#WinningLotto, this.#rank);
+        const winningsRate = this.#LottoController.calculateWinnings(this.#rank);
+        OutputView.printWinningResult(this.#rank.get(), winningsRate);
     }
 }
 

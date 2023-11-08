@@ -11,7 +11,7 @@ class RankModel {
         this.#prize = prize;
         this.#winningAmount = 0;
     }
-    //
+    // 두 변수 비교
     #meetStandard(count, hasBonus) {
         const { numbers, bonus } = this.#standard;
 
