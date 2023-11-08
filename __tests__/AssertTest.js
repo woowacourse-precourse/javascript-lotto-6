@@ -62,8 +62,6 @@ describe("Assert 클래스 테스트", () => {
     ];
 
     inputs.forEach((input) => {
-      console.log(input);
-
       expect(() => assert.assertWinningNumber(input)).toThrow(
         new WinningNumberError(WinningNumberError.TYPE_OUT_OF_RANGE)
       );
@@ -81,11 +79,41 @@ describe("Assert 클래스 테스트", () => {
   });
 
   test("보너스 번호 입력 검증: 통과해야 할 케이스", () => {
-    const inputs = [1, 5, 10, 45];
+    const inputs = [
+      [1, [2, 3, 4, 5, 6, 7]],
+      [7, [1, 2, 3, 4, 5, 6]],
+      [45, [1, 2, 3, 4, 5, 6]],
+    ];
 
     inputs.forEach((input) => {
-      expect(() => assert.assertBounsNumber(input)).not.toThrow(
+      expect(() => assert.assertBounsNumber(input[0], input[1])).not.toThrow(
         BonusNumberError
+      );
+    });
+  });
+
+  test("보너스 번호 입력 검증: 유효한 숫자 범위가 아님", () => {
+    const inputs = [
+      [0, [2, 3, 4, 5, 6, 7]],
+      [46, [1, 2, 3, 4, 5, 6]],
+    ];
+
+    inputs.forEach((input) => {
+      expect(() => assert.assertBounsNumber(input[0], input[1])).toThrow(
+        new BonusNumberError(BonusNumberError.TYPE_OUT_OF_RANGE)
+      );
+    });
+  });
+
+  test("보너스 번호 입력 검증: 중복된 숫자가 존재함", () => {
+    const inputs = [
+      [1, [1, 2, 3, 4, 5, 6]],
+      [6, [1, 2, 3, 4, 5, 6]],
+    ];
+
+    inputs.forEach((input) => {
+      expect(() => assert.assertBounsNumber(input[0], input[1])).toThrow(
+        new BonusNumberError(BonusNumberError.TYPE_DUPLICATED)
       );
     });
   });
