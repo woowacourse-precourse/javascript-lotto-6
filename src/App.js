@@ -1,5 +1,11 @@
+import LottoManager from "./ui/LottoManager.js";
+
 class App {
-  async play() {}
+  async play() {
+    const lottoManager = new LottoManager();
+
+    await lottoManager.startLottoSimulator();
+  }
 }
 
 export default App;
