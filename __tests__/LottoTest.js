@@ -29,4 +29,17 @@ describe("로또 클래스 테스트", () => {
       expect(new Set(numbers).size).toBe(6);
     });
   });
+
+  describe("T-2-3 발행한 로또 수량 및 번호 출력 테스트", () => {
+    test("발행한 로또 수량과 번호가 콘솔에 출력되어야 한다", () => {
+      const consoleSpy = jest.spyOn(console, 'log');
+      const lottos = Lotto.generateMultipleLottos(3000);
+      Lotto.printLottos(lottos);
+      expect(consoleSpy).toHaveBeenCalledWith("3개를 구매했습니다.");
+      lottos.forEach(lotto => {
+        expect(consoleSpy).toHaveBeenCalledWith(`[ ${lotto.numbers.join(', ')} ]`);
+      });
+      consoleSpy.mockRestore();
+    });
+  });
 });
