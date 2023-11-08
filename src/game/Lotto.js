@@ -33,6 +33,44 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
+
+  checkLottoRank(winnigNumbers, bonusNumber) {
+    let matchCount = 0;
+    let bonusNumberMatched = false;
+
+    winnigNumbers.forEach((winningNumber) => {
+      if (this.#numbers.includes(winningNumber)) {
+        matchCount++;
+      }
+    });
+
+    if (this.#numbers.includes(bonusNumber)) {
+      bonusNumberMatched = true;
+    }
+
+    this.modifyRankingCount(matchCount, bonusNumberMatched);
+  }
+
+  modifyRankingCount(matchCount, bonusNumberMatched) {
+    switch (matchCount) {
+      case 3:
+        lottoRanking.FIFTH.count++;
+        break;
+      case 4:
+        lottoRanking.FOURTH.count++;
+        break;
+      case 5:
+        if (bonusNumberMatched) {
+          lottoRanking.SECOND.count++;
+          break;
+        }
+        lottoRanking.THIRD.count++;
+        break;
+      case 6:
+        lottoRanking.FIRST.count++;
+        break;
+    }
+  }
 }
 
 export default Lotto;
