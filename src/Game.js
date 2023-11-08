@@ -45,6 +45,15 @@ class Game {
     return winningNumbers;
   };
 
+  getBonusNumber = async (winningNumbers) => {
+    const userInput = await InputOutput.getInput("보너스 번호를 입력해 주세요.");
+    const bonusNumber = +userInput;
+    if (!Validate.isNumeric(userInput)) throw new Error(ErrorMessages.invalidInput("숫자를 입력해 주세요"));
+    if (bonusNumber < 1 || 45 < bonusNumber) throw new Error(ErrorMessages.lottoNumberRangeError);
+    if (winningNumbers.includes(bonusNumber)) throw new Error(ErrorMessages.bonusNumberError);
+    return bonusNumber;
+  };
+
 }
 
 export default Game;
