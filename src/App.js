@@ -51,7 +51,7 @@ class App {
 
   printLottoNumbers() {
     for (const lotto of this.lottoNumbers) {
-      Console.print(lotto.numbers);
+      Console.print(`[${lotto.numbers.join(', ')}]`);
     }
   }
 
@@ -102,15 +102,15 @@ class App {
     for (let i = 0; i < winningStatistics.length; i++) {
       winningProfit += WINNING_PROFITS[i] * winningStatistics[i];
     }
-    const profitRate = parseFloat(((winningProfit - lottoAmount) / lottoAmount * 100).toFixed(1));
-    return profitRate;
+    const profitRate = parseFloat((winningProfit / lottoAmount * 100).toFixed(1)).toFixed(1);
+    return parseFloat(profitRate).toFixed(1);
   }
 
   printProfitRate(profitRate) {
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 
-async play() {
+  async playLottoMachine() {
     const lottoAmount = await this.getLottoAmount();
     this.validateLottoAmount(lottoAmount);
     const lottoCount = this.calculateLottoCount(lottoAmount);
@@ -123,6 +123,14 @@ async play() {
     this.printWinningStatistics(winningStatistics);
     const profitRate = this.calculateProfitRate(lottoAmount, winningStatistics);
     this.printProfitRate(profitRate);
+  }
+
+async play() {
+  try {
+    await this.playLottoMachine();
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 }
 
