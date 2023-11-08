@@ -12,13 +12,7 @@ class App {
     numbers: [],
     bonusNumber: 0,
   };
-  #result = {
-    fifthPlaceWin: INITIAL_VALUE,
-    fourthPlaceWin: INITIAL_VALUE,
-    thirdPlaceWin: INITIAL_VALUE,
-    secondPlaceWin: INITIAL_VALUE,
-    firstPlaceWin: INITIAL_VALUE,
-  };
+  #result;
   #incomePercentage;
 
   async play() {
@@ -28,7 +22,7 @@ class App {
 
     await this.initializeLottoNumber();
     await this.initializeBonusNumber();
-    this.checkResult();
+    this.#result = this.checkResult();
     this.checkIncomePercentage();
     OutputView.printResult(this.#result);
     OutputView.printIncomePercentage(this.#incomePercentage);
@@ -73,9 +67,8 @@ class App {
 
   checkResult() {
     const results = this.#lottos.map(lotto => lotto.checkLotto(this.#drawnLotto));
-    results.map(element => {
-      this.#result = this.mergeAndAddValues(this.#result, element);
-    });
+
+    return results.reduce((acc, element) => this.mergeAndAddValues(acc, element), {});
   }
 
   checkIncomePercentage() {

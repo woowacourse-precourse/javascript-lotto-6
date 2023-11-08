@@ -3,13 +3,6 @@ import { FIVE_COUNT, FOUR_COUNT, INCREMENT, INITIAL_VALUE, SIX_COUNT, THREE_COUN
 
 class Lotto {
   #numbers;
-  #result = {
-    fifthPlaceWin: INITIAL_VALUE,
-    fourthPlaceWin: INITIAL_VALUE,
-    thirdPlaceWin: INITIAL_VALUE,
-    secondPlaceWin: INITIAL_VALUE,
-    firstPlaceWin: INITIAL_VALUE,
-  };
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -25,35 +18,41 @@ class Lotto {
   }
 
   checkLotto(drawnLotto) {
-    const matchingNumbers = this.checkMatchingNumbers(drawnLotto);
+    const result = {
+      fifthPlaceWin: INITIAL_VALUE,
+      fourthPlaceWin: INITIAL_VALUE,
+      thirdPlaceWin: INITIAL_VALUE,
+      secondPlaceWin: INITIAL_VALUE,
+      firstPlaceWin: INITIAL_VALUE,
+    };
+    const matchCount = this.checkMatchCount(drawnLotto);
     const bonusMatch = this.checkMatchingBonus(drawnLotto);
-    const matchCount = matchingNumbers.length;
 
     if (matchCount === THREE_COUNT) {
-      this.#result.fifthPlaceWin += INCREMENT;
+      result.fifthPlaceWin += INCREMENT;
     }
 
     if (matchCount === FOUR_COUNT) {
-      this.#result.fourthPlaceWin += INCREMENT;
+      result.fourthPlaceWin += INCREMENT;
     }
 
     if (matchCount === FIVE_COUNT) {
       bonusMatch
-        ? (this.#result.secondPlaceWin += INCREMENT)
-        : (this.#result.thirdPlaceWin += INCREMENT);
+        ? (result.secondPlaceWin += INCREMENT)
+        : (result.thirdPlaceWin += INCREMENT);
     }
 
     if (matchCount === SIX_COUNT) {
-      this.#result.firstPlaceWin += INCREMENT;
+      result.firstPlaceWin += INCREMENT;
     }
 
-    return this.#result;
+    return result;
   }
 
-  checkMatchingNumbers(drawnLotto) {
+  checkMatchCount(drawnLotto) {
     return this.#numbers.filter(
       (number) => drawnLotto.numbers.includes(number.toString())
-    );
+    ).length;
   }
 
   checkMatchingBonus(drawnLotto) {
@@ -62,10 +61,6 @@ class Lotto {
 
   getLottoNumbers() {
     return this.#numbers;
-  }
-
-  getResult() {
-    return this.#result;
   }
 
   toString() {
