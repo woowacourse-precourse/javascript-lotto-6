@@ -1,6 +1,7 @@
-import {lottoInput,lottoOutput,printWinnings} from './io/InputOutput';
+import {lottoInput,lottoOutput} from './io/InputOutput';
 import randomLottoGenerator from './utils/RandomLottoGenerator';
 import compareForResult from './utils/CompareForResult';
+import calculateRate from './utils/CalculateRate';
 import winningNumberToArray from './utils/WinningNumberToArray';
 import checkMoney from './error/MoneyError';
 import Lotto from './Lotto';
@@ -30,6 +31,10 @@ class App {
     lottoInput.printResultHeader();
     const winningList = compareForResult(winningNumbers,bonus,lottos);
     lottoOutput.printWinningList(winningList);
+    const rate = calculateRate(money,winningList);
+    lottoOutput.printResultRate(rate);
+
+
 
 
 

@@ -51,4 +51,4 @@ const printWinnings = [
     }
 ];
 
-export {lottoInput,lottoOutput,printWinnings};
+export {lottoInput,lottoOutput};

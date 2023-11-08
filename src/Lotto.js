@@ -1,6 +1,6 @@
 import ERROR from './constants/Error.js';
 import { Console } from '@woowacourse/mission-utils';
-import GAME from '../constants/Game';
+import GAME from './constants/Game';
 class Lotto {
   #numbers;
 
