@@ -1,37 +1,13 @@
 import View from "./View/View.js";
 import Model from "./Model.js";
 import Lotto from "./Lotto.js";
-
-const MAX_LOTTO_NUMBER_LENGTH = 6;
+import Validate from "./View/Validate.js";
 
 class App {
   constructor() {
     this.view = new View();
     this.model = new Model();
-  }
-  validateNumber(inputNumber) {
-    if (isNaN(inputNumber)) {
-      throw new Error("[ERROR] : 숫자로만 입력해주세요!");
-    }
-  }
-
-  validateDuplicationNumber(Numbers) {
-    const seen = {};
-
-    for (const item of Numbers) {
-      if (seen[item]) {
-        throw new Error("[ERROR] : 중복된 수 없이 입력해주세요");
-      }
-      seen[item] = true;
-    }
-  }
-
-  validateWinningNumber(inputWinningNumber) {
-    for (let i = 0; i < MAX_LOTTO_NUMBER_LENGTH; i++) {
-      if ((inputWinningNumber[i] >= 45) || (inputWinningNumber[i] < 1)) {
-        throw new Error("[ERROR] : 당첨번호는 1~45 사이 수여야 합니다.");
-      }
-    }
+    this.validate = new Validate();
   }
 
   countBuyLottos(cost) {
@@ -43,16 +19,46 @@ class App {
   }
 
   async processInputCost() {
-    const buyLottoCost = await this.view.inputNumber("구입금액을 입력해 주세요.\n");
-    this.validateNumber(buyLottoCost);
+    let buyLottoCost = 0;
+    while (true) {
+      try {
+        buyLottoCost = await this.view.inputNumber("구입금액을 입력해 주세요.\n");
+        this.validate.isCost(buyLottoCost);
+        break;
+      }
+      catch (error) {
+        this.view.print(error.message);
+      }
+    }
     this.model.setBuyLottoNumber(this.countBuyLottos(buyLottoCost))
   }
 
   async processInputWinningNumber() {
-    const winningNumber = await this.view.inputWinningNumber("당첨 번호를 입력해 주세요.\n");
-    this.validateWinningNumber(winningNumber);
-    this.validateDuplicationNumber(winningNumber);
+    let winningNumber = 0;
+    while (true) {
+      try {
+        winningNumber = await this.view.inputWinningNumber("당첨 번호를 입력해 주세요.\n");
+        this.validate.isWinningNumber(winningNumber);
+        break;
+      } catch (error) {
+        this.view.print(error.message);
+      }
+    }
     this.model.setWinningNumber(winningNumber);
+  }
+
+  async processInputBonusNumber() {
+    let bonusNumber = 0;
+    while (true) {
+      try {
+        bonusNumber = await this.view.inputNumber("보너스 번호를 입력해 주세요.\n");
+        this.validate.isBonusNumber(bonusNumber, this.model.getWinningNumber());
+        break;
+      } catch (error) {
+        this.view.print(error.message);
+      }
+    }
+    this.model.setBonusNumber(bonusNumber);
   }
 
   printLottoCountAndLottoNumber() {
@@ -70,15 +76,16 @@ class App {
     }
   }
 
+
+
   async play() {
-    try {
-      await this.processInputCost();
-      this.makeLotto(this.model.getBuyLottoNumber());
-      this.printLottoCountAndLottoNumber();
-      await this.processInputWinningNumber();
-    } catch (error) {
-      throw new Error(error);
-    }
+    await this.processInputCost();
+    this.makeLotto(this.model.getBuyLottoNumber());
+    this.printLottoCountAndLottoNumber();
+    await this.processInputWinningNumber();
+    await this.processInputBonusNumber();
+    this.model.judgeResultGrade();
+    this.view.printResult(this.model.getGradeCounts(), 100 + this.model.getEarningRate())
   }
 }
 
