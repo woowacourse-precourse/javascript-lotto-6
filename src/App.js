@@ -93,7 +93,7 @@ class App {
       MissionUtils.Console.print("[ERROR] 숫자만 입력해주세요.\n");
     } else if (bonusNumber < 1 || bonusNumber > 45) {
       MissionUtils.Console.print("[ERROR] 1~45 사이의 숫자를 입력해주세요.\n");
-    } else if (winningNumbers.includes(bonusNumber)) {
+    } else if (this.winningNumbers.includes(bonusNumber)) {
       MissionUtils.Console.print("[ERROR] 당첨 번호와 중복될 수 없습니다.\n");
     } else return true;
   }
@@ -114,7 +114,7 @@ class App {
       case 6:
         return "1등";
       case 5:
-        if (this.winningNumbers.includes(this.bonusNumber)) {
+        if (lotto.includes(this.bonusNumber)) {
           return "2등";
         } else return "3등";
       case 4:
