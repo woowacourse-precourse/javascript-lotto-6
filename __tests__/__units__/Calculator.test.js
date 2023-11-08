@@ -1,7 +1,6 @@
 import { LOTTO_RULE, MESSAGES } from "../../src/constants";
 import { getLogSpy, mockQuestions } from "../../src/utils";
 import { Calculator } from "../../src/domain";
-import { CustomError } from "../../src/exception";
 
 const { LENGTH, RANGE } = LOTTO_RULE;
 const { MIN, MAX } = RANGE;
@@ -18,11 +17,14 @@ describe("Calculator 유닛 테스트", () => {
 
     const validWinningNumbers = [[["1,2,3,4,5,6"]]];
     const inValidWinningNumebrsAndMessages = [
-      [["1,1,1,1,1,1"], NOT_UNIQUE],
-      [["안,녕,하,세,요,!"], NOT_NUMBER],
-      [["1,2,3,4,5"], NOT_LENGTH(LENGTH)],
-      [["1.5,2.3,3.5,4.1,5.7,4.4"], NOT_INTEGER],
-      [["-1,46,435,34314,1344,49404"], NOT_ON_RANGE(RANGE.MIN, RANGE.MAX)],
+      [["1,1,1,1,1,1", "1,2,3,4,5,6"], NOT_UNIQUE],
+      [["안,녕,하,세,요,!", "1,2,3,4,5,6"], NOT_NUMBER],
+      [["1,2,3,4,5", "1,2,3,4,5,6"], NOT_LENGTH(LENGTH)],
+      [["1.5,2.3,3.5,4.1,5.7,4.4", "1,2,3,4,5,6"], NOT_INTEGER],
+      [
+        ["-1,46,435,34314,1344,49404", "1,2,3,4,5,6"],
+        NOT_ON_RANGE(RANGE.MIN, RANGE.MAX),
+      ],
     ];
 
     test.each(validWinningNumbers)(
@@ -33,8 +35,11 @@ describe("Calculator 유닛 테스트", () => {
         const calculator = new Calculator();
         mockQuestions(validWinningNumber);
 
+        // when
+        await calculator.promptWinningNumber();
+
         // then
-        await expect(calculator.promptWinningNumber()).resolves.not.toThrow();
+        expect(logSpy).toHaveBeenCalledTimes(0);
       }
     );
 
@@ -42,11 +47,16 @@ describe("Calculator 유닛 테스트", () => {
       "틀린 케이스",
       async (inValidWinningNumber, errorMessage) => {
         // given
+        const logSpy = getLogSpy();
         const calculator = new Calculator();
         mockQuestions(inValidWinningNumber);
+
+        // when
+        await calculator.promptWinningNumber();
+
         // then
-        await expect(calculator.promptWinningNumber()).rejects.toThrow(
-          new CustomError(errorMessage)
+        expect(logSpy).toHaveBeenCalledWith(
+          expect.stringContaining(errorMessage)
         );
       }
     );
@@ -57,32 +67,39 @@ describe("Calculator 유닛 테스트", () => {
 
     const validBonusNumbers = [[["7"]]];
     const inValidBonusNumbersAndErrorMessages = [
-      [["힣"], NOT_NUMBER],
-      [["4.7"], NOT_INTEGER],
-      [["48"], NOT_ON_RANGE(MIN, MAX)],
-      [["-1"], NOT_ON_RANGE(MIN, MAX)],
+      [["힣", "7"], NOT_NUMBER],
+      [["4.7", "7"], NOT_INTEGER],
+      [["48", "7"], NOT_ON_RANGE(MIN, MAX)],
+      [["-1", "7"], NOT_ON_RANGE(MIN, MAX)],
     ];
 
     test.each(validBonusNumbers)("올바른 케이스", async (validBonusNumber) => {
       // given
+      const logSpy = getLogSpy();
       const calculator = new Calculator();
       mockQuestions(validBonusNumber);
 
+      // when
+      await calculator.promptBonusNumber();
+
       // then
-      await expect(
-        calculator.promptBonusNumber(MESSAGES.BONUS_NUMBER.PLACE_HOLDER)
-      ).resolves.not.toThrow();
+      expect(logSpy).toHaveBeenCalledTimes(0);
     });
 
     test.each(inValidBonusNumbersAndErrorMessages)(
       "틀린 케이스",
       async (inValidBonusNumber, errorMessage) => {
         // given
+        const logSpy = getLogSpy();
         const calculator = new Calculator();
         mockQuestions(inValidBonusNumber);
+
+        //when
+        await calculator.promptBonusNumber();
+
         // then
-        await expect(calculator.promptBonusNumber()).rejects.toThrow(
-          new CustomError(errorMessage)
+        expect(logSpy).toHaveBeenCalledWith(
+          expect.stringContaining(errorMessage)
         );
       }
     );
