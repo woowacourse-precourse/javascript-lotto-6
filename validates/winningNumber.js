@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from '../constants/errorMessages.js';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 export const checkLength = (winningNumbers) => {
   if (winningNumbers.length !== 6) {

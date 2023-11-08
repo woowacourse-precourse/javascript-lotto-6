@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from '../constants/errorMessages.js';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 export const checkBonusNumberType = (bonusNumber) => {
   if (typeof bonusNumber !== 'number' || isNaN(bonusNumber)) {

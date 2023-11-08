@@ -1,7 +1,7 @@
-import Lotto from './Lotto.js';
-import User from './User.js';
+import Lotto from './Lotto';
+import User from './User';
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGES } from '../constants/messages.js';
+import { MESSAGES } from '../constants/messages';
 
 class Game {
   #user;

@@ -1,4 +1,4 @@
-import User from '../src/User.js';
+import User from '../src/User';
 
 describe('로또 구입금액 입력 테스트', () => {
   let user;

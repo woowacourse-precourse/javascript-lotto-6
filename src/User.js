@@ -1,20 +1,20 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGES } from '../constants/messages.js';
+import { MESSAGES } from '../constants/messages';
 import {
   validateFormat,
   validateMinimumAmount,
   validateUndivided,
-} from '../validates/lottoPurchase.js';
+} from '../validates/lottoPurchase';
 import {
   checkDuplicate,
   checkLength,
   checkTypeAndRange,
-} from '../validates/winningNumber.js';
+} from '../validates/winningNumber';
 import {
   checkBonusNumberRange,
   checkBonusNumberType,
   checkBonusNumberDuplicate,
-} from '../validates/bonusNumber.js';
+} from '../validates/bonusNumber';
 
 class User {
   #lottoCount;

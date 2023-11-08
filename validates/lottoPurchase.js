@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from '../constants/errorMessages.js';
+import { ERROR_MESSAGES } from '../constants/errorMessages';
 
 export const validateFormat = (amount) => {
   const numberPattern = /^[0-9]+$/;
