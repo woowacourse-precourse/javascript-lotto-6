@@ -1,4 +1,4 @@
-class InputPrice {
+class InputPriceValidation {
   constructor(price) {
     this.validate(price);
     this.price = price;
@@ -19,4 +19,4 @@ class InputPrice {
   }
 }
 
-export default InputPrice
+export default InputPriceValidation

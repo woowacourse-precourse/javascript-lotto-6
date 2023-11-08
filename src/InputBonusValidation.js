@@ -1,4 +1,4 @@
-class InputBonus {
+class InputBonusValidation {
   constructor(bonus, lottoArr) {
     this.validate(bonus, lottoArr);
     this.price = bonus;
@@ -15,4 +15,4 @@ class InputBonus {
   }
 }
 
-export default InputBonus
+export default InputBonusValidation
