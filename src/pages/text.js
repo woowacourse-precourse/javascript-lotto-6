@@ -10,9 +10,14 @@ export const ERROR = {
 };
 
 export const GAME = {
-  input_cost: "구입금액을 입력해 주세요 : ",
-  input_number: "당첨 번호를 입력해 주세요.\n",
-  input_bonus: "보너스 번호를 입력해 주세요.\n",
-  buy: (count) => `${count}개를 구매하였습니다.`,
+  input_cost: "구입금액을 입력해 주세요.\n",
+  input_number: "\n당첨 번호를 입력해 주세요.\n",
+  input_bonus: "\n보너스 번호를 입력해 주세요.\n",
+  buy: (count) => `${count}개를 구매했습니다.`,
   statistic: "당첨통계\n-----\n",
+
+  game_result: (win_3, win_4, win_5, win_6, win_50) =>
+    `3개 일치 (5,000원) - ${win_3}개\n4개 일치 (50,000원) - ${win_4}개\n5개 일치 (1,500,000원) - ${win_5}개\n5개 일치, 보너스 볼 일치 (30,000,000원) - ${win_6}개\n6개 일치 (2,000,000,000원) - ${win_50}개`,
+
+  game_money: (money) => `총 수익률은 ${money}%입니다.`,
 };

@@ -25,8 +25,6 @@ class Lotto {
   getNumbers() {
     return this.#numbers;
   }
-
-  // 추가 기능을 구현할 수 있습니다.
 }
 
 export default Lotto;

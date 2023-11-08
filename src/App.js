@@ -7,12 +7,13 @@ class App {
   async play() {
     let lotto = new inputUserLotto();
     const count = await lotto.getUserCostToLotto();
-    await lotto.getUserNumber();
-    await lotto.getUserNumber("BONUS");
 
     const lottery = new randomBuyLotto(count);
     lottery.buyLottoTickets();
     lottery.printLottoTickets();
+
+    await lotto.getUserNumber();
+    await lotto.getUserNumber("BONUS");
 
     let result = new printWinner(
       lottery.getLottoTickets(),

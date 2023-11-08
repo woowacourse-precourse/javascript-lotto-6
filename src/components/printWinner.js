@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { GAME, ERROR } from "../pages/text.js";
 
 const WIN_PRIZES = {
   3: 5000,
@@ -58,19 +59,19 @@ export default class PrintWinner {
       this.winCount[6] * WIN_PRIZES[6];
     const totalInvestment = this.randomLottoTickets.length * 1000;
 
-    MissionUtils.Console.print(`
-    3개 일치 (5,000원) - ${this.winCount[3]}개
-    4개 일치 (50,000원) - ${this.winCount[4]}개
-    5개 일치 (1,500,000원) - ${this.winCount[5]}개
-    5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.winCount[50]}개
-    6개 일치 (2,000,000,000원) - ${this.winCount[6]}개
-    `);
+    MissionUtils.Console.print(
+      GAME.game_result(
+        this.winCount[3],
+        this.winCount[4],
+        this.winCount[5],
+        this.winCount[6],
+        this.winCount[50]
+      )
+    );
 
     const totalRate = (this.totalWinning / totalInvestment) * 100;
-    const formattedTotalRate = totalRate < 0 ? 0 : totalRate.toFixed(2);
+    const formattedTotalRate = totalRate < 0 ? 0 : totalRate.toFixed(1);
 
-    MissionUtils.Console.print(
-      `${this.totalWinning} 수익이며 총 수익률은 ${formattedTotalRate}%입니다.`
-    );
+    MissionUtils.Console.print(GAME.game_money(formattedTotalRate));
   }
 }

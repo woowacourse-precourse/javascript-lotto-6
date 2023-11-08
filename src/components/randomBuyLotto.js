@@ -29,6 +29,8 @@ export default class randomBuyLotto {
 
   printLottoTickets() {
     MissionUtils.Console.print(GAME.buy(this.count));
-    this.lottoTickets.map((ticket) => MissionUtils.Console.print(ticket));
+    this.lottoTickets.map((ticket) =>
+      MissionUtils.Console.print(`[${ticket.join(", ")}]`)
+    );
   }
 }

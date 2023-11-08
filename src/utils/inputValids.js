@@ -12,18 +12,19 @@ export default class InputValidator {
   }
 
   validateNumber(NUMBER_STRING, TYPE) {
-    if (!NUMBER_STRING.every((number) => 1 <= number && number <= 45)) {
+    console.log(NUMBER_STRING);
+    if (!NUMBER_STRING.every((number) => number < 1 || number > 45)) {
       throw new Error(ERROR.input_1_45);
     }
 
     if (new Set(NUMBER_STRING).size !== NUMBER_STRING.length)
       throw new Error(ERROR.input_double_num);
 
-    if (TYPE === "BONUS") {
-      this.checkBonus(NUMBER_STRING);
-    } else {
-      this.checkNumbers(NUMBER_STRING);
-    }
+    this.check(
+      NUMBER_STRING,
+      TYPE === "BONUS" ? 1 : 6,
+      ERROR.input_lotto_bonus
+    );
 
     return NUMBER_STRING;
   }
