@@ -1,15 +1,13 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { STRINGS } from './constants/STRINGS';
-import {Validation} from './Validation';
 class App {
-  async play() {}
   async play() {
     this.startGame();
   }
 
   async startGame() {
-      
       this.getLottoAmount();
+      this.getAnswerNumbers();
   }
 
   async getLottoAmount(){
@@ -30,6 +28,14 @@ class App {
         const RANDOM_NUMBERS = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
         lottos.push(new Lotto(RANDOM_NUMBERS));
     }
+  }
+
+  async getAnswerNumbers(){
+    const ANSWER_NUMBERS = await MissionUtils.Console.readLineAsync(STRINGS.ANSWER_NUMBERS);
+    Validation.validateAnswerNumbersComma(ANSWER_NUMBERS);
+    Validation.repeatedAnswerNumbers(ANSWER_NUMBERS);
+    Validation.validateNumbersLength(ANSWER_NUMBERS);
+    return this.getBonusNumber(ANSWER_NUMBERS);
   }
 
 }
