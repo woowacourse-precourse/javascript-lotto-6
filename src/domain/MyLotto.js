@@ -19,6 +19,10 @@ class MyLotto {
     getMyLottos() {
         return this.#lottos;
     }
+
+    getLottoSize() {
+        return this.#lottos.length;
+    }
 }
 
 export default MyLotto;

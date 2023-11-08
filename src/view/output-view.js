@@ -1,5 +1,7 @@
 import { OUTPUT_MESSAGE } from "../constants/constants.js";
+import LottoResult from "../domain/LottoResult.js";
 import { Console } from "@woowacourse/mission-utils";
+
 
 class OutputView {
     printMyLotto(perchaseNumber, myLotto) {
@@ -9,6 +11,8 @@ class OutputView {
             Console.print(element.getNumbers());
         }
     }
+
+    printResult(myLotto, winningLotto) {}
 };
 
 export default OutputView;
