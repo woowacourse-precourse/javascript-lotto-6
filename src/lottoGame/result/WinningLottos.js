@@ -1,7 +1,6 @@
-import { LottoResult } from './Lotto.js';
 import { Print } from '../../interface/Output.js';
 import { getRoundedNumber } from '../../utils/getRoundedNumber.js';
-import { BONUS_NUMBER_TYPE, WINNING_CONDITIONS_AND_PRIZES } from '../../constants.js';
+import { WINNING_CONDITIONS_AND_PRIZES } from '../../constants.js';
 
 export class WinningLottosResult {
   #winningLottosResult = WINNING_CONDITIONS_AND_PRIZES.map(({ condition, prize }) => {
@@ -10,12 +9,20 @@ export class WinningLottosResult {
 
   #userMoney;
 
-  constructor(lottos, winningNumbers, bonusNumber, userMoney) {
-    lottos.map((lottoNumbers) => {
-      this.#setWinningLottos(new LottoResult(lottoNumbers, winningNumbers, bonusNumber));
-    });
+  #winningLottos;
+
+  constructor(lottoResults, userMoney) {
+    this.#winningLottos = lottoResults.filter((lottoResult) => lottoResult.isWin());
 
     this.#userMoney = userMoney;
+
+    this.#winningLottosResult.forEach((winningLotto) => {
+      this.#setWinningLottosResult(winningLotto);
+    });
+  }
+
+  getWinningLottos() {
+    return this.#winningLottos;
   }
 
   getWinningLottosResult() {
@@ -23,28 +30,21 @@ export class WinningLottosResult {
   }
 
   getTotalProfitRate() {
-    let totalProfit = 0;
-    this.#winningLottosResult.forEach(({ profit }) => {
-      totalProfit += profit;
-    });
+    const totalProfit = this.#winningLottosResult.reduce(
+      (accumulator, current) => accumulator + current.profit,
+      0,
+    );
 
     const rate = (totalProfit / this.#userMoney) * 100;
     return getRoundedNumber(rate);
   }
 
-  #setWinningLottos(lottoResult) {
-    this.#winningLottosResult.forEach((winningLotto) => {
-      const { condition } = winningLotto;
-      const { winningNumbersCount, bonusNumberType: winningBonusNumberType } = condition;
+  #setWinningLottosResult(winningLotto) {
+    const { condition } = winningLotto;
 
-      if (lottoResult.isWin()) {
-        const { countOfWinningNumbers, bonusNumberType } = lottoResult.get();
-
-        if (
-          winningNumbersCount === countOfWinningNumbers &&
-          winningBonusNumberType === bonusNumberType
-        )
-          this.#increaseWinningLottoCountAndProfit(winningLotto);
+    this.getWinningLottos().forEach((lottoResult) => {
+      if (lottoResult.compareResultWithCondition(condition)) {
+        this.#increaseWinningLottoCountAndProfit(winningLotto);
       }
     });
   }
