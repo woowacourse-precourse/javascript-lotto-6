@@ -48,6 +48,29 @@ class Model {
       throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.');
     }
   }
+
+  getWinningLottos() {
+    const winningLottos = [0, 0, 0, 0, 0];
+    this.#lottoNumbers.forEach((lotto) => {
+      const [matchCount, matchBonus] = lotto.compareLotto(this.#winningLottory, this.#bonusNumber);
+      if (matchCount === 3) {
+        winningLottos[0] += 1;
+      }
+      if (matchCount === 4) {
+        winningLottos[1] += 1;
+      }
+      if (matchCount === 5 && !matchBonus) {
+        winningLottos[2] += 1;
+      }
+      if (matchCount === 5 && matchBonus) {
+        winningLottos[3] += 1;
+      }
+      if (matchCount === 6) {
+        winningLottos[4] += 1;
+      }
+    });
+    return winningLottos;
+  }
 }
 
 export default Model;

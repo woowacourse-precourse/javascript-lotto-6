@@ -23,9 +23,9 @@
     - [x] 입력된 숫자가 1~45 사이인지 확인
     - [x] 입력된 숫자가 중복되지 않는지 확인
 
-- [] Lotto 클래스내 중복된 번호 개수 method 작성
-    - [] argument가 맞는 형식인지 확인 ( Lotto )
-    - [] 비교결과가 정확한 값인지 테스트
+- [x] Lotto 클래스내 중복된 번호 개수 method 작성
+    - [x] argument가 맞는 형식인지 확인 ( Lotto )
+    - [x] 비교결과가 정확한 값인지 테스트
     - argument : bonus(number), Lotto(Lotto)
     - return : object { matchCount(number), bonusMatch(bool) }
 

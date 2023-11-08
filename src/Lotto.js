@@ -25,12 +25,36 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  #getNumbers() {
+    return this.#numbers;
+  }
+
   toString() {
     return `[${this.#numbers.join(', ')}]`;
   }
 
   duplicateTest(bonus) {
     return this.#numbers.includes(bonus);
+  }
+
+  compareLotto(lotto, bonus) {
+    if (!(lotto instanceof Lotto)) {
+      throw new Error('[ERROR] Lotto 객체를 입력해주세요.');
+    }
+
+    let matchCount = 0;
+    let matchBonus = false;
+    const lottoNumbers = lotto.#getNumbers();
+    this.#numbers.forEach((number) => {
+      if (lottoNumbers.includes(number)) {
+        matchCount += 1;
+      }
+      if (number === bonus) {
+        matchBonus = true;
+      }
+    });
+
+    return [matchCount, matchBonus];
   }
 }
 

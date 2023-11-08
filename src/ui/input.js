@@ -1,10 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateMoney } from './validate.js';
 import { inputMessages } from '../message/ui.js';
-
-const printError = (error) => {
-  Console.print(`[ERROR] ${error.message}`);
-};
+import printError from './error.js';
 
 export const inputMoney = async () => {
   const money = await Console.readLineAsync(inputMessages.MONEY);
