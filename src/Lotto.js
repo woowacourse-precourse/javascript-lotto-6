@@ -1,3 +1,5 @@
+import { ERROR } from "./constants/constants.js";
+
 class Lotto {
   #numbers;
 
@@ -8,7 +10,19 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR.INVALID_LENGTH);
+    }
+
+    numbers.forEach((num) => {
+      if (num < 1 || num > 45) {
+        throw new Error(ERROR.INVALID_LOTTO_RANGE);
+      }
+    });
+
+    const set = new Set(numbers);
+    const arr = Array.from(set);
+    if (arr.length !== 6) {
+      throw new Error(ERROR.LOTTO_DUPLICATION);
     }
   }
 
