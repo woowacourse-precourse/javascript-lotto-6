@@ -14,18 +14,18 @@ describe('로또 클래스 테스트', () => {
   });
 
   // 내가 작성한 test code
-  test('로또 번호 2개가 1~45 사이 숫자가 아닐 때 예외를 발생한다.?', () => {
+  test('당첨 번호 2개가 1~45 사이 숫자가 아닐 때 예외를 발생한다.?', () => {
     const testNumbers = [3, 56, 4, 7, 9, 89];
     expect(() => {
       new Lotto(testNumbers);
-    }).toThrow('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    }).toThrow('[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.');
   });
 
-  test('로또 번호를 입력하지 않으면 오류를 발생할까 ?', () => {
+  test('당첨 번호를 입력하지 않으면 오류를 발생할까 ?', () => {
     const testNumbers = [];
     expect(() => {
       new Lotto(testNumbers);
-    }).toThrow('[ERROR] 로또 번호를 입력하세요.');
+    }).toThrow('[ERROR] 당첨 번호를 입력하세요.');
   });
 });
 
