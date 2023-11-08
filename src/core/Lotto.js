@@ -1,6 +1,6 @@
 //@ts-check
 
-import Assert from "./Assert";
+import Assert from "./Assert.js";
 
 class Lotto {
   #numbers;
@@ -11,7 +11,7 @@ class Lotto {
    */
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers.sort();
+    this.#numbers = numbers.sort((a, b) => a - b);
   }
 
   /**
