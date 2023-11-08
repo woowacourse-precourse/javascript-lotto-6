@@ -1,7 +1,7 @@
 import Lotto from './Lotto.js';
 import Input from './utils/inputOutput/input.js';
 import Output from './utils/inputOutput/output.js';
-import { validateNumber, isIncludedBonusNumbers, validatedPrice } from './utils/validation/validation.js';
+import { ensureIsNumberString, isIncludedBonusNumbers, validatedPrice } from './utils/validation/validation.js';
 import { changeParseInt, lottoPurchaseCount, randomLottoNumbers, sortLottoNumbers } from './utils/lottoNumber/number.js';
 import { calculateProfit, calculateProfitRate, countIncludeNumbers } from './utils/calculate/calculate.js';
 import { MESSAGE } from './constants/constants.js';
@@ -91,7 +91,7 @@ class StartGame {
     const inputBonusNumber = await Input.readLineAsync(textMessage);
 
     try {
-      validateNumber(inputBonusNumber);
+      ensureIsNumberString(inputBonusNumber);
       const bonusNumber = parseInt(inputBonusNumber, 10);
       isIncludedBonusNumbers(this.#winningNumbers, bonusNumber);
 

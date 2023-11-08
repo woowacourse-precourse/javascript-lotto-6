@@ -1,11 +1,10 @@
 import { LOTTO_PRICE, ERROR } from '../../constants/constants.js';
 
-const validateNumber = number => {
+const ensureIsNumberString = number => {
   const trimmed = number.trim();
   const parsed = parseInt(trimmed, 10);
 
-  if (trimmed === '' || Number.isNaN(parsed)) throw new Error(ERROR.notNumber);
-  if (trimmed !== parsed.toString()) throw new Error(ERROR.notThousandWon);
+  if (trimmed === '' || Number.isNaN(parsed) || trimmed !== parsed.toString()) throw new Error(ERROR.notNumber);
 };
 
 const isValidatedPrice = inputPrice => {
@@ -23,8 +22,8 @@ const isIncludedBonusNumbers = (lottoNumbers, bonusNumber) => {
 };
 
 const validatedPrice = inputPrice => {
-  validateNumber(inputPrice);
+  ensureIsNumberString(inputPrice);
   isValidatedPrice(inputPrice);
 };
 
-export { validateNumber, isIncludedBonusNumbers, validatedPrice };
+export { ensureIsNumberString, isIncludedBonusNumbers, validatedPrice };
