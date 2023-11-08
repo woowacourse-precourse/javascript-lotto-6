@@ -13,7 +13,6 @@ class LottoGame {
     this.#bonusNumber = bonusNumber;
     this.winnerStatic = Array.from({ length: 5 }, () => 0);
     this.#checkWinner();
-    console.log(this.winnerStatic); // TODO 디버기용
   }
 
   #checkWinner() {

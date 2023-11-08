@@ -39,7 +39,6 @@ class Lotto {
   getBonusNumber() {
     return this.bonusNumber;
   }
-  // TODO: 추가 기능 구현
 }
 
 export default Lotto;
