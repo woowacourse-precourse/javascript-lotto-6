@@ -19,7 +19,7 @@ export const OUTPUT_MESSAGE = Object.freeze({
   OUTPUT_BUY_LOTTERY: (totalTicket) => {
     return `\n${totalTicket}개를 구매했습니다.`;
   },
-  OUTPUT_RESULT: '당첨 통계',
+  OUTPUT_RESULT: '\n당첨 통계',
   OUTPUT_DIVIDER: '---',
   OUTPUT_THREE_MATCH: '3개 일치 (5,000원)',
   OUTPUT_FOUR_MATCH: '4개 일치 (50,000원)',
