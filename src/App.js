@@ -72,6 +72,28 @@ class App {
         return "꽝";
     }
   }
+
+  // 총 당첨 내역 출력
+    // 결과 합산
+  computeTotalResult(lottos, winningNumbers, bonusNubmer) {
+    const result = { "1등": 0, "2등": 0, "3등": 0, "4등": 0, "5등": 0, "꽝": 0};
+    for (const lotto of lottos) {
+      const rank = this.computeRank(lotto, winningNumbers, bonusNubmer);
+      result[rank]++;
+    }
+    return result;
+  }
+
+    // 출력
+  printResult(result) {
+    MissionUtils.Console.print(`
+당첨 통계\n---
+3개 일치 (5,000원) - ${result["5등"]}개
+4개 일치 (50,000원) - ${result["4등"]}개
+5개 일치 (1,500,000원) - ${result["3등"]}개
+5개 일치, 보너스 볼 일치 (30,000,000원) - ${result["2등"]}개
+6개 일치 (2,000,000,000원) - ${result["1등"]}개`);
+  }
   }
 }
 
