@@ -31,3 +31,4 @@ class LottoGenerator {
     return lottos;
   }
 }
+export default LottoGenerator;
