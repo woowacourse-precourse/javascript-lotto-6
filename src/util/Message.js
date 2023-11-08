@@ -1,4 +1,4 @@
-import { LOTTO } from "./constant";
+import { LOTTO } from "./constant.js";
 
 export const MESSAGE = Object.freeze({
   inputAmount: "구입금액을 입력해 주세요.\n",

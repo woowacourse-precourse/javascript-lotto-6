@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR, MESSAGE } from "./util/Message";
-import { INPUT, LOTTO, STR_REWARD } from "./util/constant";
+import { ERROR, MESSAGE } from "./util/Message.js";
+import { INPUT, LOTTO, STR_REWARD } from "./util/constant.js";
 
 class View {
   async getLottoPurchaseAmount() {
@@ -24,6 +24,7 @@ class View {
         let userInput = await this.readLine(MESSAGE.inputWinningNumber);
         winningNumbers = userInput.split(INPUT.lottoNumSep).map(Number);
         this.validateWinningNumbers(winningNumbers);
+        this.validateDuplicate(winningNumbers);
         break;
       } catch (error) {
         Console.print(error.message);
@@ -54,34 +55,33 @@ class View {
   }
 
   validateWinningNumbers(numbers) {
-    this.validateDuplicate(numbers);
     for (let i = 0; i < numbers.length; i++) {
       this.validateNumberRange(numbers[i]);
     }
   }
 
   validateNoDuplicateBonusNumber(winningNumbers, bonusNumber) {
-    if (winningNumbers.include(bonusNumber)) {
+    if (winningNumbers.includes(bonusNumber)) {
       throw new Error(ERROR.lottoBonusDuplicate);
     }
   }
 
   validateNumberRange(number) {
     if (number < LOTTO.minimum || number > LOTTO.maximum) {
-      throw new Error(ERROR.lottoWinningNumDuplicate);
+      throw new Error(ERROR.lottoNumRange);
     }
   }
 
   validateDuplicate(numbers) {
     if (new Set(numbers).size !== LOTTO.numLength) {
-      throw new Error(ERROR.lottoNumDuplicate);
+      throw new Error(ERROR.lottoWinningNumDuplicate);
     }
   }
 
   getLottoResult(prize, profitRate) {
     Console.print("\n당첨 통계");
     Console.print("---");
-    Console.print(`3개 일치 (${STR_REWARD.fifth}}원) - ${prize.fifth}개`);
+    Console.print(`3개 일치 (${STR_REWARD.fifth}원) - ${prize.fifth}개`);
     Console.print(`4개 일치 (${STR_REWARD.fourth}원) - ${prize.fourth}개`);
     Console.print(`5개 일치 (${STR_REWARD.third}원) - ${prize.third}개`);
     Console.print(

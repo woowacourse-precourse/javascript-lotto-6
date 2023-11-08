@@ -1,9 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
+import { ERROR } from "./util/Message.js";
+import { LOTTO } from "./util/constant.js";
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#validateDuplicate(numbers);
     this.#numbers = numbers;
   }
 
@@ -17,8 +20,14 @@ class Lotto {
     }
   }
 
+  #validateDuplicate(numbers) {
+    if (new Set(numbers).size !== LOTTO.numLength) {
+      throw new Error(ERROR.lottoWinningNumDuplicate);
+    }
+  }
+
   print() {
-    Console.print(this.#numbers);
+    Console.print(`[${this.#numbers.join(", ")}]`);
   }
 }
 

@@ -1,5 +1,6 @@
 import { Console, Random } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
+import { LOTTO } from "./util/constant.js";
 
 class User {
   #myLottos = [];
@@ -19,11 +20,13 @@ class User {
 
   // 로또를 생성한다.
   createLottos() {
-    const n = this.#amount / 1000;
+    const n = this.#amount / LOTTO.price;
     for (let i = 0; i < n; i++) {
-      const nums = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
-        (a, b) => a - b
-      );
+      const nums = Random.pickUniqueNumbersInRange(
+        LOTTO.minimum,
+        LOTTO.maximum,
+        LOTTO.numLength
+      ).sort((a, b) => a - b);
       this.#myLottos.push(new Lotto(nums));
     }
 
@@ -31,7 +34,7 @@ class User {
   }
 
   printLottos() {
-    Console.print(`\n${this.#amount / 1000}개를 구매했습니다.`);
+    Console.print(`\n${this.#amount / LOTTO.price}개를 구매했습니다.`);
     this.#myLottos.map((lotto) => lotto.print());
   }
 }
