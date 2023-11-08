@@ -13,6 +13,7 @@ class LottoController {
     this.count = 0;
     this.lottoNumbersList = [];
     this.winningNumbers = [];
+    this.bonusNumber = 0;
   }
 
   async getPurchaseAmount() {
@@ -42,6 +43,7 @@ class LottoController {
     const input = await inputView.bonusNumber();
     const parsedInput = parseInt(input, 10);
     validation.validateBonusNumber(parsedInput, this.winningNumbers);
+    this.bonusNumber = parsedInput;
   }
 }
 

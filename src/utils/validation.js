@@ -20,6 +20,9 @@ const validation = {
     if (winningNumbers.includes(input)) {
       throw new Error(ERROR_MESSAGE.DUPLICATE_NUMBERS);
     }
+    if (input > 45 || input < 1) {
+      throw new Error(ERROR_MESSAGE.INVALID_LOTTO_RANGE);
+    }
   },
 };
 
