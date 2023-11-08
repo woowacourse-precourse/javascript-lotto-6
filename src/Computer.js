@@ -40,7 +40,7 @@ export default class Computer {
     Console.print(MESSAGE.WINNING_STATISTICS);
     Console.print(MESSAGE.DASHES);
     for (let i = 5; i >= 1; i -= 1) {
-      const { label, winnings } = LOTTERY_WINNINGS.get(i);
+      const { label, winnings } = LOTTERY_WINNINGS[i];
       const commaWinnings = NumberConverter.splitIntoThreeDigitWithComma(winnings);
       Console.print(MESSAGE.MATCH_LOTTO_COUNT(label, commaWinnings, this.result[i]));
     }
@@ -66,14 +66,7 @@ export default class Computer {
   }
 
   getTotalWinnings() {
-    const winnings = [
-      LOTTERY_WINNINGS.get(LOTTERY.DEFAULT_PLACE).winnings,
-      LOTTERY_WINNINGS.get(LOTTERY.FIRST_PLACE).winnings,
-      LOTTERY_WINNINGS.get(LOTTERY.SECOND_PLACE).winnings,
-      LOTTERY_WINNINGS.get(LOTTERY.THIRD_PLACE).winnings,
-      LOTTERY_WINNINGS.get(LOTTERY.FOURTH_PLACE).winnings,
-      LOTTERY_WINNINGS.get(LOTTERY.FIFTH_PLACE).winnings,
-    ];
+    const winnings = LOTTERY_WINNINGS.map((place) => place.winnings);
     return this.result.reduce((total, curCnt, place) => {
       return total + curCnt * winnings[place];
     }, 0);
