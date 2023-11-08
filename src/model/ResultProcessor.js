@@ -1,3 +1,5 @@
+import { LOTTO_RESULT } from "../constants/Constants";
+
 class ResultProcessor {
   #userLottoNumbers;
   #bonusNumbers;
@@ -5,7 +7,7 @@ class ResultProcessor {
   #lottoResult;
 
   constructor(userLottoNumbers, bonusNumbers, lottoNumbers) {
-    this.#lottoResult = { 3: 0, 4: 0, 5: 0, bonus: 0, 6: 0 };
+    this.#lottoResult = LOTTO_RESULT;
     this.#userLottoNumbers = userLottoNumbers;
     this.#bonusNumbers = bonusNumbers;
     this.#lottoNumbers = lottoNumbers;

@@ -13,3 +13,11 @@ export const PRIZE_STRING = {
   bonus: "30,000,000원",
   6: "2,000,000,000원",
 };
+
+export const LOTTO_RESULT = {
+  3: 0,
+  4: 0,
+  5: 0,
+  bonus: 0,
+  6: 0,
+};

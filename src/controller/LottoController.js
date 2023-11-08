@@ -1,6 +1,5 @@
 import InputView from "../view/InputView";
 import OutputView from "../view/OutputView";
-import Validator from "../utils/Validator";
 import Lotto from "../model/Lotto";
 import LottoDataProcessor from "../model/LottoDataProcessor";
 import Bonus from "../model/Bonus";
