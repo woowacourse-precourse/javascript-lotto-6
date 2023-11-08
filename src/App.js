@@ -18,7 +18,7 @@ class App {
     const bonusNumber = await this.Lotto.enterBonusNumber();
     const rankOfResult = this.Lotto.resultOfDraw(lottoNumbers, drawNumbers, bonusNumber);
     const resultOfLotto = this.Lotto.lottoDrawResult(rankOfResult);
-    this.Lotto.lottoResultPrinter(resultOfLotto);
+    this.Lotto.lottoResultPrinter();
     const profitRate = this.Profit.profitRateAcc(resultOfLotto, credit);
     this.Profit.profitPrinter(profitRate);
   }
