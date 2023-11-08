@@ -1,8 +1,6 @@
-import { Random, Console } from '@woowacourse/mission-utils';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import { ERROR_MESSEGE } from '../constant/messages.js';
-import Lottos from '../model/Lottos.js';
 
 class WinningController {
   async inputWinning() {
@@ -10,31 +8,45 @@ class WinningController {
     while (true) {
       try {
         winningNumber = await InputView.inputWinningNumber();
-        // this.validatePurchaseAmount(winningNumber);
-        Console.print(winningNumber);
+        this.#validateWinningNumber(winningNumber);
         break;
       } catch (error) {
         OutputView.printError(error.message);
       }
     }
+    return winningNumber.split(',');
   }
 
-  validatePurchaseAmount(purchaseAmount) {
-    if (!purchaseAmount) {
+  #validateWinningNumber(winningNumber) {
+    if (!winningNumber) {
       throw new Error(ERROR_MESSEGE.notInput);
     }
 
-    if (isNaN(purchaseAmount)) {
+    const winningNumbers = winningNumber.split(',');
+
+    if (winningNumbers.length !== 6) {
+      throw new Error(ERROR_MESSEGE.notSixNumbers);
+    }
+
+    if (winningNumbers.some((number) => isNaN(number))) {
       throw new Error(ERROR_MESSEGE.notNumber);
     }
 
-    if (purchaseAmount <= 0) {
+    if (winningNumbers.some((number) => number <= 0)) {
       throw new Error(ERROR_MESSEGE.notPositive);
     }
 
-    if (purchaseAmount % 1000 !== 0) {
-      throw new Error(ERROR_MESSEGE.not1000Multiple);
+    if (winningNumbers.some((number) => number < 1 || number > 45)) {
+      throw new Error(ERROR_MESSEGE.outOfRange);
     }
+
+    if (this.#isDuplicates(winningNumbers)) {
+      throw new Error(ERROR_MESSEGE.duplicates);
+    }
+  }
+
+  #isDuplicates(array) {
+    return new Set(array).size !== array.length;
   }
 }
 

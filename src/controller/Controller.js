@@ -5,6 +5,7 @@ import OutputView from '../view/OutputView.js';
 
 class Controller {
   #lottos;
+  #winning;
   #PurchaseController;
   #WinningController;
 
@@ -16,7 +17,8 @@ class Controller {
   async play() {
     this.#lottos = await this.#PurchaseController.inputPurchase();
     OutputView.printLottos(this.#lottos);
-    await this.#WinningController.inputWinning();
+    this.#winning = await this.#WinningController.inputWinning();
+    // Console.print(this.#winning);
   }
 }
 
