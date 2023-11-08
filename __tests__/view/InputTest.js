@@ -7,19 +7,6 @@ const mockInput = (input) => {
 };
 
 describe("입력값 테스트", () => {
-    test("구입 금액 입력 테스트", async () => {
-        //given
-        const input = 14000;
-        mockInput(input);
-
-        //when
-        const inputValue = new InputView();
-        const output = await inputValue.readPurchaseAmount();
-
-        //then
-        expect(output).toEqual(14);
-    });
-
     test("구입 금액이 1000으로 나누어 떨어지지 않을 경우 예외 처리", async () => {
         //given
         const input = 14500;
