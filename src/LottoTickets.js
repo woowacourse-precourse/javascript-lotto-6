@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { LOTTO_LENGTH } from "../src/constants/constants.js";
 
 class LottoTickets {
   generateLottoTickets(numberOfTickets) {
@@ -6,9 +7,9 @@ class LottoTickets {
 
     for (let i = 0; i < numberOfTickets; i++) {
       const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
-        1,
-        45,
-        6
+        LOTTO_LENGTH.LOTTO_MIN_NUMBER,
+        LOTTO_LENGTH.LOTTO_MAX_NUMBER,
+        LOTTO_LENGTH.LOTTO_LENGTH
       );
       lottoNumbers.sort((a, b) => a - b);
       lottoTickets.push(lottoNumbers);
