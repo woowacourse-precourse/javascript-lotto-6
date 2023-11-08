@@ -3,9 +3,30 @@ import { PRIZE } from '../constant/Prize.js';
 
 export default class LottoCalculator {
   constructor(money, win, bonus) {
+    this.#validate(money, win, bonus);
     this.money = money;
     this.win = win;
     this.bonus = bonus;
+  }
+
+  #validate(money, win, bonus) {
+    if (typeof money !== "number") {
+      throw new Error("[ERROR] money 매개변수는 number 데이터 타입이어야 합니다.");
+    }
+
+    if (typeof win !== "object") {
+      throw new Error("[ERROR] win 매개변수는 object 데이터 타입이어야 합니다.");
+    }
+
+    win.forEach(number => {
+      if (typeof number !== "number") {
+        throw new Error("[ERROR] win 매개변수의 요소는 number 데이터 타입이어야 합니다.");
+      }
+    });
+
+    if (typeof bonus !== "number") {
+      throw new Error("[ERROR] bonus 매개변수는 number 데이터 타입이어야 합니다.");
+    }
   }
 
   countMatches(lotto) {
