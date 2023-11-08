@@ -148,6 +148,18 @@ class App {
    * @param {Lotto} winningLotto
    * @param {number} bonusNumber */
   printResult(lottos, winningLotto, bonusNumber) {
+    const RANKS = lottos.map((lotto) => this.getRank(lotto, winningLotto, bonusNumber));
+    const FIXED_LOTTO_RANK = LOTTO_RANK.slice(0, LOTTO_RANK.length - 1).reverse();
+    const PROFIT_RATE = this.calculateProfitRate(lottos.length * 1000, RANKS);
+
+    Console.print('당첨 통계\n---');
+
+    FIXED_LOTTO_RANK.forEach((rank) => {
+      const MATCHED_COUNT = RANKS.filter((lotto) => lotto.rank === rank.rank).length;
+      Console.print(`${rank.message} - ${MATCHED_COUNT}개`);
+    });
+
+    Console.print(`총 수익률은 ${PROFIT_RATE.toFixed(1)}%입니다.`);
   }
 }
 
