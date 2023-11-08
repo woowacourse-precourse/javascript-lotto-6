@@ -19,7 +19,7 @@ class Lotto {
   }
   // test code
   checkRange(numbers) {
-    return numbers.filter(value => 1 > value || value > 45).length;
+    return numbers.filter(value => CONSTANT.NUMBER_MIN_RANGE > value || value > CONSTANT.NUMBER_MAX_RANGE).length;
   }
 
   getNumbersSet(numbers) {
@@ -37,11 +37,11 @@ class Lotto {
   // test code
   getLottoResult(equalNumber, bonusResult) {
     let result = [0, 0, 0, 0, 0];
-    if (equalNumber === 3) result[0] += 1;
-    if (equalNumber === 4) result[1] += 1;
-    if (equalNumber === 5 && !bonusResult) result[2] += 1;
-    if (equalNumber === 5 && bonusResult) result[3] += 1;
-    if (equalNumber === 6) result[4] += 1;
+    if (equalNumber === CONSTANT.MATCH_THREE) result[0] += CONSTANT.ONE;
+    if (equalNumber === CONSTANT.MATCH_FOUR) result[1] += CONSTANT.ONE;
+    if (equalNumber === CONSTANT.MATCH_FIVE && !bonusResult) result[2] += CONSTANT.ONE;
+    if (equalNumber === CONSTANT.MATCH_FIVE && bonusResult) result[3] += CONSTANT.ONE;
+    if (equalNumber === CONSTANT.MATCH_SIX) result[4] += CONSTANT.ONE;
     return result;
   }
   // test code
