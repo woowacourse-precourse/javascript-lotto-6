@@ -28,10 +28,10 @@ class Lotto {
   #validate(numbers) {
     if (numbers.length !== 6)
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    if (numbers.some(num => Number.isNaN(num)))
-      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if (this.hasDuplicates(numbers))
       throw new Error("[ERROR] 서로 다른 숫자를 입력해야 합니다.");
+    if (numbers.some(num => Number.isNaN(num)))
+      throw new Error("[ERROR] 숫자를 입력해야 합니다.");
     if (numbers.some(num => num <= 0 || num >= 46))
       throw new Error("[ERROR] 1부터 45 사이의 숫자를 입력해야 합니다.");
     if (numbers.some(num => num >= 1 && num <= 45 && !Number.isInteger(num)))
