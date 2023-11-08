@@ -1,5 +1,5 @@
 import LottoError from "../../src/Error/LottoError.js";
-import Lotto from "../../src/Models/Lotto.js";
+import Lotto from "../../src/Lotto.js";
 import { LottoSettings } from "../../src/config/gameSetting.js";
 
 const setting = new LottoSettings();
