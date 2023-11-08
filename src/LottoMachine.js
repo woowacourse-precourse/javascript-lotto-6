@@ -1,5 +1,5 @@
  import { Console } from '@woowacourse/mission-utils';
-import { LOTTO_PRIZE, REWARD_INFOS } from './constants';
+import { LOTTO_PRIZE, REWARD_INFOS } from './constants.js';
 
 export default class LottoMachine {
   #lottos;

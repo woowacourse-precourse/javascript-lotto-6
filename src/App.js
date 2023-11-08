@@ -11,7 +11,7 @@ class App {
 
     const lottos = [];
     for (let i = 0; i < lottoAmount; i++) {
-      const lottoNumbers = Random.pickUniqueNumbersInRange(1, 6, 6);
+      const lottoNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
       const newLotto = new Lotto(lottoNumbers);
       newLotto.printNumbers();
       lottos.push(newLotto);
