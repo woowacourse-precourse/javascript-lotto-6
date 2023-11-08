@@ -1,13 +1,14 @@
 import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto';
 import { PRINT_MESSAGE, INPUT_MESSAGE } from './message';
-import Validate from './Validate'
+import Validate from './Validate';
+import { CONSTANT } from './constant';
 
 class App {
   constructor() {
     this.lottoRandomNumber = [];
     this.lottoTicket;
-    this.countNumber = 0;
+    this.countNumber = CONSTANT.ZERO;
     this.validate = new Validate();
   }
 
@@ -16,7 +17,7 @@ class App {
   }
 
   makeRandomNumber() {
-    return Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(CONSTANT.NUMBER_MIN_RANGE, CONSTANT.NUMBER_MAX_RANGE, CONSTANT.NUMBER_MAX_LENGTH);
   }
 
   pushArray(randomNumberArray) { 
@@ -72,7 +73,7 @@ class App {
         let randomNumberArray = this.makeRandomNumber();
         randomNumberArray = this.sortNumber(randomNumberArray);
         this.pushArray(randomNumberArray);
-        this.countNumber += 1;
+        this.countNumber += CONSTANT.ONE;
       }
       this.printLottoArray();
       const userLottoNumber = await Console.readLineAsync(
