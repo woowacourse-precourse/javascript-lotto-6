@@ -1,7 +1,7 @@
 import MatchNumber from '../src/lottogame/MatchNumber.js';
 
 describe('MatchNumber 클래스 테스트', () => {
-  test('당첨 번호와 일치하는 로또 번호를 찾는다', () => {
+  test('당첨 번호와 일치하는 로또 개수를 찾는다.', () => {
     const matchNumber = new MatchNumber([1, 2, 3, 4, 5, 6]);
     const winnings = [2, 4, 6, 8, 10, 12];
     const matchingCount = matchNumber.findMatchingNumbers(winnings);
