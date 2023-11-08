@@ -2,7 +2,9 @@ import { MESSAGE, NUMBER_OPTIONS, PURCHASE_OPTIONS } from './Constants.js';
 
 const Validation = {
   isNumber: (number) => {
-    if (Number.isNaN(number)) {
+    const convertNumber = Number(number);
+
+    if (Number.isNaN(convertNumber)) {
       throw new Error(`${MESSAGE.prefix} ${MESSAGE.invalidType}`);
     }
   },
