@@ -1,4 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { Random } from '@woowacourse/mission-utils';
 import App from '../src/App.js';
 import Lotto from '../src/Lotto.js';
 import {
@@ -8,10 +8,10 @@ import {
 } from '../src/utils/validate.js';
 
 const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  Random.pickUniqueNumbersInRange = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickUniqueNumbersInRange);
+  }, Random.pickUniqueNumbersInRange);
 };
 
 describe('로또 구입 금액 테스트', () => {

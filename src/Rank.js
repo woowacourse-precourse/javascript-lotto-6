@@ -1,4 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
 
 export default class Rank {
   #ranking;
@@ -27,13 +27,13 @@ export default class Rank {
 
   printRank() {
     if (this.ranking !== 2) {
-      MissionUtils.Console.print(
+      Console.print(
         `${this.matchNumbers}개 일치 (${this.winnings.toLocaleString()}원) - ${
           this.count
         }개`
       );
     } else if (this.ranking === 2) {
-      MissionUtils.Console.print(
+      Console.print(
         `${
           this.matchNumbers
         }개 일치, 보너스 볼 일치 (${this.winnings.toLocaleString()}원) - ${

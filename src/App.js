@@ -1,4 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { Console, Random } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
 import Rank from './Rank.js';
 import {
@@ -33,17 +33,15 @@ class App {
         validateAmount(this.amount);
       } catch (error) {
         this.amount = 0;
-        MissionUtils.Console.print(error.message);
+        Console.print(error.message);
       } finally {
-        MissionUtils.Console.print('');
+        Console.print('');
       }
     }
   }
 
   async enterAmount() {
-    this.amount = await MissionUtils.Console.readLineAsync(
-      '구입금액을 입력해 주세요.\n'
-    );
+    this.amount = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
   }
 
   getLottos() {
@@ -55,17 +53,17 @@ class App {
   }
 
   getLottoNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Random.pickUniqueNumbersInRange(1, 45, 6);
   }
 
   printLottos() {
-    MissionUtils.Console.print(`${this.lottosCount}개를 구매했습니다.`);
+    Console.print(`${this.lottosCount}개를 구매했습니다.`);
     let i = 0;
     while (i < this.lottosCount) {
-      MissionUtils.Console.print('[' + this.lottos[i].numbers.join(', ') + ']');
+      Console.print('[' + this.lottos[i].numbers.join(', ') + ']');
       i += 1;
     }
-    MissionUtils.Console.print('');
+    Console.print('');
   }
 
   async getWinningNumbers() {
@@ -75,17 +73,15 @@ class App {
         validateWinningNumbers(this.winningNumbers);
       } catch (error) {
         this.winningNumbers = [];
-        MissionUtils.Console.print(error.message);
+        Console.print(error.message);
       } finally {
-        MissionUtils.Console.print('');
+        Console.print('');
       }
     }
   }
 
   async enterWinningNumbers() {
-    const numbers = await MissionUtils.Console.readLineAsync(
-      '당첨 번호를 입력해 주세요.\n'
-    );
+    const numbers = await Console.readLineAsync('당첨 번호를 입력해 주세요.\n');
     this.winningNumbers = numbers.split(',').map(Number);
   }
 
@@ -96,15 +92,15 @@ class App {
         validateBonusNumber(this.winningNumbers, this.bonusNumber);
       } catch (error) {
         this.bonusNumber = 0;
-        MissionUtils.Console.print(error.message);
+        Console.print(error.message);
       } finally {
-        MissionUtils.Console.print('');
+        Console.print('');
       }
     }
   }
 
   async enterBonusNumber() {
-    this.bonusNumber = +(await MissionUtils.Console.readLineAsync(
+    this.bonusNumber = +(await Console.readLineAsync(
       '보너스 번호를 입력해 주세요.\n'
     ));
   }
@@ -132,12 +128,12 @@ class App {
   }
 
   printLottoRanking() {
-    MissionUtils.Console.print('당첨 통계');
-    MissionUtils.Console.print('---');
+    Console.print('당첨 통계');
+    Console.print('---');
     for (let i = 0; i < this.ranks.length; i += 1) {
       this.ranks[i].printRank();
     }
-    MissionUtils.Console.print(`총 수익률은 ${this.getEarningsRate()}입니다.`);
+    Console.print(`총 수익률은 ${this.getEarningsRate()}입니다.`);
   }
 
   getEarningsRate() {
