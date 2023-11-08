@@ -1,5 +1,11 @@
 # 🎟️ 미션 - 로또
 
+<img width="305" alt="image" src="https://github.com/FastSubTeam/front/assets/83483378/dd0fdbbd-da2b-4e73-b6da-59d359959b20">
+
+## 👀 로또 게임 미리보기
+
+![ezgif com-video-to-gif (35)](https://github.com/FastSubTeam/front/assets/83483378/48bf76dd-90b0-4780-a840-9f361edf584f)
+
 ## 🚀 기능 구현 목록
 
 ### ✅ phase-1 구입금액을 입력 받는다.
