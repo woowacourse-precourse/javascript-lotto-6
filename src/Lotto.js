@@ -7,6 +7,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#validateDuplicate(numbers);
+    this.#validateIsNaN(numbers);
     this.#numbers = numbers;
   }
 
@@ -18,6 +19,14 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
+  }
+
+  #validateIsNaN(numbers) {
+    numbers.forEach((num) => {
+      if (isNaN(num)) {
+        throw new Error("[ERROR] 로또 번호는 숫자만 가능 합니다.");
+      }
+    });
   }
 
   #validateDuplicate(numbers) {
