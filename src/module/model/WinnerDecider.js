@@ -21,7 +21,7 @@ class WinnerDecider {
   #countAllMatchedNumber() {
     let count = 0, bonus = 0;
 
-    for(let i = 0; i < this.#lottoList.length; i += 1) {
+    for (let i = 0; i < this.#lottoList.length; i += 1) {
       count = this.#countMatchedNumber(i);
       bonus = this.#matchBonus(this.#lottoList[i].numbers);
       this.#checkWinner(count, bonus);
@@ -30,9 +30,11 @@ class WinnerDecider {
 
   #countMatchedNumber(i) {
     let count = 0;
+
     this.#lottoList[i].numbers.forEach((e) => {
-      if(this.#winNumber.includes(e)) count += 1;
-    })
+      if (this.#winNumber.includes(e)) count += 1;
+    });
+
     return count;
   }
 
