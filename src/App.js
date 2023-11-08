@@ -158,7 +158,8 @@ class App {
 
   checkWinningResults(winningNumsList, bonus) {
     for (let i = 0; i < this.userRandomList.length; i++) {
-      let winningCount = this.userRandomList[i].filter(it => winningNumsList.includes(Number(it))).length
+      let winningCount = this.userRandomList[i]
+      .filter(it => winningNumsList.includes(Number(it))).length
 
       this.checkIsIncludes(bonus, this.userRandomList[i], true)
       this.calcWinningCount(winningCount);
