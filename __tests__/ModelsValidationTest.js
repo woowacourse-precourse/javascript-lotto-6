@@ -1,6 +1,6 @@
-import BonusNumber from '../../Models/BonusNumber';
-import PurchaseMoney from '../../Models/PurchaseMoney';
-import Lotto from '../../src/Lotto';
+import BonusNumber from '../Models/BonusNumber';
+import PurchaseMoney from '../Models/PurchaseMoney';
+import Lotto from '../src/Lotto';
 
 describe('사용자 입력 유효성 검사', () => {
   const insertedMoneyTestInput = ['1500', '1000k', 'abcd', '', ' '];

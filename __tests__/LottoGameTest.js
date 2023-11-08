@@ -61,8 +61,7 @@ describe('로또 게임 컨트롤러 메소드 테스트.', () => {
     expect(testResult).toEqual(expectedResult);
   });
 
-  test('endGame 메소드 테스트.', async () => {
-    const logSpy = getLogSpy();
+  test('calculateGameResult 메소드 테스트.', async () => {
     const purchasedNumbers = [
       [1, 2, 3, 4, 5, 6],
       [10, 11, 12, 13, 14, 15],
@@ -70,25 +69,19 @@ describe('로또 게임 컨트롤러 메소드 테스트.', () => {
     ];
     const lottoNumber = [1, 2, 3, 10, 11, 12];
     const bonusNumber = 20;
-    const expectedLog = [
-      '3개 일치 (5,000원) - 2개',
-      '4개 일치 (50,000원) - 0개',
-      '5개 일치 (1,500,000원) - 0개',
-      '5개 일치, 보너스 볼 일치 (30,000,000원) - 1개',
-      '6개 일치 (2,000,000,000원) - 0개',
-      '총 수익률은 1000333.3%입니다.',
-    ];
+    const expectedResult = {
+      winResultBoard: { three: 2, four: 0, five: 0, fiveBonus: 1, six: 0 },
+      profitPercent: '1000333.3',
+    };
 
-    lottoGame.endGame(
+    const testResult = lottoGame.calculateGameResult(
       purchasedNumbers,
       lottoNumber,
       bonusNumber,
       purchasedNumbers.length
     );
 
-    expectedLog.forEach((log) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
-    });
+    expect(testResult).toEqual(expectedResult);
   });
 });
 
