@@ -1,4 +1,3 @@
-import { printArray } from "./Print";
 
 class Lotto {
   #numbers;
@@ -13,22 +12,9 @@ class Lotto {
       throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
     }
   }
-  countMatchNumber(numbers) {
-    return (12 - new Set([...targetNumbers, ...numbers]).size)
-  }
-  checkIsBonusCorrect(bonusNumber) {
-    return this.#numbers.includes(bonusNumber) ? true : false
-  }
 
-  checkIsWinLottery(numbers, bonusNumber) {
-    const isBonusCorrect = false;
-    const matchNumber = this.countMatchNumber(numbers) === 5;
-    (matchNumber === 5) && (isBonusCorrect = this.checkIsBonusCorrect(bonusNumber));
-    return [matchNumber, isBonusCorrect]
-  }
-  printOwnNumber() {
-    printArray(this.#numbers)
-    return this
+  getNumber() {
+    return this.#numbers
   }
 }
 
