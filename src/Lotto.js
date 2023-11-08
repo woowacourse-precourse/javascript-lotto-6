@@ -32,13 +32,17 @@ class Lotto {
     const number = correct.length;
     if (number === 6) {
       return PRIZE.six;
-    } else if (number === 5 && this.#numbers.includes(bonus)) {
+    }
+    if (number === 5 && this.#numbers.includes(bonus)) {
       return PRIZE.fivePlus;
-    } else if (number === 5) {
+    }
+    if (number === 5) {
       return PRIZE.five;
-    } else if (number === 4) {
+    }
+    if (number === 4) {
       return PRIZE.four;
-    } else if (number === 3) {
+    }
+    if (number === 3) {
       return PRIZE.three;
     }
     return 0;
