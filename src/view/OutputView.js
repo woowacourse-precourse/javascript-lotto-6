@@ -7,6 +7,14 @@ const OutputView = {
 
     printResult(resultContent) {
         MissionUtils.Console.print(resultContent);
+    },
+
+    printBuyAmount(amount) {
+        MissionUtils.Console.print(amount);
+    },
+
+    printRandomNumbersJoin(numbers) {
+        MissionUtils.Console.print(`[${numbers.join(', ')}]`);
     }
 }
 
