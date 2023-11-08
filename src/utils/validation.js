@@ -16,6 +16,10 @@ export const validateNumber = {
   isIncludesRange(number) {
     return number > RANGE.MIN && number < RANGE.MAX;
   },
+
+  isInArray(number, array) {
+    return array.includes(number);
+  },
 };
 
 export const validateArray = {

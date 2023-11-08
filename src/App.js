@@ -55,7 +55,7 @@ class App {
     try {
       this.bonusNumber = await Input.bonusNumber();
       Output.enter();
-      return new BonusNumber(this.bonusNumber);
+      return new BonusNumber(this.bonusNumber, this.lotto);
     } catch (error) {
       Output.error(error);
       return this.getBonusNumber();
