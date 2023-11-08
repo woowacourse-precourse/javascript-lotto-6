@@ -2,7 +2,7 @@ import { Console, Random } from '@woowacourse/mission-utils';
 import { MESSAGE, LOTTERY, LOTTERY_WINNINGS } from './constants.js';
 import Lotto from './Lotto.js';
 import UserInput from './UserInput.js';
-import { NumberConverter } from '../src/utils/NumberConverter.js';
+import { NumberConverter, ArrayConverter } from './utils/converter.js';
 
 export default class Computer {
   constructor() {
@@ -42,7 +42,9 @@ export default class Computer {
   }
 
   printLotto() {
-    this.lottos.forEach((lotto) => Console.print(lotto.getNumbers()));
+    this.lottos.forEach((lotto) =>
+      Console.print(ArrayConverter.convertArrayToString(lotto.getNumbers())),
+    );
   }
 
   printLottoWinningStatistics() {

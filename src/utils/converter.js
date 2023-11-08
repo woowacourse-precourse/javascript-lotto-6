@@ -9,3 +9,9 @@ export class NumberConverter {
     });
   }
 }
+
+export class ArrayConverter {
+  static convertArrayToString(arr) {
+    return `[${arr.join(', ')}]`;
+  }
+}
