@@ -1,5 +1,6 @@
 import Lotto from "../Lotto.js";
 import { PROFIT_FOR_PRIZE } from "../constants/lottoPrize.js";
+import { typeValidator } from "../utils/validators.js";
 
 class LottoResultCalculator {
   #lottos;
@@ -26,14 +27,18 @@ class LottoResultCalculator {
   }
 
   static #validateLottos(value) {
-    if (!Array.isArray(value)) {
-      throw new Error("[ERROR] 배열 형태의 값이 아닙니다.");
-    }
+    typeValidator.isArray(value);
+    LottoResultCalculator.#validateHasElement(value);
+    LottoResultCalculator.#validateHasOnlyLotto(value);
+  }
 
+  static #validateHasElement(value) {
     if (!value.length) {
       throw new Error("[ERROR] 배열에 요소가 1개 이상 존재하지 않습니다.");
     }
+  }
 
+  static #validateHasOnlyLotto(value) {
     if (!value.every((element) => element instanceof Lotto)) {
       throw new Error("[ERROR] 로또 객체가 아닌 값이 포함되어 있습니다.");
     }
