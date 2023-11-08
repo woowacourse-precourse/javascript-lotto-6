@@ -9,6 +9,17 @@ export const GAME_MESSAGES = {
   MESSSAGE_SUFFIX: "개"
 }
 
+export const ERROR_MESSAGES = {
+  EMPTY_INPUT: '[ERROR] 값이 비어있습니다.',
+  INVALID_NUMBER_FORMAT: "[ERROR] 숫자 형식이 아닙니다.",
+  DUPLICATE_LOTTO_NUMBER: "[ERROR] 로또 번호가 중복되면 안됩니다.",
+  NUMBER_OUT_OF_RANGE: `[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.`,
+  BONUS_NUMBER_OUT_OF_RANGE: `[ERROR] 보너스 로또 번호도 1부터 45 사이의 숫자여야 합니다.`,
+  NUMBER_OUT_OF_RANGE: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
+  LOTTO_NUMBER_OUT_OF_RANGE: "[ERROR] 로또 번호는 6개를 입력해주세요.",
+  INVAID_PURCHASE_AMOUNT: "[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다."
+}
+
 export const RANK_PRIZE = {
   1: '2,000,000,000원',
   2: '30,000,000원',
@@ -19,8 +30,9 @@ export const RANK_PRIZE = {
 
 export const RANK_MESSAGES = {
   1: `6개 일치 (${RANK_PRIZE[1]}) - `,
-  2: `5개 일치 + 보너스볼 (${RANK_PRIZE[2]}) - `,
+  2: `5개 일치, 보너스 볼 일치 (${RANK_PRIZE[2]}) - `,
   3: `5개 일치 (${RANK_PRIZE[3]}) - `,
   4: `4개 일치 (${RANK_PRIZE[4]}) - `,
   5: `3개 일치 (${RANK_PRIZE[5]}) - `,
 }
+
