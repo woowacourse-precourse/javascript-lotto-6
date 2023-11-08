@@ -13,7 +13,7 @@ export default class BonusNumberValidator {
     }
 
     if (winningNumbers.includes(number)) {
-      throw new Error(BONUS_NUMBER_ERROR_MESSAGE.duplicatedNumbers);
+      throw new Error(BONUS_NUMBER_ERROR_MESSAGE.duplicatedNumber);
     }
   }
 }

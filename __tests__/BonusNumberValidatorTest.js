@@ -21,7 +21,7 @@ describe("보너스 번호 유효성 검사 테스트", () => {
     const winningNumbers = [3, 5, 7, 9, 11, 13];
     expect(() => {
       BonusNumberValidator.validateBonusNumber("5", winningNumbers);
-    }).toThrow(BONUS_NUMBER_ERROR_MESSAGE.duplicatedNumbers);
+    }).toThrow(BONUS_NUMBER_ERROR_MESSAGE.duplicatedNumber);
   });
 
   test("올바른 보너스 번호가 입력되면 예외가 발생하지 않는다.", () => {
