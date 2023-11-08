@@ -1,13 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import MESSAGE from "../static/Message.js";
-import STATIC_RESULT from "../static/StaticResult.js";
+import STATISTIC_RESULT from "../static/StatisticResult.js";
 
 const OutputView = {
   printPurchaseAmount(amount) {
     Console.print(`\n${amount}${MESSAGE.purchaseAmount}`);
   },
 
-  // 도메인 생성 후 작업 에정
   printLottos(lottos) {
     for (let i = 0; i < lottos.length; i++) {
       Console.print(`[${lottos[i].join(", ")}]`);
@@ -20,14 +19,13 @@ const OutputView = {
     );
   },
 
-  // 도메인 생성 후 작업 에정
   printResultStatistic(winningStatistic) {
     Console.print(MESSAGE.resultStatic);
-    for (let i = 0; i < winningStatistic.length; i++) {
+    STATISTIC_RESULT.map((result, index) =>
       Console.print(
-        `${STATIC_RESULT[i]}${winningStatistic[4 - i]}${MESSAGE.staticSuffix}`
-      );
-    }
+        `${result}${winningStatistic[4 - index]}${MESSAGE.staticSuffix}`
+      )
+    );
   },
 };
 
