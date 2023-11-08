@@ -45,28 +45,19 @@ class App {
   };
 
   makeRandomNumbers() {
-    this.userRandomList = []; // 배열 초기화
+    this.userRandomList = [];
     const randomCount = (this.userMoney / 1000);
 
     while (this.userRandomList.length < randomCount) {
       let randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-      randomNums.sort((a, b) => a - b); // 오름차순 정렬
+      randomNums.sort((a, b) => a - b);
       
       this.checkDuplicateNums(randomNums);
 
-      let randomNumsString = String(randomNums);
-      let printedString = '';
-
-      for (let i=0; i < randomNumsString.length; i++) {
-        if (randomNumsString[i] !== ',') {
-          printedString = printedString + randomNumsString[i]
-        } else {printedString = printedString + randomNumsString[i] + ' '}
-      }
-
-      printedString = '[' + printedString + ']'
-      this.userRandomList.push(randomNums); // 숫자 배열 저장
+      const printedString = `[${randomNums.join(', ')}]`;
       Console.print(printedString)
-
+      
+      this.userRandomList.push(randomNums);
     }
     return this.userRandomList;
   };
@@ -94,9 +85,10 @@ class App {
 
       winningNumsList = winningNums.split(',').map(Number);
       
-      if (winningNumsList.length !== 6 || winningNumsList.length !== new Set(winningNumsList).size) {
+      if (winningNumsList.length !== 6) {
         throw new Error(ERROR_MESSAGE.INVALID_ERROR)
       }
+      this.checkDuplicateNums(winningNumsList);
 
       for (let i = 0; i < winningNumsList.length; i++) {
         if (!numRangePattern.test(winningNumsList[i])) {
