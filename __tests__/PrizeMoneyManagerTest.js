@@ -7,7 +7,7 @@ describe("상금매니저 테스트", () => {
     const ranks = [[1, 3, 0, 0, 0], [0, 0, 0, 0, 1], [0, 0, 1, 1, 0]];
     const result = [155000, 2000000000, 31500000];
 
-    ranks.map((rank, index) => {
+    ranks.forEach((rank, index) => {
       expect(manager.calculateTotalPrizeMoney(rank)).toEqual(result[index]);
     });
   });
@@ -17,8 +17,8 @@ describe("상금매니저 테스트", () => {
     const amount = 8000;
     const result = ['62.5', '125.0', '1937.5'];
 
-    moneys.map((money, index) => {
+    moneys.forEach((money, index) => {
       expect(manager.calculateEarningsPercent(money, amount)).toBe(result[index]);
-    })
-  })
+    });
+  });
 });

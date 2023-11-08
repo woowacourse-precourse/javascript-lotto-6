@@ -1,7 +1,7 @@
 import { NUMBER, PRIZEMONEY_NUMBER } from './Constants/LottoGame.js';
 
 class PrizeMoneyManager {
-  #prizeMoneys
+  #prizeMoneys;
   
   constructor() {
     this.#prizeMoneys = PRIZEMONEY_NUMBER.prizeMoneys;

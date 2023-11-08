@@ -12,10 +12,10 @@ const LottoTypeConversion = {
   Numbers(numbers) {
     return numbers.map((number) => Number(number));
   },
-  
+
   NumberCommas(str) {
     return Number(str).toLocaleString();
-  }
-}
+  },
+};
 
 export default LottoTypeConversion;

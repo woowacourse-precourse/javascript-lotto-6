@@ -1,11 +1,10 @@
 import LottoTypeConversion from './LottoTypeConversion.js';
 import ERROR from '../Constants/Error.js';
-import { NUMBER, DELIMITER, REGEXP } from '../Constants/LottoGame.js'
+import { NUMBER, DELIMITER, REGEXP } from '../Constants/LottoGame.js';
 
 const Validator = {
   numberType(input) {
-    const isNotNumber = REGEXP.isNotNumber;
-    if (isNotNumber.test(input)) throw (ERROR.notNumber)
+    if (REGEXP.isNotNumber.test(input)) throw (ERROR.notNumber);
   },
 
   buyLottoMinimumOrder(amount) {
@@ -21,10 +20,11 @@ const Validator = {
   },
 
   commaSeparatedWinningNumbers(numbers) {
-    if (numbers.indexOf(DELIMITER.winningNumbers) === - 1 || numbers.indexOf(DELIMITER.winningNumbers) === numbers.length - 1) {
+    if (numbers.indexOf(DELIMITER.winningNumbers) === -1
+    || numbers.indexOf(DELIMITER.winningNumbers) === numbers.length - 1) {
       throw (ERROR.commaWinningNumbers);
     }
-  }
-}
+  },
+};
 
 export default Validator;

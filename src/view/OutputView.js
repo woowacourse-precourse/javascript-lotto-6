@@ -1,5 +1,5 @@
-import MESSAGES from '../Constants/Messages.js';
 import { Console } from '@woowacourse/mission-utils';
+import MESSAGES from '../Constants/Messages.js';
 
 const OutputView = {
   error(error) {
@@ -19,7 +19,7 @@ const OutputView = {
     Console.print(MESSAGES.resultBarLine);
     Console.print(MESSAGES.winningResult(rankMap));
     Console.print(MESSAGES.earningsPercent(earningsPercent));
-  }
-}
+  },
+};
 
 export default OutputView;

@@ -9,6 +9,6 @@ const ERROR = {
   lottoDuplicate: errorMessages('로또 번호는 중복되지 않아야 합니다.'),
   lottoNumberRange: errorMessages('로또 번호는 1 ~ 45의 숫자여야합니다.'),
   bonusNumberInWinningNumber: errorMessages('당첨번호와 보너스 번호는 중복되지 않아야 합니다.'),
-}
+};
 
 export default ERROR;

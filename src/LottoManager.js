@@ -1,9 +1,9 @@
 import { NUMBER, RANK_RULL_NUMBER, RANK_NUMBER, RANK_WINNING_NUMBER } from './Constants/LottoGame.js';
 
 class LottoManager {
-  #lottoPrice
-  #lottos
-  #ranks
+  #lottoPrice;
+  #lottos;
+  #ranks;
 
   constructor() {
     this.#lottoPrice = NUMBER.price;

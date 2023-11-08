@@ -1,5 +1,5 @@
-import MESSAGES from '../Constants/Messages.js';
 import { Console } from '@woowacourse/mission-utils';
+import MESSAGES from '../Constants/Messages.js';
 
 const InputView = {
   async buyLotto() {
@@ -15,7 +15,7 @@ const InputView = {
   async bonusNumber() {
     const bonusNumber = await Console.readLineAsync(MESSAGES.bonusNumber);
     return bonusNumber;
-  }
-}
+  },
+};
 
 export default InputView;

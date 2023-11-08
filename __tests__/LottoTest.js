@@ -18,7 +18,7 @@ describe("로또 클래스 테스트", () => {
 
     numbers.map((number) => expect(() => {
       Lotto.validateLottoNumber(number);
-    }).toThrow("[ERROR]"));
+    }).toThrow('[ERROR]'));
   });
 
   test('보너스 번호가 당첨번호와 중복된다면 예외가 발생한다.', () => {
@@ -27,5 +27,5 @@ describe("로또 클래스 테스트", () => {
     expect(() => {
       Lotto.validateBonusNumberInWinningNumber(lotto, 1);
     }).toThrow('[ERROR]');
-  })
+  });
 });

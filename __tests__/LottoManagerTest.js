@@ -1,7 +1,7 @@
 import LottoManager from '../src/LottoManager.js';
 
-describe("로또매니저 클래스 테스트", () => {
-  const manager = new LottoManager()
+describe('로또매니저 클래스 테스트', () => {
+  const manager = new LottoManager();
 
   test('1000원 단위로 계산하여 로또 티켓을 발행해주는가', () => {
     const prices = [1000, 30000, 50000];
@@ -30,5 +30,5 @@ describe("로또매니저 클래스 테스트", () => {
 
       expect(manager.getRanks()).toEqual(result[index]);
     });
-  })
+  });
 });

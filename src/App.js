@@ -1,4 +1,4 @@
-import InputView from './view/InputView.js'
+import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 
 import Lotto from './Lotto.js';
@@ -21,7 +21,7 @@ class App {
       Validator.buyLottoUnit(buyLotto);
 
       return this.issueLotto(buyLotto);
-    } catch(error) {
+    } catch (error) {
       OutputView.error(error);
 
       return this.play();
@@ -33,8 +33,10 @@ class App {
     OutputView.buyLotto(lottoTicket);
 
     this.LottoManager.issueLotto(Lotto.generateLottos(lottoTicket));
-    this.LottoManager.getLottos().map((lotto) => OutputView.issuedLotto(LottoTypeConversion.issuedLotto(lotto)));
-    
+    this.LottoManager.getLottos().map((lotto) => {
+      OutputView.issuedLotto(LottoTypeConversion.issuedLotto(lotto));
+    });
+
     return this.getWinningNumbers(buyLotto);
   }
 
@@ -44,10 +46,12 @@ class App {
       Validator.winningNumbersType(userWinningNumbers);
       Validator.commaSeparatedWinningNumbers(userWinningNumbers);
 
-      const winningNumbers = new Lotto(LottoTypeConversion.winningNumbers(userWinningNumbers)).getNumbers();
+      const winningNumbers = new Lotto(
+        LottoTypeConversion.winningNumbers(userWinningNumbers),
+      ).getNumbers();
 
       return this.getBounsNumber(buyLotto, winningNumbers);
-    } catch(error) {
+    } catch (error) {
       OutputView.error(error);
 
       return this.getWinningNumbers(buyLotto);
@@ -62,7 +66,7 @@ class App {
       Lotto.validateBonusNumberInWinningNumber(winningNumbers, bonusNumber);
 
       return this.drawLotto(buyLotto, winningNumbers, bonusNumber);
-    } catch(error) {
+    } catch (error) {
       OutputView.error(error);
 
       return this.getBounsNumber(buyLotto, winningNumbers);
@@ -81,7 +85,10 @@ class App {
   }
 
   result(earningsPercen) {
-    OutputView.result(this.LottoManager.getRanks(), LottoTypeConversion.NumberCommas(earningsPercen));
+    OutputView.result(
+      this.LottoManager.getRanks(),
+      LottoTypeConversion.NumberCommas(earningsPercen),
+    );
   }
 }
 
