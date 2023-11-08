@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { LOTTO_PRICE } from './utils';
+import { LOTTO_PRICE, LOTTO_NUMBER_AMOUNT } from './utils';
+import UniqueRandomNumbers from './UniqueRandomNumbers';
 import Lotto from './Lotto';
 
 class LottoPurchase {
@@ -36,6 +37,26 @@ class LottoPurchase {
         `[ERROR] Invalid purchase amount. 로또 금액인 1000으로 나누어 떨어지는 수를 입력하세요.`
       );
     }
+  }
+
+  static purchaseLottos(number) {
+    const lottos = [];
+
+    LottoPurchase.#printMessage(number);
+
+    while (lottos.length < number) {
+      const uniqueRandomNumbers = new UniqueRandomNumbers(
+        LOTTO_NUMBER_AMOUNT
+      ).get();
+      const lotto = new Lotto(uniqueRandomNumbers).getNumbers();
+      lottos.push(lotto);
+    }
+
+    return lottos;
+  }
+
+  static #printMessage(number) {
+    MissionUtils.Console.print(`${number}개를 구입했습니다.`);
   }
 }
 
