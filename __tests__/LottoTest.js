@@ -1,5 +1,5 @@
 import Lotto from '../src/Lotto.js';
-import Game, { RANK } from '../src/Game.js';
+import Game, { RANK, REWARD } from '../src/Game.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
@@ -61,11 +61,11 @@ describe('로또 클래스 테스트', () => {
     const game = new Game(amount);
 
     game.drawInfo = {
-      [RANK._5th]: { count: 1, reward: 5000 },
-      [RANK._4th]: { count: 1, reward: 50000 },
-      [RANK._3rd]: { count: 0, reward: 1500000 },
-      [RANK._2nd]: { count: 0, reward: 30000000 },
-      [RANK._1st]: { count: 0, reward: 2000000000 },
+      [RANK[5]]: { count: 1, reward: REWARD[5] },
+      [RANK[4]]: { count: 1, reward: REWARD[4] },
+      [RANK[3]]: { count: 0, reward: REWARD[3] },
+      [RANK[2]]: { count: 0, reward: REWARD[2] },
+      [RANK[1]]: { count: 0, reward: REWARD[1] },
     };
 
     const output = 55000;
