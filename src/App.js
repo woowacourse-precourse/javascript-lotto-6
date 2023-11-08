@@ -94,6 +94,18 @@ class App {
 5개 일치, 보너스 볼 일치 (30,000,000원) - ${result["2등"]}개
 6개 일치 (2,000,000,000원) - ${result["1등"]}개`);
   }
+
+  // 수익률 계산
+  
+  computeProfit(result,money){
+    const totalPrize = result["5등"]*5000 + result["4등"]*50000 + result["3등"]*1500000 + result["2등"]*30000000 + result["1등"]*2000000000;
+    const profit = (totalPrize/money*100).toFixed(1);
+    return profit;  
+  }
+  
+  printProfit(profit){
+    MissionUtils.Console.print(`총 수익률은 ${profit}%입니다.`);
+  }
   }
 }
 
