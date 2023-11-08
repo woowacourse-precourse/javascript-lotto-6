@@ -11,6 +11,29 @@ class LottoController {
 
   #view = new LottoView();
 
+  async play() {
+    try {
+      const price = await this.#getValidPrice();
+      this.#view.displayLottoCount(price / 1000);
+
+      const lottoContainer = LottoMachine.draw(price / 1000);
+      this.#view.displayLottos(lottoContainer);
+
+      const winningNums = (await this.#readWinningNumbers()).getNumbers();
+      const bonusNum = Number(await this.#view.readBonusNumber());
+
+      this.#lottoOutcome.calculateOutcome(
+        lottoContainer,
+        winningNums,
+        bonusNum,
+        price,
+        this.#view,
+      );
+    } catch (error) {
+      this.#view.displayError(error.message);
+    }
+  }
+
   async #getValidPrice() {
     while (true) {
       const price = await this.#view.readPrice();
