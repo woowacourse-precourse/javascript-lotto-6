@@ -21,13 +21,18 @@ class App {
     Console.readLine(MESSAGE.INPUT_MONEY, this.gameStart.bind(this));
   }
 
-  gameStart(inputMoney) {
-    this.validator.validateInputMoney(inputMoney);
-    this.inputMoney = Number(inputMoney);
-    this.issueLotto();
-    this.changePrintFormat();
-    this.printLottoNum();
-    this.getUserNumber();
+  async gameStart(inputMoney) {
+    try {
+      this.validator.validateInputMoney(inputMoney);
+      this.inputMoney = Number(inputMoney);
+      this.issueLotto();
+      this.changePrintFormat();
+      this.printLottoNum();
+      this.getUserNumber();
+    } catch (error) {
+      Console.print(error.message);
+      return await this.play();
+    }
   }
 
   issueLotto() {
@@ -42,19 +47,29 @@ class App {
     this.lottos.forEach(lotto => lotto.print());
   }
 
-  getUserNumber() {
-    Console.readLine(MESSAGE.INPUT_USER_NUMBER, (userNumber) => {
-      this.validator.checkUserNum(userNumber);
-      this.userLotto = new Lotto(userNumber.split(',').map(num => Number(num)));
-      this.getUserBonusNumber();
+  async getUserNumber() {
+    Console.readLine(MESSAGE.INPUT_USER_NUMBER, async (userNumber) => {
+      try {
+        this.validator.checkUserNum(userNumber);
+        this.userLotto = new Lotto(userNumber.split(',').map(num => Number(num)));
+        this.getUserBonusNumber();
+      } catch (error) {
+        Console.print(error.message);
+        return await this.getUserNumber();
+      }
     });
   }
 
-  getUserBonusNumber() {
-    Console.readLine(MESSAGE.INPUT_USER_BONUS_NUMBER, (bonusNumber) => {
-      this.validator.checkUserBonusNum(this.userLotto.getNumbers(), bonusNumber);
-      this.bonusNumber = Number(bonusNumber);
-      this.gameEnd();
+  async getUserBonusNumber() {
+    Console.readLine(MESSAGE.INPUT_USER_BONUS_NUMBER, async (bonusNumber) => {
+      try {
+        this.validator.checkUserBonusNum(this.userLotto.getNumbers(), bonusNumber);
+        this.bonusNumber = Number(bonusNumber);
+        this.gameEnd();
+      } catch (error) {
+        Console.print(error.message);
+        return await this.getUserBonusNumber();
+      }
     });
   }
 
@@ -84,11 +99,11 @@ class App {
 
   // 출력 형식
   changePrintFormat() {
-    String.prototype.format = function() {
-      return [...arguments].reduce((pattern,value) => pattern.replace(/%s/,value), this);
+    String.prototype.format = function () {
+      return [...arguments].reduce((pattern, value) => pattern.replace(/%s/, value), this);
     };
   }
-  
+
   addCommasToNumber(money) {
     return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
