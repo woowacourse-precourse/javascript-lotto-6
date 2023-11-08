@@ -2,7 +2,7 @@ import Lotto from "./Lotto.js";
 import LottoBonusValidator from "../validator/lotto-bonus-validator.js";
 
 class WinningLotto extends Lotto {
-    #bonusNumber
+    #bonusNumber;
 
     constructor(winningNumbers, bonusNumber) {
         super(winningNumbers);

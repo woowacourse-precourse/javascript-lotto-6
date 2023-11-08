@@ -3,8 +3,8 @@ import InputView from "../view/input-view.js";
 import OutputView from "../view/output-view.js";
 
 class LottoController {
-    #inputView
-    #outputView
+    #inputView;
+    #outputView;
 
     constructor() {
         this.#inputView = new InputView();
