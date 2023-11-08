@@ -21,7 +21,8 @@ class Lotto {
     for (let i = 0; i < amount; i++) {
       lottoNumbers.push(this.getRandomNumbers());
     }
-    return lottoNumbers;
+    const sortedLottoNumbers = lottoNumbers.map((lottoNumber) => lottoNumber.sort((a, b) => a - b));
+    return sortedLottoNumbers;
   }
 
   printLottoNumbers(lottoNumbers) {
@@ -31,7 +32,7 @@ class Lotto {
     }
   }
 
-  async enterDrawNumbers(num) {
+  async enterDrawNumbers() {
     try {
       const input = await Console.readLineAsync(INPUT.DRAW);
       const number = input.split(",");
@@ -42,7 +43,7 @@ class Lotto {
     }
   }
 
-  async enterBonusNumber(num) {
+  async enterBonusNumber() {
     try {
       const input = await Console.readLineAsync(INPUT.BONUS);
       const number = input.split(",");
