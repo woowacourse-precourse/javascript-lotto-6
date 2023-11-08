@@ -10,6 +10,7 @@ class LottoNumbersValidator {
     this.validateNumbers(lottoNumbers);
     this.validateLottoNumbersLength(lottoNumbers);
     this.validateLottoNumbersInRange(lottoNumbers);
+    this.validateNumbersDuplicated(lottoNumbers);
     return true;
   }
 
@@ -36,6 +37,13 @@ class LottoNumbersValidator {
   validateLottoNumbersInRange(lottoNumbers) {
     if (lottoNumbers.some((number) => isOutOfRange(number))) {
       throw new Error(LOTTO_NUMBERS_ERROR_MESSAGES.OUT_OF_RANGE);
+    }
+  }
+
+  validateNumbersDuplicated(lottoNumbers) {
+    const lottoNumbersNotDuplicated = new Set(lottoNumbers);
+    if (lottoNumbersNotDuplicated.size !== LOTTO_NUMBERS_LENGTH) {
+      throw new Error(LOTTO_NUMBERS_ERROR_MESSAGES.DUPLICATED);
     }
   }
 }
