@@ -13,7 +13,7 @@ export const RANK = Object.freeze({
 
 export const TICKET_PRICE = 1000;
 
-const REWARD = Object.freeze({
+export const REWARD = Object.freeze({
   5: 5000,
   4: 50000,
   3: 1500000,
