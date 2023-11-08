@@ -12,11 +12,11 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error(ERROR_MESSAGE.WINNING_NUM_COUNT);
+      throw (ERROR_MESSAGE.WINNING_NUM_COUNT);
     }
     numbers.forEach((number) => {
       if (number < 1 || number > 45) {
-        throw new Error(ERROR_MESSAGE.NUM_RANGE);
+        throw (ERROR_MESSAGE.NUM_RANGE);
       }
     })
   }

@@ -4,13 +4,13 @@ import { validAmountCheck, validBonusNumberCheck } from "../validator.js"
 import { print, changeArrayStringIntoNumber } from "../utils.js"
 
 export const getUserAmount = async () => {
-  try {
-    const input = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.AMOUNT);
-    await validAmountCheck(input);
-    return input;
-  } catch (error) {
-    print(ERROR_MESSAGE.AMOUNT);
+
+  const input = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.AMOUNT);
+  const validator_result = await validAmountCheck(input);
+  if (validator_result !== input) {
+    throw validator_result;
   }
+  return input;
 }
 
 export const getWinningNumber = async () => {
@@ -24,11 +24,12 @@ export const getWinningNumber = async () => {
 }
 
 export const getBonusNumber = async () => {
-  try {
-    const input = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUM);
-    await validBonusNumberCheck(input);
-    return input;
-  } catch (error) {
-    print(error);
+
+  const input = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE.BONUS_NUM);
+  const validator_result = await validBonusNumberCheck(input);
+  if (validator_result !== input) {
+    throw validator_result;
   }
+  return input;
+
 }
