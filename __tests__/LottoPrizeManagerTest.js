@@ -1,8 +1,5 @@
 import LottoPrizeManager from "../src/LottoPrizeManager.js";
 
-const correctWinningNumber = "1,2,3,4,5,6";
-const correctBonusNumber = "7";
-
 describe("LottoPrizeManager 클래스 테스트", () => {
   test.each([
     ["FIRST", [1, 2, 3, 4, 5, 6]],
@@ -21,12 +18,14 @@ describe("LottoPrizeManager 클래스 테스트", () => {
         FIFTH: 0,
       };
 
-      const prizeManager = new LottoPrizeManager(
-        correctWinningNumber,
-        correctBonusNumber
-      );
+      const prizeManager = new LottoPrizeManager();
 
-      const result = prizeManager.calculateAllLottoRank([numberArray]);
+      const result = prizeManager.calculateAllLottoRank({
+        winningNumbers: [1, 2, 3, 4, 5, 6],
+        bonusNumber: 7,
+        lottoArray: [numberArray],
+      });
+
       defaultResult[expectedRank]++;
       expect(result).toEqual(defaultResult);
     }
