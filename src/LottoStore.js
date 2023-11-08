@@ -16,6 +16,12 @@ class LottoStore {
 
     return lottos;
   }
+
+  makeRandomNumbers() {
+    const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+
+    return numbers;
+  }
 }
 
 export default LottoStore;
