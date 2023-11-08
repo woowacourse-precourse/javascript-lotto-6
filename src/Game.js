@@ -44,7 +44,8 @@ class Game {
   }
 
   #printMyLotto() {
-    User.printMessage(MESSAGE.purchasedLotto(this.#lottoAmount, this.#myLotto));
+    User.printMessage(MESSAGE.purchasedLotto(this.#lottoAmount));
+    this.#myLotto.forEach((lotto) => Console.print(lotto.getNumbers()));
   }
 
   static async #enterWinNumbers() {
