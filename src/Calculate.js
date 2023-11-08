@@ -58,7 +58,7 @@ class Calculate {
 
   calStatistics(usrlotto) {
     let totalNum = [...usrlotto, ...this.winningnumber];
-    let uniqueNum = [...new Set(temp)];
+    let uniqueNum = [...new Set(totalNum)];
     // uniqueNum.length = 6 1등
     // uniqueNum.length = 7 + 보너스 2등
     // uniqueNum.length = 7 3등
