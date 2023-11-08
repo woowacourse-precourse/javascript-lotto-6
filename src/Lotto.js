@@ -28,27 +28,31 @@ class Lotto {
     });
   }
 
-  getWinNumberCount(lottos, bonusNumber) {
-    let resultCount = [];
+  calculateResultCount(lottoNums, bonusNum) {
+    let count = 0;
+    let bonusCount = 0;
 
-    lottos.forEach((lottoNums) => {
-      let count = 0;
-      let bonusCount = 0;
-
-      lottoNums.forEach((el) => {
-        this.#numbers.forEach((winNum) => {
-          if (winNum === el) {
-            count += 1;
-          }
-        });
-
-        if (el === bonusNumber) {
+    lottoNums.forEach((el) => {
+      this.#numbers.forEach((winNum) => {
+        if (winNum === el) {
           count += 1;
-          bonusCount += 1;
         }
       });
 
-      resultCount.push({ count: count, bonusCount: bonusCount });
+      if (el === bonusNum) {
+        count += 1;
+        bonusCount += 1;
+      }
+    });
+
+    return { count: count, bonusCount: bonusCount };
+  }
+
+  getWinNumberCount(lottos, bonusNumber) {
+    const resultCount = lottos.map((lottoNums) => {
+      const countResult = this.calculateResultCount(lottoNums, bonusNumber);
+
+      return countResult;
     });
 
     return resultCount;
