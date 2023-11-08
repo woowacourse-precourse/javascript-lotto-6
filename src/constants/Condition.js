@@ -9,43 +9,43 @@ export const LOTTO_NUMBER = {
   seperator: ',',
 };
 
-const FIRST_PRIZE = {
+const first_prize = {
   rank: '1',
   match: '6',
   reward: 2000000000,
 };
 
-const SECOND_PRIZE = {
+const second_prize = {
   rank: '2',
   match: '5',
   reward: 30000000,
 };
 
-const THIRD_PRIZE = {
+const third_prize = {
   rank: '3',
   match: '5',
   reward: 1500000,
 };
 
-const FOURTH_PRIZE = {
+const fourth_prize = {
   rank: '4',
   match: '4',
   reward: 50000,
 };
 
-const FIFTH_PRIZE = {
+const fifth_prize = {
   rank: '5',
   match: '3',
   reward: 5000,
 };
 
-const NO_PRIZE = {
+const no_prize = {
   rank: '0',
   match: '0',
   reward: 0,
 };
 
-export const PRIZE = [NO_PRIZE, FIRST_PRIZE, SECOND_PRIZE, THIRD_PRIZE, FOURTH_PRIZE, FIFTH_PRIZE];
+export const PRIZE = [no_prize, first_prize, second_prize, third_prize, fourth_prize, fifth_prize];
 
 export const TOTAL_RETURN = {
   multiplier: 1000,

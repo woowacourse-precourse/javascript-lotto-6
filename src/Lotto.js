@@ -5,11 +5,11 @@ class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
+    this.#validateNumbers(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
+  #validateNumbers(numbers) {
     Validation.validateInputDuplicate(numbers);
     Validation.validateInputLength(numbers, LOTTO_NUMBER.length);
   }
@@ -35,8 +35,8 @@ class Lotto {
 
   calculateLottoResult(winningNumbers, bonusNumber) {
     const matchNumberCount = this.calculateMatchNumber(winningNumbers);
-    const result = this.compareMatchNumberWithPrize(matchNumberCount, bonusNumber);
-    return result;
+    const lottoResult = this.compareMatchNumberWithPrize(matchNumberCount, bonusNumber);
+    return lottoResult;
   }
 }
 

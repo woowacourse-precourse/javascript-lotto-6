@@ -17,11 +17,6 @@ class Output {
     );
   }
 
-  lottoTickets(tickets) {
-    this.lottoTicketsCount(tickets);
-    this.lottoTicketsNumbers(tickets);
-  }
-
   singleWinningResult(prize, results) {
     if (prize === PRIZE[2]) {
       Console.print(OUTPUT.second_prize(prize.match, prize.reward, results[prize.rank]));
@@ -39,11 +34,6 @@ class Output {
 
   totalReturnResult(totalReturn) {
     Console.print(OUTPUT.total_return(totalReturn));
-  }
-
-  gameResult({ results, totalReturn }) {
-    this.totalWinningResult(results);
-    this.totalReturnResult(totalReturn);
   }
 }
 

@@ -26,11 +26,6 @@ class App {
     }
   }
 
-  setLottoTickets(user) {
-    const tickets = this.#game.purchaseLottoTickets(user.getMoney());
-    user.setTickets(tickets);
-  }
-
   async setWinningNumbers() {
     while (true) {
       try {
@@ -55,11 +50,17 @@ class App {
     }
   }
 
+  setLottoTickets(user) {
+    const tickets = this.#game.purchaseLottoTickets(user.getMoney());
+    user.setTickets(tickets);
+  }
+
   async setGameConditions(user) {
     await this.setUserMoney(user);
     this.setLottoTickets(user);
 
-    this.#output.lottoTickets(user.getTickets());
+    this.#output.lottoTicketsCount(user.getTickets());
+    this.#output.lottoTicketsNumbers(user.getTickets());
 
     await this.setWinningNumbers();
     await this.setBonusNumber();
@@ -67,10 +68,16 @@ class App {
 
   async play() {
     const user = new User();
+
     await this.setGameConditions(user);
 
-    const result = this.#game.calculateGameResults(user.getTickets(), user.getMoney());
-    this.#output.gameResult(result);
+    const { winningResults, totalReturn } = this.#game.calculateGameResult(
+      user.getTickets(),
+      user.getMoney()
+    );
+
+    this.#output.totalWinningResult(winningResults);
+    this.#output.totalReturnResult(totalReturn);
   }
 }
 

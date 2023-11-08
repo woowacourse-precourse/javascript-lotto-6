@@ -58,16 +58,14 @@ class Game {
   }
 
   purchaseLottoTickets(money) {
-    const ticketCount = money / LOTTO_PURCHASE_UNIT;
-
-    const tickets = Array.from({ length: ticketCount }).map(() => {
+    const tickets = Array.from({ length: money / LOTTO_PURCHASE_UNIT }).map(() => {
       return this.createSingleLottoTicket();
     });
 
     return tickets;
   }
 
-  calculateTotalWinningResults(tickets) {
+  calculateWinningResults(tickets) {
     const results = PRIZE.reduce((obj, prize) => {
       obj[prize.rank] = 0;
       return obj;
@@ -89,11 +87,11 @@ class Game {
     return Math.round((total / money) * TOTAL_RETURN.multiplier) / TOTAL_RETURN.divider;
   }
 
-  calculateGameResults(tickets, money) {
-    const results = this.calculateTotalWinningResults(tickets);
-    const totalReturn = this.calculateTotalReturn(money, results);
+  calculateGameResult(tickets, money) {
+    const winningResults = this.calculateWinningResults(tickets);
+    const totalReturn = this.calculateTotalReturn(money, winningResults);
 
-    return { results: results, totalReturn, totalReturn };
+    return { winningResults, totalReturn };
   }
 }
 

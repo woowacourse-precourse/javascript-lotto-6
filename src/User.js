@@ -9,14 +9,14 @@ class User {
     this.#tickets = [];
   }
 
-  #validateUserMoney(money) {
+  #validateMoney(money) {
     Validation.validateInputNumber(money);
     Validation.validateInputZeroOrLess(money);
     Validation.validateInputThousands(money);
   }
 
   setMoney(money) {
-    this.#validateUserMoney(money);
+    this.#validateMoney(money);
     this.#money = money;
   }
 
