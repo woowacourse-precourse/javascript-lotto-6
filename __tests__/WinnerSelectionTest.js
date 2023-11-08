@@ -43,4 +43,10 @@ describe('Matching Test', () => {
   test('로또 개수 비교 테스트', () => {
     expect(mockWinnerSelector.getLottoCount([1, 2, 3, 4, 5, 6])).toEqual(6);
   });
+
+  test('보너스 확인 테스트', () => {
+    expect(mockWinnerSelector.isBonusMatched([1, 2, 3, 4, 5, 30])).toEqual(
+      true,
+    );
+  });
 });
