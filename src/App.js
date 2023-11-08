@@ -7,18 +7,19 @@ import isValidCost from './modules/isValidCost.js';
 import isValidWinnerNumber from './modules/isValidWinnerNumber.js';
 import isValidBonusNumber from './modules/isValidBonusNumber.js';
 import { prize, rank } from './datas/prize.js';
+import { NUMBER, PROMPT } from './datas/constants.js';
 
 const inputStep = {
   cost: {
-    prompt: '구입금액을 입력해 주세요.\n',
+    prompt: PROMPT.costInput,
     validate: isValidCost,
   },
   winnerNumbers: {
-    prompt: '당첨 번호를 입력해 주세요\n',
+    prompt: PROMPT.prizeNumberInput,
     validate: isValidWinnerNumber,
   },
   bonusNumber: {
-    prompt: '보너스번호를 입력해 주세요\n',
+    prompt: PROMPT.bonusNumberInput,
     validate: isValidBonusNumber,
   },
 };
@@ -40,7 +41,7 @@ class App {
   }
 
   createLotto(cost) {
-    const lottoNumber = Array.from({ length: cost / 1000 }, (_, i) => i);
+    const lottoNumber = Array.from({ length: cost / NUMBER.divisor }, (_, i) => i);
     this.#lottos = lottoNumber.map((elem) => {
       const randomNumbers = getRandomUniqueNumbers();
       return new Lotto(randomNumbers);
@@ -67,8 +68,8 @@ class App {
     });
     bonusNumber = Number(bonusNumber);
 
-    print('당첨 통계');
-    print('---');
+    print(PROMPT.prize);
+    print(PROMPT.dividingLine);
 
     const computer = new Computer(winnerNumbers, bonusNumber, cost);
     computer.setPrizeResult(this.#lottos);
