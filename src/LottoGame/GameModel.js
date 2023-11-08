@@ -1,7 +1,7 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-import Lotto from '../Lotto';
-import { ErrorMessage } from '../Message';
-import GameUtil from './GameUtil';
+import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "../Lotto";
+import { ErrorMessage } from "../Message";
+import GameUtil from "./GameUtil";
 
 export default class GameModel {
   constructor() {
@@ -48,14 +48,11 @@ export default class GameModel {
 
   calculateResult() {
     for (const lotto of this.LOTTOS) {
-      const matchingNumbers = this.util.countMatchingNumbers(
-        lotto.getLottoNumber(),
-        this.WINNING_NUMBER,
-      );
+      const matchingNumbers = this.util.countMatchingNumbers(lotto.getLottoNumber(), this.WINNING_NUMBER);
       const isBonusNumberMatched = this.util.isBonusNumberMatched(
         lotto.getLottoNumber(),
         this.BONUS_NUMBER,
-        matchingNumbers,
+        matchingNumbers
       );
       this.updateResult(matchingNumbers, isBonusNumberMatched);
     }
@@ -63,42 +60,39 @@ export default class GameModel {
 
   updateResult(matchingNumbers, isBonusNumberMatched) {
     if (matchingNumbers === 6) {
-      this.RESULT['SIX_MATCH'] += 1;
+      this.RESULT["SIX_MATCH"] += 1;
     }
     if (matchingNumbers === 5 && isBonusNumberMatched) {
-      this.RESULT['FIVE_BONUS_MATCH'] += 1;
+      this.RESULT["FIVE_BONUS_MATCH"] += 1;
     }
     if (matchingNumbers === 5) {
-      this.RESULT['FIVE_MATCH'] += 1;
+      this.RESULT["FIVE_MATCH"] += 1;
     }
     if (matchingNumbers === 4) {
-      this.RESULT['FOUR_MATCH'] += 1;
+      this.RESULT["FOUR_MATCH"] += 1;
     }
     if (matchingNumbers === 3) {
-      this.RESULT['THREE_MATCH'] += 1;
+      this.RESULT["THREE_MATCH"] += 1;
     }
   }
 
   calculateProfitRate() {
     let totalProfit = 0;
-    if (this.RESULT['SIX_MATCH'] !== 0) {
-      totalProfit += 2000000000 * Number(this.RESULT['SIX_MATCH']);
+    if (this.RESULT["SIX_MATCH"] !== 0) {
+      totalProfit += 2000000000 * Number(this.RESULT["SIX_MATCH"]);
     }
-    if (this.RESULT['FIVE_BONUS_MATCH'] !== 0) {
-      totalProfit += 30000000 * Number(this.RESULT['FIVE_BONUS_MATCH']);
+    if (this.RESULT["FIVE_BONUS_MATCH"] !== 0) {
+      totalProfit += 30000000 * Number(this.RESULT["FIVE_BONUS_MATCH"]);
     }
-    if (this.RESULT['FIVE_MATCH'] !== 0) {
-      totalProfit += 1500000 * Number(this.RESULT['FIVE_MATCH']);
+    if (this.RESULT["FIVE_MATCH"] !== 0) {
+      totalProfit += 1500000 * Number(this.RESULT["FIVE_MATCH"]);
     }
-    if (this.RESULT['FOUR_MATCH'] !== 0) {
-      totalProfit += 50000 * Number(this.RESULT['FOUR_MATCH']);
+    if (this.RESULT["FOUR_MATCH"] !== 0) {
+      totalProfit += 50000 * Number(this.RESULT["FOUR_MATCH"]);
     }
-    if (this.RESULT['THREE_MATCH'] !== 0) {
-      totalProfit += 5000 * Number(this.RESULT['THREE_MATCH']);
+    if (this.RESULT["THREE_MATCH"] !== 0) {
+      totalProfit += 5000 * Number(this.RESULT["THREE_MATCH"]);
     }
-    this.RESULT['PROFIT_RATE'] = (
-      (totalProfit / (this.LOTTO_COUNT * 1000)) *
-      100
-    ).toFixed(1);
+    this.RESULT["PROFIT_RATE"] = ((totalProfit / (this.LOTTO_COUNT * 1000)) * 100).toFixed(1);
   }
 }
