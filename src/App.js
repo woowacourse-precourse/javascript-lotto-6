@@ -8,6 +8,7 @@ import { runLotteryMachine } from "./domain/RunLotteryMachine.js";
 import { ask } from "./UI/inputView.js";
 import { print } from "./UI/outputView.js";
 import { Console } from "@woowacourse/mission-utils";
+import { ERROR } from "./const/Messages.js";
 
 class App {
   constructor() {
@@ -30,7 +31,10 @@ class App {
   }
 
   async setLotto() {
-    while (true) {
+    const maxAttempts = 3;
+    let attempts = 0;
+
+    while (attempts < maxAttempts) {
       try {
         const pay = await ask.payment();
         const baseNums = await ask.baseNumbers();
@@ -45,6 +49,11 @@ class App {
         break;
       } catch (error) {
         Console.print(error.message);
+        attempts += 1;
+        if (attempts >= maxAttempts) {
+          Console.print(ERROR.MAXIMUM_ATTEMPTS_REACHED);
+          break;
+        }
       }
     }
   }
