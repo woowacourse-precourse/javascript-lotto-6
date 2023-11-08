@@ -26,7 +26,8 @@ class App {
   }
 
   printResult(result, prof) {
-    MissionUtils.Console.print(`당첨 통계\n---`);
+    MissionUtils.Console.print(`당첨 통계`);
+    MissionUtils.Console.print(`---`);
     MissionUtils.Console.print(`3개 일치 (5,000원) - ${result.filter(e=>e===5).length}개`)
     MissionUtils.Console.print(`4개 일치 (50,000원) - ${result.filter(e=>e===4).length}개`)
     MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${result.filter(e=>e===3).length}개`)
@@ -77,7 +78,7 @@ class App {
       if(bonus) return bonus;
     } catch(error) {
       console.error(error.message);
-      // this.getBonusLotto(winning);
+      // await this.getBonusLotto(winning);
     }
   }
 
@@ -91,14 +92,22 @@ class App {
       if(lotto) return winnigArray;
     } catch(error) {
       console.error(error.message);
-      // this.getWinningLotto();
+      // await this.getWinningLotto();
     }
   }
 
   async getMoneyReturnCount() {
     const money = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    if(money%1000 !== 0) throw new Error("[ERROR] 1000원 단위로 입력해 주세요.");
-    return Math.floor(money/1000);
+    try {
+      const parsedMoney = Number(money);
+      console.log("parsedMoney", parsedMoney)
+      if(isNaN(parsedMoney) || parsedMoney%1000 !== 0) throw new Error("[ERROR] 1000원 단위로 입력해 주세요.");
+      return Math.floor(parsedMoney/1000);
+    } catch(error) {
+      console.error(error.message);
+      throw error;   
+    }
+    
   }
 
   generateAndPrintLotto(count) {
