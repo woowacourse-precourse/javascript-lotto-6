@@ -2,14 +2,13 @@ class Score {
     #score;
 
     constructor() {
-        this.#score = Object.seal({
+        this.#score = {
             '1st': 0,
             '2nd': 0,
             '3rd': 0,
             '4th': 0,
-            '5th': 0,
-            'No Win': 0
-        });
+            '5th': 0
+        };
     }
 
     countCorrectNumbers(lotto, winningNum) {
@@ -26,13 +25,12 @@ class Score {
             case 5: return hasBonus ? '2nd' : '3rd';
             case 4: return '4th';
             case 3: return '5th';
-            default: return 'No Win';
         }
     }
 
     updateScore(correctCount, hasBonus) {
         const rank = this.determineRank(correctCount, hasBonus);
-        if (this.#score.hasOwnProperty(rank)) {
+        if (rank && this.#score.hasOwnProperty(rank)) {
             this.#score[rank] += 1;
         }
     }

@@ -4,32 +4,31 @@ import GetLotto from "../models/GetLotto";
 import OutputView from "../views/OutputView";
 import Lotto from "../Lotto";
 import Score from "../models/Score";
+import Margin from "../models/Margin";
+import BonusValidation from "../validation/bonusValidation";
 
 class LottoController {    
     budget = 0;
     lottoCount = 0;
     lottos = [];
     winningNum = [];
-    bonusNum = 0;
+    bonusNum;
     result;
-
-    async getBudget() {
-        //입력받은 값을 유효성 검사를 위해 넘겨줌
-        const inputBudget = await this.getInputBudget();
-        this.checkValidateBudget(inputBudget);
-    }
 
     async getInputBudget() {
         //사용자에게 로또 구매 금액을 입력받음
-        const inputViewInstance = new inputView();
-        return await inputViewInstance.inputLottoBudget();
-    }
-    
-    checkValidateBudget(inputBudget) {
-        //사용자에게 입력받은 로또 구매 양에 대한 유효성 검사를 진행
-        const validBudget = new BudgetValidation();
-        this.budget = validBudget.budgetValid(inputBudget);
-        console.log(this.budget);
+        const input = new inputView();
+        const valid = new BudgetValidation();
+        const print = new OutputView();
+        while (this.budget === 0) {
+            let inputBudget = await input.inputLottoBudget();
+            try {
+                this.budget = valid.budgetValid(inputBudget);
+                if (this.budget > 0) break;
+            } catch (error) {
+                print.printError(error.message);
+            }
+        }
     }
 
 
@@ -59,36 +58,62 @@ class LottoController {
         this.lottos.forEach(numbers => print.printLottoNum(numbers));
     }
 
-
     async getWinningNumber() {
-        //당첨 숫자 입력받음
-        const winning = new inputView();
-        const inputWinning = await winning.inputLottoWinningNumber();
-        const inputBonusNumber = await this.getBonusNumber();
-        const lotto = new Lotto(inputWinning, inputBonusNumber);
-
-        //당첨 번호, 보너스 번호 돌려받음
+        let lotto;
+        const print = new OutputView();
+        const input = new inputView();
+        while (!lotto) {
+            const numbers = await input.inputLottoWinningNumber();
+            try {
+                lotto = new Lotto(numbers);
+            } catch (error) {
+                print.printError(error.message);
+            }
+        }
         this.winningNum = lotto.getNumbers();
-        this.bonusNum = lotto.getBonusNumber();
     }
 
     async getBonusNumber() {
         //보너스 번호 입력받음
         const bonus = new inputView();
-        return await bonus.inputLottoBonusNumber();
+        const check = new BonusValidation();
+        const print = new OutputView();
+
+        while (!this.bonusNum) {
+            const bonusNumber = await bonus.inputLottoBonusNumber();
+            try {
+                this.bonusNum = check.checkBonusValidation(bonusNumber);
+            } catch (error) {
+                print.printError(error.message);
+            }
+        }
     }
 
     calculateScore() {
         //로또 당첨 계산
         const score = new Score();
-        this.result = score.checkLotto(this.lottos, this.winningNum, this.bonusNum);
+        this.lottos.forEach(lotto => {
+            score.checkLotto(lotto, this.winningNum, this.bonusNum);
+        });
+        this.result = score.getScore();
+    }
+
+    printScore() {
+        const margin = new Margin();
+        const printMargin = margin.calculateLottoMargin(this.result);
+
+        const print = new OutputView();
+        print.printMargin(printMargin);
     }
 
     async start() {
-        await this.getBudget();
+        await this.getInputBudget();
         this.purchaseLottoTickets();
         this.makeRandomLotto();
+        await this.getWinningNumber();
+        await this.getBonusNumber();
         this.calculateScore();
+        this.printScore();
     }
 }
 

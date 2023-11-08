@@ -8,7 +8,7 @@ class inputView {
 
     async inputLottoWinningNumber() {
         const inputWinningNumber = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.");
-        return inputWinningNumber;
+        return inputWinningNumber.split(",").map((number) => Number(number));
     }
 
     async inputLottoBonusNumber() {
