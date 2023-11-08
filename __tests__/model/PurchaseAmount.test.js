@@ -19,8 +19,10 @@ describe('PurchaseAmount', () => {
   });
 
   test('최대 구입금액을 초과하였을 때 예외를 발생시켜야합니다.', () => {
-    const invalidInput = 100_500;
-    expect(() => PurchaseAmount.of(invalidInput)).toThrow('[ERROR]');
+    const invalidInput = 101_000;
+    expect(() => PurchaseAmount.of(invalidInput)).toThrow(
+      '[ERROR] 로또 구입 금액은 100,000원을 초과할 수 없습니다.',
+    );
   });
 
   test('getLottoCount 메서드가 정확한 로또 티켓 수를 반환해야 합니다', () => {
