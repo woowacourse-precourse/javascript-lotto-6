@@ -6,7 +6,7 @@ import LottoManager from './LottoManager.js';
 import PrizeMoneyManager from './PrizeMoneyManager.js';
 
 import LottoTypeConversion from './util/LottoTypeConversion.js';
-import Validator from './util/validator.js';
+import Validator from './util/Validator.js';
 
 class App {
   constructor() {
