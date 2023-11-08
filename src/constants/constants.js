@@ -1,5 +1,6 @@
 export const INPUT_MESSAGE = {
     inputPurchaseAmount : "구입 금액을 입력해 주세요.\n",
+    inputWinningNumbers : "당첨 번호를 입력해 주세요.\n",
 };
 
 export const OUTPUT_MESSAGE = {

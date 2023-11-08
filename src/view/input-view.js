@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE } from "../constants/constants.js";
 import InputValidator from "../validator/input-validator.js";
+import LottoValidator from "../validator/lotto-validator.js";
 
 class InputView {
     async readPurchaseAmount() {
@@ -11,8 +12,15 @@ class InputView {
     }
 
     async readWinningNumber() {
-        return null;
+        const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE.inputWinningNumbers);
+        LottoValidator.lottoLengthValidation(winningNumbers);
+        LottoValidator.lottoDuplicatedValidation(winningNumbers);
+        LottoValidator.lottoRangeValidation(winningNumbers);
+        LottoValidator.lottoTypeValidation(winningNumbers);
+        return winningNumbers;
     }
+
+    async readBonusNumber() {}
 }
 
 export default InputView;
