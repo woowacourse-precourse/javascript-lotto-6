@@ -12,9 +12,11 @@ class LottoController {
   #result;
   #roi;
   #lottoNumberGenerator;
+  #profitCalculator;
 
   constructor() {
-    this.#lottoNumberGenerator = new GenerateLottoNumbers(); 
+    this.#lottoNumberGenerator = new GenerateLottoNumbers();
+    this.#profitCalculator = new ProfitCalculator(); 
   }
 
   async playGame() {
@@ -51,8 +53,8 @@ class LottoController {
   #calculateResult() {
     const game = new LottoResultCalculator(this.#lottos);
     this.#result = game.getResult(this.#winningNumbers, this.#bonusNumber);
-    const totalPrize = ProfitCalculator.calculateTotalPrize(this.#result);
-    this.#roi = ProfitCalculator.calculateROI(totalPrize, this.#purchasePrice);
+    const totalPrize = this.#profitCalculator.calculateTotalPrize(this.#result);
+    this.#roi = this.#profitCalculator.calculateROI(totalPrize, this.#purchasePrice);
   }
 
   #displayResult() {
