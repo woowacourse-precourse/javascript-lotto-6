@@ -12,7 +12,17 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
-export default Lotto;
+function generateLottoTicket() {
+  const numbers = new Set();
+  while (numbers.size < 6) {
+    numbers.add(Math.floor(Math.random() * 45) + 1);
+  }
+  return new Lotto(Array.from(numbers));
+}
+
+module.exports = { generateLottoTicket, Lotto };
