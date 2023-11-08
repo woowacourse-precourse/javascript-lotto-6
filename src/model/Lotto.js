@@ -14,7 +14,7 @@ class Lotto {
   }
 
   getLottoNumbers() {
-    return this.#numbers;
+    return `[${this.#numbers.join(', ')}]`;
   }
 
   getPrize(winningLotteryNumbers, bonusNumber) {
