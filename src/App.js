@@ -1,4 +1,4 @@
-import View from "./View.js";
+import View from "./View/View.js";
 import Model from "./Model.js";
 import Lotto from "./Lotto.js";
 
