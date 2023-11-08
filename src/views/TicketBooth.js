@@ -42,7 +42,7 @@ class TiketBooth {
   }
 
   #validateMoney(paymentAmount) {
-    if (Number(paymentAmount) % 1000 !== 0) {
+    if (paymentAmount < 1000 || Number(paymentAmount) % 1000 !== 0) {
       throw new Error(ERROR.invalidUnit);
     }
   }
