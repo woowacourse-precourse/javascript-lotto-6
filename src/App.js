@@ -39,8 +39,7 @@ class App {
 
     this.output.printMyLottoList(this.purchaseCount, this.myLottoList);
 
-    const inputWinningLotto = await this.input.askLotteryNumbers();
-    const winningLotto = new WinningLotto(inputWinningLotto);
+    const winningLotto = await this.inputLottoNumber();
 
     const inputBonusLotto = await this.input.askLotteryBonusNumber();
     winningLotto.validateBonusLotto(inputBonusLotto);
@@ -68,6 +67,18 @@ class App {
       try {
         inputPurchaseAmount = await this.input.askPurchaseAmount();
         return new PurchaseAmount(inputPurchaseAmount);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  }
+
+  async inputLottoNumber() {
+    let inputLottoNumber;
+    while (true) {
+      try {
+        inputLottoNumber = await this.input.askLotteryNumbers();
+        return new WinningLotto(inputLottoNumber);
       } catch (error) {
         console.log(error.message);
       }
