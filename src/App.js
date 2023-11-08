@@ -1,7 +1,11 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 class App {
-  // 구입 금액 입력받기
+  constructor() {
+    this.winningNumbers = [];
+    this.bonusNumber = 0;
+  }
+
   async inputMoney() {
     let money;
     let isValidated = false;
@@ -94,26 +98,23 @@ class App {
     else return true;
   }
 
-  // 로또 하나에 대한 결과(등수) 계산
-
-    // 일치하는 번호 개수
-  countMatchingNumbers(lotto, winningNumbers) {
+  countMatchingNumbers(lotto) {
     let count = 0;
     lotto.forEach((number) => {
-      if (winningNumbers.includes(number)) {
+      if (this.winningNumbers.includes(number)) {
         count++;
       }
     });
     return count;
   }
-    // 등수 계산
-  computeRank(lotto, winningNumbers, bonusNumber) {
-    const count = this.countMatchingNumbers(lotto, winningNumbers);
+
+  computeRank(lotto) {
+    const count = this.countMatchingNumbers(lotto, this.winningNumbers);
     switch (count) {
       case 6:
         return "1등";
       case 5:
-        if (winningNumbers.includes(bonusNumber)) {
+        if (this.winningNumbers.includes(this.bonusNumber)) {
           return "2등";
         } else return "3등";
       case 4:
@@ -130,7 +131,11 @@ class App {
   computeTotalResult(lottos) {
     const result = { "1등": 0, "2등": 0, "3등": 0, "4등": 0, "5등": 0, 꽝: 0 };
     for (const lotto of lottos) {
-      const rank = this.computeRank(lotto, winningNumbers, bonusNubmer);
+      const rank = this.computeRank(
+        lotto,
+        this.winningNumbers,
+        this.bonusNumber
+      );
       result[rank]++;
     }
     return result;
