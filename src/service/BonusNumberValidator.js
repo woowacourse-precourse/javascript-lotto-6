@@ -1,24 +1,22 @@
+// BonusNumberValidator.js
+
+import { ERROR, LOTTO } from '../common/constants.js';
+import { isElementInTarget, isInRange, isNumeric } from '../common/validator.js';
+
 import { throwError } from '../common/utils.js';
-import { LOTTO, ERROR } from '../common/constants.js';
-import { isNumeric, isElementInString, isInRange } from '../common/validator.js';
 
 class BonusNumberValidator {
   constructor(input) {
     this.input = input;
   };
 
-  validate() {
+  validate(winningNumbers) {
     this.#validateInput();
     this.#validateNumber();
     this.#validateRange();
+    this.#validateUnique(winningNumbers);
 
     return this.input;
-  };
-
-  validateUnique(winningNumbers) {
-    if (!isElementInString(winningNumbers, this.input)) {
-      throwError(ERROR.bonus_duplicate);
-    }
   };
 
   #validateInput() {
@@ -36,6 +34,12 @@ class BonusNumberValidator {
   #validateRange() {
     if (!isInRange(this.input, LOTTO.min_number, LOTTO.max_number)) {
       throwError(ERROR.range);
+    }
+  };
+
+  #validateUnique(winningNumbers) {
+    if (isElementInTarget(winningNumbers, parseInt(this.input, 10))) {
+      throwError(ERROR.bonus_duplicate);
     }
   };
 };

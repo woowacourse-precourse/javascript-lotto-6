@@ -22,20 +22,12 @@ const containUniqueNumbersInArray = (array) => array.length === new Set(array).s
 
 const isArrayLengthEqualTo = (array, length) => array.length === length;
 
-const isElementInString = (string, element) => string.includes(element);
+const isElementInTarget = (target, element) => target.includes(element);
 
 const isNumeric = (input) => UTILS.positive_integer.test(input);
 
 const isInRange = (input, min, max) => input >= min && input <= max;
 
-export { 
-  isDivisibleByUnit,
-  isCommaSeparated,
-  isStringLengthEqualTo,
-  containUniqueNumbersInString,
-  containUniqueNumbersInArray,
-  isArrayLengthEqualTo,
-  isElementInString,
-  isNumeric,
-  isInRange,
+export {
+  containUniqueNumbersInArray, containUniqueNumbersInString, isArrayLengthEqualTo, isCommaSeparated, isDivisibleByUnit, isElementInTarget, isInRange, isNumeric, isStringLengthEqualTo
 };
