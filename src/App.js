@@ -5,26 +5,16 @@ import InputBonus from "./InputBonus.js";
 
 class App {
   async play() {
-    const randomLottoArr = await InputValidation();
-
-    const lottoInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    const lottoNumber = lottoInput.split(",");
-    const lotto = new Lotto(lottoNumber);
-    lotto.getValidate();
-
-    Console.print("");
-    const bonusInput = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-    const bonus = new InputBonus(bonusInput, lottoNumber);
-    bonus.validate(bonusInput, lottoNumber);
-    Console.print("");
-
-    const matchList = matchLotto(randomLottoArr[0], lottoNumber, bonusInput);
+    const randomLottoArr = await InputPriceValidation();
+    const lottoNumber = await InputLottoValidation();
+    const bonus = await InputBonusValidation(lottoNumber);
+    const matchList = matchLotto(randomLottoArr[0], lottoNumber, bonus);
     const resultList = matchResult(matchList);
     printResult(resultList, randomLottoArr[1]);
   }
 }
 
-async function InputValidation() {
+async function InputPriceValidation() {
   while (true) {
     try {
       const budgetInput = await Console.readLineAsync(
@@ -37,6 +27,36 @@ async function InputValidation() {
       const randomLottoArr = printLotto(numLotto);
       return [randomLottoArr, budgetInput];
 
+    } catch (error) {
+      Console.print(`${error.message}`);
+    }
+  }
+}
+
+async function InputLottoValidation() {
+  while (true) {
+    try {
+      const lottoInput = await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+      const lottoNumber = lottoInput.split(",");
+      const lotto = new Lotto(lottoNumber);
+      lotto.getValidate();
+      Console.print("");
+      return lottoNumber;
+
+    } catch (error) {
+      Console.print(`${error.message}`);
+    }
+  }
+}
+
+async function InputBonusValidation(lottoNumber) {
+  while (true) {
+    try {
+      const bonusInput = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+      const bonus = new InputBonus(bonusInput, lottoNumber);
+      bonus.validate(bonusInput, lottoNumber);
+      Console.print("");
+      return bonusInput;
     } catch (error) {
       Console.print(`${error.message}`);
     }
@@ -70,6 +90,7 @@ function matchLotto(randomLottoArr, lotto, bonus) {
   }
   return matchList;
 }
+
 
 function matchLottoNumber(randomLottoArr, lotto, bonus) {
   const match = { lottoMatch: 0, bonusMatch: 0 }
