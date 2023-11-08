@@ -33,6 +33,7 @@ class App {
       this.checkInputIsNaN(inputMoney);
       this.checkInputIsNull(inputMoney);
       this.userMoney = Number(inputMoney);
+      
       if (this.userMoney % 1000 > 0 || this.userMoney <= 0) {
         throw new Error(ERROR_MESSAGE.INPUT_USERMONEY_ERROR);
       }
@@ -49,7 +50,7 @@ class App {
     const randomCount = (this.userMoney / 1000);
 
     while (this.userRandomList.length < randomCount) {
-      let randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      const randomNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       randomNums.sort((a, b) => a - b);
       
       this.checkDuplicateNums(randomNums);
@@ -188,7 +189,6 @@ class App {
     + PRIZE.SIX * this.winningSix
 
     this.rate = (sums / this.userMoney*100).toFixed(1);
-    console.log(this.rate)
     return this.rate
   }
 }
