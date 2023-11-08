@@ -159,7 +159,7 @@ describe('로또 번들 클래스 기능 테스트', () => {
       ],
       winningNumber: [1, 2, 3, 7, 8, 9],
       bonusNumber: 10,
-      profit: 5_000,
+      profit: 10_000,
     },
   ])(
     '로또 번들의 총 수익을 구하는 기능 테스트',
@@ -176,7 +176,7 @@ describe('로또 번들 클래스 기능 테스트', () => {
       const result = lottoBundle.getProfit();
 
       // then
-      expect(result).toStrictEqual(result);
+      expect(result).toStrictEqual(profit);
     },
   );
 

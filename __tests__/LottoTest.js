@@ -42,7 +42,7 @@ describe('로또 클래스 검증 테스트', () => {
   );
 
   test.each([[[0, 1, 2, 3, 4, 5]], [[1, 2, 3, 4, 5, 46]]])(
-    `로또 번호 중 ${LOTTO_NUMBER.minNum}와 ${LOTTO_NUMBER.maxNum} 사이의 숫자가 아닌 요소가 있으면 예외가 발생한다.`,
+    `로또 번호 중 ${LOTTO_NUMBER.minNum} ${LOTTO_NUMBER.maxNum} 사이의 숫자가 아닌 요소가 있으면 예외가 발생한다.`,
     (input) => {
       expect(() => {
         new Lotto(input);
@@ -56,7 +56,7 @@ describe('로또 클래스 검증 테스트', () => {
     [[1, '2', 3, '4', 5, '6']],
     [[39, 31, 21, 5, 43, 12]],
   ])(
-    '로또 번호가 1-45사이의 서로 다른 숫자 6개로 이루어져 있다면 예외가 발생하지 않는다.',
+    `로또 번호가 ${LOTTO_NUMBER.minNum}과 ${LOTTO_NUMBER.maxNum}사이의 서로 다른 숫자 ${LOTTO_NUMBER.count}개로 이루어져 있다면 예외가 발생하지 않는다.`,
     (input) => {
       expect(() => {
         new Lotto(input);
