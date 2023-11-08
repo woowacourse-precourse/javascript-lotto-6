@@ -46,13 +46,7 @@ class Lotto {
     const results = [0, 0, 0, 0, 0];
 
     userLottoNumbers.forEach(lottoNumber => {
-      let count = 0;
-
-      lottoNumber.forEach(number => {
-        if (this.#numbers.indexOf(number) !== -1) {
-          count += 1;
-        }
-      });
+      const count = this.#getCount(lottoNumber);
 
       if (count == 5 && lottoNumber.indexOf(bonusNumber) !== -1) {
         results[count - 2] += 1;
@@ -64,10 +58,20 @@ class Lotto {
     return results;
   }
 
+  #getCount(lottoNumber) {
+    let count = 0;
+
+    lottoNumber.forEach(number => {
+      if (this.#numbers.indexOf(number) !== -1) count += 1;
+    });
+
+    return count;
+  }
+
   calculateEarningsRate(results) {
     const amount = [5000, 50000, 1500000, 30000000, 2000000000];
-
     let i = 0;
+
     const earnings = results.reduce((acc, curr) => {
       return acc + (curr * amount[i++]);
     }, 0);
