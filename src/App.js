@@ -21,6 +21,19 @@ class App {
     for (let i = 0; i < lottoInstances.length; i++) {
       lottoInstances[i].showNumber();
     }
+
+    Console.print("");
+    Console.print("당첨 번호를 입력해 주세요.");
+    let winningNumbers = await Console.readLineAsync("");
+    winningNumbers = winningNumbers.split(",");
+    // console.log(winningNumbers);
+    for (let i = 0; i < winningNumbers.length; i++) {
+      if (isNaN(purchaseAmount)) {
+        throw new Error("[ERROR] 숫자만 입력할 수 있습니다.");
+      }
+      winningNumbers[i] = parseInt(winningNumbers[i]);
+    }
+    // console.log(winningNumbers);
   }
 }
 
