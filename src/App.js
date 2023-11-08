@@ -60,6 +60,26 @@ class App {
       .split(",")
       .map((num) => Number(num.trim()));
     const bonusNum = await MissionUtils.Console.readLineAsync(BONUS_NUM);
+    this.#calculateResult(this.lottos, winningNums, bonusNum, this.price);
+  }
+
+  #matchCount(lotto, winningNums, bonusNum) {
+    const match = lotto.filter((num) => winningNums.includes(num)).length;
+    return match + (match === 5 && lotto.includes(bonusNum) ? 0.5 : 0);
+  }
+
+  #calculateWinning(lottos, winningNums, bonusNum) {
+    const results = { 3: 0, 4: 0, 5: 0, 5.5: 0, 6: 0 };
+    lottos.forEach((lotto) => {
+      const count = this.#matchCount(lotto, winningNums, bonusNum);
+      if (count in results) results[count]++;
+    });
+    return results;
+  }
+
+  #calculateResult(lottos, winningNums, bonusNum) {
+    const results = this.#calculateWinning(lottos, winningNums, bonusNum);
+    MissionUtils.Console.print(results);
   }
 }
 
