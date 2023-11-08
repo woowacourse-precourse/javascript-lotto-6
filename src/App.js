@@ -7,6 +7,7 @@ import { Print } from "./utils/Print.js";
 import GetRrandomList from "./utils/getRrandomList.js";
 import ReturnRate from "./utils/ReturnRate.js";
 import CheckWinning from "./utils/CheckWinning.js";
+
 class App {
   buyLotto;
   winning;
@@ -26,7 +27,6 @@ class App {
     this.outputResult();
   }
 
-  // 로또 구입 금액 입력
   async inputBuyMoney() {
     try {
       this.buyLotto = await this.Input.buyLotto();
@@ -37,14 +37,12 @@ class App {
     }
   }
 
-  // 발행 로또 출력
   outputLottoTicket() {
     const lottoQuantity = this.buyLotto / 1000;
     this.lotto = GetRrandomList(lottoQuantity);
     this.printValue.lottoIssuedQuantity(lottoQuantity, this.lotto);
   }
 
-  // 당첨 로또 번호 입력
   async inputWinningNumber() {
     try {
       this.winning = await this.Input.winningNumber();
@@ -55,7 +53,6 @@ class App {
     }
   }
 
-  // 보너스 로또 번호 입력
   async inputBonusNumber() {
     try {
       this.bonus = await this.Input.bonusNumber();
@@ -66,7 +63,6 @@ class App {
     }
   }
 
-  // 당첨 내역 출력
   outputResult() {
     const winningList = CheckWinning(this.winning, this.bonus, this.lotto);
     const roi = ReturnRate(this.buyLotto, winningList);
