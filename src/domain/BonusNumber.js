@@ -21,7 +21,7 @@ class BonusNumber {
     }
   }
 
-  #validate(input) {
+  validate(input) {
     this.#validateIsNumber(input);
     this.#validateRange(input);
   }
@@ -30,7 +30,7 @@ class BonusNumber {
     while (true) {
       try {
         const input = await Console.readLineAsync("");
-        this.#validate(input);
+        this.validate(input);
         return input;
       } catch (error) {
         Console.print(error.message);
