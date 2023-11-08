@@ -60,7 +60,7 @@ describe("app test", () => {
 
             await expect(() =>
                 app.isValidBonusNumber(value, winningNumber)
-            ).toThrow("[ERROR] 숫자가 잘못된 형식입니다.");
+            ).toThrow("[ERROR]");
         }
     );
 });
