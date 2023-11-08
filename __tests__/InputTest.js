@@ -86,3 +86,46 @@ describe('로또 당첨 번호 입력 테스트(getLottoNumber)', () => {
     await expect(Input.getLottoNumber()).rejects.toThrow(ERROR.lottoCount);
   });
 });
+
+describe('로또 보너스 번호 입력 테스트(getLottoBonusNumber)', () => {
+  const answers = [1, 2, 3, 4, 5, 6];
+  test('당첨 번호와 중복된 번호가 있는 경우 에러 반환', async () => {
+    const input = ['1', '6'];
+
+    mockQuestions(input);
+
+    await expect(Input.getLottoBonusNumber(answers)).rejects.toThrow(
+      ERROR.lottoIsNotDuplicate
+    );
+  });
+
+  test('번호가 숫자가 아닌 경우 에러 반환', async () => {
+    const input = ['a', ''];
+
+    mockQuestions(input);
+
+    await expect(Input.getLottoBonusNumber(answers)).rejects.toThrow(
+      ERROR.lottoIsNumber
+    );
+  });
+
+  test('번호가 1부터 45까지의 숫자가 아닌 경우 에러 반환', async () => {
+    const input = ['0', '46'];
+
+    mockQuestions(input);
+
+    await expect(Input.getLottoBonusNumber(answers)).rejects.toThrow(
+      ERROR.lottoRange
+    );
+  });
+
+  test('번호가 1개가 아닌 경우 에러 반환', async () => {
+    const input = ['1,2'];
+
+    mockQuestions(input);
+
+    await expect(Input.getLottoBonusNumber(answers)).rejects.toThrow(
+      ERROR.lottoIsNumber
+    );
+  });
+});
