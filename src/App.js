@@ -3,7 +3,11 @@ import InputBonusNumber from "./input/InputBonusNumber.js";
 import InputWinningNumber from "./input/InputWinningNumber.js";
 import RandomNumber from "./RandomNumber.js";
 import LottoCount from "./LottoCount.js";
-import { printLottoNumbers, printReturnRate, printWinning } from "./Print.js";
+import {
+  printLottoNumbers,
+  printReturnRate,
+  printWinning,
+} from "./PrintLog.js";
 import CheckWinning from "./CheckWinning.js";
 class App {
   async play() {

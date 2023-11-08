@@ -1,5 +1,5 @@
 import { LOTTO_PRICE } from "./constant/LottoInfo.js";
-import { printCount } from "./Print.js";
+import { printCount } from "./PrintLog.js";
 
 function LottoCount(amount) {
   const count = amount / LOTTO_PRICE;

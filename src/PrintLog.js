@@ -2,6 +2,7 @@ import { PRINT_MESSAGE } from "./constant/Log.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import CalcReturnRate from "./CalcReturnRate.js";
 const PRINT_DECIMAL_POINT = 1;
+
 export function printCount(count) {
   MissionUtils.Console.print("\n" + count + PRINT_MESSAGE.count);
 }

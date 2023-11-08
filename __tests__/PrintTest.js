@@ -1,4 +1,4 @@
-import { printLottoNumbers, printWinning } from "../src/print";
+import { printLottoNumbers, printWinning } from "../src/PrintLog.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "../src/Lotto.js";
 /* eslint-disable no-undef */

@@ -45,7 +45,9 @@ function compareList(winning, lotto) {
   });
   return sameCount;
 }
+
 function compareNumber(lotto, bonus) {
   return lotto.includes(bonus);
 }
+
 export default CheckWinning;

@@ -5,6 +5,7 @@ import {
   LOTTO_NUMBER_MIN,
   LOTTO_NUMBER_COUNT,
 } from "./constant/LottoInfo.js";
+
 function RandomNumber(count) {
   let lottoNumberList = [];
   for (let i = 0; i < count; i++) {
