@@ -11,7 +11,7 @@ export const getMoneyTable = (table) => {
     return "1,500,000원";
   }
 
-  if (table === "불일치5") {
+  if (table === "볼일치5") {
     return "30,000,000원";
   }
 

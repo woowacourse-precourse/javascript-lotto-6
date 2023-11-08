@@ -6,7 +6,7 @@ export const calculateWinMoney = (winCount) => {
     },
     { 4: 0, winMoney: 0 },
     { 5: 0, winMoney: 0 },
-    { 불일치5: 0, winMoney: 0 },
+    { 볼일치5: 0, winMoney: 0 },
     { 6: 0, winMoney: 0 },
   ];
 
