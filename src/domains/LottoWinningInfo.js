@@ -1,5 +1,5 @@
 import bonusNumberValidator from '../validators/bonusNumberValidator.js';
-import lottoNumberValidator from '../validators/lottoNumbersValidator.js';
+import { lottoWinningNumbersValidator } from '../validators/lottoNumbersValidator.js';
 
 class LottoWinnigInfo {
   #winningNumbers;
@@ -12,10 +12,10 @@ class LottoWinnigInfo {
   }
 
   #validateWinningNumbers(winningNumbers) {
-    lottoNumberValidator.validateType(winningNumbers);
-    lottoNumberValidator.validateCount(winningNumbers);
-    lottoNumberValidator.validateRange(winningNumbers);
-    lottoNumberValidator.validateUniqueness(winningNumbers);
+    lottoWinningNumbersValidator.validateType(winningNumbers);
+    lottoWinningNumbersValidator.validateCount(winningNumbers);
+    lottoWinningNumbersValidator.validateRange(winningNumbers);
+    lottoWinningNumbersValidator.validateUniqueness(winningNumbers);
   }
 
   #validateBounsNumber(bonusNumber) {
