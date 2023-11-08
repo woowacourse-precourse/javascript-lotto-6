@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
 import { NUMBER, RANDOM } from '../constants/index.js';
 import Lotto from '../Lotto.js';
-import Calculator from '../Caculator/index.js';
+import Calculator from '../Calculator/index.js';
 import Formatter from '../Formatter/index.js';
 
 class LottoMachine {
@@ -61,8 +61,8 @@ class LottoMachine {
 
   makeResult() {
     const ranks = this.#calculator.calculateRanks();
-    const revenu = this.#calculator.calculateRevenu(this.#purchaseAmount);
-    return Formatter.formatResult(ranks, Number(revenu));
+    const revenu = this.#calculator.calculateRevenue(this.#purchaseAmount);
+    return Formatter.formatStatistics(ranks, Number(revenu));
   }
 }
 

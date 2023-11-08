@@ -46,7 +46,7 @@ class Calculator {
     return ranks;
   }
 
-  calculateRevenu(purchaseAmount) {
+  calculateRevenue(purchaseAmount) {
     const ranks = this.calculateRanks();
     const revenue = Object.entries(ranks).reduce(
       (acc, [rank, count]) => acc + count * REWARD[rank],
