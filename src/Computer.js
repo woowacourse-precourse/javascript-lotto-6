@@ -1,3 +1,4 @@
+import round from './utils/round';
 import { prize, rank, conditionMap } from './datas/prize';
 
 class Computer {
@@ -49,7 +50,7 @@ class Computer {
       return currentProfit;
     }, 0);
     const profitRatio = (totlaProfit / this.#cost) * 100;
-    const ratioString = `${Math.round((profitRatio * 10).toPrecision(15)) / 10}%`;
+    const ratioString = `${round(profitRatio)}%`;
 
     return ratioString;
   }
