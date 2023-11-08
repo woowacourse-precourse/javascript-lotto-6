@@ -1,5 +1,5 @@
+import Lotto from '../src/Lotto';
 import LottoStore from '../src/domains/LottoStore';
-import Lotto from '../src/domains/Lotto';
 
 describe('LottoStore 클래스 테스트', () => {
   // given
