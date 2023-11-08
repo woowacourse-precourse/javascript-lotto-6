@@ -25,13 +25,14 @@ class Lotto {
 
   /**
    * @param {number} money
-   * @returns {Lotto[]}
+   * @returns {{lottoes:Lotto[], count:number}}
    */
   static buyAutomaticLotto(money) {
     Validation.validateMoney(money);
-    return new Array(Math.floor(money / 1000))
+    const lottoes = new Array(Math.floor(money / 1000))
       .fill(0)
       .map(() => new Lotto(Lotto.pickRandomNumbers()));
+    return { lottoes, count: lottoes.length };
   }
   /**
    * @param {number[]} numbers
