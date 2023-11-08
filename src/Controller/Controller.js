@@ -16,6 +16,11 @@ export default class Controller {
   async handlePurchaseAmount() {
     const input = await inputView.readPurchaseAmount();
     this.#myWallet.setPurchaseAmount(input);
+
+    return this.handleLottoCount(input);
+  }
+
+  handleLottoCount(input) {
     this.#myLotto.setlottoCount(input);
     outputView.printLottoCount(this.#myLotto.getLottoCount());
 
