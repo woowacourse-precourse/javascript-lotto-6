@@ -1,10 +1,12 @@
+import { PRICE, RANGE } from "../constants/NUMBER.js";
+
 export const validateNumber = {
   isDivideThousand(number) {
-    return number % 1000 === 0;
+    return number % PRICE === 0;
   },
 
   isBiggerThanThousand(number) {
-    return number >= 1000;
+    return number >= PRICE;
   },
 
   isNumber(number) {
@@ -12,17 +14,19 @@ export const validateNumber = {
   },
 
   isOneToFourtyFive(number) {
-    return number > 1 && number < 45;
+    return number > RANGE.MIN && number < RANGE.MAX;
   },
 };
 
 export const validateArray = {
   isSixSize(numbers) {
-    return numbers.length === 6;
+    return numbers.length === RANGE.SIZE;
   },
 
   isOneToFourtyFive(numbers) {
-    return numbers.every((element) => element >= 1 && element <= 45);
+    return numbers.every(
+      (element) => element >= RANGE.MIN && element <= RANGE.MAX
+    );
   },
 
   isDuplicate(numbers) {
