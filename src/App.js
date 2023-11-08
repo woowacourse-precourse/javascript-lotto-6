@@ -1,5 +1,18 @@
+import { Console } from "@woowacourse/mission-utils";
+import User from "./User.js";
+
 class App {
-  async play() {}
+  constructor() {
+    this.user = new User();
+  }
+
+  async play() {
+    try {
+      await this.user.buy();
+    } catch (error) {
+      Console.print(error);
+    }
+  }
 }
 
 export default App;
