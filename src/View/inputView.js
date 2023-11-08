@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { LOTTO_MESSAGE, NUMBERS } from '../Constants/Constants.js';
 import VALIDATION from '../Controller/Validation.js';
 import OUTPUT_VIEW from './outputView.js';
+import Lotto from '../Lotto.js';
 
 const INPUT_VIEW = {
   async inputPrice() {
@@ -23,9 +24,24 @@ const INPUT_VIEW = {
   },
 
   async inputLotto() {
-    const LOTTO_NUM = await Console.readLineAsync(LOTTO_MESSAGE.INPUT_NUMBERS);
-    const LOTTO_SPLIT = LOTTO_NUM.split(',').map((element) => Number(element)); // 6개짜리 배열 저장
-    return LOTTO_SPLIT;
+    let VAL = false;
+    let WINNING_LOTTO = null;
+    // 6개짜리 배열 저장
+    while (!VAL) {
+      try {
+        const LOTTO_NUM = await Console.readLineAsync(
+          LOTTO_MESSAGE.INPUT_NUMBERS,
+        );
+        const LOTTO_SPLIT = LOTTO_NUM.split(',').map((element) =>
+          Number(element),
+        );
+        WINNING_LOTTO = new Lotto(LOTTO_SPLIT);
+        VAL = true;
+      } catch (error) {
+        Console.print(error);
+      }
+    }
+    return WINNING_LOTTO.getNumbers();
   },
 
   async inputBonus(numbers) {
