@@ -9,7 +9,7 @@ class BonusController {
     while (true) {
       try {
         bonusNumber = await InputView.inputBonusNumber();
-        this.#validateBonusNumber(bonusNumber, winningNumber);
+        this.validateBonusNumber(bonusNumber, winningNumber);
         break;
       } catch (error) {
         OutputView.printError(error.message);
@@ -18,7 +18,7 @@ class BonusController {
     return Number(bonusNumber);
   }
 
-  #validateBonusNumber(bonusNumber, winningNumber) {
+  validateBonusNumber(bonusNumber, winningNumber) {
     if (!bonusNumber) throw new Error(ERROR_MESSEGE.notInput);
     if (isNaN(bonusNumber)) throw new Error(ERROR_MESSEGE.notNumber);
     if (bonusNumber <= 0) throw new Error(ERROR_MESSEGE.notPositive);

@@ -10,7 +10,7 @@ class PurchaseController {
     while (true) {
       try {
         purchaseAmount = await InputView.inputPurchaseAmount();
-        this.#validatePurchaseAmount(purchaseAmount);
+        this.validatePurchaseAmount(purchaseAmount);
         break;
       } catch (error) {
         OutputView.printError(error.message);
@@ -24,7 +24,7 @@ class PurchaseController {
     return lottos;
   }
 
-  #validatePurchaseAmount(purchaseAmount) {
+  validatePurchaseAmount(purchaseAmount) {
     if (!purchaseAmount) throw new Error(ERROR_MESSEGE.notInput);
     if (isNaN(purchaseAmount)) throw new Error(ERROR_MESSEGE.notNumber);
     if (purchaseAmount <= 0) throw new Error(ERROR_MESSEGE.notPositive);

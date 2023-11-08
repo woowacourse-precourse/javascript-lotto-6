@@ -9,7 +9,7 @@ class WinningController {
     while (true) {
       try {
         winningNumber = await InputView.inputWinningNumber();
-        this.#validateWinningNumber(winningNumber);
+        this.validateWinningNumber(winningNumber);
         break;
       } catch (error) {
         OutputView.printError(error.message);
@@ -18,7 +18,7 @@ class WinningController {
     return winningNumber.split(',').map(Number);
   }
 
-  #validateWinningNumber(winningNumber) {
+  validateWinningNumber(winningNumber) {
     if (!winningNumber) {
       throw new Error(ERROR_MESSEGE.notInput);
     }
@@ -28,7 +28,8 @@ class WinningController {
     if (winningNumbers.length !== OPTIONS.length) throw new Error(ERROR_MESSEGE.notSixNumbers);
     if (winningNumbers.some((number) => isNaN(number))) throw new Error(ERROR_MESSEGE.notNumber);
     if (winningNumbers.some((number) => number <= 0)) throw new Error(ERROR_MESSEGE.notPositive);
-    if (winningNumbers.some((number) => number < OPTIONS.minNumber || number > OPTIONS.maxNumber)) throw new Error(ERROR_MESSEGE.outOfRange);
+    if (winningNumbers.some((number) => number < OPTIONS.minNumber || number > OPTIONS.maxNumber))
+      throw new Error(ERROR_MESSEGE.outOfRange);
     if (this.#isDuplicates(winningNumbers)) throw new Error(ERROR_MESSEGE.duplicates);
   }
 
