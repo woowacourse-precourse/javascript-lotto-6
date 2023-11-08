@@ -2,15 +2,20 @@ import getLottoAmount from './service/input/getLottoAmount.js';
 import LottoGenerator from './service/LottoGenerator.js';
 import display from './domain/utils/display.js';
 import getWinningNumbers from './service/input/getWinningNumbers.js';
+import getBonusNumber from './service/input/getBonusNumber.js';
+import Lotto from './Lotto.js';
 
 class App {
   #lottoAmount;
   #lottoGenerator;
-  #lotto;
+  #lottoNumbers;
+  #bonusNumber;
 
   constructor() {
     this.#lottoAmount = null;
     this.#lottoGenerator = null;
+    this.#lottoNumbers = null;
+    this.#bonusNumber = null;
   }
 
   async #issueLotto() {
@@ -27,10 +32,18 @@ class App {
     this.#drawWinningNumber();
   }
 
-  #drawWinningNumber() {
-    const winningNumbers = getWinningNumbers();
+  async #drawWinningNumber() {
+    const winningNumbers = await getWinningNumbers();
 
-    this.#lotto = new Lotto(winningNumbers);
+    this.#lottoNumbers = new Lotto(winningNumbers);
+
+    this.#drawBonuseNumber();
+  }
+
+  async #drawBonuseNumber() {
+    const bonusNumber = await getBonusNumber();
+
+    this.#bonusNumber = bonusNumber;
   }
 
   async play() {
