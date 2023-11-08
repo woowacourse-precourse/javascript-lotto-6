@@ -51,12 +51,10 @@ class App {
   }
 
   getLottos() {
-    this.lottosCount = this.amount / 1000;
-    let i = 0;
-    while (i < this.lottosCount) {
+    this.lottosCount = parseInt(this.amount / 1000);
+    for (let i = 0; i < this.lottosCount; i += 1) {
       const lotto = new Lotto(this.getLottoNumbers());
       this.lottos.push(lotto);
-      i += 1;
     }
   }
 
@@ -112,28 +110,24 @@ class App {
   }
 
   setRanks() {
-    let i = 0;
-    while (i < 5) {
+    for (let i = 0; i < 5; i += 1) {
       const rank = new Rank(
         RANK_INFO[i].ranking,
         RANK_INFO[i].matchNumbers,
         RANK_INFO[i].winnings
       );
       this.ranks.push(rank);
-      i += 1;
     }
   }
 
   getLottoRanking() {
     this.setRanks();
-    let i = 0;
-    while (i < this.lottosCount) {
+    for (let i = 0; i < this.lottosCount; i += 1) {
       const ranking = this.lottos[i].getRanking(
         this.winningNumbers,
         this.bonusNumber
       );
       this.ranks.map((rank) => rank.ranking === ranking && rank.count++);
-      i += 1;
     }
   }
 
@@ -153,10 +147,8 @@ class App {
   printLottoRanking() {
     MissionUtils.Console.print('당첨 통계');
     MissionUtils.Console.print('---');
-    let i = 0;
-    while (i < this.ranks.length) {
+    for (let i = 0; i < this.ranks.length; i += 1) {
       this.ranks[i].printRank();
-      i += 1;
     }
     MissionUtils.Console.print(`총 수익률은 ${this.getEarningsRate()}입니다.`);
   }
