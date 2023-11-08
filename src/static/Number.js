@@ -11,6 +11,7 @@ const NUMBER = Object.freeze({
   thirdPlace: 3,
   fourthPlace: 4,
   fifthPlace: 5,
+  arraySize: 4,
 });
 
 export default NUMBER;
