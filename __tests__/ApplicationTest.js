@@ -17,6 +17,8 @@ const mockRandoms = (numbers) => {
   numbers.reduce((acc, number) => acc.mockReturnValueOnce(number), MissionUtils.Random.pickUniqueNumbersInRange);
 };
 
+export { mockQuestions };
+
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
