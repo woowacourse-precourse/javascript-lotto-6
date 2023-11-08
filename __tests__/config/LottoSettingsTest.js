@@ -53,7 +53,7 @@ describe("LottoSettings 클래스 테스트", () => {
     expect(lottoPrice).toBe(1000);
   });
 
-  test("LOTTO_SETTINGS 값을 변경할려 할 때 에러가 발생해야한다.", () => {
-    expect(() => (LOTTO_SETTINGS.NUMBERS_PER_TICKET = 8)).toThrow();
+  test("LOTTO_SETTINGS는 객체 안의 객체까지 깊게 얼려있어야 한다.", () => {
+    expect(() => (LOTTO_SETTINGS.WINNINGS.SECOND_PRIZE.matchNum = 8)).toThrow();
   });
 });
