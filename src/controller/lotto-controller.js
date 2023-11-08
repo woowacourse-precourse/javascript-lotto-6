@@ -16,6 +16,8 @@ class LottoController {
         let perchaseNumber = await this.#inputView.readPurchaseAmount();
         let myLotto = new MyLotto(perchaseNumber);
         this.#outputView.printMyLotto(perchaseNumber, myLotto);
+        let winningNumbers = await this.#inputView.readWinningNumber();
+        let bonusNumber = await this.#inputView.readBonusNumber();
     }
 }
 

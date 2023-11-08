@@ -13,7 +13,8 @@ class InputView {
     }
 
     async readWinningNumber() {
-        const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE.inputWinningNumbers);
+        const input = await Console.readLineAsync(INPUT_MESSAGE.inputWinningNumbers);
+        const winningNumbers = input.split(",").map(Number);
         LottoValidator.lottoLengthValidation(winningNumbers);
         LottoValidator.lottoDuplicatedValidation(winningNumbers);
         LottoValidator.lottoRangeValidation(winningNumbers);
