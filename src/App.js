@@ -34,6 +34,14 @@ class App {
     return this.getRank(count, isBonus)
   }
 
+  getRank(winningCount, bonus) {
+    if(winningCount===6) return 1;
+    if(winningCount===5 && bonus) return 2;
+    if(winningCount===5) return 3;
+    if(winningCount===4) return 4;
+    if(winningCount===3) return 5;    
+  }
+
   getProfit() {
 
   }
