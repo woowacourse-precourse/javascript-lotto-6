@@ -1,13 +1,12 @@
 import Bonus from "../src/model/Bonus";
 
 describe("보너스 클래스 테스트", () => {
-  test.each
-  ([
+  test.each([
     ["1,2"],
-    [ "!"],
-     ["@"],
-     ["A"],
-     ["ㄱ"]
+    ["!"],
+    ["@"],
+    ["A"],
+    ["ㄱ"]
   ])
   ("보너스 번호가 숫자로 구성되지 않은 경우 예외가 발생한다.", (input) => {
     const RESULT = () => new Bonus(input);
@@ -23,7 +22,7 @@ describe("보너스 클래스 테스트", () => {
     const RESULT = () => new Bonus(input);
     expect(RESULT).toThrow("[ERROR] 숫자는 1~45까지 입력해주세요.");
   });
-  
+
   test.each([
     [[0,1,3,5,0],[3]],
     [[5,1,5,0],[0,2]],
