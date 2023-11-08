@@ -3,7 +3,7 @@ import { Random } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView.js';
 import InputValidator from '../validators/InputValidator.js';
 import OutputView from '../views/OutputView.js';
-import Lotto from '../models/Lotto.js';
+import Lotto from '../Lotto.js';
 import WinningNumber from '../models/WinningNumber.js';
 import WinningResult from '../models/WinningResult.js';
 
