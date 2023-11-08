@@ -90,7 +90,6 @@ class App {
   //결과 출력 함수
   printResult() {
     let count = 0;
-
     for (const lotto of this.lottos) {
       for (const item of this.answer) {
         if (lotto.numbers.includes(item)) {
@@ -103,7 +102,7 @@ class App {
       } else if (count === 4) {
         this.four++;
       } else if (count === 5) {
-        if (lotto.includes(this.bonus)) {
+        if (lotto.numbers.includes(this.bonus)) {
           this.fivePlusOne++;
         } else {
           this.five++;
@@ -132,7 +131,7 @@ class App {
       1500000 * five +
       300000000 * fivePlusOne +
       2000000000 * six;
-    const ProfitRate = prizeResult / price / 100;
+    const ProfitRate = (prizeResult / price) * 100;
     MissionUtils.Console.print(`총 수익률은 ${ProfitRate}% 입니다.`);
   }
 }
