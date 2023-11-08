@@ -15,6 +15,21 @@ export async function getBuyMoney(){  //UI
   }
 }
 
+export function getBuyNumber(buyMoney){ 
+  let buyNumber = buyMoney/1000;
+  return buyNumber;
+}
+
+export function getLottoNumber(buyNumber){
+  let lottoNumber = [];
+  for(let i = 0; i < buyNumber; i++){
+    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    const lotto = new Lotto(numbers); //Lotto클래스 객체 lotto
+    lottoNumber.push(lotto);  //lotto 객체를 lottoNumber 배열에 차례대로 삽입.
+  }
+  return lottoNumber;
+}
+
 export async function getWinNumber(){ //UI
   try{
   let winNumber =  await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
@@ -43,12 +58,45 @@ export async function getBonusNumber(){ //UI
   }
 }
 
+export function calculateWinCount(matchingCount,winCount,lottoNumber,bonusNumber){  
+  switch(matchingCount){
+    case 3: winCount[0] += 5000;  //당첨된 금액을 바로 배열에 저장
+      break;
+    case 4: winCount[1] += 50000;
+      break;
+    case 5: if (lottoNumber.getNumber().includes(bonusNumber)) { winCount[3] += 30000000; break;}
+      winCount[2] += 1500000;
+      break;
+    case 6: winCount[4] += 2000000000;
+      break;
+  }
+  return winCount;
+}
+
+export function getWinCount(buyNumber,lottoNumber,winNumber,bonusNumber){
+  let winCount = [0,0,0,0,0];
+  for(let i = 0; i < buyNumber; i++){
+    let matchingCount = lottoNumber[i].match(winNumber);  //Lotto 클래스 내 match 메소드로 같은 수 비교
+    winCount = calculateWinCount(matchingCount,winCount,lottoNumber[i],bonusNumber);  //같은 수 갯수 만큼 계산
+  }
+  return winCount;
+}
+
 export function printLottoNumber(buyNumber,lottoNumber){    //UI
   MissionUtils.Console.print(buyNumber+"개를 구매했습니다.");
   for(let i=0; i<buyNumber; i++){
     let lottoNumber_string = "["+lottoNumber[i].getNumber().sort((a,b)=>a-b).join(", ")+"]"
     MissionUtils.Console.print(lottoNumber_string);
   }
+}
+
+export function getRateofReturn(buyMoney,winCount){ //수익률 계산
+  let sum = 0;
+  for(let i=0; i<5; i++){
+    sum += winCount[i];
+  }
+  let rateOfRetrurn = (sum/buyMoney)*100;
+  return rateOfRetrurn.toFixed(1);
 }
 
 export function printReward(rateOfRetrurn,winCount){  //UI
@@ -65,9 +113,13 @@ class App {
   async play() {
     try{
       let buyMoney = await getBuyMoney();
+      let buyNumber = getBuyNumber(buyMoney);
+      let lottoNumber = getLottoNumber(buyNumber);
       printLottoNumber(buyNumber,lottoNumber);
       let winNumber = await getWinNumber();
       let bonusNumber = await getBonusNumber();
+      let winCount = getWinCount(buyNumber,lottoNumber,winNumber,bonusNumber);
+      let rateOfRetrurn = getRateofReturn(buyMoney,winCount);
       printReward(rateOfRetrurn,winCount);
     } catch(error){throw error;}
   }
