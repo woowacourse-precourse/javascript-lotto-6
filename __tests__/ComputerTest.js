@@ -75,4 +75,18 @@ describe('컴퓨터 기능 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
+
+  test.each([
+    { input: [0, 0, 0, 0, 0, 1], expected: 5000 },
+    { input: [0, 0, 0, 1, 1, 0], expected: 1550000 },
+    { input: [0, 1, 0, 0, 1, 0], expected: 2000050000 },
+    { input: [0, 0, 0, 0, 0, 2], expected: 10000 },
+    { input: [0, 0, 1, 2, 1, 0], expected: 33050000 },
+    { input: [0, 1, 1, 1, 1, 1], expected: 2031555000 },
+  ])('총 상금 계산 테스트', ({ input, expected }) => {
+    const computer = new Computer();
+    computer.result = input;
+
+    expect(computer.getTotalWinnings()).toEqual(expected);
+  });
 });

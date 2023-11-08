@@ -61,6 +61,20 @@ export default class Computer {
     }, Array(6).fill(0));
   }
 
+  getTotalWinnings() {
+    const winnings = [
+      LOTTERY_WINNINGS.get(LOTTERY.DEFAULT_PLACE).winnings,
+      LOTTERY_WINNINGS.get(LOTTERY.FIRST_PLACE).winnings,
+      LOTTERY_WINNINGS.get(LOTTERY.SECOND_PLACE).winnings,
+      LOTTERY_WINNINGS.get(LOTTERY.THIRD_PLACE).winnings,
+      LOTTERY_WINNINGS.get(LOTTERY.FOURTH_PLACE).winnings,
+      LOTTERY_WINNINGS.get(LOTTERY.FIFTH_PLACE).winnings,
+    ];
+    return this.result.reduce((total, curCnt, place) => {
+      return total + curCnt * winnings[place];
+    }, 0);
+  }
+
   resetLotto() {
     this.winningNumbers = [];
     this.bonusNumber = 0;
