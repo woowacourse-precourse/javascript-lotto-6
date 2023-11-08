@@ -11,6 +11,10 @@ class WinningLotto extends Lotto {
     this.#bonus = bonus;
   }
 
+  getBonusNumber() {
+    return this.#bonus;
+  }
+
   #validate(winningNumbers, bonus) {
     const REGEX_NUMERIC = /^\d+$/;
 
@@ -25,6 +29,14 @@ class WinningLotto extends Lotto {
     if (winningNumbers.indexOf(bonus) !== -1) {
       throw new CustomError(ERROR.BONUS_ALREADY_IN_LOTTO);
     }
+  }
+
+  countMatchingNumbers(lotto) {
+    const matchCnt = this._numbers.reduce(
+      (sum, num) => (lotto.contain(num) ? sum + 1 : sum),
+      0
+    );
+    return matchCnt;
   }
 }
 

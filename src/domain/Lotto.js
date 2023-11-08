@@ -2,15 +2,19 @@ import { ERROR, LOTTO } from '../Constant.js';
 import CustomError from '../CustomError.js';
 
 class Lotto {
-  #numbers;
+  _numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
-    this.#numbers = numbers;
+    this._numbers = numbers;
   }
 
   getNumbers() {
-    return this.#numbers;
+    return this._numbers;
+  }
+
+  contain(x) {
+    return this._numbers.indexOf(x) !== -1;
   }
 
   #validate(numbers) {
