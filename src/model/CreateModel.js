@@ -12,7 +12,7 @@ class CreateModel {
   }
 
   createBonusModel(bonusNumber, lottoWinngNumbers) {
-    return new Bonus(bonusNumber, lottoWinngNumbers);
+    return new Bonus(bonusNumber, lottoWinngNumbers.getLotto());
   }
 }
 

@@ -14,13 +14,13 @@ class Bonus {
     if (number.length !== LOTTO_CONSTANT.bonusCount) {
       throw new Error(ERROR_MESSAGES.bonusNumberCountOne);
     }
-    if (number.some((num) => Number.isNaN(num))) {
+    if (number.some((num) => Number.isNaN(num) || typeof num !== "number")) {
       throw new Error(ERROR_MESSAGES.bonusNumberNotNumber);
     }
     if (number.some((num) => num < LOTTO_CONSTANT.minNumber || num > LOTTO_CONSTANT.maxNumber)) {
       throw new Error(ERROR_MESSAGES.bonusNumberOutOfRange);
     }
-    if (lottoWinngNumbers.getLotto().includes(number[0])) {
+    if (lottoWinngNumbers.includes(number[0])) {
       throw new Error(ERROR_MESSAGES.bonusNumberAlreadyIncluded);
     }
   }
