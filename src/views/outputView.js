@@ -3,8 +3,8 @@ import view from '../utils/view';
 
 const outputView = {
   printLottosInfo(lottos) {
-    printLottosCount(lottos.length);
-    printLottosNumbers(lottos);
+    this.printLottosCount(lottos.length);
+    this.printLottosNumbers(lottos);
   },
 
   printLottosCount(count) {
@@ -14,10 +14,12 @@ const outputView = {
   },
 
   printLottosNumbers(lottos) {
-    const sortedLottos = lottos.map(() => sort((a, b) => a - b));
-    const message = OUTPUT_MESSAGE.LOTTO_NUMBERS(sortedLottos);
-    
-    view.print(message);
+    const sortedLottos = lottos.map((arr) => arr.sort((a, b) => a - b));
+
+    for(const numbers of sortedLottos) {
+      const message = OUTPUT_MESSAGE.LOTTO_NUMBERS(numbers);
+      view.print(message);
+    };
   },
 }
 

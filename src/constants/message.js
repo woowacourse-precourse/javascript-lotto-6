@@ -34,14 +34,10 @@ export const OUTPUT_MESSAGE = Object.freeze({
     return `${count}개를 구매했습니다.`;
   },
   LOTTO_NUMBERS(lottos) {
-    const lottoNumbersToString = (lottoNumbers) => {
+    const lottosOutput = (lottoNumbers) => {
       return `[${lottoNumbers.join(', ')}]`;
     }
 
-    const lottosOutput = lottos
-      .map(lottoNumbersToString)
-      .join('\n');
-
-    return lottosOutput;
+    return lottosOutput(lottos);
   },
 });

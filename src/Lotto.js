@@ -30,7 +30,7 @@ class Lotto {
   }
 
   static generateNumbers() {
-    const numbers = random.generateNumbers(
+    const numbers = random.getNumbersInRange(
       LOTTO.MIN_NUMBER_IN_RANGE,
       LOTTO.MAX_NUMBER_IN_RANGE,
       LOTTO.CHOICE_NUMBERS_PER_TICKET
