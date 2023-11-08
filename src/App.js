@@ -63,7 +63,7 @@ class App {
     const winningNumbers = await Console.readLineAsync('');
     this.winningNumbers = validateWinningNumbers(
       winningNumbers,
-      SYMBOL,
+      SYMBOL.COMMA,
       INPUT_ERROR_MESSAGE,
     );
   }

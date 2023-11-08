@@ -15,7 +15,7 @@ export function validateWinningNumbers(
   SYMBOL,
   INPUT_ERROR_MESSAGE,
 ) {
-  const splitWinningNumbers = winningNumbers.split(SYMBOL.COMMA);
+  const splitWinningNumbers = winningNumbers.split(SYMBOL);
 
   if (splitWinningNumbers.length !== 6) {
     throw new Error(INPUT_ERROR_MESSAGE.WINNING_NUMBERS_ERROR);
