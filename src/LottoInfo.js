@@ -15,11 +15,11 @@ const IGNORE_MATCHING_COUNTS = [0, 1, 2];
 Object.freeze(IGNORE_MATCHING_COUNTS);
 
 const MATCHING_COUNT = {
-  THREE: 3,
-  FOUR: 4,
-  FIVE: 5,
-  BONUS_FIVE: 51,
-  SIX: 6,
+  three: 3,
+  four: 4,
+  five: 5,
+  bonusFive: 51,
+  six: 6,
 };
 Object.freeze(MATCHING_COUNT);
 

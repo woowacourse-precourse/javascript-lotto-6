@@ -14,11 +14,11 @@ class WinningLotto {
   }
 
   countMatchingWith(otherLotto) {
-    const { FIVE, BONUS_FIVE } = MATCHING_COUNT;
+    const { five, bonusFive } = MATCHING_COUNT;
 
     const matchingCount = otherLotto.countMatchingWith(this.#lotto);
-    if (matchingCount === FIVE && otherLotto.includes(this.#bonusNumber)) {
-      return BONUS_FIVE;
+    if (matchingCount === five && otherLotto.includes(this.#bonusNumber)) {
+      return bonusFive;
     }
     return matchingCount;
   }
