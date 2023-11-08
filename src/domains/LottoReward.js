@@ -1,15 +1,18 @@
+import { GRADE, PIRZE } from '../constants/lotto.js';
 import paramType from '../lib/paramType/src/paramType.js';
+import roundNumber from '../utils/roundNumber.js';
 
 export default class LottoReward {
   #drawResult;
   #purchasePrice;
+  DECIMAL_PLACES = 1;
 
   static GRADE_PRIZE = Object.freeze({
-    1: 2000000000,
-    2: 30000000,
-    3: 1500000,
-    4: 50000,
-    5: 5000,
+    [GRADE.FIRST]: PIRZE.FIRST,
+    [GRADE.SECOND]: PIRZE.SECOND,
+    [GRADE.THIRD]: PIRZE.THIRD,
+    [GRADE.FOURTH]: PIRZE.FOURTH,
+    [GRADE.FIFTH]: PIRZE.FIFTH,
   });
 
   constructor(
@@ -25,7 +28,7 @@ export default class LottoReward {
   calculrateProfitRate() {
     const totalPrize = this.#calculateTotalPrize();
     const profit = totalPrize / this.#purchasePrice;
-    const profitRate = (profit * 100).toFixed(1);
+    const profitRate = roundNumber(profit * 100, this.DECIMAL_PLACES);
 
     return profitRate;
   }
