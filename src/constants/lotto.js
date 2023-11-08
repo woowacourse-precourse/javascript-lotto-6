@@ -5,12 +5,6 @@ export const RANGE = {
 
 export const PICK_NUMBERS = 6;
 
-export const NUMBER_MAX_LENGTH = 2;
-
-export const NUMBER_MIN_LENGTH = 1;
-
-export const ZERO = 0;
-
 export const LOTTO_PRICE = 1000;
 
 export const WINNING_REQUIRED_COUNT = Object.freeze({
