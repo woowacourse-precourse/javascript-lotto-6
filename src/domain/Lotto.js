@@ -1,5 +1,6 @@
-import Validator from '../utils/Validator.js';
+import Validator from '../utils/Validator';
 import { Random } from '@woowacourse/mission-utils';
+import { MAGIC_NUMBER } from '../constants/number';
 
 class Lotto {
   #numbers;
@@ -14,13 +15,15 @@ class Lotto {
   }
 
   static generateLottoNumber(numbers) {
-    const Lottos = [];
-    const lottoCount = numbers / 1000;
+    const lottoCount = numbers / MAGIC_NUMBER.oneThousand;
 
-    for (let i = 0; i < lottoCount; i++) {
-      const purchaseLotto = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
-      Lottos.push(purchaseLotto);
-    }
+    const Lottos = Array.from({ length: lottoCount }, () =>
+      Random.pickUniqueNumbersInRange(
+        MAGIC_NUMBER.lottoStart,
+        MAGIC_NUMBER.lottoEnd,
+        MAGIC_NUMBER.lottoCount
+      ).sort((a, b) => a - b)
+    );
 
     return Lottos;
   }

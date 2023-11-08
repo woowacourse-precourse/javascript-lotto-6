@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from '../constants/messages';
 import { WINNING_DESCRIPTION } from '../constants/winning';
 import { SYMBOL } from '../constants/symbol';
+import { MAGIC_NUMBER } from '../constants/number';
 
 class OutputView {
   static printLotto(purchaseLotto) {
@@ -12,11 +13,12 @@ class OutputView {
   }
 
   static printWinningStatistics(winnings) {
-    Console.print(`${OUTPUT_MESSAGE.enter}${OUTPUT_MESSAGE.result}`);
-    Console.print(`${SYMBOL.contour}`);
-    for (let i = 0; i < 5; i++) {
-      Console.print(`${WINNING_DESCRIPTION[i]} - ${winnings[i]}${OUTPUT_MESSAGE.count}`);
-    }
+    Console.print(`${OUTPUT_MESSAGE.result}${SYMBOL.contour}`);
+    WINNING_DESCRIPTION.slice(MAGIC_NUMBER.zero, MAGIC_NUMBER.rank).forEach(
+      (description, index) => {
+        Console.print(`${description} - ${winnings[index]}${OUTPUT_MESSAGE.count}`);
+      }
+    );
   }
 
   static printRevenueRate(rate) {

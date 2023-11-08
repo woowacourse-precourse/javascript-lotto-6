@@ -1,13 +1,19 @@
-import { WINNING_AMOUNTS } from '../constants/winning.js';
+import { WINNING_AMOUNTS } from '../constants/winning';
+import { MAGIC_NUMBER } from '../constants/number';
 
 class CirculateRate {
   static winningReword(winnings) {
-    return winnings.reduce((acc, amount, index) => acc + amount * WINNING_AMOUNTS[index], 0);
+    const reword = winnings.reduce(
+      (acc, amount, index) => acc + amount * WINNING_AMOUNTS[index],
+      MAGIC_NUMBER.zero
+    );
+
+    return reword;
   }
 
   static calculateRevenueRate(reword, purchaseAmount) {
-    const rate = (reword / purchaseAmount) * 100;
-    return Math.round(rate * 100) / 100;
+    const rate = (reword / purchaseAmount) * MAGIC_NUMBER.hundred;
+    return Math.round(rate * MAGIC_NUMBER.hundred) / MAGIC_NUMBER.hundred;
   }
 
   static revenueRate(winnings, purchaseAmount) {

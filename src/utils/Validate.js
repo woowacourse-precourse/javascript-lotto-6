@@ -1,5 +1,6 @@
 import { REGEXP } from '../constants/regexp';
 import { ERROR_MESSAGE } from '../constants/messages';
+import { MAGIC_NUMBER } from '../constants/number';
 
 class Validate {
   static numberValidate(value) {
@@ -8,24 +9,25 @@ class Validate {
   }
 
   static divisionValidate(value) {
-    if (value % 1000 !== 0) {
+    if (value % MAGIC_NUMBER.oneThousand !== MAGIC_NUMBER.zero) {
       throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidDivision}`);
     }
   }
 
   static quantityValidate(value) {
-    if (value === 0) {
+    if (value === MAGIC_NUMBER.zero) {
       throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidQuantity}`);
     }
   }
 
   static rangeValidate(value) {
-    if (value < 1 || value > 45)
+    if (value < MAGIC_NUMBER.lottoStart || value > MAGIC_NUMBER.lottoEnd) {
       throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidRange}`);
+    }
   }
 
   static lengthValidate(value) {
-    if (value.length !== 6) {
+    if (value.length !== MAGIC_NUMBER.lottoCount) {
       throw new Error(`${ERROR_MESSAGE.prefix} ${ERROR_MESSAGE.invalidLength}`);
     }
   }
