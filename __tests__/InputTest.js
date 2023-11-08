@@ -1,4 +1,4 @@
-import InputView from '../src/InputView.js';
+import InputView from '../src/view/InputView.js';
 
 describe('구입금액 입력 테스트', () => {
   test('숫자를 입력받아야합니다.', () => {

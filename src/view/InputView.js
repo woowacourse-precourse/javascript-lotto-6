@@ -2,42 +2,45 @@ import { Console } from '@woowacourse/mission-utils';
 
 const INPUT_MONEY_MESSAGE = '구입금액을 입력해 주세요.\n';
 const INPUT_LOTTO_NUMBERS_MESSAGE = '당첨 번호를 입력해 주세요.\n';
-const INPUT_BONUS_NUMBER_MESSAGE = '보너스 번ㅎ를을 입력해 주세요.\n';
+const INPUT_BONUS_NUMBER_MESSAGE = '보너스 번호를 입력해 주세요.\n';
 class InputView {
-  static async InputMoney() {
+  static async inputMoney() {
     const userInputMoney = await Console.readLineAsync(INPUT_MONEY_MESSAGE);
     try {
       this.validateMoney(userInputMoney);
     } catch (error) {
       Console.print(error.message);
-      return this.InputMoney();
+      return this.inputMoney();
     }
     const money = Number(userInputMoney);
+
     return money;
   }
 
-  static async InputLottoNumbers() {
+  static async inputLottoNumbers() {
     const userInputLottoNumbers = await Console.readLineAsync(INPUT_LOTTO_NUMBERS_MESSAGE);
     try {
       this.validateLottoNumbers(userInputLottoNumbers);
     } catch (error) {
       Console.print(error.message);
-      return this.InputLottoNumbers();
+      return this.inputLottoNumbers();
     }
     const stringLottoNumbers = userInputLottoNumbers.split(',');
     const lottoNumbers = stringLottoNumbers.map(number => Number(number));
+
     return lottoNumbers;
   }
 
-  static async setBonusNumber() {
+  static async inputBonusNumber(winnersNumbers) {
     const userInputBonusNumber = await Console.readLineAsync(INPUT_BONUS_NUMBER_MESSAGE);
     try {
-      this.validateBonusNumber(userInputBonusNumber);
+      this.validateBonusNumber(userInputBonusNumber, winnersNumbers);
     } catch (error) {
       Console.print(error.message);
-      return this.setBonusNumber();
+      return this.inputBonusNumber(winnersNumbers);
     }
     const bonusNumber = Number(userInputBonusNumber);
+
     return bonusNumber;
   }
 
@@ -71,12 +74,15 @@ class InputView {
     }
   }
 
-  static validateBonusNumber(input) {
+  static validateBonusNumber(input, winnerNumbers) {
     if (Number.isInteger(Number(input)) === false) {
       throw new Error('[ERROR] 보너스 번호는 정수여야 합니다.');
     }
     if (Number(input) < 1 || Number(input) > 45) {
       throw new Error('[ERROR] 보너스 번호는 1~45 사이의 숫자여야 합니다.');
+    }
+    if (winnerNumbers.includes(Number(input))) {
+      throw new Error('[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.');
     }
   }
 }
