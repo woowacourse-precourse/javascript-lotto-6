@@ -90,7 +90,83 @@ describe('로또 테스트', () => {
     });
   });
 
-  test('예외 테스트', async () => {
+  test('금액 입력 예외 테스트1', async () => {
     await runException('1000j');
+  });
+
+  test('금액 입력 예외 테스트2', async () => {
+    await runException('1000,');
+  });
+
+  test('당첨 번호 입력 6개 초과 예외 테스트', async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6,8', '1,2,3,4,5,6', '7'];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions(INPUT_NUMBERS_TO_END);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  });
+
+  test('당첨 번호 입력 시 숫자가 아닌 경우 예외 테스트', async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6,a', '1,2,3,4,5,6', '7'];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions(INPUT_NUMBERS_TO_END);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  });
+
+  test('보너스 번호 입력 시 당첨 번호와 중복될 시 예외 테스트', async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6', '6', '5', '7'];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions(INPUT_NUMBERS_TO_END);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
+  });
+
+  test('입력한 보너스 번호가 1미만, 45 초과했을 때 예외 테스트', async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS_TO_END = ['1000', '1,2,3,4,5,6', '0', '46', '7'];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions(INPUT_NUMBERS_TO_END);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
   });
 });
