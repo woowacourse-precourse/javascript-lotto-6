@@ -26,7 +26,7 @@ class GameManager {
         (lottoRank) => lottoRank === rank.result
       ).length;
       Console.print(
-        `${rank.match}개 일치${index === 3 ? `, 보너스 볼 일치` : ' '}(${
+        `${rank.match}개 일치${index === 3 ? `, 보너스 볼 일치 ` : ' '}(${
           rank.printMoney
         }원) - ${count}개`
       );
