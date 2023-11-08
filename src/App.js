@@ -17,7 +17,7 @@ class App {
 
   async getPurchasePrice() {
     try {
-      this.purchasePrice = await Input.inputPurchasePrice();
+      this.purchasePrice = await Input.purchasePrice();
       Output.showEnter();
       return new PurchasePrice(this.purchasePrice);
     } catch (error) {
@@ -28,7 +28,7 @@ class App {
 
   async getLottoNumbers() {
     try {
-      this.lotto = await Input.inputLotto();
+      this.lotto = await Input.lotto();
       Output.showEnter();
       return new Lotto(this.lotto);
     } catch (error) {
@@ -39,7 +39,7 @@ class App {
 
   async getBonusNumber() {
     try {
-      this.bonusNumber = await Input.inputBonusNumber();
+      this.bonusNumber = await Input.bonusNumber();
       Output.showEnter();
       return new BonusNumber(this.bonusNumber);
     } catch (error) {
