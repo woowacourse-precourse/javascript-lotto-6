@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
-import WinningNumbers from "./domains/WinningRate.js";
+import WinningNumbers from "./domains/WinningNumbers.js";
 import Result from "./domains/Result.js";
 import InputView from "./view/InputView.js";
 import OutputView from "./view/OutputView.js";
