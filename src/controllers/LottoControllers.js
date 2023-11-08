@@ -38,9 +38,7 @@ class LottoController {
   }
 
   async #getPurchaseAmount() {
-    const input = await Console.readLineAsync(
-      '구입금액을 입력해 주세요. (1000원 단위)\n',
-    );
+    const input = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
     const amount = Number(input);
     if (!isValidAmount(amount)) {
       throw new Error('[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다.');
@@ -49,9 +47,7 @@ class LottoController {
   }
 
   async #getWinningNumbers() {
-    const input = await Console.readLineAsync(
-      '당첨 번호를 입력해 주세요. (쉼표로 구분하여 입력)\n',
-    );
+    const input = await Console.readLineAsync('\n당첨 번호를 입력해 주세요.\n');
     const numbers = input.split(',').map((num) => Number(num.trim()));
     if (
       numbers.length !== NUMBERS_COUNT ||
@@ -63,7 +59,9 @@ class LottoController {
   }
 
   async #getBonusNumber() {
-    const input = await Console.readLineAsync('보너스 번호를 입력해 주세요.\n');
+    const input = await Console.readLineAsync(
+      '\n보너스 번호를 입력해 주세요.\n',
+    );
     const number = Number(input.trim());
     if (!areNumbersInRange([number], MIN_NUMBER, MAX_NUMBER)) {
       throw new Error('[ERROR] 잘못된 보너스 번호입니다. 다시 입력해주세요.');
@@ -73,7 +71,8 @@ class LottoController {
 
   #calculateProfitRate(amount, results) {
     const totalPrize = results.reduce((acc, curr) => acc + curr.prize, 0);
-    return ((totalPrize - amount) / amount) * 100;
+    const profitRate = (totalPrize / amount) * 100;
+    return parseFloat(profitRate.toFixed(2)).toString();
   }
 }
 
