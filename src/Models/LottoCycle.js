@@ -45,9 +45,8 @@ class LottoCycle {
 
 	checkLottosRank() {
 		this.#userLottos.forEach((lotto) => {
-			const correctCount = LottoCheck.checkNumber(this.#winnerLotto, lotto);
-			const isCorrectBonus = LottoCheck.checkBounsNumber(lotto, this.#bonusLotto);
-
+			const correctCount = LottoCheck.checkCorrectNumber(this.#winnerLotto, lotto);
+			const isCorrectBonus = lotto.includes(this.#bonusLotto);
 			this.#updateScoreCount(correctCount, isCorrectBonus);
 		});
 	}
