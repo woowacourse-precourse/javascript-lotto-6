@@ -66,7 +66,7 @@ export default class LottoYieldCalculator {
     const foundKey = prizeDetailEntries.find(
       ([key, { matchNum }]) =>
         matchCount === matchNum &&
-        (!isBonusMatched || key === this.getSecondPrizeRank())
+        (!isBonusMatched || key === this.setting.getSecondPrizeRank())
     );
 
     return foundKey ? foundKey[0] : null;
