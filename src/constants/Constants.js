@@ -8,8 +8,8 @@ export const OPTIONS = Object.freeze({
 export const MESSAGE = Object.freeze({
   enterPurchasePrice: `구입금액을 입력해 주세요.\n`,
   purchaseAmount: `개를 구매했습니다.`,
-  enterWinningNumbers: `당첨 번호를 입력해 주세요.\n`,
-  enterBonusNumber: `보너스 번호를 입력해 주세요.\n`,
+  enterWinningNumbers: `\n당첨 번호를 입력해 주세요.\n`,
+  enterBonusNumber: `\n보너스 번호를 입력해 주세요.\n`,
   winningResult: `당첨 통계\n---\n`,
   totalProfitPercentage: `총 수익률은`,
 });

@@ -11,9 +11,9 @@ class GameController {
 
   #lottos = [];
 
-  #winningLottoNumbers = [];
+  #winningNumbers = [];
 
-  #winningBonusNumbers = 0;
+  #bonusNumber = 0;
 
   async enterPurchasePrice() {
     const price = Number(await UserInputView.inputPrice());
@@ -41,10 +41,21 @@ class GameController {
     const numbers = input.split(',').map(Number);
     try {
       Validator.winningNumbers(numbers);
-      this.#winningLottoNumbers = numbers;
+      this.#winningNumbers = numbers;
     } catch (error) {
       UserOutputView.printError(error.message);
       await this.enterWinningNumbers();
+    }
+  }
+
+  async enterBonusNumber() {
+    const number = Number(await UserInputView.inputBonusNumber());
+    try {
+      Validator.bonusNumber(number, this.#winningNumbers);
+      this.#bonusNumber = number;
+    } catch (error) {
+      UserOutputView.printError(error.message);
+      await this.enterBonusNumber();
     }
   }
 
@@ -53,6 +64,7 @@ class GameController {
     this.calculateTicketCount();
     this.makeAndPrintLottos();
     await this.enterWinningNumbers();
+    await this.enterBonusNumber();
   }
 }
 

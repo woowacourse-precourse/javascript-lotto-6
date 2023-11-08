@@ -46,13 +46,35 @@ class Validator {
 
   static checkNumberRange(input) {
     input.forEach((element) => {
-      if (element < OPTIONS.lottoNumberMin) {
-        throw new Error(ERROR.invalidNumberRange);
-      }
-      if (element > OPTIONS.lottoNumberMax) {
+      if (
+        Number.isNaN(element)
+        || element < OPTIONS.lottoNumberMin
+        || element > OPTIONS.lottoNumberMax
+      ) {
         throw new Error(ERROR.invalidNumberRange);
       }
     });
+  }
+
+  static bonusNumber(input, inputArr) {
+    Validator.checkBonusNumberRange(input);
+    Validator.checkDuplicateBonusNumbers(input, inputArr);
+  }
+
+  static checkBonusNumberRange(input) {
+    if (
+      Number.isNaN(input)
+      || input < OPTIONS.lottoNumberMin
+      || input > OPTIONS.lottoNumberMax
+    ) {
+      throw new Error(ERROR.invalidNumberRange);
+    }
+  }
+
+  static checkDuplicateBonusNumbers(input, inputArr) {
+    if (inputArr.includes(input)) {
+      throw new Error(ERROR.duplicateNumbers);
+    }
   }
 }
 

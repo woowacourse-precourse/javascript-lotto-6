@@ -15,6 +15,13 @@ class UserInputView {
     );
     return winningNumber;
   }
+
+  static async inputBonusNumber() {
+    const bonusNumber = await MissionUtils.Console.readLineAsync(
+      MESSAGE.enterBonusNumber,
+    );
+    return bonusNumber;
+  }
 }
 
 export default UserInputView;
