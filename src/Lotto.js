@@ -14,12 +14,18 @@ class Lotto {
       const num = numbers[i];
       this.#validateNumber(num);
     }
+    this.#validateDuplicate(numbers);
   }
 
   #validateNumber(number) {
     if(isNaN(number) || number<1 || number>45) {
       throw new Error("[ERROR] 각 번호는 1~45의 숫자여야 합니다.")
     }
+  }
+
+  #validateDuplicate(numberArray) {
+    const set = new Set(...numberArray);
+    if(set.length!==6) throw new Error("[ERROR] 로또 번호 중 중복된 수가 있습니다.")
   }
 
   // TODO: 추가 기능 구현
