@@ -7,16 +7,30 @@ const playLottoGame = (inputNumber, lottoArray, bonusNumber, userBuyMoney) => {
 
     lottoArray.forEach((numbers) => {
         const lottoCount = includedLottoNumbers(inputNumber, numbers);
-        const bonusCheck = includedBonusNumber(numbers, bonusNumber);
+        const getBonusNumber = includedBonusNumber(numbers, bonusNumber);
 
-        if (lottoCount === 3) { checkLottoResult.three.count += 1; }
-        if (lottoCount === 4) { checkLottoResult.four.count += 1; }
-        if (lottoCount === 5) { checkLottoResult.five.count += 1; }
-        if (lottoCount === 5 && bonusCheck) { checkLottoResult.fiveBonus.count += 1; }
-        if (lottoCount === 6) { checkLottoResult.six.count += 1; }
+        compareLottoCount(checkLottoResult, lottoCount, getBonusNumber);
     });
 
     printLottoResult(checkLottoResult, userBuyMoney);
+}
+
+const compareLottoCount = (checkLottoResult, lottoCount, bonusNumber) => {
+    switch (lottoCount) {
+        case 3:
+            checkLottoResult.three.count += 1;
+            break;
+        case 4:
+            checkLottoResult.four.count += 1;
+            break;
+        case 5:
+            checkLottoResult.five.count += 1;
+            if (bonusNumber) checkLottoResult.fiveBonus.count += 1;
+            break;
+        case 6:
+            checkLottoResult.six.count += 1;
+            break;
+    }
 }
 
 export default playLottoGame;
