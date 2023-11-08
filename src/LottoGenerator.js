@@ -10,19 +10,12 @@ class LottoGenerator{
     this.printLottos();
   }
 
-  async printLottos() {
-    Console.print("\n" + this.count + "개를 구매했습니다.")
-    //for (let i = 0; i < this.lottos.length; i++) {
-    //  const lotto = this.lottos[i];
-    //  for (let j = 0; i < lotto.length; j++)
-    //    Console.print(`[${lotto[j].join(", ")}]`);
-    //}
-    for (let lotto of this.lottos)
-    {
-      //Console.print("here");
-      lotto.printNumbers();
-
-    }
+  printLottos() {
+    Console.print("");
+    Console.print(`${this.count}개를 구매했습니다.`);
+    this.lottos.forEach((lotto) => {
+      Console.print(`[${lotto.getNumbers().join(", ")}]`);
+    });
   }
 
   async lottoGenerator() {
