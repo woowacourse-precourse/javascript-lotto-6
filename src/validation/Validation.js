@@ -20,6 +20,11 @@ class Validation {
     });
   }
 
+  static isLottoNotUnique(lotto) {
+    const lottoSet = new Set(lotto);
+    if (lottoSet.size === lotto.length) throw new Error(ERROR.LOTTO_NOT_UNIQUE);
+  }
+
   static isLottoBadRange(lotto) {
     lotto.forEach((number) => {
       if (number < RANGE_START || number > RANGE_END) throw new Error(ERROR.LOTTO_BAD_RANGE);

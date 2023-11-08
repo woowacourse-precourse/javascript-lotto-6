@@ -12,6 +12,7 @@ class Lotto {
 
   #validate(numbers) {
     Validation.isLottoBadFormat(numbers);
+    Validation.isLottoNotUnique(numbers);
     Validation.isLottoBadRange(numbers);
   }
 

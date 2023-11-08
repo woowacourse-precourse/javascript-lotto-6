@@ -50,6 +50,7 @@ export const ERROR = {
   PRICE_NULL: "[ERROR] 로또 구입 금액을 입력해 주세요.",
   PRICE_NOT_NUMBER: "[ERROR] 로또 구입 금액은 숫자로 입력해 주세요.",
   LOTTO_BAD_FORMAT: "[ERROR] 로또 번호는 쉼표(,)로 구분된 숫자 6개를 입력해 주세요.",
+  LOTTO_NOT_UNIQUE: "[ERROR] 로또 번호는 서로 다른 숫자를 입력해 주세요.",
   LOTTO_BAD_RANGE: "[ERROR] 로또 번호는 1부터 45 사이의 숫자입니다.",
   BONUS_NOT_NUMBER: "[ERROR] 보너스 번호는 숫자로 입력해 주세요.",
   BONUS_BAD_RANGE: "[ERROR] 보너스 번호는 1부터 45사이의 숫자입니다."
