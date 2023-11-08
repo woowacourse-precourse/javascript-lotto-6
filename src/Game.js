@@ -38,6 +38,13 @@ class Game {
     return this.calculateLottoCountFromMoney(userInput);
   };
 
+  getWinningNumber = async () => {
+    const userInput = await InputOutput.getInput("당첨 번호를 입력해 주세요.");
+    const winningNumbers = userInput.split(",").map((value) => +value);
+    if (!Validate.isLottoNumbersFormat(winningNumbers)) throw new Error(ErrorMessages.lottoFormatError);
+    return winningNumbers;
+  };
+
 }
 
 export default Game;
