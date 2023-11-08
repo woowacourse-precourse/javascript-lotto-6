@@ -16,6 +16,38 @@ const inputHandlers = {
       }
     }
   },
+
+  async inputWinningNumbers() {
+    let winnigNumbersStr;
+    while (true) {
+      try {
+        winnigNumbersStr = await Console.readLineAsync(
+          `${MESSAGES.WINNING_NUMBERS_INPUT}`
+        );
+        const winningNumbersList = winnigNumbersStr.split(",").map(Number);
+        inputValidators.validateWinningNumbers(winningNumbersList);
+        return winningNumbersList;
+      } catch (error) {
+        Console.print(`${ERROR.INPUT_ERROR}`);
+      }
+    }
+  },
+
+  async inputBonusNumber(winnigNumbers) {
+    let bonusNumberStr;
+    while (true) {
+      try {
+        bonusNumberStr = await Console.readLineAsync(
+          `${MESSAGES.BONUS_NUMBER_INPUT}`
+        );
+        const bonusNumber = Number(bonusNumberStr);
+        inputValidators.validateBonusNumber(bonusNumber, winnigNumbers);
+        return bonusNumber;
+      } catch (error) {
+        Console.print(`${ERROR.INPUT_ERROR}`);
+      }
+    }
+  },
 };
 
 export default inputHandlers;
