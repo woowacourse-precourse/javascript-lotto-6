@@ -1,3 +1,7 @@
+import MESSAGES from "./constants/Messages.js";
+import { LOTTO } from "./constants/Standard.js";
+import { isOnlyNumber, isInRangeNumber } from "./utils/Validation.js";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +11,35 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    if (!isOnlyNumber(numbers.join(""))) {
+      throw new Error(MESSAGES.ERROR.PLEASE_ONLY_NUMBER);
     }
+    if (numbers.length !== LOTTO.LENGTH) {
+      throw new Error(MESSAGES.ERROR.INVAILD_LOTTO_LENGTH);
+    }
+    if (!isInRangeNumber(numbers)) {
+      throw new Error(MESSAGES.ERROR.INVAILD_LOTTO_NUMBER);
+    }
+    if (new Set(numbers).size !== numbers.length) {
+      throw new Error(MESSAGES.ERROR.DUPLICATE_LOTTO_NUMBER);
+    }
+    return true;
   }
 
-  // TODO: 추가 기능 구현
+  checkSameNumber(winningNumbers, bonusNumber) {
+    const match =
+      this.#numbers.length +
+      winningNumbers.length -
+      new Set([...this.#numbers, ...winningNumbers]).size;
+
+    if (match === 5) {
+      if (this.#numbers.includes(bonusNumber)) {
+        return 5.5;
+      }
+    }
+
+    return match;
+  }
 }
 
 export default Lotto;
