@@ -111,4 +111,105 @@ describe('LottoService 테스트', () => {
       });
     });
   });
+
+  describe('generateWinningLotto 메서드는 당첨 번호와 보너스 번호를 입력받아 당첨 로또(WinningLotto)를 반환한다.', () => {
+    const cases = [
+      {
+        numbers: [1, 2, 3, 4, 5, 6],
+        bonusNumber: 7,
+      },
+      {
+        numbers: [10, 20, 30, 40, 41, 42],
+        bonusNumber: 43,
+      },
+      {
+        numbers: [6, 7, 8, 9, 10, 11],
+        bonusNumber: 12,
+      },
+    ];
+
+    const errorCases = [
+      {
+        numbers: [10, 10, 30, 40, 41, 42],
+        bonusNumber: 1,
+        expectedError: ERROR.message.lotto.notUnique,
+        describe: '로또 번호가 중복될 경우 예외처리 한다.',
+      },
+      {
+        numbers: [1, 2, 3, 4, 5, 6],
+        bonusNumber: 1,
+        expectedError: ERROR.message.lotto.notUnique,
+        describe: '보너스 번호가 로또 번호와 중복될 경우 예외처리 한다.',
+      },
+      {
+        numbers: [1, 2, 3, 4, 5],
+        bonusNumber: 6,
+        expectedError: ERROR.message.lotto.length,
+        describe: '로또 번호가 6개보다 적을 경우 예외처리 한다.',
+      },
+      {
+        numbers: [1, 2, 3, 4, 5, 6, 7],
+        bonusNumber: 8,
+        expectedError: ERROR.message.lotto.length,
+        describe: '로또 번호가 6개보다 많을 경우 예외처리 한다.',
+      },
+      {
+        numbers: [1, 2, 3, 4, 5, 100],
+        bonusNumber: 6,
+        expectedError: ERROR.message.lotto.notInRange,
+        describe: '로또 번호가 범위를 넘어갈 경우 예외처리 한다.',
+      },
+      {
+        numbers: [1, 2, 3, 4, 5, 6],
+        bonusNumber: 100,
+        expectedError: ERROR.message.lotto.notInRange,
+        describe: '보너스 번호가 범위를 넘어갈 경우 예외처리 한다.',
+      },
+    ];
+
+    test.each(cases)(
+      'WinningLotto는 입력받은 당첨번호를 가지고있다.',
+      ({ numbers, bonusNumber }) => {
+        // when
+        const winningLotto = lottoServiceInstance.generateWinningLotto({
+          numbers,
+          bonusNumber,
+        });
+
+        // then
+        expect(winningLotto.getNumbers()).toEqual(numbers);
+      },
+    );
+
+    test.each(cases)(
+      'WinningLotto는 입력받은 보너스 번호를 가지고있다.',
+      ({ numbers, bonusNumber }) => {
+        // when
+        const winningLotto = lottoServiceInstance.generateWinningLotto({
+          numbers,
+          bonusNumber,
+        });
+
+        // then
+        expect(winningLotto.getBonusNumber()).toEqual(bonusNumber);
+      },
+    );
+
+    describe('예외 테스트', () => {
+      test.each(errorCases)(
+        '$describe',
+        ({ numbers, bonusNumber, expectedError }) => {
+          // when
+          const generateWinningLotto = () =>
+            lottoServiceInstance.generateWinningLotto({
+              numbers,
+              bonusNumber,
+            });
+
+          // then
+          expect(generateWinningLotto).toThrow(expectedError);
+        },
+      );
+    });
+  });
 });
