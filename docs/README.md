@@ -4,10 +4,11 @@
 - [x] 로또 티켓 1장을 발행한다. - `LottoShop.#issueLottoTicket()`
 - [x] 로또 번호를 생성한다. - `LottoShop.#createLottoNumbers()`
 
-- [x] 로또 당첨을 확인한다. - `LottoResultCalculator.checkLottoResult(lottoTickets)`
-- [x] 당첨 번호와 로또 티켓 번호를 비교한다. - `LottoResultCalculator.#matchLottoBalls(lottoTicket)`
-- [x] 로또 번호에서 당첨 번호와 일치하는 숫자의 개수를 계산한다. - `LottoResultCalculator.#countSameNumber(lottoTicket)`
-- [x] 로또 번호에 보너스 번호가 있는지 확인한다. - `LottoResultCalculator#hasBonusNumber(lottoTicket)`
+- [x] 로또 당첨을 확인한다. - `LottoResultChecker.checkLottoResult(lottoTickets)`
+- [x] 당첨 번호와 로또 티켓 번호를 비교한다. - `LottoResultChecker.#matchLottoBalls(lottoTicket)`
+- [x] 로또 번호에서 당첨 번호와 일치하는 숫자의 개수를 계산한다. - `LottoResultChecker.#countSameNumber(lottoTicket)`
+- [x] 로또 번호에 보너스 번호가 있는지 확인한다. - `LottoResultChecker#hasBonusNumber(lottoTicket)`
+- [x] 인수로 전달한 등수에 당첨된 로또의 개수를 계산한다. - `LottoResultChecker#getResultCount(count, flag)`
 
 - [x] 수익률을 계산한다. - `LottoReturnRateCalculator.calculateReturnRate()`
 - [x] 총 수익을 계산한다. - `LottoReturnRateCalculator.#calculateTotalProfit()`
