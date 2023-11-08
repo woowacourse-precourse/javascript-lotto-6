@@ -4,6 +4,7 @@ import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
 import LottoManager from './LottoManager.js';
 import PrizeMoneyManager from './PrizeMoneyManager.js';
+
 import LottoTypeConversion from './util/LottoTypeConversion.js';
 import Validator from './util/validator.js';
 
@@ -36,7 +37,7 @@ class App {
     
     return this.getWinningNumbers(buyLotto);
   }
-  
+
   async getWinningNumbers(buyLotto) {
     try {
       const userWinningNumbers = await InputView.winningNumber();
@@ -60,7 +61,7 @@ class App {
       Lotto.validateLottoNumber(bonusNumber);
       Lotto.validateBonusNumberInWinningNumber(winningNumbers, bonusNumber);
 
-      return this.result(buyLotto, winningNumbers, bonusNumber);
+      return this.drawLotto(buyLotto, winningNumbers, bonusNumber);
     } catch(error) {
       OutputView.error(error);
 
@@ -68,7 +69,7 @@ class App {
     }
   }
 
-  result(buyLotto, winningNumbers, bonusNumber) {
+  drawLotto(buyLotto, winningNumbers, bonusNumber) {
     const prizeMoneyManager = new PrizeMoneyManager();
 
     this.LottoManager.drawingLotto(LottoTypeConversion.Numbers(winningNumbers, bonusNumber));
@@ -76,6 +77,10 @@ class App {
     const totalMoney = prizeMoneyManager.calculateTotalPrizeMoney(this.LottoManager.getRanks());
     const earningsPercen = prizeMoneyManager.calculateEarningsPercent(totalMoney, buyLotto);
 
+    return this.result(earningsPercen);
+  }
+
+  result(earningsPercen) {
     OutputView.result(this.LottoManager.getRanks(), LottoTypeConversion.NumberCommas(earningsPercen));
   }
 }
