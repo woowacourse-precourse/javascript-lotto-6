@@ -5,10 +5,22 @@ class UserLottoNumberController{
     static async setUserLottoNumber(){
         const userLottoNumber = await LottoView.getUserLottoNumber();
         if(Validation.isUserInputLottoNumberValidate(userLottoNumber)){
-            const res = userLottoNumber.split(',').map(number => Number(number));
-        
-            console.log("유저로또넘버", res)}
-        
+            return userLottoNumber.split(',').map(number => Number(number));
+        }
+    }
+
+    static async setUserBonusLottoNumber(userLottoNumber){
+        const userBonusLottoNumber = await LottoView.getUserBonusLottoNumber();
+        if(Validation.isUserInputBonusNumberValidate(userLottoNumber,userBonusLottoNumber)){
+            return Number(userBonusLottoNumber);
+        }
+    }
+
+    static async setUserInputLottoNumber(){
+        const userLottoNumber = await this.setUserLottoNumber();
+        console.log("유저로또넘버는?",userLottoNumber);
+        const userBonusLottoNumber = await this.setUserBonusLottoNumber(userLottoNumber);
+
     }
 }
 

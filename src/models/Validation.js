@@ -43,6 +43,25 @@ class Validation{
 
         return true;
     }
+
+    static isUserInputBonusNumberValidate(userLottoNumber, userBonusNumber){
+        if(!userBonusNumber){
+            throw new Error(ERROR_MESSAGE.INVALID_NULL);
+        }
+
+        if(userBonusNumber < CONSTANTS.MIN_VALUE || userBonusNumber > CONSTANTS.MAX_VALUE){
+            throw new Error(ERROR_MESSAGE.INVALID_LOTTO_NUMBER_RANGE);
+        }
+
+        if(isNaN(Number(userBonusNumber))){
+            throw new Error(ERROR_MESSAGE.INVALID_NOT_A_NUMBER);
+        }
+
+        if(userLottoNumber.includes(Number(userBonusNumber))){
+            throw new Error(ERROR_MESSAGE.INVALID_DUPLICATE_LOTTO_NUMBER);
+        }
+        return true;
+    }
 }
 
 export default Validation;

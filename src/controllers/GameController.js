@@ -6,7 +6,7 @@ import UserLottoNumberController from "./UserLottoNumberController.js";
 class GameController{
     async gameStart(){
         await LottoSettingController.setUserLotto();
-        await UserLottoNumberController.setUserLottoNumber();
+        await UserLottoNumberController.setUserInputLottoNumber();
     }
 }
 export default GameController;

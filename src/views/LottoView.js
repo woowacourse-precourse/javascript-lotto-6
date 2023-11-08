@@ -16,6 +16,10 @@ const LottoView = {
 
     getUserLottoNumber(){
         return Console.readLineAsync(PROMPT.WINNING_NUMBER);
+    },
+
+    getUserBonusLottoNumber(){
+        return Console.readLineAsync(PROMPT.BONUS_NUMBER);
     }
 }
 export default LottoView;
