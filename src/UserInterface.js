@@ -35,7 +35,8 @@ const UserInterface = () => {
   const printLottoNumbers = (lottoNumbers) => {
     Console.print("\n" + lottoNumbers.length + "개를 구매했습니다.");
     lottoNumbers.forEach((lottoNumber) => {
-      Console.print(lottoNumber);
+
+      Console.print("[" + lottoNumber.join(", ") + "]");
     });
   };
 
@@ -44,7 +45,7 @@ const UserInterface = () => {
     let winningNumbersArray;
     while (!isValid) {
       const winningNumber = await Console.readLineAsync(
-        "당첨 번호를 입력해 주세요.\n"
+        "\n당첨 번호를 입력해 주세요.\n"
       );
       try {
         winningNumbersArray = validateWinningNumbers(winningNumber);
@@ -87,7 +88,7 @@ const UserInterface = () => {
     let isValid = false;
     let bonusNumberToInt;
     while (!isValid) {
-      const bonusNumber = await Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+      const bonusNumber = await Console.readLineAsync("\n보너스 번호를 입력해 주세요.\n");
       try {
         bonusNumberToInt = validateBonusNumber(bonusNumber);
         isValid = true;
