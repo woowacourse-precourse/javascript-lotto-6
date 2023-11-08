@@ -48,6 +48,38 @@ class WinnigStatistics {
       this.#prizeMoney += this.#prize[matchCount];
     }
   }
+
+  printResult() {
+    Console.print("\n당첨 통계");
+    Console.print("---");
+
+    const resultArray = this.getResult();
+    resultArray.forEach((eachResult) => {
+      Console.print(eachResult);
+    });
+  }
+
+  getResult() {
+    const result = Object.entries(this.#result);
+
+    const resultArray = [];
+    for (const [matchNumber, count] of result) {
+      const prizeMoney = this.#prize[matchNumber];
+      const thousandSeparator = prizeMoney.toLocaleString();
+
+      if (matchNumber === "5b") {
+        resultArray.push(
+          `5개 일치, 보너스 볼 일치 (${thousandSeparator}원) - ${count}개`
+        );
+      } else {
+        resultArray.push(
+          `${matchNumber}개 일치 (${thousandSeparator}원) - ${count}개`
+        );
+      }
+    }
+
+    return resultArray.sort();
+  }
 }
 
 export default WinnigStatistics;
