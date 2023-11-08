@@ -14,6 +14,7 @@ describe("로또 구입 금액 입력 테스트", () => {
     })
 
   test("1000 단위로 떨어지지 않는 값이 입력될 경우 예외가 발생한다.", async () => {
+    /**잘못된 입력 후, 재귀호출로 인해 한번더 값을 반환 */
     Console.readLineAsync
     .mockResolvedValueOnce('1200')
     .mockResolvedValueOnce('1000');

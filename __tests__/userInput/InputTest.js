@@ -8,6 +8,10 @@ const logSpy = jest.spyOn(Console, "print");
 
 describe("쉼표로 나누어지는 여러 값을 포함하는 문자열 입력 테스트", () => {
   test("입력이 되지 않을 경우 예외가 발생한다.", async () => {
+
+    /**잘못된 입력 후, 재귀호출로 인해 한번더 값을 반환
+     * 이후 테스트에서 동일
+     */
     Console.readLineAsync
     .mockResolvedValueOnce(' ')
     .mockResolvedValueOnce('1,2,3');

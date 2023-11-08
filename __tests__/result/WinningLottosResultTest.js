@@ -9,6 +9,13 @@ let printTitleSpy;
 let printWinningLottoWithBonusSpy;
 let printWinningLottoSpy;
 let printTotalProfitRateSpy;
+let fifthWinningLottoNumbers;
+let fourthWinningLottoNumbers;
+let winningLottoNumbers;
+let losingLottoNumbers;
+let lottoNumbers;
+let lottoResults;
+let winningLottosResult;
 
 const getLogSpy = () => {
     const logSpy = jest.spyOn(Console, "print");
@@ -20,18 +27,15 @@ const winningNumbers = [1,33,35,31,2,3];
 const bonusNumber = 16
 const userMoney = 6000;
 
-let fifthWinningLottoNumbers;
-let fourthWinningLottoNumbers;
-let winningLottoNumbers;
-let losingLottoNumbers;
-let lottoNumbers;
+const initializeSpies=()=>{
+    printWinningLottoWithBonusSpy = jest.spyOn(printResult, "winningLottoWithBonus")
+    printWinningLottoSpy = jest.spyOn(printResult, "winningLotto")
+    printTotalProfitRateSpy = jest.spyOn(printResult, "totalProfitRate")
+    printTitleSpy =  jest.spyOn(printResult, "title")
+}
 
-let lottoResults;
-
-let winningLottosResult;
-
-beforeEach(()=>{
-     fifthWinningLottoNumbers = [
+const initializeInstance=()=>{
+    fifthWinningLottoNumbers = [
         [1,33,35,4,5,6],
         [1,2,3,4,5,6],
     ];
@@ -52,11 +56,13 @@ beforeEach(()=>{
     lottoResults = lottoNumbers.map((lottos)=> new LottoResult(lottos, winningNumbers, bonusNumber));
 
     winningLottosResult = new WinningLottosResult(lottoResults, userMoney);
+}
 
-    printWinningLottoWithBonusSpy = jest.spyOn(printResult, "winningLottoWithBonus")
-    printWinningLottoSpy = jest.spyOn(printResult, "winningLotto")
-    printTotalProfitRateSpy = jest.spyOn(printResult, "totalProfitRate")
-    printTitleSpy =  jest.spyOn(printResult, "title")
+
+
+beforeEach(()=>{
+    initializeInstance();
+    initializeSpies()
 })
 
 describe("n 개의 당첨된 로또들",()=>{
