@@ -175,7 +175,9 @@ class Lotto {
 
   lottoResultPrinter(count) {
     const statCount = this.statCount;
-    Console.print(`${RESULT.START}${RESULT.RANK5}${statCount[0]}개`);
+
+    Console.print(`${RESULT.START}`);
+    Console.print(`${RESULT.RANK5}${statCount[0]}개`);
     Console.print(`${RESULT.RANK4}${statCount[1]}개`);
     Console.print(`${RESULT.RANK3}${statCount[2]}개`);
     Console.print(`${RESULT.RANK2}${statCount[3]}개`);

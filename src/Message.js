@@ -15,7 +15,7 @@ export const INPUT = {
 };
 
 export const RESULT = {
-  START: "\n당첨 통계\n---\n",
+  START: "\n당첨 통계\n---",
   RANK5: "3개 일치 (5,000원) - ",
   RANK4: "4개 일치 (50,000원) - ",
   RANK3: "5개 일치 (1,500,000원) - ",
