@@ -8,8 +8,12 @@ class App {
     const lottoAmonut = await user.purchaseAmount();
     const lottoList = computer.issuanceLotto(lottoAmonut);
     const lottoNumber = await computer.inputLottoNumber();
-    const bonusNumber = await computer.inutBonusNumber(lottoNumber);
-    console.log(bonusNumber);
+    const bonusNumber = await computer.inutBonusNumber(lottoList);
+    const winningDetail = computer.winningDetails(
+      lottoNumber,
+      bonusNumber,
+      lottoList,
+    );
   }
 }
 const app = new App();
