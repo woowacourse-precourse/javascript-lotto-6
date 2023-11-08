@@ -3,6 +3,8 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.validateNumbers(numbers);
+
     this.#numbers = numbers;
   }
 
@@ -10,6 +12,14 @@ class Lotto {
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
     }
+  }
+
+  validateNumbers(numbers) {
+    numbers.forEach((number) => {
+      if (numbers.indexOf(number) !== numbers.lastIndexOf(number)) {
+        throw new Error('[ERROR] 중복된 숫자가 있는지 확인해주세요.');
+      }
+    });
   }
 
   getNumbers() {
