@@ -19,6 +19,14 @@ const NUMBER_RANGE = Object.freeze({
   max: 45,
 });
 
+const PLACE = Object.freeze({
+  first: 1,
+  second: 2,
+  third: 3,
+  fourth: 4,
+  fifth: 5,
+});
+
 const INPUT_ERROR = Object.freeze({
   null: `${PREFIX} 아무것도 입력하지 않았습니다.\n`,
   blank: `${PREFIX} 공백없이 입력해야 합니다.\n`,
@@ -36,5 +44,6 @@ export {
   NUMBER_CRITERIA,
   PERCENT,
   NUMBER_RANGE,
+  PLACE,
   INPUT_ERROR,
 };
