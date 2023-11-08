@@ -5,6 +5,7 @@ import ValidateBonus from './module/ValidateBonus.js';
 import ValidatePurchase from './module/ValidatePurchase.js';
 import purchasedLottoArray from './module/RandomLotto.js';
 import Match from './module/Match.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 class App {
   constructor() {
@@ -22,17 +23,58 @@ class App {
   }
 
   async userSpendMoney() {
-    this.purchasedLottoAmount = await UserInput.purchasedLottoAmount();
-    const validatePurchase = new ValidatePurchase(this.purchasedLottoAmount);
+    await this.reInputPurchasedLottoAmount();
     this.lottoArray = purchasedLottoArray(Number(this.purchasedLottoAmount));
     Output.printUserLottos(this.lottoArray);
   }
 
+  async reInputPurchasedLottoAmount() {
+    let inputValid = false;
+    while (!inputValid) {
+      try {
+        this.purchasedLottoAmount = await UserInput.purchasedLottoAmount();
+        const validatePurchase = new ValidatePurchase(
+          this.purchasedLottoAmount,
+        );
+        inputValid = true;
+      } catch (error) {
+        MissionUtils.Console.print(`${error.message}\n`);
+      }
+    }
+  }
+
   async lottoNumbers() {
-    this.winningNumbers = await UserInput.winningNumbers();
-    const lotto = new Lotto(this.winningNumbers);
-    this.bonus = await UserInput.bonusNumber();
-    const validateBonus = new ValidateBonus(this.bonus, this.winningNumbers);
+    await this.reInputLottoNumbers();
+    await this.reInputBonus();
+  }
+
+  async reInputLottoNumbers() {
+    let inputValid = false;
+    while (!inputValid) {
+      try {
+        this.winningNumbers = await UserInput.winningNumbers();
+        const lotto = new Lotto(this.winningNumbers);
+        inputValid = true;
+      } catch (error) {
+        MissionUtils.Console.print(`${error.message}\n`);
+      }
+    }
+  }
+
+  async reInputBonus() {
+    let inputValid = false;
+    while (!inputValid) {
+      try {
+        this.bonus = await UserInput.bonusNumber();
+        const validateBonus = new ValidateBonus(
+          this.bonus,
+          this.winningNumbers,
+        );
+        inputValid = true;
+      } catch (error) {
+        MissionUtils.Console.print(`${error.message}`);
+      }
+    }
   }
 
   printStatistics() {
