@@ -1,21 +1,28 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { purchaseSize } from "./utils/purchaseSize.js";
 import { RANGE } from "./constant/NUMBER.js";
 import PurchasePrice from "./PurchasePrice.js";
 
 class Game {
-  allLottoNumbers = [];
-  matchingResults = [0, 0, 0, 0, 0];
+  constructor() {
+    this.allLottoNumbers = [];
+    this.matchingResults = [0, 0, 0, 0, 0];
+  }
+
+  #generateRandomLotto() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(
+      RANGE.MIN,
+      RANGE.MAX,
+      RANGE.SIZE
+    ).sort((a, b) => a - b);
+  }
 
   drawLotto(size) {
-    Array.from({ length: purchaseSize(size) }).forEach(() => {
-      const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
-        RANGE.MIN,
-        RANGE.MAX,
-        RANGE.SIZE
-      );
-
-      this.allLottoNumbers.push(randomNumbers.sort((a, b) => a - b));
-    });
+    this.allLottoNumbers = Array.from({ length: purchaseSize(size) }).map(
+      () => {
+        return this.#generateRandomLotto();
+      }
+    );
 
     return this.allLottoNumbers;
   }
