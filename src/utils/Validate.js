@@ -3,11 +3,12 @@ import NUMBER from '../constants/Number';
 
 const Validate = {
   isNumber(number) {
-    if (Number.isNaN(number)) throw Error(ERROR_MESSAGE.INVALID_NUMBER);
+    const convertNumber = Number(number);
+    if (Number.isNaN(convertNumber)) throw Error(ERROR_MESSAGE.INVALID_NUMBER);
   },
 
   isInteger(number) {
-    if (Number.isInteger(number)) throw Error(ERROR_MESSAGE.INVALID_INTEGER);
+    if (!Number.isInteger(number)) throw Error(ERROR_MESSAGE.INVALID_INTEGER);
   },
 
   isPositive(number) {
