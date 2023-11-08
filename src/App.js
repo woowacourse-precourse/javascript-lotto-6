@@ -104,7 +104,7 @@ class App {
     for (let i = 0; i < winningStatistics.length; i++) {
       winningProfit += WINNING_PROFITS[i] * winningStatistics[i];
     }
-    const profitRate = parseFloat(((winningProfit - lottoAmount) / lottoAmount * 100).toFixed(1)).toFixed(1);
+    const profitRate = parseFloat((winningProfit / lottoAmount * 100).toFixed(1)).toFixed(1);
     return parseFloat(profitRate).toFixed(1);
   }
 
