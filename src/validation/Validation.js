@@ -22,7 +22,7 @@ class Validation {
 
   static isLottoNotUnique(lotto) {
     const lottoSet = new Set(lotto);
-    if (lottoSet.size === lotto.length) throw new Error(ERROR.LOTTO_NOT_UNIQUE);
+    if (lottoSet.size !== lotto.length) throw new Error(ERROR.LOTTO_NOT_UNIQUE);
   }
 
   static isLottoBadRange(lotto) {

@@ -33,7 +33,7 @@ export const RESULT = {
   THREE: 3,
   FOUR: 4,
   FIVE: 5,
-  BONUS: 0,
+  BONUS: 7,
   SIX: 6
 }
 
