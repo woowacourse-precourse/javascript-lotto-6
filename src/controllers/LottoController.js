@@ -2,6 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import Result from '../models/Result.js';
+import PurchasedLotto from '../models/purchasedLottos.js';
 import { ErrorMessage } from '../constants/ErrorMessage.js';
 
 class LottoController {
@@ -12,7 +13,7 @@ class LottoController {
   #bonusNumber;
 
   constructor() {
-    this.#lottos = [];
+    this.#lottos = new PurchasedLotto();
   }
 
   async start() {
@@ -22,15 +23,19 @@ class LottoController {
   async #getAndValidateInputs() {
     const purchaseCost = await InputView.inputParchaseCost();
     this.validatePurchaseCost(purchaseCost);
-    this.#lottos = await this.#createLottos(purchaseCost);
-    OutputView.printLottos(this.#lottos);
-    this.#winningNumbers = await this.#getWinningNumbers();
-    console.log(this.#winningNumbers);
-    this.#bonusNumber = await InputView.inputBonusNumber();
-    this.validateBonusNumber(this.#bonusNumber);
-    const results = this.#calculateResults();
-    OutputView.printResults(results);
-    OutputView.printProfit(this.#calculateProfit(results));
+    const lottos = this.#createLottos(purchaseCost);
+    // this.#winningNumbers = await this.#getWinningNumbers();
+    // this.#bonusNumber = await InputView.inputBonusNumber();
+    // this.validateBonusNumber(this.#bonusNumber);
+    // const results = this.#calculateResults();
+    // OutputView.printResults(results);
+    // OutputView.printProfit(this.#calculateProfit(results));
+  }
+
+  #createLottos(purchaseCost) {
+    const lottos = this.#lottos.createLottos(purchaseCost);
+    OutputView.printLottos(lottos);
+    return lottos;
   }
 
   async #getWinningNumbers() {
@@ -72,20 +77,6 @@ class LottoController {
     if (parseBonusNumber < 1 || parseBonusNumber > 45) {
       throw new Error(ErrorMessage.INVALID_LOTTO_NUMBERS_UNIT);
     }
-  }
-
-  async #createLottos(purchaseCost) {
-    const lottosToPurchase = Math.floor(purchaseCost / 1000);
-    for (let i = 0; i < lottosToPurchase; i += 1) {
-      const lotto = await MissionUtils.Random.pickUniqueNumbersInRange(
-        1,
-        45,
-        6,
-      );
-      const sortedLotto = lotto.sort((a, b) => a - b);
-      this.#lottos.push(sortedLotto);
-    }
-    return this.#lottos;
   }
 
   #calculateResults() {
