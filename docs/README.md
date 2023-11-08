@@ -39,5 +39,19 @@
 17. [⭕] 총 수익률 출력하기
 
 -------
+## Lotto 클래스
+
+|메세지||설명|
+|checkRange()|1~45 사이가 아닌 숫자의 배열의 길이를 반환한다|
+|getNumbersSet()|
+|countEqualNumbers()|로또 번호에 당첨 번호가 포함된 개수를 반환한다|
+|compareBonusNumber()|로또 번호에 보너스 번호가 포함되었는지 여부를 반환한다|
+|getLottoResult()|로또 당첨 결과를 담은 배열을 반환한다|
+|checkBonusNumber()|로또 번호와 보너스 번호가 5개 일치할 경우, compareBonusNumber()을 호출해 보너스 번호가 포함되어 있는 여부를 반환한다|
+|compareLottoNumbers()| 로또 번호가 당첨 번호, 보너스 번호가 포함되어 있는지 확인 후 로또 당첨 결과를 반환한다|
+|getLottoRate()|로또 결과와 로또 구입 금액을 가지고 수익률을 구해 반환한다|
+
+
+-------
 ## 기술 스택
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)  ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
