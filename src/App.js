@@ -6,6 +6,7 @@ import {
   INPUT_BONUS_MESSAGE,
   INPUT_RANGE_ERROR_MESSAGE,
   INCLUDE_BONUS_ERROR_MESSAGE,
+  INPUT_NUMBER_ERROR_MESSAGE,
   MONEYS,
   NUMS,
   THREE_MATCH_MONEY,
@@ -27,11 +28,9 @@ class App {
     return NUMBERS;
   }
 
-  async inputBonus(NUMBERS) {
+  async inputBonus() {
     await MissionUtils.Console.print("\n" + INPUT_BONUS_MESSAGE);
     const BONUS = Number(await MissionUtils.Console.readLineAsync(""));
-
-    this.validateBonus(BONUS, NUMBERS);
 
     return BONUS;
   }
@@ -84,11 +83,41 @@ class App {
   async play() {
     const user = new User();
     const MONEY = await user.play();
-    const NUMBERS = await this.inputNumber();
-    const lotto = new Lotto(NUMBERS);
-    const CORRECT = lotto.getNumbers();
-    const BONUS = await this.inputBonus(NUMBERS);
-    const STATS = user.matching(CORRECT, BONUS);
+
+    const lotto = new Lotto();
+
+    let test = "fail";
+    let numbers = 0;
+
+    while (test === "fail") {
+      numbers = await this.inputNumber();
+      try {
+        lotto.validate(numbers);
+        test = "success";
+      } catch (error) {
+        MissionUtils.Console.print(INPUT_NUMBER_ERROR_MESSAGE);
+      }
+    }
+
+    numbers.forEach((number) => {
+      Number(number);
+    });
+
+    let bonusTest = "fail";
+    let bonus = 0;
+
+    while (bonusTest === "fail") {
+      bonus = await this.inputBonus();
+
+      try {
+        await this.validateBonus(bonus, numbers);
+        bonusTest = "success";
+      } catch (error) {
+        MissionUtils.Console.print(INPUT_NUMBER_ERROR_MESSAGE);
+      }
+    }
+
+    const STATS = user.matching(numbers, bonus);
     await this.printStats(STATS);
     this.printYield(STATS, MONEY);
   }

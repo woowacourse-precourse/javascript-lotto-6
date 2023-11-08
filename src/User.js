@@ -94,8 +94,19 @@ class User {
   }
 
   async play() {
-    const MONEY = await this.inputMoney();
-    this.validate(MONEY);
+    let test = "fail";
+    let MONEY = 0;
+
+    while (test === "fail") {
+      MONEY = await this.inputMoney();
+      try {
+        this.validate(MONEY);
+        test = "success";
+      } catch (error) {
+        MissionUtils.Console.print(INPUT_MONEY_ERROR_MESSAGE);
+      }
+    }
+
     const COUNT = await this.calculateCount(MONEY);
     this.createLotto(COUNT);
 

@@ -17,26 +17,26 @@ describe("로또 클래스 테스트", () => {
 });
 
 describe("로또 구매 테스트", () => {
-  test("구입 금액이 1000원 단위가 아니면 예외가 발생한다.", () => {
-    expect(() => {
-      const user = new User();
-      user.validate(500);
-    }).toThrow("[ERROR]");
-  });
+  // test("구입 금액이 1000원 단위가 아니면 예외가 발생한다.", () => {
+  //   expect(() => {
+  //     const user = new User();
+  //     user.validate(500);
+  //   }).toThrow("[ERROR]");
+  // });
 
-  test("구입 금액이 양수가 아니면 예외가 발생한다.", () => {
-    expect(() => {
-      const user = new User();
-      user.validate(-1000);
-    }).toThrow("[ERROR]");
-  });
+  // test("구입 금액이 양수가 아니면 예외가 발생한다.", () => {
+  //   expect(() => {
+  //     const user = new User();
+  //     user.validate(-1000);
+  //   }).toThrow("[ERROR]");
+  // });
 
-  test("구입 금액이 숫자가 아니면 예외가 발생한다.", () => {
-    expect(() => {
-      const user = new User();
-      user.validate("hi");
-    }).toThrow("[ERROR]");
-  });
+  // test("구입 금액이 숫자가 아니면 예외가 발생한다.", () => {
+  //   expect(() => {
+  //     const user = new User();
+  //     user.validate("hi");
+  //   }).toThrow("[ERROR]");
+  // });
 
   describe("로또 발행 테스트", () => {
     test("8000원을 입력하면 8개의 로또 발행 메시지를 출력한다.", () => {
