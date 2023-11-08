@@ -3,6 +3,7 @@ import { userPriceInput, userWinningInput, userBonusInput } from './input.js';
 import { printCnt, printLottoNumber } from './print.js';
 import { printWinningList, printROI } from './result.js';
 import { checkWinning } from './utils.js';
+import Lotto from "./Lotto.js";
 
 class App {
   async play() {
@@ -18,7 +19,8 @@ class App {
     }
 
     printCnt(count, change);
-    const lotto = printLottoNumber(count);
+    const lottos = generateLottos(count);
+    printLottoNumber(lottos);
 
     while (true) {
       try {
@@ -30,21 +32,17 @@ class App {
       }
     }
 
+    let bonusNumber;
     while (true) {
       try {
-        const bonusNumber = await userBonusInput();
+        bonusNumber = await userBonusInput();
         break;
       } catch (error) {
         MissionUtils.Console.print(error.message);
       }
     }
 
-    const winList = [0, 0, 0, 0, 0];
-    lotto.map((l) => {
-      const idx = checkWinning(l, winNumber, bonusNumber);
-      winList[idx] = winList[idx] + 1;
-    });
-
+    const winList = checkAllLottos(lottos, winNumbers, bonusNumber);
     printWinningList(winList);
     printROI(winList, count);
   }

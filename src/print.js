@@ -7,21 +7,9 @@ export function printCnt(count, change) {
   }
 }
 
-export function printLottoNumber(count) {
-  const lotto = [];
-  for (let i = 0; i < count; i++) {
-    const random = generateRandomNumber(6);
-    MissionUtils.Console.print(`[${random.join(",")}]`);
-    lotto.add();
-  }
-  return lotto;
-}
-
-function generateRandomNumber(len) {
-  const randomList = new Set();
-  while (randomList.size < len) {
-    const randomNumber = MissionUtils.Random.pickNumberInRange(1, 45);
-    randomList.push(randomNumber);
-  }
-  return randomList.sort();
+export function printLottoNumber(lottos) {
+  lottos.forEach(lotto => {
+    const numbers = lotto.getNumbers();
+    MissionUtils.Console.print(`[${numbers.join(', ')}]`);
+  });
 }
