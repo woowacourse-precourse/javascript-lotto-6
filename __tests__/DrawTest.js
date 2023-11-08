@@ -32,10 +32,10 @@ describe("당첨 번호 입력 테스트", () => {
   test("선택한 모든 당첨 번호가 1부터 45 사이에 있는지 확인한다.", () => {
     // given
     const winningNumbersList = [
-      [1, 2, 3, 4, 5],
-      [45, 44, 43, 42, 41],
-      [0, 1, 3, 4, 5],
-      [46, 45, 44, 43, 42],
+      [1, 2, 3, 4, 5, 6],
+      [45, 44, 43, 42, 41, 40],
+      [0, 1, 3, 4, 5, 6],
+      [46, 45, 44, 43, 42, 41],
     ];
     const results = [true, true, false, false];
 
@@ -49,8 +49,8 @@ describe("당첨 번호 입력 테스트", () => {
   test("선택한 모든 당첨번호가 다른지 확인한다.", () => {
     // given
     const winningNumbersList = [
-      [1, 2, 3, 4, 5],
-      [1, 1, 3, 4, 5],
+      [1, 2, 3, 4, 5, 6],
+      [1, 1, 3, 4, 5, 6],
     ];
     const results = [true, false];
 
@@ -89,9 +89,9 @@ describe("보너스 번호 입력 테스트", () => {
 
   test("당첨 번호 중에 보너스 번호와 동일한 숫자가 있으면 안 된다.", () => {
     // given
-    const winningNumbers = [1, 2, 3, 4, 5];
-    const bonusNumbers = [1, 2, 3, 4, 5, 6];
-    const results = [false, false, false, false, false, true];
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonusNumbers = [1, 2, 3, 4, 5, 6, 7];
+    const results = [false, false, false, false, false, false, true];
 
     // when
     const answers = bonusNumbers.map((bonusNumber) => DrawController.checkWinningBonusDifferent({ winningNumbers, bonusNumber }));
