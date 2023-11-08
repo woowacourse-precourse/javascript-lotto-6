@@ -70,7 +70,6 @@ class App {
     winNumber = winNumber.split(",").map(changeWinNumber);
     // 유효성 검사 필요, winNumber
     this.winNumber = new Lotto(winNumber);
-    console.log("winNumber", this.winNumber.getNumber());
   }
   async inputBonusNumber() {
     MissionUtils.Console.print(
@@ -81,25 +80,21 @@ class App {
         "보너스 번호를 입력해주세요. \n 번호의 범위는 1에서 45까지이며 당첨번호와 중복되어선 안됩니다."
       )
     );
-    console.log("bonusNumber", bonusNumber);
+    // console.log("bonusNumber", bonusNumber);
   }
   validateBonusNumber() {}
   printLottoList() {
-    console.log("printLottoList");
-    console.log(this.lottoList);
-    // this.lottoList.forEach((element, index) => {
-    //   MissionUtils.Console.print(
-    //     index == 0
-    //       ? `[${element.join().trim()}]`
-    //       : `\n [${element.join().trim()}]`
-    //   );
-    // });
+    this.lottoList.forEach((element, index) => {
+      MissionUtils.Console.print(
+        index == 0
+          ? `[${element.join().replaceAll(",", ", ")}]`
+          : `\n [${element.join().replaceAll(",", ", ")}]`
+      );
+    });
     //임시로 주석 처리
   }
 
   setWinDetail() {
-    console.log("setWinDetail");
-    console.log("lottoList", this.lottoList);
     const matchLotto = (lottoArray) =>
       lottoArray.filter((element) =>
         this.winNumber.getNumber().includes(element)
@@ -127,33 +122,48 @@ class App {
           break;
       }
     });
-    console.log(this.winDetail);
   }
 
   printResult() {
     console.log("printResult");
-    const message = this.winDetail;
     MissionUtils.Console.print(`당첨 통계 \n --- \n  `);
+    this.printWinDetail();
+    this.printProfit();
+  }
+
+  printWinDetail() {
     MissionUtils.Console.print(
-      `3개 일치(${this.profit.match3.toLocaleString()}원) - ${
+      `3개 일치 (${this.profit.match3.toLocaleString()}원) - ${
         this.winDetail.match3
       }개
-      \n4개 일치(${this.profit.match4.toLocaleString()}원) - ${
+      \n4개 일치 (${this.profit.match4.toLocaleString()}원) - ${
         this.winDetail.match4
       }개
-      \n5개 일치(${this.profit.match5.toLocaleString()}원) - ${
+      \n5개 일치 (${this.profit.match5.toLocaleString()}원) - ${
         this.winDetail.match5
       }개
-      \n5개 일치, 보너스 볼 일치(${this.profit.match5Bonus.toLocaleString()}원) - ${
+      \n5개 일치, 보너스 볼 일치 (${this.profit.match5Bonus.toLocaleString()}원) - ${
         this.winDetail.match5Bonus
       }개
-      \n6개 일치(${this.profit.match6.toLocaleString()}원) - ${
+      \n6개 일치 (${this.profit.match6.toLocaleString()}원) - ${
         this.winDetail.match6
       }개
       `
     );
-    const profit = 5000 * this.winDetail.match3 + console.log(this.winDetail);
   }
+  printProfit() {
+    let profit = 0;
+    const count = Object.keys(this.profit).length;
+
+    for (let i = 3; i !== count + 2; i++) {
+      profit += this.profit[`match${i}`] * this.winDetail[`match${i}`];
+    }
+    profit += this.profit.match5Bonus * this.winDetail.match5Bonus;
+    const inputMoney = this.lottoList.length * 1000;
+    const rateProfit = ((profit / inputMoney) * 100).toFixed(1);
+    MissionUtils.Console.print(`총 수익률은 ${rateProfit}%입니다. `);
+  }
+
   // reset(){}
 }
 
