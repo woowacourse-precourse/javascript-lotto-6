@@ -6,7 +6,7 @@ const LottoMachine = {
   async getLottoCount(purchasePrice) {
     return purchasePrice / 1000;
   },
-  generateLotto(count) {
+  async generateLotto(count) {
     const lottoList = [];
     while (count--) {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
@@ -16,7 +16,7 @@ const LottoMachine = {
 
     return lottoList;
   },
-  getStatisticsResult(winningNumber, bonusNumber, lottoList) {
+  async getStatisticsResult(winningNumber, bonusNumber, lottoList) {
     const result = [];
     const statisticsInst = new Statistics(
       winningNumber,

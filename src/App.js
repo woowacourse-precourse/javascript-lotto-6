@@ -11,18 +11,20 @@ class App {
   }
 
   async checkPriceInputError(purchasePrice) {
-    await InputError.checkPriceInputError(purchasePrice);
-    await this.printLottoCount(purchasePrice);
+    const result = await InputError.checkPriceInputError(purchasePrice);
+    result === true
+      ? await this.printLottoCount(purchasePrice)
+      : await this.play();
   }
 
   async printLottoCount(purchasePrice) {
     const count = await LottoMachine.getLottoCount(purchasePrice);
-    Output.printLottoCount(count);
-    this.generateLotto(count);
+    await Output.printLottoCount(count);
+    await this.generateLotto(count);
   }
 
   async generateLotto(count) {
-    const lottoList = LottoMachine.generateLotto(count);
+    const lottoList = await LottoMachine.generateLotto(count);
     Output.printLottoList(lottoList);
     await this.getWinningAndBonusNum(lottoList);
   }
