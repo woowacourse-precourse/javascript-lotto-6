@@ -1,8 +1,8 @@
 import LottosList from './LottosList.js';
 
-import enterPurchaseAmount from './Input/enterPurchaseAmount.js';
-import enterWinningNumbers from './Input/enterWinningNumbers.js';
-import enterBonusNumber from './Input/enterBonusNumber.js';
+import tryEnterPurchaseAmount from './Input/tryEnterPurchaseAmount.js';
+import tryEnterWinningNumbers from './Input/tryEnterWinningNumbers.js';
+import tryEnterBonusNumber from './Input/tryEnterBonusNumber.js';
 import printPurchasedLottoAmount from './Output/printPurchasedLottoAmount.js';
 import printLottosList from './Output/printLottosList.js';
 import calculateStatistics from './Process/calculateStatistics.js';
@@ -12,23 +12,20 @@ import printGrossReturn from './Output/printGrossReturn.js';
 
 class App {
   async play() {
-    const purchaseAmount = await enterPurchaseAmount();
+    const purchaseAmount = await tryEnterPurchaseAmount();
 
     const newLottosList = new LottosList(purchaseAmount);
-    const lottosList = newLottosList.lottosList;
     printPurchasedLottoAmount(newLottosList.lottoAmount);
-    printLottosList(lottosList);
+    printLottosList(newLottosList.lottosList);
 
-    const winningNumbers = await enterWinningNumbers();
+    const winningNumbers = await tryEnterWinningNumbers();
 
-    const bonusNumber = await enterBonusNumber(winningNumbers);
+    const bonusNumber = await tryEnterBonusNumber(winningNumbers);
 
-    const statistics = calculateStatistics(lottosList, winningNumbers, bonusNumber);
-
+    const statistics = calculateStatistics(newLottosList.lottosList, winningNumbers, bonusNumber);
     printStatistics(statistics);
 
     const grossReturn = calculateGrossReturn(purchaseAmount, statistics);
-
     printGrossReturn(grossReturn);
   }
 }
