@@ -1,4 +1,4 @@
-import validateBonusNumber from '../src/Validation/validateBonusNumber';
+import validateBonusNumber from '../src/validation/validateBonusNumber';
 
 describe('보너스 번호 입력 테스트', () => {
   test('숫자가 아닌 것을 입력하면 예외가 발생한다.', () => {

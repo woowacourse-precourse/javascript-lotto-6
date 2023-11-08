@@ -1,4 +1,4 @@
-import validateWinningNumbers from '../src/Validation/validateWinningNumbers.js';
+import validateWinningNumbers from '../src/validation/validateWinningNumbers.js';
 
 describe('당첨 번호 입력 테스트', () => {
   test('숫자가 아닌 것이 있으면 예외가 발생한다.', () => {

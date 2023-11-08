@@ -1,6 +1,6 @@
 import { message } from './Constants.js';
 
-import validateLottoNumbers from './Validation/validateLottoNumbers.js';
+import validateLottoNumbers from './validation/validateLottoNumbers.js';
 
 class Lotto {
   #numbers;

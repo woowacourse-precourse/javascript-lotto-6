@@ -1,4 +1,4 @@
-import validatePurchaseAmount from '../src/Validation/validatePurchaseAmount.js';
+import validatePurchaseAmount from '../src/validation/validatePurchaseAmount.js';
 
 describe('구입금액 입력 테스트', () => {
   test('숫자가 아닌 것을 입력하면 예외가 발생한다.', () => {

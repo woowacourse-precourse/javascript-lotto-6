@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { message } from '../Constants.js';
 
-import validatePurchaseAmount from '../Validation/validatePurchaseAmount.js';
+import validatePurchaseAmount from '../validation/validatePurchaseAmount.js';
 
 async function enterPurchaseAmount() {
   const purchaseAmountInput = await Console.readLineAsync(message.ENTER_PURCHASE_AMOUNT);

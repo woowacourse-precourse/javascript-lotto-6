@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { message } from '../Constants.js';
 
-import validateWinningNumbers from '../Validation/validateWinningNumbers.js';
+import validateWinningNumbers from '../validation/validateWinningNumbers.js';
 
 async function enterWinningNumbers() {
   const winningNumbers = await Console.readLineAsync(message.ENTER_WINNING_NUMBERS);
