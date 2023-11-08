@@ -13,10 +13,7 @@ class Lotto {
 			throw new Error(ERROR.NOT_SIX_LENGTH);
 		}
 		numbers.forEach((num) => {
-			if (num < 0) {
-				throw new Error(ERROR.NEGATIVE);
-			}
-			if (num > 45) {
+			if (num < 0 || num > 45) {
 				throw new Error(ERROR.OUT_OF_LIMIT);
 			}
 			if (isNaN(num)) {
@@ -27,11 +24,6 @@ class Lotto {
 		if (tmp.size !== numbers.length) {
 			throw new Error(ERROR.DUPLICATE);
 		}
-	}
-	// TODO: 추가 기능 구현
-
-	match(ticket) {
-		return this.#numbers.filter((number) => ticket.includes(number)).length;
 	}
 }
 

@@ -1,32 +1,65 @@
+import { Console } from '@woowacourse/mission-utils';
 import { ERROR } from './constants.js';
 
 export const validation = {
-	buy(price) {
-		if (price % 1000 !== 0) {
-			throw new Error(ERROR.OUT_OF_MONEY);
+	buy(payment) {
+		if (payment % 1000 !== 0) {
+			Console.print(ERROR.OUT_OF_MONEY);
+			return false;
 		}
-		if (price === 0) {
-			throw new Error(ERROR.NOTING);
+		if (payment === 0) {
+			Console.print(ERROR.NOTING);
+			return false;
 		}
-		if (isNaN(price)) {
-			throw new Error(ERROR.NOT_NUMBER);
+		if (isNaN(payment)) {
+			Console.print(ERROR.NOT_NUMBER);
+			return false;
 		}
-		if (price < 0) {
-			throw new Error(ERROR.NEGATIVE);
+		if (payment < 0) {
+			Console.print(ERROR.NEGATIVE);
+			return false;
 		}
+		return true;
 	},
-	bonusNumber(bonusNumber, winningNumber) {
+	winningNumber(winningNumbers) {
+		if (winningNumbers.length !== 6) {
+			Console.print(ERROR.NOT_SIX_LENGTH);
+			return false;
+		}
+		winningNumbers.forEach((num) => {
+			if (num < 0 || num > 45) {
+				Console.print(ERROR.OUT_OF_LIMIT);
+				return false;
+			}
+			if (isNaN(num)) {
+				Console.print(ERROR.NOT_NUMBER);
+				return false;
+			}
+		});
+		const tmp = new Set(winningNumbers);
+		if (tmp.size !== winningNumbers.length) {
+			Console.print(ERROR.DUPLICATE);
+			return false;
+		}
+		return true;
+	},
+	bonusNumber(bonusNumber, winningNumbers) {
 		if (bonusNumber < 0 || bonusNumber === 0) {
-			throw new Error(ERROR.NEGATIVE);
+			Console.print(ERROR.NEGATIVE);
+			return false;
 		}
 		if (bonusNumber > 45) {
-			throw new Error(ERROR.OUT_OF_LIMIT);
+			Console.print(ERROR.OUT_OF_LIMIT);
+			return false;
 		}
 		if (isNaN(bonusNumber)) {
-			throw new Error(ERROR.NOT_NUMBER);
+			Console.print(ERROR.NOT_NUMBER);
+			return false;
 		}
-		if (winningNumber.includes(bonusNumber)) {
-			throw new Error(ERROR.DUPLICATE);
+		if (winningNumbers.includes(bonusNumber)) {
+			Console.print(ERROR.DUPLICATE);
+			return false;
 		}
+		return true;
 	},
 };
