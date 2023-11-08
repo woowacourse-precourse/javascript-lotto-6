@@ -1,12 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-import {
-  calculateProfit,
-  calculateProfitRate,
-  countIncludeNumbers,
-  matchedLottoNumbers,
-  filterLottoNumbers,
-} from '../src/utils/calculate/calculate.js';
+import { calculateProfit, calculateProfitRate, countIncludeNumbers, matchedLottoNumbers } from '../src/utils/calculate/calculate.js';
 
 describe('당첨금 계산 함수 테스트', () => {
   test('당첨금 합계 테스트', () => {
@@ -54,8 +48,46 @@ describe('당첨금 계산 함수 테스트', () => {
 
     lottoResults.forEach((_, index) => {
       const updatedResults = matchedLottoNumbers(lottoResults[index], matchedNumbers[index], matchedBonus[index]);
-      console.log(updatedResults);
       expect(updatedResults).toEqual(predictedResults[index]);
+    });
+  });
+
+  test('로또번호 확인하는 전체 로직 함수 테스트', () => {
+    const lottoResults = [
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+    ];
+    const winningNumbers = [
+      [1, 2, 3, 4, 5, 6],
+      [2, 4, 5, 6, 7, 8],
+      [10, 13, 14, 15, 16, 17],
+    ];
+    const bonusNumber = [5, 1, 7];
+
+    const lottoNumbersArray = [
+      [
+        [1, 2, 3, 4, 5, 6],
+        [7, 8, 9, 10, 11, 12],
+        [12, 13, 14, 15, 16, 17],
+      ],
+      [[2, 3, 9, 10, 11, 23]],
+      [
+        [12, 13, 14, 15, 16, 17],
+        [2, 3, 9, 10, 11, 23],
+      ],
+    ];
+
+    const predictedResults = [
+      { 1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      { 1: 0, 2: 0, 3: 1, 4: 0, 5: 0 },
+    ];
+
+    winningNumbers.forEach((_, index) => {
+      expect(countIncludeNumbers(lottoResults[index], winningNumbers[index], bonusNumber[index], lottoNumbersArray[index])).toEqual(
+        predictedResults[index],
+      );
     });
   });
 });
