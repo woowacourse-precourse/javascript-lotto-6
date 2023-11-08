@@ -32,7 +32,19 @@ class App {
       this.#lottoNumbers.push(lottoNumberArr);
     }
   }
-  
+
+  async inputWinLotto() {
+    try {
+      const input = await Console.readLineAsync(WIN_NUMBERS_MESSAGE);
+      this.#winNumber = input.split(',');
+      const lotto = new Lotto(this.#winNumber);
+      return this.#winNumber;
+    } catch (e) {
+      Console.print(e.message);
+      return this.inputWinLotto();
+    }
+  }
+
   async play() {}
 }
 
