@@ -7,7 +7,10 @@ class OutputView {
     }
 
     static printLottoNumbers(lottos) {
-        lottos.forEach((lotto) => Console.print(lotto.getNumbers().sort((a, b) => a - b)));
+        lottos.forEach((lotto) => {
+            const numbersString = lotto.getNumbers().sort((a, b) => a - b).join(', ');
+            Console.print(`[${numbersString}]`);
+        });
         Console.print('');
     }
 
@@ -18,6 +21,10 @@ class OutputView {
         Console.print(PRIZE.third + prize[2] + '개');
         Console.print(PRIZE.second + prize[3] + '개');
         Console.print(PRIZE.first + prize[4] + '개');
+    }
+
+    static printProfitRate(profitRate) {
+        Console.print(`총 수익률은 ${profitRate}%입니다.`);
     }
 }
 

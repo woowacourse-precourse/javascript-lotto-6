@@ -1,6 +1,7 @@
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import LottoManager from './LottoManager.js';
+import Bank from './Bank.js';
 
 class App {
   async play() {
@@ -22,9 +23,13 @@ class App {
     const bonusNumber = await InputView.readBonusNumber();
     lottoManager.setBonusNumber(bonusNumber);
 
-    // ➎ 당첨 로또 번호와 구매한 로또 번호를 비교한다.
+    // 기능 ➎ 당첨 로또 번호와 구매한 로또 번호를 비교한다.
     const prize = lottoManager.getWinCount();
     OutputView.printPrize(prize);
+
+    // 기능 ➏ 수익률을 계산한다.
+    const bank = new Bank(money, prize);
+    OutputView.printProfitRate(bank.getProfitRate());
   }
 }
 
