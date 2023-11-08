@@ -24,13 +24,13 @@ class LottoController{
     }
 
     async run(){
-        const boughtLottoNumber = await this.#buyLotto();
-        this.#writeLotto(boughtLottoNumber);
-        await this.#makeWinningLotto();
-        this.#printResult()
+        const boughtLottoNumber = await this.buyLotto();
+        this.writeLotto(boughtLottoNumber);
+        await this.makeWinningLotto();
+        this.printResult()
     }
 
-    async #buyLotto(){
+    async buyLotto(){
         while(true){
             try {
                 const moneyString = await Input.inputMoney();
@@ -46,7 +46,7 @@ class LottoController{
         }
     }
 
-    #writeLotto(boughtLottoNumber){
+    writeLotto(boughtLottoNumber){
         while(true){
             try {
                 const lottos = generateLottos(boughtLottoNumber);
@@ -59,7 +59,7 @@ class LottoController{
         }
     }
 
-    async #makeWinningLotto(){
+    async makeWinningLotto(){
         while(true){
             try{
                 const winningNumbersString = await Input.inputWinningNumbers();
@@ -74,7 +74,7 @@ class LottoController{
         }
     }
 
-    #printResult(){
+    printResult(){
         const scoreBoard = this.#lottoSet.makeScoreBoard(this.#winningLotto);
         Output.outputScoreBoard(scoreBoard);
         Output.outputRevenuePercent(this.#money.calculateRevenuePercent(scoreBoard.prize));
