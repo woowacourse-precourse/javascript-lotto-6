@@ -9,6 +9,8 @@ class App {
     const lottos = await this.generateLottos(purchaseAmount);
 
     this.displayPurchasedLottos(lottos);
+
+    const winningNumbers = await this.inputWinningNumbers();
   }
 
   // 2. 로또 구입하기: 로또 구입 금액 입력
@@ -64,7 +66,7 @@ class App {
     });
   }
 
-    // 3. 당첨 확인: 당첨 번호 입력
+// 3. 당첨 확인: 당첨 번호 입력
   async inputWinningNumbers() {
     while (true) {
       const input = await Console.readLineAsync('당첨 번호를 입력해 주세요: ');
