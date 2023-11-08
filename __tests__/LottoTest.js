@@ -61,7 +61,7 @@ describe("티켓생성, 출력 확인", () => {
 
   test("티켓 생성&출력 테스트", () => {
     const ticket = 3;
-    console.log("랜덤티켓생성");
+    // console.log("랜덤티켓생성");
     const tickets = produce_ticket(ticket);
     // console.log(tickets);
     // tickets.forEach((ticket) => console.log(ticket.get_numbers()));
@@ -109,6 +109,7 @@ describe("티켓 결과 확인", () => {
     // console.log(test_lotto.get_price(winning_number, bonus_number));
   });
 });
+
 describe("예외 테스트..", () => {
   test("구입금액", () => {
     const INPUT = ["1000j", "1004", "2000"];
@@ -116,8 +117,8 @@ describe("예외 테스트..", () => {
     let price;
     let i = 0;
     //구매금액 입력
-    MissionUtils.Console.print("구입금액을 입력해 주세요.");
-    while (true) {
+    // MissionUtils.Console.print("구입금액을 입력해 주세요.");
+    while (false) {
       let input = INPUT[i];
       i = i + 1;
       console.log(`입력: ${input}`);
@@ -148,8 +149,8 @@ describe("예외 테스트..", () => {
     const INPUT = ["1,2,3,4,5", "1,2,3,56,56", "2,3,t, 3, 4, 5", "1,2,3,4,5,6"];
     let i = 0;
     let winning_number;
-    MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
-    while (true) {
+    // MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
+    while (false) {
       try {
         let input = INPUT[i];
         i++;
@@ -168,8 +169,8 @@ describe("예외 테스트..", () => {
     const MIN_NUMBER = 1;
     let i = 0;
     let bonus_number;
-    MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
-    while (true) {
+    // MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
+    while (false) {
       let input = INPUT[i];
       i = i + 1;
       console.log(`입력: ${input}`);

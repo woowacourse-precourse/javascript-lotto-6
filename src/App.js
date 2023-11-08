@@ -5,19 +5,18 @@ const MAX_NUMBER = 45;
 const MIN_NUMBER = 1;
 const PRICE_UNIT = 1000;
 
-const INPUT = ["8000", "1,2,3,4,5,6", "7"];
-
 class App {
   async play() {
     let price;
     let winning_number;
     let bonus_number;
-    // let bonus_number;
+    let input;
+
     //구매금액 입력
     MissionUtils.Console.print("구입금액을 입력해 주세요.");
     while (true) {
       try {
-        let input = await MissionUtils.Console.readLineAsync();
+        input = await MissionUtils.Console.readLineAsync();
         check_number_format(input);
         check_multiple_of_price_unit(input);
         price = input;
@@ -28,12 +27,8 @@ class App {
       }
     }
 
-    // 발행한 로또 수량 및 번호를 출력
-    const ticket_num = parseInt(price) / 1000;
-    MissionUtils.Console.print(`${ticket_num}개를 구매했습니다.`);
-    //랜덤 로또 생산, 출력
-    const tickets = produce_ticket(ticket_num);
-
+    // 발행한 로또 수량 및 랜덤 번호를 출력
+    const tickets = produce_ticket(parseInt(price) / 1000);
     tickets.forEach((ticket) =>
       MissionUtils.Console.print(`[${ticket.get_numbers().join(", ")}]`)
     );
@@ -42,7 +37,7 @@ class App {
     MissionUtils.Console.print("당첨 번호를 입력해 주세요.");
     while (true) {
       try {
-        let input = await MissionUtils.Console.readLineAsync();
+        input = await MissionUtils.Console.readLineAsync();
         winning_number = new Lotto(input.split(",").map(Number));
         break;
       } catch (error) {
@@ -55,9 +50,9 @@ class App {
     MissionUtils.Console.print("보너스 번호를 입력해 주세요.");
     while (true) {
       try {
-        let input = await MissionUtils.Console.readLineAsync();
+        input = await MissionUtils.Console.readLineAsync();
         check_number_format(input);
-        check_number_in_range(input);
+        check_number_in_range(parseInt(input));
         bonus_number = parseInt(input);
         break;
       } catch (error) {
@@ -67,8 +62,16 @@ class App {
     }
 
     //로또들 당첨액 출력
+    const total_profit_rate = (check_winning_price() / price) * 100;
+    // MissionUtils.Console.print(
+    //   `총 수익률은 ${(check_winning_price() / price) * 100}%입니다.`
+    // );
     MissionUtils.Console.print(
-      `총 수익률은 ${(check_winning_price() / price) * 100}%입니다.`
+      Number.isInteger(total_profit_rate)
+        ? `총 수익률은 ${total_profit_rate}%입니다.`
+        : `총 수익률은 ${total_profit_rate
+            .toFixed(2)
+            .replace(/\.?0+$/, "")}%입니다.`
     );
 
     function check_winning_price() {
@@ -131,13 +134,14 @@ class App {
       }
     }
     function check_number_in_range(input) {
-      if (parseInt(input) < MIN_NUMBER || parseInt(input) > MAX_NUMBER) {
+      if (input < MIN_NUMBER || input > MAX_NUMBER) {
         throw new Error("[ERROR] 1~45까지의 번호를 입력해 주세요");
       }
     }
 
     // 랜덤로또 생산
     function produce_ticket(ticket) {
+      MissionUtils.Console.print(`${ticket}개를 구매했습니다.`);
       let tickets = [];
       for (let i = 0; i < ticket; i++) {
         tickets.push(new Lotto());
