@@ -32,17 +32,16 @@ const Validator = {
   InputWinningNumber(input) {
     const inputWinninNumbers = input.split(",");
     if (input.replace(/\d|\,/g, "").length > 0)
-      throw new Error("[ERROR] 로또 번호는 숫자만 가능합니다.");
-
-    if (inputWinninNumbers.length !== 6)
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR_MESSAGE.WINNING_NUMBER);
 
     if (inputWinninNumbers.length !== new Set(inputWinninNumbers).size)
-      throw new Error(
-        "[ERROR] 로또 번호는 중복되지 않은 숫자로 이루어져야 합니다."
-      );
+      throw new Error(ERROR_MESSAGE.LOTTO_DUPLICATE);
+
+    if (inputWinninNumbers.length !== 6)
+      throw new Error(ERROR_MESSAGE.WINNING_COUNT);
+
     if (RangeTest(inputWinninNumbers))
-      throw new Error("[ERROR] 당첨 번호는 1과 45 사이의 값이어야 합니다.");
+      throw new Error(ERROR_MESSAGE.WINNING_RANGE);
   },
 };
 
