@@ -13,7 +13,7 @@ const LOTTO_VIEW = Object.freeze({
     return Console.readLineAsync(MESSAGES.userInputLottoBonusNumber);
   },
   printBuyMessage(count) {
-    Console.print(`${count}${MESSAGES.buyMessage}`);
+    Console.print(`${count.toLocaleString()}${MESSAGES.buyMessage}`);
   },
   printLottoList(lottoList) {
     lottoList.forEach((lotto) =>
@@ -23,11 +23,13 @@ const LOTTO_VIEW = Object.freeze({
   printResult(result) {
     Console.print(MESSAGES.totalWinning);
     Object.keys(result).forEach((key) => {
-      Console.print(`${MATCHES[key].message} - ${result[key]}개`);
+      Console.print(
+        `${MATCHES[key].message} - ${result[key].toLocaleString()}개`
+      );
     });
   },
   printRateOfReturn(roi) {
-    Console.print(`총 수익률은 ${roi}%입니다.`);
+    Console.print(`총 수익률은 ${roi.toLocaleString()}%입니다.`);
   },
 });
 
