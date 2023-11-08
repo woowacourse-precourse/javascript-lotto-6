@@ -1,5 +1,5 @@
 import { LOTTO_RANKS, MATCHED_COUNT } from '../constants/lotto.js';
-import lottoNumberValidator from '../validators/lottoNumbersValidator.js';
+import { lottoNumbersValidator } from '../validators/lottoNumbersValidator.js';
 
 class Lotto {
   #numbers;
@@ -10,10 +10,10 @@ class Lotto {
   }
 
   #validate(numbers) {
-    lottoNumberValidator.validateType(numbers);
-    lottoNumberValidator.validateCount(numbers);
-    lottoNumberValidator.validateRange(numbers);
-    lottoNumberValidator.validateUniqueness(numbers);
+    lottoNumbersValidator.validateType(numbers);
+    lottoNumbersValidator.validateCount(numbers);
+    lottoNumbersValidator.validateRange(numbers);
+    lottoNumbersValidator.validateUniqueness(numbers);
   }
 
   #checkMatchedCount(winningNumbers) {
@@ -25,7 +25,7 @@ class Lotto {
     return this.#numbers.includes(bonusNumber);
   }
 
-  #getLottoRank(machedCount, hasBonusNumber) {
+  #checkLottoRank(machedCount, hasBonusNumber) {
     if (machedCount === MATCHED_COUNT.six) return LOTTO_RANKS.first;
     if (machedCount === MATCHED_COUNT.five && hasBonusNumber) return LOTTO_RANKS.second;
     if (machedCount === MATCHED_COUNT.five) return LOTTO_RANKS.third;
@@ -37,7 +37,7 @@ class Lotto {
   getLottoRank(winningNumbers, bonusNumber) {
     const matchedCount = this.#checkMatchedCount(winningNumbers);
     const hasBounsNumber = this.#hasBonusNumber(bonusNumber);
-    const lottoRank = this.#getLottoRank(matchedCount, hasBounsNumber);
+    const lottoRank = this.#checkLottoRank(matchedCount, hasBounsNumber);
 
     return lottoRank;
   }
