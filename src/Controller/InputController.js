@@ -1,12 +1,14 @@
 import getUserInputAsync from "../View/input.js";
+import Output from "../View/Output.js";
 import Validator from "../View/Validator.js";
 import INPUT_CONSTANT from "../Constant/InputConstant.js";
 import Formattor from "../View/Formattor.js";
 import RULE_CONSTANT from "../Constant/RuleConstant.js";
 import NUMBER_CONSTANT from "../Constant/NumberConstant.js";
 
-const controllerLottoPurchase = async () => {
-  const amountString = await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_PURCHASE_AMOUNT_MESSAGE);
+const TRUE = true;
+
+const ValidateNoProblemNumber = (amountString) => {
   Validator.assertNonEmptyString(amountString);
   Validator.assertParsableAsInteger(amountString);
   const parsedAmountNumber = Formattor.formatStringToInteger(amountString);
@@ -16,6 +18,20 @@ const controllerLottoPurchase = async () => {
     RULE_CONSTANT.LOTTO_TICKET_PRICE,
     NUMBER_CONSTANT.ZERO
   );
+  return (parsedAmountNumber);
+}
+
+const controllerLottoPurchase = async () => {
+  let parsedAmountNumber = 0;
+  while(TRUE) {
+    try {
+      const amountString = await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_PURCHASE_AMOUNT_MESSAGE);
+      parsedAmountNumber = ValidateNoProblemNumber(amountString);
+      break ;
+    } catch(error) {
+      Output.outputString(error.message);
+    }
+  }
   const getLottoTicketCount = () => (
     Formattor.getDivisionQuotient(parsedAmountNumber, RULE_CONSTANT.LOTTO_TICKET_PRICE)
   )
@@ -40,35 +56,54 @@ const controllerCommonLottoWinningNumbersElements = (lottoCommonWinningNumbersAr
 }
 
 const controllerCommonLottoWinningNumbers = async () => {
-  const lottoCommonWinningNumbersString = (
-    await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_COMMON_WINNING_NUMBERS_MESSAGE)
-  );
-  const lottoCommonWinningNumbersArray = (
-    Formattor.splitStringToArray(lottoCommonWinningNumbersString, RULE_CONSTANT.DELIMITER)
-  );
-  Validator.assertArraySizeEqual(
-    lottoCommonWinningNumbersArray,
-    RULE_CONSTANT.COMMON_WINNING_NUMBERS_SIZE
-  );
-  Validator.assertNotInDuplicateValueInArray(lottoCommonWinningNumbersArray);
+  let lottoCommonWinningNumbersArray = [];
+  while (TRUE) {
+    try {
+      lottoCommonWinningNumbersArray = [];
+      const lottoCommonWinningNumbersString = (
+        await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_COMMON_WINNING_NUMBERS_MESSAGE)
+      );
+      lottoCommonWinningNumbersArray = (
+        Formattor.splitStringToArray(lottoCommonWinningNumbersString, RULE_CONSTANT.DELIMITER)
+      );
+      Validator.assertArraySizeEqual(
+        lottoCommonWinningNumbersArray,
+        RULE_CONSTANT.COMMON_WINNING_NUMBERS_SIZE
+      );
+      Validator.assertNotInDuplicateValueInArray(lottoCommonWinningNumbersArray);
+      break ;
+    } catch(error) {
+      Output.outputString(error.message);
+    }
+  }
   const getlottoCommonWinningNumbersArray = () => (
     controllerCommonLottoWinningNumbersElements(lottoCommonWinningNumbersArray).getNumberArray()
   );
   return {getlottoCommonWinningNumbersArray};
 }
 
-const controllerBonusLottoWinningNumber = async () => {
-  const lottoBonusWinningNumberString = (
-    await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_BONUS_WINNING_NUMBERS_MESSAGE)
-  );
-  Validator.assertNonEmptyString(lottoBonusWinningNumberString);
-  Validator.assertParsableAsInteger(lottoBonusWinningNumberString);
-  const lottoBonusWinningNumber =Formattor.formatStringToInteger(lottoBonusWinningNumberString);
-  Validator.assertValueInRange(
-    lottoBonusWinningNumber,
-    RULE_CONSTANT.LOTTO_MIN_NUMBER,
-    RULE_CONSTANT.LOTTO_MAX_NUMBER
-  );
+const controllerBonusLottoWinningNumber = async (array) => {
+  let lottoBonusWinningNumber = 0;
+  while (TRUE) {
+    try {
+      const lottoBonusWinningNumberString = (
+        await getUserInputAsync(INPUT_CONSTANT.GET_LOTTO_BONUS_WINNING_NUMBERS_MESSAGE)
+      );
+      Validator.assertNonEmptyString(lottoBonusWinningNumberString);
+      Validator.assertParsableAsInteger(lottoBonusWinningNumberString);
+      lottoBonusWinningNumber =Formattor.formatStringToInteger(lottoBonusWinningNumberString);
+      Validator.assertValueInRange(
+        lottoBonusWinningNumber,
+        RULE_CONSTANT.LOTTO_MIN_NUMBER,
+        RULE_CONSTANT.LOTTO_MAX_NUMBER
+      );
+      Validator.assertNotInDuplicateInputValueInArray(array, lottoBonusWinningNumber);
+      break ;
+    } catch(error) {
+      Output.outputString(error.message);
+    }
+
+  }
   const getlottoBonusWinningNumber = () => lottoBonusWinningNumber;
   return {getlottoBonusWinningNumber};
 }

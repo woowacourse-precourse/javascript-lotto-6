@@ -60,23 +60,24 @@ describe('InputController controllerCommonLottoWinningNumbers', () => {
 
 describe('InputController controllerBonusLottoWinningNumber', () => {
   const input = '1';
+  const array = [2,3,4,5,6,7];
   test('controllerBonusLottoWinningNumber 은 Function type이다 ', () => {
     expect(typeof (InputController.controllerBonusLottoWinningNumber)).toBe("function");
   })
   test(`controllerLottoPurchaseAmount로 객체를 생성합니다. `, async () => {
     mockQuestions([input]);
-    const controllerTest = await InputController.controllerBonusLottoWinningNumber();
+    const controllerTest = await InputController.controllerBonusLottoWinningNumber(array);
     expect(typeof (controllerTest)).toBe("object");
   })
   test(`controllerBonusLottoWinningNumber 로 생성한 객체는 getlottoBonusWinningNumber 를 메소드로 갖습니다. `, async () => {
     mockQuestions([input]);
-    const controllerTest = await InputController.controllerBonusLottoWinningNumber();
+    const controllerTest = await InputController.controllerBonusLottoWinningNumber(array);
     expect(controllerTest.getlottoBonusWinningNumber).toBeInstanceOf(Function);
   })
   test(`controllerBonusLottoWinningNumber 는 원소를 정수 리턴한다. `, async () => {
     const expected = 1;
     mockQuestions([input]);
-    const controllerTest = await InputController.controllerBonusLottoWinningNumber();
+    const controllerTest = await InputController.controllerBonusLottoWinningNumber(array);
     const answer = controllerTest.getlottoBonusWinningNumber();
     expect(answer).toStrictEqual(expected);
   });
