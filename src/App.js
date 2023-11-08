@@ -6,7 +6,6 @@ import {
   getWinLottoBonusInput,
   getStatistics,
 } from "./Game.js";
-import { Console, Random } from "@woowacourse/mission-utils";
 class App {
   constructor() {
     this.money = 0;
