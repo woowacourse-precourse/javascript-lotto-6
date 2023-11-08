@@ -39,6 +39,7 @@ class App {
   }
   async getInputCost() {
     const input = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
+    MissionUtils.Console.print("");
     return Number(input);
   }
   costValid(input) {
@@ -63,6 +64,7 @@ class App {
     this.lottos.forEach((lotto) => {
       MissionUtils.Console.print(`[${lotto.getNumbers().join(", ")}]`);
     });
+    MissionUtils.Console.print("");
   }
   // 당첨 번호 관련 함수들
   async inputWinnerNum() {
@@ -78,6 +80,7 @@ class App {
   }
   async getInputWinnerNum() {
     const input = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
+    MissionUtils.Console.print("");
     return input.split(",").map(Number);
   }
   // 보너스 번호 관련 함수들
@@ -95,6 +98,7 @@ class App {
   }
   async getInputBonusNum() {
     const input = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+    MissionUtils.Console.print("");
     return Number(input);
   }
   bonusNumValid(input) {
