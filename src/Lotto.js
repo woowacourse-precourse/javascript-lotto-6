@@ -45,6 +45,7 @@ class Lotto {
         '\n당첨 번호를 입력해 주세요.\n',
       );
       this.numbers = lottoinput.split(',').map((x) => parseInt(x.trim()));
+      this.#validate(this.numbers);
       this.validatefigure(this.numbers);
       this.validateint(this.numbers);
       this.validateduplication(this.numbers);
