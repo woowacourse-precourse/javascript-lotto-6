@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { PRIZE_TEXT_BY_MATCH_COUNT } from './constants/index.js';
+import { PRIZE_TEXT_BY_MATCH_COUNT } from '../constants/index.js';
 import Lotto from './Lotto.js';
 
 class LottoManager {

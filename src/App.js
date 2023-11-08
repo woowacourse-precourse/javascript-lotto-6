@@ -1,7 +1,7 @@
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
-import LottoManager from './LottoManager.js';
-import Bank from './Bank.js';
+import LottoManager from './domain/LottoManager.js';
+import Bank from './domain/Bank.js';
 
 class App {
   async play() {

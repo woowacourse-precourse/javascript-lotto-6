@@ -1,4 +1,4 @@
-import { PRIZE_MONEY } from "./constants/index.js";
+import { PRIZE_MONEY } from "../constants/index.js";
 
 class Bank {
     #money;
