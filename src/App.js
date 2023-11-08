@@ -20,12 +20,11 @@ class App {
       const result = this.getResultInOneLotto(oneLotto, winningLotto, bonusLotto);
       resultArray.push(result);
     }
-    const profit = this.getProfit(resultArray);
+    const profit = this.getProfit(resultArray, lottoCount);
     this.printResult(resultArray, profit)
   }
 
   printResult(result, prof) {
-    
     MissionUtils.Console.print(`당첨 통계\n---`);
     MissionUtils.Console.print(`3개 일치 (5,000원) - ${result.filter(e=>e===5).length}개`)
     MissionUtils.Console.print(`4개 일치 (50,000원) - ${result.filter(e=>e===4).length}개`)
@@ -56,7 +55,7 @@ class App {
     else return 0;    
   }
 
-  getProfit(result) {
+  getProfit(result, count) {
     const sum = 0;
     result.forEach(rank=>{
       if(rank===1) sum+=2000000000;
@@ -65,7 +64,8 @@ class App {
       else if(rank===4) sum+=50000;
       else if(rank===5) sum+=5000;
     })
-    return sum;
+    const profit = (count*100 / sum) * 100;
+    return profit.toFixed(1);
   }
   
 
