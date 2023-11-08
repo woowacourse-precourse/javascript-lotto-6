@@ -35,7 +35,7 @@ class LottoController {
   handleMainNumber(mainNumberArray) {
     if (!Validator.validateLottoNumbers(mainNumberArray)) return this.readMainNumber();
     OutputView.printBlank();
-    this.readBonusNumber(mainNumberArray);
+    return this.readBonusNumber(mainNumberArray);
   }
 
   async readBonusNumber(mainNumberArray) {
@@ -47,7 +47,7 @@ class LottoController {
     if (!Validator.validateBonusNumber(mainNumberArray, bonusNumber))
       return this.readBonusNumber(mainNumberArray);
     OutputView.printBlank();
-    this.raffleLottos(mainNumberArray, bonusNumber);
+    return this.raffleLottos(mainNumberArray, bonusNumber);
   }
 
   raffleLottos(mainNumberArray, bonusNumber) {
