@@ -58,6 +58,11 @@ describe('유효성 검사 테스트', () => {
             expect(() => checkPurchaseAmount(amount)).toThrow(ERROR.INVALID_AMOUNT_MESSAGE);
         });
 
+        test('구매 금액이 음수일 경우 예외가 발생한다.', () => {
+            const amount = -1000;
+            expect(() => checkPurchaseAmount(amount)).toThrow(ERROR.INVALID_AMOUNT_MESSAGE);
+        });
+
         test('구매 금액이 정수가 아닐 경우 예외가 발생한다.', () => {
             const amount = 1.1;
             expect(() => checkPurchaseAmount(amount)).toThrow(ERROR.INVALID_AMOUNT_MESSAGE);
