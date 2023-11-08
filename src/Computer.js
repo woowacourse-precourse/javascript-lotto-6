@@ -1,23 +1,21 @@
-import { MissionUtils, Console } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js"
 
 class Computer {
-  static pickRandomNumber() {
-    const pickNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
-    return pickNumber.sort(function (a, b) {
-    return a - b;
-    });
-    }
-
-  static purchaseList(purchaseAmount) {
-    const purchaseQuantity = purchaseAmount / 1000
+  static purchaseList(lottoNumber) {
+    const purchaseQuantity = lottoNumber / 1000
     return purchaseQuantity
   }
 
   static randomNumberList(purchaseNumber) {
+    let lottoList =[];
     for (let i = 0; i < purchaseNumber; i++) {
-    Computer.pickRandomNumber();
-    Console.print(Computer.pickRandomNumber());
+    lottoList.push(Lotto.pickRandomNumber());
     }
+    return lottoList;
+  }
+
+  static lotto(lottoNumber,lottoList) {
+    console.log(lottoNumber.split(',').filter(x => lottoList.includes(x)));
   }
 }
 
