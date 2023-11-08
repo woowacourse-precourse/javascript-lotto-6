@@ -4,21 +4,25 @@ class WinnerSelector {
   #issuedLottos;
   #winningCount;
 
-  constructor({ lottoNumbers, bonusNumber, issedLottos }) {
-    this.#lottoNumbers = lottoNumbers;
-    this.#bonusNumber = bonuasNumber;
-    this.#issuedLottos = issedLottos;
+  constructor({ lottoNumbers, bonusNumber, issuedLottos }) {
+    this.#lottoNumbers = lottoNumbers.map(Number);
+    this.#bonusNumber = bonusNumber;
+    this.#issuedLottos = issuedLottos;
     this.#winningCount = [0, 0, 0, 0, 0];
   }
 
-  #getLottoCount(issedLotto) {
-    return issedLotto.filter(lottoNumber =>
+  #getLottoCount(issuedLotto) {
+    return issuedLotto.filter(lottoNumber =>
       this.#lottoNumbers.includes(lottoNumber),
     ).length;
   }
 
   #isBonusMatched(issuedLotto) {
     return issuedLotto.includes(this.#bonusNumber);
+  }
+
+  getIssuedLottos() {
+    return this.#issuedLottos;
   }
 
   #setWinningCount({ lottoCount, isBonus }) {
@@ -44,11 +48,13 @@ class WinnerSelector {
     this.#issuedLottos.forEach(issuedLotto => {
       const lottoCount = this.#getLottoCount(issuedLotto);
       const isBonus = this.#isBonusMatched(issuedLotto);
+
       this.#setWinningCount({ lottoCount, isBonus });
     });
   }
 
   getResult() {
+    this.#matchResult();
     return this.#winningCount;
   }
 }
