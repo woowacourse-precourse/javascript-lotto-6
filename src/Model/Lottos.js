@@ -39,4 +39,9 @@ class Lottos {
       this.#lottoTickets.push(lotto);
     }
   }
+
+  createLotto() {
+    const randomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+    return Array.from(randomNumbers).sort((a, b) => a - b);
+  }
 }
