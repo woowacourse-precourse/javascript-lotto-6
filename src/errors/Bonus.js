@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "./Constants.js";
+import { ERROR_MESSAGE } from "../Constants.js";
 class Bonus {
   #lottoArr;
 

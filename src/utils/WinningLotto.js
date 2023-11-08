@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { CONSOLE_MESSAGE } from "../Constants.js";
-import Lotto from "../Lotto.js";
-import Bonus from "../Bonus.js";
+import Lotto from "../errors/Lotto.js";
+import Bonus from "../errors/Bonus.js";
 class WinningLotto {
   async getWinningLotto() {
     let mainLotto = "";

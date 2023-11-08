@@ -1,4 +1,4 @@
-import Bonus from "../src/Bonus.js";
+import Bonus from "../src/errors/Bonus.js";
 
 describe("보너스 클래스 테스트", () => {
   const spaceTestCases = [
