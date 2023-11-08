@@ -80,6 +80,7 @@ class Controller {
       this.lottoTickets.push(new Lotto(getLottoNumber()));
     };
 
+    OutputView.showLottoCount(this.lottoTickets.length);
     OutputView.showLottoNumbers(this.lottoTickets);
   };
 
