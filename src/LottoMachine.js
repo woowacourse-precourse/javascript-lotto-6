@@ -8,8 +8,8 @@ export class LottoMachine {
   }
 
   generateLotto() {
-    const lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
-    this.lottos.push(lotto);
+    const lotto = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+    this.lottos.push(lotto.sort((a, b) => a - b));
   }
 
   printLottos(lottos) {
