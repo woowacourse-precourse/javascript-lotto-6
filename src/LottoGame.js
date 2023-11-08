@@ -29,6 +29,7 @@ class LottoGame {
       const lottoNum = this.sortRandomLottoNumbers();
       this.#lottoList.push(lottoNum);
     }
+    this.printLottoNumbers();
   }
 
   sortRandomLottoNumbers() {
@@ -36,6 +37,13 @@ class LottoGame {
     ramdomNum.sort((a, b) => a - b);
 
     return ramdomNum;
+  }
+
+  printLottoNumbers() {
+    Console.print(`\n${this.#gameCount}개를 구매했습니다.`);
+    this.#lottoList.forEach((lottoNum) => {
+      Console.print(`[${lottoNum.join(", ")}]`);
+    });
   }
 }
 
