@@ -21,6 +21,7 @@ class App {
       resultArray.push(result);
     }
     const profit = this.getProfit(resultArray, lottoCount);
+    console.log("resultArray", resultArray)
     this.printResult(resultArray, profit)
   }
 
@@ -56,7 +57,7 @@ class App {
   }
 
   getProfit(result, count) {
-    const sum = 0;
+    let sum = 0;
     result.forEach(rank=>{
       if(rank===1) sum+=2000000000;
       else if(rank===2) sum+=30000000;
@@ -64,7 +65,7 @@ class App {
       else if(rank===4) sum+=50000;
       else if(rank===5) sum+=5000;
     })
-    const profit = (count*100 / sum) * 100;
+    const profit = (sum / (count*1000)) * 100;
     return profit.toFixed(1);
   }
   
@@ -82,7 +83,6 @@ class App {
 
   async getWinningLotto() {
     const winningNumber = await MissionUtils.Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
-    console.log("winningNumber", winningNumber)
     try {
       const winnigArray = winningNumber.split(",").map(Number);
       console.log("winnigArray", winnigArray)
