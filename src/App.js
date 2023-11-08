@@ -3,11 +3,7 @@ import Lotto from './Lotto';
 import LottoStatistics from './LottoStatistics';
 import genLottoNumber from './genLottoNumber';
 import InputHandler from './utils/InputHandler';
-import {
-  MAX_NUMBER,
-  MIN_NUMBER,
-  PERCHASE_AMOUNT,
-} from './constant/lottoNumber';
+import { PERCHASE_AMOUNT } from './constant/lottoNumber';
 import WINNING_MONEY from './constant/winningMoney';
 import USER_INPUT_TEXT from './constant/inputText';
 import {
@@ -87,7 +83,6 @@ class App {
       .split(',')
       .map(Number)
       .sort((a, b) => a - b);
-
     Object.keys(winningNumbersValidater).forEach(validate => {
       winningNumbersValidater[validate](winningNumbers);
     });
