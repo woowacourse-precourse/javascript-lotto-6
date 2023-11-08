@@ -15,7 +15,8 @@ class LottoController {
     this.lottoModel.generateRandomLottoNumbers();
     this.outputView.printLottos(this.lottoModel.randomNumbers);
     await this.inputluckyNumbers();
-    await this.bonusenumbers();
+    await this.inputBonusNumber();
+    this.outputView.print(this.lottoModel.matchCount);
   }
 
   async inputAmount() {
@@ -24,7 +25,7 @@ class LottoController {
       this.lottoModel.setPurchaseAmount(getPrice);
       this.outputView.print(`${this.lottoModel.purchasecount}개를 구매했습니다.`);
     } catch (e) {
-      this.outputView.print(`${ERROR_MESSAGES.error} ${e.message}`);
+      this.outputView.print(e.message);
       await this.inputAmount();
     }
   }
@@ -34,8 +35,18 @@ class LottoController {
     try {
       this.lottoModel.setLuckyNumbers(getLuckyNumbers);
     } catch (e) {
-      this.outputView.print(`${ERROR_MESSAGES.error} ${e.message}`);
+      this.outputView.print(e.message);
       await this.inputluckyNumbers();
+    }
+  }
+
+  async inputBonusNumber() {
+    const getBonusNumber = await this.inputView.userInput(NOTICE_MESSAGES.inputBonusNumber);
+    try {
+      this.lottoModel.setBonusNumber(getBonusNumber);
+    } catch (e) {
+      this.outputView.print(e.message);
+      await this.inputBonusNumber();
     }
   }
 }

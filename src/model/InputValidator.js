@@ -4,7 +4,7 @@ import { ERROR_MESSAGES, INIT } from '../constants/messages.js';
 class InputValidator {
   static errorCondition(condition, message) {
     if (condition) {
-      throw new Error(message);
+      throw new Error(`${ERROR_MESSAGES.error} ` + message);
     }
   }
 
@@ -30,9 +30,9 @@ class InputValidator {
     this.errorCondition(setSize, ERROR_MESSAGES.nonDuplicateNumber);
   }
 
-  static lengthCheck(numbers) {
-    const setlength = numbers.length !== INIT.validNumber.count;
-    this.errorCondition(setlength, ERROR_MESSAGES.lengthError);
+  static lengthCheck(numbers, length) {
+    const setlength = numbers.length !== length;
+    this.errorCondition(setlength, ERROR_MESSAGES.lengthError(length));
   }
 
   static isValidNumber(num) {
@@ -42,15 +42,24 @@ class InputValidator {
   }
 
   static numberCheck(numbers) {
-    const checkNum = numbers.every(num => this.isValidNumber(num));
+    const checkNum = numbers.every(number => this.isValidNumber(number));
     this.errorCondition(!checkNum, ERROR_MESSAGES.invalidNumber);
   }
 
   static ValidLuckyNumber(inputNumbers) {
     const convertedToArrayType = inputNumbers.split(',').map(Number);
-    this.lengthCheck(convertedToArrayType);
+    this.lengthCheck(convertedToArrayType, INIT.validNumber.count);
     this.setNumber(convertedToArrayType);
     this.numberCheck(convertedToArrayType);
+  }
+
+  // 보너스 유효성
+
+  static ValidBonusNumber(inputNumber) {
+    const convertedToArrayType = inputNumber.split(',');
+    this.lengthCheck(convertedToArrayType, INIT.validNumber.min);
+    const convertedToNumberType = parseInt(inputNumber, 10);
+    this.errorCondition(!this.isValidNumber(convertedToNumberType), ERROR_MESSAGES.invalidNumber);
   }
 }
 

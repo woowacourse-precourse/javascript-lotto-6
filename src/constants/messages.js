@@ -29,7 +29,8 @@ const ERROR_MESSAGES = {
   priceUnit: '1000단위로 입력해주세요',
   invalidNumber: '유효한 숫자가 아닙니다.',
   nonDuplicateNumber: '중복된 숫자가 있습니다.',
-  lengthError: '6자리의 숫자를 입력해주세요.',
+  nonOverlappingNumbers: '당첨번호와 보너스 번호는 겹칠 수 없습니다.',
+  lengthError: length => `${length}자리의 숫자를 입력해주세요.`,
 };
 
 const REGEX = {

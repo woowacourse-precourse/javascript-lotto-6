@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { INIT } from '../constants/messages.js';
+import { INIT, ERROR_MESSAGES } from '../constants/messages.js';
 import InputValidator from './InputValidator.js';
 import Lotto from '../Lotto.js';
 
@@ -8,7 +8,9 @@ class LottoModel {
     this.purchaseAmount = 0;
     this.purchasecount = 0;
     this.randomNumbers = [];
-    this.LuckyNumbers = [];
+    this.luckyNumbers = [];
+    this.bonusNumber = 0;
+    this.matchCount = this.calculateMatchCount();
   }
 
   setPurchaseAmount(inputPrice) {
@@ -32,12 +34,25 @@ class LottoModel {
 
   setLuckyNumbers(inputNumbers) {
     InputValidator.ValidLuckyNumber(inputNumbers);
-    this.LuckyNumbers = inputNumbers.split(',').map(Number);
+    this.luckyNumbers = inputNumbers.split(',').map(Number);
+  }
+
+  setBonusNumber(inputNumber) {
+    InputValidator.ValidBonusNumber(inputNumber);
+    InputValidator.errorCondition(
+      this.luckyNumbers.includes(Number(inputNumber)),
+      ERROR_MESSAGES.nonOverlappingNumbers
+    );
+    this.bonusNumber = parseInt(inputNumber, 10);
+  }
+
+  calculateSingleMatchCount(number) {
+    return 13 - new Set([...number, ...this.luckyNumbers, this.bonusNumber]).size;
+  }
+
+  calculateMatchCount() {
+    return this.randomNumbers.map(numbers => this.calculateSingleMatchCount(numbers));
   }
 }
-// const test = new LottoModel();
-
-// console.log(test.setPurchaseAmount('5000'));
-// console.log(test.randomNumbers);
 
 export default LottoModel;
