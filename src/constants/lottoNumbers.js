@@ -1,0 +1,15 @@
+export const PICK_NUMBERS = {
+  START_RANGE: 1,
+  END_RANGE: 45,
+  HOW_MANY: 6,
+};
+
+export const ONE_LOTTO_PRICE = 1000;
+
+export const REWARDS = {
+  FIFTH: 5000,
+  FOURTH: 50000,
+  THIRD: 1500000,
+  SECOND: 30000000,
+  FIRST: 2000000000,
+};
