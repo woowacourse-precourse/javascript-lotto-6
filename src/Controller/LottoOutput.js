@@ -81,8 +81,10 @@ class LottoOutput {
       this.matchBonus * PRIZE.PRIZE_BONUS +
       this.matchSix * PRIZE.PRIZE_SIX;
     this.rate = ((sums / money) * 100).toFixed(1);
-
-    Console.print(MESSAGE_OUTPUT(this.rate).RATE);
+    this.rate = this.rate
+      .toString()
+      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    Console.print(MESSAGE_OUTPUT(this.rate.toLocaleString()).RATE);
   }
 }
 
