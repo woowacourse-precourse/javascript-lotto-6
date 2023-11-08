@@ -1,8 +1,8 @@
 import InputView from "../views/InputView.js";
 import OutputView from "../views/OutputView.js";
-import GenerateLottoNumbers from "../models/GenerateLottoNumbers.js";
-import LottoResultCalculator from "../models/LottoResultCalculator.js";
-import ProfitCalculator from "../models/ProfitCalculator.js";
+import GenerateLottoNumbers from "../domain/GenerateLottoNumbers.js";
+import LottoResultCalculator from "../domain/LottoResultCalculator.js";
+import ProfitCalculator from "../domain/ProfitCalculator.js";
 
 class LottoController {
   #purchasePrice;

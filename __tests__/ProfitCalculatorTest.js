@@ -1,4 +1,4 @@
-import ProfitCalculator from "../src/models/ProfitCalculator.js";
+import ProfitCalculator from "../src/domain/ProfitCalculator.js";
 import { PRIZE_MONEY, INITIAL_RESULT  } from "../src/constants/Constant.js";
 
 describe("ProfitCalculator 클래스 테스트", () => {

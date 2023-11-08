@@ -1,4 +1,4 @@
-import GenerateLottoNumbers from "../src/models/GenerateLottoNumbers.js";
+import GenerateLottoNumbers from "../src/domain/GenerateLottoNumbers.js";
 
 describe("GenerateLottoNumbers 테스트", () => {
   test("올바른 로또 번호를 생성하는지 확인", () => {
