@@ -8,7 +8,7 @@ import { isEmptyObject } from '../../../utils/object/object.module.js';
  */
 const calculatePrize = (prizeInfo, rankDistributionTable) =>
   Object.entries(rankDistributionTable).reduce(
-    (prevPrize, [rank, count]) => prevPrize + (prizeInfo[rank] ?? 0) * count,
+    (prevPrize, [rank, count]) => prevPrize + prizeInfo[rank] * count,
     0,
   );
 
