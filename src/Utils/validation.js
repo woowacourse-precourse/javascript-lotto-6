@@ -1,5 +1,5 @@
-import ERROR from '../Constant/Error';
-import CustomError from './CustomError';
+import ERROR from '../Constant/Error.js';
+import CustomError from './CustomError.js';
 
 const validateInput = (input) => {
   if (Number.isNaN(Number(input))) {

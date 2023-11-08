@@ -11,7 +11,7 @@ describe('NumberCheck 테스트', () => {
       ];
     });
     test('맞춘 숫자값만 반환 (보너스 X)', () => {
-      const user = [1, 2, 3, 20, 30, 40];
+      const user = [1, 2, 3, 6, 10, 40];
       const bonus = 7;
 
       const numbers = { randomNum, userNum: { user, bonus } };
@@ -94,13 +94,13 @@ describe('NumberCheck 테스트', () => {
   describe('getSameResult 테스트', () => {
     test('일치하는 수 개수에 따라 결과 반환', () => {
       const matchResult = ['3개 일치 (5,000원)', '4개 일치 (50,000원)'];
-      const aaa = ['3개 일치 (5,000원) - 1개', '4개 일치 (50,000원) - 1개'];
+      const answer = ['3개 일치 (5,000원) - 1개', '4개 일치 (50,000원) - 1개'];
 
       const result = new CheckNumber().getSameResult(matchResult);
 
       // eslint-disable-next-line no-unused-vars
       matchResult.forEach((_) => {
-        expect(result).toEqual(expect.arrayContaining(aaa));
+        expect(result).toEqual(expect.arrayContaining(answer));
       });
     });
   });
