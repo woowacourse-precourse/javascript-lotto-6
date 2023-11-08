@@ -1,22 +1,34 @@
 import Screen from '../view/Screen';
 import Lotto from '../model/Lotto';
-import generateLottoNumbers from '../utils/LottoUtil';
+import LottoResult from '../model/LottoResult';
+import Rank from '../model/Rank';
+import {
+  generateLottoNumbers,
+  calculateMatchingCount,
+} from '../utils/LottoUtil';
 import { MONEY_UNIT, MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH } from '../Constants';
 
 class LottoGame {
   #lottos = [];
+  #results = [];
   #count;
   #winningLotto;
   #bonusNumber;
 
   async start() {
     await this.#inputPurchaseCount();
-
     this.#issueLottos();
     this.#printLottos();
 
     await this.#inputWinningLotto();
     await this.#inputBonusNumber();
+
+    Screen.printResultMessage();
+    this.#calculateLottoResult();
+    Rank.LIST.forEach((rank) => {
+      const winningCount = this.#calculateWinningCount(rank);
+      Screen.printRankResult(rank, winningCount);
+    });
   }
 
   async #inputPurchaseCount() {
@@ -57,6 +69,21 @@ class LottoGame {
       Screen.printErrorMessage(message);
       await this.#inputBonusNumber();
     }
+  }
+
+  #calculateLottoResult() {
+    this.#lottos.forEach((lotto) => {
+      const matchingCount = calculateMatchingCount(lotto, this.#winningLotto);
+      const includesBonus = lotto.getNumbers().includes(this.#bonusNumber);
+      this.#results.push(new LottoResult(matchingCount, includesBonus));
+    });
+  }
+
+  #calculateWinningCount(rank) {
+    return this.#results.reduce(
+      (acc, result) => acc + rank.isWinnable(result),
+      0,
+    );
   }
 }
 

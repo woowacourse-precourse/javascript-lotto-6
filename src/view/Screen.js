@@ -41,6 +41,23 @@ class Screen {
 
     return number;
   }
+
+  static printResultMessage() {
+    Console.print(`${STRINGS.winningResult}\n${STRINGS.hyphenLine}`);
+  }
+
+  static printRankResult(rank, winningCount) {
+    const { prize, requiredCount, isRequiredBonus } = rank;
+
+    Console.print(
+      MESSAGES.rankMessage(
+        prize.toLocaleString(),
+        requiredCount,
+        isRequiredBonus,
+        winningCount,
+      ),
+    );
+  }
 }
 
 export default Screen;

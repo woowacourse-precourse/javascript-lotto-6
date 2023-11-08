@@ -5,6 +5,10 @@ export const MESSAGES = Object.freeze({
   purchaseLottoCountsMessage: '개를 구매했습니다.',
   winningLottoInputMessage: '당첨 번호를 입력해 주세요.',
   bonusNumberInputMessage: '보너스 번호를 입력해 주세요.',
+  rankMessage: (prize, requiredCount, isRequiredBonus, winningCount) =>
+    `${requiredCount}개 일치${
+      isRequiredBonus ? ', 보너스 볼 일치' : ''
+    } (${prize}원) - ${winningCount}개`,
 });
 
 export const ERROR = Object.freeze({
@@ -25,6 +29,8 @@ export const STRINGS = Object.freeze({
   lottoSuffix: ']',
   lottoDelimiter: ', ',
   winningDelimiter: ',',
+  winningResult: '당첨 통계',
+  hyphenLine: '- - -',
 });
 
 export const MONEY_UNIT = 1000;
