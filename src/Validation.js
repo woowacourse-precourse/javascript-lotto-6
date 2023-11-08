@@ -13,6 +13,7 @@ class Validation extends Input {
       return inputValue;
     } catch (error) {
         MissionUtils.Console.print(error);
+        return Input.getMoney();
     }
   }
 
@@ -28,6 +29,7 @@ class Validation extends Input {
       return arrValue;
     } catch (error) {
       MissionUtils.Console.print(error);
+      return Input.getNumbers();
     }
   }
   
@@ -41,6 +43,7 @@ class Validation extends Input {
       return inputValue;
     } catch (error) {
       MissionUtils.Console.print(error);
+      return Input.getBonus();
     }
   }
 }
