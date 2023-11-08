@@ -32,8 +32,8 @@ class MainController {
     let UserWinningNumber = await Input.getWinningNumber();
     while(true) {
       try{
-        const winningNumberArray = UserWinningNumber.split(',');
-        const lotto = new Lotto(winningNumberArray);
+        this.winningNumberArray = UserWinningNumber.split(',');
+        const lotto = new Lotto(this.winningNumberArray);
         this.resultArray = lotto.getCompareResult(this.lottoNumber);
         break;
       }
@@ -48,6 +48,7 @@ class MainController {
     while(true) {
       try {
         const bonus = new Bonus(userBonusNumber);
+        bonus.LottoNumberValidate(this.winningNumberArray,userBonusNumber);
         bonus.IsinFive(this.resultArray);
         this.winningInFive = bonus.IsinBonusNumber(this.lottoNumber);
         break;
