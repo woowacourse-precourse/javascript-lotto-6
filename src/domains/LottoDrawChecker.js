@@ -29,7 +29,6 @@ export default class LottoDrawChecker {
     return matchingCountArray.reduce(
       (drawTemplete, { matchingCount, haveBonusNumber }) => {
         if (this.#isQquang(matchingCount)) return drawTemplete;
-
         const drawGrade =
           LottoDrawChecker.drawTable[matchingCount](haveBonusNumber);
         drawTemplete[drawGrade] += 1;

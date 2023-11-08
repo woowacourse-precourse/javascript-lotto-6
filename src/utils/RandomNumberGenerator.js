@@ -1,7 +1,7 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LOTTO } from '../constants/lotto';
-import paramType from '../lib/paramType/src/paramType';
-import { ERROR_MESSAGE } from '../constants/message';
+import { LOTTO } from '../constants/lotto.js';
+import paramType from '../lib/paramType/src/paramType.js';
+import { ERROR_MESSAGE } from '../constants/message.js';
 
 export default class RandomNumberGenerator {
   #minInclusive;

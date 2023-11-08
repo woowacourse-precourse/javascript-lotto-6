@@ -3,9 +3,9 @@ import paramType from './lib/paramType/src/paramType.js';
 import InputReader from './view/InputReader.js';
 import PromptPrinter from './view/promptPrinter.js';
 import RandomNumberGenerator from './utils/RandomNumberGenerator.js';
+import LottoGame from './domains/LottoGame.js';
 import LottoMachine from './domains/LottoMachine.js';
 import ValidUserInputs from './validator/ValidUserInputs.js';
-import LottoGame from './domains/LottoGame.js';
 
 class App {
   #inputReader;
