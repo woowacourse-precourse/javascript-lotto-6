@@ -32,11 +32,22 @@ describe("게임 클래스 테스트", () => {
       "5개 일치 (1,500,000원) - 0개",
       "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
       "6개 일치 (2,000,000,000원) - 1개",
-      "총 수익률은 2000000000.0%입니다.",
+      "총 수익률은 200000000.0%입니다.",
     ];
 
     logs.forEach((log) => {
       expect(spyFn).toHaveBeenCalledWith(expect.stringContaining(log));
     });
+  });
+
+  test("예외 상황이 발생하여 사용자가 값을 다시 입력", async () => {
+    mockRandom([[1, 2, 3, 4, 5, 6]])
+    mockInput(["1000j", "1000", "1,2,3,4,5,6", "7"]);
+    spyFn.mockClear();
+
+    const game = new Game();
+    await game.play();
+
+    expect(spyFn).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
   });
 });
