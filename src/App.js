@@ -4,7 +4,7 @@ class App {
   async play() {
     try {
       let [count, change] = await this.userPriceInput();
-      
+      await this.printCnt(count, change);
     } catch (error) {
       [count, change] = await this.userPriceInput();
     }
@@ -29,7 +29,12 @@ class App {
     return typeof input === 'number' && !isNaN(input);
   }
 
-
+  printCnt(count, change) {
+    MissionUtils.Console.print(`${count}개 구매했습니다.`);
+    if (change > 0) {
+      MissionUtils.Console.print(`거스름돈은 ${change}원입니다.`)
+    }
+  }
 }
   
 
