@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import MESSAGES from '../constants/message.js';
 import MATCHES from '../constants/matches.js';
+import CONFIG from '../constants/config.js';
 
 const LOTTO_VIEW = Object.freeze({
   getUserInputTotalBuyPrice() {
@@ -29,7 +30,11 @@ const LOTTO_VIEW = Object.freeze({
     });
   },
   printRateOfReturn(roi) {
-    Console.print(`총 수익률은 ${roi.toLocaleString()}%입니다.`);
+    Console.print(
+      `총 수익률은 ${roi
+        .toFixed(CONFIG.maxDecimalPoint)
+        .toLocaleString()}%입니다.`
+    );
   },
 });
 

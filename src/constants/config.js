@@ -1,4 +1,5 @@
 const CONFIG = Object.freeze({
+  maxDecimalPoint: 1,
   minLottoNumber: 1,
   maxLottoNumber: 45,
   lottoPrice: 1000,
