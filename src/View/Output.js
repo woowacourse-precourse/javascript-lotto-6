@@ -7,7 +7,12 @@ class Output {
 
   printLottoTickets(lottoTickets) {
     lottoTickets.forEach((ticket) => {
-      Console.print(ticket.getNumbers());
+      const ticketString = ticket
+        .getNumbers()
+        .map((number) => number.toString())
+        .join(", ");
+
+      Console.print(`[${ticketString}]`);
     });
   }
 
