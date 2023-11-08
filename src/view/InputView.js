@@ -1,19 +1,19 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { BONUS_NUMBER, BUY_LOTTO_AMOUNT, WINNING_NUMBERS } from "../constant/constant";
+import { INPUT_MESSAGES } from "../constant/message";
 
 const InputView = {
     async readLottoAmount() {
-        const buyLottoAmount = await MissionUtils.Console.readLineAsync(BUY_LOTTO_AMOUNT);
+        const buyLottoAmount = await MissionUtils.Console.readLineAsync(INPUT_MESSAGES.buyLottoAmount);
         return buyLottoAmount;
     },
 
     async readLottoNumbers() {
-        const inputLottoNumbers = await MissionUtils.Console.readLineAsync(WINNING_NUMBERS);
+        const inputLottoNumbers = await MissionUtils.Console.readLineAsync(INPUT_MESSAGES.winningLottoNumbers);
         return inputLottoNumbers;
     },
 
     async readBonusNumber() {
-        const inputBonusNumber = await MissionUtils.Console.readLineAsync(BONUS_NUMBER);
+        const inputBonusNumber = await MissionUtils.Console.readLineAsync(INPUT_MESSAGES.bonusNumber);
         return inputBonusNumber;
     }
 }
