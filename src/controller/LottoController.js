@@ -20,11 +20,10 @@ class LottoController {
     this.lottoModel.checkBonusNumber();
     this.lottoModel.calculateResult();
     this.lottoModel.initializeResultObject();
-
-    this.outputView.print(this.lottoModel.matchCount);
-    this.outputView.print(this.lottoModel.hasBonus);
-    this.outputView.print(this.lottoModel.result);
-    this.outputView.print(this.lottoModel.initObject);
+    this.lottoModel.calculateResultObject();
+    this.outputView.print(NOTICE_MESSAGES.resultPrint);
+    this.outputView.print(NOTICE_MESSAGES.dashes);
+    this.lottoModel.printResults();
   }
 
   async inputAmount() {

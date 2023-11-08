@@ -6,7 +6,4 @@ class App {
     await start.lottoDraw();
   }
 }
-
 export default App;
-
-//

@@ -1,4 +1,4 @@
-import { Random } from '@woowacourse/mission-utils';
+import { Random, Console } from '@woowacourse/mission-utils';
 import { INIT, ERROR_MESSAGES } from '../constants/messages.js';
 import InputValidator from './InputValidator.js';
 import Lotto from '../Lotto.js';
@@ -79,6 +79,47 @@ class LottoModel {
   initializeResultObject() {
     this.initObject = Object.fromEntries(Array.from({ length: 5 }, (_, i) => i + 3).map(v => [v, 0]));
   }
+
+  calculateResultObject() {
+    this.result.reduce((acc, value) => this.updateResultObject(acc, value), this.initObject);
+  }
+
+  updateResultObject(acc, value) {
+    acc[value] = (acc[value] || 0) + 1;
+    return acc;
+  }
+
+  printResults() {
+    [3, 4, 5, 7, 6].forEach(count => this.printResult(count));
+
+    const totalPrize = Object.entries(this.initObject).reduce(
+      (acc, [count, frequency]) => this.calculateTotalPrize(acc, count, frequency),
+      0
+    );
+
+    const roi = (totalPrize / this.purchaseAmount) * 100;
+    Console.print(`총 수익률은 ${roi.toFixed(1)}%입니다.`);
+  }
+
+  printResult(count) {
+    const frequency = this.initObject[count] || 0;
+    const prize = prizeMapping[count] || '0원';
+    const matchType = count === 7 ? '5개 일치, 보너스 볼 일치' : `${count}개 일치`;
+    Console.print(`${matchType} (${prize.toLocaleString()}원) - ${frequency}개`);
+  }
+
+  calculateTotalPrize(acc, count, frequency) {
+    const prize = prizeMapping[count] || 0;
+    return acc + prize * frequency;
+  }
 }
+
+const prizeMapping = {
+  3: 5000,
+  4: 50000,
+  5: 1500000,
+  6: 2000000000, // 6개 일치
+  7: 30000000, // 5개 일치, 보너스 볼 일치
+};
 
 export default LottoModel;

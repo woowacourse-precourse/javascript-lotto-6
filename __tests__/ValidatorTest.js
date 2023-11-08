@@ -1,7 +1,7 @@
 import InputValidator from '../src/model/InputValidator';
 
 describe('InputValidator', () => {
-  it('should validate number type', () => {
+  it('정수 인지 확인', () => {
     // Valid input
     expect(() => InputValidator.validateNumberType('123')).not.toThrow();
     expect(() => InputValidator.validateNumberType('456')).not.toThrow();

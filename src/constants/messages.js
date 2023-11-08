@@ -3,6 +3,8 @@ const NOTICE_MESSAGES = {
   purchaseCount: '개를 구매했습니다.\n',
   inputLuckyNumbers: '당첨 번호를 입력해 주세요.\n',
   inputBonusNumber: '보너스 번호를 입력해 주세요.\n',
+  resultPrint: '당첨 통계',
+  dashes: '---',
   matchingNumbers: (matchingCount, prizeAmount, totalCount) =>
     `${matchingCount}개 일치 (${prizeAmount}원) - ${totalCount}개`,
 };
