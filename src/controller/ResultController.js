@@ -13,22 +13,6 @@ export default class ResultController {
     this.#resultService.setResult(lottos, raffle);
   }
 
-  #calculateRanks() {
-    this.#resultService.calculateRanks();
-  }
-
-  #calculateReturns() {
-    this.#resultService.calculateReturns();
-  }
-
-  #calculateReturnRate() {
-    return this.#resultService.returnRate();
-  }
-
-  #prizes() {
-    return this.#resultService.prizes();
-  }
-
   calculateResults() {
     this.#calculateRanks();
     this.#calculateReturns();
@@ -45,5 +29,21 @@ export default class ResultController {
     View.printOutput(`${MESSAGES.outputSecondPrize}${prizes['2']}${MESSAGES.suffixAmount}`);
     View.printOutput(`${MESSAGES.outputFirstPrize}${prizes['1']}${MESSAGES.suffixAmount}`);
     View.printOutput(`${MESSAGES.outputReturnRate}${returnRate}${MESSAGES.suffixReturnRate}`);
+  }
+
+  #calculateRanks() {
+    this.#resultService.calculateRanks();
+  }
+
+  #calculateReturns() {
+    this.#resultService.calculateReturns();
+  }
+
+  #calculateReturnRate() {
+    return this.#resultService.returnRate();
+  }
+
+  #prizes() {
+    return this.#resultService.prizes();
   }
 }
