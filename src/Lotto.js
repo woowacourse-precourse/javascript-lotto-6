@@ -12,7 +12,11 @@ export default class Lotto {
   }
 
   getNumbers() {
-    return [...this.#numbers].sort((a, b) => a - b);
+    return [...this.#numbers].sort(this.#asendingSort);
+  }
+
+  #asendingSort(prevNumber, nextNumber) {
+    return prevNumber - nextNumber;
   }
 
   #validate(numbers) {
