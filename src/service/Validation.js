@@ -1,23 +1,4 @@
-const STANDARD = {
-  numberRangeBegin: 1,
-  numberRangeEnd: 45,
-  winningNumbersLength: 6,
-  bonusNumberLength: 1,
-  purchaseUnit: 1000,
-};
-
-const MESSAGE = {
-  prefix: '[ERROR]',
-  invalidType: '숫자만 입력할 수 있습니다.',
-  duplicatedNumber: '중복된 숫자는 입력할 수 없습니다.',
-  duplicatedWinning: '당첨 번호와 중복되는 숫자는 입력할 수 없습니다.',
-  invalidRange: (begin, end) =>
-    `${begin}이상 ${end}이하의 숫자만 입력할 수 있습니다.`,
-  invalidLength: (length) => `로또 번호는 ${length}개여야 합니다.`,
-  invalidBonusLength: (length) => `보너스 번호는 ${length}개여야 합니다.`,
-  invalidPurchaseUnit: (unit) =>
-    `로또 구입 금액은 ${unit}원 단위로 입력해야 합니다.`,
-};
+import { MESSAGE, NUMBER_OPTIONS } from './Constants.js';
 
 const Validation = {
   isNumber: (number) => {
@@ -40,8 +21,8 @@ const Validation = {
   },
 
   isNumberInRange: (number) => {
-    const beginNumber = STANDARD.numberRangeBegin;
-    const endNumber = STANDARD.numberRangeEnd;
+    const beginNumber = NUMBER_OPTIONS.beginRange;
+    const endNumber = NUMBER_OPTIONS.endRange;
 
     if (number < beginNumber || number > endNumber) {
       throw new Error(

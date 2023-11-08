@@ -1,10 +1,6 @@
-import Lotto from '../Lotto.js';
-import Validation from '../service/Validation.js';
-
-const NUMBER_NAME = {
-  winning: '당첨',
-  bonus: '보너스',
-};
+import Lotto from './Lotto.js';
+import Validation from './service/Validation.js';
+import { NUMBER_OPTIONS } from './service/Constants.js';
 
 class WinningLotto extends Lotto {
   #bonusNumber;
@@ -31,8 +27,8 @@ class WinningLotto extends Lotto {
   getTotalNumbers() {
     const winningNumbers = this.getNumbers();
     const totalNumbers = new Map([
-      [NUMBER_NAME.winning, winningNumbers],
-      [NUMBER_NAME.bonus, this.#bonusNumber],
+      [NUMBER_OPTIONS.winningName, winningNumbers],
+      [NUMBER_OPTIONS.bonusName, this.#bonusNumber],
     ]);
 
     return totalNumbers;

@@ -1,8 +1,5 @@
 import Validation from '../service/Validation.js';
-
-const LOTTO = {
-  price: 1000,
-};
+import { PURCHASE_OPTIONS } from '../service/Constants.js';
 
 class PurchasingLotto {
   #cost;
@@ -18,7 +15,7 @@ class PurchasingLotto {
   }
 
   #calculateCount() {
-    const lottoCount = this.#cost / LOTTO.price;
+    const lottoCount = this.#cost / PURCHASE_OPTIONS.unitPrice;
     return lottoCount;
   }
 

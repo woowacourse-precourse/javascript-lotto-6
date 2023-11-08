@@ -1,31 +1,8 @@
-const NUMBER_NAME = {
-  winning: '당첨',
-  bonus: '보너스',
-};
-
-const LOTTO = {
-  price: 1000,
-};
-
-const BONUS_OPTIONS = {
-  matchCount: 5,
-};
-
-const MATCH_RANKING = new Map([
-  [3, '5등'],
-  [4, '4등'],
-  [5, '3등'],
-  [NUMBER_NAME.bonus, '2등'],
-  [6, '1등'],
-]);
-
-const WINNING_PRIZE = new Map([
-  ['5등', 5000],
-  ['4등', 50000],
-  ['3등', 1500000],
-  ['2등', 30000000],
-  ['1등', 2000000000],
-]);
+import {
+  NUMBER_OPTIONS,
+  STATISTICS_STANDARD,
+  PURCHASE_OPTIONS,
+} from '../service/Constants.js';
 
 class WinningCalculator {
   #totalWinningNumbers;
@@ -37,14 +14,17 @@ class WinningCalculator {
   constructor(totalWinningNumbers, issuedLottoNumbers) {
     this.#totalWinningNumbers = totalWinningNumbers;
     this.#issuedLottoNumbers = issuedLottoNumbers;
+    this.standard = STATISTICS_STANDARD;
     this.winnerList = new Map();
     this.#analyzeWinner();
     this.#calculateProfit();
   }
 
   #analyzeWinner() {
-    const winningNumbers = this.#totalWinningNumbers.get(NUMBER_NAME.winning);
-    const bonusNumber = this.#totalWinningNumbers.get(NUMBER_NAME.bonus);
+    const winningNumbers = this.#totalWinningNumbers.get(
+      NUMBER_OPTIONS.winningName,
+    );
+    const bonusNumber = this.#totalWinningNumbers.get(NUMBER_OPTIONS.bonusName);
 
     this.#issuedLottoNumbers.forEach((lotto) => {
       const matchCount = this.calculateMatchNumbers(winningNumbers, lotto);
@@ -69,28 +49,36 @@ class WinningCalculator {
 
   // 끝
   #compileWinner(matchCount) {
-    const rank = MATCH_RANKING.get(matchCount);
+    const rankList = this.standard.matchCountRank;
+    const rank = rankList.get(matchCount);
     this.winnerList.set(rank, 1 + (this.winnerList.get(rank) ?? 0));
   }
 
   #compileBonusWinner(matchCount, isWinningBonus) {
-    const rank = MATCH_RANKING.get(matchCount);
-    const bonusRank = MATCH_RANKING.get(NUMBER_NAME.bonus);
+    const { bonusMatchCount } = this.standard;
+    const rankList = this.standard.matchCountRank;
+    const rank = rankList.get(matchCount);
+    const bonusRank = rankList.get(NUMBER_OPTIONS.bonusName);
 
-    if (matchCount === BONUS_OPTIONS.matchCount && isWinningBonus) {
+    if (matchCount === bonusMatchCount && isWinningBonus) {
       this.winnerList.set(rank, this.winnerList.get(rank) - 1);
       this.winnerList.set(bonusRank, 1 + (this.winnerList.get(bonusRank) ?? 0));
     }
   }
 
   #calculateProfit() {
-    const totalCost = this.#issuedLottoNumbers.length * LOTTO.price;
-    const winnerListArray = Array.from(this.winnerList);
-    const totalPrize = winnerListArray.reduce((accPrize, rankAndCount) => {
-      const prize =
-        accPrize + WINNING_PRIZE.get(rankAndCount[0]) * rankAndCount[1];
-      return prize;
+    const totalCost =
+      this.#issuedLottoNumbers.length * PURCHASE_OPTIONS.unitPrice;
+
+    const userPrize = [];
+    this.winnerList.forEach((count, match) => {
+      const winningPrize = this.standard.prizeAmount.get(match) * count;
+      userPrize.push(winningPrize);
     });
+    const totalPrize = userPrize.reduce(
+      (accPrize, targetPrize) => accPrize + targetPrize,
+    );
+
     return totalPrize / totalCost;
   }
 }

@@ -1,11 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
 import Lotto from '../Lotto.js';
-
-const NUMBERS_OPTIONS = {
-  first: 1,
-  last: 45,
-  length: 6,
-};
+import { NUMBER_OPTIONS } from '../service/Constants.js';
 
 class IssuingLotto {
   #count;
@@ -19,9 +14,9 @@ class IssuingLotto {
 
   #getRandomNumbers() {
     const randomNumbers = Random.pickUniqueNumbersInRange(
-      NUMBERS_OPTIONS.first,
-      NUMBERS_OPTIONS.last,
-      NUMBERS_OPTIONS.length,
+      NUMBER_OPTIONS.beginRange,
+      NUMBER_OPTIONS.endRange,
+      NUMBER_OPTIONS.winningLength,
     );
     return randomNumbers;
   }
