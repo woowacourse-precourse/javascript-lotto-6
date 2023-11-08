@@ -1,4 +1,6 @@
 const error = {
+  ERROR: '[ERROR]',
+
   name: {
     EXPENSE: 'expense input error',
     NUMBER: 'number input error',

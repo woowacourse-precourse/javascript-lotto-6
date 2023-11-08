@@ -2,7 +2,7 @@ import error from './constants/error.js';
 
 class CustomError extends Error {
   constructor(message, name) {
-    super(`[ERROR] ${message}`);
+    super(`${error.ERROR} ${message}`);
     this.name = name;
   }
 
