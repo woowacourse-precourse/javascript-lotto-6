@@ -2,7 +2,6 @@ import Lotto from '../model/Lotto.js';
 import WinningNumbers from '../model/WinningNumbers.js';
 import InputView from '../view/InputView.js';
 import LottoPurchase from '../model/LottoPurchase.js';
-import { printMessage } from '../utils/printMessage.js';
 import BonusLottoNumber from '../model/BonusLottoNumber.js';
 import LottoResult from '../model/LottoResult.js';
 import ProfitRate from '../model/ProfitRate.js';

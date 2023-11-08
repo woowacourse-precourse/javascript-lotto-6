@@ -1,7 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import { printMessage } from '../utils/printMessage.js';
 import NUMBERS from '../constants/numbers.js';
-import MESSAGES from '../constants/messages.js';
+import OutputView from '../view/OutputView.js';
 
 class WinningNumbers {
   static getWinningLottoNumbers(purchaseAmount) {
@@ -11,7 +10,7 @@ class WinningNumbers {
       10,
     );
 
-    printMessage(`${perchaseQuentity}${MESSAGES.purchaseQuantity}`);
+    OutputView.printPurchaseHeader(perchaseQuentity);
     let count = 0;
     while (count < perchaseQuentity) {
       const lottoNumbers = Random.pickUniqueNumbersInRange(
@@ -21,7 +20,7 @@ class WinningNumbers {
       );
       const winningNumber = lottoNumbers.sort((a, b) => a - b);
       winningNumbers.push(winningNumber);
-      printMessage(`[${winningNumber.join(', ')}]`);
+      OutputView.printWinningNumber(winningNumber);
       count += 1;
     }
     return winningNumbers;

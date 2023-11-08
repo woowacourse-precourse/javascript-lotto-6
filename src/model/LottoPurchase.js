@@ -1,4 +1,3 @@
-import { printErrorMessage } from '../utils/printMessage.js';
 import MESSAGES from '../constants/messages.js';
 import NUMBERS from '../constants/numbers.js';
 

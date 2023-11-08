@@ -1,5 +1,4 @@
-import MESSAGES from '../constants/messages.js';
-import { printMessage } from '../utils/printMessage.js';
+import OutputView from '../view/OutputView.js';
 
 class ProfitRate {
   static calculateProfitRate(purchaseAmount, totalPrize) {
@@ -7,7 +6,7 @@ class ProfitRate {
     if (profitRate % 0.01) {
       profitRate.toFixed(2);
     }
-    printMessage(MESSAGES.profitRate(profitRate));
+    OutputView.printProfitRate(profitRate);
   }
 }
 

@@ -1,5 +1,5 @@
 import MESSAGES from '../constants/messages.js';
-import { printMessage } from '../utils/printMessage.js';
+import OutputView from '../view/OutputView.js';
 
 class LottoResult {
   constructor() {
@@ -66,8 +66,7 @@ class LottoResult {
       MESSAGES.matchSix,
     ];
 
-    printMessage(MESSAGES.winningResult);
-    printMessage(MESSAGES.divisionLine);
+    OutputView.printLottoResultHeader();
 
     const prize = [5000, 50000, 1500000, 30000000, 2000000000];
 
@@ -77,7 +76,7 @@ class LottoResult {
       if (result !== 0) {
         totalPrize += result * prize[index];
       }
-      printMessage(`${messages[index]}${result}개`);
+      OutputView.printLottoResult(messages[index], result);
     });
 
     return totalPrize;
