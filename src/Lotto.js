@@ -1,4 +1,5 @@
 import LottoValidation from "./LottoValidation.js";
+import { Random } from "@woowacourse/mission-utils";
 
 export const LOTTO_PRICE = 1000;
 export const LOTTO_NUMBER_RANGE = Object.freeze({
@@ -23,6 +24,26 @@ class Lotto {
 
   static calculateQuantityFromPrice(price) {
     return price / LOTTO_PRICE;
+  }
+
+  static #generateLotto() {
+    const lottoNumbers = Random.pickUniqueNumbersInRange(
+      LOTTO_NUMBER_RANGE.MIN,
+      LOTTO_NUMBER_RANGE.MAX,
+      LOTTO_NUMBER_COUNT
+    );
+
+    return new Lotto(lottoNumbers);
+  }
+
+  static generateLottos(quantity) {
+    const result = [];
+
+    Array.from({ length: quantity }, () => {
+      result.push(this.#generateLotto());
+    });
+
+    return result;
   }
 }
 
