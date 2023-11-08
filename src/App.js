@@ -21,6 +21,17 @@ class App {
       return this.buyLotto();
     }
   }
+
+  printLotto(money) {
+    this.#lottoAmount = money / 1000;
+    Console.print(`\n ${this.#lottoAmount}개를 구매했습니다.\n`);
+    for (let i = 0; i < this.#lottoAmount; i++) {
+      const lottoNumberArr = Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, COUNT_NUMBER).sort((a, b) => a - b);
+      const lottoNum = `[${lottoNumberArr.join(", ")}]`;
+      Console.print(lottoNum);
+      this.#lottoNumbers.push(lottoNumberArr);
+    }
+  }
   
   async play() {}
 }
