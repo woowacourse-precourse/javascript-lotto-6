@@ -35,7 +35,7 @@ class LottoGame {
     this.#winningTicket = inputWinningTicket.map(number => Number(number));
     this.#bonusNumber = await this.inputBonusNumbers(this.#winningTicket);
 
-    this.#winningResult = this.checkLottoResult(this.#lottoTickets, this.#winningTicket, this.#bonusNumber); 
+    this.#winningResult = this.checkLottoResult(this.#lottoTickets, this.#winningTicket, this.#bonusNumber);
     this.output.winningResults(this.#winningResult);
 
     this.#profitRate = this.calculateProfitRate(this.#winningResult, this.#purchaseAmount);
@@ -46,17 +46,16 @@ class LottoGame {
     while (true) {
       try {
         const inputPrice = await this.input.price();
-
-        const tempPrice = Number(inputPrice);
-        this.#validatePrice(tempPrice);
-        return tempPrice;
+        let tempPrice = LottoGame.validatePrice(inputPrice);
+        return Number(tempPrice);
       } catch (error) {
         Console.print(error.message);
       }
     }
   }
 
-  #validatePrice(price) {
+  static validatePrice(price) {
+    price = Number(price);
     if (price <= 0) {
       throw new Error("[ERROR] 구입 가능한 금액이 입력되지 않았습니다.")
     }
@@ -69,6 +68,7 @@ class LottoGame {
     if (price % 1000 !== 0) {
       throw new Error("[ERROR] 금액이 1,000원으로 나누어 떨어지지 않습니다.")
     }
+    return price;
   }
 
 
@@ -113,7 +113,7 @@ class LottoGame {
     while (true) {
       try {
         const inputNumbers = await this.input.bonusNumber();
-        this.#validateBonusNumbers(inputNumbers, winningNumbers);
+        LottoGame.validateBonusNumbers(inputNumbers, winningNumbers);
         return inputNumbers;
       } catch (error) {
         Console.print(error.message);
@@ -121,9 +121,9 @@ class LottoGame {
     }
   }
 
-  #validateBonusNumbers(number, winningNumbers) {
+  static validateBonusNumbers(number, winningNumbers) {
     number = Number(number);
-    if (isNaN(number)) {
+    if (isNaN(number) || number.toString() === '') {
       throw new Error("[ERROR] 숫자가 아닌 입력입니다.")
     }
     if (!Number.isInteger(number)) {
