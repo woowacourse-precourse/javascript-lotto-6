@@ -40,12 +40,12 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -95,4 +95,3 @@ describe("로또 테스트", () => {
     await runException("1000j");
   });
 });
-
