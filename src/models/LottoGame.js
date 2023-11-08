@@ -1,5 +1,10 @@
 import { Random } from '@woowacourse/mission-utils';
-import { GAME_NUMBER, LOTTO_NUMBER } from '../constants/constants.js';
+import {
+  GAME_NUMBER,
+  LOTTO_NUMBER,
+  RANK,
+  PRIZE,
+} from '../constants/constants.js';
 import Lotto from '../Lotto.js';
 import validation from '../utills/validation.js';
 
@@ -55,7 +60,7 @@ class LottoGame {
     return Random.pickUniqueNumbersInRange(
       LOTTO_NUMBER.MIN,
       LOTTO_NUMBER.MAX,
-      LOTTO_NUMBER.COUNT
+      LOTTO_NUMBER.LENGTH
     ).map(Number);
   }
 
@@ -75,22 +80,30 @@ class LottoGame {
     ).length;
     const bonusMatch = lotto.includes(this.#bonusNumber);
 
-    if (matchingNumbers === 6) return 1;
-    if (matchingNumbers === 5 && bonusMatch) return 2;
-    if (matchingNumbers === 5) return 3;
-    if (matchingNumbers === 4) return 4;
-    if (matchingNumbers === 3) return 5;
-    return 0;
+    if (matchingNumbers === 6) return RANK.FIRST;
+    if (matchingNumbers === 5 && bonusMatch) return RANK.SECOND;
+    if (matchingNumbers === 5) return RANK.THIRD;
+    if (matchingNumbers === 4) return RANK.FOURTH;
+    if (matchingNumbers === 3) return RANK.FIFTH;
+    return RANK.NONE;
   }
 
   calculateEarningRate() {
-    const amount = this.#count * 1000;
-    const prizeMoney = [0, 2000000000, 3000000, 1500000, 50000, 5000];
+    const amount = this.#count * GAME_NUMBER.MONEY_UNIT;
+    const prizeMoney = [
+      PRIZE.NONE,
+      PRIZE.FIRST,
+      PRIZE.SECOND,
+      PRIZE.THIRD,
+      PRIZE.FOURTH,
+      PRIZE.FIFTH,
+    ];
     const earning = this.#result.reduce((acc, value, index) => {
       return acc + value * prizeMoney[index];
     }, 0);
-    const earningRate = ((earning / amount) * 100).toFixed(1);
-    return earningRate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const earningRate = (earning / amount) * 100;
+
+    return earningRate.toLocaleString(undefined, { maximumFractionDigits: 1 });
   }
 }
 

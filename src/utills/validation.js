@@ -1,4 +1,4 @@
-import { GAME_NUMBER, ERROR } from '../constants/constants.js';
+import { GAME_NUMBER, ERROR, LOTTO_NUMBER } from '../constants/constants.js';
 
 const validation = {
   validateInputNumber(input) {
@@ -16,7 +16,8 @@ const validation = {
   },
 
   validateLottoLength(numbers) {
-    if (numbers.length !== 6) throw new Error(ERROR.INVALID_LENGTH);
+    if (numbers.length !== LOTTO_NUMBER.LENGTH)
+      throw new Error(ERROR.INVALID_LENGTH);
   },
 
   validateLottoNumbers(numbers) {
@@ -27,7 +28,8 @@ const validation = {
 
   validateLottoRange(numbers) {
     numbers.forEach((number) => {
-      if (number < 1 || number > 45) throw new Error(ERROR.INVALID_LOTTO_RANGE);
+      if (number < LOTTO_NUMBER.MIN || number > LOTTO_NUMBER.MAX)
+        throw new Error(ERROR.INVALID_LOTTO_RANGE);
     });
   },
 
@@ -39,7 +41,7 @@ const validation = {
   validateBonusNumber(bonusNumber, winningNumber) {
     if (winningNumber.includes(bonusNumber))
       throw new Error(ERROR.LOTTO_DUPLICATION);
-    if (bonusNumber < 1 || bonusNumber > 45)
+    if (bonusNumber < LOTTO_NUMBER.MIN || bonusNumber > LOTTO_NUMBER.MAX)
       throw new Error(ERROR.INVALID_LOTTO_RANGE);
   },
 };
