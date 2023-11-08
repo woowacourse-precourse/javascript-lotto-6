@@ -5,6 +5,8 @@ const GAME = Object.freeze({
   fiveMatchWinnigs: 1500000,
   fiveMatchWinnigsWithBonus: 30000000,
   sixMatchWinnigs: 2000000000,
+  lottoMin: 1,
+  lottoMax: 45,
 });
 
 export default GAME;
