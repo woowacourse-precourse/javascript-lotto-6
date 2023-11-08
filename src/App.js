@@ -11,9 +11,13 @@ class App {
 
         this.printLottoTickets(lottoTickets);
 
+        const winningNumbersInput = await this.inputWinningNumbers();
+        const bonusNumberInput = await this.inputBonusNumber(
+            winningNumbersInput
+        );
         const winningNumbers = new WinningNumbers(
-            await this.inputWinningNumbers(),
-            await this.inputBonusNumber()
+            winningNumbersInput,
+            bonusNumberInput
         );
 
         const matchingCounts = this.calculateMatchingCounts(
@@ -83,13 +87,15 @@ class App {
         }
     }
 
-    async inputBonusNumber() {
+    async inputBonusNumber(winningNumbers) {
         while (true) {
             try {
+                console.log(winningNumbers);
                 const bonusNumber = await Console.readLineAsync(
                     "보너스 번호를 입력해 주세요.\n"
-                );
-                if (!this.isValidBonusNumber(bonusNumber)) {
+                ).then(Number);
+                console.log(bonusNumber);
+                if (!new WinningNumbers(winningNumbers, bonusNumber)) {
                     throw new Error(
                         "[ERROR] 유효한 보너스 번호를 입력해주세요."
                     );
@@ -99,10 +105,6 @@ class App {
                 Console.print(error.message);
             }
         }
-    }
-
-    isValidBonusNumber(bonusNumber) {
-        return !isNaN(bonusNumber) && bonusNumber >= 1 && bonusNumber <= 45;
     }
 
     initializeMatchingCounts() {

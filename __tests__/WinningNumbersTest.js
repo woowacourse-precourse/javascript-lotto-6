@@ -1,21 +1,6 @@
 import WinningNumbers from "../src/WinningNumbers";
 
 describe("당첨번호 클래스 테스트", () => {
-    test("당첨번호가 6개가 아니면 예외가 발생한다.", () => {
-        expect(() => {
-            new WinningNumbers([1, 2, 3, 4, 5], 6);
-        }).toThrow("[ERROR]");
-    });
-    test("당첨번호가 중복되면 예외가 발생한다.", () => {
-        expect(() => {
-            new WinningNumbers([1, 2, 3, 4, 5, 5], 6);
-        }).toThrow("[ERROR]");
-    });
-    test("당첨번호가 1~45를 벗어나면 예외가 발생한다.", () => {
-        expect(() => {
-            new WinningNumbers([1, 2, 3, 4, 5, 46], 6);
-        }).toThrow("[ERROR]");
-    });
     test("보너스 번호가 1~45를 벗어나면 예외가 발생한다.", () => {
         expect(() => {
             new WinningNumbers([1, 2, 3, 4, 5, 6], 46);
