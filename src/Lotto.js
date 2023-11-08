@@ -12,7 +12,12 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  checkWinning(winningNumbers, bonusNumber) {
+  }
+
+  toString() {
+    return `[${this.#numbers.join(", ")}]`;
+  }
 }
 
 export default Lotto;
