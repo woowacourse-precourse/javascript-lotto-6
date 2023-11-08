@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { LOTTO_SETTINGS } from "../config/gameSetting.js";
+import { LottoSettings } from "../config/gameSetting.js";
 
 export default class OutputView {
   static printPurchseResults(numOfLottos) {
@@ -8,22 +8,29 @@ export default class OutputView {
 
   static printResultMessage(result, yieldRate) {
     let resultMessages = `\n당첨 통계\n---\n`;
-    for (const [key, { prize, matchNum }] of Object.entries(
-      LOTTO_SETTINGS.WINNINGS
-    )) {
-      let text = `${matchNum}개 일치`;
-
-      if (key === "SECOND_PRIZE") text += ", 보너스 볼 일치";
-      resultMessages += `${text} (${prize.toLocaleString()}원) - ${
-        result[key]
-      }개\n`;
-    }
-    const formatedYiel = this.formatYield(yieldRate);
+    resultMessages += this.#createWinningResultMessage(result);
+    const formatedYiel = this.#formatYield(yieldRate);
     resultMessages += `총 수익률은 ${formatedYiel}%입니다.`;
     Console.print(resultMessages);
   }
 
-  static formatYield(yieldRate) {
+  static #createWinningResultMessage(result) {
+    const setting = new LottoSettings();
+    let winningResultMessage = "";
+    for (const [key, { prize, matchNum }] of Object.entries(
+      setting.getAllPrizeDetails()
+    )) {
+      let text = `${matchNum}개 일치`;
+
+      if (key === setting.getSecondPrizeRank()) text += ", 보너스 볼 일치";
+      winningResultMessage += `${text} (${prize.toLocaleString()}원) - ${
+        result[key]
+      }개\n`;
+    }
+    return winningResultMessage;
+  }
+
+  static #formatYield(yieldRate) {
     return parseFloat(yieldRate).toLocaleString(undefined, {
       minimumFractionDigits: 1,
       maximumFractionDigits: 1,
