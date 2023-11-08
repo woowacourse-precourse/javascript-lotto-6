@@ -5,6 +5,7 @@ import OutputView from '../view/OutputView.js';
 
 class LottoGameController {
   #lottoGame;
+
   constructor() {
     this.#lottoGame = new LottoGame();
   }
@@ -51,13 +52,12 @@ class LottoGameController {
   }
 
   async enterBonusNumber() {
-    const winningNumber = this.#lottoGame.getWinningNumbers();
     try {
       const bonusNumber = await InputView.readBonusNumber();
       this.#lottoGame.setBonusNumber(bonusNumber);
     } catch (error) {
       Console.print(error.message);
-      await this.enterBonusNumber(winningNumber);
+      await this.enterBonusNumber();
     }
   }
 
