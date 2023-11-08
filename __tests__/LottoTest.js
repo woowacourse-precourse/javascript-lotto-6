@@ -49,7 +49,7 @@ describe("로또 클래스 테스트", () => {
   });
 
   test("로또 결과 저장", () => {
-    const input = [5, 1];
+    const input = [5, true];
     const lottoGame = new Lotto([1, 2, 3, 4, 5, 6]);
     const lottoBoard = {
       threeSame: 0,
