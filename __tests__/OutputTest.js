@@ -255,3 +255,29 @@ describe('당첨 내역 출력 테스트', () => {
     });
   });
 });
+
+describe('총 수익률 출력 테스트', () => {
+  test('총 수익률이 자연수일 때.', () => {
+    const logSpy = getLogSpy();
+    const totalReturn = 200000000;
+    const logs = ['총 수익률은 200000000.0%입니다.'];
+
+    new Output().totalReturnResult(totalReturn);
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+
+  test('총 수익률이 소수점 한 자리 수일 때.', () => {
+    const logSpy = getLogSpy();
+    const totalReturn = 68.8;
+    const logs = ['총 수익률은 68.8%입니다.'];
+
+    new Output().totalReturnResult(totalReturn);
+
+    logs.forEach((log) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+    });
+  });
+});
