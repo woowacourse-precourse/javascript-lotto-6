@@ -1,6 +1,6 @@
 import CalculateLottoResult from '../../model/calculate_lotto_result.js';
 import PrintLottoResult from '../../view/print_lotto_result.js';
-import Lotto from '../../../utils/error/type/Lotto.js';
+import Lotto from '../../../Lotto.js';
 import BonusNumError from '../../../utils/error/type/bonus_num_error.js';
 import printError from '../../../utils/error/print_error.js';
 import Question from '../../../utils/input/question.js';
