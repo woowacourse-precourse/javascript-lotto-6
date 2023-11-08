@@ -22,7 +22,7 @@ class Controller {
     this.#lottos = await this.#PurchaseController.inputPurchase();
     OutputView.printLottos(this.#lottos);
     this.#winning = await this.#WinningController.inputWinning();
-    this.#bonus = await this.#BonusController.inputBonus();
+    this.#bonus = await this.#BonusController.inputBonus(this.#winning);
     Console.print(this.#bonus);
   }
 }

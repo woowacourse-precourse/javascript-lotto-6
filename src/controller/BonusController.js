@@ -3,12 +3,12 @@ import OutputView from '../view/OutputView.js';
 import { ERROR_MESSEGE } from '../constant/messages.js';
 
 class BonusController {
-  async inputBonus() {
+  async inputBonus(winningNumber) {
     let bonusNumber;
     while (true) {
       try {
         bonusNumber = await InputView.inputBonusNumber();
-        // this.#validateBonusNumber(bonusNumber);
+        this.#validateBonusNumber(bonusNumber,winningNumber);
         break;
       } catch (error) {
         OutputView.printError(error.message);
@@ -17,11 +17,27 @@ class BonusController {
     return bonusNumber;
   }
 
-  #validateBonusNumber(bonusNumber) {
-    //
-  }
+  #validateBonusNumber(bonusNumber,winningNumber) {
+    if (!bonusNumber) {
+      throw new Error(ERROR_MESSEGE.notInput);
+    }
 
-  #isDuplicates(array) {}
+    if (isNaN(bonusNumber)) {
+      throw new Error(ERROR_MESSEGE.notNumber);
+    }
+
+    if (bonusNumber <= 0) {
+      throw new Error(ERROR_MESSEGE.notPositive);
+    }
+
+    if (bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error(ERROR_MESSEGE.outOfRange);
+    }
+
+    if (winningNumber.includes(bonusNumber)) {
+      throw new Error(ERROR_MESSEGE.duplicates);
+    }
+  }
 }
 
 export default BonusController;
