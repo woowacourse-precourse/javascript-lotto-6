@@ -1,6 +1,7 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import { BUY_MESSAGE, THOUSAND } from "./constant/constant";
 import sortedLottoNumbers from "./generator/generateLottoRandomNumbers";
+import OutputView from "./view/OutputView";
+import { BUY_MESSAGE } from "./constant/message";
+import OPTIONS from "./constant/option";
 
 class User {
     constructor() {
@@ -15,7 +16,7 @@ class User {
     }
 
     amountOfBuying() {
-        const amount = this.userBuyMoney / THOUSAND;
+        const amount = this.userBuyMoney / OPTIONS.thousand;
         return amount;
     }
 
@@ -33,9 +34,9 @@ class User {
     }
 
     printRandomNumber(randomNumbers, amount) {
-        MissionUtils.Console.print(BUY_MESSAGE(amount));
+        OutputView.printBuyAmount(BUY_MESSAGE(amount));
         randomNumbers.forEach((numbers) => {
-            MissionUtils.Console.print(`[${numbers.join(', ')}]`);
+            OutputView.printRandomNumbersJoin(numbers);
         })
     }
 
