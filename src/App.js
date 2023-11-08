@@ -112,20 +112,24 @@ class App {
     Console.print(`총 수익률은 ${profitRate}%입니다.`);
   }
 
+  async playLottoMachine() {
+    const lottoAmount = await this.getLottoAmount();
+    this.validateLottoAmount(lottoAmount);
+    const lottoCount = this.calculateLottoCount(lottoAmount);
+    this.printLottoCount(lottoCount);
+    this.generateLottoNumbers(lottoCount);
+    this.printLottoNumbers();
+    const winningLotto = await this.getWinningNumbers();
+    const bonusNumber = await this.getBonusNumber();
+    const winningStatistics = this.calculateWinningStatistics(winningLotto, bonusNumber);
+    this.printWinningStatistics(winningStatistics);
+    const profitRate = this.calculateProfitRate(lottoAmount, winningStatistics);
+    this.printProfitRate(profitRate);
+  }
+
   async play() {
     try {
-      const lottoAmount = await this.getLottoAmount();
-      this.validateLottoAmount(lottoAmount);
-      const lottoCount = this.calculateLottoCount(lottoAmount);
-      this.printLottoCount(lottoCount);
-      this.generateLottoNumbers(lottoCount);
-      this.printLottoNumbers();
-      const winningLotto = await this.getWinningNumbers();
-      const bonusNumber = await this.getBonusNumber();
-      const winningStatistics = this.calculateWinningStatistics(winningLotto, bonusNumber);
-      this.printWinningStatistics(winningStatistics);
-      const profitRate = this.calculateProfitRate(lottoAmount, winningStatistics);
-      this.printProfitRate(profitRate);
+      await this.playLottoMachine();
     } catch (error) {
       Console.print(error.message);
     }
