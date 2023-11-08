@@ -23,7 +23,12 @@
   - [x] 당첨 내역을 계산하여 출력한다.  
   - [x] 총 수익률을 계산하여 출력한다.  
 - [ ] 도메인 로직에 대한 단위 테스트를 구현한다.  
-  
+  - [ ] LottoAnswer  
+  - [ ] LottoNumbersParser  
+  - [ ] LottoResultCalculator  
+  - [ ] LottoSeller  
+  - [ ] Money  
+    
 ### 주의 사항  
 - [x] 입력값 처리 중 에러 발생 시 문구 출력 후 다시 입력받는다.  
 
