@@ -1,29 +1,34 @@
+import {
+	LOTTO_IS_NOT_SIX_ERROR,
+	LOTTO_NUMBER_SAME_ERROR,
+	LOTTO_RANGE_ERROR,
+} from './Constant.js';
+
 class Lotto {
 	#numbers;
 
 	constructor(numbers) {
 		this.#validate(numbers);
+		this.#deduplicate(numbers);
+		this.#rangeCheck(numbers);
 		this.#numbers = numbers.sort((a, b) => a - b);
-		this.#deduplication(numbers);
-		this.#range_check(numbers);
 	}
 
 	#validate(numbers) {
 		if (numbers.length !== 6) {
-			throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+			throw new Error(LOTTO_IS_NOT_SIX_ERROR);
 		}
 	}
 
-	// TODO: 추가 기능 구현
-	#deduplication(numbers) {
-		if (new Set(numbers).size !== 6) {
-			throw new Error('[ERROR] 로또 번호는 중복되면 안됩니다.');
+	#deduplicate(numbers) {
+		if (new Set(numbers).size !== numbers.length) {
+			throw new Error(LOTTO_NUMBER_SAME_ERROR);
 		}
 	}
 
-	#range_check(numbers) {
-		if (numbers.find((element) => element < 0 || element > 45)) {
-			throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+	#rangeCheck(numbers) {
+		if (numbers.some((number) => number < 1 || number > 45)) {
+			throw new Error(LOTTO_RANGE_ERROR);
 		}
 	}
 

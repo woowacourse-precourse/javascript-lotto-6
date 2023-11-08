@@ -1,13 +1,15 @@
+import { NUMBER_TYPE_ERROR, CANNOT_BUY_LOTTO_ERROR } from './Constant.js';
+
 class ErrorCheck {
 	static inputNumberCheck(input) {
 		if (isNaN(input)) {
-			throw new Error('[ERROR] 숫자가 잘못된 형식입니다.');
+			throw new Error(NUMBER_TYPE_ERROR);
 		}
 	}
 
 	static purchaseCountCheck(number) {
 		if (number < 1) {
-			throw new Error('[ERROR] 복권을 살 수 없어요!');
+			throw new Error(CANNOT_BUY_LOTTO_ERROR);
 		}
 	}
 }

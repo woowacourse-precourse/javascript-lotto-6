@@ -1,4 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
+import {
+	THREE_MATCH_MESSAGE,
+	FOUR_MATCH_MESSAGE,
+	FIVE_MATCH_MESSAGE,
+	FIVE_PLUS_BONUS_MATCH_MESSAGE,
+	SIX_MATCH_MESSAGE,
+} from './Constant.js';
 class LottoCounter {
 	constructor() {
 		this.match_three = 0;
@@ -18,13 +25,13 @@ class LottoCounter {
 	}
 
 	printCountMatches() {
-		Console.print(`3개 일치 (5,000원) - ${this.match_three}개`);
-		Console.print(`4개 일치 (50,000원) - ${this.match_four}개`);
-		Console.print(`5개 일치 (1,500,000원) - ${this.match_five}개`);
+		Console.print(THREE_MATCH_MESSAGE + `${this.match_three}개`);
+		Console.print(FOUR_MATCH_MESSAGE + `${this.match_four}개`);
+		Console.print(FIVE_MATCH_MESSAGE + `${this.match_five}개`);
 		Console.print(
-			`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.match_five_plus_bonus}개`,
+			FIVE_PLUS_BONUS_MATCH_MESSAGE + `${this.match_five_plus_bonus}개`,
 		);
-		Console.print(`6개 일치 (2,000,000,000원) - ${this.match_six}개`);
+		Console.print(SIX_MATCH_MESSAGE + `${this.match_six}개`);
 	}
 
 	calculatePrize(number) {
