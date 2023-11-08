@@ -25,13 +25,19 @@ class Lotto {
 	}
 
 	validateLottoWinningNumbers() {
-		if (this.#numbers.split(',').length !== LOTTO.NUMBER_COUNT) {
-			throw new Error(ErrorMessage.invalidLottoNumberSeparator);
-		}
+		this.#validateLottoWinnintNumberSeparator();
 		const winningNumbersArray = this.#parseWinningNumbers();
 		this.#validateWinningNumberCount(winningNumbersArray);
 		this.#validateWinningNumberRange(winningNumbersArray);
 		this.#validateDuplicateWinningNumbers(winningNumbersArray);
+	}
+
+	#validateLottoWinnintNumberSeparator() {
+		// 콤마가 있는지 확인
+		const pattern = /^[\w,ㄱ-ㅎㅏ-ㅣ가-힣]+$/u;
+		if (!pattern.test(this.#numbers)) {
+			throw new Error(ErrorMessage.invalidLottoNumberSeparator);
+		}
 	}
 
 	#parseWinningNumbers() {
@@ -48,9 +54,10 @@ class Lotto {
 	}
 
 	#validateWinningNumberRange(winningNumbersArray) {
+		const lastIndex = winningNumbersArray.length - 1;
 		if (
 			winningNumbersArray[0] < LOTTO.NUMBER_START ||
-			winningNumbersArray.at(-1) > LOTTO.NUMBER_LAST
+			winningNumbersArray[lastIndex] > LOTTO.NUMBER_LAST
 		) {
 			throw new Error(ErrorMessage.invalidLottoWinningNumberRange());
 		}
@@ -113,9 +120,11 @@ class Lotto {
 		let totalPrizeMoney = 0;
 		this.#numbers.forEach((matchingNumber, idx) => {
 			const hasBonus = matchingBonusNumberArray[idx] === 1;
-			const rule = WINNING_RULES.findLast(
-				(rule) => rule.match === matchingNumber && (!rule.bonus || hasBonus)
-			);
+			const rule = [...WINNING_RULES]
+				.reverse()
+				.find(
+					(rule) => rule.match === matchingNumber && (!rule.bonus || hasBonus)
+				);
 			if (rule) {
 				totalPrizeMoney += rule.prizeNumber;
 			}
