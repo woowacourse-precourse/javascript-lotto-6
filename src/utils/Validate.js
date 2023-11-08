@@ -6,6 +6,14 @@ const Validate = {
     if (Number.isNaN(number)) throw Error(ERROR_MESSAGE.INVALID_NUMBER);
   },
 
+  isInteger(number) {
+    if (Number.isInteger(number)) throw Error(ERROR_MESSAGE.INVALID_INTEGER);
+  },
+
+  isPositive(number) {
+    if (number <= 0) throw Error(ERROR_MESSAGE.INVALID_POSITIVE);
+  },
+
   isPurchaseUnit(amount) {
     if (amount % NUMBER.PURCHASE_AMOUNT_UNIT > 0) throw Error(ERROR_MESSAGE.INVALID_PURCHASE_UNIT);
   },

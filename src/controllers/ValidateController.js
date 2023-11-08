@@ -6,6 +6,8 @@ const ValidateController = {
     const amount = Convert.convertToNumber(amountString);
 
     Validate.isNumber(amount);
+    Validate.isInteger(amount);
+    Validate.isPositive(amount);
     Validate.isPurchaseUnit(amount);
 
     return amount;
@@ -13,8 +15,11 @@ const ValidateController = {
 
   validateWinningNumbers(numbersString) {
     const numbers = Convert.convertToList(numbersString);
-
-    numbers.map(number => Validate.isNumberInRange(number));
+    numbers.forEach(number => {
+      Validate.isNumber(number);
+      Validate.isInteger(number);
+      Validate.isPositive(number);
+    });
     Validate.isWinningNumbersLength(numbers);
     Validate.isDuplicateWinningNumbers(numbers);
     numbers.map(number => Validate.isNumberInRange(number));
@@ -26,6 +31,8 @@ const ValidateController = {
     const number = Convert.convertToNumber(numberString);
 
     Validate.isNumber(number);
+    Validate.isInteger(number);
+    Validate.isPositive(number);
     Validate.isNumberInRange(number);
     Validate.isDuplicateBonusNumber(winningNumbers, number);
 
