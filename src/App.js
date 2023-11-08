@@ -62,19 +62,22 @@ class App {
     Console.print(PRINT_MESSAGE.PURCHASE(lottoTicket));
   }
 
+  makeLottoNumberArray(){
+    while (this.countNumber < this.lottoTicket) {
+      let randomNumberArray = this.makeRandomNumber();
+      randomNumberArray = this.sortNumber(randomNumberArray);
+      this.pushArray(randomNumberArray);
+      this.countNumber += CONSTANT.ONE;
+    }
+  }
+
   async play() {
     try {
       const lottoPrice = await Console.readLineAsync(INPUT_MESSAGE.PRICE);
       this.validate.checkLottoPrice(lottoPrice);
       this.lottoTicket = this.getLottoTicket(lottoPrice);
       this.printPurchaseAmount(this.lottoTicket);
-
-      while (this.countNumber < this.lottoTicket) {
-        let randomNumberArray = this.makeRandomNumber();
-        randomNumberArray = this.sortNumber(randomNumberArray);
-        this.pushArray(randomNumberArray);
-        this.countNumber += CONSTANT.ONE;
-      }
+      this.makeLottoNumberArray();
       this.printLottoArray();
       const userLottoNumber = await Console.readLineAsync(
         INPUT_MESSAGE.MATCH_NUMBERS,
