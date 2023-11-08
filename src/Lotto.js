@@ -14,11 +14,11 @@ class Lotto {
 
     const lottoNumbers = [];
     numbers.forEach(number => {
-      if (!lottoNumbers.includes(number)) {
-        lottoNumbers.push(number);
-      } else {
-        throw new Error("[ERROR] 로또 번호는 중복되지 않아야 합니다.")
+      if (lottoNumbers.includes(number)) {
+        throw new Error("[ERROR] 로또 번호는 중복되지 않아야 합니다.");
       }
+
+      lottoNumbers.push(number);
     })
   }
 
