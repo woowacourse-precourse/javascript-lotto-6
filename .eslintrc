@@ -25,7 +25,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.js", "LottoTest.js"],
+      "files": ["**/*.test.js", "LottoTest.js", "ApplicationTest.js"],
       "rules": {
         // 테스트 파일에 대해서는 max-lines-per-function 룰을 비활성화합니다.
         "max-lines-per-function": "off",
