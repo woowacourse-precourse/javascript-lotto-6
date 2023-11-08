@@ -1,4 +1,4 @@
-import Validator from "./Validator/Validator.js";
+import Validator from "./validator/Validator.js";
 
 class BonusNumber {
   #bonusNumber

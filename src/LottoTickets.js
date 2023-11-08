@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { LOTTO_NUMBER_RANGE, TOTAL_LOTTO_NUMBERS } from "./constants/constants.js";
-import Validator from "./Validator/Validator.js";
+import Validator from "./validator/Validator.js";
 import Lotto from "./Lotto.js";
 
 
