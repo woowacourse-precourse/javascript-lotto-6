@@ -33,18 +33,34 @@ export const validateRange = (number) => {
 	}
 };
 
+/**
+ *
+ * @param {Array} numbers
+ * Array의 길이가 6인지 아닌지 validate하는 함수
+ */
 export const validateNumberLength = (numbers) => {
 	if (numbers.length !== 6) {
 		throw ERRORS.INVALID_NUMBERS_LENGTH;
 	}
 };
 
+/**
+ *
+ * @param {Array} numbers
+ * 중복된 숫자가 있는지 validate하는 함수
+ */
 export const validateDuplicate = (numbers) => {
 	if (numbers.length !== new Set(numbers).size) {
 		throw ERRORS.INVALID_NUMBERS_DUPLICATE;
 	}
 };
 
+/**
+ *
+ * @param {Number} bonusNumber
+ * @param {Array} winningNummber
+ * 로또 번호에 이미 보너스 번호가 있는지 validate하는 함수
+ */
 export const validateInWinnerNumber = (bonusNumber, winningNummber) => {
 	if (winningNummber.includes(bonusNumber)) {
 		throw ERRORS.INVALID_NUMBER_IN_WINNINGNUMBER;
