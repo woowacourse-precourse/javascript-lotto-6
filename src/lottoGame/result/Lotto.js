@@ -35,7 +35,10 @@ export class LottoResult {
   }
 
   isWin(condition) {
-    const { winningCount, bonusType } = condition;
-    return winningCount === this.#countOfWinningNumbers && bonusType === this.getBonusNumberType();
+    const { winningNumbersCount, bonusNumberType } = condition;
+    return (
+      winningNumbersCount === this.#countOfWinningNumbers &&
+      bonusNumberType === this.getBonusNumberType()
+    );
   }
 }
