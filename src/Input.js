@@ -1,10 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import Validate from './Validate.js';
+import MESSAGE from './constants/Message.js';
 
 const Input = {
   async getLottoPrice() {
     try {
-      const price = await Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      const price = await Console.readLineAsync(MESSAGE.inputPrice);
       Validate.checkPurchaseAmount(price);
       return +price;
     } catch (error) {
@@ -14,9 +15,7 @@ const Input = {
   },
   async getLottoNumber() {
     try {
-      const numbers = await Console.readLineAsync(
-        '당첨 번호를 입력해 주세요.\n'
-      );
+      const numbers = await Console.readLineAsync(MESSAGE.inputAnswerNum);
       Validate.checkIncludeComma(numbers);
 
       const NumberList = numbers.split(',');
@@ -31,9 +30,7 @@ const Input = {
   },
   async getLottoBonusNumber(answers) {
     try {
-      const number = await Console.readLineAsync(
-        '보너스 번호를 입력해 주세요.\n'
-      );
+      const number = await Console.readLineAsync(MESSAGE.inputBonusNum);
       Validate.checkNumberRange(number);
       Validate.checkDuplicateNumber([...answers, Number(number)]);
 
