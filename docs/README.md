@@ -37,7 +37,9 @@ npm test
 ```
 <br/>
 
-<img src='./Test.gif'>
+![Test](https://github.com/alwubin/Algorithm-Binary-Search/assets/135022491/a666be6e-8b8d-45bd-a6cf-9922dee582e2)
+
+<br/>
 
 ---
 
