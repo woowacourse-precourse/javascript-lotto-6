@@ -7,10 +7,10 @@ import { PERCHASE_AMOUNT } from './constant/lottoNumber';
 import WINNING_MONEY from './constant/winningMoney';
 import USER_INPUT_TEXT from './constant/inputText';
 import {
-  paymentAmountValidater,
-  winningNumbersValidater,
-  bonusNumberValidater,
-} from './utils/validater';
+  paymentAmountValidator,
+  winningNumbersValidator,
+  bonusNumberValidator,
+} from './utils/validator';
 
 class App {
   #paymentAmount;
@@ -53,8 +53,8 @@ class App {
   }
 
   #validatePaymentAmount(amount) {
-    Object.keys(paymentAmountValidater).forEach(validate => {
-      paymentAmountValidater[validate](amount);
+    Object.keys(paymentAmountValidator).forEach(validate => {
+      paymentAmountValidator[validate](amount);
     });
   }
 
@@ -83,8 +83,8 @@ class App {
       .split(',')
       .map(Number)
       .sort((a, b) => a - b);
-    Object.keys(winningNumbersValidater).forEach(validate => {
-      winningNumbersValidater[validate](winningNumbers);
+    Object.keys(winningNumbersValidator).forEach(validate => {
+      winningNumbersValidator[validate](winningNumbers);
     });
   }
 
@@ -99,8 +99,8 @@ class App {
 
   #validateBonusNumber(inputNumber, winningNumbers) {
     const bonusNumber = Number(inputNumber);
-    Object.keys(bonusNumberValidater).forEach(validate => {
-      bonusNumberValidater[validate](bonusNumber, winningNumbers);
+    Object.keys(bonusNumberValidator).forEach(validate => {
+      bonusNumberValidator[validate](bonusNumber, winningNumbers);
     });
   }
 

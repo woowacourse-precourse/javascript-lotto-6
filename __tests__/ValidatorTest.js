@@ -1,31 +1,31 @@
 import {
-  paymentAmountValidater,
-  winningNumbersValidater,
-  bonusNumberValidater,
-} from '../src/utils/validater';
+  paymentAmountValidator,
+  winningNumbersValidator,
+  bonusNumberValidator,
+} from '../src/utils/validator';
 
 describe('구매 금액 테스트', () => {
   test('구매 금액이 숫자가 아닐 때 예외 발생', () => {
     expect(() => {
-      paymentAmountValidater.isntNumber('lotto');
+      paymentAmountValidator.isntNumber('lotto');
     }).toThrow('[ERROR]');
   });
 
   test('구매 금액이 공백일 때 예외 발생', () => {
     expect(() => {
-      paymentAmountValidater.isntNumber('');
+      paymentAmountValidator.isntNumber('');
     }).toThrow('[ERROR]');
   });
 
   test('구매 금액이 정수가 아닐 때 예외 발생', () => {
     expect(() => {
-      paymentAmountValidater.isntInteger(1000.5);
+      paymentAmountValidator.isntInteger(1000.5);
     }).toThrow('[ERROR]');
   });
 
   test('구매 금액이 1000 단위가 아닐 때 예외 발생', () => {
     expect(() => {
-      paymentAmountValidater.outOfUnit(1999);
+      paymentAmountValidator.outOfUnit(1999);
     }).toThrow('[ERROR]');
   });
 });
@@ -33,43 +33,43 @@ describe('구매 금액 테스트', () => {
 describe('당첨 번호 테스트', () => {
   test('당첨 번호의 길이가 6미만일 때 예외 발생', () => {
     expect(() => {
-      winningNumbersValidater.length([1, 2, 3, 4, 5]);
+      winningNumbersValidator.length([1, 2, 3, 4, 5]);
     }).toThrow('[ERROR]');
   });
 
   test('당첨 번호가 공백일 때 예외 발생', () => {
     expect(() => {
-      winningNumbersValidater.isntNumber([1, 2, 3, 4, 5, ' ']);
+      winningNumbersValidator.isntNumber([1, 2, 3, 4, 5, ' ']);
     }).toThrow('[ERROR]');
   });
 
   test('당첨 번호가 숫자가 아닐 때 예외 발생', () => {
     expect(() => {
-      winningNumbersValidater.isntNumber([1, 2, 3, 4, 5, 'lotto']);
+      winningNumbersValidator.isntNumber([1, 2, 3, 4, 5, 'lotto']);
     }).toThrow('[ERROR]');
   });
 
   test('당첨 번호가 정수가 아닐 때 예외 발생', () => {
     expect(() => {
-      winningNumbersValidater.isntInteger([1, 2, 3, 4, 5, 6.5]);
+      winningNumbersValidator.isntInteger([1, 2, 3, 4, 5, 6.5]);
     }).toThrow('[ERROR]');
   });
 
   test('당첨 번호가 1 미만일 때 예외 발생', () => {
     expect(() => {
-      winningNumbersValidater.outOfRange([1, 2, 3, 4, 5, -1]);
+      winningNumbersValidator.outOfRange([1, 2, 3, 4, 5, -1]);
     }).toThrow('[ERROR]');
   });
 
   test('당첨 번호가 45 초과일 때 예외 발생', () => {
     expect(() => {
-      winningNumbersValidater.outOfRange([1, 2, 3, 4, 5, 46]);
+      winningNumbersValidator.outOfRange([1, 2, 3, 4, 5, 46]);
     }).toThrow('[ERROR]');
   });
 
   test('당첨 번호에 중복이 있을 때 예외 발생', () => {
     expect(() => {
-      winningNumbersValidater.duplicated([1, 2, 3, 4, 5, 5]);
+      winningNumbersValidator.duplicated([1, 2, 3, 4, 5, 5]);
     }).toThrow('[ERROR]');
   });
 });
@@ -77,37 +77,37 @@ describe('당첨 번호 테스트', () => {
 describe('보너스 번호 테스트', () => {
   test('보너스 번호가 숫자가 아닐 때 예외 발생', () => {
     expect(() => {
-      bonusNumberValidater.isntNumber('lotto');
+      bonusNumberValidator.isntNumber('lotto');
     }).toThrow('[ERROR]');
   });
 
   test('보너스 번호가 공백일 때 예외 발생', () => {
     expect(() => {
-      bonusNumberValidater.isntNumber(' ');
+      bonusNumberValidator.isntNumber(' ');
     }).toThrow('[ERROR]');
   });
 
   test('보너스 번호가 정수가 아닐 때 예외 발생', () => {
     expect(() => {
-      bonusNumberValidater.isntInteger(10.5);
+      bonusNumberValidator.isntInteger(10.5);
     }).toThrow('[ERROR]');
   });
 
   test('보너스 번호가 1 미만일 때 예외 발생', () => {
     expect(() => {
-      bonusNumberValidater.outOfRange(-1);
+      bonusNumberValidator.outOfRange(-1);
     }).toThrow('[ERROR]');
   });
 
   test('보너스 번호가 45 초과일 때 예외 발생', () => {
     expect(() => {
-      bonusNumberValidater.outOfRange(46);
+      bonusNumberValidator.outOfRange(46);
     }).toThrow('[ERROR]');
   });
 
   test('보너스 번호가 당첨 번호와 중복 되었을 때 예외 발생', () => {
     expect(() => {
-      bonusNumberValidater.duplicated(1, [1, 2, 3, 4, 5, 6]);
+      bonusNumberValidator.duplicated(1, [1, 2, 3, 4, 5, 6]);
     }).toThrow('[ERROR]');
   });
 });

@@ -5,7 +5,7 @@ const onError = (subject, type) => {
   throw new Error(ERROR_MESSAGES[subject][type]);
 };
 
-const paymentAmountValidater = {
+const paymentAmountValidator = {
   isntNumber: paymentAmount => {
     if (Number.isNaN(Number(paymentAmount)) || !Number(paymentAmount)) {
       onError('paymentAmount', 'isntNumber');
@@ -23,7 +23,7 @@ const paymentAmountValidater = {
   },
 };
 
-const winningNumbersValidater = {
+const winningNumbersValidator = {
   length: winningNumbers => {
     if (winningNumbers.length !== 6) onError('winningNumbers', 'length');
   },
@@ -59,7 +59,7 @@ const winningNumbersValidater = {
   },
 };
 
-const bonusNumberValidater = {
+const bonusNumberValidator = {
   isntNumber: bonusNumber => {
     if (Number.isNaN(Number(bonusNumber)) || !Number(bonusNumber)) {
       onError('bonusNumber', 'isntNumber');
@@ -83,7 +83,7 @@ const bonusNumberValidater = {
 };
 
 export {
-  paymentAmountValidater,
-  winningNumbersValidater,
-  bonusNumberValidater,
+  paymentAmountValidator,
+  winningNumbersValidator,
+  bonusNumberValidator,
 };
