@@ -14,8 +14,14 @@ class Lotto {
     }
     
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error("[ERROR] 로또 번호는 중복되어서는 안됩니다.")
+      throw new Error("[ERROR] 로또 번호는 중복되어서는 안됩니다.");
     }
+
+    numbers.forEach(number => {
+      if (isNaN(number)) {
+        throw new Error("[ERROR] 로또 번호가 올바른 숫자 형식이 아닙니다.")
+      }
+    })
   }
 
   printNumbers() {
