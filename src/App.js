@@ -3,12 +3,27 @@ import Lotto from "./Lotto.js";
 class App {
   // 구입 금액 입력받기
   async inputMoney() {
-    const money = await MissionUtils.Console.readLineAsync("구입금액을 입력해 주세요.\n");
-    if (money % 1000 !== 0) {
-      throw new Error("[ERROR] 1000원 단위로 입력해 주세요.");
+    let money;
+    let isValidated = false;
+    while (!isValidated) {
+      const inputString = await MissionUtils.Console.readLineAsync(
+        "구입금액을 입력해 주세요.\n"
+      );
+      money = Number(inputString.trim());
+      isValidated = this.validateMoney(money);
     }
     return money;
   }
+
+  // 예외처리
+  validateMoney(money) {
+    if (isNaN(money)) {
+      MissionUtils.Console.print("[ERROR] 숫자만 입력해주세요.\n");
+    } else if (money % 1000 !== 0) {
+      MissionUtils.Console.print("[ERROR] 1000원 단위로 입력해주세요.\n");
+    } else return true;
+  }
+
   // 로또 발행
   publishLotto(money) {
     const lottoCount = money / 1000;
@@ -24,22 +39,55 @@ class App {
     MissionUtils.Console.print(`\n${lottos.length}개를 구매했습니다.`);
   // 당첨 번호 입력받기
   async inputNumbers() {
-    const inputString = await MissionUtils.Console.readLineAsync(
-      "당첨 번호를 입력해주세요.\n"
-    );
-    const numbers = inputString
-      .split(",")
-      .map((number) => Number(number.trim()));
-    return numbers;
+    let numbers;
+    let isValidated = false;
+    while (!isValidated) {
+      const inputString = await MissionUtils.Console.readLineAsync(
+        "\n당첨 번호를 입력해주세요.\n"
+      );
+      numbers = inputString.split(",").map((number) => Number(number.trim()));
+      isValidated = this.validateNumbers(numbers);
+    }
+    this.winningNumbers = numbers;
+  }
+
+  // 당첨 번호 예외처리
+  validateNumbers(numbers) {
+    if (numbers.length !== 6) {
+      MissionUtils.Console.print("[ERROR] 6개의 숫자를 입력해주세요.\n");
+    } else if (numbers.some((number) => isNaN(number))) {
+      MissionUtils.Console.print("[ERROR] 숫자만 입력해주세요.\n");
+    } else if (numbers.some((number) => number < 1 || number > 45)) {
+      MissionUtils.Console.print("[ERROR] 1~45 사이의 숫자를 입력해주세요.\n");
+    } else if (new Set(numbers).size !== 6) {
+      MissionUtils.Console.print("[ERROR] 중복된 숫자를 입력할 수 없습니다.\n");
+    } else return true;
   }
 
   // 보너스 번호 입력받기
   async inputBonusNumber() {
-    const inputString = await MissionUtils.Console.readLineAsync(
-      "보너스 번호를 입력해주세요.\n"
-    );
-    const bonusNumber = Number(inputString.trim());
-    return bonusNumber;
+    let bonusNumber;
+    let isValidated = false;
+    while (!isValidated) {
+      const inputString = await MissionUtils.Console.readLineAsync(
+        "\n보너스 번호를 입력해주세요.\n"
+      );
+      bonusNumber = Number(inputString.trim());
+      isValidated = this.validateBonusNumber(bonusNumber);
+    }
+    this.bonusNumber = bonusNumber;
+  }
+
+  validateBonusNumber(bonusNumber) {
+    const winningNumbers = this.winningNumbers;
+    if (isNaN(bonusNumber)) {
+      MissionUtils.Console.print("[ERROR] 숫자만 입력해주세요.\n");
+    } else if (bonusNumber < 1 || bonusNumber > 45) {
+      MissionUtils.Console.print("[ERROR] 1~45 사이의 숫자를 입력해주세요.\n");
+    } else if (winningNumbers.includes(bonusNumber)) {
+      MissionUtils.Console.print("[ERROR] 당첨 번호와 중복될 수 없습니다.\n");
+    }
+    else return true;
   }
 
   // 로또 하나에 대한 결과(등수) 계산
