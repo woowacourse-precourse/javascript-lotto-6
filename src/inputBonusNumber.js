@@ -1,13 +1,16 @@
-import { Console } from '@woowacourse/mission-utils';
-import validateBonusNumber from 'validates/validateBonusNumber';
+import { MissionUtils } from "@woowacourse/mission-utils";
+import validateBonusNumber from "./validateBonusNumber.js";
 
-export default async function inputBonusNumber(winningNumbers) {
-  while (true) {
+async function inputBonusNumber(winningNumbers) {
+    let bonusNumber = Number(await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n"));
     try {
-      const bonusNumber = Number(await Console.readLineAsync('보너스 번호를 입력하세요\n'));
-      return validateBonusNumber(bonusNumber, winningNumbers);
-    } catch (error) {
-      Console.print(error.message);
+        bonusNumber = validateBonusNumber(bonusNumber, winningNumbers);
+        MissionUtils.Console.print("");
+    } catch(err) {
+        MissionUtils.Console.print(err.message);
+        return inputBonusNumber(winningNumbers);
     }
-  }
+    return bonusNumber;
 }
+
+export default inputBonusNumber;
