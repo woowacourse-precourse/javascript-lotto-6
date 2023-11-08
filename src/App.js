@@ -93,10 +93,26 @@ class App {
         if (rankingDetailStr === comparedResultStr) {
           value.count++;
         }
-      })
+      });
     });
 
     return allLottoResult;
+  }
+
+  calculateProfitRate(allLottoResult, theNumberOfLotto) {
+    let profit = 0;
+    const theAmountOfLotto = theNumberOfLotto*1000;
+
+    Object.values(allLottoResult).forEach(value => {
+      const {rankingDetail, reward, count} = value;
+      profit += reward*count;
+    });
+
+    profit -= theAmountOfLotto;
+
+    const profitRate = profit / theAmountOfLotto * 100;
+  
+    return profitRate;
   }
 
   async play() {
@@ -108,6 +124,7 @@ class App {
     const lottoBonusNumber = await user.inputLottoBonusNumber();
     const lottoResult = this.checkAllLottoResult(lottos, lottoWinningNumber, lottoBonusNumber);
     user.printAllLottoResult(lottoResult);
+    const profitRate = this.calculateProfitRate(lottoResult, theNumberOfLotto);
   }
 }
 
