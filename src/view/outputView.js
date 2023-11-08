@@ -11,10 +11,14 @@ class OutputView {
   static showEmptyLine() {
     Console.print('');
   }
-  
-  static showLottoNumbers (lottoTickets) {
+
+  static showLottoCount(lottoTickets) {
     this.showEmptyLine();
     Console.print(MESSAGE.LOTTO_TICKET(lottoTickets.length));
+  }
+  
+  static showLottoNumbers (lottoTickets) {
+    this.showLottoCount(lottoTickets);
 
     lottoTickets.forEach((lotto) => {
       Console.print(`[${String(lotto.getNumbers()).split(DELIMITER).join(DELIMITER_SPACE)}]`);
