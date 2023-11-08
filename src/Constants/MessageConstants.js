@@ -1,4 +1,4 @@
-import { LOTTO_CONSTANTS } from './LottoContstants';
+import { LOTTO_CONSTANTS } from './LottoContstants.js';
 
 const ERROR_MESSAGE = Object.freeze({
 	errorPrefix: '[ERROR]',
