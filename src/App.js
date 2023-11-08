@@ -5,6 +5,9 @@ import {
   CONSOLE_MESSAGE,
   ERROR_MESSAGE,
   LOTTO_PRICE_UNIT,
+  MATCH_COUNT,
+  NUMBER_RANGE,
+  WINNING_PRIZE,
 } from './constants.js';
 
 class App {
@@ -34,7 +37,11 @@ class App {
     let generatedLottos = [];
 
     for (let i = 0; i < lottoAmount; i++) {
-      const numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+      const numbers = Random.pickUniqueNumbersInRange(
+        NUMBER_RANGE.MIN,
+        NUMBER_RANGE.MAX,
+        6
+      );
       numbers.sort((a, b) => a - b);
       generatedLottos.push(numbers);
     }
@@ -103,11 +110,14 @@ class App {
 
   calculateWinningStatistics(lottos, winningNumbers, bonusNumber) {
     const statistics = {
-      3: { count: 0, prize: 5000 },
-      4: { count: 0, prize: 50000 },
-      5: { count: 0, prize: 1500000 },
-      '5+1': { count: 0, prize: 30000000 },
-      6: { count: 0, prize: 2000000000 },
+      [MATCH_COUNT.THREE]: { count: 0, prize: WINNING_PRIZE.THREE_MATCH },
+      [MATCH_COUNT.FOUR]: { count: 0, prize: WINNING_PRIZE.FOUR_MATCH },
+      [MATCH_COUNT.FIVE]: { count: 0, prize: WINNING_PRIZE.FIVE_MATCH },
+      [MATCH_COUNT.FIVE_PLUS_BONUS]: {
+        count: 0,
+        prize: WINNING_PRIZE.FIVE_PLUS_BONUS_MATCH,
+      },
+      [MATCH_COUNT.SIX]: { count: 0, prize: WINNING_PRIZE.SIX_MATCH },
     };
 
     lottos.forEach(lotto => {
@@ -121,8 +131,8 @@ class App {
     const matchCount = this.getMatchCount(lotto, winningNumbers);
     const isBonusMatch = lotto.includes(bonusNumber);
 
-    if (matchCount === 5 && isBonusMatch) {
-      statistics['5+1'].count++;
+    if (matchCount === MATCH_COUNT.FIVE && isBonusMatch) {
+      statistics[MATCH_COUNT.FIVE_PLUS_BONUS].count++;
     } else if (statistics[matchCount]) {
       statistics[matchCount].count++;
     }
@@ -136,14 +146,20 @@ class App {
     Console.print('\n당첨 통계\n---');
 
     const sortedKeys = Object.keys(statistics).sort((a, b) => {
-      const order = ['3', '4', '5', '5+1', '6'];
+      const order = [
+        MATCH_COUNT.THREE,
+        MATCH_COUNT.FOUR,
+        MATCH_COUNT.FIVE,
+        MATCH_COUNT.FIVE_PLUS_BONUS,
+        MATCH_COUNT.SIX,
+      ];
       return order.indexOf(a) - order.indexOf(b);
     });
 
     sortedKeys.forEach(key => {
       const { count, prize } = statistics[key];
       let message = `${key}개 일치`;
-      if (key === '5+1') {
+      if (key === MATCH_COUNT.FIVE_PLUS_BONUS) {
         message = '5개 일치, 보너스 볼 일치';
       }
       Console.print(`${message} (${prize.toLocaleString()}원) - ${count}개`);

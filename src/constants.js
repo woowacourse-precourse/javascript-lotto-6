@@ -23,10 +23,23 @@ export const CONSOLE_MESSAGE = {
 
 export const LOTTO_PRICE_UNIT = 1000;
 
-export const LOTTO_RESULTS = {
-  SAME_3_NUMBERS: `3개 일치 (5,000원) - `,
-  SAME_4_NUMBERS: `4개 일치 (50,000원) - `,
-  SAME_5_NUMBERS: `5개 일치 (1,500,000원) - `,
-  SAME_5_NUMBERS_AND_BONUS: `5개 일치, 보너스 볼 일치 (30,000,000원) - `,
-  SAME_6_NUMBERS: `6개 일치 (2,000,000,000원) - `,
+export const WINNING_PRIZE = {
+  THREE_MATCH: 5000,
+  FOUR_MATCH: 50000,
+  FIVE_MATCH: 1500000,
+  FIVE_PLUS_BONUS_MATCH: 30000000,
+  SIX_MATCH: 2000000000,
+};
+
+export const MATCH_COUNT = {
+  THREE: '3',
+  FOUR: '4',
+  FIVE: '5',
+  FIVE_PLUS_BONUS: '5+1',
+  SIX: '6',
+};
+
+export const NUMBER_RANGE = {
+  MIN: 1,
+  MAX: 45,
 };
