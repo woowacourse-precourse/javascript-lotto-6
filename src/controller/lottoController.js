@@ -40,8 +40,14 @@ class LottoController {
   }
 
   async readLottoNumber() {
-    const lottoNumber = await InputView.inputLotto();
-    this.readBonusNumber(lottoNumber);
+    try {
+      const lottoNumber = await InputView.inputLotto();
+      this.Error.validateLottoInput(lottoNumber);
+      this.readBonusNumber(lottoNumber);
+    } catch (e) {
+      OutputView.printErrorMessage(e.message);
+      return this.readLottoNumber();
+    }
   }
 
   async readBonusNumber(lottoNumber) {

@@ -21,6 +21,14 @@ class InputError {
     }
   }
 
+  validateLottoInputDataType(input) {
+    for (let i = 0; i < input.length; i++) {
+      if (isNaN(Number(input[i]))) {
+        throw new Error(ERROR_MESSAGE.INPUT_DATA_TYPE_ERROR);
+      }
+    }
+  }
+
   validateInputDataType(input) {
     if (isNaN(Number(input))) {
       throw new Error(ERROR_MESSAGE.INPUT_DATA_TYPE_ERROR);
@@ -49,6 +57,13 @@ class InputError {
     this.validateLottoPaymentLength(input);
     this.validateInputDataType(input);
     this.validateIsPositiveNumber(input);
+  }
+
+  validateLottoInput(input) {
+    this.validateInputExist(input);
+    this.validateLottoNumberLength(input);
+    this.validateLottoIsDistinct(input);
+    this.validateLottoInputDataType(input);
   }
 }
 
