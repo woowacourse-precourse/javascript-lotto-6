@@ -8,15 +8,16 @@ export class Start {
     this.lottoGame = new LottoGame();
     this.inputLotto = new InputLotto(this.lottoGame);
   }
+  //시작
   async run() {
     await this.inputLotto.buyLottos();
     await this.inputLotto.winLottos();
     await this.inputLotto.isBonusNumber();
 
     const statistics = new LottoStatistics(
-      this.lottoGame.playerLottos,
-      this.lottoGame.winningNumbers,
-      this.lottoGame.bonusNumber,
+      this.lottoGame.playerLottos, //랜덤 로또 번호
+      this.lottoGame.winningNumbers, //당첨 번호
+      this.lottoGame.bonusNumber, //보너스 번호
     );
     statistics.calculateStatistics();
     statistics.printStatistics();
