@@ -19,4 +19,13 @@ describe('number.js 함수 테스트', () => {
       expect(() => parseStringsToIntegers(inputs)).toThrowError('[ERROR]');
     },
   );
+
+  test('로또 구매 수량 반환 테스트', () => {
+    const inputPrice = ['1000', '2000', '10000'];
+    const predictedResults = [1, 2, 10];
+
+    inputPrice.forEach((price, index) => {
+      expect(lottoPurchaseCount(price)).toBe(predictedResults[index]);
+    });
+  });
 });
