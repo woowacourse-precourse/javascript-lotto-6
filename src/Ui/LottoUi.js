@@ -53,11 +53,14 @@ const LottoUi = {
     Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   },
 
-  alertFinishdrawLottos(numberOfLottos) {
+  alertFinishdrawLottos(purchaseAmount) {
+    const numberOfLottos = purchaseAmount / 1000;
     Console.print(`${numberOfLottos}${MESSAGE.FINISH_DRAW_LOTTOS}`);
   },
 
-  printPurchasedLottos(purchasedLottos) {
+  printPurchasedLottos(purchaseAmount, purchasedLottos) {
+    this.alertFinishdrawLottos(purchaseAmount);
+
     purchasedLottos.forEach((lotto) => {
       Console.print(`[${lotto.join(', ')}]`);
     });

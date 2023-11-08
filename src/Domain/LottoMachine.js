@@ -12,9 +12,6 @@ const LottoMachine = {
       );
     }
 
-    LottoUi.alertFinishdrawLottos(numberOfLottos);
-    LottoUi.printPurchasedLottos(purchasedLottos);
-
     return purchasedLottos;
   },
 };

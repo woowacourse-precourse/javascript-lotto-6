@@ -5,7 +5,7 @@ class App {
   async play() {
     const purchaseAmount = await LottoUi.inputPurchaseAmount();
     const purchasedLottos = LottoMachine.drawLottos(purchaseAmount);
-
+    LottoUi.printPurchasedLottos(purchaseAmount, purchasedLottos);
     const winningNumbers = await LottoUi.inputWinningNumbers();
     const bonusNumber = await LottoUi.inputBonusNumber();
 
