@@ -16,8 +16,12 @@ function validatePurchaseMoney(str) {
 }
 
 function validateBonus(str) {
+  const bonus = Number(str);
   if (!isNumber(str)) {
     throw new Error('[ERROR] 숫자 형식으로 입력해주세요');
+  }
+  if (bonus < 1 || bonus > 45) {
+    throw new Error('[ERROR] 로또 번호는 1~45까지여야 합니다.');
   }
 }
 
