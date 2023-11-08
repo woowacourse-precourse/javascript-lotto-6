@@ -1,23 +1,35 @@
+const NUMBER = {
+  NUMBER_ZERO: 0,
+  LOTTO_LENGTH: 6,
+  NUMBER_FIVE: 5,
+  BONUS_NUMBER: 1
+}
+
+const KEY = {
+  LOTTO_MATCH: "lottoMatch",
+  BONUS_MATCH: "bonusMatch"
+}
+
 export function matchLotto(randomLottoArr, lotto, bonus) {
-    const matchList = []
-    for (let i = 0; i < randomLottoArr.length; i++) {
-        matchList.push(matchLottoNumber(randomLottoArr[i], lotto, bonus))
-    }
-    return matchList;
+  const matchList = []
+  for (let i = NUMBER.NUMBER_ZERO; i < randomLottoArr.length; i++) {
+    matchList.push(matchLottoNumber(randomLottoArr[i], lotto, bonus))
+  }
+  return matchList;
 }
 
 
 function matchLottoNumber(randomLottoArr, lotto, bonus) {
-    const match = { lottoMatch: 0, bonusMatch: 0 }
-    for (let i = 0; i < 6; i++) {
-        if (randomLottoArr.includes(parseInt(lotto[i]))) {
-            match["lottoMatch"]++;
-        }
+  const match = { lottoMatch: NUMBER.NUMBER_ZERO, bonusMatch: NUMBER.NUMBER_ZERO }
+  for (let i = NUMBER.NUMBER_ZERO; i < NUMBER.LOTTO_LENGTH; i++) {
+    if (randomLottoArr.includes(parseInt(lotto[i]))) {
+      match[KEY.LOTTO_MATCH]++;
     }
-    if (match["lottoMatch"] === 5) {
-        if (randomLottoArr.includes(parseInt(bonus))) {
-            match["bonusMatch"] = 1;
-        }
+  }
+  if (match[KEY.LOTTO_MATCH] === NUMBER.NUMBER_FIVE) {
+    if (randomLottoArr.includes(parseInt(bonus))) {
+      match[KEY.BONUS_MATCH] = NUMBER.BONUS_NUMBER;
     }
-    return match;
+  }
+  return match;
 }
