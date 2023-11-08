@@ -236,3 +236,59 @@ async #getPurchaseAmount() {
 - <https://typescript-eslint.io/rules/return-await/>
 - <https://eslint.org/blog/2023/07/eslint-v8.46.0-released/#features>
 - <https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb-base/rules/best-practices.js>
+
+## 6. getter를 사용하는 대신 객체에 메시지를 보내자
+
+이 부분은 정말 오래 고민하였습니다. 설계 부터 어떻게하면 getter를 사용하지 않고 잘 구현할 수 있을까 계속 생각했습니다. 사실 그냥 getter쓰는게 정말 구현하기 편하긴 하다. 하지만 연습하는 과정이니 메시지를 보내는 식으로도 구현해보고 싶었습니다.
+
+테코블에 있는 글 [getter를 사용하는 대신 객체에 메시지를 보내자](https://tecoble.techcourse.co.kr/post/2020-04-28-ask-instead-of-getter/)를 보면 포비가 이런 말을 하셨다고 한다.
+
+```text
+상태를 가지는 객체를 추가했다면 객체가 제대로 된 역할을 하도록 구현해야 한다.
+객체가 로직을 구현하도록 해야한다.
+상태 데이터를 꺼내 로직을 처리하도록 구현하지 말고 객체에 메시지를 보내 일을 하도록 리팩토링한다.
+```
+
+로또를 구현하다보면 당첨번호와 보너스번호를 각각 관리했을 때 보너스 번호 유효성 체크를 위해 상호 비교를 해야합니다. 그러기 위해서는 한쪽의 데이터를 가져와야합니다.  
+여기서 당첨 번호를 가져오기 위해 getter을 쓰기보다는 메시지를 보내서 중복값이 존재하는지 확인하는 메서드를 실행시키도록 구현하였습니다.
+
+> Lotto.js
+
+```js
+isDuplicatedWinningNumbers(bonusNumber) {
+    return this.#numbers.includes(Number(bonusNumber));
+  }
+```
+
+> Bonus.js
+
+```js
+ #validate(bonus, winningNumbers) {
+    if (!isNumber(bonus)) handleValidationError(ERROR_MESSAGE.number);
+    if (!isInteger(bonus)) handleValidationError(ERROR_MESSAGE.integer);
+    if (!isNumberValidScope(bonus)) handleValidationError(ERROR_MESSAGE_FUNCTION.validScope());
+    if (winningNumbers.isDuplicatedWinningNumbers(bonus)) {
+      handleValidationError(ERROR_MESSAGE.winningDuplication);
+    }
+  }
+```
+
+하지만 Bonus에 객체 전체를 줘야하기 때문에 과연 getter사용하는 것보다 효율적인지는 잘 모르겠습니다.  
+또한 테스트 코드가 getter사용할 때보다. 더 복잡해져서 이런 부분은 단점이 될 것 같습니다.
+(시도는 좋았으나 제대로 구현한 것 같지 않습니다. 이 부분은 다음 미션에서 더 연습해야할 것 같습니다)
+
+블로그 글에서도 getter를 무조건 사용하지 말라고 하는건 아니니 어디서 사용하고 어디서 메시지를 보내야할지 다음 미션에서 더 고민해보고 연습해보겠습니다.
+
+그에 비해 아래와 같은 코드는 직접 당첨번호를 가져오는게 아니라 메시지를 보내서 `Lotto.js` 내부에서 계산을 하고 결과값을 출력하기에 이러한 경우가 더 의도에 맞게 구현된 것 같습니다.
+
+> Lotto.js
+
+```js
+compareWinningNumbers(userLotto, bonus) {
+    const matchCount = this.#checkMatchCount(userLotto);
+
+    if (Lotto.#isSecond(matchCount, bonus, userLotto)) return LOTTO.rank.bonus;
+
+    return LOTTO.rank[matchCount] ?? LOTTO.rank.undefined;
+  }
+```
