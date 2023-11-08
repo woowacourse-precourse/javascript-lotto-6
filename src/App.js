@@ -41,7 +41,7 @@ class App {
 
     const winningNumber = await MissionUtils.Console.readLineAsync('');
     const winningSplitNumber = winningNumberSpliter(winningNumber);
-    this.winning = new Winning(winningSplitNumber);
+    new Winning(winningSplitNumber);
 
     this.inputBonusNumber(model.winningNumber, model.counts);
   }
