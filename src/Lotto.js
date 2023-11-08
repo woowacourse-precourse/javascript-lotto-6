@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './Constants.js';
+import { LOTTO, ERROR_MESSAGE } from './Constants.js';
 
 class Lotto {
   #numbers;
@@ -12,14 +12,17 @@ class Lotto {
     if (numbers.length < 1) {
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.NOTHING);
     }
-    if (numbers.every((num) => isNaN(num))) {
+    if (numbers.some((num) => isNaN(num))) {
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.NOT_A_NUMBER);
     }
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO.NUMBER_RANGE.PICK) {
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.NOT_SIX);
     }
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== LOTTO.NUMBER_RANGE.PICK) {
       throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.SAME_NUMBER);
+    }
+    if (numbers.some((num) => num < LOTTO.NUMBER_RANGE.FROM || num > LOTTO.NUMBER_RANGE.TO)) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NUMBERS.NOT_A_NUMBER);
     }
   }
 
