@@ -1,4 +1,4 @@
-import LottoGame from './LottoGame.js';
+import LottoGame from './lottogame/LottoGame.js';
 
 class App {
   constructor() {
