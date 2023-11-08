@@ -23,25 +23,25 @@ class Lotto {
 
   lottoMatchStart(randomNumbersArray, bonusNumber) {
     randomNumbersArray.forEach((randomNumbers) => {
-      let count = this.getMatchNumberCount(randomNumbers);
-      let isBonus = this.isBonusNumber(bonusNumber, randomNumbers);
-      this.storeResult(count, isBonus);
+      let count = this.#getMatchNumberCount(randomNumbers);
+      let isBonus = this.#isBonusNumber(bonusNumber, randomNumbers);
+      this.#storeResult(count, isBonus);
     })
     return this.result;
   }
 
-  getMatchNumberCount(randomNumbers) {
+  #getMatchNumberCount(randomNumbers) {
     let count = randomNumbers.filter((num) =>
       this.#numbers.includes(num)
     ).length;
     return count;
   }
 
-  isBonusNumber(bonusNumber, randomNumbers) {
+  #isBonusNumber(bonusNumber, randomNumbers) {
     return randomNumbers.includes(Number(bonusNumber));
   }
 
-  storeResult(count, isBonus) {
+  #storeResult(count, isBonus) {
     if (count === 3) this.result[RESULT.THREE] += 1;
 
     if (count === 4) this.result[RESULT.FOUR] += 1;
