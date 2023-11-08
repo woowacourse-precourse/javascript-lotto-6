@@ -1,18 +1,57 @@
+import { ERROR, NUMBERS, LOTTO_NUMBER_RANGE } from './util/constant.js';
+
 class Lotto {
   #numbers;
 
   constructor(numbers) {
-    this.#validate(numbers);
     this.#numbers = numbers;
+    this.#validate();
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+  #validate() {
+    this.notNumberElement();
+    this.notSixNumber();
+    this.notRangeNumber();
+    this.sameNumber();
+  }
+
+  notNumberElement() {
+    this.#numbers.forEach(number => {
+      return this.notNumber(number);
+    });
+  }
+
+  notNumber(number) {
+    if (/[\D]/g.test(number)) {
+      throw ERROR.notNumberic;
     }
   }
 
-  // TODO: 추가 기능 구현
+  notSixNumber() {
+    if (this.#numbers.length !== NUMBERS.lottoLength) {
+      throw ERROR.notSixNumber;
+    }
+  }
+
+  notRangeNumber() {
+    this.#numbers.forEach(number => {
+      return this.numberListRangeCheck(Number(number));
+    });
+  }
+
+  numberListRangeCheck(number) {
+    if (number < LOTTO_NUMBER_RANGE[0] || number > LOTTO_NUMBER_RANGE[1]) {
+      throw ERROR.rangeOverInput;
+    }
+  }
+
+  sameNumber() {
+    const deleteSameNumber = new Set(this.#numbers).size;
+
+    if (this.#numbers.length !== deleteSameNumber) {
+      throw ERROR.sameNumber;
+    }
+  }
 }
 
 export default Lotto;
