@@ -8,6 +8,7 @@ import { MAX } from "./Constants.js";
 import { PICK_NUMBER } from "./Constants.js";
 import { THREE, FOUR, FIVE, SIX } from "./Constants.js";
 import Match from "./Match.js";
+import { literationMoney } from "./Function.js";
 
 class User {
   constructor() {
@@ -94,19 +95,7 @@ class User {
   }
 
   async play() {
-    let test = "fail";
-    let MONEY = 0;
-
-    while (test === "fail") {
-      MONEY = await this.inputMoney();
-      try {
-        this.validate(MONEY);
-        test = "success";
-      } catch (error) {
-        MissionUtils.Console.print(INPUT_MONEY_ERROR_MESSAGE);
-      }
-    }
-
+    const MONEY = await literationMoney();
     const COUNT = await this.calculateCount(MONEY);
     this.createLotto(COUNT);
 

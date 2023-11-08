@@ -47,3 +47,7 @@ export const FOUR_MATCH_MONEY = 50000;
 export const FIVE_MATCH_MONEY = 1500000;
 export const BONUS_MATCH_MONEY = 30000000;
 export const ALL_MATCH_MONEY = 2000000000;
+
+//Function.js
+export const FAIL = false;
+export const SUCCESS = true;

@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { literationNumbers, literationBonus } from "./Function.js";
 import {
   MIN,
   MAX,
@@ -83,41 +84,9 @@ class App {
   async play() {
     const user = new User();
     const MONEY = await user.play();
-
-    const lotto = new Lotto();
-
-    let test = "fail";
-    let numbers = 0;
-
-    while (test === "fail") {
-      numbers = await this.inputNumber();
-      try {
-        lotto.validate(numbers);
-        test = "success";
-      } catch (error) {
-        MissionUtils.Console.print(INPUT_NUMBER_ERROR_MESSAGE);
-      }
-    }
-
-    numbers.forEach((number) => {
-      Number(number);
-    });
-
-    let bonusTest = "fail";
-    let bonus = 0;
-
-    while (bonusTest === "fail") {
-      bonus = await this.inputBonus();
-
-      try {
-        await this.validateBonus(bonus, numbers);
-        bonusTest = "success";
-      } catch (error) {
-        MissionUtils.Console.print(INPUT_NUMBER_ERROR_MESSAGE);
-      }
-    }
-
-    const STATS = user.matching(numbers, bonus);
+    const NUMBERS = await literationNumbers();
+    const BONUS = await literationBonus(NUMBERS);
+    const STATS = user.matching(NUMBERS, BONUS);
     await this.printStats(STATS);
     this.printYield(STATS, MONEY);
   }
