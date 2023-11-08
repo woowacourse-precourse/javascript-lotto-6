@@ -22,3 +22,8 @@ export const inputWinningLotto = async () => {
   const winningLottoNumbers = await Console.readLineAsync(inputMessages.WINNING_LOTTO);
   return winningLottoNumbers.split(',').map((number) => Number(number));
 };
+
+export const inputBonusNumber = async () => {
+  const bonusNumber = await Console.readLineAsync(inputMessages.BONUS_NUMBER);
+  return Number(bonusNumber);
+};
