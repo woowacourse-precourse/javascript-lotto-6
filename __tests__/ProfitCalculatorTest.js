@@ -1,5 +1,5 @@
 import ProfitCalculator from "../src/domain/ProfitCalculator.js";
-import { PRIZE_MONEY, INITIAL_RESULT  } from "../src/constants/Constant.js";
+import { PRIZE_MONEY } from "../src/constants/Constant.js";
 
 describe("ProfitCalculator 클래스 테스트", () => {
   let profitCalculator;
@@ -24,7 +24,7 @@ describe("ProfitCalculator 클래스 테스트", () => {
   test("수익률 계산 테스트", () => {
     const totalPrize = 2050000;
     const purchasePrice = 3000;
-    const expectedROI = (totalPrize / purchasePrice) * 100;
+    const expectedROI = Number(((totalPrize / purchasePrice) * 100).toFixed(1));
     expect(profitCalculator.calculateROI(totalPrize, purchasePrice)).toBe(expectedROI);
   });
 });
