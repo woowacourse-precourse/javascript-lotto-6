@@ -2,34 +2,34 @@ import ValidatorUtil from './ValidatorUtil.js';
 
 class InputValidator {
   static purchaseAmountValidator(input) {
-    const inputToNum = Number(input);
+    const inputToNumber = Number(input);
 
-    ValidatorUtil.isNumberValidate(inputToNum);
-    ValidatorUtil.isPositiveNumberValidate(inputToNum);
-    ValidatorUtil.isMultiplesOf1000Validate(inputToNum);
+    ValidatorUtil.isNumberValidate(inputToNumber);
+    ValidatorUtil.isPositiveNumberValidate(inputToNumber);
+    ValidatorUtil.isMultiplesOf1000Validate(inputToNumber);
 
-    return inputToNum;
+    return inputToNumber;
   }
 
   static lottoNumberValidator(input) {
-    const inputToNumArr = input.split(',').map((item) => Number(item));
+    const inputToNumberArray = input.split(',').map((item) => Number(item));
 
-    ValidatorUtil.lengthValidate(inputToNumArr);
-    inputToNumArr.map((number) => {
+    ValidatorUtil.lengthValidate(inputToNumberArray);
+    inputToNumberArray.map((number) => {
       ValidatorUtil.isNumberValidate(number);
       ValidatorUtil.isNumberInRangeValidate(number);
     });
 
-    return inputToNumArr;
+    return inputToNumberArray;
   }
 
   static bonusNumberValidator(input) {
-    const inputToNum = Number(input);
+    const inputToNumber = Number(input);
 
-    ValidatorUtil.isNumberValidate(inputToNum);
-    ValidatorUtil.isNumberInRangeValidate(inputToNum);
+    ValidatorUtil.isNumberValidate(inputToNumber);
+    ValidatorUtil.isNumberInRangeValidate(inputToNumber);
 
-    return inputToNum;
+    return inputToNumber;
   }
 }
 

@@ -5,7 +5,7 @@ class Output {
     Console.print(`${purchaseAmount}개를 구매했습니다.`);
 
     userNumbers.forEach((numbers) => {
-      Console.print('[' + numbers + ']');
+      Console.print(`[${numbers}]`);
     });
   }
 
@@ -28,7 +28,7 @@ class Output {
   }
 
   static printYeild(userYeild) {
-    Console.print('총 수익률은 ' + userYeild + '%입니다.');
+    Console.print(`총 수익률은 ${userYeild}%입니다.`);
   }
 }
 

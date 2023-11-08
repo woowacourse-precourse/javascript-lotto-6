@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { LottoConstants, LottoPrizes } from './constants/Constants';
+import { LottoConstants, LottoPrizes } from './constants/Constants.js';
 class Generator {
   static randomNumbersGenerator(purchaseAmount) {
     const result = [];

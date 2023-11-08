@@ -11,7 +11,6 @@ class Lotto {
   }
 
   #validate(numbers, bonus) {
-    //ValidatorUtil.lengthValidate(numbers);
     ValidatorUtil.duplicationValidate(numbers, bonus);
   }
 

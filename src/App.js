@@ -25,6 +25,7 @@ class App {
       this.user = new User(purchaseAmount);
     } catch (error) {
       Console.print(error.message);
+
       await this.userInputController();
     }
   }
@@ -41,9 +42,11 @@ class App {
     try {
       const lottoNumber = await Input.readLottoNumber();
       const bonusNumber = await Input.readBonusNumber();
+
       this.lotto = new Lotto(lottoNumber, bonusNumber);
     } catch (error) {
       Console.print(error.message);
+
       await this.lottoInputController();
     }
   }
