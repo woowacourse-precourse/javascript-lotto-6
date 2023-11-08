@@ -1,4 +1,4 @@
-import { LOTTO_RANGE, ERROR_MESSAGE } from "./constants/constants";
+import { LOTTO_RANGE, ERROR_MESSAGE, PRIZE_MESSAGE } from "./constants/constants";
 
 class Lotto {
   #numbers;
@@ -6,6 +6,7 @@ class Lotto {
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
+
   }
 
   #validate(numbers) {
@@ -27,7 +28,12 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
-  // 당첨번호랑 비교하는 용도로 사용할 클래스.
+
+  // 당첨번호랑 비교하는 용도로 사용할 함수.
+  compareLotto(arr) {
+    let resArr = arr.filter(x => this.#numbers.includes(x));
+    return resArr;
+  }
 }
 
 export default Lotto;
