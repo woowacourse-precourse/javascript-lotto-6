@@ -1,7 +1,7 @@
 export const PRIZE = {
-  match3: 5000,
-  match4: 50000,
-  match5: 150000,
-  match6: 200000000,
-  bonus: 30000000
+  MATCH_3: 5000,
+  MATCH_4: 50000,
+  MATCH_5: 150000,
+  MATCH_6: 200000000,
+  BONUS: 30000000
 };

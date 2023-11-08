@@ -1,64 +1,65 @@
 import { REGEX } from '../constant/Regex.js';
+import { ERROR_MESSAGE } from '../constant/ErrorMessage.js';
 
 export default class Validator {
   checkIsNumber(value) {
-    if (!REGEX.isNumber.test(value)) {
-      throw new Error('[ERROR] 숫자를 입력해야 합니다.');
+    if (!REGEX.IS_NUMBER.test(value)) {
+      throw new Error(ERROR_MESSAGE.MONEY_NOT_NUMBER);
     }
   }
 
   checkIsGreaterThanThousand(value) {
-    if (!REGEX.isGreaterThanThousand.test(value)) {
-      throw new Error('[ERROR] 금액은 1000원 이상이어야 합니다.');
+    if (!REGEX.IS_GREATER_THAN_THOUSAND.test(value)) {
+      throw new Error(ERROR_MESSAGE.MONEY_NOT_GREATER_THAN_THOUSAND);
     }
   }
 
   checkIsThousandMultiple(value) {
-    if (!REGEX.isThousandMultiple.test(value)) {
-      throw new Error('[ERROR] 금액은 1000원의 배수여야 합니다.');
+    if (!REGEX.IS_THOUSAND_MULTIPLE.test(value)) {
+      throw new Error(ERROR_MESSAGE.MONEY_NOT_THOUSAND_MULTIPLE);
     }
   }
 
   checkIsCommaSeparatedNumber(value) {
-    if (!REGEX.isCommaSeparatedNumber.test(value)) {
-      throw new Error('[ERROR] 로또 번호는 콤마로 구분된 숫자여야 합니다.');
+    if (!REGEX.IS_COMMA_SEPARATED_NUMBER.test(value)) {
+      throw new Error(ERROR_MESSAGE.WIN_NUMBER_NOT_COMMA_SEPARATED);
     }
   }
 
   checkIsSixNumbers(value) {
-    if (!REGEX.isSixNumbers.test(value)) {
-      throw new Error('[ERROR] 로또 번호는 6개의 숫자여야 합니다.');
+    if (!REGEX.IS_SIX_NUMBERS.test(value)) {
+      throw new Error(ERROR_MESSAGE.WIN_NUMBER_NOT_SIX_DIGITS);
     }
   }
 
   checkIsCommaSeparatedNumberBetween1And45(value) {
-    if (!REGEX.isCommaSeparatedNumberBetween1And45.test(value)) {
-      throw new Error('[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.');
+    if (!REGEX.IS_COMMA_SEPARATED_NUMBER_BETWEEN_1_AND_45.test(value)) {
+      throw new Error(ERROR_MESSAGE.WIN_NUMBER_OUT_OF_RANGE);
     }
   }
 
   checkIsUnique(value) {
     const numbers = value.split(',');
     if (new Set(numbers).size !== numbers.length) {
-      throw new Error('[ERROR] 로또 번호는 유일한 숫자여야 합니다.');
+      throw new Error(ERROR_MESSAGE.WIN_NUMBER_NOT_UNIQUE);
     }
   }
 
-  checkIsNumberBonus(value) {
-    if (!REGEX.isNumber.test(value)) {
-      throw new Error('[ERROR] 보너스 번호는 숫자여야 합니다.');
+  checkBonusIsNumber(value) {
+    if (!REGEX.IS_NUMBER.test(value)) {
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_NOT_NUMBER);
     }
   }
 
   checkIsBetween1And45(value) {
-    if (!REGEX.isBetween1And45.test(value)) {
-      throw new Error('[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.');
+    if (!REGEX.IS_BETWEEN_1_AND_45.test(value)) {
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_OUT_OF_RANGE);
     }
   }
 
   checkIsNotInWin(value, win) {
     if (win.includes(value)) {
-      throw new Error('[ERROR] 보너스 번호는 당첨 번호에 없는 숫자여야 합니다.');
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_IN_WIN);
     }
   }
 }

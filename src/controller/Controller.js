@@ -34,7 +34,7 @@ export default class Controller {
   async getMoney() {
     const moneyString = await repeat(
       this.#view.readLine,
-      INPUT_MESSAGE.money,
+      INPUT_MESSAGE.MONEY,
       [
         this.#validator.checkIsNumber,
         this.#validator.checkIsGreaterThanThousand,
@@ -48,7 +48,7 @@ export default class Controller {
   async getWin() {
     const winString = await repeat(
       this.#view.readLine,
-      INPUT_MESSAGE.win,
+      INPUT_MESSAGE.WIN,
       [
         this.#validator.checkIsCommaSeparatedNumber,
         this.#validator.checkIsSixNumbers,
@@ -65,8 +65,8 @@ export default class Controller {
 
     while (true) {
       try {
-        bonus = parseInt(await this.#view.readLine(INPUT_MESSAGE.bonus));
-        this.#validator.checkIsNumberBonus(bonus);
+        bonus = parseInt(await this.#view.readLine(INPUT_MESSAGE.BONUS));
+        this.#validator.checkBonusIsNumber(bonus);
         this.#validator.checkIsBetween1And45(bonus);
         this.#validator.checkIsNotInWin(bonus, win);
         break;
@@ -74,7 +74,6 @@ export default class Controller {
         MissionUtils.Console.print(error.message);
       }
     }
-
 
     return parseInt(bonus);
   }

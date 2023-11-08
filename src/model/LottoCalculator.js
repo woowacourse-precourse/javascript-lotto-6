@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE } from "../constant/ErrorMessage";
 import { CONSTANT } from '../constant/Constant.js';
 import { PRIZE } from '../constant/Prize.js';
 
@@ -11,21 +12,21 @@ export default class LottoCalculator {
 
   #validate(money, win, bonus) {
     if (typeof money !== "number") {
-      throw new Error("[ERROR] money 매개변수는 number 데이터 타입이어야 합니다.");
+      throw new Error(ERROR_MESSAGE.PARAMETER_MONEY_NOT_NUMBER);
     }
 
     if (typeof win !== "object") {
-      throw new Error("[ERROR] win 매개변수는 object 데이터 타입이어야 합니다.");
+      throw new Error(ERROR_MESSAGE.PARAMETER_WIN_NOT_OBJECT);
     }
 
     win.forEach(number => {
       if (typeof number !== "number") {
-        throw new Error("[ERROR] win 매개변수의 요소는 number 데이터 타입이어야 합니다.");
+        throw new Error(ERROR_MESSAGE.PARAMETER_WIN_ELEMENT_NOT_NUMBER);
       }
     });
 
     if (typeof bonus !== "number") {
-      throw new Error("[ERROR] bonus 매개변수는 number 데이터 타입이어야 합니다.");
+      throw new Error(ERROR_MESSAGE.PARAMETER_BONUS_NOT_NUMBER);
     }
   }
 
@@ -82,11 +83,10 @@ export default class LottoCalculator {
   getPrize(data) {
     let sum = 0;
 
+    sum += data.bonus * PRIZE.BONUS;
     for (let i = CONSTANT.LAST_WIN; i <= CONSTANT.FIRST_WIN; i++) {
-      sum += data[`match${i}`] * PRIZE[`match${i}`];
+      sum += data[`match${i}`] * PRIZE[`MATCH_${i}`];
     }
-
-    sum += data.bonus * PRIZE.bonus;
 
     return sum;
   }
