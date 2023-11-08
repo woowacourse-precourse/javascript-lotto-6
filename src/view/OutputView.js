@@ -22,7 +22,7 @@ const OutputView = {
 
   printResultStatistic(winningStatistic) {
     Console.print(MESSAGE.resultStatic);
-    STATISTIC_RESULT.map((result, index) =>
+    STATISTIC_RESULT.forEach((result, index) =>
       Console.print(
         `${result}${winningStatistic[NUMBER.arraySize - index]}${
           MESSAGE.staticSuffix
