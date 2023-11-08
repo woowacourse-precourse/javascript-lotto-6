@@ -1,18 +1,29 @@
+"use strict";
+import { Random } from "@woowacourse/mission-utils";
 class Lotto {
-  #numbers;
+    #numbers;
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
-  }
-
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    constructor(numbers) {
+        this.#validate(numbers);
+        this.#numbers = numbers;
     }
-  }
 
-  // TODO: 추가 기능 구현
+    #validate(numbers) {
+        if (numbers.length !== 6) {
+            throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+        }
+    }
+
+    /**
+     * 로또 랜덤 번호를 생성하는 함수
+     */
+    buy(tickets) {
+        for (let i = 0; i < tickets; i++) {
+            this.#numbers = Random.pickUniqueNumbersInRange(1, 45, 6);
+            this.#numbers.sort((a, b) => a - b);
+            Console.print(this.#numbers);
+        }
+    }
 }
 
 export default Lotto;
