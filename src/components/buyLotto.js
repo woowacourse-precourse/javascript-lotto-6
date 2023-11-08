@@ -15,11 +15,10 @@ export default class BuyLotto {
     this.count = userInput / 1000;
     return userInput / 1000;
   }
-
-  async getUserNumber() {
+  async getUserNumber(TYPE) {
     const userInput = await MissionUtils.Console.readLineAsync(
-      GAME.input_number
+      TYPE === "BONUS" ? GAME.input_bonus : GAME.input_number
     );
-    return this.inputValidator.validateNumber(userInput);
+    return this.inputValidator.validateNumber(userInput, TYPE);
   }
 }
