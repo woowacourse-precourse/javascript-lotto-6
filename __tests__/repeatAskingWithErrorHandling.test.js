@@ -1,6 +1,6 @@
 import { getLogSpy, mockReadLineAsync } from './mockMissionUtils';
 import { repeatAskingWithErrorHandling } from '../src/repeatAskingWithErrorHandling';
-import { askPurchaseAmount } from '../src/askPurchaseAmount';
+import LottoPurchase from '../src/LottoPurchase';
 
 describe('repeatAskingWithErrorHandling', () => {
   test('잘못 입력할 경우 에러 메시지 출력 후, 다시 입력 받음', async () => {
@@ -10,7 +10,9 @@ describe('repeatAskingWithErrorHandling', () => {
     const logSpy = getLogSpy();
 
     // when
-    const result = await repeatAskingWithErrorHandling(askPurchaseAmount);
+    const result = await repeatAskingWithErrorHandling(
+      LottoPurchase.askPurchaseAmount
+    );
 
     // then
     expect(logSpy).toHaveBeenCalledWith(
