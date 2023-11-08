@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { purchaseSize } from "./utils/purchaseSize.js";
+import { earningRate } from "./utils/earningRate.js";
 import { RANGE } from "./constant/NUMBER.js";
 import PurchasePrice from "./PurchasePrice.js";
 
@@ -57,6 +58,13 @@ class Game {
     return this.matchingResults;
   }
 
+  getEarningRate(prize, matchingResults, purchasePrice) {
+    const earningSum = prize.reduce((sum, element, index) => {
+      return sum + element * matchingResults[index];
+    }, 0);
+
+    return earningRate(earningSum, purchasePrice);
+  }
 }
 
 export default Game;
