@@ -20,7 +20,7 @@ describe('LottoService 테스트', () => {
 
     describe('로또 구매 테스트', () => {
       test.each(cases)(
-        '$input원을 입력받으면 $expected개의 로또를 반환한다.',
+        '$input원을 입력받는 경우, $expected개의 로또를 반환한다.',
         ({ input, expected }) => {
           // when
           const result = lottoServiceInstance.sellLotto(input);
@@ -49,7 +49,7 @@ describe('LottoService 테스트', () => {
         ];
 
         test.each(errorCases)(
-          '$input원을 입력받으면 $describe, 예외처리 한다. ',
+          '$input원을 입력받는 경우, $describe 예외처리 한다. ',
           ({ input }) => {
             // when
             const sellLotto = () => lottoServiceInstance.sellLotto(input);

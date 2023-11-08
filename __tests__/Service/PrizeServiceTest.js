@@ -101,7 +101,7 @@ describe('PrizeService 클래스 테스트', () => {
     ];
 
     test.each(cases)(
-      '로또를 $purchaseQuantity개 사서, 숫자를 $status개 맞추면, 수익률이 $expectedProfitRate%?!',
+      '로또를 $purchaseQuantity개 사서, 숫자를 $status개 맞추는 경우, 수익률이 $expectedProfitRate%?!',
       ({ prizes, purchaseQuantity, expectedProfitRate }) => {
         const profitRate = prizeService.getProfitRate({
           prizes,

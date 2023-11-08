@@ -4,7 +4,7 @@ import LOTTO from '../../src/constants/lotto';
 
 describe('당첨 로또(WinningLotto) 클래스 테스트', () => {
   describe('예외가 발생하는 경우', () => {
-    describe('보너스 번호가 로또 번호의 범위를 벗어나면 예외가 발생한다.', () => {
+    describe('보너스 번호가 로또 번호의 범위를 벗어나는 경우, 예외가 발생한다.', () => {
       // given
       const errorCases = [
         { bonusNumber: -1 },
@@ -29,7 +29,7 @@ describe('당첨 로또(WinningLotto) 클래스 테스트', () => {
       );
     });
 
-    describe('보너스 번호가 로또 번호와 중복되는 경우 예외가 발생한다.', () => {
+    describe('보너스 번호가 로또 번호와 중복되는 경우, 예외가 발생한다.', () => {
       // given
       const errorCases = [
         { numbers: [1, 2, 3, 4, 5, 6], bonusNumber: 1 },

@@ -17,7 +17,7 @@ describe('로또 클래스 테스트', () => {
   });
 
   describe('로또 생성시 예외가 발생하는 경우', () => {
-    describe('로또 번호의 개수가 6개 미만인 경우 예외가 발생한다.', () => {
+    describe('로또 번호의 개수가 6개 미만인 경우, 예외가 발생한다.', () => {
       // given
       const cases = [
         { input: [] },
@@ -48,7 +48,7 @@ describe('로또 클래스 테스트', () => {
       expect(createLotto).toThrow(ERROR.message.lotto.falsy);
     });
 
-    describe('로또 번호에 범위 밖의 숫자가 포함되어 있으면 예외가 발생한다.', () => {
+    describe('로또 번호에 범위 밖의 숫자가 포함되어 있는 경우, 예외가 발생한다.', () => {
       // given
       const cases = [
         { input: [0, 1, 2, 3, 4, 5], invalidNumber: 0 },
@@ -68,7 +68,7 @@ describe('로또 클래스 테스트', () => {
       );
     });
 
-    describe('로또 번호에 정수가 아닌 값이 포함되어 있으면 예외가 발생한다.', () => {
+    describe('로또 번호에 정수가 아닌 값이 포함되어 있는 경우, 예외가 발생한다.', () => {
       // given
       const cases = [
         { input: [1, 2, 3e3, 4, 5, 6], invalidNumber: 3e3 },
