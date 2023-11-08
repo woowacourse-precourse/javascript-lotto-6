@@ -1,4 +1,20 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
+
+export async function askNumbers() {
+  const lottoNumber = await MissionUtils.Console.readLineAsync(
+    "\n당첨번호를 입력해주세요.\n",
+  );
+  const bonusNumber = await MissionUtils.Console.readLineAsync(
+    "\n보너스 번호를 입력해 주세요.\n",
+  );
+
+  return [lottoNumber, bonusNumber];
+
+  // const theLotto1 = new Lotto(lottoNumber, bonusNumber);
+
+  // return lottoNumber, bonusNumber, theLotto1;
+}
 
 export async function getPayment() {
   const payment = await MissionUtils.Console.readLineAsync(
