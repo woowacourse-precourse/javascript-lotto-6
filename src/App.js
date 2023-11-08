@@ -115,6 +115,21 @@ class App {
    * @param {number} bonusNumber
    * @return {LottoInfo} */
   getRank(lotto, winningLotto, bonusNumber) {
+    const MATCHED_COUNT = lotto.matchCount(winningLotto);
+    const BONUS_MATCHED = lotto.contains(bonusNumber);
+
+    switch (MATCHED_COUNT) {
+      case 6:
+        return LOTTO_RANK[0];
+      case 5:
+        return BONUS_MATCHED ? LOTTO_RANK[1] : LOTTO_RANK[2];
+      case 4:
+        return LOTTO_RANK[3];
+      case 3:
+        return LOTTO_RANK[4];
+      default:
+        return LOTTO_RANK[5];
+    }
   }
 
   /**
