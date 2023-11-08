@@ -38,7 +38,7 @@ class App {
   }
 
   async #makePurchaseAmount() {
-    const purchaseAmount = await this.createObj(
+    const purchaseAmount = await this.#createObj(
       magicNumber.PURCHASE_AMOUNT,
       null,
     );
@@ -55,13 +55,13 @@ class App {
   }
 
   async #makeLotto() {
-    const lotto = await this.createObj(magicNumber.LOTTO, null);
+    const lotto = await this.#createObj(magicNumber.LOTTO, null);
     const lottoNumber = lotto.getLottoNumber();
     return [lotto, lottoNumber];
   }
 
   async #makeBonus(lottoNumber) {
-    const bonus = await this.createObj(magicNumber.BONUS, lottoNumber);
+    const bonus = await this.#createObj(magicNumber.BONUS, lottoNumber);
     const bonusNumber = bonus.getBonusNumber();
     return bonusNumber;
   }
@@ -88,19 +88,19 @@ class App {
     printMethod(uiConstants.RETURN + resultNum + uiConstants.END);
   }
 
-  async createObj(type, lotto) {
+  async #createObj(type, lotto) {
     let obj = 0;
 
     try {
-      obj = await this.createType(type, lotto);
+      obj = await this.#createType(type, lotto);
     } catch (error) {
       printMethod(error.message);
-      obj = await this.createObj(type, lotto);
+      obj = await this.#createObj(type, lotto);
     }
     return obj;
   }
 
-  async createType(type, lotto) {
+  async #createType(type, lotto) {
     let obj = 0;
     switch (type) {
       case 'purchaseAmount':

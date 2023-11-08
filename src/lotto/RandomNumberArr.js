@@ -6,9 +6,10 @@ export default class RandomNumber {
   #randomNumber;
 
   constructor(cnt) {
-    this.#randomNumber = this.createRandomNumber(cnt);
+    this.#randomNumber = this.#createRandomNumber(cnt);
   }
 
+  // 랜덤 숫자들을 화면에 출력하는 메서드
   printRandomNumber() {
     this.#randomNumber.forEach((numbers, idx) => {
       const numberStr = this.#makeArrStr(numbers);
@@ -17,6 +18,7 @@ export default class RandomNumber {
     });
   }
 
+  // 배열의 형태가 아닌, 문자열의 형태로 출력하게 바꾸는 메서드
   #makeArrStr(arr) {
     const tmpArr = arr.slice();
     let tmpStr = '';
@@ -28,7 +30,7 @@ export default class RandomNumber {
     return tmpStr;
   }
 
-  createNumbers() {
+  #createNumbers() {
     const numbers = MissionUtils.Random.pickUniqueNumbersInRange(
       magicNumber.START_RANGE,
       magicNumber.END_RANGE,
@@ -37,11 +39,11 @@ export default class RandomNumber {
     return numbers.sort((a, b) => a - b);
   }
 
-  createRandomNumber(cnt) {
+  #createRandomNumber(cnt) {
     const randomNumber = [];
     let numbers = [];
     for (let idx = 0; idx < cnt; idx += 1) {
-      numbers = this.createNumbers();
+      numbers = this.#createNumbers();
       randomNumber.push(numbers);
     }
     return randomNumber;
