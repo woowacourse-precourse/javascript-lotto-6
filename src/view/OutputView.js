@@ -1,12 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-
-const hitMoney = [
-  "5,000원",
-  "50,000원",
-  "1,500,000원",
-  "30,000,000원",
-  "2,000,000,000원",
-];
+import { PRIZE_STRING } from "../constants/Constants";
 
 class OutputView {
   printPurchaseAmount(input) {
@@ -38,7 +31,7 @@ class OutputView {
   }
 
   #printWithoutBonus(key, value) {
-    Console.print(`${key}개 일치 (${hitMoney[key - 3]}) - ${value}개`);
+    Console.print(`${key}개 일치 (${PRIZE_STRING[key]}) - ${value}개`);
   }
 
   #printWithBonus(key, value) {
