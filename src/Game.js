@@ -1,17 +1,17 @@
-import InputOutput from "./InputOutput";
-import Validate from "./Validate";
-import Lotto from "./Lotto";
-import ErrorMessages from "./Error";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import InputOutput from './InputOutput';
+import Validate from './Validate';
+import Lotto from './Lotto';
+import ErrorMessages from './Error';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 class Game {
   winMessages = [
-    "",
-    "6개 일치 (2,000,000,000원) - ",
-    "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
-    "5개 일치 (1,500,000원) - ",
-    "4개 일치 (50,000원) - ",
-    "3개 일치 (5,000원) - ",
+    '',
+    '6개 일치 (2,000,000,000원) - ',
+    '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
+    '5개 일치 (1,500,000원) - ',
+    '4개 일치 (50,000원) - ',
+    '3개 일치 (5,000원) - ',
   ];
 
   winPrizes = [0, 2000000000, 30000000, 1500000, 50000, 5000, 0];
@@ -34,23 +34,23 @@ class Game {
   }
 
   getUserMoney = async () => {
-    const userInput = await InputOutput.getInput("구입금액을 입력해 주세요.");
-    if (!Validate.isNumeric(userInput)) throw new Error(ErrorMessages.invalidInput("숫자를 입력해주세요"));
-    if (!Validate.isMultipleOf1000(userInput)) throw new Error(ErrorMessages.invalidInput("돈은 천원 단위로 입력해주세요"));
+    const userInput = await InputOutput.getInput('구입금액을 입력해 주세요.');
+    if (!Validate.isNumeric(userInput)) throw new Error(ErrorMessages.invalidInput('숫자를 입력해주세요'));
+    if (!Validate.isMultipleOf1000(userInput)) throw new Error(ErrorMessages.invalidInput('돈은 천원 단위로 입력해주세요'));
     return this.calculateLottoCountFromMoney(userInput);
   };
 
   getWinningNumber = async () => {
-    const userInput = await InputOutput.getInput("당첨 번호를 입력해 주세요.");
-    const winningNumbers = userInput.split(",").map((value) => +value);
+    const userInput = await InputOutput.getInput('당첨 번호를 입력해 주세요.');
+    const winningNumbers = userInput.split(',').map((value) => +value);
     if (!Validate.isLottoNumbersFormat(winningNumbers)) throw new Error(ErrorMessages.lottoFormatError);
     return winningNumbers;
   };
 
   getBonusNumber = async (winningNumbers) => {
-    const userInput = await InputOutput.getInput("보너스 번호를 입력해 주세요.");
+    const userInput = await InputOutput.getInput('보너스 번호를 입력해 주세요.');
     const bonusNumber = +userInput;
-    if (!Validate.isNumeric(userInput)) throw new Error(ErrorMessages.invalidInput("숫자를 입력해 주세요"));
+    if (!Validate.isNumeric(userInput)) throw new Error(ErrorMessages.invalidInput('숫자를 입력해 주세요'));
     if (bonusNumber < 1 || 45 < bonusNumber) throw new Error(ErrorMessages.lottoNumberRangeError);
     if (winningNumbers.includes(bonusNumber)) throw new Error(ErrorMessages.bonusNumberError);
     return bonusNumber;
@@ -81,7 +81,6 @@ class Game {
     const rateOfReturn = Math.round((totalPrize / investedMoney) * 10000) / 100;
     InputOutput.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   }
-
 }
 
 export default Game;

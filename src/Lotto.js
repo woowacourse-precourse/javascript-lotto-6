@@ -1,6 +1,6 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
 import Validate from "./Validate.js";
 import ErrorMessages from "./Error.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Lotto {
   #numbers;
@@ -12,7 +12,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error(ErrorMessages.invalidInput("로또 번호는 6개여야 합니다."));
+      throw new Error(ErrorMessages.invalidInput('로또 번호는 6개여야 합니다.'));
     }
     if (!Validate.isLottoNumbersFormat(numbers)) {
       throw new Error(ErrorMessages.lottoFormatError);
@@ -24,14 +24,13 @@ class Lotto {
   }
 
   printLottoNumbers() {
-    const str = this.#numbers.join(", ");
+    const str = this.#numbers.join(', ');
     MissionUtils.Console.print(`[${str}]`);
   }
 
   calculateLottoRank(winningNumbers, bonusNumber) {
     const matchingCount = winningNumbers.reduce(
-      (count, number) => this.#numbers.includes(number) ? count + 1 : count,
-      0
+      (count, number) => this.#numbers.includes(number) ? count + 1 : count, 0
     );
 
     if (matchingCount === 6) return 1;

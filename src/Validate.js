@@ -8,7 +8,9 @@ class Validate {
   }
 
   static isLottoNumbersFormat(winningNumbers) {
-    if (winningNumbers.length !== 6) return false;
+    if (winningNumbers.length !== 6) {
+      return false;
+    }
     const set = new Set(winningNumbers);
     return set.size === winningNumbers.length;
   }
