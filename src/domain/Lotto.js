@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { ERROR, LOTTO } from './config.js';
-import { isPositiveInteger } from './utils.js';
+import { ERROR, LOTTO } from '../config.js';
+import { isPositiveInteger } from '../utils.js';
 
 class Lotto {
   static generateLottoNumbers() {
