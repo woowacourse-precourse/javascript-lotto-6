@@ -6,6 +6,7 @@ class App {
   async play() {
     this.#controller = new LottoController();
     await this.#controller.getPurchaseAmount();
+    this.#controller.printLottoNumbers();
   }
 }
 
