@@ -6,7 +6,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     priceInput.forEach((price) => {
       expect(() => {
-        Validator.inputPurchaseAmount(price);
+        Validator.InputPurchaseAmount(price);
       }).toThrow();
     });
   });
@@ -16,7 +16,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     priceInput.forEach((price) => {
       expect(() => {
-        Validator.inputPurchaseAmount(price);
+        Validator.InputPurchaseAmount(price);
       }).toThrow();
     });
   });
@@ -26,7 +26,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     priceInput.forEach((price) => {
       expect(() => {
-        Validator.inputPurchaseAmount(price);
+        Validator.InputPurchaseAmount(price);
       }).toThrow();
     });
   });
@@ -36,7 +36,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     winningNumberInput.forEach((numbers) => {
       expect(() => {
-        Validator.inputWinningNumber(numbers);
+        Validator.InputWinningNumber(numbers);
       }).toThrow();
     });
   });
@@ -46,7 +46,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     winningNumberInput.forEach((number) => {
       expect(() => {
-        Validator.inputWinningNumber(number);
+        Validator.InputWinningNumber(number);
       }).toThrow();
     });
   });
@@ -56,7 +56,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     winningNumberInput.forEach((number) => {
       expect(() => {
-        Validator.inputPurchaseAmount(number);
+        Validator.InputWinningNumber(number);
       }).toThrow();
     });
   });
@@ -70,7 +70,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     winningNumberInput.forEach((number) => {
       expect(() => {
-        Validator.inputWinningNumber(number);
+        Validator.InputWinningNumber(number);
       }).toThrow();
     });
   });
@@ -81,7 +81,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     bonusNumberInput.forEach((number) => {
       expect(() => {
-        Validator.inputBonusNumber(number, winningNumber);
+        Validator.InputBonusNumber(number, winningNumber);
       }).toThrow();
     });
   });
@@ -92,7 +92,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     bonusNumberInput.forEach((number) => {
       expect(() => {
-        Validator.inputBonusNumber(number, winningNumber);
+        Validator.InputBonusNumber(number, winningNumber);
       }).toThrow();
     });
   });
@@ -103,7 +103,7 @@ describe("입력값 유효성 검사 테스트", () => {
 
     bonusNumberInput.forEach((number) => {
       expect(() => {
-        Validator.inputBonusNumber(number, winningNumber);
+        Validator.InputBonusNumber(number, winningNumber);
       }).toThrow();
     });
   });
