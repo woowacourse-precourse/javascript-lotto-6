@@ -45,4 +45,22 @@ export default class Validator {
       }
     });
   }
+
+  checkIsNumberBonus(value) {
+    if (!REGEX.isNumber.test(value)) {
+      throw new Error('[ERROR] 보너스 번호는 숫자여야 합니다.');
+    }
+  }
+
+  checkIsBetween1And45(value) {
+    if (!REGEX.isBetween1And45.test(value)) {
+      throw new Error('[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.');
+    }
+  }
+
+  checkIsNotInWin(value, win) {
+    if (win.includes(value)) {
+      throw new Error('[ERROR] 보너스 번호는 당첨 번호에 없는 숫자여야 합니다.');
+    }
+  }
 }

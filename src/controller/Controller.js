@@ -24,7 +24,7 @@ export default class Controller {
 
     const win = await this.getWin();
 
-
+    const bonus = await this.getBonus(win);
   }
 
   async getMoney() {
@@ -40,7 +40,7 @@ export default class Controller {
 
     return parseInt(moneyString);
   }
-
+  
   async getWin() {
     const winString = await repeat(
       this.#view.readLine,
@@ -54,5 +54,20 @@ export default class Controller {
     );
 
     return winString.split(',');
+  }
+
+  async getBonus(win) {
+    const bonusString = await repeat(
+      this.#view.readLine,
+      INPUT_MESSAGE.bonus,
+      [
+        this.#validator.checkIsNumberBonus,
+        this.#validator.checkIsBetween1And45,
+        this.#validator.checkIsNotInWin
+      ],
+      win
+    );
+
+    return parseInt(bonusString);
   }
 }
