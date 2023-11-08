@@ -31,8 +31,20 @@ describe("로또 클래스 테스트", () => {
       [1, 2, 3, 4, 5, 8],
       [1, 2, 3, 4, 11, 10],
       [1, 2, 3, 10, 11, 12],
+      [1, 2, 10, 11, 12, 13],
+      [7, 10, 11, 12, 13, 14],
+      [10, 11, 12, 13, 14, 15],
     ];
-    const answers = ["six", "bonusFive", "five", "four", "three"];
+    const answers = [
+      "six",
+      "bonusFive",
+      "five",
+      "four",
+      "three",
+      null,
+      null,
+      null,
+    ];
 
     inputs.forEach((input, index) => {
       const result = new Lotto(input).matchResult(winning, bonus);
