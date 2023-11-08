@@ -4,8 +4,7 @@ import { PLACE } from '../constants/numbers.js';
 
 const outputView = {
   lottos(lottos) {
-    this.newLine();
-    Console.print(`${lottos.length}${OUTPUT.LOTTOS}`);
+    Console.print(`\n${lottos.length}${OUTPUT.LOTTOS}`);
     for (let i = 0; i < lottos.length; i += 1) {
       const lotto = `[${lottos[i].getLottoNumbers().join(', ')}]`;
       Console.print(lotto);
@@ -39,10 +38,6 @@ const outputView = {
     Console.print(
       `${OUTPUT.RATE_OF_RETURNS[0]}${rate}${OUTPUT.RATE_OF_RETURNS[1]}`,
     );
-  },
-
-  newLine() {
-    Console.print(OUTPUT.NEW_LINE);
   },
 
   error(error) {
