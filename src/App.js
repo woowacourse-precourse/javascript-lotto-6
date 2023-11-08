@@ -64,9 +64,7 @@ class App {
     //로또들 당첨액 출력
     const total_profit_rate = (check_winning_price() / price) * 100;
     MissionUtils.Console.print(
-      `총 수익률은 ${total_profit_rate
-        .toFixed(2)
-        .replace(/\.?0+$/, "")}%입니다.`
+      `총 수익률은 ${total_profit_rate.toFixed(1)}%입니다.`
     );
 
     function check_winning_price() {
