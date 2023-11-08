@@ -31,6 +31,12 @@ class Game {
     return lotto.filter((item) => drawingLotto.includes(item)).length;
   }
 
+  #countWinning(counts, prizeResult) {
+    if (counts >= 3 && counts <= 6) {
+      return prizeResult[counts - 3]++;
+    }
+  }
+
   #isMatchBonusBall(bonusNumber, drawingLotto) {
     return drawingLotto.includes(bonusNumber);
   }
