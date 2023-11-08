@@ -15,11 +15,11 @@ class LottoModel {
   };
 
   generateLotto(purchaseAmount) {
-    const count = PurchaseAmount.of(purchaseAmount).getLottoCount();
-    const lottos = LottoGenerator.run(count);
-    this.#userLottos = lottos;
+    const matchCount = PurchaseAmount.of(purchaseAmount).getLottoCount();
+    const userLottos = LottoGenerator.run(matchCount);
+    this.#userLottos = userLottos;
 
-    return lottos;
+    return userLottos;
   }
 
   getWinningStatistics(winningNumbers, bonus) {

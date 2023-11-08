@@ -48,14 +48,14 @@ class Lotto {
   }
 
   compareWinningNumbers(userLotto, bonus) {
-    const count = this.#calculateCount(userLotto);
+    const matchCount = this.#checkMatchCount(userLotto);
 
-    if (Lotto.#isSecond(count, bonus, userLotto)) return LOTTO.rank.bonus;
+    if (Lotto.#isSecond(matchCount, bonus, userLotto)) return LOTTO.rank.bonus;
 
-    return LOTTO.rank[count] ?? LOTTO.rank.undefined;
+    return LOTTO.rank[matchCount] ?? LOTTO.rank.undefined;
   }
 
-  #calculateCount(userLotto) {
+  #checkMatchCount(userLotto) {
     return userLotto.reduce((acc, number) => {
       if (!this.#numbers.includes(number)) return acc;
 
