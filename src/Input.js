@@ -23,22 +23,33 @@ class Input {
   }
 
   static async getWinningLottery() {
+    const winningLottery = await this.getWinningLotto();
+    const bonusNumber = await this.getBonus();
+    if (Validator.isValidBonus(bonusNumber, winningLottery))
+      return { winningLottery, bonusNumber };
+  }
+  static async getWinningLotto() {
     try {
       const inputValue = await new this().readInput(
         INPUT_QUERY_MESSAGES.winningLottery
       );
       let winningLottery = Parser.stringToArray(inputValue);
       winningLottery = winningLottery.map((num) => Parser.stringToNumber(num));
-      Validator.isValidLottery(winningLottery);
-
-      const bonusNumber = await new this().readInput(
-        INPUT_QUERY_MESSAGES.bonusNumber
-      );
-      winningLottery.push(Parser.stringToNumber(bonusNumber));
       if (Validator.isValidLottery(winningLottery)) return winningLottery;
     } catch (error) {
       console.log(error);
-      await this.getWinningLottery();
+      await this.getWinningLotto();
+    }
+  }
+  static async getBonus() {
+    try {
+      let bonusNumber = await new this().readInput(
+        INPUT_QUERY_MESSAGES.bonusNumber
+      );
+      return Parser.stringToNumber(bonusNumber);
+    } catch (error) {
+      console.log(error);
+      await this.getBonus();
     }
   }
 }

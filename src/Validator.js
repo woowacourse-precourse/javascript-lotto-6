@@ -16,6 +16,14 @@ class Validator {
     new this().#isInRange(lottery);
     return true;
   }
+  static isValidBonus(bonusNumber, winningLottery) {
+    for (const num of winningLottery) {
+      if (bonusNumber === num) {
+        throw new InputError('중복입니다.');
+      }
+    }
+    return true;
+  }
   #isInRange(arr) {
     for (const num of arr) {
       if (num < 1 || num > 45) {

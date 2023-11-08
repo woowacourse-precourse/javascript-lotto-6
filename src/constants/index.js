@@ -10,4 +10,12 @@ const ERROR_MESSAGES = {
   notANumber: '숫자가 아닙니다.',
   zero: '0은 유효한 금액이 아닙니다.',
 };
-export { MESSAGES, INPUT_QUERY_MESSAGES, ERROR_MESSAGES };
+const WINNING_PRICE = {
+  threePoint: 5000,
+  fourPoint: 50000,
+  fivePoint: 1500000,
+  fivePointAndBonus: 30000000,
+  sixPoint: 2000000000,
+};
+
+export { MESSAGES, INPUT_QUERY_MESSAGES, ERROR_MESSAGES, WINNING_PRICE };
