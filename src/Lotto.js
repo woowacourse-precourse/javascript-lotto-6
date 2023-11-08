@@ -21,8 +21,8 @@ class Lotto {
     for (let i = 0; i < amount; i++) {
       lottoNumbers.push(this.getRandomNumbers());
     }
-    const sortedLottoNumbers = lottoNumbers.map((lottoNumber) => lottoNumber.sort((a, b) => a - b));
-    return sortedLottoNumbers;
+    const sortLottoNumbers = lottoNumbers.map((lottoNumber) => lottoNumber.sort((a, b) => a - b));
+    return sortLottoNumbers;
   }
 
   printLottoNumbers(lottoNumbers) {
