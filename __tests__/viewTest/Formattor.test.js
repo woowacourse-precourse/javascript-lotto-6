@@ -237,3 +237,16 @@ describe('Formattor divideValue', () => {
       expect(Formattor.divideValue(input1, input2)).toStrictEqual(expected);
   });
 });
+
+describe('Formattor joinStrings', () => {
+  test('joinStrings Function type이다 ', () => {
+    expect(typeof (Formattor.joinStrings)).toBe('function');
+  })
+  test(`joinStrings 기능 검사, 받은 배열을 원소를 합친 문자열을 리턴한다 `, () => {
+    const input1 = "123";
+    const input2 = "456";
+    const expected = '123456';
+      expect(Formattor.joinStrings(input1, input2)).toBe(expected);
+  });
+});
+

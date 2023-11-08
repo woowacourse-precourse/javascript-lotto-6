@@ -117,6 +117,14 @@ const divideValue = (value1, value2) => {
   return (value1 / value2);
 }
 
+const joinStrings = (...strings) => {
+  if (!Array.isArray(strings)) {
+    throw new ValidationError(ERROR_CONSTANT.IS_NUT_ARRAY);
+  }
+
+  return (strings.join(''));
+}
+
 export default {
   formatStringToInteger,
   getDivisionQuotient,
@@ -128,4 +136,5 @@ export default {
   getEqulsValueCount,
   multiplyValue,
   divideValue,
+  joinStrings,
 };
