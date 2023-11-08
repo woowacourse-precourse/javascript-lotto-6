@@ -3,7 +3,7 @@ import { RANK } from '../constants/options.js';
 class Analyzer {
   #rankedLotto;
 
-  constructor(matchedNumberList) {
+  constructor() {
     this.#rankedLotto = {
       first: 0,
       second: 0,
@@ -12,23 +12,19 @@ class Analyzer {
       fifth: 0,
       losingLotto: 0,
     };
-    this.matchedNumberList = matchedNumberList;
-    this.getRankedLotto();
-    this.countWinningRank();
-    this.calculateTotalPrize();
   }
 
   getRankedLotto() {
     return this.#rankedLotto;
   }
 
-  countWinningRank() {
-    this.matchedNumberList.forEach((numbers) => {
-      this.#rankedLotto[this.checkRank(numbers[0], numbers[1])] += 1;
+  countWinningRank(matchedNumberList) {
+    matchedNumberList.forEach((numbers) => {
+      this.#rankedLotto[this.#checkRank(numbers[0], numbers[1])] += 1;
     });
   }
 
-  checkRank(winCount, bonusCount) {
+  #checkRank(winCount, bonusCount) {
     if (winCount === 6) return RANK.first[0];
     if (winCount === 5 && bonusCount) return RANK.second[0];
     if (winCount === 5) return RANK.third[0];
@@ -37,7 +33,7 @@ class Analyzer {
     return RANK.losingLotto[0];
   }
 
-  calculateTotalPrize() {
+  #calculateTotalPrize() {
     let totalPrize = 0;
     for (const rank in this.#rankedLotto) {
       totalPrize += RANK[rank][1] * this.#rankedLotto[rank];
@@ -47,7 +43,7 @@ class Analyzer {
   }
 
   calculateProfitRate() {
-    const totalPrize = this.calculateTotalPrize();
+    const totalPrize = this.#calculateTotalPrize();
     let paymentAmount = 0;
     for (const rank in this.#rankedLotto) {
       paymentAmount += this.#rankedLotto[rank];
