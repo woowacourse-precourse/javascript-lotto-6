@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-export default class Input {
+export class Input {
   static async readLineLoop(message, validation) {
     let result;
     try {
@@ -17,3 +17,5 @@ export default class Input {
     return Console.readLineAsync(message).then((input) => input.trim());
   }
 }
+
+export default Input;

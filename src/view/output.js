@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { LOTTO, OUTPUT_MESSAGE } from '../constant/index.js';
 
-export default class Output {
+export class Output {
   static purchasedLottosNumber(lottos) {
     Console.print(OUTPUT_MESSAGE.TOTAL_LOTTO_COUNT(lottos.length));
     lottos.forEach(Output.printLottoNumbers);
@@ -28,3 +28,5 @@ export default class Output {
     Console.print(OUTPUT_MESSAGE.PROFIT_RATE(rate));
   }
 }
+
+export default Output;
