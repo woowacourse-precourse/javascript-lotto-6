@@ -1,6 +1,6 @@
 import Lotto from '../src/Lotto.js';
-import Game, { RANK, REWARD } from '../src/Game.js';
-
+import Game from '../src/Game.js';
+import { RANK, REWARDS } from '../src/util/constants.js';
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
     expect(() => {
@@ -48,7 +48,7 @@ describe('로또 클래스 테스트', () => {
       { matchCount: 3, isBonusMatched: false },
     ];
 
-    const output = ['1st', '2nd', '3rd', '4th', '5th'];
+    const output = Object.values(RANK);
 
     inputs.forEach((input, index) => {
       expect(game.getRank(input)).toEqual(output[index]);
@@ -61,11 +61,11 @@ describe('로또 클래스 테스트', () => {
     const game = new Game(amount);
 
     game.drawInfo = {
-      [RANK[5]]: { count: 1, reward: REWARD[5] },
-      [RANK[4]]: { count: 1, reward: REWARD[4] },
-      [RANK[3]]: { count: 0, reward: REWARD[3] },
-      [RANK[2]]: { count: 0, reward: REWARD[2] },
-      [RANK[1]]: { count: 0, reward: REWARD[1] },
+      [RANK[5]]: { winningCount: 1, reward: REWARDS[5], matchCount: 3 },
+      [RANK[4]]: { winningCount: 1, reward: REWARDS[4], matchCount: 4 },
+      [RANK[3]]: { winningCount: 0, reward: REWARDS[3], matchCount: 5 },
+      [RANK[2]]: { winningCount: 0, reward: REWARDS[2], matchCount: 5 },
+      [RANK[1]]: { winningCount: 0, reward: REWARDS[1], matchCount: 6 },
     };
 
     const output = 55000;
