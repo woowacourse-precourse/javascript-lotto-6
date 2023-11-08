@@ -8,34 +8,20 @@ class App {
   userLotto;
   userBonus;
 
-  setRandumNum(value) {
-    let intValue = value / 1000;
-    let objArr = new Array(intValue);
-    for(let i = 0; i < intValue; i++) {
-      let arr = MissionUtils.Random.pickUniqueNumbersInRange(1,45,6);
-      objArr.push(arr);
-    }
-    return this.printRandumNum(objArr,intValue,value);
-  }
+  
 
-  printRandumNum(arr,value,returnvalue) {
-    MissionUtils.Consol.print(
-      `${value}개를 구매했습니다.
-      ${arr}`
-    );
-    return returnvalue;
-  }
+  
 
-  constructor() {
-    let money = new Money();
-    this.userMoney = money.getMoney(this.setRandumNum);
-  }
+  constructor() {}
 
   async play() {
-    let lotto = new Lotto();
-    let bonus = new Bonus();
+    
+    let money = new Money();
+    this.userMoney = money.inputMoney(this.setRandumNum);
 
-    this.userLotto = lotto.getNumbers();
+    let lotto = new Lotto();
+
+    //this.userLotto = lotto.getNumbers();
 
   }
 }

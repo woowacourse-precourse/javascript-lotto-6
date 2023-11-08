@@ -5,7 +5,7 @@ class Lotto {
 
   constructor(numbers) {
     
-    this.#numbers = this.getNumbers();
+    //this.#numbers = this.getNumbers();
   }
 
   async getNumbers (callback) {

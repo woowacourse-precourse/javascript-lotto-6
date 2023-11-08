@@ -4,7 +4,7 @@ class Bonus {
   #bonus;
 
   constructor(numbers) {
-    this.#bonus = this.getBonus();
+    //this.#bonus = this.getBonus();
   }
 
   async getBonus () {
