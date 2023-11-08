@@ -1,5 +1,3 @@
-// BonusNumberValidator.js
-
 import { ERROR, LOTTO } from '../common/constants.js';
 import { isElementInTarget, isInRange, isNumeric } from '../common/validator.js';
 
