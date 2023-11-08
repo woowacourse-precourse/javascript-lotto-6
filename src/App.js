@@ -1,6 +1,6 @@
 import { Random, Console } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
-import { LOTTO_PRIZE, REWARD_INFOS } from './constants.js';
+import { REWARD_INFOS } from './constants.js';
 import ReadInput from './ReadInput.js';
 import LottoMachine from './LottoMachine.js';
 

@@ -1,8 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from '../src/Lotto.js';
 import { REWARD_INFOS } from '../src/constants.js';
-import Validator from '../src/Vaildator.js';
-import App from '../src/App.js';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
