@@ -5,7 +5,9 @@ import Vendor from './Vendor.js';
 
 class App {
   async play() {
-    const paid = await Vendor.buyTickets();
+    const vendor = new Vendor();
+    const paid = await vendor.recieveMoney();
+    const tickets = vendor.issueTickets(paid);
     const winningNumbers = await Host.getWinningNumbers();
     const lotto = new Lotto(winningNumbers);
     const bonusNumber = await Host.getBonusNumber(winningNumbers);
