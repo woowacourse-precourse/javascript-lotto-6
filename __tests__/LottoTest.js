@@ -25,4 +25,17 @@ describe("로또 클래스 테스트", () => {
     const expected = [1, 2, 3, 4, 5, 6];
     expect(result).toEqual(expected);
   });
+
+  test("구입한 로또 갯수만큼 로또를 생성 한다.", () => {
+    // given
+    const lottoQuantity = 4;
+
+    // when
+    const lottos = Lotto.generateLottos(lottoQuantity);
+
+    // then
+    lottos.forEach((lotto) => {
+      expect(lotto).toBeInstanceOf(Lotto);
+    });
+  });
 });
