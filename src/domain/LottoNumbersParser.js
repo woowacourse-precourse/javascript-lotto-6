@@ -8,6 +8,10 @@ const LottoNumbersParser = {
     return this.parseInts(splittedInput);
   },
 
+  parseSingle(input) {
+    return this.parse(input)[0];
+  },
+
   splitByComma(value) {
     return value.split(",");
   },
