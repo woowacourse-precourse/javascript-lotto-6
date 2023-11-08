@@ -51,6 +51,18 @@ class User {
       .map(Number);
     return winningNumbersArray;
   }
+
+  async setBonusNumber() {
+    const bonusNumberString = await inputView.inputBonusNumber();
+
+    if (!validator.isNumericString(bonusNumberString)) {
+      throw new Error(ERROR_MESSAGE.NAN);
+    }
+
+    const bonusNumber = Number(bonusNumberString);
+
+    return bonusNumber;
+  }
 };
 
 export default User;

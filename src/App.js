@@ -1,5 +1,6 @@
 import Lotto from './Lotto';
 import User from './User';
+import BonusNumber from './BonusNumber';
 import outputView from './views/outputView';
 
 class App {
@@ -13,6 +14,7 @@ class App {
     await this.getPurchaseAmount();
     this.buyLottos();
     await this.getWinningNumbers();
+    await this.getBonusNumber();
   }
 
   async getPurchaseAmount() {
@@ -29,6 +31,11 @@ class App {
   async getWinningNumbers() {
     const winningNumbersArray = await this.#player.setWinningNumbers();
     this.#winningNumbers = new Lotto(winningNumbersArray);
+  }
+
+  async getBonusNumber() {
+    const bonusNumberInput = await this.#player.setBonusNumber();
+    this.#bonusNumber = new BonusNumber(bonusNumberInput, this.#winningNumbers);
   }
 };
 

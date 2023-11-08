@@ -44,6 +44,10 @@ class Lotto {
 
     return result;
   }
+
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
