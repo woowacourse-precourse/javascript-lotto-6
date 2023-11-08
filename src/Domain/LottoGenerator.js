@@ -1,11 +1,9 @@
-import Lotto from "../Lotto";
-import getRandomNumber from "../Utils/getRandomNumber";
-import { LOTTO_INFO } from "../Utils/constants";
-import LottoValidator from "../Validator/lottoValidator";
+import Lotto from '../Lotto';
+import getRandomNumber from '../Utils/getRandomNumber';
+import { LOTTO_INFO } from '../Utils/constants';
+import LottoValidator from '../Validator/lottoValidator';
 
 class LottoGenerator {
-  
-
   constructor(purcaseAmount) {
     this.#validate(purcaseAmount);
     this.#generateLotto(purcaseAmount);
@@ -26,6 +24,5 @@ class LottoGenerator {
       this.purchasedList.push(numbers);
     });
   }
-
 }
 export default LottoGenerator;

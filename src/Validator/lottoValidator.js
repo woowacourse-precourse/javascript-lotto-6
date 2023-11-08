@@ -21,7 +21,7 @@ const validatePurchaseAmount = purchaseAmount => {
     throw new Error(ERROR_MESSAGE.INVALID_PURCHASE_UNIT);
   }
   if (
-    purchaseAmount < LOTTO_INFO.MIN_LOTTO_MONEY
+    purchaseAmount < LOTTO_INFO.MIN_LOTTO_MONEY 
     || LOTTO_INFO.MAX_LOTTO_MONEY < purchaseAmount
   ) {
     throw new Error(ERROR_MESSAGE.INVALID_PURCHASE_RANGE);
