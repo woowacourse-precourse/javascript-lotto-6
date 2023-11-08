@@ -1,5 +1,4 @@
-import { Random, Console } from '@woowacourse/mission-utils';
-
+import { Console } from '@woowacourse/mission-utils';
 class Input {
   constructor() {
     this.lottoNumbers = [];
@@ -21,7 +20,7 @@ class Input {
       return input;
     } catch (error) {
       Console.print(error.message);
-      return this.userPurchase(); // 재귀 호출
+      return this.userPurchase();
     }
   }
 
@@ -38,7 +37,7 @@ class Input {
       return this.lottoNumbers;
     } catch (error) {
       Console.print(error.message);
-      return this.userNumber(); // 재귀 호출
+      return this.userNumber();
     }
   }
 
@@ -58,7 +57,7 @@ class Input {
       return bonusNumber;
     } catch (error) {
       Console.print(error.message);
-      return this.userBonusNumber(); // 재귀 호출
+      return this.userBonusNumber();
     }
   }
 

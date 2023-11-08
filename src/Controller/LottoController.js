@@ -1,7 +1,6 @@
-import { Random, Console } from '@woowacourse/mission-utils';
-import Lotto from './Lotto.js';
-import Input from './UserInput.js';
-import Output from './ComputerOutput.js';
+import { Console } from '@woowacourse/mission-utils';
+import Input from '../View/UserInput.js';
+import Output from '../View/ComputerOutput.js';
 
 class Controller {
   constructor() {
@@ -9,7 +8,6 @@ class Controller {
     this.lottoNumbers = [];
     this.lottoBonusNumber = [];
     this.lottoTickets = [];
-
   }
 
   async gameStart() {
@@ -21,12 +19,7 @@ class Controller {
     this.gameResult();
   }
 
-  async gameResult() {
-    // Console.print(`\n구입금액을 입력해 주세요.\n${this.purchaseAmount}`);
-    // this.lottoTickets = Output.ticketPrint(this.purchaseAmount);
-    // Console.print(`\n당첨 번호를 입력해 주세요.\n${this.lottoNumbers}`);
-    // Console.print(`\n보너스 번호를 입력해 주세요.\n${this.lottoBonusNumber}`);
-
+  gameResult() {
     const matchingCounts = Output.compareTickets(this.lottoTickets, this.lottoNumbers, this.lottoBonusNumber);
 
     Console.print('\n당첨 통계');
@@ -34,9 +27,7 @@ class Controller {
 
     const totalPrize = Output.calculatePrizes(matchingCounts);
     Output.calculateEarnings(totalPrize, this.purchaseAmount);
-
   }
-
 }
 
 export default Controller;

@@ -1,7 +1,5 @@
-import { Random, Console } from '@woowacourse/mission-utils';
-import Input from './UserInput.js';
-import Lotto from './Lotto.js';
-
+import { Console } from '@woowacourse/mission-utils';
+import Lotto from '../Lotto.js';
 class Output {
 
   static ticketPrint(purchaseAmount) {
