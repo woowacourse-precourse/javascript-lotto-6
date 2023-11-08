@@ -9,9 +9,10 @@ class App {
     const customer = new Customer(lottoPrice);
 
     const lottoCount = customer.getLottoCount();
-    OutputView.printLottoCount(lottoCount);
     const lottoNumbers = LottoGameController.generateCustomerNumbers(lottoCount);
     customer.setLottoNumbers(lottoNumbers);
+    OutputView.printLottoCount(lottoCount);
+    OutputView.printLottoNumbers(customer.getLottoNumbers());
   }
 }
 

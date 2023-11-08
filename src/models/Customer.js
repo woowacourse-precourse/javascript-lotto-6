@@ -32,6 +32,10 @@ class Customer {
   setLottoNumbers(lottoNumbers) {
     this.#lottoNumbers = lottoNumbers;
   }
+
+  getLottoNumbers() {
+    return this.#lottoNumbers;
+  }
 }
 
 export default Customer;
