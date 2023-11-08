@@ -40,6 +40,7 @@ const pattern = {
   prefix: '[ERROR]',
   notNumber: /[^1-9]/,
   notMoney: /[^0-9]/,
+  zeroCheck: /^(0+)$|^0.*0$/,
 };
 
 const REQUEST = {
@@ -57,6 +58,7 @@ const NOTICE = {
 
 const ERROR = {
   TYPE_CHECK: `${pattern.prefix} 정확한 값이 아닙니다.`,
+  MINIMUN_INPUT: `${pattern.prefix} 최소한 1000원 이상은 입력해주세요.`,
   AMOUNT_CHECK: `${pattern.prefix} 금액은 ${NUMBER.DEFAULT}원 단위로 입력해주세요.`,
   INVALID_ARRAY: `${pattern.prefix} ${NUMBER.LOTTO_LENGTH}개의 숫자를 쉼표(,)로 구분하여 입력해주세요.`,
   DUPLICATE: `${pattern.prefix} 서로 다른 숫자를 입력해주세요.`,

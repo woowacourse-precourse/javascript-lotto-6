@@ -29,4 +29,8 @@ describe('유효성 검사 테스트', () => {
   test.each([undefined, null, '1000won'])('입력금액이 숫자 이외에 입력이 들어오면 예외가 발생한다.', (input) => {
     expect(() => validate.money(input)).toThrowError(ERROR.TYPE_CHECK);
   });
+
+  test.each(['0', '000', '009000'])('입력금액이 0으로 시작되거나 끝나면 예외가 발생한다.', (input) => {
+    expect(() => validate.money(input)).toThrowError(ERROR.MINIMUN_INPUT);
+  });
 });

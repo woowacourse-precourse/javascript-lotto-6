@@ -3,6 +3,9 @@ import { ERROR, pattern, NUMBER } from '../constants.js';
 const validate = {
   money(inputNumber) {
     if (!inputNumber) throw new Error(ERROR.TYPE_CHECK);
+
+    if (pattern.zeroCheck.test(inputNumber)) throw new Error(ERROR.MINIMUN_INPUT);
+
     if (pattern.notMoney.test(inputNumber)) throw new Error(ERROR.TYPE_CHECK);
     if (inputNumber % NUMBER.DEFAULT_WON !== NUMBER.DEFAULT) throw new Error(ERROR.AMOUNT_CHECK);
 
