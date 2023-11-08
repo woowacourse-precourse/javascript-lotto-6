@@ -1,5 +1,5 @@
 class Margin {
-    calculateLottoMargin(result) {
+    calculateLottoMargin(result, investment) {
         const prizeMapping = {
             '1st': '6개 일치 (2,000,000,000원)',
             '2nd': '5개 일치, 보너스 볼 일치 (30,000,000원)',

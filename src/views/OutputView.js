@@ -18,6 +18,10 @@ class OutputView {
         MissionUtils.Console.print("---");
         MissionUtils.Console.print(printMargin);
     }
+
+    printPrize(totalPrize) {
+        MissionUtils.Console.print(`총 수익률은 ${totalPrize}%입니다.`);
+    }
 }
 
 export default OutputView;

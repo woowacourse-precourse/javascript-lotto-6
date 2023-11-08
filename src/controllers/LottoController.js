@@ -6,6 +6,7 @@ import Lotto from "../Lotto";
 import Score from "../models/Score";
 import Margin from "../models/Margin";
 import BonusValidation from "../validation/bonusValidation";
+import ProfitCalculator from "../models/ProfitCalculator";
 
 class LottoController {    
     budget = 0;
@@ -14,6 +15,7 @@ class LottoController {
     winningNum = [];
     bonusNum;
     result;
+    totalPrize;
 
     async getInputBudget() {
         //사용자에게 로또 구매 금액을 입력받음
@@ -106,6 +108,14 @@ class LottoController {
         print.printMargin(printMargin);
     }
 
+    printTotalPrize() {
+        const calculate = new ProfitCalculator(this.result, this.budget);
+        const profitRate = calculate.getProfitRate();
+        console.log(profitRate)
+        const print = new OutputView();
+        print.printPrize(profitRate);
+    }
+
     async start() {
         await this.getInputBudget();
         this.purchaseLottoTickets();
@@ -114,6 +124,7 @@ class LottoController {
         await this.getBonusNumber();
         this.calculateScore();
         this.printScore();
+        this.printTotalPrize();
     }
 }
 
