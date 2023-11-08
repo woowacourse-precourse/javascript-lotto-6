@@ -48,6 +48,3 @@ class LottoGenerator {
 }
 
 export default LottoGenerator;
-
-// const lottoGenerator = new LottoGenerator(5000);
-// console.log(lottoGenerator.generateLotto());

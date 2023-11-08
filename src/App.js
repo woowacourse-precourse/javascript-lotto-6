@@ -8,13 +8,13 @@ import Lotto from './Lotto.js';
 class App {
   #lottoAmount;
   #lottoGenerator;
-  #lottoNumbers;
+  #lotto;
   #bonusNumber;
 
   constructor() {
     this.#lottoAmount = null;
     this.#lottoGenerator = null;
-    this.#lottoNumbers = null;
+    this.#lotto = null;
     this.#bonusNumber = null;
   }
 
@@ -35,7 +35,7 @@ class App {
   async #drawWinningNumber() {
     const winningNumbers = await getWinningNumbers();
 
-    this.#lottoNumbers = new Lotto(winningNumbers);
+    this.#lotto = new Lotto(winningNumbers);
 
     this.#drawBonuseNumber();
   }
@@ -51,8 +51,8 @@ class App {
   #displayWinningStatistics() {
     display.winningStatisticsInfo({
       lottoGenerator: this.#lottoGenerator,
-      lotto: this.#lottoNumbers,
-      bonus: this.#bonusNumber,
+      lottoNumbers: this.#lotto.getNumbers(),
+      bonusNumber: this.#bonusNumber,
     });
   }
 

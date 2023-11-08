@@ -7,8 +7,12 @@ const display = {
     info.printInfoMessage();
   },
 
-  winningStatisticsInfo: ({ lottoGenerator, lotto, bonus }) => {
-    const info = new WinningStatisticsInfo({ lottoGenerator, lotto, bonus });
+  winningStatisticsInfo: ({ lottoGenerator, lottoNumbers, bonusNumber }) => {
+    const info = new WinningStatisticsInfo({
+      lottoGenerator,
+      lottoNumbers,
+      bonusNumber,
+    });
     info.printInfoMessage();
   },
 };
