@@ -54,7 +54,7 @@ class App {
 
     await this.retryUntilSuccess(async () => {
       this.winningNumbers = this.convertToArr(
-        await this.lottoResultChecker.inputWinningLottoNum()
+        await this.inputWinningLottoNum()
       );
       new Lotto(this.winningNumbers);
     });
@@ -107,6 +107,9 @@ class App {
     ) {
       throw new Error("[ERROR] 구입금액을 올바르게 입력해 주세요.");
     }
+  }
+  async inputWinningLottoNum() {
+    return await Console.readLineAsync("당첨 번호를 입력해 주세요.\n");
   }
   convertToArr(inputNum) {
     return inputNum.split(",").map((element) => Number(element));
