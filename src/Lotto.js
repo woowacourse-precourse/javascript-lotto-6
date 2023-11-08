@@ -30,14 +30,14 @@ class Lotto {
         const winningNumArr = winningNumber.split(",").map((el) => Number(el));
         const bonusNumbertoNumber = Number(bonusNumber);
         const winningMatches = winningNumArr.filter((el) =>
-            this.#numbers.includes(el)
-        ).length;
-        if (this.#numbers.includes(bonusNumbertoNumber)) {
-            winningMatches += "bonus";
-        }
-        if (winningMatches > 2 || winningMatches === "5bonus") {
-            lottoResult.push(winningMatches);
-        }
+            this.#numbers.includes(el)).length;
+        if (
+            winningMatches === 5 &&
+            this.#numbers.includes(bonusNumbertoNumber)
+        ) {
+            lottoResult.push("5bonus");}
+        if (winningMatches > 2) {
+            lottoResult.push(winningMatches);}
         return lottoResult;
     }
 }
