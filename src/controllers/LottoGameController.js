@@ -8,16 +8,18 @@ import Lotto from '../models/Lotto.js';
 class LottoGameController {
   async startLottoGame() {
     const lottoList = await this.#getLotto();
+    // OutputView.outputLottoPurchaseAmount(lottoList);
   }
 
   async #getInputPrice() {
-    const price = await InputView.inputPrice();
-    try {
-      InputValidator.validateInputPrice(price);
-      return price;
-    } catch (error) {
-      OutputView.outputMessage(error.message);
-      this.#getInputPrice();
+    while (true) {
+      const price = await InputView.inputPrice();
+      try {
+        InputValidator.validateInputPrice(price);
+        return price;
+      } catch (error) {
+        OutputView.outputMessage(error.message);
+      }
     }
   }
 
@@ -28,9 +30,9 @@ class LottoGameController {
   }
 
   #generateLotto(amount) {
-    const lotto = [];
+    const lottoList = [];
     for (let i = 0; i < amount; i += 1) {
-      lotto.push(
+      lottoList.push(
         new Lotto(
           Random.pickUniqueNumbersInRange(
             LOTTO_SETTING.minNumber,
@@ -40,7 +42,7 @@ class LottoGameController {
         ),
       );
     }
-    return lotto;
+    return lottoList;
   }
 }
 
