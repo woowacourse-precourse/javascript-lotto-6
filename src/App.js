@@ -1,5 +1,9 @@
+import LottoGame from './controller/LottoGame';
+
 class App {
-  async play() {}
+  async play() {
+    await new LottoGame().start();
+  }
 }
 
 export default App;
