@@ -1,17 +1,17 @@
 import { Random } from "@woowacourse/mission-utils";
+import Validation from "./Validation";
 
 class Lotto {
   /**@type {number[]} */
   #numbers;
 
-  /**@constructor
+  /**
+   * @constructor
    * @param {number[]} numbers
    */
 
   constructor(numbers) {
-    console.log(
-      Random.pickUniqueNumbersInRange(...[1, 45], 6).sort((a, b) => a - b)
-    );
+    Validation.validateLottoNumbers(number);
     this.#numbers = numbers;
   }
 
@@ -20,7 +20,7 @@ class Lotto {
    * @returns {number[]}
    */
   static pickRandomNumbers() {
-    return Random.pickUniqueNumbersInRange(...[1, 45], 6,).sort((a, b) => a - b);
+    return Random.pickUniqueNumbersInRange(...[1, 45], 6).sort((a, b) => a - b);
   }
 }
 
