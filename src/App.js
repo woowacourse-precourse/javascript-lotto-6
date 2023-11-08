@@ -13,7 +13,17 @@ class App {
     const purchaseAmount = await MissionUtils.Console.readLineAsync(
       "구입금액을 입력해 주세요.\n"
     );
-    MissionUtils.Console.print("");
+    //MissionUtils.Console.print("");
+    return this.isValidPurhcaseAmount(purchaseAmount);
+  }
+  isValidPurhcaseAmount(purchaseAmount) {
+    if (isNaN(purchaseAmount) || parseInt(purchaseAmount) < 0) {
+      MissionUtils.Console.print(
+        new Error("[ERROR] 구입 금액은 0보다 크거나 같은 숫자여야 합니다.")
+          .message
+      );
+      return this.getPurchaseAmount();
+    }
     return parseInt(purchaseAmount);
   }
   makeLottos(purchaseAmount) {
