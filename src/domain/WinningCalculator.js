@@ -1,3 +1,4 @@
+import Utils from '../service/Utils.js';
 import {
   NUMBER_OPTIONS,
   STATISTICS_STANDARD,
@@ -7,15 +8,16 @@ import {
 class WinningCalculator {
   #totalWinningNumbers;
 
-  #issuedLottoNumbers;
+  #issuedLotto;
 
   profit;
 
-  constructor(totalWinningNumbers, issuedLottoNumbers) {
+  constructor(totalWinningNumbers, issuedLotto) {
     this.#totalWinningNumbers = totalWinningNumbers;
-    this.#issuedLottoNumbers = issuedLottoNumbers;
+    this.#issuedLotto = issuedLotto;
     this.standard = STATISTICS_STANDARD;
     this.winnerList = new Map();
+    this.profit = null;
     this.#analyzeWinner();
     this.#calculateProfit();
   }
@@ -26,7 +28,7 @@ class WinningCalculator {
     );
     const bonusNumber = this.#totalWinningNumbers.get(NUMBER_OPTIONS.bonusName);
 
-    this.#issuedLottoNumbers.forEach((lotto) => {
+    this.#issuedLotto.forEach((lotto) => {
       const matchCount = this.calculateMatchNumbers(winningNumbers, lotto);
       const isWinningBonus = this.isMatchBonusNumber(bonusNumber, lotto);
 
@@ -67,8 +69,7 @@ class WinningCalculator {
   }
 
   #calculateProfit() {
-    const totalCost =
-      this.#issuedLottoNumbers.length * PURCHASE_OPTIONS.unitPrice;
+    const totalCost = this.#issuedLotto.length * PURCHASE_OPTIONS.unitPrice;
 
     const userPrize = [];
     this.winnerList.forEach((count, match) => {
@@ -79,7 +80,8 @@ class WinningCalculator {
       (accPrize, targetPrize) => accPrize + targetPrize,
     );
 
-    return totalPrize / totalCost;
+    const profit = Utils.convertPercentNumber(totalPrize, totalCost);
+    this.profit = profit;
   }
 }
 

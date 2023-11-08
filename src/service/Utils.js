@@ -14,6 +14,12 @@ class Utils {
     return convertNumbers;
   }
 
+  static convertPercentNumber(numerator, denominator) {
+    const targetNumber = (numerator / denominator) * 1000;
+    const roundNumber = Math.round(targetNumber);
+    return roundNumber / 10;
+  }
+
   static informUser(informations) {
     Console.print(informations);
   }
