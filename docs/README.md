@@ -28,9 +28,9 @@
   4개를 구매했습니다.
   ```
 
-  - [ ] 구매한 로또 번호 출력
-    - [ ] 1개의 로또 발행 마다 1-45 사이 중복 없는 랜덤 6개의 숫자 뽑기
-    - [ ] 로또의 각 번호는 오름차순 정렬
+  - [x] 구매한 로또 번호 출력
+    - [x] 1개의 로또 발행 마다 1-45 사이 중복 없는 랜덤 6개의 숫자 뽑기
+    - [x] 로또의 각 번호는 오름차순 정렬
 
   ```
   [8, 21, 23, 41, 42, 43]
@@ -146,7 +146,7 @@
   - `__tests__/LottoTest.js` 를 참고하여 학습한 후 테스트 구현
   - 도메인 로직에 단위 테스트 구현
   - 단, UI(`Console.readLineAsync`, `Console.print`) 로직에 대한 단위 테스트는 제외
-- [ ] `@woowacourse/mission-utils`의 `Random` `Console` API를 사용해서 구현
-  - 랜덤 값 추출을 위해 `Random.pickNumberInRange()` 활용
+- [x] `@woowacourse/mission-utils`의 `Random` `Console` API를 사용해서 구현
+  - 랜덤 값 추출을 위해 `Random.pickUniqueNumbersInRange()` 활용
   - 사용자 값 입력을 위해 `Console.readLineAsync` 활용
   - 출력을 위해 `Console.print` 활용

@@ -1,7 +1,8 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import Validator from '../utils/validation.js';
+import MakeLottoModel from '../model/MakeLottoModel.js';
 import UserInputView from '../view/UserInputView.js';
-import { MESSAGE, OPTIONS } from '../constants/Constants.js';
+import UserOutputView from '../view/UserOutputView.js';
+import { OPTIONS } from '../constants/Constants.js';
 
 class GameController {
   #purchasePrice = 0;
@@ -14,19 +15,25 @@ class GameController {
       Validator.purchasePrice(price);
       this.#purchasePrice = price;
     } catch (error) {
-      MissionUtils.Console.print(error.message);
+      UserOutputView.printError(error);
       await this.inputPurchasePrice();
     }
   }
 
   calculateTicketCount() {
     this.#ticketCount = this.#purchasePrice / OPTIONS.priceUnit;
-    MissionUtils.Console.print(`${this.#ticketCount}${MESSAGE.purchaseAmount}`);
+    UserOutputView.printTicketCount(this.#ticketCount);
+  }
+
+  makeAndPrintLottos() {
+    const lottos = MakeLottoModel.buyLottos(this.#ticketCount);
+    UserOutputView.printLotto(lottos);
   }
 
   async startGame() {
     await this.inputPurchasePrice();
     this.calculateTicketCount();
+    this.makeAndPrintLottos();
   }
 }
 
