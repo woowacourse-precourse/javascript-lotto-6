@@ -42,6 +42,36 @@ class App {
     return bonusNumber;
   }
 
+  // 로또 하나에 대한 결과(등수) 계산
+
+    // 일치하는 번호 개수
+  countMatchingNumbers(lotto, winningNumbers) {
+    let count = 0;
+    lotto.forEach((number) => {
+      if (winningNumbers.includes(number)) {
+        count++;
+      }
+    });
+    return count;
+  }
+    // 등수 계산
+  computeRank(lotto, winningNumbers, bonusNumber) {
+    const count = this.countMatchingNumbers(lotto, winningNumbers);
+    switch (count) {
+      case 6:
+        return "1등";
+      case 5:
+        if (winningNumbers.includes(bonusNumber)) {
+          return "2등";
+        } else return "3등";
+      case 4:
+        return "4등";
+      case 3:
+        return "5등";
+      default:
+        return "꽝";
+    }
+  }
   }
 }
 
