@@ -5,12 +5,12 @@
  * @returns {string} 변환된 퍼센트입니다.
  */
 const formatPercentage = (value, decimalPoint) => {
-  const formattedNumber = value.toFixed(decimalPoint);
+  const formattedNumber = value.toLocaleString(undefined, {
+    minimumFractionDigits: decimalPoint,
+    maximumFractionDigits: decimalPoint,
+  });
 
-  const parts = formattedNumber.toString().split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  return `${parts.join('.')}%`;
+  return `${formattedNumber}%`;
 };
 
 export default formatPercentage;
