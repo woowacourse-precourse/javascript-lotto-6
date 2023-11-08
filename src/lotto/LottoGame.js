@@ -20,6 +20,8 @@ class LottoGame {
 
   async playLottoGame() {
     await this.buyAndIssueLottos();
+    
+    await this.lottoGameHost.setLottoWinningNumbers();
   }
 }
 
