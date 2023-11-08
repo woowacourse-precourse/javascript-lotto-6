@@ -56,9 +56,19 @@ class Machine {
   }
 
   CalculatorOfLottoAmount(money) {
+    this.validateMoneyInput(money);
     const amount = Math.floor(money / 1000);
     Console.print(`${amount}개를 구매했습니다.`);
     return amount;
+  }
+
+  validateMoneyInput(money) {
+    if (money <= 0) {
+      throw new Error('금액은 양수여야 합니다.');
+    }
+    if (money % 1000 !== 0) {
+      throw new Error('금액은 1000의 배수여야 합니다.');
+    }
   }
 }
 
