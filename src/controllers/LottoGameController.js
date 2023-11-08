@@ -15,8 +15,8 @@ class LottoGameController {
     const winningNumber = await this.#setWinningNumber();
     await this.#setBonusNumber(winningNumber);
 
-    const lottoGameResult = this.#createLotteryResult(lottoList, winningNumber);
-    console.log(lottoGameResult.getResult());
+    const lottoWinningResult = this.#createLotteryResult(lottoList, winningNumber);
+    OutputView.outputLottoGameResult(lottoWinningResult.getResult());
   }
 
   async #getLotto() {
