@@ -8,6 +8,8 @@ class App {
 
     const lottoAry = game.createAndPrintLottoTickets(lottoCnt);
 
+    const winningNumbers = await game.getInputLoop(game.getWinningNumber);
+
 
   }
 }
