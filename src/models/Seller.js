@@ -1,7 +1,6 @@
 import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 import LottoMachine from './LottoMachine.js';
-import Lotto from '../Lotto.js';
 
 class Seller {
   #lottoMachine;
@@ -17,8 +16,8 @@ class Seller {
 
   setAmount(money) {
     const amount = money / 1000;
-    OutputView.printAmount(amount, this.makeLotto);
-    return amount;
+    OutputView.printAmount(amount);
+    this.setLottoTicket(amount);
   }
 
   setLottoTicket(amount) {

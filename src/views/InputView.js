@@ -14,7 +14,8 @@ const InputView = {
     const winningInput = await Console.readLineAsync(
       '\n당첨 번호를 입력해 주세요.\n',
     );
-    const winningNumber = winningInput.split(',').map(Number);
+    const winningArray = winningInput.split(',');
+    const winningNumber = winningArray.map((number) => parseInt(number, 10));
     return winningNumber;
   },
   async InputBonusNumber() {
