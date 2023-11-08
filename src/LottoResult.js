@@ -40,7 +40,7 @@ class LottoResult {
 
   getEarningRate(previousMoney){
     const rate = (this.earningMoney / previousMoney) * 100;
-    return rate.toFixed(1);
+    return Number(rate.toFixed(1));
   }
 }
 
