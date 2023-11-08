@@ -12,6 +12,9 @@ class WinningCondition {
 	}
 
 	checkWin(correctCnt, bonusCnt) {
+		if (this.#bonusCnt === 0) {
+			return correctCnt === this.#correctCnt;
+		}
 		return correctCnt === this.#correctCnt && bonusCnt === this.#bonusCnt;
 	}
 
