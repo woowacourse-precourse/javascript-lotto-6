@@ -6,6 +6,13 @@ export const RANGE = {
   SIZE: 6,
 };
 
+export const BONUS = {
+  SIZE: 1,
+  CONDITION: 5,
+};
+
+export const MIN_MATCHING = 3;
+
 export const PRIZE = [5000, 50000, 1500000, 2000000000, 30000000];
 
 export const INITIAL = 0;
