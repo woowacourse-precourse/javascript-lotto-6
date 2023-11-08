@@ -24,21 +24,23 @@ class LottoGenerator {
     }
   }
 
-  #getLottoNumber() {
+  getLottoNumber() {
     while (this.#numbers.length !== 6) {
       this.#addBall();
     }
+    const lottoNumber = this.#numbers;
+    this.#numbers = [];
+    return lottoNumber;
   }
 
-  getMultipleLotto(lottoCount) {
-    const lottoNumbers = [];
-    for (let i = 0; i < lottoCount; i++){
-      this.#getLottoNumber();
-      lottoNumbers.push(this.#numbers.sort((a, b) => a - b, 0));
-      this.#numbers = [];
-    }
-    return lottoNumbers;
-  }
+  // getMultipleLotto(lottoCount) {
+  //   for (let i = 0; i < lottoCount; i++){
+  //     this.#getLottoNumber();
+  //     lottoNumbers.push(this.#numbers.sort((a, b) => a - b, 0));
+  //     this.#numbers = [];
+  //   }
+  //   return lottoNumbers;
+  // }
 }
 
 export default LottoGenerator;
