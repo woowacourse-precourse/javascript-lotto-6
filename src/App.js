@@ -1,4 +1,4 @@
-import InputAmount from "./Input/InputAmount.js";
+import InputAmount from "./input/InputAmount.js";
 import InputBonusNumber from "./input/InputBonusNumber.js";
 import InputWinningNumber from "./input/InputWinningNumber.js";
 import RandomNumber from "./RandomNumber.js";
