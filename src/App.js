@@ -1,4 +1,3 @@
-import {MissionUtils} from "@woowacourse/mission-utils";
 import InputHandler from "./InputHandler.js";
 import OutputHandler from "./OutputHandler.js";
 import LottoPurchase from "./LottoPurchase.js";
