@@ -9,7 +9,7 @@ class OutputView {
     });
   }
 
-  printresult(winnerList) {
+  printResult(winnerList) {
     Console.print(MESSAGE.result);
     Console.print(MESSAGE.commandLine);
     Console.print(
@@ -19,10 +19,6 @@ ${MESSAGE.matchFive} - ${winnerList.third}개
 ${MESSAGE.matchfiveAndBonus} - ${winnerList.second}개
 ${MESSAGE.matchsix} - ${winnerList.first}개`,
     );
-  }
-
-  printRateOfReturn(rateOfReturn) {
-    Console.print(`총 수익률은 ${rateOfReturn}%입니다.`);
   }
 }
 export default OutputView;
