@@ -2,7 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils'
 
 const InputView = {
     async getMoney(){
-        const input = await MissionUtils.Console.readLineAsync('구입금액을 입력해주세요.\n')
+        const input = await MissionUtils.Console.readLineAsync('구입금액을 입력해주세요.')
         this.checkMoneyValidity(input)
 
         return Number(input)
@@ -21,7 +21,7 @@ const InputView = {
     },
 
     async getWinningLotto(){
-        const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.\n')
+        const input = await MissionUtils.Console.readLineAsync('당첨 번호를 입력해 주세요.')
         const splitInput = input.split(',')
         this.checkLottoValidity(splitInput)
 
@@ -37,7 +37,7 @@ const InputView = {
     },
 
     async getBonus(){
-        const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.\n')
+        const input = await MissionUtils.Console.readLineAsync('보너스 번호를 입력해 주세요.')
         this.checkNumberValidity(input)
 
         return Number(input)

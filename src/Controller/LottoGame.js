@@ -17,7 +17,7 @@ class LottoGame{
         OutputView.printLottoList(lottoList)
 
         const winningLotto = InputView.getWinningLotto()
-        // const bonus = InputView.getBonus()
+        const bonus = InputView.getBonus()
     }
 
     async getCount(){
