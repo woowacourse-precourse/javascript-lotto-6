@@ -24,13 +24,11 @@ class Validator {
 
   static validateBonusNumber(bonusNumber) {
     const validators = [this.missingValue, this.invalidNumber, this.invalidNumberRange];
-
     validators.forEach(validator => validator(bonusNumber));
   }
 
   static validateLotto(numbers) {
     const validators = [this.invalidLottoNumberCount, this.duplicatedLottoNumber];
-
     validators.forEach(validator => validator(numbers));
   }
 

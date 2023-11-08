@@ -5,11 +5,9 @@ import CONSTANTS from '../constants/constants.js';
 const getReturns = (lottos, winningNumbers, bonusNumber) => {
   const matchCounts = getMatchingNumbersCounts(lottos, winningNumbers);
   findFiveMatchWithBonus(lottos, matchCounts, bonusNumber);
-  const returns = matchCounts
+  return matchCounts
     .map(matchCount => CONSTANTS.prize[matchCount])
     .filter(item => item !== undefined);
-
-  return returns;
 };
 
 export default getReturns;

@@ -5,9 +5,7 @@ import findFiveMatchWithBonus from './findFiveMatchWithBonus.js';
 const getWinningStatistics = (lottos, winningNumbers, bonusNumber) => {
   const matchCounts = getMatchingNumbersCounts(lottos, winningNumbers);
   findFiveMatchWithBonus(lottos, matchCounts, bonusNumber);
-  const winningStatisticsString = getWinningStatisticsString(matchCounts);
-
-  return winningStatisticsString;
+  return getWinningStatisticsString(matchCounts);
 };
 
 export default getWinningStatistics;

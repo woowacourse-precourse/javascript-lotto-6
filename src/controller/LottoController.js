@@ -9,7 +9,7 @@ class LottoController {
   constructor() {
     this.#lottos = [];
   }
-
+  
   async gameStart() {
     const purchaseAmount = await this.#inputPurchaseAmount();
     const count = this.#getCount(purchaseAmount);

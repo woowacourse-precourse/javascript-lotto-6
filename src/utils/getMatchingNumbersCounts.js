@@ -1,8 +1,4 @@
-const getMatchingNumbersCounts = (lottos, winningNumbers) => {
-  const matchCounts = lottos.map(
-    lotto => lotto.getNumbers().filter(item => winningNumbers.includes(item)).length,
-  );
-  return matchCounts;
-};
+const getMatchingNumbersCounts = (lottos, winningNumbers) =>
+  lottos.map(lotto => lotto.getNumbers().filter(item => winningNumbers.includes(item)).length);
 
 export default getMatchingNumbersCounts;

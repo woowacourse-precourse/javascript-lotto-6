@@ -7,7 +7,6 @@ const getWinningStatisticsString = matchCounts => {
     return `${MESSAGE.winningStatistics[key]}${count}개`;
   });
   swap(winningStatisticsString);
-
   return winningStatisticsString;
 };
 
