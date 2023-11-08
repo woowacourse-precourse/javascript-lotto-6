@@ -1,8 +1,8 @@
 import Money from "../src/Money.js";
-import BuyLotto from "../src/BuyLotto.js";
+import LottoPurchase from "./LottoPurchase.js";
 import Lotto from "../src/Lotto.js";
 import BonusLotto from "../src/BonusLotto.js";
-import MatchLottoNumber from "../src/MatchLottoNumber.js";
+import WinningLotto from "./WinningLotto.js";
 import { INPUTMESSAGES } from "./util/Message.js";
 import { MONEY_CONSTANTS } from "./util/constants.js";
 const { LOTTO_PRICE, WINNINGS_OUTPUTS } = MONEY_CONSTANTS;
@@ -11,8 +11,8 @@ const { Console } = MissionUtils;
 class App {
   lottoCount = 0;
   moneys;
-  buyLotto;
-  matchLottoNumber;
+  lottoPurchase;
+  winningLotto;
 
   async winningNumberInput() {
     const winningNumbers = await Console.readLineAsync(
@@ -97,9 +97,9 @@ class App {
   }
 
   buyLottos() {
-    this.buyLotto = new BuyLotto(this.lottoCount);
-    this.buyLotto.buyLottos();
-    this.buyListOutput(this.lottoCount, this.buyLotto.getBoughtLotto);
+    this.lottoPurchase = new LottoPurchase(this.lottoCount);
+    this.lottoPurchase.buyLottos();
+    this.buyListOutput(this.lottoCount, this.lottoPurchase.getBoughtLotto);
   }
 
   async start() {
@@ -108,13 +108,13 @@ class App {
     const lotto = await this.lottoInput();
     const bonusLotto = await this.bonusLottoInput(await lotto.getNumbers);
     // 당첨 번호, 보너스 번호, 구매한 로또, 구매한 로또 개수를 통해 당첨 통계 계산
-    const matchLottoNumber = new MatchLottoNumber(
+    const winningLotto = new WinningLotto(
       lotto.getNumbers,
       bonusLotto.getBonusNumbers,
-      this.buyLotto.getBoughtLotto,
+      this.lottoPurchase.getBoughtLotto,
       this.lottoCount
     );
-    this.moneys.rankingMoney(matchLottoNumber.getRank);
+    this.moneys.rankingMoney(winningLotto.getRank);
     this.lottoResultOutput(this.moneys);
   }
 

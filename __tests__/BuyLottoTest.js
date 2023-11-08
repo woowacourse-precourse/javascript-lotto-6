@@ -1,4 +1,4 @@
-import BuyLotto from "../src/BuyLotto";
+import LottoPurchase from "../src/LottoPurchase";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const mockRandoms = (numbers) => {
@@ -15,8 +15,8 @@ describe("로또 구매 클래스 테스트", () => {
     mockRandoms(randoms);
 
     //when
-    const buyLotto = new BuyLotto();
-    const boughtLotto = buyLotto.buyOneLotto();
+    const lottoPurchase = new LottoPurchase();
+    const boughtLotto = lottoPurchase.buyOneLotto();
 
     //then
 
@@ -31,9 +31,9 @@ describe("로또 구매 클래스 테스트", () => {
     mockRandoms(randoms);
 
     //when
-    const buyLotto = new BuyLotto(2);
-    buyLotto.buyLottos();
-    const boughtLotto = buyLotto.getBoughtLotto;
+    const lottoPurchase = new LottoPurchase(2);
+    lottoPurchase.buyLottos();
+    const boughtLotto = lottoPurchase.getBoughtLotto;
 
     //then
     expect(boughtLotto).toEqual([

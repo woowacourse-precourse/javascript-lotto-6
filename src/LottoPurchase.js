@@ -2,7 +2,7 @@ import { LOTTO_CONSTANTS } from "./util/constants";
 const { LENGTH, MIN, MAX } = LOTTO_CONSTANTS;
 import { MissionUtils } from "@woowacourse/mission-utils";
 const { Random } = MissionUtils;
-class BuyLotto {
+class LottoPurchase {
   #lottoCount;
   #boughtLotto = [];
 
@@ -33,4 +33,4 @@ class BuyLotto {
   }
 }
 
-export default BuyLotto;
+export default LottoPurchase;

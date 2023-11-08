@@ -1,4 +1,4 @@
-class MatchLottoNumber {
+class WinningLotto {
   #rank = [];
 
   constructor(numbers, bonusNumbers, lottos, lottoCount) {
@@ -44,4 +44,4 @@ class MatchLottoNumber {
   }
 }
 
-export default MatchLottoNumber;
+export default WinningLotto;
