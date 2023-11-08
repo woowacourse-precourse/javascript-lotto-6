@@ -27,11 +27,6 @@ export const ERROR = Object.freeze({
   duplicatedWithWinLotto: `${ERROR_PREFIX} 보너스 번호는 당첨 번호와 중복을 허용하지 않습니다.`,
 });
 
-export const MESSAGE = Object.freeze({
-  purchase: (count) => `\n${count}개를 구매했습니다.`,
-  rateOfReturn: (number) => `총 수익률은 ${number}%입니다.`,
-});
-
 export const REGEX = Object.freeze({
   isNumber: /^\d+$/,
 });

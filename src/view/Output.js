@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from '../constant/constant.js';
 import Util from '../utils/Util.js';
+import { messageFormat } from '../constant/mesaageFormat.js';
 
 class Output {
   static print(message) {
@@ -8,7 +8,7 @@ class Output {
   }
 
   static printPurchaseCount(count) {
-    Output.print(MESSAGE.purchase(count));
+    Output.print(messageFormat.purchase(count));
   }
 
   static printPurchasedLottoList(lottoList) {
@@ -24,7 +24,7 @@ class Output {
   }
 
   static printRateOrReturn(number) {
-    Output.print(MESSAGE.rateOfReturn(number));
+    Output.print(messageFormat.rateOfReturn(number));
   }
 }
 export default Output;

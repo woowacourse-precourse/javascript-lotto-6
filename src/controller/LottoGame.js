@@ -7,9 +7,7 @@ import Result from '../model/Result.js';
 
 class LottoGame {
   #buyer;
-
   #winLotto;
-
   #result;
 
   async start() {

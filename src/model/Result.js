@@ -3,9 +3,7 @@ import { PRIZE_MESSAGE } from '../constant/mesaageFormat.js';
 
 class Result {
   #prizeCount;
-
   #resultMessages;
-
   #totalPrize;
 
   constructor(userLottos, winLotto, bonusLotto) {
