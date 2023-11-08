@@ -79,6 +79,10 @@ class LottoMachine {
       Console.print(lotto.getNumbers());
     }
   }
+
+  getLottos() {
+    return this.#lottos;
+  }
 }
 
 export default LottoMachine;
