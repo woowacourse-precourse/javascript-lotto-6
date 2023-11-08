@@ -1,9 +1,5 @@
-import {
-  errorConstants,
-  magicNumber,
-  uiConstants,
-} from '../constants/index.js';
-import { printMethod } from '../utils/index.js';
+import { errorConstants, magicNumber, uiConstants } from './constants/index.js';
+import { printMethod } from './utils/index.js';
 
 export default class Lotto {
   #numbers;

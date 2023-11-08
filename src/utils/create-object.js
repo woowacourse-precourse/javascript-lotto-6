@@ -1,4 +1,5 @@
-import { PurchaseAmount, Lotto, BonusNumber } from '../lotto/index.js';
+import { PurchaseAmount, BonusNumber } from '../lotto/index.js';
+import Lotto from '../Lotto.js';
 import { inputMethod } from './index.js';
 import { uiConstants } from '../constants/index.js';
 
