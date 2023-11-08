@@ -15,7 +15,8 @@ class App {
     const generatedLottoNumbers = LottoPurchaser.lottoList(price);
 
     for (const lottoTicket of generatedLottoNumbers) {
-      Console.print(lottoTicket);
+      lottoTicket.sort((a, b) => a - b);
+      Console.print(`[${lottoTicket.join(", ")}]`);
     }
     Console.print("");
     this.winningNumbers = await InputManager.getWinningNumbers();
