@@ -1,18 +1,40 @@
+import LOTTO from "./constants/lotto.js";
+import {
+  validateNumbersDuplicate,
+  validateNumbersRange,
+  validateNumbersLength,
+} from "./validators/lotto.js";
+
 class Lotto {
   #numbers;
 
+  /**
+   * @param {number[]} numbers
+   */
   constructor(numbers) {
     this.#validate(numbers);
     this.#numbers = numbers;
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+  /**
+   * @returns {number[]}
+   */
+  getNumbers() {
+    return [...this.#numbers];
   }
 
-  // TODO: 추가 기능 구현
+  /**
+   * @param {number[]} numbers
+   */
+  #validate(numbers) {
+    validateNumbersLength(numbers, LOTTO.length);
+    validateNumbersRange(
+      numbers,
+      LOTTO.range.startInclusive,
+      LOTTO.range.endInclusive,
+    );
+    validateNumbersDuplicate(numbers);
+  }
 }
 
 export default Lotto;
