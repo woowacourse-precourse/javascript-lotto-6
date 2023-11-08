@@ -27,6 +27,9 @@ class Lotto {
     if (Number.isNaN(Number(number)) || number < 1 || number > 45) {
       throw new Error('[ERROR] 보너스 번호는 1부터 45사이의 숫자여야 합니다.');
     }
+    if (this.#numbers.includes(number)) {
+      throw new Error('[ERROR] 당첨번호와 중복될 수 없습니다.');
+    }
   }
 
   getNumbers() {
