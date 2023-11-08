@@ -27,7 +27,7 @@ class Game {
             const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
             numList.push(numbers);
             lottoList.push(new Lotto(numbers));
-            Console.print(`[${numbers.join(", ")}]`);
+            Console.print(`[${numbers.sort((a,b)=>a - b).join(", ")}]`);
         }
 
         let winNumInput = "";
