@@ -7,6 +7,6 @@ describe('구매 컨트롤러 테스트', () => {
     const controller = new PurchaseController();
     controller.purchaseLottos(3);
 
-    expect(controller.getPurchasedLottos().length == 3);
+    expect(controller.getPurchasedLottos().length).toEqual(3);
   });
 });
