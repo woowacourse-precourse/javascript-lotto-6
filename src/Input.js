@@ -30,7 +30,6 @@ class Input {
         '\n당첨 번호를 입력해 주세요.\n',
       );
       const numbers = input.split(',').map(Number);
-
       this.validateWinningNumbers(input, numbers);
       return numbers;
     } catch (error) {
@@ -42,6 +41,9 @@ class Input {
     const numberOfCommas = (input.match(/,/g) || []).length;
     if (numberOfCommas !== 5 || numbers.length !== 6) {
       throw new Error('[ERROR] 쉼표(,)를 기준으로 숫자 6개를 입력해야 합니다.');
+    }
+    if (numbers.some(isNaN)) {
+      throw new Error('[ERROR] 당첨 번호는 숫자이어야 합니다.');
     }
     if (numbers.some((number) => number < 1 || number > 45)) {
       throw new Error('[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다.');
