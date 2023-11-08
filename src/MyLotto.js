@@ -1,5 +1,5 @@
 import { Console, Random } from "@woowacourse/mission-utils";
-import { MESSAGE, NUMBER } from "./contants.js";
+import { MESSAGE, NUMBER, ERRORS } from "./contants.js";
 
 class MyLotto {
   #money;
@@ -7,18 +7,18 @@ class MyLotto {
   #lottos = [];
 
   constructor(money) {
+    this.#validate(money);
     this.#money = money;
-    this.#validate();
     this.#count = this.#money / NUMBER.LOTTO_PRICE_FORMAT;
     this.printCount();
     this.#createMyLottos();
   }
 
-  #validate() {
-    if (isNaN(this.#money)) {
+  #validate(money) {
+    if (isNaN(money)) {
       throw new Error(ERRORS.NOT_NUMBER);
     }
-    if (this.#money % 1000 !== 0) {
+    if (money % 1000 !== 0) {
       throw new Error(ERRORS.UNFORMATTED_NUMBER);
     }
   }
