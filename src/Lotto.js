@@ -7,8 +7,11 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.some((number) => !Number.isInteger(number))) {
+    if (!numbers.every((number) => Number.isInteger(number))) {
       throw new Error('[ERROR] 로또 번호는 숫자여야 합니다.');
+    }
+    if (!numbers.every((number) => number >= 1 && number <= 45)) {
+      throw new Error('[ERROR] 로또 번호는 1~45까지여야 합니다.');
     }
     if (numbers.length !== 6) {
       throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
