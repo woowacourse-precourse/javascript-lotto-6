@@ -16,7 +16,9 @@ const ERROR_MESSAGE = {
   THE_NUMBER: `${ERROR_PREFIX} 로또 번호의 개수는 6개 입니다`,
   OVERLAP: `${ERROR_PREFIX} 로또는 중복된 번호가 나올 수 없습니다.`,
   LOTTO_NUMBER_CONDITION: `${ERROR_PREFIX} 로또 번호는 1에서 45 사이의 정수여야 합니다`,
-  MONEY: `${ERROR_PREFIX} 구입 금액은 1000원 단위의 숫자를 입력해주세요`,
+  MONEY_NOT_INTEGER: `${ERROR_PREFIX} 구입 금액은 정수를 입력해주세요.`,
+  MONEY_THOUSANDS: `${ERROR_PREFIX} 구입 금액은 1000의 배수를 입력해주세요.`,
+  MONEY_NOT_ENOUGH: `${ERROR_PREFIX} 구입 금액은 1000원 이상의 숫자를 입력해주세요.`,
 };
 
 const PRIZE_MONEY = {
