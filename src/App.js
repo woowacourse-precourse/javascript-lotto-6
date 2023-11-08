@@ -76,11 +76,10 @@ class App {
     const WINLOG = [0, 0, 0, 0, 0];
 
     TICKETS.forEach(ticket => {
-      const TICKETNUM = ticket.returnNumbers();
-      const MATCHED = this.countMatchedNumbers(TICKETNUM, WINNINGNUMS);
+      const MATCHED = this.countMatchedNumbers(ticket, WINNINGNUMS);
 
       if (MATCHED >= 3 && MATCHED <= 6) {
-        if (MATCHED === 5 && TICKETNUM.includes(BONUS)) {
+        if (MATCHED === 5 && ticket.includes(BONUS)) {
           WINLOG[4]++;
         } else {
           WINLOG[MATCHED - 3]++;
