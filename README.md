@@ -167,7 +167,7 @@
 - 0이면 예외 처리한다.
 - 1000으로 나누어 떨어지지 않으면 예외 처리한다.
 
-`calcPurchaseQuantity(input)`
+`calculatePurchaseQuantity(input)`
 
 - 구매 수량을 구한다.
 
@@ -231,7 +231,7 @@
 
 총 수익률을 계산하는 클래스
 
-`calcProfit(ranking, purchase_amount)`
+`calculateProfit(ranking, purchase_amount)`
 
 - 총 수익금을 계산한다.
 - 총 수익률을 계산해 소수점 둘째 자리에서 반올림해 반환한다.
