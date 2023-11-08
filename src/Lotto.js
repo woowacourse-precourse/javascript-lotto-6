@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from './message';
+import { CONSTANT } from './constant';
 
 class Lotto {
   #numbers;
@@ -10,13 +11,13 @@ class Lotto {
 
   #validate(numbers) {
     // test code
-    if (numbers.length === 0) throw new Error(ERROR_MESSAGE.LOTTO_EMPTY);
-    if (numbers.length !== 6) {
+    if (numbers.length === CONSTANT.ZERO) throw new Error(ERROR_MESSAGE.LOTTO_EMPTY);
+    if (numbers.length !== CONSTANT.NUMBER_MAX_LENGTH) {
       throw new Error(ERROR_MESSAGE.SIX_NUMBERS);
     }
     if (this.checkRange(numbers)) throw new Error(ERROR_MESSAGE.LOTTO_RANGE);
     const numbersSet = this.getNumbersSet(numbers);
-    if ([...numbersSet].length !== 6)
+    if ([...numbersSet].length !== CONSTANT.NUMBER_MAX_LENGTH)
       throw new Error(ERROR_MESSAGE.SAME_NUMBERS);
   }
   // test code
@@ -48,14 +49,14 @@ class Lotto {
   }
   // test code
   checkBonusNumber(randomNumberArray, equalNumber, userBonusNumber) {
-    if (equalNumber === 5) {
+    if (equalNumber === CONSTANT.MATCH_FIVE) {
       return this.compareBonusNumber(randomNumberArray, userBonusNumber);
     }
   }
 
   compareLottoNumbers(lottoRandomNumber, userLottoNumber, userBonusNumber) {
     let lottoResult = [];
-    let bonusResult = 0;
+    let bonusResult = CONSTANT.ZERO;
     lottoRandomNumber.forEach(randomNumberArray => {
       const equalNumber = this.countEqualNumbers(
         randomNumberArray,
@@ -73,9 +74,9 @@ class Lotto {
 
   getLottoRate(lottoResult, lottoPrice) {
     const money = [5000, 50000, 1500000, 30000000, 2000000000];
-    let prizeMoney = 0;
+    let prizeMoney = CONSTANT.ZERO;
     let investment = Number(lottoPrice);
-    let rate = 0;
+    let rate = CONSTANT.ZERO;
     lottoResult.forEach((amount, index) => {
       if (amount) prizeMoney += amount * money[index];
     });
