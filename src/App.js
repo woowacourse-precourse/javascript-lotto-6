@@ -6,7 +6,20 @@ class App {
     this.lottoList = [];
   }
 
-  async play() {}
+  async play() {
+    const purchaseAmount = await this.inputPurchaseAmount();
+    const numberOfLottos = this.calculateNumberOfLottos(purchaseAmount);
+    MissionUtils.Console.print(`${numberOfLottos}개를 구매했습니다.`);
+
+    this.purchaseLottos(numberOfLottos);
+    this.printPurchasedLottos(numberOfLottos);
+
+    const { winningNumbers, bonusNumber } =
+      await this.inputWinningNumbersAndBonus();
+
+    const result = this.calculateResults(winningNumbers, bonusNumber);
+    this.printResults(result);
+  }
 
   async inputPurchaseAmount() {
     while (true) {
