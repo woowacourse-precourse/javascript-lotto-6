@@ -88,4 +88,4 @@ npm test
 
 ## 프로그램 흐름도
 
-![Flow-Chart](/docs/image/lottery.png)
+![Flow-Chart](../docs/image/lottery.png)
