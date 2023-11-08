@@ -68,6 +68,17 @@ describe('BonusNumberValidator 클래스 테스트', () => {
     });
   });
 
+  test('보너스 번호가 2개 이상 입력되는 경우 예외가 발생한다.', () => {
+    const numsArray = ['1,2,3,4,5,5', '12,23,24,25,25,33', '1,1,1,1,1,1'];
+    const bonusNumbers = ['9,10', '1,2', '11,12'];
+
+    numsArray.forEach((nums, index) => {
+      expect(() => {
+        BonusNumberValidator.validateBonusNumber(nums, bonusNumbers[index]);
+      }).toThrow('[ERROR]');
+    });
+  });
+
   test('당첨 번호와 보너스 번호가 중복되지 않는 경우 예외가 발생하지 않는다.', () => {
     const numsArray = ['1,2,3,4,5,6', '12,23,24,25,29,33', '34,35,36,37,38,39'];
     const bonusNumbers = ['7', '14', '45'];

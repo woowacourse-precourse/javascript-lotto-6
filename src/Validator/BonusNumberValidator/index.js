@@ -8,7 +8,7 @@ class BonusNumberValidator extends Validator {
     const isDuplicate = bonusNumbers.some((bonusNumber) =>
       winningNumbers.includes(Number(bonusNumber)),
     );
-    if (!bonusNumbers.length || isDuplicate) {
+    if (!bonusNumbers.length || isDuplicate || bonusNumbers.length > 1) {
       throw new ValidationError(ERROR.invalidBonusNumber);
     }
   }
