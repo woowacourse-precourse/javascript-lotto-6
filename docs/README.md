@@ -69,16 +69,16 @@ calculateLottoCount
 <br/>
 
 calculateNumberOfMatchingNumbers
-- [x]
+- [x] 로또에 있는 번호 중 당첨 번호와 일치하는 개수를 계산
 
 isBonusNumberMatched
-- [x]
+- [x] 보너스 번호가 로또 번호에 포함되어 있는지 확인
 
 determinePrizeCategory
-- [x]
+- [x] 일치하는 번호의 개수와 보너스 번호의 존재 여부에 따라 상금 등급을 결정
 
 countAndPrintResult
-- [x]
+- [x] 상금 등급에 따라 화면에 출력하도록 함
 
 checkWinning
 - [x] 주어진 로또 번호가 당첨 번호와 일치하는지 확인
