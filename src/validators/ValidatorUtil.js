@@ -1,4 +1,5 @@
 import { ErrorMessages } from '../constants/Messages.js';
+import { LottoConstants } from '../constants/Constants.js';
 
 class ValidatorUtil {
   static isNumberValidate(input) {
@@ -14,12 +15,13 @@ class ValidatorUtil {
   }
 
   static isNumberInRangeValidate(input) {
-    if (input < 1 || input > 45)
+    if (input < LottoConstants.MIN_NUM || input > LottoConstants.MAX_NUM)
       throw new Error(ErrorMessages.NOT_NUMBER_IN_RANGE);
   }
 
   static lengthValidate(input) {
-    if (input.length !== 6) throw new Error(ErrorMessages.NOT_LENGTH_6);
+    if (input.length !== LottoConstants.LENGTH)
+      throw new Error(ErrorMessages.NOT_LENGTH_6);
   }
 
   static duplicationValidate(input, bonusNumber) {

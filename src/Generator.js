@@ -1,14 +1,14 @@
 import { Random } from '@woowacourse/mission-utils';
-
+import { LottoConstants, LottoPrizes } from './constants/Constants';
 class Generator {
   static randomNumbersGenerator(purchaseAmount) {
     const result = [];
 
     for (let index = 0; index < purchaseAmount; index++) {
       const sortedRandomNumbers = Random.pickUniqueNumbersInRange(
-        1,
-        45,
-        6
+        LottoConstants.MIN_NUM,
+        LottoConstants.MAX_NUM,
+        LottoConstants.LENGTH
       ).sort((num1, num2) => num1 - num2);
       result.push(sortedRandomNumbers);
     }
@@ -32,15 +32,15 @@ class Generator {
   static profitGenerator(lottoCount, isBonus) {
     switch (lottoCount) {
       case 3:
-        return 5000;
+        return LottoPrizes.THREE_EQUAL;
       case 4:
-        return 50000;
+        return LottoPrizes.FOUR_EQUAL;
       case 5:
-        return isBonus ? 30000000 : 1500000;
+        return isBonus
+          ? LottoPrizes.FIVE_EQUAL_AND_BONUS
+          : LottoPrizes.FIVE_EQUAL;
       case 6:
-        return 2000000000;
-      default:
-        return 0;
+        return LottoPrizes.SIX_EQUAL;
     }
   }
 }
