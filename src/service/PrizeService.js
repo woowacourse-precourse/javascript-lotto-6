@@ -1,5 +1,6 @@
 import {LOTTO} from "../utils/Define.js";
 import Prize from "../domain/Prize.js";
+import rank from "../domain/Rank.js";
 
 class PrizeService {
     constructor() {
@@ -56,10 +57,10 @@ class PrizeService {
 
 
     #calculateReward(rankCounts, prize) {
-        return Object.keys(rankCounts).reduce((totalReward, rank) => {
-            const count = rankCounts[rank];
-            const rewardPerLotto = prize.getPrize(rank);
-            return totalReward + rewardPerLotto * count;
+        return rankCounts.reduce((totalReward, count, i) => {
+            const ranks = 5 - i; // rankCounts는 5등부터 1등 순서로 되어있으므로, rank 계산
+            const rewardPerRank = prize.getPrize(ranks);
+            return totalReward + rewardPerRank * count;
         }, 0);
     }
 
