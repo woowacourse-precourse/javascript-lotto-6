@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class Lotto {
   #numbers;
 
@@ -14,6 +16,35 @@ class Lotto {
 
   #sortLotto(numbers) {
     return numbers.sort((a, b) => a - b);
+  }
+
+  calculate(winning, bonus) {
+    const matchingNumbers = this.getMatchingNumbers(winning);
+    const bonusMatch = this.getBonusMatch(bonus);
+    return this.updateState(matchingNumbers.length, bonusMatch);
+  }
+
+  getMatchingNumbers(winning) {
+    return this.#numbers.filter((number) => winning.includes(number));
+  }
+
+  getBonusMatch(bonus) {
+    return this.#numbers.includes(bonus);
+  }
+
+  updateState(matchingNumbers, bonusMatch) {
+    if (matchingNumbers === 3) {
+      return 0;
+    } else if (matchingNumbers === 4) {
+      return 1;
+    } else if (matchingNumbers === 5 && bonusMatch) {
+      return 3;
+    } else if (matchingNumbers === 5) {
+      return 2;
+    } else if (matchingNumbers === 6) {
+      return 4;
+    }
+    return -1;
   }
 
   getLotto() {

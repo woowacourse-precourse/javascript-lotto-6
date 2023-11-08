@@ -3,6 +3,7 @@ import PurchaseController from './PurchaseController.js';
 import WinningController from './WinningController.js';
 import OutputView from '../view/OutputView.js';
 import BonusController from './BonusController.js';
+import CalculateController from './CalculateController.js';
 
 class Controller {
   #lottos;
@@ -11,6 +12,7 @@ class Controller {
   #PurchaseController;
   #WinningController;
   #BonusController;
+  #CalculateController;
 
   constructor() {
     this.#PurchaseController = new PurchaseController();
@@ -23,7 +25,11 @@ class Controller {
     OutputView.printLottos(this.#lottos);
     this.#winning = await this.#WinningController.inputWinning();
     this.#bonus = await this.#BonusController.inputBonus(this.#winning);
-    Console.print(this.#bonus);
+
+    this.#CalculateController = new CalculateController(this.#lottos, this.#winning, this.#bonus);
+
+    const state = this.#CalculateController.calculatestate();
+    Console.print(state);
   }
 }
 
