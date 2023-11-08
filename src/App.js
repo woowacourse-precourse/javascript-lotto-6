@@ -63,7 +63,7 @@ class App {
   }
 
   performGame(drawingLotto) {
-    const matchingResults = this.game.countAllLottoMatches(
+    const results = this.game.getLottoResults(
       this.lotto,
       drawingLotto,
       this.bonusNumber
@@ -71,11 +71,11 @@ class App {
 
     const earningRate = this.game.getEarningRate(
       PRIZE,
-      matchingResults,
+      results,
       this.purchasePrice
     );
 
-    Output.winningReport(matchingResults, earningRate);
+    Output.winningReport(results, earningRate);
   }
 }
 

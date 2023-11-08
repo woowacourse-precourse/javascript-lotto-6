@@ -30,7 +30,7 @@ describe("Game 클래스 테스트", () => {
     const lotto = [1, 2, 3, 4, 5, 6];
     const drawingLotto = [[3, 4, 5, 6, 7, 8]];
     const bonusNumber = 9;
-    const matchingResults = game.calculateAllLottoMatches(
+    const matchingResults = game.getLottoResults(
       lotto,
       drawingLotto,
       bonusNumber
@@ -43,7 +43,7 @@ describe("Game 클래스 테스트", () => {
     const lotto = [2, 3, 4, 5, 6, 7];
     const drawingLotto = [[1, 2, 3, 4, 5, 6]];
     const bonusNumber = 1;
-    const matchingBonusBall = game.calculateAllLottoMatches(
+    const matchingBonusBall = game.getLottoResults(
       lotto,
       drawingLotto,
       bonusNumber
