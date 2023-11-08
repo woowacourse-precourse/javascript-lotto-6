@@ -14,8 +14,6 @@ class App {
 
   #BONUS_NUMBER;
 
-  #MAX_LENGTH;
-
   #WINNING_COUNT;
 
   #TMP_WINNING_COUNT;
@@ -24,6 +22,8 @@ class App {
 
   #RATE_OF_RETURN;
 
+  #MAX_LENGTH;
+
   constructor() {
     this.#PRICE = [2000000000, 30000000, 1500000, 50000, 5000];
     this.#USER_PRICE = 0;
@@ -31,11 +31,11 @@ class App {
     this.#WINNING_NUMBERS = [];
     this.#LOTTOS_MAX = 0;
     this.#BONUS_NUMBER = 0;
-    this.#MAX_LENGTH = 6;
     this.#WINNING_COUNT = [0, 0, 0, 0, 0];
     this.#TMP_WINNING_COUNT = [];
     this.#AWARD_PRICE = 0;
     this.#RATE_OF_RETURN = 0;
+    this.#MAX_LENGTH = 6;
   }
 
   async getInputPrice() {
@@ -43,12 +43,12 @@ class App {
       await Console.readLineAsync('구입금액을 입력해 주세요.\n');
 
     try {
-      this.checkInputPrice(parseInt(USER_INPUT, 10));
+      this.checkInputPrice(USER_INPUT);
       this.#USER_PRICE = parseInt(USER_INPUT, 10);
       this.#LOTTOS_MAX = this.#USER_PRICE / 1000;
     } catch (e) {
       Console.print(e);
-      this.getInputPrice();
+      await this.getInputPrice();
     }
   }
 
@@ -70,7 +70,7 @@ class App {
       this.makeWinningNumberArray(TMP_WINNING_NUMBER);
     } catch (e) {
       Console.print(e);
-      this.getInputWinningNumber();
+      await this.getInputWinningNumber();
     }
   }
 
@@ -81,7 +81,7 @@ class App {
   }
 
   checkInputWinningNumber(winningNumber) {
-    if (winningNumber.length !== this.#MAX_LENGTH) {
+    if (winningNumber.length !== 6) {
       throw new Error('[ERROR] 당첨 번호는 6자리 숫자여야 합니다.');
     } else if (new Set(winningNumber).size !== winningNumber.length) {
       throw new Error('[ERROR] 당첨 번호가 중복되었습니다.');
@@ -116,53 +116,35 @@ class App {
   }
 
   makeLottoArray() {
+    Console.print(`${this.#LOTTOS_MAX}개를 구매했습니다.`);
     try {
       while (this.#USER_LOTTOS.length < this.#LOTTOS_MAX) {
-        this.#USER_LOTTOS.push(new Lotto(this.makeEachLotto()).makeLotto());
+        const LOTTO_NUMBERS = Random.pickUniqueNumbersInRange(1, 45, 6);
+        LOTTO_NUMBERS.sort((a, b) => a - b);
+        const LOTTO = new Lotto(LOTTO_NUMBERS).makeLotto();
+        Console.print(this.printEachLotto(LOTTO_NUMBERS));
+        this.#USER_LOTTOS.push(LOTTO);
       }
     } catch (e) {
       throw new Error(e);
     }
   }
 
-  makeEachLotto() {
-    const TMP_LOTTO = [];
-
-    while (TMP_LOTTO.length < this.#MAX_LENGTH) {
-      const NUMBER = Random.pickNumberInRange(1, 45);
-      if (!TMP_LOTTO.includes(NUMBER)) {
-        TMP_LOTTO.push(NUMBER);
-      }
-    }
-    TMP_LOTTO.sort((a, b) => a - b);
-
-    return TMP_LOTTO;
-  }
-
-  printLottoArray() {
-    Console.print(`${this.#LOTTOS_MAX}개를 구매했습니다.`);
-    this.#USER_LOTTOS.forEach((lotto) => {
-      Console.print(this.printEachLotto(lotto));
-    });
-  }
-
   printEachLotto(lotto) {
     let tmpString = '[';
-
-    for (let i = 0; i < lotto.length; i += 1) {
-      if (i === lotto.length - 1) {
-        tmpString += `${lotto[i]}]`;
-      } else if (i !== lotto.length - 1) {
-        tmpString += `${lotto[i]}, `;
+    lotto.forEach((number, index) => {
+      if (index !== this.#MAX_LENGTH - 1) {
+        tmpString += `${number}, `;
+      } else if (index === this.#MAX_LENGTH - 1) {
+        tmpString += `${number}]`;
       }
-    }
-
+    });
     return tmpString;
   }
 
   checkLotto() {
-    this.#USER_LOTTOS.forEach((userLotto, index) => {
-      this.checkEachLotto(userLotto, index);
+    this.#USER_LOTTOS.forEach((userLotto) => {
+      this.checkEachLotto(userLotto);
     });
   }
 
@@ -182,12 +164,6 @@ class App {
     this.#TMP_WINNING_COUNT.push({ count: winningCount, bonus: checkBonus });
   }
 
-  //   3개 일치 (5,000원) - 1개
-  // 4개 일치 (50,000원) - 0개
-  // 5개 일치 (1,500,000원) - 0개
-  // 5개 일치, 보너스 볼 일치 (30,000,000원) - 0개
-  // 6개 일치 (2,000,000,000원) - 0개
-  // 총 수익률은 62.5%입니다.
   calculateResults() {
     this.calculateAwardPrice();
     this.#RATE_OF_RETURN =
@@ -206,19 +182,41 @@ class App {
     });
   }
 
-  
+  // "3개 일치 (5,000원) - 1개",
+  //     "4개 일치 (50,000원) - 0개",
+  //     "5개 일치 (1,500,000원) - 0개",
+  //     "5개 일치, 보너스 볼 일치 (30,000,000원) - 0개",
+  //     "6개 일치 (2,000,000,000원) - 0개",
+  //     "총 수익률은 62.5%입니다.",
+
+  printLottoResult() {
+    Console.print('당첨 통계');
+    Console.print('---');
+
+    for (let i = this.#WINNING_COUNT.length - 1; i >= 0; i -= 1) {
+      if(i === 4) Console.print(`3개 일치 (5,000원) - ${this.#WINNING_COUNT[i]}개`);
+      else if(i === 3) Console.print(`4개 일치 (50,000원) - ${this.#WINNING_COUNT[i]}개`);
+      else if(i === 2) Console.print(`5개 일치 (1,500,000원) - ${this.#WINNING_COUNT[i]}개`);
+      else if(i === 1) Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#WINNING_COUNT[i]}개`);
+      else if(i === 0) Console.print(`6개 일치 (2,000,000,000원) - ${this.#WINNING_COUNT[i]}개`);
+    }
+
+    Console.print(`총 수익률은 ${this.#RATE_OF_RETURN}%입니다.`);
+  }
+
+  // makeLottoResult(index) {
+  //   return
+
+  // }
 
   async play() {
     await this.getInputPrice();
     this.makeLottoArray();
-    Console.print(this.#USER_LOTTOS);
     await this.getInputWinningNumber();
     await this.getInputBonusNumber();
-
-    this.printLottoArray();
     this.checkLotto();
     this.calculateResults();
-    Console.print(this.#RATE_OF_RETURN.toFixed(2));
+    this.printLottoResult();
   }
 }
 
