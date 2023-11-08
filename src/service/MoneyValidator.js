@@ -8,8 +8,15 @@ class MoneyValidator {
   };
 
   validate() {
+    this.#validateInput();
     this.#validateNumber();
     this.#validateMoneyUnit();
+  };
+
+  #validateInput() {
+    if (!this.input) {
+      throwError(ERROR.empty);
+    }
   };
 
   #validateNumber() {
