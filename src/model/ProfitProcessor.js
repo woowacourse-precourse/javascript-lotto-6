@@ -1,4 +1,4 @@
-import { PRIZE } from "../constants/Constants";
+import { PRIZE } from "../constants/Constants.js";
 
 class ProfitProcessor {
   #profitPercentage;
