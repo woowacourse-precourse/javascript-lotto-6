@@ -20,6 +20,25 @@ class App {
     return lottos;
   }
 
+  compareToLottoNumbers(lotto, lottoWinningNumber, lottoBonusNumber) {
+    const comparedResult = {
+      theNumberOfMatches: 0,
+      haveBonusNumber: false
+    };
+
+    lotto.forEach(number => {
+      if (lottoWinningNumber.includes(number)) {
+        comparedResult.theNumberOfMatches++;
+      }
+    });
+
+    if (lotto.myNumbers.includes(lottoBonusNumber)) {
+      comparedResult.haveBonusNumber = true;
+    }
+    
+    return comparedResult;
+  }
+
   async play() {
     const user = new User();
     const theNumberOfLotto = await user.inputLottoPurchaseAmount();
@@ -27,6 +46,7 @@ class App {
     user.printLottoNumbers(lottos);
     const lottoWinningNumber = await user.inputLottoWinningNumber();
     const lottoBonusNumber = await user.inputLottoBonusNumber();
+    this.checkLottoResult(lottos, lottoWinningNumber, lottoBonusNumber);''
   }
 }
 
