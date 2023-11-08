@@ -6,20 +6,25 @@ export default class MyLotto {
 
   #quickPicks;
 
+  #winCountArr;
+
   constructor() {
     this.#quickPicks = [];
+    this.#winCountArr = [];
   }
 
   setLottoCount(input) {
     this.#lottoCount = Number(input.slice(MONEYSET.moneySlice.start, MONEYSET.moneySlice.end));
-
-    return this.#setQuickPicks();
   }
 
-  #setQuickPicks() {
+  setQuickPicks() {
     while (this.#quickPicks.length < this.#lottoCount) {
       this.#quickPicks.push(randomLotto());
     }
+  }
+
+  setWinCount(winCount) {
+    this.#winCountArr.push(winCount);
   }
 
   getLottoCount() {
@@ -28,5 +33,9 @@ export default class MyLotto {
 
   getQuickPicks() {
     return this.#quickPicks;
+  }
+
+  getWinCountArr() {
+    return this.#winCountArr;
   }
 }

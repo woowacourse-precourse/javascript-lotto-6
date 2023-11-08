@@ -3,6 +3,7 @@ import outputView from '../view/outputview.js';
 import MyWallet from '../Model/MyWallet.js';
 import MyLotto from '../Model/MyLotto.js';
 import WinNumber from '../Model/WinNumber.js';
+import Service from '../Service/Service.js';
 
 export default class Controller {
   #myWallet;
@@ -31,23 +32,31 @@ export default class Controller {
   }
 
   handleQuickPicks() {
+    this.#myLotto.setQuickPicks();
     outputView.printQuickPicks(this.#myLotto.getQuickPicks());
 
-    return this.handleCommonWinNum();
+    return this.handleCommonWinNumber();
   }
 
-  async handleCommonWinNum() {
-    const input = await inputView.readCommonWinNum();
+  async handleCommonWinNumber() {
+    const input = await inputView.readCommonWinNumber();
     this.#winNumber = new WinNumber();
     this.#winNumber.setCommonWinNum(input);
 
-    return this.handleBonusWinNum();
+    return this.handleBonusWinNumber();
   }
 
-  async handleBonusWinNum() {
-    const input = await inputView.readBonusWinNum();
+  async handleBonusWinNumber() {
+    const input = await inputView.readBonusWinNumber();
     this.#winNumber.setBonusWinNum(input);
 
-    return console.log(this.#winNumber.getCommonWinNum(), this.#winNumber.getBonusWinNum());
+    return this.handleCompareNumber();
+  }
+
+  handleCompareNumber() {
+    const service = new Service(this.#myLotto, this.#winNumber);
+
+    service.compareEachNumber();
+    return console.log(this.#myLotto.getWinCountArr());
   }
 }

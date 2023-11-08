@@ -8,13 +8,13 @@ const inputView = {
     return input;
   },
 
-  async readCommonWinNum() {
+  async readCommonWinNumber() {
     const input = await Console.readLineAsync(INPUT_MESSAGE.commonWinNumInput);
 
     return input;
   },
 
-  async readBonusWinNum() {
+  async readBonusWinNumber() {
     const input = await Console.readLineAsync(INPUT_MESSAGE.bonusWinNumInput);
 
     return input;
