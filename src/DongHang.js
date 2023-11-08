@@ -54,6 +54,10 @@ class DongHang {
     return new WinningNumbers(main, bonus);
   }
 
+  /**
+   * 사용자로부터 당첨 번호를 입력받는다.
+   * @returns {Promise<number[]>}
+   */
   static async inputWinningNumbers() {
     const mainInput = await Input.readCommaSeparatedAsync(PROMPT.WINNING_NUMBERS);
 
@@ -64,6 +68,9 @@ class DongHang {
   }
 
   /**
+   * 사용자로부터 보너스 번호를 입력받는다.
+   *
+   * 메인 번호와 중복되지 않는지, 범위 내에 있는지 검증한다.
    * @param {number[]} mainInput
    * @returns {Promise<number>}
    */
