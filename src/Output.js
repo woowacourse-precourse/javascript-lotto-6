@@ -26,7 +26,7 @@ class Output {
 
   async printLottoResult(key, value) {
     if (key === "3") {
-      Console.print("\n당첨 통계\n---");
+      Console.print(`\n${OUTPUT_MSG.WIN_RESULT}\n${OUTPUT_MSG.LINE}`)
       Console.print(`${MATCH_DATA.THREE} ${value}개`);
     } else if (key === "4") {
       Console.print(`${MATCH_DATA.FOUR} ${value}개`);
