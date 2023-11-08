@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import LottoController from './controller/LottoController.js';
 
 class App {
@@ -6,9 +7,13 @@ class App {
   }
 
   async play() {
-    await this.lottoController.handleBuyLottos();
-    await this.lottoController.handleCreateWinResult();
-    await this.lottoController.handleLottoResult();
+    try {
+      await this.lottoController.handleBuyLottos();
+      await this.lottoController.handleCreateWinResult();
+      await this.lottoController.handleLottoResult();
+    } catch (err) {
+      Console.print(err.message);
+    }
   }
 }
 
