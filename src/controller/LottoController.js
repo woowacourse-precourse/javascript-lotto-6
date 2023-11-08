@@ -1,7 +1,7 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import CONSTANTS from '../constants/constants.js';
-import generateLotto from '../utils/generateLotto.js';
+import Lottos from '../domain/Lottos.js';
 
 class LottoController {
   #lottos;
@@ -9,7 +9,7 @@ class LottoController {
   constructor() {
     this.#lottos = [];
   }
-  
+
   async gameStart() {
     const purchaseAmount = await this.#inputPurchaseAmount();
     const count = this.#getCount(purchaseAmount);
@@ -38,7 +38,8 @@ class LottoController {
   }
 
   #generateLottos(count) {
-    Array.from({ length: count }, () => this.#lottos.push(generateLotto()));
+    const lottos = new Lottos(count);
+    this.#lottos = lottos.getLottos();
   }
 
   #printLottos(count) {
