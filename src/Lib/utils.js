@@ -20,9 +20,7 @@ export const deepFreeze = (object) => {
  *
  * @param {function} inputMethod 사용자 입력을 처리하는 함수
  * @param {Array} winningNumbers 당첨 번호 배열
- *
  * @returns {Promise} 입력 메서드의 실행 결과를 반환하는 Promise 객체
- *
  * @throws {Error} 입력 메서드 실행 중 오류가 발생하면 콘솔에 오류 메시지를 출력
  */
 export const inputWithRetry = async (inputMethod, winningNumbers) => {
@@ -40,7 +38,6 @@ export const inputWithRetry = async (inputMethod, winningNumbers) => {
  *
  * @param {Number} number 포맷팅할 숫자
  * @returns {String} 콤마와 소수점 첫 번째 자리까지 포맷팅된 문자열
- *
  */
 export const formatNumberWithCommasAndDecimals = (number) => {
   return number.toLocaleString(undefined, {

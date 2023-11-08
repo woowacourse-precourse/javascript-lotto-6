@@ -8,6 +8,7 @@ class PurchaseAmount {
 
   /**
    * 입력받은 금액으로 로또를 구매하고, 구매한 로또 티켓들을 반환한다.
+   *
    * @param {number} purchaseAmount 로또 구입 금액
    * @returns {Array} 구매한 로또 티켓들
    */
@@ -20,6 +21,7 @@ class PurchaseAmount {
 
   /**
    * 구매한 로또 티켓의 수를 출력한다.
+   *
    * @param {number} ticketCount 구매한 로또 티켓의 수
    */
   printPurchaseConfirm(ticketCount) {
@@ -28,6 +30,7 @@ class PurchaseAmount {
 
   /**
    * 지정된 수만큼 로또 티켓을 구매하고, 구매한 로또 티켓들을 출력한다.
+   *
    * @param {number} ticketCount 구매할 로또 티켓의 수
    * @returns {Array} 구매한 로또 티켓들
    */

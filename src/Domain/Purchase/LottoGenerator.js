@@ -3,7 +3,8 @@ import { Random } from '@woowacourse/mission-utils';
 
 class LottoGenerator {
   /**
-   * 랜덤한 로또 티켓 번호를 생성하고 반환합니다.
+   * 랜덤한 로또 티켓 번호를 생성하고 반환한다.
+   *
    * @returns {Array} 랜덤한 로또 티켓 번호
    */
   generateRandomLottoTicket() {
@@ -15,7 +16,8 @@ class LottoGenerator {
   }
 
   /**
-   * 지정된 수만큼 랜덤한 로또 티켓들을 생성하고 반환합니다.
+   * 지정된 수만큼 랜덤한 로또 티켓들을 생성하고 반환한다.
+   *
    * @param {number} ticketCount 생성할 로또 티켓의 수
    * @returns {Array} 생성된 로또 티켓들
    */
