@@ -21,15 +21,15 @@ class App {
   }
 
   async play() {
-    this.enterPurchaseAmount();
+    await this.enterPurchaseAmount();
     this.createLottoArray();
     this.printLottoNumbers();
-    this.enterWinningNumbers();
+    await this.enterWinningNumbers();
     this.printWinningResults();
   }
 
   async enterPurchaseAmount() {
-    const userPrice = await Console.readLineAsync("구입금액을 입력해 주세요.");
+    let userPrice = await Console.readLineAsync("구입금액을 입력해 주세요.");
     Util.validatePurchasePrice(userPrice,this.basedAmount);
     this.purchaseAmount = userPrice / this.basedAmount;
   }
