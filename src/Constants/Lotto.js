@@ -27,7 +27,7 @@ const RANK_WINNING_NUMBER = {
 }
 
 const PRIZEMONEY_NUMBER = {
-  prizeMoneys: [5000, 50000, 1500000, 3000000, 2000000],
+  prizeMoneys: [5000, 50000, 1500000, 30000000, 2000000000],
   percent: 100,
   roundPosition: 1,
 };
