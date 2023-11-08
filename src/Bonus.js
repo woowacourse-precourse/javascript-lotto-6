@@ -1,13 +1,15 @@
+import { model } from "./Model.js";
+
 export class Bonus {
   #number;
-  #winningNumbers;
 
   constructor(number, winningNumbers) {
     this.#bonusNumberValidater(number);
     this.#bonusNumberRangeValidater(number);
     this.#bonusNumberDuplicateValidater(number, winningNumbers);
     this.#number = number;
-    this.#winningNumbers = winningNumbers;
+
+    model.bonus = this.#number;
   }
 
   #bonusNumberValidater(number) {
@@ -29,9 +31,5 @@ export class Bonus {
         throw new Error("[ERROR] 보너스 번호가 중복되었습니다.")
       }
     }
-  }
-
-  bonusNumber() {
-    return this.#number
   }
 }

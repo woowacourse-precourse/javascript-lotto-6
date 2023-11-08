@@ -50,11 +50,9 @@ class App {
     this.bonusNumberComment();
 
     const bonusNumber = await MissionUtils.Console.readLineAsync('');
-    this.bonus = new Bonus(bonusNumber, winning);
-    const bonus = this.bonus.bonusNumber();
-    model.bonus = bonus;
+    new Bonus(bonusNumber, winning);
 
-    this.callResults(winning, bonus, counts)
+    this.callResults(winning, model.bonus, counts)
     process.exitCode = 0;
   }
 
