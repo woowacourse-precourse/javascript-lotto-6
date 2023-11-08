@@ -12,6 +12,7 @@ class Lotto {
     }
     for(let i=0; i<6; i++) {
       const num = numbers[i];
+      console.log('num', num)
       this.#validateNumber(num);
     }
     this.#validateDuplicate(numbers);
@@ -25,7 +26,7 @@ class Lotto {
   }
 
   #validateDuplicate(numberArray) {
-    const set = new Set(...numberArray);
+    const set = new Set(numberArray);
     if(set.length!==6) throw new Error("[ERROR] 로또 번호 중 중복된 수가 있습니다.")
   }
 
