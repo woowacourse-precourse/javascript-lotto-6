@@ -54,7 +54,7 @@ describe('로또 판매상 테스트', () => {
   it('1000단위의 금액일 경우, 금액을 리턴', async () => {
     // given
     const MONEY = 10000;
-    mockQuestions([money]);
+    mockQuestions([MONEY]);
 
     // when
     const paid = await vendor.recieveMoney();
