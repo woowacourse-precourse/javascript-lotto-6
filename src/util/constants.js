@@ -4,6 +4,7 @@ export const MESSAGES = Object.freeze({
   INPUT_BONUS_NUMBER: '\n보너스 번호를 입력해 주세요.\n',
 
   OUTPUT_BUY_TICKETS: (num) => `\n${num}개를 구매했습니다.`,
+  OUTPUT_RESULT_TITLE: '\n당첨 통계\n---',
   OUTPUT_RESULT_DETAILS: (rank, { winningCount, matchCount }) => {
     const reward = REWARDS[rank].toLocaleString('ko-KR');
     const bonusMessage = rank === 2 ? ', 보너스 볼 일치' : '';
