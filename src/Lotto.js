@@ -21,7 +21,7 @@ class Lotto {
       this.#numbers
     );
 
-    const isBonus = null;
+    let isBonus = null;
     if (lottoCount === 5)
       isBonus = Generator.isBonusGenerator(userNumbers, this.bonus);
 
