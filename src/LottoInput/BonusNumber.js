@@ -7,17 +7,9 @@ export class BonusNumber {
     }
 
     async bonusNumber() {
-        let bonusNum;
-        while (true) {
-            try {
-                const bonusInput = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
-                bonusNum = Number(bonusInput);
-                new Lotto([...this.winNumbers, bonusNum], true); 
-                break;
-            } catch (error) {
-                MissionUtils.Console.print(error.message);
-            }
-        }
+        const bonusInput = await MissionUtils.Console.readLineAsync("보너스 번호를 입력해 주세요.\n");
+        const bonusNum = Number(bonusInput);
+        new Lotto([...this.winNumbers, bonusNum], true);
         return bonusNum;
     }
 }
