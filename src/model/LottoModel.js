@@ -11,6 +11,8 @@ class LottoModel {
     this.luckyNumbers = [];
     this.bonusNumber = 0;
     this.matchCount = [];
+    this.hasBonus = [];
+    this.result = [];
   }
 
   setPurchaseAmount(inputPrice) {
@@ -47,12 +49,31 @@ class LottoModel {
   }
 
   calculateTotalMatchCount() {
-    this.randomNumbers.map(v => this.calculateSingleMatchCount(v));
+    this.randomNumbers.map(randomNumber => this.calculateSingleMatchCount(randomNumber));
   }
 
   calculateSingleMatchCount(numbers) {
     const randomnum = 13 - new Set([...numbers, ...this.luckyNumbers, this.bonusNumber]).size;
     this.matchCount.push(randomnum);
+  }
+
+  checkBonusNumber() {
+    this.randomNumbers.map(numbers => this.checkSingleBonusNumber(numbers));
+  }
+
+  checkSingleBonusNumber(number) {
+    const haveit = new Set(number).has(this.bonusNumber);
+    this.hasBonus.push(haveit);
+  }
+
+  filterResultCount(count) {
+    return count > 2 || count === 7;
+  }
+
+  calculateResult() {
+    this.result = this.matchCount
+      .map((count, i) => (count === 5 && this.hasBonus[i] ? 7 : count))
+      .filter(count => this.filterResultCount(count));
   }
 }
 

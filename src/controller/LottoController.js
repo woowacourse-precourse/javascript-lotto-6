@@ -17,8 +17,12 @@ class LottoController {
     await this.inputluckyNumbers();
     await this.inputBonusNumber();
     this.lottoModel.calculateTotalMatchCount();
+    this.lottoModel.checkBonusNumber();
+    this.lottoModel.calculateResult();
 
     this.outputView.print(this.lottoModel.matchCount);
+    this.outputView.print(this.lottoModel.hasBonus);
+    this.outputView.print(this.lottoModel.result);
   }
 
   async inputAmount() {
