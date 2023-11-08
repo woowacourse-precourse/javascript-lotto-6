@@ -57,12 +57,12 @@ class App {
 
   printPurchasedLottos() {
     this.lottoList.forEach((lotto) => {
-      const lottoNumbers = [
-        `${lotto
+      const lottoNumbers = 
+        `[${lotto
           .getNumbers()
           .sort((a, b) => a - b)
-          .join(", ")}`,
-      ];
+          .join(", ")}]`,
+      ;
       MissionUtils.Console.print(lottoNumbers);
     });
   }
