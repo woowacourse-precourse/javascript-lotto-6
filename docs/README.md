@@ -41,7 +41,8 @@
 -------
 ## Lotto 클래스
 
-|메세지||설명|
+|메소드 이름|설명|
+|---------|-------------------|
 |checkRange()|1~45 사이가 아닌 숫자의 배열의 길이를 반환한다|
 |getNumbersSet()|
 |countEqualNumbers()|로또 번호에 당첨 번호가 포함된 개수를 반환한다|
@@ -50,6 +51,23 @@
 |checkBonusNumber()|로또 번호와 보너스 번호가 5개 일치할 경우, compareBonusNumber()을 호출해 보너스 번호가 포함되어 있는 여부를 반환한다|
 |compareLottoNumbers()| 로또 번호가 당첨 번호, 보너스 번호가 포함되어 있는지 확인 후 로또 당첨 결과를 반환한다|
 |getLottoRate()|로또 결과와 로또 구입 금액을 가지고 수익률을 구해 반환한다|
+
+--------------------------------
+## App 클래스
+
+|메서드 이름|설명|
+|----------|----------|
+|getLottoTicket()|로또 구입 금액으로 로또 구입 개수를 반환한다|
+|checkLottoPrice()|로또 금액에 대한 예외를 검사한다|
+|makeRandomNumber()| 서로 다른 로또 번호 6개를 생성한 배열을 반환한다|
+|pushArray()| 로또 번호의 배열을 lottoRandomNumber에 push한다.
+|removeSpace()|출력 형식에 맞게 문자열을 설정하고 반환한다|
+|printLottoArray()| 모든 로또 번호를 출력한다|
+|checkBonusNumber()| 보너스 번호에 대한 예외를 검사한다|
+|printLottoResult()|로또 당첨 결과를 출력 형식에 맞춰 출력한다|
+|getLottoNumberArray()| 문자열을 숫자 배열로 반환한다|
+|sortNumber()| 서로 다른 6개의 숫자가 담긴 로또 번호 배열을 오름차순으로 정렬한다|
+|printPurchaseAmount()|로또 구입 개수를 출력 형식에 맞게 출력한다|
 
 
 -------
