@@ -49,12 +49,14 @@ describe('User 클래스 테스트', () => {
       [1, 2, 3, 4, 5, 7],
       [1, 2, 3, 4, 5, 6],
     ];
-    const expectedResult = [1, 1, 1, 1, 1];
     mockRandoms([...randoms]);
 
     const user = new User(5000);
     user.raffleLottos(mainNumbersArray, bonusNumber);
 
-    expect(user.printStatistic()).toEqual(expectedResult);
+    const testCases = [user.printStatistic(), user.calculateReward()];
+    const expectedResult = [[1, 1, 1, 1, 1], 2_031_555_000];
+
+    testCases.forEach((testCase, index) => expect(testCase).toEqual(expectedResult[index]));
   });
 });
