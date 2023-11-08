@@ -16,7 +16,7 @@ class Lottos {
 
   #generateLotto() {
     let lottoNumber = [];
-    lottoNumber = Random.pickUniqueNumbersInRange(1, 45, `${OPTIONS.length}`);
+    lottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
     return lottoNumber;
   }
 
