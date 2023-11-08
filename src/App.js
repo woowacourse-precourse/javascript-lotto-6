@@ -11,6 +11,9 @@ class App {
         Console.print("당첨번호를 입력해주세요.");
         const winningNumber = await this.getWinningNumber();
         Console.print(winningNumber);
+        Console.print("보너스 번호를 입력해 주세요.");
+        const bonusNumber = await this.getBonusNumber(winningNumber);
+        Console.print(bonusNumber);
     }
 
     async getPurchaseAmount() {
@@ -82,10 +85,10 @@ class App {
         }
     }
 
-    async getBonusNumber() {
+    async getBonusNumber(winningNumber) {
         const bonusNumber = await Console.readLineAsync()
             .then((value) => {
-                this.isValidBonusNumber(value);
+                this.isValidBonusNumber(value, winningNumber);
                 return value;
             })
             .catch((err) => {
@@ -94,9 +97,13 @@ class App {
         return bonusNumber;
     }
 
-    isValidBonusNumber(input) {
+    isValidBonusNumber(input, winningNumber) {
+        const winningNumArr = winningNumber.split(",");
         if (!isValidRange(input)) {
             throw new Error("[ERROR] 숫자가 잘못된 형식입니다.");
+        }
+        if (winningNumArr.includes(input)) {
+            throw new Error("[ERROR] 당첨번호와 중복된 번호입니다.");
         }
     }
 }
