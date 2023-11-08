@@ -23,15 +23,10 @@ class Lotto {
     return this.#numbers.includes(number);
   }
 
-  compare(winningLotto, bonus) {
+  compare(winningLotto) {
     const lottoMatch = this.#numbers.filter(
       (lottoNumber) => winningLotto.includes(lottoNumber),
     ).length;
-
-    if (lottoMatch === 5 && this.#numbers.includes(bonus)) {
-      return '5-b';
-    }
-
     return lottoMatch;
   }
 }
