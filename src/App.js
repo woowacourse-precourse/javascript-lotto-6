@@ -110,6 +110,23 @@ class App {
     return this.printResult(matchCounts);
   }
 
+  async printResult(matchCounts) {
+    let totalReward = 0;
+    MissionUtils.Console.print(STRINGS.RESULT_THREE_CORRECT(matchCounts[3]));
+    totalReward += 5000 * matchCounts[3];
+    MissionUtils.Console.print(STRINGS.RESULT_FOUR_CORRECT(matchCounts[4]));
+    totalReward += 50000 * matchCounts[4];
+    MissionUtils.Console.print(STRINGS.RESULT_FIVE_CORRECT(matchCounts[5]));
+    totalReward += 1500000 * matchCounts[5];
+    MissionUtils.Console.print(
+      STRINGS.RESULT_FIVE_BONUS_CORRECT(matchCounts[5_1]),
+    );
+    totalReward += 30000000 * matchCounts[5];
+    MissionUtils.Console.print(STRINGS.RESULT_SIX_CORRECT(matchCounts[6]));
+    totalReward += 2000000000 * matchCounts[5];
+
+    return calculateRateOfReturn(totalReward);
+  }
   }
 }
 
