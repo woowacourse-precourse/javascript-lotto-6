@@ -11,6 +11,6 @@ export default class Provider {
   }
 
   provideLotto() {
-    return Random.pickUniqueNumbersInRange(RULES.range.start, RULES.range.end, RULES.lottoLength);
+    return Random.pickUniqueNumbersInRange(RULES.range.start, RULES.range.end, RULES.lottoLength).sort((first, second) => first - second);
   }
 }

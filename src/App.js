@@ -2,7 +2,8 @@ import Computer from "./Computer.js";
 
 class App {
   async play() {
-    Computer.createComputer().simulateLotto();
+    const computer = Computer.createComputer()
+    await computer.simulateLotto();
   }
 }
 
