@@ -50,5 +50,30 @@ class Input {
       throw new Error('[ERROR] 당첨 번호 6개는 중복되지 않아야 합니다.');
     }
   }
+
+  async getBonusNumber(winningNumbers) {
+    try {
+      const input = await Console.readLineAsync(
+        '\n보너스 번호를 입력해 주세요.\n',
+      );
+      const bonusNumber = parseInt(input);
+
+      this.validateBonusNumber(bonusNumber, winningNumbers);
+      return bonusNumber;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
+  validateBonusNumber(bonusNumber, winningNumbers) {
+    if (isNaN(bonusNumber)) {
+      throw new Error('[ERROR] 숫자 1개를 입력해야 합니다.');
+    }
+    if (winningNumbers.includes(bonusNumber)) {
+      throw new Error(
+        '[ERROR] 보너스 번호는 앞서 입력한 당첨 번호와 중복되지 않아야 합니다.',
+      );
+    }
+  }
 }
 export default Input;
