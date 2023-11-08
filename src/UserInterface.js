@@ -127,10 +127,14 @@ const UserInterface = () => {
     Console.print("5개 일치 (1,500,000원) - " + rankCount['3'] + "개");
     Console.print("5개 일치, 보너스 볼 일치 (30,000,000원) - " + rankCount['2'] + "개");
     Console.print("6개 일치 (2,000,000,000원) - " + rankCount['1'] + "개");
+
   }
 
+  const printProfitRate = (profitRate) => {
+    Console.print(`총 수익률은 ${profitRate.toFixed(1)}%입니다.`);
+  }
 
-  return { getLottoNumbers, printLottoNumbers, getWinningNumbers, getBonusNumber, printResult };
+  return { getLottoNumbers, printLottoNumbers, getWinningNumbers, getBonusNumber, printResult, printProfitRate };
 };
 
 export default UserInterface;
