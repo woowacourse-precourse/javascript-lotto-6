@@ -1,3 +1,6 @@
+import ERROR_MESSAGE from './constants/ErrorMessage.js';
+import Validation from './utils/Validation.js';
+
 class Lotto {
   #numbers;
 
@@ -8,11 +11,35 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(ERROR_MESSAGE.LOTTO_LENGTH);
+    }
+    this.#validateStringContained(numbers);
+    this.#validateInRange(numbers);
+    this.#validateOverlap(numbers);
+  }
+
+  #validateOverlap(numbers) {
+    if (Validation.overlap(numbers)) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NO_OVERLAP);
+    }
+  }
+
+  #validateStringContained(numbers) {
+    if (Validation.stringContained(numbers)) {
+      throw new Error(ERROR_MESSAGE.LOTTO_NO_STRING);
+    }
+  }
+
+  #validateInRange(numbers) {
+    if (Validation.inRange(numbers)) {
+      throw new Error(ERROR_MESSAGE.LOTTO_IN_RANGE);
     }
   }
 
   // TODO: 추가 기능 구현
+  getLotto() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
