@@ -10,10 +10,9 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
-    }
+    Validate.checkNumberCount(numbers);
     Validate.checkDuplicateNumber(numbers);
+
     numbers.forEach((number) => Validate.checkNumberRange(number));
     numbers.forEach((number) => Validate.checkNumberType(number));
   }

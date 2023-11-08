@@ -11,6 +11,11 @@ const Validate = {
       throw new Error(ERROR.purchaseThousands);
     }
   },
+  checkNumberCount(numbers) {
+    if (numbers.length !== 6) {
+      throw new Error(ERROR.lottoCount);
+    }
+  },
   checkDuplicateNumber(numbers) {
     const set = new Set(numbers);
     if (numbers.length !== set.size) {

@@ -10,6 +10,7 @@ const ERROR = {
   lottoIsNumberType: `${ERROR_HEADER} 로또 번호는 숫자형이어야 합니다.`,
   lottoRange: `${ERROR_HEADER} 로또 번호는 1부터 45 사이의 숫자여야 합니다.`,
   lottoContainComma: `${ERROR_HEADER} 로또 번호는 쉼표(,)를 기준으로 구분해야 합니다.`,
+  lottoCount: `${ERROR_HEADER} 로또 번호는 6개여야 합니다.`,
 };
 Object.freeze(ERROR);
 
