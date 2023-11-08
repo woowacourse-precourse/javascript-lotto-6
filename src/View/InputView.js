@@ -12,11 +12,11 @@ const InputView = {
     }
   },
 
-  async readWinningNumbers() {
+  async readLottoNumber() {
     try {
-      const winningNumbers = await Console.readLineAsync(INPUT_MESSAGE.winning_numbers);
+      const lottoNumber = await Console.readLineAsync(INPUT_MESSAGE.lotto_numbers);
 
-      return winningNumbers;
+      return lottoNumber;
     } catch (error) {
       throw new Error(error);
     }

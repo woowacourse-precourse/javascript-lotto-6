@@ -6,7 +6,7 @@ import {
 import {
   BONUS_NUMBER_ERROR_MESSAGE,
   PURCHASE_AMOUNT_ERROR_MESSAGE,
-  WINNING_NUMBERS_ERROR_MESSAGE,
+  LOTTO_NUMBERS_ERROR_MESSAGE,
 } from "./constants/messages.js";
 
 const Validator = Object.freeze({
@@ -28,30 +28,33 @@ const Validator = Object.freeze({
     }
   },
 
-  validateWinningNumbers: (winningNumbers) => {
-    if (isDuplicated(winningNumbers)) {
-      throw WINNING_NUMBERS_ERROR_MESSAGE.duplicated;
+  validateLottoNumbers: (numbers) => {
+    const lottoNumbers = numbers.map(String);
+
+    if (isDuplicated(lottoNumbers)) {
+      throw LOTTO_NUMBERS_ERROR_MESSAGE.duplicated;
     }
 
-    if (!hasCorrectLength(winningNumbers)) {
-      throw WINNING_NUMBERS_ERROR_MESSAGE.empty_numbers;
+
+    if (!hasCorrectLength(lottoNumbers)) {
+      throw LOTTO_NUMBERS_ERROR_MESSAGE.empty_numbers;
     }
 
-    winningNumbers.map((number) => {
+    lottoNumbers.map((number) => {
       if (isEmpty(number)) {
-        throw WINNING_NUMBERS_ERROR_MESSAGE.empty_numbers;
+        throw LOTTO_NUMBERS_ERROR_MESSAGE.empty_numbers;
       }
 
       if (!isNumeric(number)) {
-        throw WINNING_NUMBERS_ERROR_MESSAGE.invalid_character;
+        throw LOTTO_NUMBERS_ERROR_MESSAGE.invalid_character;
       }
 
       if (!isInteger(number)) {
-        throw WINNING_NUMBERS_ERROR_MESSAGE.not_integer;
+        throw LOTTO_NUMBERS_ERROR_MESSAGE.not_integer;
       }
 
       if (!isInRange(number)) {
-        throw WINNING_NUMBERS_ERROR_MESSAGE.not_in_range;
+        throw LOTTO_NUMBERS_ERROR_MESSAGE.not_in_range;
       }
     });
   },

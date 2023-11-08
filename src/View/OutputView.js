@@ -8,20 +8,20 @@ const OutputView = {
     Console.print(message);
   },
 
-  printLotteries(lotteries) {
-    this.print(OUTPUT_MESSAGE.purchased(lotteries.length));
-    lotteries.map((lottery) => {
-      this.print(JSON.stringify(lottery).replace(/,/g, ', '));
+  printLotteries(lottos) {
+    this.print(OUTPUT_MESSAGE.purchased(lottos.length));
+    lottos.map((lotto) => {
+      this.print(lotto.toString());
     });
   },
 
   printResult(matchResult) {
-    this.print(OUTPUT_MESSAGE.winningResult);
-    this.print(OUTPUT_MESSAGE.threeNumbersCorrect(matchResult.threeNumbersCorrect));
-    this.print(OUTPUT_MESSAGE.fourNumbersCorrect(matchResult.fourNumbersCorrect));
-    this.print(OUTPUT_MESSAGE.fiveNumbersCorrect(matchResult.fiveNumbersCorrect));
-    this.print(OUTPUT_MESSAGE.fiveNumbersAndBonusBallCorrect(matchResult.fiveNumbersAndBonusBallCorrect));
-    this.print(OUTPUT_MESSAGE.sixNumbersCorrect(matchResult.sixNumbersCorrect));
+    this.print(OUTPUT_MESSAGE.lottoResult);
+    this.print(OUTPUT_MESSAGE.fifthPlaceWin(matchResult.fifthPlaceWin));
+    this.print(OUTPUT_MESSAGE.fourthPlaceWin(matchResult.fourthPlaceWin));
+    this.print(OUTPUT_MESSAGE.thirdPlaceWin(matchResult.thirdPlaceWin));
+    this.print(OUTPUT_MESSAGE.secondPlaceWin(matchResult.secondPlaceWin));
+    this.print(OUTPUT_MESSAGE.firstPlaceWin(matchResult.firstPlaceWin));
   },
 
   printIncomePercentage(incomePercentage) {
