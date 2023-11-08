@@ -167,7 +167,7 @@ flowchart TD
   - `4개` 번호가 일치하면 `4등`이고 `50,000원`의 수익을 얻는다.
   - `3개` 번호가 일치하면 `5등`이고 `5,000원`의 수익을 얻는다.
 
-### 🟢 4-2. 당첨 내역 출력
+### 🔵 4-2. 당첨 내역 출력
 
 - ✏️ 기능 설명
 
@@ -185,7 +185,7 @@ flowchart TD
       5개 일치, 보너스 볼 일치 (30,000,000원) - 0개
       6개 일치 (2,000,000,000원) - 0개
 
-### 🟢 4-3. 총 수익률 출력
+### 🔵 4-3. 총 수익률 출력
 
 - ✏️ 기능 설명
 
@@ -230,14 +230,14 @@ flowchart TD
 <td>11월 7일 (화)</td>
 <td>코드 점검 및 리팩토링</td>
 <td>3 Hours</td>
-<td style="text-align: center">🟡</td>
-<td>-</td>
+<td style="text-align: center">🟢</td>
+<td>5 Hours</td>
 </tr>
 <tr>
 <td>11월 8일 (수)</td>
 <td>과제 제출</td>
 <td>1 Hours</td>
-<td style="text-align: center">🔴</td>
-<td>-</td>
+<td style="text-align: center">🟢</td>
+<td>3 Hours</td>
 </tr>
 </table>
