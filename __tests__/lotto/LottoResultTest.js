@@ -16,7 +16,7 @@ describe("1개의 로또 결과", ()=>{
         expect(winWinningLottoResult.getBonusNumberType()).toBe(BONUS_NUMBER_TYPE.useless);
     })
 
-    test("당첨 조건 과 비교해 당첨 여부 를 확인 한다.", ()=>{
+    test("당첨 조건 과 당첨 번호 일치 개수, 보너스 번호 일치 개수 비교해 당첨 여부 를 확인 한다.", ()=>{
         expect(winWinningLottoResult.isWin()).toBe(true)
         expect(loseWinningLottoResult.isWin()).toBe(false)
     })
