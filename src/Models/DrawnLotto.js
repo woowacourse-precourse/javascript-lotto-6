@@ -1,4 +1,4 @@
-import Lotto from "./Lotto.js";
+import Lotto from "../Lotto.js";
 import DrawnLottoValidator from "../Validator/DrawnLottoValidator.js";
 
 class DrawnLotto extends Lotto {

@@ -16,7 +16,7 @@ export default class AnnounceResult {
 
   static #calculateYieldRate(result, purchaseAmount) {
     const lottoYieldCalculator = new LottoYieldCalculator();
-    const yieldRate = lottoYieldCalculator.caculateYieldRate(
+    const yieldRate = lottoYieldCalculator.calculateYieldRate(
       result,
       purchaseAmount.getAmount()
     );

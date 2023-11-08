@@ -20,8 +20,8 @@ export const LOTTO_SETTINGS = deepFreeze({
 
 export class LottoSettings {
   settings;
-  constructor() {
-    this.settings = LOTTO_SETTINGS;
+  constructor(settings = LOTTO_SETTINGS) {
+    this.settings = settings;
   }
 
   getPrizeForRank(rank) {
