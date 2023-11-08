@@ -33,8 +33,8 @@ describe("로또 클래스 테스트", () => {
     ];
     const bonusNumber = [4, 5];
     const outputs = [
-      [3, 1],
-      [6, 0],
+      [3, true],
+      [6, false],
     ];
 
     const lottoGame = new Lotto([1, 2, 3, 32, 39, 45]);
