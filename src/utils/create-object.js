@@ -3,7 +3,7 @@ import { inputMethod } from './index.js';
 import { uiConstants } from '../constants/index.js';
 
 export async function createPurchaseAmount() {
-  const inputAmount = await await inputMethod(
+  const inputAmount = await inputMethod(
     uiConstants.RANDOM_NUMBER_PURCHASE_MONEY_MESSAGE,
   );
   const purchaseAmount = new PurchaseAmount(inputAmount);

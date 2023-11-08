@@ -11,5 +11,7 @@ const uiConstants = {
   SIX_WINNING: '6개 일치 (2,000,000,000원) - ',
   FIVE_BONUS_WINNING: '5개 일치, 보너스 볼 일치 (30,000,000원) - ',
   CNT: '개',
+  RETURN: '총 수익률은 ',
+  END: '%입니다.',
 };
 export default uiConstants;

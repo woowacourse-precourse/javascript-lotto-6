@@ -12,6 +12,10 @@ const magicNumber = {
   FIVE: 5,
   SIX: 6,
   SEVEN: 7,
+  WINNING_AMOUNT: [0, 0, 0, 5000, 50000, 1500000, 2000000000, 30000000],
+  PURCHASE_AMOUNT: 'purchaseAmount',
+  LOTTO: 'lotto',
+  BONUS: 'bonus',
 };
 
 export default magicNumber;

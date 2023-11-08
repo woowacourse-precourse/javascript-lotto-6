@@ -7,7 +7,7 @@ describe('구입 비용 클래스 테스트', () => {
       new PurchaseAmount(['aosjd']);
     }).toThrow(errorConstants.NOT_A_NUMBER);
   });
-  test('공백이 있는지 체크', () => {
+  test('입력받은 수 양옆에 공백이 있는지 체크', () => {
     expect(() => {
       new PurchaseAmount(['  1000 ']);
     }).toThrow(errorConstants.NOT_EMPTY);

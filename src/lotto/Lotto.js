@@ -104,7 +104,7 @@ export default class Lotto {
         if (cnt === magicNumber.FIVE && bonusCnt[idx]) {
           moneyArr[magicNumber.EIGHT + magicNumber.MINUS_ONE] +=
             magicNumber.START_RANGE;
-          moneyArr[cnt] = magicNumber.ZERO;
+          moneyArr[cnt] += magicNumber.MINUS_ONE;
         }
       }
     });
