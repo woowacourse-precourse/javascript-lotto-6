@@ -3,9 +3,9 @@ import {
   LIMIT_PER_DAY_PURCHASABLE_TOTAL_PRICE,
 } from '../../src/constants/lotto';
 import { ERROR_MESSAGE } from '../../src/constants/message';
-import { ValidatePurchasePriceUserInput } from '../../src/validator/ValidateUserInput';
+import PurchasePriceUserInputValidator from '../../src/validator/PurchasePriceUserInputValidator';
 
-describe('class ValidatePurchasePriceUserInput test', () => {
+describe('class PurchasePriceUserInputValidator test', () => {
   test.each(['"1000a"', '사딸라'])(
     '숫자가 아닌 값이 들어왔을때 숫자가 아니라는 메세지와 함께 예외가 발생해야 한다.',
     (purchasePrice) => {
@@ -13,7 +13,7 @@ describe('class ValidatePurchasePriceUserInput test', () => {
       // when
       // then
       expect(() => {
-        new ValidatePurchasePriceUserInput(purchasePrice);
+        new PurchasePriceUserInputValidator(purchasePrice);
       }).toThrow(ERROR_MESSAGE.USER_INPUT.IS_NOT_ONLY_NUMBER_TYPE);
       expect(ERROR_MESSAGE.USER_INPUT.IS_NOT_ONLY_NUMBER_TYPE).toBeDefined();
     },
@@ -26,7 +26,7 @@ describe('class ValidatePurchasePriceUserInput test', () => {
     // when
     // then
     expect(() => {
-      new ValidatePurchasePriceUserInput(purchasePrice);
+      new PurchasePriceUserInputValidator(purchasePrice);
     }).toThrow(ERROR_MESSAGE.USER_INPUT.LOWER_THAN_MINIMUM_PURCHASE_PRICE);
     expect(
       ERROR_MESSAGE.USER_INPUT.LOWER_THAN_MINIMUM_PURCHASE_PRICE,
@@ -40,7 +40,7 @@ describe('class ValidatePurchasePriceUserInput test', () => {
     // when
     // then
     expect(() => {
-      new ValidatePurchasePriceUserInput(purchasePrice);
+      new PurchasePriceUserInputValidator(purchasePrice);
     }).toThrow(ERROR_MESSAGE.USER_INPUT.HAVE_MINUS_SIGN);
     expect(ERROR_MESSAGE.USER_INPUT.HAVE_MINUS_SIGN).toBeDefined();
   });
@@ -52,7 +52,7 @@ describe('class ValidatePurchasePriceUserInput test', () => {
     // when
     // then
     expect(() => {
-      new ValidatePurchasePriceUserInput(purchasePrice);
+      new PurchasePriceUserInputValidator(purchasePrice);
     }).toThrow(ERROR_MESSAGE.USER_INPUT.IS_NOT_MULTIPLE_SELLING_PRICE);
     expect(
       ERROR_MESSAGE.USER_INPUT.IS_NOT_MULTIPLE_SELLING_PRICE,
@@ -66,7 +66,7 @@ describe('class ValidatePurchasePriceUserInput test', () => {
     // when
     // then
     expect(() => {
-      new ValidatePurchasePriceUserInput(purchasePrice);
+      new PurchasePriceUserInputValidator(purchasePrice);
     }).toThrow(ERROR_MESSAGE.USER_INPUT.HAVE_SPACING);
     expect(ERROR_MESSAGE.USER_INPUT.HAVE_SPACING).toBeDefined();
   });
@@ -78,7 +78,7 @@ describe('class ValidatePurchasePriceUserInput test', () => {
     // when
     // then
     expect(() => {
-      new ValidatePurchasePriceUserInput(purchasePrice);
+      new PurchasePriceUserInputValidator(purchasePrice);
     }).toThrow(ERROR_MESSAGE.USER_INPUT.PURCHASE_PRICE.HAVE_START_NUMBER_ZERO);
     expect(
       ERROR_MESSAGE.USER_INPUT.PURCHASE_PRICE.HAVE_START_NUMBER_ZERO,
@@ -94,7 +94,7 @@ describe('class ValidatePurchasePriceUserInput test', () => {
     // when
     // then
     expect(() => {
-      new ValidatePurchasePriceUserInput(purchasePrice);
+      new PurchasePriceUserInputValidator(purchasePrice);
     }).toThrow(ERROR_MESSAGE.USER_INPUT.IS_OVER_PURCHASABLE_PRICE_OF_PER_DAY);
     expect(
       ERROR_MESSAGE.USER_INPUT.IS_OVER_PURCHASABLE_PRICE_OF_PER_DAY,

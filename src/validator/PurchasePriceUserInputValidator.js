@@ -6,7 +6,7 @@ import { ERROR_MESSAGE } from '../constants/message.js';
 import paramType from '../lib/paramType/src/paramType.js';
 import { PurchasePriceInputError } from '../errors/UserInputErrors.js';
 
-export class ValidatePurchasePriceUserInput {
+export default class PurchasePriceUserInputValidator {
   constructor(purchasePrice, _ = paramType(purchasePrice, 'string')) {
     this.#validate(purchasePrice);
   }
