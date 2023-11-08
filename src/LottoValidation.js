@@ -10,7 +10,7 @@ export const ERROR_MESSAGES = Object.freeze({
 class LottoValidation {
   static validate(numbers) {
     if (
-      !this.#isNumbersInRange(
+      !this.isNumbersInRange(
         numbers,
         LOTTO_NUMBER_RANGE.MIN,
         LOTTO_NUMBER_RANGE.MAX
@@ -19,26 +19,26 @@ class LottoValidation {
       throw new LottoNumbersError(ERROR_MESSAGES.NUMBER_NOT_IN_RANGE);
     }
 
-    if (!this.#isLengthMatch(numbers, LOTTO_NUMBER_COUNT)) {
+    if (!this.isLengthMatch(numbers, LOTTO_NUMBER_COUNT)) {
       throw new LottoNumbersError(ERROR_MESSAGES.LENGTH_NOT_MATCHED);
     }
 
-    if (!this.#hasUniqueElements(numbers)) {
+    if (!this.hasUniqueElements(numbers)) {
       throw new LottoNumbersError(ERROR_MESSAGES.DUPLICATED_NUMBERS);
     }
   }
 
-  static #isNumbersInRange(numbers, min, max) {
+  static isNumbersInRange(numbers, min, max) {
     return numbers.every(
       (number) => Number.isInteger(number) && number >= min && number <= max
     );
   }
 
-  static #isLengthMatch(array, length) {
+  static isLengthMatch(array, length) {
     return array.length === length;
   }
 
-  static #hasUniqueElements(array) {
+  static hasUniqueElements(array) {
     return array.length === new Set(array).size;
   }
 }
