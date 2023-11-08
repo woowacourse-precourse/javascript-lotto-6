@@ -1,5 +1,9 @@
 import Assert from "../src/utils/Assert";
-import { PurchaseValueError, WinningNumberError } from "../src/utils/Error";
+import {
+  BonusNumberError,
+  PurchaseValueError,
+  WinningNumberError,
+} from "../src/utils/Error";
 
 describe("Assert 클래스 테스트", () => {
   /** @type {Assert} */
@@ -28,9 +32,9 @@ describe("Assert 클래스 테스트", () => {
 
   test("당첨 번호 입력 검증: 통과해야 할 케이스", () => {
     const inputs = [
-      "1,2,3,4,5,6",
-      "1, 3, 5, 14, 22, 45",
-      "1, 8, 11, 31, 41, 42",
+      [1, 2, 3, 4, 5, 6],
+      [1, 3, 5, 14, 22, 45],
+      [1, 8, 11, 31, 41, 42],
     ];
 
     inputs.forEach((input) => {
@@ -41,7 +45,7 @@ describe("Assert 클래스 테스트", () => {
   });
 
   test("당첨 번호 입력 검증: 6개로 나누어지지 않음", () => {
-    const inputs = ["1,2,3,4,5", "1,2,3,4,5,6,7", "", "1 2 3 4 5 6"];
+    const inputs = [[1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 6, 7], [], [123456]];
 
     inputs.forEach((input) => {
       expect(() => assert.assertWinningNumber(input)).toThrow(
@@ -52,14 +56,14 @@ describe("Assert 클래스 테스트", () => {
 
   test("당첨 번호 입력 검증: 유효한 숫자 범위가 아님", () => {
     const inputs = [
-      "a,1,2,3,4,5",
-      ",,,,,",
-      "0,1,2,3,4,5",
-      "1,2,3,4,5,46",
-      "1.0,2.0,3,4,5,6",
+      [NaN, 1, 2, 3, 4, 5],
+      [0, 1, 2, 3, 4, 5],
+      [1, 2, 3, 4, 5, 46],
     ];
 
     inputs.forEach((input) => {
+      console.log(input);
+
       expect(() => assert.assertWinningNumber(input)).toThrow(
         new WinningNumberError(WinningNumberError.TYPE_OUT_OF_RANGE)
       );
@@ -67,11 +71,21 @@ describe("Assert 클래스 테스트", () => {
   });
 
   test("당첨 번호 입력 검증: 중복된 숫자가 존재함", () => {
-    const inputs = ["1,1,2,3,4,5"];
+    const inputs = [[1, 1, 2, 3, 4, 5]];
 
     inputs.forEach((input) => {
       expect(() => assert.assertWinningNumber(input)).toThrow(
         new WinningNumberError(WinningNumberError.TYPE_DUPLICATED)
+      );
+    });
+  });
+
+  test("보너스 번호 입력 검증: 통과해야 할 케이스", () => {
+    const inputs = [1, 5, 10, 45];
+
+    inputs.forEach((input) => {
+      expect(() => assert.assertBounsNumber(input)).not.toThrow(
+        BonusNumberError
       );
     });
   });
