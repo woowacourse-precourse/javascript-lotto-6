@@ -128,27 +128,27 @@ describe('SetGame 클래스', () => {
     });
   });
 
-//   describe('#calculateRateOfReturn 메소드', () => {
-//     test('당첨 현황(winningStatus)과 구매금액(purchaseAmount)으로 수익률을 계산 및 반환.', () => {
-//       // given
-//       const PURCHASE_AMOUNT = LOTTO_RULE.UNIT * 2;
-//       const WINNING_STATUS = { 3: 2, 4: 1, 5: 0, 6: 0 };
-//       const SUM_OF_PROFIT = WINNIG_PROFITS[3] * 2 + WINNIG_PROFITS[4];
-//       const RATE_OF_RETURN = ((SUM_OF_PROFIT / PURCHASE_AMOUNT) * 100).toFixed(
-//         1,
-//       );
+  //   describe('#calculateRateOfReturn 메소드', () => {
+  //     test('당첨 현황(winningStatus)과 구매금액(purchaseAmount)으로 수익률을 계산 및 반환.', () => {
+  //       // given
+  //       const PURCHASE_AMOUNT = LOTTO_RULE.UNIT * 2;
+  //       const WINNING_STATUS = { 3: 2, 4: 1, 5: 0, 6: 0 };
+  //       const SUM_OF_PROFIT = WINNIG_PROFITS[3] * 2 + WINNIG_PROFITS[4];
+  //       const RATE_OF_RETURN = ((SUM_OF_PROFIT / PURCHASE_AMOUNT) * 100).toFixed(
+  //         1,
+  //       );
 
-//       // when
-//       mockRandoms([
-//         [1, 2, 3, 4, 5, 6],
-//         [3, 4, 5, 6, 7, 8],
-//       ]);
-//       const setGame = new SetGame(PURCHASE_AMOUNT);
+  //       // when
+  //       mockRandoms([
+  //         [1, 2, 3, 4, 5, 6],
+  //         [3, 4, 5, 6, 7, 8],
+  //       ]);
+  //       const setGame = new SetGame(PURCHASE_AMOUNT);
 
-//       // then
-//       expect(setGame.calculateRateOfReturn(WINNING_STATUS)).toBe(
-//         RATE_OF_RETURN,
-//       );
-//     });
-//   });
+  //       // then
+  //       expect(setGame.calculateRateOfReturn(WINNING_STATUS)).toBe(
+  //         RATE_OF_RETURN,
+  //       );
+  //     });
+  //   });
 });

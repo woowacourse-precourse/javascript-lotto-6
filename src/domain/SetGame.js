@@ -55,7 +55,8 @@ class SetGame {
   calcProfit(winningStatus) {
     let sumProfit = 0;
     for (let winningNumber in winningStatus) {
-      sumProfit += WINNING_PROFITS[winningNumber] * winningStatus[winningNumber];
+      sumProfit +=
+        WINNING_PROFITS[winningNumber] * winningStatus[winningNumber];
     }
     const profit = ((sumProfit / this.#buyAmount) * 100).toFixed(1);
     return profit;
