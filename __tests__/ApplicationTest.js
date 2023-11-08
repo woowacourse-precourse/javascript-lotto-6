@@ -178,14 +178,14 @@ describe("로또 테스트", () => {
   });
 
   test("보너스 입력값이 랜덤 배열에 포함 여부 테스트", () => {
-    const app = new App();
-    app.bonusNumber = 20;
+    const lottoManagement = new LottoManagement();
+    const bonusNumber = 20;
     const randomArrs = [
       new Lotto([1, 2, 3, 4, 5, 6]),
       new Lotto([7, 8, 9, 10, 11, 12]),
     ];
 
-    const result = app.countBonuses(randomArrs);
+    const result = lottoManagement.countBonuses(randomArrs, bonusNumber);
 
     expect(result).toEqual([0, 0]);
   });
