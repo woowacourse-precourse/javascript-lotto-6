@@ -3,7 +3,6 @@ import { QUERY, TEMPLATE, WINNING_STATISTICS } from './LottoMessage.js';
 
 class View {
   static #DELIMITER = ',';
-  static #DIVISION_LINE = '---';
 
   static async askPurchaseAmount() {
     const answer = await Console.readLineAsync(QUERY.purchaseAmount);
@@ -26,7 +25,8 @@ class View {
     View.print(message);
   }
 
-  static printSortedLottos(sortedLottos) {
+  static printLottos(lottos) {
+    const sortedLottos = View.#getSorted(lottos);
     const message = sortedLottos.reduce(
       (acc, cur) => acc + TEMPLATE.sortedLotto(cur.join(`${this.#DELIMITER} `)),
       '',
@@ -34,40 +34,42 @@ class View {
     View.print(message);
   }
 
-  static printWinningResults(resultArray) {
-    View.print(WINNING_STATISTICS);
-    View.print(View.#DIVISION_LINE);
+  static #getSorted(arrays) {
+    return arrays.map((array) => array.sort((a, b) => a - b));
+  }
 
-    const message = this.#getWinningResultsMessage(resultArray);
+  static printWinningResults(winningResults) {
+    let message = WINNING_STATISTICS;
+    message += this.#getWinningResultsMessage(winningResults);
     View.print(message);
   }
 
-  static #getWinningResultsMessage(resultArray) {
+  static #getWinningResultsMessage(winningResults) {
     let message = '';
-    const reversedResultMap = View.#getReversedResultMap(resultArray);
-    reversedResultMap.forEach((count, ranking) => {
+    const reversedMap = View.#getReversedMap(winningResults);
+    reversedMap.forEach((count, ranking) => {
       message += TEMPLATE.winnigResultsBy[ranking](count);
     });
     return message;
   }
 
-  static #getReversedResultMap(resultArray) {
-    return new Map(resultArray.reverse());
+  static #getReversedMap(array) {
+    return new Map(array.reverse());
   }
 
   static printProfitRate(profitRate) {
-    const trimmedRate = View.getTrimmedRate(profitRate);
+    const trimmedRate = View.#getTrimmedRate(profitRate);
     const message = TEMPLATE.profitRate(trimmedRate);
     View.print(message);
   }
 
-  static getTrimmedRate(rate) {
-    const roundedRate = View.getRoundedRate(rate);
+  static #getTrimmedRate(rate) {
+    const roundedRate = View.#getRoundedRate(rate);
     const includesDot = roundedRate.toString().includes('.');
     return includesDot ? roundedRate : `${roundedRate}.0`;
   }
 
-  static getRoundedRate(rate) {
+  static #getRoundedRate(rate) {
     return Math.round(rate * 10) / 10;
   }
 

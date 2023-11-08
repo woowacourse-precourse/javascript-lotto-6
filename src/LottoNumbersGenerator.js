@@ -2,7 +2,7 @@ import { Random } from '@woowacourse/mission-utils';
 import { LOTTO } from './LottoInfo.js';
 
 class LottoNumbersGenerator {
-  generate() {
+  static generate() {
     return Random.pickUniqueNumbersInRange(
       LOTTO.number.min,
       LOTTO.number.max,

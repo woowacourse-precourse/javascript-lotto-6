@@ -16,7 +16,7 @@ class WinningResults {
     this.#resultMap.set(ranking, rankingCount + 1);
   }
 
-  getResultArray() {
+  get() {
     return [...this.#resultMap];
   }
 

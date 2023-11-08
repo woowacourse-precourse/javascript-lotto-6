@@ -6,16 +6,17 @@ const QUERY = {
 Object.freeze(QUERY);
 
 const ERROR = {
-  falsy: '[ERROR] 정확한 숫자를 입력하셔야 합니다.',
-  notBeDividedByThousand: '[ERROR] 1000으로 나누어 떨어져야 합니다.',
-  notSix: '[ERROR] 로또 번호는 6개여야 합니다.',
-  notUnique: '[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.',
-  notOneToFortyFive: '[Error] 로또 번호는 1에서 45 사이의 숫자여야 합니다.',
-  notUniqueBonusNumber: '[ERROR] 로또 번호에 보너스 번호 숫자가 없어야 합니다.',
+  falsy: '[ERROR] 정확한 숫자를 입력하셔야 합니다.\n',
+  notBeDividedByThousand: '[ERROR] 1000으로 나누어 떨어져야 합니다.\n',
+  notSix: '[ERROR] 로또 번호는 6개여야 합니다.\n',
+  notUnique: '[ERROR] 로또 번호는 중복된 숫자가 없어야 합니다.\n',
+  notOneToFortyFive: '[Error] 로또 번호는 1에서 45 사이의 숫자여야 합니다.\n',
+  notUniqueBonusNumber:
+    '[ERROR] 로또 번호에 보너스 번호 숫자가 없어야 합니다.\n',
 };
 Object.freeze(ERROR);
 
-const WINNING_STATISTICS = '\n당첨 통계';
+const WINNING_STATISTICS = '\n당첨 통계\n---\n';
 
 const WINNING_RESULTS_BY = {
   1: (count) => `6개 일치 (2,000,000,000원) - ${count}개\n`,
@@ -27,9 +28,9 @@ const WINNING_RESULTS_BY = {
 Object.freeze(WINNING_RESULTS_BY);
 
 const TEMPLATE = {
+  winnigResultsBy: WINNING_RESULTS_BY,
   lottoCount: (lottoCount) => `\n${lottoCount}개를 구매했습니다.`,
   sortedLotto: (sortedLotto) => `[${sortedLotto}]\n`,
-  winnigResultsBy: WINNING_RESULTS_BY,
   profitRate: (profitRate) => `총 수익률은 ${profitRate}%입니다.`,
 };
 Object.freeze(TEMPLATE);

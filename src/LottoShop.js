@@ -1,11 +1,9 @@
 import Lotto from './Lotto.js';
 import { LOTTO } from './LottoInfo.js';
 import { ERROR } from './LottoMessage.js';
-import LottoNumbersGenerator from './RandomNumbersGenerator.js';
+import LottoNumbersGenerator from './LottoNumbersGenerator.js';
 
 class LottoShop {
-  #numbersGenerator = new LottoNumbersGenerator();
-
   sellTo(purchaser, amount) {
     this.#validate(amount);
 
@@ -21,7 +19,7 @@ class LottoShop {
   #createLottos(number) {
     const lottos = Array.from(
       { length: number },
-      () => new Lotto(this.#numbersGenerator.generate()),
+      () => new Lotto(LottoNumbersGenerator.generate()),
     );
     return lottos;
   }

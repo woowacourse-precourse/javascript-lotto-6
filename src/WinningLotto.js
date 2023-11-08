@@ -1,3 +1,4 @@
+import Lotto from './Lotto.js';
 import { LOTTO, MATCHING_COUNT } from './LottoInfo.js';
 import { ERROR } from './LottoMessage.js';
 
@@ -5,8 +6,8 @@ class WinningLotto {
   #lotto;
   #bonusNumber;
 
-  constructor(lotto, bonusNumber) {
-    this.#lotto = lotto;
+  constructor(winningNumbers, bonusNumber) {
+    this.#lotto = new Lotto(winningNumbers);
     this.#validate(bonusNumber);
     this.#bonusNumber = bonusNumber;
   }

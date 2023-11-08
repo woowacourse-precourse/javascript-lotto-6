@@ -1,4 +1,3 @@
-import Lotto from './Lotto.js';
 import LottoPurchaser from './LottoPurchaser.js';
 import LottoShop from './LottoShop.js';
 import View from './View.js';
@@ -13,12 +12,12 @@ class LottoGame {
     await this.#purchaseLottos();
 
     View.printLottoCount(this.#lottoPurchaser.getLottoCount());
-    View.printSortedLottos(this.#lottoPurchaser.getSortedLottos());
+    View.printLottos(this.#lottoPurchaser.getLottos());
 
     await this.#saveWinningLotto();
     this.#lottoPurchaser.check(this.#winningLotto);
 
-    View.printWinningResults(this.#lottoPurchaser.getResultArray());
+    View.printWinningResults(this.#lottoPurchaser.getWinningResults());
     View.printProfitRate(this.#lottoPurchaser.getProfitRate());
   }
 
@@ -37,7 +36,7 @@ class LottoGame {
   async #saveWinningLotto() {
     try {
       this.#winningLotto = new WinningLotto(
-        new Lotto(await View.askWinningNumbers()),
+        await View.askWinningNumbers(),
         await View.askBonusNumber(),
       );
     } catch (error) {

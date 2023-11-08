@@ -4,7 +4,7 @@ import WinningLotto from '../src/WinningLotto.js';
 
 describe('당첨 번호 클래스 테스트', () => {
   describe('로또 번호와 당첨 번호의 일치 숫자 개수가 정확한지 확인하는 테스트', () => {
-    const winningLotto = new WinningLotto(new Lotto([1, 2, 3, 4, 5, 6]), 7);
+    const winningLotto = new WinningLotto([1, 2, 3, 4, 5, 6], 7);
     const countMatchingWith = (numbers) => {
       return winningLotto.countMatchingWith(new Lotto(numbers));
     };
@@ -37,27 +37,27 @@ describe('당첨 번호 클래스 테스트', () => {
   describe('예외 발생 테스트', () => {
     test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
       expect(() => {
-        new WinningLotto(new Lotto([1, 2, 3, 4, 5, 6, 7]));
+        new WinningLotto([1, 2, 3, 4, 5, 6, 7]);
       }).toThrow(ERROR.notSix);
     });
     test('로또 번호의 개수가 6개보다 적으면 예외가 발생한다.', () => {
       expect(() => {
-        new WinningLotto(new Lotto([1, 2, 3, 4, 5]));
+        new WinningLotto([1, 2, 3, 4, 5]);
       }).toThrow(ERROR.notSix);
     });
     test('보너스 번호가 1에서 45 사이의 숫자가 아니면 예외가 발생한다.', () => {
       expect(() => {
-        new WinningLotto(new Lotto([1, 2, 3, 4, 5, 6]), 46);
+        new WinningLotto([1, 2, 3, 4, 5, 6], 46);
       }).toThrow(ERROR.notOneToFortyFive);
     });
     test('로또 번호 중에 보너스 번호가 있으면 예외가 발생한다.', () => {
       expect(() => {
-        new WinningLotto(new Lotto([1, 2, 3, 4, 5, 6]), 6);
+        new WinningLotto([1, 2, 3, 4, 5, 6], 6);
       }).toThrow(ERROR.notUniqueBonusNumber);
     });
     test('예외가 발생하지 않는 경우', () => {
       expect(() => {
-        new WinningLotto(new Lotto([1, 2, 3, 4, 5, 6]), 9);
+        new WinningLotto([1, 2, 3, 4, 5, 6], 9);
       }).not.toThrow();
     });
   });

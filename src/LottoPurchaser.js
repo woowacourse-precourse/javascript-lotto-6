@@ -23,15 +23,12 @@ class LottoPurchaser {
     return this.#lottos.length;
   }
 
-  getSortedLottos() {
-    const sortedLottos = this.#lottos.map((lotto) =>
-      lotto.get().sort((a, b) => a - b),
-    );
-    return sortedLottos;
+  getLottos() {
+    return this.#lottos.map((lotto) => lotto.get());
   }
 
-  getResultArray() {
-    return this.#winningResults.getResultArray();
+  getWinningResults() {
+    return this.#winningResults.get();
   }
 
   getProfitRate() {
