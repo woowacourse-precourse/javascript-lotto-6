@@ -2,20 +2,21 @@
 
 import { Console } from "@woowacourse/mission-utils";
 import { WINNING_FIELD_INDEX, WINNING_PRICES } from "../const.js";
+import Lotto from "../Lotto.js";
 
 export default class Logger {
   constructor() {}
 
   /**
    *
-   * @param {number[][]} lottos
+   * @param {Lotto[]} lottos
    */
   printLottoNumbers(lottos) {
     const lottoAmount = lottos.length;
 
     Console.print(`${lottoAmount}개를 구매했습니다.`);
     lottos
-      .map((lotto) => lotto.sort())
+      .map((lotto) => lotto.getNumbers())
       .map((lotto) => this.#arrayToPrettyString(lotto))
       .forEach((lotto) => {
         Console.print(lotto);
