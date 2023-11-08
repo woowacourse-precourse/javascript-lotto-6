@@ -112,18 +112,23 @@ export function getResult(lottos, numbers, bonusNumber) {
 export function countStatistics(totalResult, totalStatistics) {
   if (totalResult[0] === 6) {
     totalStatistics[0]++;
+    return;
   }
   if (totalResult[0] === 5 && totalResult[1] === 1) {
     totalStatistics[1]++;
+    return;
   }
   if (totalResult[0] === 5) {
     totalStatistics[2]++;
+    return;
   }
   if (totalResult[0] === 4) {
     totalStatistics[3]++;
+    return;
   }
   if (totalResult[0] === 3) {
     totalStatistics[4]++;
+    return;
   }
 }
 
