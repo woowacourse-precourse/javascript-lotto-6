@@ -6,10 +6,8 @@ export default class Purchase {
   #balance;
   #amount;
   #lottos;
-  #isValid;
 
   constructor(balance) {
-    this.#isValid = false;
     this.#balance = new Balance(balance);
     this.#amount = Number(this.#balance.get()) / SETTINGS.lottoPrice;
     this.#lottos = new Lottos(this.#amount);

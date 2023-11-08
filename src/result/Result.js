@@ -2,7 +2,6 @@ import Prizes from './Prizes.js';
 import Returns from './Returns.js';
 import Lotto from './Lotto.js';
 import Raffle from './Raffle.js';
-import Utils from '../utils/Utils.js';
 import SETTINGS from '../constants/Settings.js';
 import ReturnRate from './ReturnRate.js';
 

@@ -8,7 +8,7 @@ import {
 export default class Bonus {
   #bonus;
 
-  constructor(bonus) {
+  constructor( bonus) {
     this.#validate(bonus);
     this.#bonus = bonus;
   }
@@ -23,6 +23,6 @@ export default class Bonus {
   }
 
   get() {
-    return this.#bonus;
+    return Number(this.#bonus);
   }
 }
