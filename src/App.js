@@ -11,22 +11,17 @@ import { MESSAGES, RANK, TICKET_PRICE } from './util/constants.js';
 class App {
   async play() {
     try {
-      const amount = await this.getAmountInput();
-      const game = new Game(amount);
-
+      const enteredAmount = await this.getAmountInput();
+      const game = new Game(enteredAmount);
       game.getLottoTickets();
       game.printTickets();
 
-      const winningInfo = await this.getWinningInput();
+      const enteredWinningInfo = await this.getWinningInput();
+      game.draw(enteredWinningInfo);
 
-      game.draw(winningInfo);
-      this.printResult(game.drawInfo);
-
-      const totalReturn = game.getReturn();
-
-      Console.print(
-        MESSAGES.OUTPUT_RETURN(((totalReturn / amount) * 100).toFixed(1))
-      );
+      const drawInfo = game.drawInfo;
+      const profitRate = game.getProfitRate();
+      this.printResult(drawInfo, profitRate);
     } catch (err) {
       Console.print('[ERROR]\n');
       this.play();
@@ -57,13 +52,14 @@ class App {
     };
   }
 
-  printResult(result) {
-    Console.print('\n당첨 통계');
-    Console.print('---');
+  printResult(drawResult, profitRate) {
+    Console.print(MESSAGES.OUTPUT_RESULT_TITLE);
 
     for (let i = 5; i >= 1; i--) {
-      Console.print(MESSAGES.OUTPUT_RESULT_DETAILS(i, result[RANK[i]]));
+      Console.print(MESSAGES.OUTPUT_RESULT_DETAILS(i, drawResult[RANK[i]]));
     }
+
+    Console.print(MESSAGES.OUTPUT_RETURN(profitRate.toFixed(1)));
   }
 }
 
