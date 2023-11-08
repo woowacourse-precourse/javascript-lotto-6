@@ -24,27 +24,32 @@
 - 범위에 해당하는 수를 배열로 만든 뒤, 정렬 후 슬라이스 하는 로직 역시 시간 복잡도 개선 필요
 
 ## 커버리지
-File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                                
----------------------|---------|----------|---------|---------|-------------------
-All files            |   98.68 |    96.29 |     100 |   98.59 | 
- src                 |     100 |      100 |     100 |     100 | 
-  App.js             |     100 |      100 |     100 |     100 | 
-  Lotto.js           |     100 |      100 |     100 |     100 | 
- src/lib             |     100 |      100 |     100 |     100 | 
-  Constants.js       |     100 |      100 |     100 |     100 | 
- src/lib/Domain      |     100 |      100 |     100 |     100 | 
-  LottoBundle.js     |     100 |      100 |     100 |     100 | 
-  ReferenceLotto.js  |     100 |      100 |     100 |     100 | 
- src/lib/Handler     |   97.22 |     87.5 |     100 |   96.77 | 
-  InputHandler.js    |     100 |      100 |     100 |     100 | 
-  OutputHandler.js   |      90 |       75 |     100 |      90 | 30
- src/lib/Validator   |     100 |      100 |     100 |     100 | 
-  DomainValidator.js |     100 |      100 |     100 |     100 | 
-  InputValidator.js  |     100 |      100 |     100 |     100 | 
-  OutputValidator.js |     100 |      100 |     100 |     100 | 
- src/lib/View        |   88.88 |    91.66 |     100 |    87.5 | 
-  OutputView.js      |   88.88 |    91.66 |     100 |    87.5 | 17
-
+File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                                          
+-------------------------|---------|----------|---------|---------|-------------------
+All files                |    98.8 |    96.29 |     100 |   98.71 |                   
+ src                     |     100 |      100 |     100 |     100 | 
+  App.js                 |     100 |      100 |     100 |     100 | 
+  Lotto.js               |     100 |      100 |     100 |     100 | 
+ src/lib                 |     100 |      100 |     100 |     100 | 
+  Constants.js           |     100 |      100 |     100 |     100 | 
+ src/lib/Domain          |     100 |      100 |     100 |     100 | 
+  LottoBundle.js         |     100 |      100 |     100 |     100 | 
+  ReferenceLotto.js      |     100 |      100 |     100 |     100 | 
+ src/lib/Error           |     100 |      100 |     100 |     100 | 
+  NonPropagatingError.js |     100 |      100 |     100 |     100 | 
+  ValidationError.js     |     100 |      100 |     100 |     100 | 
+  index.js               |       0 |        0 |       0 |       0 | 
+ src/lib/Handler         |   97.67 |     87.5 |     100 |   97.29 | 
+  InputHandler.js        |     100 |      100 |     100 |     100 | 
+  OutputHandler.js       |      90 |       75 |     100 |      90 | 30
+ src/lib/Validator       |     100 |      100 |     100 |     100 | 
+  DomainValidator.js     |     100 |      100 |     100 |     100 | 
+  InputValidator.js      |     100 |      100 |     100 |     100 | 
+  OutputValidator.js     |     100 |      100 |     100 |     100 | 
+ src/lib/View            |   91.66 |    91.66 |     100 |    90.9 | 
+  InputView.js           |     100 |      100 |     100 |     100 | 
+  OutputView.js          |   88.88 |    91.66 |     100 |    87.5 | 17
+  
 ## 테스트에서 커버되지 않은 내용
 - `OutputHandler.error()`으로 예기치 못한 에러의 경우 App의 가장 바깥 스코프까지 전달하는 경우
 - `OutputView.err()`으로 핸들되지 않은 에러에 대해 예기치 못한 에러를 출력하는 경우
