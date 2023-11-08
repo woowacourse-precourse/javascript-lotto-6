@@ -22,6 +22,15 @@ class CalculateController {
     });
     return this.#state;
   }
+
+  rating() {
+    let rate = 0;
+    const prizes = [5000, 50000, 1500000, 30000000, 2000000000];
+    prizes.forEach((prize, index) => {
+      rate += prize * this.#state[index];
+    });
+    return (rate / (this.#lottos.length * 1000)) * 100;
+  }
 }
 
 export default CalculateController;

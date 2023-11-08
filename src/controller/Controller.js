@@ -30,6 +30,7 @@ class Controller {
 
     const state = this.#CalculateController.calculateState();
     OutputView.printCalculate(state);
+    Console.print(this.#CalculateController.rating());
   }
 }
 
