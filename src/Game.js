@@ -31,6 +31,10 @@ class Game {
     return lotto.filter((item) => drawingLotto.includes(item)).length;
   }
 
+  #isMatchBonusBall(bonusNumber, drawingLotto) {
+    return drawingLotto.includes(bonusNumber);
+  }
+
 }
 
 export default Game;
