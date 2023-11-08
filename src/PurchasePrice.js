@@ -13,11 +13,11 @@ class PurchasePrice {
     if (!validateNumber.isNumber(price)) {
       throw new Error(PURCHASE_PRICE_ERROR.isNumber);
     }
-    if (!validateNumber.isDivideThousand(price)) {
-      throw new Error(PURCHASE_PRICE_ERROR.isDivideThousand);
+    if (!validateNumber.isDividePrice(price)) {
+      throw new Error(PURCHASE_PRICE_ERROR.isDividePrice);
     }
-    if (!validateNumber.isBiggerThanThousand(price)) {
-      throw new Error(PURCHASE_PRICE_ERROR.isBiggerThanThousand);
+    if (!validateNumber.isBiggerThanPrice(price)) {
+      throw new Error(PURCHASE_PRICE_ERROR.isBiggerThanPrice);
     }
   }
 

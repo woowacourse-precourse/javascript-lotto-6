@@ -10,8 +10,8 @@ class BonusNumber {
   }
 
   #validate(number) {
-    if (!validateNumber.isOneToFourtyFive(number)) {
-      throw new Error(BONUS_NUMBER_ERROR.isOneToFourtyFive);
+    if (!validateNumber.isIncludesRange(number)) {
+      throw new Error(BONUS_NUMBER_ERROR.isIncludesRange);
     }
     if (!validateNumber.isNumber(number)) {
       throw new Error(BONUS_NUMBER_ERROR.isNumber);

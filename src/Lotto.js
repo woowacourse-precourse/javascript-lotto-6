@@ -16,8 +16,8 @@ class Lotto {
     if (!validateArray.isSixSize(numbers)) {
       throw new Error(LOTTO_ERROR.isSixSize);
     }
-    if (!validateArray.isOneToFourtyFive(numbers)) {
-      throw new Error(LOTTO_ERROR.isOneToFourtyFive);
+    if (!validateArray.isIncludesRange(numbers)) {
+      throw new Error(LOTTO_ERROR.isIncludesRange);
     }
     if (validateArray.isDuplicate(numbers)) {
       throw new Error(LOTTO_ERROR.isDuplicate);

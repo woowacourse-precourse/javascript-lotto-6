@@ -1,11 +1,11 @@
 import { PRICE, RANGE } from "../constant/NUMBER.js";
 
 export const validateNumber = {
-  isDivideThousand(number) {
+  isDividePrice(number) {
     return number % PRICE === 0;
   },
 
-  isBiggerThanThousand(number) {
+  isBiggerThanPrice(number) {
     return number >= PRICE;
   },
 
@@ -13,7 +13,7 @@ export const validateNumber = {
     return !Number.isNaN(number);
   },
 
-  isOneToFourtyFive(number) {
+  isIncludesRange(number) {
     return number > RANGE.MIN && number < RANGE.MAX;
   },
 };
@@ -23,7 +23,7 @@ export const validateArray = {
     return numbers.length === RANGE.SIZE;
   },
 
-  isOneToFourtyFive(numbers) {
+  isIncludesRange(numbers) {
     return numbers.every(
       (element) => element >= RANGE.MIN && element <= RANGE.MAX
     );
