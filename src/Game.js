@@ -11,6 +11,8 @@ class Game {
 
   #winLotto;
 
+  #bonusNumber;
+
   static async #getLottoPrice() {
     const priceInput = await User.readInput(MESSAGE.enterPrice);
     return Validation.price(priceInput);
@@ -37,6 +39,10 @@ class Game {
     }
   }
 
+  #printMyLotto() {
+    User.printMessage(MESSAGE.purchasedLotto(this.#lottoAmount, this.#myLotto));
+  }
+
   static async #enterWinNumbers() {
     const winNumbersInput = await User.readInput(MESSAGE.enterWinNumbers);
     return Validation.winNumbers(winNumbersInput);
@@ -46,11 +52,22 @@ class Game {
     this.#winLotto = new Lotto(await Game.#enterWinNumbers());
   }
 
+  static async #enterBonusNumber() {
+    const bonusNumberInput = await User.readInput(MESSAGE.enterBonusNumber);
+    return Validation.bonusNumber(bonusNumberInput);
+  }
+
+  async #setBonusNumber() {
+    this.#bonusNumber = await Game.#enterBonusNumber();
+  }
+
   async play() {
     await this.#setLottoAmount();
     this.#setMyLotto();
+    this.#printMyLotto();
     await this.#setWinLotto();
-    Console.print(this.#winLotto.getNumbers());
+    await this.#setBonusNumber();
+    Console.print(this.#bonusNumber);
   }
 }
 
