@@ -15,21 +15,25 @@ class Lotto {
       throw new CustomError(LOTTO_ERROR.luckyOver);
     }
 
+    numbers.forEach((number) => {
+      if (number > LOTTO_RULE.maxNumber || number < LOTTO_RULE.minNumber) {
+        throw new CustomError(LOTTO_ERROR.luckyRange);
+      }      
+    });
+
     this.#validateExtends(numbers);
   }
 
   #validateExtends(numbers) {
     const setNumbers = new Set(numbers);
 
-    if (numbers.length !== setNumbers.size) throw new CustomError(LOTTO_ERROR.luckyConflict);
+    if (numbers.length !== setNumbers.size) {
+      throw new CustomError(LOTTO_ERROR.luckyConflict);
+    }
 
-    if (REGEX.commaNumber.test(String(numbers))) throw new CustomError(LOTTO_ERROR.form);
-    
-    numbers.forEach((number) => {
-      if (number > LOTTO_RULE.maxNumber || number < LOTTO_RULE.minNumber) {
-        throw new CustomError(LOTTO_ERROR.luckyRange);
-      }      
-    });
+    if (REGEX.commaNumber.test(String(numbers))) {
+      throw new CustomError(LOTTO_ERROR.form);
+    }
   }
 
   getLuckyNumbers() {

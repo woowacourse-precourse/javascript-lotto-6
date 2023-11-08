@@ -3,8 +3,7 @@ import { LOTTO_PLAY } from "../constants/Messeage.js";
 import { LOTTO_STATISTICS_RESULT } from "../constants/Messeage.js";
 
 export const showLottoTicket = (lottoTicket) => {
-  const purchaseNumber = lottoTicket.length;
-  Console.print(`${purchaseNumber}${LOTTO_PLAY.purchaseComplete}`);
+  Console.print(`${lottoTicket.length}${LOTTO_PLAY.purchaseComplete}`);
   
   lottoTicket.forEach((luckyArray) => {
     const luckyString = luckyArray.join(', ');

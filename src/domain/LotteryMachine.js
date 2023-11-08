@@ -7,7 +7,7 @@ class LotteryMachine {
   #lottoTicket;
 
   #issuanceLimit;
-  //purchaseAmount : string으로 들어옴
+  
   constructor(purchaseAmount) {
     this.#validatePurchaseAmount(purchaseAmount);
     this.#issuanceLimit = Number(purchaseAmount) / LOTTO_RULE.buyUnit;
@@ -15,25 +15,26 @@ class LotteryMachine {
   }
 
   #ticketMaker() {
-    this.#lottoTicket = Array.from( { length : this.#issuanceLimit }, () =>
+    this.#lottoTicket = Array.from({ length : this.#issuanceLimit }, () =>
       Random.pickUniqueNumbersInRange(
         LOTTO_RULE.minNumber,
         LOTTO_RULE.maxNumber,
         LOTTO_RULE.selectTime
       ).sort((a, b) => a - b)
-    )
+    );
   }
 
   #validatePurchaseAmount(amountString) {
-    if (REGEX.number.test(amountString)) {
-      throw new CustomError(LOTTO_ERROR.form);
-    }
+    if (REGEX.number.test(amountString)) throw new CustomError(LOTTO_ERROR.form);
+
     if (Number(amountString) > LOTTO_RULE.buyMax) {
       throw new CustomError(LOTTO_ERROR.buyLimit);
     }
+
     if (Number(amountString) < LOTTO_RULE.buyUnit) {
       throw new CustomError(LOTTO_ERROR.moneyLack);
     }
+
     if (Number(amountString) % LOTTO_RULE.buyUnit !== 0) {
       throw new CustomError(LOTTO_ERROR.unitBreak);
     }
