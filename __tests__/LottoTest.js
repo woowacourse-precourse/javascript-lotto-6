@@ -15,4 +15,27 @@ describe("로또 클래스 테스트", () => {
   });
 
   // 아래에 추가 테스트 작성 가능
+  test("로또 번호에 숫자가 아닌 문자열이 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, NaN]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("로또 번호에 범위를 벗어난 숫자가 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      new Lotto([1, 2, 3, 4, 5, 0]);
+    }).toThrow("[ERROR]");
+  });
+
+  test("번호 5개를 맞춘 경우 5를 반환한다.", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const result = lotto.compareTo(new Lotto([1, 2, 3, 4, 5, 7]), 45);
+    expect(result).toEqual(5);
+  });
+
+  test("번호 5개와 보너스 번호를 맞춘 경우 7을 반환한다.", () => {
+    const lotto = new Lotto([1, 2, 3, 4, 5, 6]);
+    const result = lotto.compareTo(new Lotto([1, 2, 3, 4, 5, 7]), 6);
+    expect(result).toEqual(7);
+  });
 });
