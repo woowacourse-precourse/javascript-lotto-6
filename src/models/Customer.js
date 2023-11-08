@@ -1,4 +1,4 @@
-import Validations from '../constants/Validations.js';
+import Validations from '../Validations.js';
 
 class Customer {
   #lottoPrice;
@@ -10,6 +10,7 @@ class Customer {
 
   #validateLottoPrice(lottoPrice) {
     Validations.hasSpace(lottoPrice);
+    Validations.isNumber(lottoPrice);
   }
 }
 
