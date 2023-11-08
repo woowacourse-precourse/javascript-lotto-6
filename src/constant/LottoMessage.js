@@ -7,20 +7,20 @@ const MARK = {
 
 const BUY_LOTTO = {
   requestMoney: '구입금액을 입력해 주세요.\n',
-  lottoCount: (count) => `${count}개를 구매했습니다.\n`,
+  lottoCount: (count) => `\n${count}개를 구매했습니다.`,
 };
 
 const REQUEST_WINNING_LOTTO = {
-  requestWinningLotto: '당첨 번호를 입력해주세요.\n',
+  requestWinningLotto: '\n당첨 번호를 입력해주세요.\n',
 };
 
 const REQUEST_BONUS_NUMBER = {
-  requestBonusNumber: '보너스 번호를 입력해주세요.\n',
+  requestBonusNumber: '\n보너스 번호를 입력해주세요.\n',
 };
 
 const RESULT = {
-  resultHeader: '당첨 통계',
-  resultHeaderLine: '***',
+  resultHeader: '\n당첨 통계',
+  resultHeaderLine: '---',
   matchNotification: (matchCountBasis, isBonus) =>
     `${matchCountBasis}개 일치${RESULT.bonus(isBonus)} `,
   bonus: (isBonus) => (isBonus ? ', 보너스 볼 일치' : ''),
