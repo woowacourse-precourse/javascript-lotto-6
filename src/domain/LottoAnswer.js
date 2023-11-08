@@ -4,6 +4,7 @@ import { getPrizeFromCorrectCount } from "../constants/lotto.js";
 import { ERROR_MESSAGE } from "../constants/messages.js";
 
 class LottoAnswer {
+  // LottoAnswer 클래스는 정답을 담은 로또 객체(answerLotto) 하나와 보너스 번호 하나로 이루어짐
   #answerLotto;
   #bonusNumber;
 
