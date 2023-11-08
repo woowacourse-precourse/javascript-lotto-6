@@ -2,25 +2,35 @@ import { Console } from '@woowacourse/mission-utils';
 //  발행한 로또번호 전부 출력
 import modifiers from '../utils/modifiers.js';
 
-const resultsMessage = (results) =>
-  `3개 일치 (5,000원) - ${results.fifth}개
-4개 일치 (50,000원) - ${results.fourth}개
-5개 일치 (1,500,000원) - ${results.third}개
-5개 일치, 보너스 볼 일치 (30,000,000원) - ${results.second}개
-6개 일치 (2,000,000,000원) - ${results.first}개`;
-
 const printing = (message) => Console.print(message);
 
-const DRAWING_MESSAGE = {
+const resultsMessage = (result) =>
+  `3개 일치 (5,000원) - ${result.fifth}개
+4개 일치 (50,000원) - ${result.fourth}개
+5개 일치 (1,500,000원) - ${result.third}개
+5개 일치, 보너스 볼 일치 (30,000,000원) - ${result.second}개
+6개 일치 (2,000,000,000원) - ${result.first}개`;
+
+const DRAWING = {
   COUNT: (count) => `${count}개를 구매했습니다.`,
 };
 
-const RESULTS_MESSAGE = {
-  WINNERS: (results) => resultsMessage(results),
+const RESULTS = {
+  WINNERS: (result) => resultsMessage(result),
   EARN_RATE: (revenue, price) =>
     `총 수익률은 ${modifiers.getEarnRate(revenue, price)}%입니다.`,
 };
 
-const output = { printing, DRAWING_MESSAGE, RESULTS_MESSAGE };
+function drawing(count, lottos) {
+  printing(DRAWING.COUNT(count));
+  for (let i = 0; i < count; i += 1) printing(lottos[i]);
+}
 
-export default output;
+function results(result, totalPrice) {
+  printing(RESULTS.WINNERS(result.result));
+  printing(RESULTS.EARN_RATE(result.revenue, totalPrice));
+}
+
+const printMessage = { drawing, results };
+
+export default printMessage;
