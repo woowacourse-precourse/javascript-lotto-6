@@ -1,10 +1,17 @@
 import { Console } from "@woowacourse/mission-utils";
+import Input from "../Input/Input";
 
 class LottoController {
   constructor() {}
 
   async LottoStart() {
-    Console.print("로또 미션 시작");
+    await this.requestPurchaseAmount();
+  }
+
+  async requestPurchaseAmount() {
+    const purchaseAmount = await Input.lottoPurchaseAmount();
+    Console.print(purchaseAmount);
+    Console.print(typeof purchaseAmount);
   }
 }
 
