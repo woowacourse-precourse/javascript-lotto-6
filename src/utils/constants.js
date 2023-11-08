@@ -1,5 +1,8 @@
 export const LOTTO_GAME = Object.freeze({
   PRICE_UNIT: 1000,
+  MIN_NUMBER: 1,
+  MAX_NUMBER: 45,
+  TOTAL_NUMBERS: 6,
 });
 
 export const INPUT_MESSAGES = Object.freeze({
