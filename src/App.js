@@ -5,7 +5,7 @@ import {
   calculator,
   printResult,
   profit,
-} from "./game.js";
+} from "./Game.js";
 
 class App {
   async play() {
