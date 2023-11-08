@@ -1,9 +1,9 @@
-import InputView from './View/InputView.js';
-import Inputs from './Inputs.js';
-import Lotto from './Lotto.js';
-import OutputView from './View/OutputView.js';
-import CalculateStats from './CalculateStats.js';
-import { LOTTO_NUMBER, OUTPUT_MESSAGE } from './constants.js';
+import InputView from '../View/InputView.js';
+import Inputs from '../models/Inputs.js';
+import Lotto from '../models/Lotto.js';
+import OutputView from '../View/OutputView.js';
+import CalculateStats from '../models/CalculateStats.js';
+import { LOTTO_NUMBER, OUTPUT_MESSAGE } from '../constants.js';
 
 class LottoGameController {
   #purchaseAmount = 0;

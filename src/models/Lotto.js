@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, LOTTO_NUMBER } from './constants.js';
+import { ERROR_MESSAGE, LOTTO_NUMBER } from '../constants.js';
 
 class Lotto {
   #numbers;

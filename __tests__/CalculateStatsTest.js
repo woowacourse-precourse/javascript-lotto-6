@@ -1,4 +1,4 @@
-import CalculateStats from '../src/CalculateStats';
+import CalculateStats from '../src/models/CalculateStats';
 
 describe('CalculateStats', () => {
   let calculateStats;
@@ -17,8 +17,7 @@ describe('CalculateStats', () => {
 
   test('updateStats는 stats 객체를 맞게 업데이트해야한다', () => {
     const stats = { 3: 0, 4: 0, 5: 0, '5b': 0, 6: 0 };
-    const updatedStats = calculateStats.updateStats(stats, 5, true);
-    expect(updatedStats).toEqual({ 3: 0, 4: 0, 5: 0, '5b': 1, 6: 0 });
+    expect(calculateStats.updateStats(stats, 5, true)).toEqual({ 3: 0, 4: 0, 5: 0, '5b': 1, 6: 0 });
   });
 
   test('calculateEarningsRate는 수익률을 맞게 계산해야한다', () => {

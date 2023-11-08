@@ -1,4 +1,4 @@
-import Lotto from '../src/Lotto';
+import Lotto from '../src/models/Lotto.js';
 import { ERROR_MESSAGE, LOTTO_NUMBER } from '../src/constants.js';
 
 describe('Lotto 클래스 테스트', () => {
@@ -23,9 +23,9 @@ describe('Lotto 클래스 테스트', () => {
     const numbers = lotto.getNumbers();
 
     expect(numbers.length).toBe(6);
-    expect(
-      numbers.every((number) => number >= LOTTO_NUMBER.inRangeFrom && number <= LOTTO_NUMBER.inRangeTo),
-    ).toBe(true);
+    expect(numbers.every((number) => number >= LOTTO_NUMBER.inRangeFrom && number <= LOTTO_NUMBER.inRangeTo)).toBe(
+      true,
+    );
   });
 
   test('로또 번호가 오름차순으로 정렬되어 있다.', () => {
