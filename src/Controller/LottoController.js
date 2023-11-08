@@ -25,6 +25,14 @@ class LottoController {
 
     this.#lottos = new Lottos(this.#lottoCount.getLottoCount());
     Output.printLottos(this.#lottos.getLottos());
+
+    await this.requestWinningNumber();
+  }
+
+  async requestWinningNumber() {
+    const winningNumber = await Input.lottoWinningNumber();
+    Console.print(winningNumber);
+    Console.print(typeof winningNumber);
   }
 }
 

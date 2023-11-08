@@ -10,6 +10,13 @@ const Input = {
     Validator.InputPurchaseAmount(purchaseAmount);
     return purchaseAmount;
   },
+
+  async lottoWinningNumber() {
+    const winningNumber = await Console.readLineAsync(
+      "\n당첨 번호를 입력해 주세요.\n"
+    );
+    return winningNumber;
+  },
 };
 
 export default Input;
