@@ -1,49 +1,34 @@
-import { WINNING_RANK_COUNT, ZERO } from '../constants/lotto/numbers';
+import PRIZE_AMOUNT_BY_BANK from '../constants/Bank';
+import { WINNING_RANK_COUNT } from '../constants/lotto';
 import ERROR_MESSAGES from '../constants/message/error';
-import ValidationError from '../error/Validation';
+import { ZERO } from '../constants/validate';
 import validationUtils from '../services/utils/validation';
 import { isDivisibleByLottoPrice } from './shop';
 
-const PLACE = {
-  [ZERO]: 0,
-  [WINNING_RANK_COUNT.firstPlace]: 2000000000,
-  [WINNING_RANK_COUNT.secondPlace]: 30000000,
-  [WINNING_RANK_COUNT.thirdPlace]: 1500000,
-  [WINNING_RANK_COUNT.fourthPlace]: 50000,
-  [WINNING_RANK_COUNT.fifthPlace]: 5000,
-};
 const PERCENTAGE = 100;
 const DECIMAL_TWO_DIGIT_OR_LESS = 1;
-// 낙첨
-const RANK_MIN = 0;
-const RANK_MAX = 5;
-
-const checkRank = (rank) => {
-  if (rank.some((number) => number < RANK_MIN || number > RANK_MAX)) {
-    throw new ValidationError(ERROR_MESSAGES.outOfRange);
-  }
-  return true;
-};
 
 const validateAmount = (number) => {
-  validationUtils.isInteger(number);
+  validationUtils.isIntegerToThrow(number);
   isDivisibleByLottoPrice(number);
 };
-
-const validateRanksValueRange = (ranks) =>
-  Object.values(ranks).every((value) => checkRank(value));
 
 // 존재 여부
 const validateRanksKeys = (ranks) => {
   const has = Object.prototype.hasOwnProperty;
-  Object.keys(WINNING_RANK_COUNT).every((rankKey) =>
-    has.call(ranks, WINNING_RANK_COUNT[rankKey]),
-  );
+  Object.keys(WINNING_RANK_COUNT).every((rankKey) => {
+    if (!has.call(ranks, WINNING_RANK_COUNT[rankKey])) {
+      throw new Error(ERROR_MESSAGES.notObjextKey);
+    }
+    return true;
+  });
 };
 
 // 유형 검사
 const validateRankValueNumber = (ranks) =>
-  Object.values(ranks).every((value) => validationUtils.isInteger(value));
+  Object.values(ranks).every((value) =>
+    validationUtils.isIntegerToThrow(value),
+  );
 
 const bank = {
   /**
@@ -55,9 +40,8 @@ const bank = {
     validationUtils.isObject(ranks);
     validateRanksKeys(ranks);
     validateRankValueNumber(ranks);
-    validateRanksValueRange(ranks);
     return Object.entries(ranks).reduce(
-      (acc, [key, value]) => acc + PLACE[key] * value,
+      (acc, [key, value]) => acc + PRIZE_AMOUNT_BY_BANK[key] * value,
       ZERO,
     );
   },
@@ -79,6 +63,4 @@ const bank = {
   },
 };
 
-// 당첨 둥수 합산
-// 수익률 계산
 export default bank;
