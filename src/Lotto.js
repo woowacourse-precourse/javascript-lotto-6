@@ -1,9 +1,18 @@
+import { Console } from "@woowacourse/mission-utils";
+import { ERROR } from "./util/Message.js";
+import { LOTTO } from "./util/constant.js";
 class Lotto {
   #numbers;
 
   constructor(numbers) {
     this.#validate(numbers);
+    this.#validateDuplicate(numbers);
+    this.#validateIsNaN(numbers);
     this.#numbers = numbers;
+  }
+
+  get getLotto() {
+    return this.#numbers;
   }
 
   #validate(numbers) {
@@ -12,7 +21,23 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  #validateIsNaN(numbers) {
+    numbers.forEach((num) => {
+      if (isNaN(num)) {
+        throw new Error("[ERROR] 로또 번호는 숫자만 가능 합니다.");
+      }
+    });
+  }
+
+  #validateDuplicate(numbers) {
+    if (new Set(numbers).size !== LOTTO.numLength) {
+      throw new Error(ERROR.lottoWinningNumDuplicate);
+    }
+  }
+
+  print() {
+    Console.print(`[${this.#numbers.join(", ")}]`);
+  }
 }
 
 export default Lotto;
