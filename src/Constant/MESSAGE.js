@@ -4,6 +4,6 @@ export const INPUT_MESSAGE = Object.freeze({
 
 export const LOTTO_COUNT_MESSAGE = Object.freeze({
   lottoCount(count) {
-    return `${count}개를 구매했습니다.\n`;
+    return `\n${count}개를 구매했습니다.`;
   },
 });
