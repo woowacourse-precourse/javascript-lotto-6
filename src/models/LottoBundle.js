@@ -36,11 +36,14 @@ class LottoBundle {
     return new Lotto(numbers);
   }
 
-  populateWinResult(winLotto, matchedNumberList) {
+  populateWinResult(winLotto) {
+    const matchedNumberList = [];
     this.#lottoBundle.forEach((lotto) => {
       const matchingResult = winLotto.countMatchingNumbers(lotto);
       matchedNumberList.push(matchingResult);
     });
+
+    return matchedNumberList;
   }
 }
 
