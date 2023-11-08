@@ -15,6 +15,18 @@ class LottoService {
         }
     }
 
+    validateMoney(money) {
+        try{
+            if(Number.isNaN(money)) throw Error("[ERROR] 구입금액은 숫자 형식이어야 합니다.");
+            if(money < 0) throw Error("[ERROR] 구입금액은 0 보다 커야합니다.");
+            if(money % 1000 != 0) throw Error("[ERROR] 구입금액은 1000원 단위로 입력해야 합니다.");
+            return true;
+        }catch(e){
+            Console.print(`${e}`);
+            return false;
+        }
+      }
+
     buyLotto(money) {
         const amount = Math.floor(money / 1000);
         Console.print(`${amount}개를 구매했습니다.`);
