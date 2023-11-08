@@ -11,6 +11,10 @@ class Bonus {
   #validate(numbers, lottoNumbers) {
     Validator.validateBonusNumber(numbers, lottoNumbers);
   }
+
+  getBonusNumber() {
+    return this.#bonus;
+  }
 }
 
 export default Bonus;

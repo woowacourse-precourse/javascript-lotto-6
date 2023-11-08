@@ -4,6 +4,7 @@ import Validator from "../utils/Validator";
 import Lotto from "../model/Lotto";
 import LottoDataProcessor from "../model/LottoDataProcessor";
 import Bonus from "../model/Bonus";
+import ResultProcessor from "../model/ResultProcessor";
 
 class LottoController {
   #inputView;
@@ -11,6 +12,7 @@ class LottoController {
   #lottoDataProcessor;
   #lotto;
   #lottoResult;
+  #resultProcessor;
   #bonus;
 
   constructor() {
@@ -47,6 +49,12 @@ class LottoController {
 
   async #generateWinningResult() {
     await this.#outputView.printWinningMessage();
+    this.#resultProcessor = new ResultProcessor(
+      this.#lotto.getLottoNumber(),
+      this.#bonus.getBonusNumber(),
+      this.#lottoDataProcessor.getLottoResults()
+    );
+    const result = this.#resultProcessor.getResult();
   }
 }
 
