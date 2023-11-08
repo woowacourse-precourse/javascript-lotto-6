@@ -32,4 +32,16 @@ describe("MoneyManager 클래스 테스트", () => {
       expect(returns).toBe(answers[index]);
     });
   });
+
+  test("수익률 계산 테스트", () => {
+    const inputs = [500, 1000, 2000];
+    const answers = [50, 100, 200];
+
+    moneyManager.setPurchaseValue(1000);
+
+    inputs.forEach((input, index) => {
+      const returns = moneyManager.calculateReturnRate(input);
+      expect(returns).toBe(answers[index]);
+    });
+  });
 });
