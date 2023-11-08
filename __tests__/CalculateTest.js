@@ -32,4 +32,30 @@ describe('당첨금 계산 함수 테스트', () => {
       expect(calculateProfitRate(startMoney[index], winningMoney[index])).toBe(profitRate[index]);
     });
   });
+
+  test('당첨수 확인 함수 테스트', () => {
+    const lottoResults = [
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+    ];
+    const matchedNumbers = [
+      [1, 2, 3, 4, 5],
+      [1, 2],
+      [1, 4, 5],
+    ];
+    const matchedBonus = [true, 0, 0];
+
+    const predictedResults = [
+      { 1: 0, 2: 1, 3: 0, 4: 0, 5: 0 },
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+      { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1 },
+    ];
+
+    lottoResults.forEach((_, index) => {
+      const updatedResults = matchedLottoNumbers(lottoResults[index], matchedNumbers[index], matchedBonus[index]);
+      console.log(updatedResults);
+      expect(updatedResults).toEqual(predictedResults[index]);
+    });
+  });
 });
