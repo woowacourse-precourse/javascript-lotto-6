@@ -24,7 +24,7 @@ export class LottoSeller {
       return this.#issueLottos(amount);
     } catch (error) {
       OutputView.print(error.message);
-      await this.sellLotto();
+      return await this.sellLotto();
     }
   }
 
@@ -74,6 +74,7 @@ export class LottoSeller {
       lotto.printNumbers();
       lottos.push(lotto.getNumbers());
     }
+
     return lottos;
   }
 }
