@@ -29,6 +29,7 @@ class App {
     await this.initializeLottoNumber();
     await this.initializeBonusNumber();
     this.checkResult();
+    this.checkIncomePercentage();
     OutputView.printResult(this.#result);
     OutputView.printIncomePercentage(this.#incomePercentage);
   }
@@ -75,7 +76,9 @@ class App {
     results.map(element => {
       this.#result = this.mergeAndAddValues(this.#result, element);
     });
+  }
 
+  checkIncomePercentage() {
     this.#incomePercentage = this.calculateIncomePercentage(this.#purchaseAmount);
   }
 

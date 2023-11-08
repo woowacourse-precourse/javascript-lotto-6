@@ -25,10 +25,8 @@ class Lotto {
   }
 
   checkLotto(drawnLotto) {
-    const matchingNumbers = this.#numbers.filter(
-      (number) => drawnLotto.numbers.includes(number.toString())
-    );
-    const bonusMatch = this.#numbers.includes(Number(drawnLotto.bonusNumber));
+    const matchingNumbers = this.checkMatchingNumbers(drawnLotto);
+    const bonusMatch = this.checkMatchingBonus(drawnLotto);
     const matchCount = matchingNumbers.length;
 
     if (matchCount === THREE_COUNT) {
@@ -50,6 +48,16 @@ class Lotto {
     }
 
     return this.#result;
+  }
+
+  checkMatchingNumbers(drawnLotto) {
+    return this.#numbers.filter(
+      (number) => drawnLotto.numbers.includes(number.toString())
+    );
+  }
+
+  checkMatchingBonus(drawnLotto) {
+    return this.#numbers.includes(Number(drawnLotto.bonusNumber));
   }
 
   getLottoNumbers() {
