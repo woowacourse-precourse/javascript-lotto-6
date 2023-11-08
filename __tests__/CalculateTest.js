@@ -12,12 +12,57 @@ describe('로또 계산 기능 테스트', () => {
     });
   });
 
-  test('랭킹 계산', async () => {
+  test('랭킹 계산_6개 정답일 경우', async () => {
     const calculate = new Calculate();
     const lottoList = [[1, 2, 3, 4, 5, 6]];
     const lotto = [1, 2, 3, 4, 5, 6];
     const bonus = 7;
     const result = [0, 0, 0, 0, 1];
+    expect(await calculate.countTotalRanking(lottoList, lotto, bonus)).toEqual(result);
+  });
+
+  test('랭킹 계산_5개 정답 + 보너스 정답일 경우', async () => {
+    const calculate = new Calculate();
+    const lottoList = [[1, 2, 3, 4, 5, 6]];
+    const lotto = [1, 2, 3, 4, 5, 10];
+    const bonus = 6;
+    const result = [0, 0, 0, 1, 0];
+    expect(await calculate.countTotalRanking(lottoList, lotto, bonus)).toEqual(result);
+  });
+
+  test('랭킹 계산_5개 정답일 경우', async () => {
+    const calculate = new Calculate();
+    const lottoList = [[1, 2, 3, 4, 5, 6]];
+    const lotto = [1, 2, 3, 4, 5, 10];
+    const bonus = 7;
+    const result = [0, 0, 1, 0, 0];
+    expect(await calculate.countTotalRanking(lottoList, lotto, bonus)).toEqual(result);
+  });
+
+  test('랭킹 계산_4개 정답일 경우', async () => {
+    const calculate = new Calculate();
+    const lottoList = [[1, 2, 3, 4, 5, 6]];
+    const lotto = [1, 2, 3, 4, 9, 10];
+    const bonus = 7;
+    const result = [0, 1, 0, 0, 0];
+    expect(await calculate.countTotalRanking(lottoList, lotto, bonus)).toEqual(result);
+  });
+
+  test('랭킹 계산_3개 정답일 경우', async () => {
+    const calculate = new Calculate();
+    const lottoList = [[1, 2, 3, 4, 5, 6]];
+    const lotto = [1, 2, 3, 8, 9, 10];
+    const bonus = 7;
+    const result = [1, 0, 0, 0, 0];
+    expect(await calculate.countTotalRanking(lottoList, lotto, bonus)).toEqual(result);
+  });
+
+  test('랭킹 계산_정답 없는 경우', async () => {
+    const calculate = new Calculate();
+    const lottoList = [[1, 2, 3, 4, 5, 6]];
+    const lotto = [10, 11, 12, 13, 14, 15];
+    const bonus = 7;
+    const result = [0, 0, 0, 0, 0];
     expect(await calculate.countTotalRanking(lottoList, lotto, bonus)).toEqual(result);
   });
 
