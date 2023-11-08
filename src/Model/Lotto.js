@@ -19,6 +19,11 @@ class Lotto {
     validateDuplicationNumbers(numbers);
     validateNumbers(numbers);
   }
+
+  getLottoNumbers() {
+    return [...this.#numbers]
+  }
+
 }
 
 export default Lotto;

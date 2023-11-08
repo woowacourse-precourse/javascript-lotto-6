@@ -18,3 +18,9 @@ export const validateBounusNumber = (number) => {
         throw new Error(InputErrorMessages.IS_NOT_NUMBERS_RANGE)
     }
 }
+
+export const validateBonusNumberDuplication = (numbers, number) => {
+    if (numbers.includes(Number(number))) {
+        throw new Error(InputErrorMessages.IS_NUMBERS_DUPLICATION);
+    }
+}

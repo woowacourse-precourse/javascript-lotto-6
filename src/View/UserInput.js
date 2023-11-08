@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { UserInputMessages } from "../constants/UserInputMessages.js";
-import { validateBounusNumber, validateDivide, validateNumbers } from "../validations/InputValidations.js";
+import { validateBounusNumber, validateDivide, validateNumbers, validateBonusNumberDuplication } from "../validations/InputValidations.js";
 import Lotto from "../Model/Lotto.js";
 
 class UserInput {
@@ -14,13 +14,14 @@ class UserInput {
     async inputWinningNumbers() {
         const winningNumbers = await Console.readLineAsync(UserInputMessages.INPUT_WINNING_NUMBERS);
         const winningLotto = new Lotto(winningNumbers.split(',').map(Number));
-        return winningLotto
+        return winningLotto.getLottoNumbers();
     }
 
-    async inputBonusNumber() {
+    async inputBonusNumber(winningNumbers) {
         const bonusNumber = await Console.readLineAsync(UserInputMessages.INPUT_BONUSE_NUMBER);
         validateNumbers(bonusNumber);
-        validateBounusNumber(bonusNumber)
+        validateBounusNumber(bonusNumber);
+        validateBonusNumberDuplication(winningNumbers,Number(bonusNumber));
         return Number(bonusNumber)
     }
 }
