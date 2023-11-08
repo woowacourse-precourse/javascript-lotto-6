@@ -6,6 +6,8 @@ class App {
     const lottos = this.makeLottos(purchaseAmount);
     this.printLottos(lottos);
     const winningNumbers = await this.getFullWinningNumbers();
+    const results = this.getResult(lottos, winningNumbers);
+    this.printResult(results);
   }
   async getPurchaseAmount() {
     const purchaseAmount = await MissionUtils.Console.readLineAsync(
@@ -57,7 +59,6 @@ class App {
     ];
     return this.isValidWinningNumbers(formattingFullWinningNumbers, 7);
   }
-
   isValidWinningNumbers(numbers, lotttoLength) {
     if (numbers.every((num) => !isNaN(num)) === false) {
       throw new Error("[ERROR] 로또 번호는 숫자여야 합니다.");
@@ -72,6 +73,49 @@ class App {
       throw new Error("[ERROR] 로또 번호는 1과 45 사이여야 합니다.");
     }
     return numbers;
+  }
+  getResult(lottos, winningNumbers) {
+    const results = [0, 0, 0, 0, 0, 0];
+    for (const lotto of lottos) {
+      const { matchCount, isBonusNumberMatch } =
+        lotto.getResult(winningNumbers);
+      results[this.judgeResult(matchCount, isBonusNumberMatch)] += 1;
+    }
+    return results;
+  }
+  judgeResult(matchCount, isBonusNumberMatch) {
+    if (matchCount === 6) return 5;
+    if (matchCount === 5 && isBonusNumberMatch) return 4;
+    if (matchCount === 5) return 3;
+    if (matchCount === 4) return 2;
+    if (matchCount === 3) return 1;
+    return 0;
+  }
+  getProfitRate(results) {
+    let sum = 0;
+    const totalPrize = results.reduce((acc, cur, idx) => {
+      sum += cur;
+      return acc + cur * this.getPrize(idx);
+    }, 0);
+    if (sum === 0) return (0).toFixed(1);
+    return ((totalPrize / sum) * 100).toFixed(1);
+  }
+  getPrize(idx) {
+    const prizes = [0, 5, 50, 1500, 30000, 2000000];
+    return prizes[idx];
+  }
+  printResult(results) {
+    MissionUtils.Console.print(
+      `당첨 통계\n---------\n3개 일치 (5000원)- ${
+        results[1]
+      }개\n4개 일치 (50000원)- ${results[2]}개\n5개 일치 (1500000원)- ${
+        results[3]
+      }개\n5개 일치, 보너스 볼 일치 (30000000원)- ${
+        results[4]
+      }개\n6개 일치 (2000000000원)- ${
+        results[5]
+      }개\n총 수익률은 ${this.getProfitRate(results)}%입니다.`
+    );
   }
 }
 

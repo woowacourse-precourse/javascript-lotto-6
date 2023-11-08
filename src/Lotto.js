@@ -19,6 +19,15 @@ class Lotto {
   getNumbers() {
     return this.sortNumbers(this.#numbers);
   }
+  getResult(winningNumbers) {
+    const bonusNumber = winningNumbers[6];
+    const winningNumber = winningNumbers.slice(0, 6);
+    const matchCount = this.#numbers.filter((num) =>
+      winningNumber.includes(num)
+    ).length;
+    const isBonusNumberMatch = this.#numbers.includes(bonusNumber);
+    return { matchCount, isBonusNumberMatch };
+  }
 }
 
 export default Lotto;
