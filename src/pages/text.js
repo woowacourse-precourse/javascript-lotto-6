@@ -13,4 +13,5 @@ export const GAME = {
   input_cost: "구입금액을 입력해 주세요 : ",
   input_number: "당첨 번호를 입력해 주세요.\n",
   input_bonus: "보너스 번호를 입력해 주세요.\n",
+  buy: (count) => `${count}개를 구매하였습니다.`,
 };

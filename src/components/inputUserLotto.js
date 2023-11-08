@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { GAME, ERROR } from "../pages/text.js";
-import InputValidator from "../utils/valids.js";
+import InputValidator from "../utils/inputValids.js";
 
 export default class inputUserLotto {
   constructor(count, numbers, bonus) {
