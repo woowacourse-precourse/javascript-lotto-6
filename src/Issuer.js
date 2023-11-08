@@ -1,3 +1,4 @@
+import { GAME } from './constants/Setting.js';
 import RandomNumberGenerator from './utils/RandomNumberGenerator.js';
 
 class Issuer {
@@ -6,7 +7,7 @@ class Issuer {
   #tickets;
 
   constructor(purchaseAmount) {
-    this.#lottoCount = purchaseAmount / 1000;
+    this.#lottoCount = purchaseAmount / GAME.unit;
     this.#tickets = this.#generate();
   }
 

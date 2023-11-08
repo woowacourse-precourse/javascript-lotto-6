@@ -1,3 +1,5 @@
+import { GAME } from './constants/Setting';
+
 class Calculator {
   #winningAmount;
 
@@ -16,8 +18,8 @@ class Calculator {
   }
 
   #calculateRateOfReturn(purchaseAmount) {
-    const rate = (this.#winningAmount / purchaseAmount) * 100;
-    this.#rateOfReturn = Math.round(rate * 10) / 10;
+    const rate = (this.#winningAmount / purchaseAmount) * GAME.percentage;
+    this.#rateOfReturn = Math.round(rate * GAME.roundDigit) / GAME.roundDigit;
   }
 
   get rateOfReturn() {

@@ -6,6 +6,8 @@ import Matcher from './Matcher.js';
 import OutputView from './OutputView.js';
 import Calculator from './Calculator.js';
 import Purchaser from './Purchaser.js';
+import { WINNING_NUMBER } from './constants/Error.js';
+import { GAME, SYMBOL } from './constants/Setting.js';
 
 class Controller {
   #purchaseAmount;
@@ -75,14 +77,14 @@ class Controller {
 
   #convertWinningNumbers(inputValue) {
     return inputValue
-      .replace(/\s/g, '')
-      .split(',')
+      .replace(GAME.removeSpaceRegex, SYMBOL.emptyString)
+      .split(SYMBOL.separator)
       .map((number) => Number(number));
   }
 
   #validateWinningNumbers(inputWinningNumbers) {
-    if (!inputWinningNumbers.includes(',')) {
-      throw new Error('[ERROR] 로또 번호는 콤마로 구분하여 입력하여야 합니다.');
+    if (!inputWinningNumbers.includes(SYMBOL.separator)) {
+      throw new Error(WINNING_NUMBER.withoutComma);
     }
   }
 

@@ -1,3 +1,6 @@
+import { WINNING_NUMBER } from './constants/Error.js';
+import { GAME } from './constants/Setting.js';
+
 class Lotto {
   #numbers;
 
@@ -8,12 +11,12 @@ class Lotto {
 
   #validate(numbers) {
     const uniqueNumbers = new Set(numbers);
-    if (uniqueNumbers.size !== 6) {
-      throw new Error('[ERROR] 로또 번호는 중복되지 않은 6개여야 합니다.');
+    if (uniqueNumbers.size !== GAME.lottoNumber) {
+      throw new Error(WINNING_NUMBER.notUnique);
     }
     uniqueNumbers.forEach((number) => {
-      if (!(number >= 1 && number <= 45)) {
-        throw new Error('[ERROR] 로또 번호는 1 이상 45 이하여야 합니다.');
+      if (!(number >= GAME.minNumber && number <= GAME.maxNumber)) {
+        throw new Error(WINNING_NUMBER.invalidRange);
       }
     });
   }

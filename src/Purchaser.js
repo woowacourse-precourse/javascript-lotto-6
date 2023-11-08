@@ -1,3 +1,6 @@
+import { PURCHASE_AMOUNT } from './constants/Error.js';
+import { GAME } from './constants/Setting.js';
+
 class Purchaser {
   #number;
 
@@ -9,13 +12,13 @@ class Purchaser {
 
   #validate(number) {
     if (Number.isNaN(number)) {
-      throw new Error('[ERROR] 구매 금액은 숫자여야 합니다.');
+      throw new Error(PURCHASE_AMOUNT.notNumber);
     }
-    if (number < 1000) {
-      throw new Error('[ERROR] 최소 구매 금액은 1000원입니다.');
+    if (number < GAME.unit) {
+      throw new Error(PURCHASE_AMOUNT.notMin);
     }
-    if (number % 1000 !== 0) {
-      throw new Error('[ERROR] 구매 금액은 1000원 단위여야 합니다.');
+    if (number % GAME.unit !== 0) {
+      throw new Error(PURCHASE_AMOUNT.invalidUnit);
     }
   }
 
