@@ -6,6 +6,7 @@ import {
   generateLottoNumbers,
   calculateMatchingCount,
 } from '../utils/LottoUtil';
+import { calculateRateOfReturn } from '../utils/RevenueUtil';
 import { MONEY_UNIT, MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH } from '../Constants';
 
 class LottoGame {
@@ -14,6 +15,7 @@ class LottoGame {
   #count;
   #winningLotto;
   #bonusNumber;
+  #revenue = 0;
 
   async start() {
     await this.#inputPurchaseCount();
@@ -28,7 +30,9 @@ class LottoGame {
     Rank.LIST.forEach((rank) => {
       const winningCount = this.#calculateWinningCount(rank);
       Screen.printRankResult(rank, winningCount);
+      this.#accumulateRevenue(winningCount * rank.prize);
     });
+    this.#printRateOfReturn();
   }
 
   async #inputPurchaseCount() {
@@ -84,6 +88,18 @@ class LottoGame {
       (acc, result) => acc + rank.isWinnable(result),
       0,
     );
+  }
+
+  #accumulateRevenue(value) {
+    this.#revenue += value;
+  }
+
+  #printRateOfReturn() {
+    const rateOfReturn = calculateRateOfReturn(
+      this.#revenue,
+      this.#lottos.length * MONEY_UNIT,
+    );
+    Screen.printRateOfReturn(rateOfReturn);
   }
 }
 

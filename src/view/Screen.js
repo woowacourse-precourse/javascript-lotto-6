@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGES, STRINGS, ERROR_PREFIX } from '../Constants';
+import { roundRateOfReturn } from '../utils/RevenueUtil';
 import Validator from '../Validator';
 
 class Screen {
@@ -56,6 +57,12 @@ class Screen {
         isRequiredBonus,
         winningCount,
       ),
+    );
+  }
+
+  static printRateOfReturn(rateOfReturn) {
+    Console.print(
+      MESSAGES.rateOfReturnMessage(roundRateOfReturn(rateOfReturn)),
     );
   }
 }

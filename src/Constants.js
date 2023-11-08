@@ -9,6 +9,7 @@ export const MESSAGES = Object.freeze({
     `${requiredCount}개 일치${
       isRequiredBonus ? ', 보너스 볼 일치' : ''
     } (${prize}원) - ${winningCount}개`,
+  rateOfReturnMessage: (rateOfReturn) => `총 수익률은 ${rateOfReturn}%입니다.`,
 });
 
 export const ERROR = Object.freeze({
