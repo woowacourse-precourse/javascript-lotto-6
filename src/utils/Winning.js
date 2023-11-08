@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import Lotto from "../Lotto.js"
 import Exception from "../Exception.js";
+import { MESSAGES } from "../Constants.js";
 
 class Winning {
 
@@ -11,7 +12,7 @@ class Winning {
   }
 
   async numberInput() {
-    const input = await Console.readLineAsync("\n당첨 번호를 입력해 주세요. \n");
+    const input = await Console.readLineAsync(MESSAGES.LOTTO_WINNING_NUM_INPUT);
     
     const lotto = new Lotto(input.split(",")).lottoReturn(input.split(","));
     this.number = lotto.map(Number);
@@ -29,7 +30,7 @@ class Winning {
   }
 
   async bonusNumInput() {
-    const input = await Console.readLineAsync("\n보너스 번호를 입력해 주세요. \n");
+    const input = await Console.readLineAsync(MESSAGES.LOTTO_BONUS_NUM_INPUT);
 
     const validinput = new Exception().validBonusInput(this.number, input);
     this.bonus = Number(validinput);

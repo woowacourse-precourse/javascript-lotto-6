@@ -1,5 +1,7 @@
 import {Console, Random} from "@woowacourse/mission-utils";
 import Exception from "../Exception.js";
+import { MESSAGES, CONSTANTS } from "../Constants.js";
+
 
 class Buy {
   
@@ -9,7 +11,7 @@ class Buy {
   }
 
   async buyLotto() {
-    const money = await Console.readLineAsync("구입금액을 입력해 주세요. \n");
+    const money = await Console.readLineAsync(MESSAGES.LOTTO_BUY_INPUT);
     const validmoney = new Exception().validateBuyLotto(money);
 
     return validmoney;
@@ -29,7 +31,8 @@ class Buy {
   }
 
   randomPickNum() {
-    const randomNum = Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+    const randomNum = Random.pickUniqueNumbersInRange(CONSTANTS.LOTTO_MIN_NUM, CONSTANTS.LOTTO_MAX_NUM, CONSTANTS.LOTTO_VALID_ETC)
+    .sort((a, b) => a - b);
     
     return randomNum;
   }

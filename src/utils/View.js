@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { MESSAGES } from "../Constants.js";
 
 class View {
 
@@ -11,7 +12,7 @@ class View {
   }
 
   statisticsPrint(statistics) {
-    Console.print("\n당첨 통계");
+    Console.print(MESSAGES.LOTTO_WINNING_STATISTICS);
     Console.print("---");
     Console.print("3개 일치 (5,000원) - " + statistics[0] + '개');
     Console.print("4개 일치 (50,000원) - " + statistics[1] + '개');
