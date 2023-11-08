@@ -1,10 +1,10 @@
-import Lotto from './Lotto.js';
-import Output from './view/Output.js';
-import Input from './view/Input.js';
-import { ERROR, GAME, DISPLAY, RESULT } from './constant/constant.js';
-import buyLotto from './lottogame/BuyLotto.js';
-import LottoController from './lottogame/LottoController.js';
-import { Rank, Profit, ProfitRate } from './calculation/index.js';
+import Lotto from '../Lotto.js';
+import Output from '../view/Output.js';
+import Input from '../view/Input.js';
+import { ERROR, GAME, DISPLAY, RESULT } from '../constant/constant.js';
+import buyLotto from './BuyLotto.js';
+import LottoController from './LottoController.js';
+import { Rank, Profit, ProfitRate } from '../calculation/index.js';
 
 class LottoGame {
   constructor() {
@@ -54,7 +54,6 @@ class LottoGame {
     }
   }
 
-  // 게임 흐름을 제어하는 메서드 구현
   async startGame() {
     const payMoney = await Input.text(GAME.COST);
     const lottoCount = await this.inputPayMoney(payMoney);
