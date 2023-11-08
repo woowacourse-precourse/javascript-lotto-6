@@ -6,7 +6,7 @@ class Lotto {
   constructor(numbers) {
     numbers.sort((a, b) => a - b);
     this.#validate(numbers);
-    this.#numbers
+    this.#numbers = numbers;
   }
 
   static pickRandomNumber() {
