@@ -36,8 +36,8 @@ class Lotto {
   }
 
   /**
-   * @param {number[]} numbers
-   * @returns {Lotto}
+   * @param {number[]} numbers 로또 한 장당 소유할 로또 번호입니다.
+   * @returns {Lotto} 생성된 로또입니다.
    */
   static of(numbers) {
     return new Lotto(numbers);
@@ -54,8 +54,7 @@ class Lotto {
 
   /**
    * 로또의 numbers를 반환합니다.
-   * @param {LottoNumber} number
-   * @returns {LottoNumber[]}
+   * @returns {LottoNumber[]} 로또의 numbers입니다.
    */
   getNumbers() {
     return Array.from(this.#numbers, (v) => v.getNumber());
@@ -63,8 +62,8 @@ class Lotto {
 
   /**
    * 입력받은 `lotto`와 몇 개의 숫자가 같은지 확인랍니다.
-   * @param {Lotto} lotto
-   * @returns {number}
+   * @param {Lotto} lotto 비교할 로또입니다.
+   * @returns {number} 로또의 맞은 갯수입니다.
    */
   prepare(lotto) {
     this.#validatePrepare(lotto);
@@ -79,8 +78,8 @@ class Lotto {
 
   /**
    * 입력받은 LottoNumber가 numbers에 포함되었는지 비교합니다.
-   * @param {LottoNumber} number
-   * @returns {boolean}
+   * @param {LottoNumber} number 비교할 로또 숫자입니다.
+   * @returns {boolean} 숫자의 소유 여부입니다.
    */
   match(number) {
     this.#validateMatch(number);
