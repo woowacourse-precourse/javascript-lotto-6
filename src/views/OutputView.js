@@ -16,6 +16,13 @@ class OutputView {
     Console.print(message);
   }
   
+  static printMatchCounts(matchCounts) {
+    Console.print(`\n${Messages.MATCH_RESULT}`);
+    Console.print(`${Messages.BREAK_LINE}`);
+    for (let i = matchCounts.length - 1; i >= 0; i -= 1) {
+      Console.print(`${Messages.RANK[i]}${matchCounts[i]}${Messages.COUNT_UNIT}`);
+    }
+  }
 }
 
 export default OutputView;

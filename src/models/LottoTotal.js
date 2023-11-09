@@ -11,7 +11,7 @@ class LottoTotal {
   constructor(lotto, bonusNumber) {
     this.#lotto = lotto;
     this.#validateBonusNumber(bonusNumber, lotto);
-    this.#bonusNumber = bonusNumber;
+    this.#bonusNumber = Number(bonusNumber);
   }
 
   #validateBonusNumber(bonusNumber, lotto) {

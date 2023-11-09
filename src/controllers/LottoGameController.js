@@ -54,7 +54,6 @@ class LottoGameController {
       .length;
   }
 
-  static;
 }
 
 export default LottoGameController;

@@ -3,15 +3,15 @@ import Messages from '../constants/Messages.js';
 
 class InputView {
   static getLottoPrice() {
-    return Console.readLineAsync(`${Messages.LOTTO_PRICE_INPUT}\n`);
+    return Console.readLineAsync(`${Messages.LOTTO_PRICE}\n`);
   }
 
   static getWinningNumbers() {
-    return Console.readLineAsync(`\n${Messages.WINNING_NUMBERS_INPUT}\n`);
+    return Console.readLineAsync(`\n${Messages.WINNING_NUMBERS}\n`);
   }
 
   static getBonusNumber() {
-    return Console.readLineAsync(`\n${Messages.BONUS_NUMBER_INPUT}\n`);
+    return Console.readLineAsync(`\n${Messages.BONUS_NUMBER}\n`);
   }
 }
 
