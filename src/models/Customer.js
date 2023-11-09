@@ -37,7 +37,6 @@ class Customer {
   }
 
   setLottoNumbers(lottoNumbers) {
-    this.#validateLottoNumbers(lottoNumbers);
     this.#lottoNumbers = lottoNumbers;
   }
 

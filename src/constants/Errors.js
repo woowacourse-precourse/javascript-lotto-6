@@ -7,7 +7,7 @@ const Errors = Object.freeze({
   IS_NOT_INTEGER: '[ERROR] 정수만 입력해주세요.',
   IS_NOT_DUPLICATED: '[ERROR] 중복된 숫자가 없이 입력해주세요.',
   IS_NOT_PROPER_LENGTH: '[ERROR] 길이가 6이어야 합니다.',
-  IS_NOT_SORTED: '[ERROR] 오름차순으로 정렬되어 있어야 합니다.'
+  IS_NOT_SORTED: '[ERROR] 오름차순으로 정렬되어 있어야 합니다.',
 });
 
 export default Errors;

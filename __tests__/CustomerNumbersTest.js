@@ -1,6 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Validations from '../src/Validations.js';
-import Customer from '../src/models/Customer.js';
 import LottoGameController from '../src/controllers/LottoGameController.js';
 
 const mockRandoms = numbers => {

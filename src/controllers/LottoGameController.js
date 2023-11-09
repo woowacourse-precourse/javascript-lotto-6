@@ -1,6 +1,5 @@
 import { Random } from "@woowacourse/mission-utils";
 import Conditions from "../constants/Conditions.js";
-import Customer from './../models/Customer';
 
 class LottoGameController {
   static generateCustomerNumbers(lottoCount) {
