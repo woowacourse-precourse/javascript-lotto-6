@@ -15,6 +15,7 @@ const Messages = Object.freeze({
     4: '3개 일치 (5,000원) - ',
   },
   COUNT_UNIT : '개',
+  RETURN_OF_INVESTMENT: (ROI) => `총 수익률은 ${ROI}%입니다.`,
 });
 
 export default Messages;

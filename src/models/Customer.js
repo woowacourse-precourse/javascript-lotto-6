@@ -38,6 +38,10 @@ class Customer {
     });
   }
 
+  getLottoPrice() {
+    return this.#lottoPrice;
+  }
+
   getLottoCount() {
     return this.#lottoCount;
   }

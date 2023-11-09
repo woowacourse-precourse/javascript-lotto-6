@@ -23,6 +23,10 @@ class OutputView {
       Console.print(`${Messages.RANK[i]}${matchCounts[i]}${Messages.COUNT_UNIT}`);
     }
   }
+
+  static printReturnOfInvestment(returnOfInvestment) {
+    Console.print(`${Messages.RETURN_OF_INVESTMENT(returnOfInvestment)}`);
+  }
 }
 
 export default OutputView;

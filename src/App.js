@@ -62,6 +62,12 @@ class App {
       lottoTotal.getBonusNumber()
     );
     OutputView.printMatchCounts(matchCounts);
+
+    const returnOfInvestment = LottoGameController.returnOfInvestment(
+      matchCounts,
+      customer.getLottoPrice()
+    );
+    OutputView.printReturnOfInvestment(returnOfInvestment);
   }
 }
 
