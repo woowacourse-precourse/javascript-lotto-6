@@ -56,11 +56,15 @@ class App {
       }
     }
     
-    const match = LottoGameController.matchRank(
+    console.log(customer.getLottoNumbers());
+    console.log(lottoTotal.getLotto().getNumbers());
+    console.log(lottoTotal.getBonusNumber());
+    const matchCounts = LottoGameController.matchRank(
       customer.getLottoNumbers(),
       lottoTotal.getLotto().getNumbers(),
       lottoTotal.getBonusNumber()
     );
+    console.log(matchCounts);
   }
 }
 
