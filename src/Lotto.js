@@ -9,15 +9,13 @@ class Lotto {
   }
 
   #validate(numbers) {
-    Validations.hasSpace(numbers);
-    const numbersArray = numbers.split(",").map((number) => Number(number));
-    numbersArray.forEach((number) => {
+    numbers.forEach((number) => {
       Validations.isNumber(number);
       Validations.isInRange(number);
       Validations.isInteger(number);
     });
-    Validations.isNotDuplicated(numbersArray);
-    Validations.isProperLength(numbersArray);
+    Validations.isNotDuplicated(numbers);
+    Validations.isProperLength(numbers);
   }
   
 }

@@ -15,7 +15,8 @@ class App {
     OutputView.printLottoCount(lottoCount);
     OutputView.printLottoNumbers(customer.getLottoNumbers());
 
-    const winningNumbers = await InputView.getWinningNumbers();
+    const temp = await InputView.getWinningNumbers();
+    const winningNumbers = temp.split(',').map((number) => Number(number));
     const bonusNumber = await InputView.getBonusNumber();
     const lottoTotal = new LottoTotal(winningNumbers, bonusNumber);
   }

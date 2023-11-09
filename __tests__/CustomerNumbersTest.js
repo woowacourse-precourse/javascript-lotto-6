@@ -79,7 +79,7 @@ describe('사용자 로또 번호 목록 테스트', () => {
   );
 
   test.each([[[1, 2, 3, 3, 4]], [[40, 39, 38]], [[1, 5, 4]]])(
-    '길이가 6인지',
+    '6개인지',
     lottoNumbers => {
       mockRandoms(lottoNumbers);
 
