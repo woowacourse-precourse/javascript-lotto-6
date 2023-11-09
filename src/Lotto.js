@@ -1,3 +1,6 @@
+import PRIZE from './constants/Prize.js';
+import Validate from './Validate.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,33 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    Validate.checkNumberCount(numbers);
+    Validate.checkDuplicateNumber(numbers);
+
+    numbers.forEach((number) => Validate.checkNumberRange(number));
+    numbers.forEach((number) => Validate.checkNumberType(number));
+  }
+
+  #choosePrize(number, bonus) {
+    switch (number) {
+      case 6:
+        return PRIZE.six;
+      case 5:
+        return this.#numbers.includes(bonus) ? PRIZE.fivePlus : PRIZE.five;
+      case 4:
+        return PRIZE.four;
+      case 3:
+        return PRIZE.three;
+      default:
+        return 0;
     }
   }
 
-  // TODO: 추가 기능 구현
+  compareLotto(answer, bonus) {
+    const correct = this.#numbers.filter((number) => answer.includes(number));
+    const number = correct.length;
+    return this.#choosePrize(number, bonus);
+  }
 }
 
 export default Lotto;
