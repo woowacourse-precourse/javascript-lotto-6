@@ -61,7 +61,6 @@ class App {
       lottoTotal.getLotto().getNumbers(),
       lottoTotal.getBonusNumber()
     );
-
     OutputView.printMatchCounts(matchCounts);
   }
 }

@@ -30,5 +30,6 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-await-in-loop': 'off',
     'no-constant-condition': 'off',
+    'no-param-reassign': 'off',
 	},
 };

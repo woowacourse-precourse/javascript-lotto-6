@@ -27,24 +27,7 @@ class LottoGameController {
     for (let i = 0; i < customerNumbers.length; i += 1) {
       const matchCount = this.matchCount(customerNumbers[i], winningNumbers);
       const isBonusMatch = customerNumbers[i].includes(bonusNumber);
-      switch (matchCount) {
-        case 6:
-          matchCounts[Conditions.FIRST] += Conditions.COUNT;
-          break;
-        case 4:
-          matchCounts[Conditions.FOURTH] += Conditions.COUNT;
-          break;
-        case 3:
-          matchCounts[Conditions.FIFTH] += Conditions.COUNT;
-          break;
-        default:
-          break;
-      }
-      if (matchCount === 5 && isBonusMatch) {
-        matchCounts[Conditions.SECOND] += Conditions.COUNT;
-      } else if (matchCount === 5) {
-        matchCounts[Conditions.THIRD] += Conditions.COUNT;
-      }
+      this.updateMatchCounts(matchCounts, matchCount, isBonusMatch);
     }
     return matchCounts;
   }
@@ -54,6 +37,27 @@ class LottoGameController {
       .length;
   }
 
+  static updateMatchCounts(matchCounts, matchCount, isBonusMatch) {
+    switch (matchCount) {
+      case 6: matchCounts[Conditions.RANK[0].INDEX] += Conditions.COUNT; break;
+      case 4: matchCounts[Conditions.RANK[3].INDEX] += Conditions.COUNT; break;
+      case 3: matchCounts[Conditions.RANK[4].INDEX] += Conditions.COUNT; break;
+      default: break;
+    }
+    if (matchCount === 5 && isBonusMatch) {
+      matchCounts[Conditions.RANK[1].INDEX] += Conditions.COUNT;
+    } else if (matchCount === 5) {
+      matchCounts[Conditions.RANK[2].INDEX] += Conditions.COUNT;
+    }
+  }
+
+  static returnOfInvestment(matchCounts, lottoPrice) {
+    const totalPrize = matchCounts.reduce((acc, cur, index) => {
+      acc += cur * Conditions.RANK[index].PRIZE;
+      return acc;
+    }, 0);
+    return (totalPrize / lottoPrice * 100).toFixed(1);
+  }
 }
 
 export default LottoGameController;
