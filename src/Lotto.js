@@ -1,3 +1,5 @@
+import Validations from "./Validations.js";
+
 class Lotto {
   #numbers;
 
@@ -6,13 +8,23 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  /**
+   * 당첨 로또 번호 유효성 검사
+   * @param {Array} numbers 
+   */
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    numbers.forEach((number) => {
+      Validations.isNumber(number);
+      Validations.isInRange(number);
+      Validations.isInteger(number);
+    });
+    Validations.isNotDuplicated(numbers);
+    Validations.isProperLength(numbers);
   }
-
-  // TODO: 추가 기능 구현
+  
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
