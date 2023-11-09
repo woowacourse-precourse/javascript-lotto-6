@@ -50,13 +50,13 @@ class Validations {
     });
   }
 
-  static isNotProperLength(input) {
+  static isProperLength(input) {
     if (input.length !== 6) {
       throw new Error(Errors.IS_NOT_PROPER_LENGTH);
     }
   }
 
-  static isNotSorted(input) {
+  static isSorted(input) {
     const sortedInput = [...input].sort((a, b) => a - b);
     if (JSON.stringify(input) !== JSON.stringify(sortedInput)) {
       throw new Error(Errors.IS_NOT_SORTED);

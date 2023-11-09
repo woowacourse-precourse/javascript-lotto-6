@@ -27,8 +27,14 @@ class Customer {
 
   #validateLottoNumbers(lottoNumbers) {
     lottoNumbers.forEach((lottoNumber) => {
-      Validations.isNumber(lottoNumber);
-      Validations.isInRange(lottoNumber);
+      lottoNumber.forEach((number) => {
+      Validations.isNumber(number);
+      Validations.isInRange(number);
+      Validations.isInteger(number);
+    });
+    Validations.isNotDuplicated(lottoNumber);
+    Validations.isProperLength(lottoNumber);
+    Validations.isSorted(lottoNumber);
     });
   }
 
@@ -37,6 +43,7 @@ class Customer {
   }
 
   setLottoNumbers(lottoNumbers) {
+    this.#validateLottoNumbers(lottoNumbers);
     this.#lottoNumbers = lottoNumbers;
   }
 

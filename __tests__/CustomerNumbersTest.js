@@ -86,8 +86,23 @@ describe('사용자 로또 번호 목록 테스트', () => {
       LottoGameController.generateCustomerNumbers(lottoNumbers).forEach(
         lottoNumber => {
           expect(() => {
-            Validations.isNotProperLength(lottoNumber);
+            Validations.isProperLength(lottoNumber);
           }).toThrow('[ERROR] 길이가 6이어야 합니다.');
+        },
+      );
+    },
+  );
+
+  test.each([[[1, 2, 3, 5, 4]], [[40, 39, 38, 37, 36]], [[1, 5, 4, 3, 6]]])(
+    '오름차순으로 정렬되어 있는지',
+    lottoNumbers => {
+      mockRandoms(lottoNumbers);
+
+      LottoGameController.generateCustomerNumbers(lottoNumbers).forEach(
+        lottoNumber => {
+          expect(() => {
+            Validations.isSorted(lottoNumber);
+          }).toThrow('ERROR] 오름차순으로 정렬되어 있어야 합니다.');
         },
       );
     },
