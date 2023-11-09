@@ -1,6 +1,7 @@
 import InputView from "./views/InputView.js";
 import OutputView from "./views/OutputView.js";
 import Customer from "./models/Customer.js";
+import Lotto from "./Lotto.js";
 import LottoTotal from "./models/LottoTotal.js";
 import LottoGameController from "./controllers/LottoGameController.js";
 
@@ -17,8 +18,10 @@ class App {
 
     const temp = await InputView.getWinningNumbers();
     const winningNumbers = temp.split(',').map((number) => Number(number));
+    const lotto = new Lotto(winningNumbers);
+    
     const bonusNumber = await InputView.getBonusNumber();
-    const lottoTotal = new LottoTotal(winningNumbers, bonusNumber);
+    const lottoTotal = new LottoTotal(lotto, bonusNumber);
   }
 }
 

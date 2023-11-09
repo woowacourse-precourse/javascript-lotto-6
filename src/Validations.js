@@ -45,7 +45,7 @@ class Validations {
   static isNotDuplicated(input) {
     input.forEach((number, index) => {
       if (input.indexOf(number) !== index) {
-        throw new Error(Errors.IS_NOT_DUPLICATED);
+        throw new Error(Errors.IS_DUPLICATED);
       }
     });
   }
@@ -60,6 +60,13 @@ class Validations {
     const sortedInput = [...input].sort((a, b) => a - b);
     if (JSON.stringify(input) !== JSON.stringify(sortedInput)) {
       throw new Error(Errors.IS_NOT_SORTED);
+    }
+  }
+
+  static isBonusNumberNotDuplicated(bonusNumber, lotto) {
+    const numbers = lotto.getNumbers();
+    if (numbers.includes(bonusNumber)) {
+      throw new Error(Errors.IS_BONUS_NUMBER_DUPLICATED);
     }
   }
 }

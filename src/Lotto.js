@@ -1,4 +1,4 @@
-import Validations from "./Validations";
+import Validations from "./Validations.js";
 
 class Lotto {
   #numbers;
@@ -18,6 +18,9 @@ class Lotto {
     Validations.isProperLength(numbers);
   }
   
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;

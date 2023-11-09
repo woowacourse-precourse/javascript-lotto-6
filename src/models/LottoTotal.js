@@ -1,15 +1,29 @@
-class LottoTotal {
-  #winningNumbers;
+import Lotto from "../Lotto.js";
+import Validations from "../Validations.js";
 
+class LottoTotal {
+  /** @type {Lotto} */
+  #lotto;
+
+  /** @type {number} */
   #bonusNumber;
 
-  constructor(winningNumbers, bonusNumber) {
-    this.#winningNumbers = winningNumbers;
+  constructor(lotto, bonusNumber) {
+    this.#lotto = lotto;
+    this.#validateBonusNumber(bonusNumber, lotto);
     this.#bonusNumber = bonusNumber;
   }
 
-  getWinningNumbers() {
-    return this.#winningNumbers;
+  #validateBonusNumber(bonusNumber, lotto) {
+    Validations.hasSpace(bonusNumber);
+    Validations.isNumber(bonusNumber);
+    Validations.isInRange(bonusNumber);
+    Validations.isInteger(bonusNumber);
+    Validations.isBonusNumberNotDuplicated(bonusNumber, lotto);
+  }
+
+  getLotto() {
+    return this.#lotto;
   }
 
   getBonusNumber() {
