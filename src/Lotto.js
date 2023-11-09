@@ -1,3 +1,6 @@
+import CustomError from './utils/Errors.js';
+import { ERROR_MESSAGE, LOTTO } from './utils/Define.js';
+
 class Lotto {
   #numbers;
 
@@ -7,12 +10,44 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+    this.#validateLength(numbers);
+    this.#validateNumbersRange(numbers);
+    this.#validateDuplicate(numbers);
+  }
+
+  #validateDuplicate(numbers) {
+    if (new Set(numbers).size !== LOTTO.numberCount) {
+      throw CustomError.lottoValidateError(ERROR_MESSAGE.notUniqueNumbers);
     }
   }
 
-  // TODO: 추가 기능 구현
+  #validateLength(numbers) {
+    if (numbers.length !== LOTTO.numberCount) {
+      throw CustomError.lottoValidateError(ERROR_MESSAGE.notNumberCountSix);
+    }
+  }
+
+  validateOutOfRange(number) {
+    if (number < LOTTO.numberMin || number > LOTTO.numberMax) {
+      throw CustomError.lottoValidateError(ERROR_MESSAGE.outOfRange);
+    }
+    return true;
+  }
+
+  #validateNumbersRange(numbers) {
+    const isValid = numbers.every(this.validateOutOfRange);
+    if (!isValid) {
+      throw CustomError.lottoValidateError(ERROR_MESSAGE.outOfRange);
+    }
+  }
+
+  includeNumber(number) {
+    return this.#numbers.includes(number);
+  }
+
+  getNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
