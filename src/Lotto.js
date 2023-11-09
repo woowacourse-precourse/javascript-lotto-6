@@ -1,3 +1,5 @@
+import Validations from "./Validations";
+
 class Lotto {
   #numbers;
 
@@ -7,12 +9,17 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    Validations.hasSpace(numbers);
+    const numbersArray = numbers.split(",").map((number) => Number(number));
+    numbersArray.forEach((number) => {
+      Validations.isNumber(number);
+      Validations.isInRange(number);
+      Validations.isInteger(number);
+    });
+    Validations.isNotDuplicated(numbersArray);
+    Validations.isProperLength(numbersArray);
   }
-
-  // TODO: 추가 기능 구현
+  
 }
 
 export default Lotto;
