@@ -65,7 +65,7 @@ class Validations {
 
   static isBonusNumberNotDuplicated(bonusNumber, lotto) {
     const numbers = lotto.getNumbers();
-    if (numbers.includes(bonusNumber)) {
+    if (numbers.includes(Number(bonusNumber))) {
       throw new Error(Errors.IS_BONUS_NUMBER_DUPLICATED);
     }
   }
