@@ -8,13 +8,14 @@ class OutputView {
 
   static printLottoNumbers(lottoNumbers) {
     lottoNumbers.forEach(lottoNumber => {
-      Console.print(
-        `${Messages.LEFT_BRACKET}${lottoNumber.join(', ')}${
-          Messages.RIGHT_BRACKET
-        }`,
-      );
+      Console.print(`${Messages.LEFT_BRACKET}${lottoNumber.join(', ')}${Messages.RIGHT_BRACKET}`);
     });
   }
+
+  static printError(message) {
+    Console.print(message);
+  }
+  
 }
 
 export default OutputView;
