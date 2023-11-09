@@ -8,6 +8,10 @@ class Lotto {
     this.#numbers = numbers;
   }
 
+  /**
+   * 당첨 로또 번호 유효성 검사
+   * @param {Array} numbers 
+   */
   #validate(numbers) {
     numbers.forEach((number) => {
       Validations.isNumber(number);

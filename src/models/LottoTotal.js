@@ -14,6 +14,11 @@ class LottoTotal {
     this.#bonusNumber = Number(bonusNumber);
   }
 
+  /**
+   * 보너스 번호 유효성 검사
+   * @param {number} bonusNumber 
+   * @param {Lotto} lotto 
+   */
   #validateBonusNumber(bonusNumber, lotto) {
     Validations.hasSpace(bonusNumber);
     Validations.isNumber(bonusNumber);

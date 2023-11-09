@@ -2,6 +2,10 @@ import { Random } from '@woowacourse/mission-utils';
 import Conditions from '../constants/Conditions.js';
 
 class LottoGameController {
+  /** 
+   * 구매자 로또 번호 생성
+   * @param {number} lottoCount
+  */
   static generateCustomerNumbers(lottoCount) {
     const customerNumbers = [];
     for (let i = 0; i < lottoCount; i += 1) {
@@ -20,6 +24,13 @@ class LottoGameController {
     userNumbers.sort((a, b) => a - b);
   }
 
+  /**
+   * 당처 번호와 구매자 로또 번호 비교
+   * @param {Array} customerNumbers 
+   * @param {Array} winningNumbers 
+   * @param {number} bonusNumber 
+   * @returns {Array}
+   */
   static matchRank(customerNumbers, winningNumbers, bonusNumber) {
     const matchCounts = Array(Conditions.TOTAL_RANK).fill(
       Conditions.INITIAL_MATCH_COUNT,
@@ -51,6 +62,12 @@ class LottoGameController {
     }
   }
 
+  /**
+   * 수익률 계산
+   * @param {Array} matchCounts 
+   * @param {number} lottoPrice 
+   * @returns {number}
+   */
   static returnOfInvestment(matchCounts, lottoPrice) {
     const totalPrize = matchCounts.reduce((acc, cur, index) => {
       acc += cur * Conditions.RANK[index].PRIZE;

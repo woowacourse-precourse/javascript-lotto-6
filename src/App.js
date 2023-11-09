@@ -7,6 +7,7 @@ import LottoGameController from "./controllers/LottoGameController.js";
 
 class App {
   async play() {
+    // 구입금액 입력
     let customer;
     while (true) {
       try {
@@ -18,9 +19,11 @@ class App {
       }
     }
 
+    // 로또 구매 개수 출력
     const lottoCount = customer.getLottoCount();
     OutputView.printLottoCount(lottoCount);
 
+    // 구매자 로또 번호 출력
     let lottoNumbers;
     while (true) {
       try {
@@ -33,6 +36,7 @@ class App {
       }
     }
     
+    // 당첨 번호 입력
     let lotto;
     while (true) {
       try {
@@ -45,6 +49,7 @@ class App {
       }
     }
     
+    // 보너스 볼 입력
     let lottoTotal;
     while (true) {
       try {
@@ -56,6 +61,7 @@ class App {
       }
     }
     
+    // 당첨 통계 출력
     const matchCounts = LottoGameController.matchRank(
       customer.getLottoNumbers(),
       lottoTotal.getLotto().getNumbers(),
@@ -63,6 +69,7 @@ class App {
     );
     OutputView.printMatchCounts(matchCounts);
 
+    // 수익률 출력
     const returnOfInvestment = LottoGameController.returnOfInvestment(
       matchCounts,
       customer.getLottoPrice()

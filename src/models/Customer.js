@@ -18,6 +18,10 @@ class Customer {
     this.#lottoNumbers = [];
   }
 
+  /**
+   * 구입 금액 유효성 검사
+   * @param {String} lottoPrice 
+   */
   #validateLottoPrice(lottoPrice) {
     Validations.hasSpace(lottoPrice);
     Validations.isNumber(lottoPrice);
@@ -25,6 +29,10 @@ class Customer {
     Validations.isThousandUnit(lottoPrice);
   }
 
+  /**
+   * 구매자 로또 번호 유효성 검사
+   * @param {Array} lottoNumbers 
+   */
   #validateLottoNumbers(lottoNumbers) {
     lottoNumbers.forEach((lottoNumber) => {
       lottoNumber.forEach((number) => {
@@ -38,17 +46,17 @@ class Customer {
     });
   }
 
+  setLottoNumbers(lottoNumbers) {
+    this.#validateLottoNumbers(lottoNumbers);
+    this.#lottoNumbers = lottoNumbers;
+  }
+
   getLottoPrice() {
     return this.#lottoPrice;
   }
 
   getLottoCount() {
     return this.#lottoCount;
-  }
-
-  setLottoNumbers(lottoNumbers) {
-    this.#validateLottoNumbers(lottoNumbers);
-    this.#lottoNumbers = lottoNumbers;
   }
 
   getLottoNumbers() {
