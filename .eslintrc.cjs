@@ -28,5 +28,7 @@ module.exports = {
 		'import/extensions': ['off'],
     'class-methods-use-this': 'off',
     'no-unused-vars': 'off',
+    'no-await-in-loop': 'off',
+    'no-constant-condition': 'off',
 	},
 };

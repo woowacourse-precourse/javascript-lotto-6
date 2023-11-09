@@ -45,17 +45,22 @@ class App {
       }
     }
     
-    let bonusNumber;
+    let lottoTotal;
     while (true) {
       try {
-        bonusNumber = await InputView.getBonusNumber();
-        const lottoTotal = new LottoTotal(lotto, bonusNumber);
+        const bonusNumber = await InputView.getBonusNumber();
+        lottoTotal = new LottoTotal(lotto, bonusNumber);
         break;
       } catch(e) {
         OutputView.printError(e.message);
       }
     }
     
+    const match = LottoGameController.matchRank(
+      customer.getLottoNumbers(),
+      lottoTotal.getLotto().getNumbers(),
+      lottoTotal.getBonusNumber()
+    );
   }
 }
 
