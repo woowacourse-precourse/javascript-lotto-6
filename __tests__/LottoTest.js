@@ -13,5 +13,15 @@ describe("로또 클래스 테스트", () => {
     }).toThrow("[ERROR] 중복된 값이 있습니다.");
   });
 
-  // 아래에 추가 테스트 작성 가능
+  test("당첨번호 확인 테스트", () => {
+    const lotto = new Lotto([1,2,3,4,5,6]);
+    const winNumbers = [1, 2, 3, 4, 5, 7];
+    const bonusNumber = 6
+    const expected = Object.freeze({
+      main: 5,
+      bonus: true,
+    })
+    const result = lotto.checkWin(winNumbers, bonusNumber);
+    expect(result).toEqual(expected);
+  })
 });

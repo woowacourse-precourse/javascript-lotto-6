@@ -52,8 +52,6 @@ class Lotto {
 
     return winStatus;
   }
-
-
 }
 
 export default Lotto;
