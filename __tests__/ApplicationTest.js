@@ -1,6 +1,7 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
-
+import Lotto from "../src/Lotto.js";
+import LottoManagement from "../src/LottoManagement.js";
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 
@@ -28,7 +29,7 @@ const runException = async (input) => {
   // given
   const logSpy = getLogSpy();
 
-  const RANDOM_NUMBERS_TO_END = [1,2,3,4,5,6];
+  const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
   const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "7"];
 
   mockRandoms([RANDOM_NUMBERS_TO_END]);
@@ -40,12 +41,12 @@ const runException = async (input) => {
 
   // then
   expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("[ERROR]"));
-}
+};
 
 describe("로또 테스트", () => {
   beforeEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test("기능 테스트", async () => {
     // given
@@ -94,5 +95,134 @@ describe("로또 테스트", () => {
   test("예외 테스트", async () => {
     await runException("1000j");
   });
-});
 
+  test("구입금액이 숫자가 아닌 경우 테스트", () => {
+    const app = new App();
+
+    const invalidPurchasePrice = "abc";
+    expect(() => app.checkValidationInputPrice(invalidPurchasePrice)).toThrow(
+      "[ERROR] 구입금액을 올바르게 입력해 주세요."
+    );
+  });
+
+  test("구입금액이 1000의 배수가 아닌 경우 테스트", () => {
+    const app = new App();
+
+    const invalidPurchasePrice = "2500";
+    expect(() => app.checkValidationInputPrice(invalidPurchasePrice)).toThrow(
+      "[ERROR] 구입금액을 올바르게 입력해 주세요."
+    );
+  });
+
+  test("구입금액이 0 이하인 경우 테스트", () => {
+    const app = new App();
+
+    const invalidPurchasePrice = "-1000";
+    expect(() => app.checkValidationInputPrice(invalidPurchasePrice)).toThrow(
+      "[ERROR] 구입금액을 올바르게 입력해 주세요."
+    );
+  });
+
+  test("구입금액이 정수가 아닌 경우 테스트", () => {
+    const app = new App();
+
+    const invalidPurchasePrice = "1500.5";
+    expect(() => app.checkValidationInputPrice(invalidPurchasePrice)).toThrow(
+      "[ERROR] 구입금액을 올바르게 입력해 주세요."
+    );
+  });
+
+  test("보너스 입력 예외 테스트 1", async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "0", "7"];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions(INPUT_NUMBERS_TO_END);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        "[ERROR] 1부터 45 사이의 숫자 한 개만 입력이 가능합니다."
+      )
+    );
+  });
+
+  test("보너스 입력 예외 테스트 2", async () => {
+    // given
+    const logSpy = getLogSpy();
+
+    logSpy.mockClear();
+
+    const RANDOM_NUMBERS_TO_END = [1, 2, 3, 4, 5, 6];
+    const INPUT_NUMBERS_TO_END = ["1000", "1,2,3,4,5,6", "1.1", "7"];
+
+    mockRandoms([RANDOM_NUMBERS_TO_END]);
+    mockQuestions(INPUT_NUMBERS_TO_END);
+
+    // when
+    const app = new App();
+    await app.play();
+
+    // then
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("[ERROR] 자연수만 입력이 가능합니다.")
+    );
+  });
+
+  test("보너스 입력값이 랜덤 배열에 포함 여부 테스트", () => {
+    const lottoManagement = new LottoManagement();
+    const bonusNumber = 20;
+    const randomArrs = [
+      new Lotto([1, 2, 3, 4, 5, 6]),
+      new Lotto([7, 8, 9, 10, 11, 12]),
+    ];
+
+    const result = lottoManagement.countBonuses(randomArrs, bonusNumber);
+
+    expect(result).toEqual([0, 0]);
+  });
+
+  test("입력된 번호와 랜덤 로또 번호 간의 일치하는 번호 개수 테스트", () => {
+    const lottoManagement = new LottoManagement();
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const generatedLottoNumbersArr = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 7],
+      [7, 8, 9, 10, 11, 12],
+    ];
+
+    const counts = lottoManagement.compareInputNumAndRandomNum(
+      winningNumbers,
+      generatedLottoNumbersArr
+    );
+
+    expect(counts).toEqual([6, 5, 0]);
+  });
+
+  test("일치하는 번호 개수를 기반으로 각 경우의 수 계산 테스트", () => {
+    const lottoManagement = new LottoManagement();
+    const counts = [3, 4, 5, 5, 6]; // 일치하는 번호 개수
+    const includedbonusArr = [0, 1, 0, 1, 0]; //보너스 번호 포함 여부 (0 또는 1)
+
+    const matchingCountsResult = lottoManagement.getMatchingCounts(
+      counts,
+      includedbonusArr
+    );
+
+    expect(matchingCountsResult).toEqual({
+      three: 1,
+      four: 1,
+      five: 1,
+      fiveAndBonus: 1,
+      six: 1,
+    });
+  });
+});
