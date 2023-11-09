@@ -1,0 +1,11 @@
+import { CONSTANTS } from "./GameConstant.js";
+
+export const ERROR_MESSAGE = Object.freeze({
+    INVALID_PRICE: `${CONSTANTS.ERROR_PRIFIX} ${Number(CONSTANTS.PURCHASE_UNIT_PRICE).toLocaleString()}원 단위의 금액만 입력 가능합니다.`,
+    INVALID_NOT_A_NUMBER : `${CONSTANTS.ERROR_PRIFIX} 0보다 큰 자연수만 입력 가능합니다.`,
+    INVALID_NULL : `${CONSTANTS.ERROR_PRIFIX} 입력값이 없습니다.`,
+    INVALID_LOTTO_NUMBER_LENGTH : `${CONSTANTS.ERROR_PRIFIX} 로또 번호는 ${CONSTANTS.LOTTO_NUMBER_LENGTH}개 입력 해야합니다.`,
+    INVALID_DUPLICATE_LOTTO_NUMBER : `${CONSTANTS.ERROR_PRIFIX} 로또 번호는 중복될 수 없습니다.`,
+    INVALID_LOTTO_NUMBER_RANGE : `${CONSTANTS.ERROR_PRIFIX} 로또 번호는 ${CONSTANTS.MIN_VALUE}~${CONSTANTS.MAX_VALUE} 사이의 숫자만 입력 가능합니다.`,
+    INVALID_DUPLICATE_LOTTO_NUMBER : `${CONSTANTS.ERROR_PRIFIX} 보너스 번호는 로또 번호와 중복될 수 없습니다.`,
+})

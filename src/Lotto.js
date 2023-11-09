@@ -1,3 +1,5 @@
+import LottoView from "./views/LottoView.js";
+
 class Lotto {
   #numbers;
 
@@ -13,6 +15,14 @@ class Lotto {
   }
 
   // TODO: 추가 기능 구현
+  printLottoNumber() {
+    LottoView.printPurchaseLottoNumbers(`[${this.#numbers.join(", ")}]`);
+  }
+
+  getLottoNumber(){
+    return this.#numbers;
+  }
+
 }
 
 export default Lotto;
