@@ -23,9 +23,7 @@ describe('App 클래스 테스트', () => {
     expect(paymentAmount).toEqual(Number(MONEY));
 
     userLottos.forEach((v, i) => {
-      expect(v.getLottoNumbers().join(',')).toBe(
-        sortNumbers(RANDOM_NUMBERS[i]).join(','),
-      );
+      expect(v.getLottoNumbers()).toEqual(sortNumbers(RANDOM_NUMBERS[i]));
     });
   });
 

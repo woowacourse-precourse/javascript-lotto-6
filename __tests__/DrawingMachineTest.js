@@ -70,7 +70,7 @@ describe('DrawingMachine 테스트', () => {
       const winningLotto = drawingMachine.getWinningLottoAndBonusBall().lotto;
 
       expect(winningNumbers.join(',')).toBe(INPUT_NUMBERS);
-      expect(winningLotto.getLottoNumbers().join(',')).toEqual(INPUT_NUMBERS);
+      expect(winningLotto.getLottoNumbers().join(',')).toBe(INPUT_NUMBERS);
     });
   });
 

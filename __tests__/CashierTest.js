@@ -76,7 +76,7 @@ describe('Cashier 클래스 테스트', () => {
     const lottoNumbers = lottos.map((v) => v.getLottoNumbers());
 
     lottoNumbers.forEach((v, i) => {
-      expect(v.join(',')).toBe(sortNumbers(RANDOM_NUMBERS[i]).join(','));
+      expect(v).toEqual(sortNumbers(RANDOM_NUMBERS[i]));
     });
   });
 });

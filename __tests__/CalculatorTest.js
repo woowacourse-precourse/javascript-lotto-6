@@ -36,8 +36,7 @@ describe('Calculator 클래스 테스트', () => {
   test('당첨금 계산', () => {
     WINNING_RESULT_ARRAY.forEach((v, i) => {
       const winnings = calculator.calculateWinnings(v);
-      const isEqual = winnings.join(',') === WINNINGS_ARRAY[i].join(',');
-      expect(isEqual).toBeTruthy();
+      expect(winnings).toEqual(WINNINGS_ARRAY[i]);
     });
   });
 

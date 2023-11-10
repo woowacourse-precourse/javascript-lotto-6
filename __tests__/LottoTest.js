@@ -59,6 +59,6 @@ describe('로또 클래스 테스트', () => {
     const SORTED_NUMBERS = [1, 2, 3, 4, 5, 6];
 
     const lottoNumbers = new Lotto(NUMBERS).getLottoNumbers();
-    expect(lottoNumbers.join(',')).toBe(SORTED_NUMBERS.join(','));
+    expect(lottoNumbers).toEqual(SORTED_NUMBERS);
   });
 });
