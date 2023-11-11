@@ -1,22 +1,40 @@
-/* eslint-disable consistent-return */
-/* eslint-disable class-methods-use-this */
+/* eslint-disable */
 import { Console } from '@woowacourse/mission-utils';
+import Input from './input.js';
 
-class Lotto {
-  #numbers; // 로또번호 입력값 배열, 여기가 필드
+class Winning {
+  #winningNum; // 로또번호 입력값 배열, 여기가 필드
 
-  constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+  constructor() {
+    this.#winningNum = new Input();
   }
 
-  #validate(numbers) {
-    if (this.#stringToNum(numbers)) throw new Error(`[ERROR] 입력 값은 숫자여야 합니다.`);
-    const newWinning = numbers.map(Number);
+  async run() {
+    const winningNum = await this.validCheck();
+    return winningNum;
+  }
 
-    if (this.#validateWinningNumLength(newWinning)) throw new Error(`[ERROR] 숫자 6개를 입력해야 합니다.`);
-    if (this.#validateNumRange(newWinning)) throw new Error(`[ERROR] 숫자 범위는 1~45 사이입니다.`);
-    if (this.#duplCheckOfWinngNum(newWinning)) throw new Error(`[ERROR] 당첨 번호는 중복될 수 없습니다.`);
+  // TODO: 추가 기능 구현
+
+  async validCheck() {
+    let newWinning;
+    let valid = true;
+
+    while (valid) {
+      const winning = await this.#winningNum.getWinningNum();
+      newWinning = winning.map(Number);
+
+      try {
+        if (this.#stringToNum(winning)) throw new Error(`[ERROR] 입력 값은 숫자여야 합니다.`);
+        if (this.#validateWinningNumLength(newWinning)) throw new Error(`[ERROR] 숫자 6개를 입력해야 합니다.`);
+        if (this.#validateNumRange(newWinning)) throw new Error(`[ERROR] 숫자 범위는 1~45 사이입니다.`);
+        if (this.#duplCheckOfWinngNum(newWinning)) throw new Error(`[ERROR] 당첨 번호는 중복될 수 없습니다.`);
+        valid = false;
+      } catch (error) {
+        continue;
+      }
+    }
+    return newWinning;
   }
 
   // 입력 값이 숫자인지 유효성도 같이 확인하면서 문자열을 숫자로 변환.
@@ -65,4 +83,4 @@ class Lotto {
   }
 }
 
-export default Lotto;
+export default Winning;
