@@ -1,5 +1,13 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { Message } from "./constants/Message";
+import {
+  Message,
+  FIFTH_PRIZE,
+  FOURTH_PRIZE,
+  THIRD_PRIZE,
+  SECOND_PRIZE,
+  FIRST_PRIZE,
+  PRIZE,
+} from "./constants/Message";
 import { checkMoney, checkLottoNumbers, checkBonusNumber } from "./Validation";
 import Lotto from "./Lotto";
 
@@ -11,6 +19,9 @@ class App {
     const userLottos = await askUserLotto();
     const bonusLotto = await askUserBonusLotto();
     const lottoResults = calculateLottoResults(lottos, userLottos, bonusLotto);
+    const prizeResults = getPrizeResult(lottoResults);
+    showPrizeResult(prizeResults.prizeResult);
+    //showTotalPrize(money, prizeResults.totalPrize);
   }
 }
 
@@ -82,4 +93,40 @@ const calculateLottoResults = (lottos, userLottos, bonusLotto) => {
   }
   return lottoResults;
 };
+
+const getPrizeResult = (lottoResults) => {
+  const result = [0, 0, 0, 0, 0];
+  const totalPrize = 0;
+  for (let lottoResult of lottoResults) {
+    switch (lottoResult.winLottoNum) {
+      case 3:
+        totalPrize += FIFTH_PRIZE;
+        result[0] += 1;
+        break;
+      case 4:
+        totalPrize += FOURTH_PRIZE;
+        result[1] += 1;
+        break;
+      case 5:
+        totalPrize += lottoResult.winBonus ? SECOND_PRIZE : THIRD_PRIZE;
+        lottoResult.winBonus ? (result[3] += 1) : (result[2] += 1);
+        break;
+      case 6:
+        totalPrize += FIRST_PRIZE;
+        result[4] += 1;
+        break;
+      default:
+    }
+  }
+  return { prizeResult: result, totalPrize: totalPrize };
+};
+
+const showPrizeResult = (prizeResult) => {
+  MissionUtils.Console.print(Message.END);
+  for (let i; i < prizeResult.length; i++) {
+    const comment = PRIZE[i] + `${prizeResult[i]}개\n`;
+    MissionUtils.Console.print(comment);
+  }
+};
+
 export default App;

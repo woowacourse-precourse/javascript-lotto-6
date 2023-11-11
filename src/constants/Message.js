@@ -2,7 +2,7 @@ export const Message = {
   INIT: "구입금액을 입력해 주세요.\n",
   LOTTOINPUT: "당첨 번호를 입력해 주세요.\n",
   BONUSINPUT: "보너스 번호를 입력해 주세요.\n",
-  END: "당첨 통계\n---\n",
+  END: "\n당첨 통계\n---\n",
 };
 
 export const ErrorMessage = {
@@ -18,3 +18,11 @@ export const SECOND_PRIZE = 30000000;
 export const THIRD_PRIZE = 1500000;
 export const FOURTH_PRIZE = 50000;
 export const FIFTH_PRIZE = 5000;
+
+export const PRIZE = [
+  "3개 일치 (5,000원) - ",
+  "4개 일치 (50,000원) - ",
+  "5개 일치 (1,500,000원) - ",
+  "5개 일치, 보너스 볼 일치 (30,000,000원) - ",
+  "6개 일치 (2,000,000,000원) - ",
+];
