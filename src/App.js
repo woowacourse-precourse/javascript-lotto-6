@@ -10,6 +10,7 @@ class App {
     const lottos = buyLotto(money);
     const userLottos = await askUserLotto();
     const bonusLotto = await askUserBonusLotto();
+    const lottoResults = calculateLottoResults(lottos, userLottos, bonusLotto);
   }
 }
 
@@ -71,5 +72,14 @@ const askUserBonusLotto = async () => {
     }
   }
   return bonusLotto;
+};
+
+const calculateLottoResults = (lottos, userLottos, bonusLotto) => {
+  const lottoResults = [];
+  for (let lotto of lottos) {
+    const result = lotto.getLottoResult(userLottos, bonusLotto);
+    lottoResults.push(result);
+  }
+  return lottoResults;
 };
 export default App;

@@ -10,6 +10,7 @@ export const ErrorMessage = {
   WRONGWON: "[ERROR] 1000원 단위가 아닙니다.",
   WRONGRANGE: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
   ISDUPLICATE: "[ERROR] 중복된 번호가 있습니다.",
+  WRONGBONUS: "[ERROR] 보너스숫자가 1개가 아닙니다.",
 };
 
 export const FIRST_PRIZE = 2000000000;
