@@ -26,7 +26,7 @@ class Lotto {
   }
 
   printConsole(){
-    var str = "[" + this.#numbers.join(", ") + "]";
+    const str = "[" + this.#numbers.join(", ") + "]";
     Console.print(str);
   }
 
