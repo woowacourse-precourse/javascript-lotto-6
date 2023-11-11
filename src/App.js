@@ -13,30 +13,30 @@ import Lotto from "./Lotto";
 
 class App {
   async play() {
-    const money = await askMoney(money);
+    const money = await askMoney();
     MissionUtils.Console.print(`${money / 1000}개를 구매했습니다.\n`);
     const lottos = buyLotto(money);
     const userLottos = await askUserLotto();
-    const bonusLotto = await askUserBonusLotto();
+    const bonusLotto = await askUserBonusLotto(userLottos);
     const lottoResults = calculateLottoResults(lottos, userLottos, bonusLotto);
     const prizeResults = getPrizeResult(lottoResults);
     showPrizeResult(prizeResults.prizeResult);
-    //showTotalPrize(money, prizeResults.totalPrize);
+    showTotalPrize(money, prizeResults.totalPrize);
   }
 }
 
 const askMoney = async () => {
   let isPass = false;
-  let money = 0;
+  let inputMoney;
   while (!isPass) {
     try {
-      money = await MissionUtils.Console.readLineAsync(Message.INIT);
-      checkMoney(money);
+      inputMoney = await MissionUtils.Console.readLineAsync(Message.INIT);
+      checkMoney(inputMoney);
       isPass = true;
     } catch (error) {
-      MissionUtils.Console.print(error.Message);
+      MissionUtils.Console.print(error.message); //소문자이다....
     }
-    return money;
+    return inputMoney;
   }
 };
 
@@ -64,22 +64,22 @@ const askUserLotto = async () => {
       checkLottoNumbers(lottoNumbers);
       isPass = true;
     } catch (error) {
-      MissionUtils.Console.print(error.Message);
+      MissionUtils.Console.print(error.message);
     }
   }
   return lottoNumbers.split(",");
 };
 
-const askUserBonusLotto = async () => {
+const askUserBonusLotto = async (userLottos) => {
   let isPass = false;
   let bonusLotto = "";
   while (!isPass) {
     try {
       bonusLotto = await MissionUtils.Console.readLineAsync(Message.BONUSINPUT);
-      checkBonusNumber(bonusLotto);
+      checkBonusNumber(bonusLotto, userLottos);
       isPass = true;
     } catch (error) {
-      MissionUtils.Console.print(error.Message);
+      MissionUtils.Console.print(error.message);
     }
   }
   return bonusLotto;
@@ -96,7 +96,7 @@ const calculateLottoResults = (lottos, userLottos, bonusLotto) => {
 
 const getPrizeResult = (lottoResults) => {
   const result = [0, 0, 0, 0, 0];
-  const totalPrize = 0;
+  let totalPrize = 0;
   for (let lottoResult of lottoResults) {
     switch (lottoResult.winLottoNum) {
       case 3:
@@ -129,4 +129,8 @@ const showPrizeResult = (prizeResult) => {
   }
 };
 
+const showTotalPrize = (money, totalPrize) => {
+  const rate = (totalPrize / money) * 100;
+  MissionUtils.Console.print(`총 수익률은 ${rate.toFixed(1)}%입니다.`);
+};
 export default App;
