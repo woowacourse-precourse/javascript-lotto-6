@@ -27,16 +27,16 @@ class App {
 
 const askMoney = async () => {
   let isPass = false;
-  let inputMoney;
+  let money;
   while (!isPass) {
     try {
-      inputMoney = await MissionUtils.Console.readLineAsync(Message.INIT);
-      checkMoney(inputMoney);
+      money = await MissionUtils.Console.readLineAsync(Message.INIT);
+      checkMoney(money);
       isPass = true;
     } catch (error) {
-      MissionUtils.Console.print(error.message); //소문자이다....
+      MissionUtils.Console.print(error.message); //message는 소문자이다....
     }
-    return inputMoney;
+    return money;
   }
 };
 
@@ -123,7 +123,7 @@ const getPrizeResult = (lottoResults) => {
 
 const showPrizeResult = (prizeResult) => {
   MissionUtils.Console.print(Message.END);
-  for (let i; i < prizeResult.length; i++) {
+  for (let i = 0; i < prizeResult.length; i++) {
     const comment = PRIZE[i] + `${prizeResult[i]}개\n`;
     MissionUtils.Console.print(comment);
   }
