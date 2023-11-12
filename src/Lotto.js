@@ -1,4 +1,6 @@
-class Lotto {
+import { ERROR, LOTTO } from "./constant";
+
+class Lotto { //예외처리 및 값 저장
   #numbers;
 
   constructor(numbers) {
@@ -7,12 +9,15 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
-    }
+    if (numbers.length !== LOTTO.LEN) throw new Error(ERROR.LOTTO);
+    if (numbers.filter(v => v < LOTTO.MIN || v > LOTTO.MAX).length > 0) throw new Error(ERROR.LOTTO);
+    if (new Set(numbers).size !== numbers.length) throw new Error(ERROR.LOTTO);
+    if (numbers.filter(v => isNaN(v)).length > 0) throw new Error(ERROR.LOTTO);
   }
 
-  // TODO: 추가 기능 구현
+  getWinningNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
