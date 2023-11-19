@@ -6,58 +6,66 @@
 
 로또과제에 필요한 [기능](https://github.com/BadaHertz52/javascript-lotto-6/blob/badahertz52/docs/README.md)들을 세부적을 나누어 클래스를 생성하고, 이를 App에서 다시 로또의 진행과정인 "구입", "당첨 번호 뽑기", "당첨 여부 확인", "당첨 결과 출력"으로 묶어서 메서드를 만든 후, App의 play 메서드에서 실행하도록 해 과제를 구현했습니다.
 
+### 실행 모습
+
+<img src="./readmeImages/lotto.png"alt="기능구현 모습" width="400px">
+
+### 파일 구조
+
 <details>
 <summary> 🗂️ 파일 구조 보기</summary>
 <div markdown="1">
 
 ```
 📦src
- ┣ 📂constant
+ ┣ 📂constants
  ┃ ┣ 📜index.js
- ┃ ┣ 📜Message.js
- ┃ ┗ 📜Rule.js
+ ┃ ┣ 📜Message.js : 메세지와 관련된 변수 관리
+ ┃ ┗ 📜Rule.js : 게임 룰에 대한 변수 관리
+ ┣ 📂controllers
+ ┃ ┣ 📜Cashier.js :구매 금액 입력값을 받아 이를 Payment에 전달해 유효성 검사를 실행 후 구매 금액에 따른 로또 발행
+ ┃ ┣ 📜DrawingMachine.js: 당첨번호,보너스 번호에 대한 입력값을 받아 Lotto,BonusBall에 전달해 유효성 검사 후 이를 반환
+ ┃ ┣ 📜ErrorController.js : 오류를 생성하고 이를 throw 함
+ ┃ ┣ 📜index.js
+ ┃ ┣ 📜InputController.js : 입력에 대한 컨트롤 담당 (입력값 받아 이를 다른 형태로 변환 후 이를 반환)
+ ┃ ┗ 📜OutputController.js : 메세지 출력에 대한 컨트롤 (데이터를 받아서 출력 메세지에 맞게 변환 후 이를 출력하도록 함)
+ ┣ 📂models
+ ┃ ┣ 📜BonusBall.js : 보너스 번호를 받아서 이에 대한 유효성 검사 진행 후 유효한 보너스 번호 반환
+ ┃ ┣ 📜Calculator.js : 당첨 결과에 따른 당첨금과 수익률 계산
+ ┃ ┣ 📜Checker.js : 사용자 로또 번호와 당첨번호,보너스번호를 비교해 당첨 결과를 계산
+ ┃ ┣ 📜CustomError.js : 새로운 Error타입을 생성
+ ┃ ┣ 📜index.js
+ ┃ ┗ 📜Payment.js : 구매 금액에 대한 유효성 검사 후 유효한 구매 금액을 반환
  ┣ 📂utils
  ┃ ┣ 📜index.js
- ┃ ┣ 📜Input.js
- ┃ ┣ 📜MessageFactory.js
- ┃ ┣ 📜Money.js
- ┃ ┣ 📜RandomNumbers.js
- ┃ ┣ 📜Sort.js
- ┃ ┣ 📜Validate.js
- ┃ ┗ 📜WinningResult.js
+ ┃ ┣ 📜Money.js  : 글자형태의 돈을 숫자로 변경하는 유틸 함수 관리
+ ┃ ┣ 📜RandomNumbers.js : 랜덤 숫자에 관한 유틸 함수 관리
+ ┃ ┣ 📜Sort.js : 배열의 졍렬에 대한 유틸 함수 관리
+ ┃ ┗ 📜Validate.js : 유효성 검사에 자주 사용하는 유틸함수 관리
+ ┣ 📂view
+ ┃ ┣ 📜index.js
+ ┃ ┣ 📜InputView.js : 사용자에게 입력값을 받음
+ ┃ ┗ 📜OutputView.js :  메세지를 출력
  ┣ 📜App.js
- ┣ 📜BonusBall.js
- ┣ 📜Calculator.js
- ┣ 📜Cashier.js
- ┣ 📜Checker.js
- ┣ 📜DrawingMachine.js
  ┣ 📜index.js
- ┣ 📜Lotto.js
- ┣ 📜Statistic.js
- ┗ 📜User.js
+ ┗ 📜Lotto.js : 로또 번호에 대한 유효성 검사 후 유효한 로또 번호를 반환
 ```
 
 </div>
 </details>
 
-| 클래스         | 소개                                                                                                                                                                                          |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| App            | <ul><li>로또 구입당첨 번호 뽑기</li> <li>당첨 여부 검사</li> <li>결과 출력</li> <li>로또 진행</li> </ul>                                                                                      |
-| BonusBall      | <ul><li>보너스 번호에 대한 유효성 검사</li> <li>보너스 번호 반환</li></ul>                                                                                                                    |
-| Calculator     | <ul><li>로또 당첨 결고에 따른 수익률 계산</li></ul>                                                                                                                                           |
-| Cashier        | <ul><li>구매 금액에 대한 유효성 검사 진행</li><li>구매 금액에 따른 로또 발행</li></ul>                                                                                                        |
-| Checker        | <ul><li>사용자가 구매한 로또들과 당첨 번호들 비교</li> <li>당첨 결과 반환</li></ul>                                                                                                           |
-| DrawingMachine | <ul><li>당첨 번호와 보너스 번호 입력값 받기</li> <li>당첨 번호와 보너스 번호에 대한 유효성 검사</li> <li>당첨 번호와 보너스 번호를 당첨 로또와 보너스 볼 형태로 변환 후 이들을 반환</li></ul> |
-| Lotto          | <ul><li>로또 번호에 대한 유효성 검사</li> <li>로또 번호 반환</li></ul>                                                                                                                        |
-| Printer        | <ul><li>당첨 결과를 통계 형식에 따라 화면에 출력</li></ul>                                                                                                                                    |
-| User           | <ul><li>로또 구매 금액 입력값을 가져와 반환</li> <li>발행된 로또들 저장 및 화면 출력</li></ul>                                                                                                |
-
-## 설치 및 테스트
+## 설치,실행,테스트
 
 #### 설치
 
 ```bash
 npm i
+```
+
+#### 실행
+
+```bash
+node ./src/index.js
 ```
 
 #### 테스트
