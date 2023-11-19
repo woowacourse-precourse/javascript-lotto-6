@@ -1,52 +1,22 @@
-import {
-  readInput,
-  readBonusNumber,
-  readPayment,
-  readWinningNumbers,
-} from './Input';
-
-import {
-  changeArrayToStringMessage,
-  getErrorMessage,
-  printMessage,
-  printPurchasedLottos,
-  printRateOfReturn,
-  printWinningResult,
-  throwError,
-} from './MessageFactory';
-
-import { changeStringToMoney } from './Money';
+import { changeStringToMoney } from './Money.js';
 
 import {
   getBonusBallNumber,
   getLottoRandomNumbers,
   getRandomNumbers,
-} from './RandomNumbers';
+} from './RandomNumbers.js';
 
-import { sortNumbers } from './Sort';
+import { sortNumbers } from './Sort.js';
 
-import { getWinningResult } from './WinningResult';
-
-import { validateNumberRange, hasNoDelimiter } from './Validate';
+import { validateNumberRange, hasNoDelimiter, isInteger } from './Validate.js';
 
 export {
-  changeArrayToStringMessage,
   changeStringToMoney,
   getBonusBallNumber,
-  getErrorMessage,
   getLottoRandomNumbers,
   getRandomNumbers,
-  getWinningResult,
   hasNoDelimiter,
-  readBonusNumber,
-  readInput,
-  readPayment,
-  readWinningNumbers,
-  printMessage,
-  printPurchasedLottos,
-  printRateOfReturn,
-  printWinningResult,
+  isInteger,
   sortNumbers,
-  throwError,
   validateNumberRange,
 };

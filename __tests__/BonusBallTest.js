@@ -1,6 +1,5 @@
-import BonusBall from '../src/BonusBall';
-import { BONUS_BALL_FORM, ERROR_MESSAGE } from '../src/constant';
-import { getErrorMessage } from '../src/utils';
+import { BonusBall } from '../src/models/index.js';
+import { BONUS_BALL_FORM, ERROR_MESSAGE } from '../src/constants/index.js';
 
 describe('BonusBall 클래스 테스트', () => {
   const LOTTO_NUMBERS = [1, 2, 3, 4, 5, 6];
@@ -18,7 +17,7 @@ describe('BonusBall 클래스 테스트', () => {
     TEST_ITEMS.forEach((v) => {
       expect(() => {
         new BonusBall(v, LOTTO_NUMBERS);
-      }).toThrow(getErrorMessage(ERROR_MESSAGE.isNotNumber));
+      }).toThrow(ERROR_MESSAGE.isNotNumber);
     });
   });
 
@@ -27,7 +26,7 @@ describe('BonusBall 클래스 테스트', () => {
     TEST_ITEMS.forEach((v) => {
       expect(() => {
         new BonusBall(v, LOTTO_NUMBERS);
-      }).toThrow(getErrorMessage(ERROR_MESSAGE.range));
+      }).toThrow(ERROR_MESSAGE.range);
     });
   });
 
@@ -49,7 +48,7 @@ describe('BonusBall 클래스 테스트', () => {
     const TEST_ITEMS = Array.from(LOTTO_NUMBERS);
     TEST_ITEMS.forEach((v) => {
       expect(() => new BonusBall(v, LOTTO_NUMBERS)).toThrow(
-        getErrorMessage(ERROR_MESSAGE.duplicateBonusBall),
+        ERROR_MESSAGE.duplicateBonusBall,
       );
     });
   });

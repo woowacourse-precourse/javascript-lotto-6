@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { BONUS_BALL_FORM, LOTTO_FORM } from '../constant';
-import { sortNumbers } from './Sort';
+import { BONUS_BALL_FORM, LOTTO_FORM } from '../constants/Rule.js';
+import { sortNumbers } from './Sort.js';
 
 const getRandomNumbers = (range, length) => {
   const numbers = Array.from(

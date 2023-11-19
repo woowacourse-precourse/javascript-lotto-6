@@ -1,19 +1,18 @@
 import Lotto from '../src/Lotto.js';
-import { ERROR_MESSAGE } from '../src/constant';
-import { getErrorMessage } from '../src/utils/MessageFactory.js';
-import { getRandomNumbers } from '../src/utils/RandomNumbers.js';
+import { ERROR_MESSAGE } from '../src/constants/index.js';
+import { getRandomNumbers } from '../src/utils/index.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 6, 7]);
-    }).toThrow(getErrorMessage(ERROR_MESSAGE.sixNumbers));
+    }).toThrow(ERROR_MESSAGE.sixNumbers);
   });
 
   test('로또 번호에 중복된 숫자가 있으면 예외가 발생한다.', () => {
     expect(() => {
       new Lotto([1, 2, 3, 4, 5, 5]);
-    }).toThrow(getErrorMessage(ERROR_MESSAGE.duplicateNumber));
+    }).toThrow(ERROR_MESSAGE.duplicateNumber);
   });
 
   test('로또 클래스는 숫자배열을 파라미터로 받으며, 그렇지 않을 경우 예외가 발생한다.', () => {
@@ -35,12 +34,12 @@ describe('로또 클래스 테스트', () => {
     LAST_ITEMS.forEach((v) => {
       expect(() => {
         new Lotto(NUMBERS.concat(v));
-      }).toThrow(getErrorMessage(ERROR_MESSAGE.isNotNumberArray));
+      }).toThrow(ERROR_MESSAGE.isNotNumberArray);
     });
 
     expect(() => {
       new Lotto(WRONG_LOTTO_NUMBERS);
-    }).toThrow(getErrorMessage(ERROR_MESSAGE.isNotNumberArray));
+    }).toThrow(ERROR_MESSAGE.isNotNumberArray);
   });
 
   test('로또 번호가 1부터 45외의 숫자가 포함되어 있으면 예외가 발생한다.', () => {
@@ -50,7 +49,7 @@ describe('로또 클래스 테스트', () => {
     wrongNumbers.forEach((v) => {
       expect(() => {
         new Lotto(NUMBERS.concat(v));
-      }).toThrow(getErrorMessage(ERROR_MESSAGE.range));
+      }).toThrow(ERROR_MESSAGE.range);
     });
   });
 
@@ -59,6 +58,6 @@ describe('로또 클래스 테스트', () => {
     const SORTED_NUMBERS = [1, 2, 3, 4, 5, 6];
 
     const lottoNumbers = new Lotto(NUMBERS).getLottoNumbers();
-    expect(lottoNumbers).toEqual(SORTED_NUMBERS);
+    expect(lottoNumbers.join(',')).toBe(SORTED_NUMBERS.join(','));
   });
 });

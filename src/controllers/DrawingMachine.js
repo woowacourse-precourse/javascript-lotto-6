@@ -1,17 +1,15 @@
-import { readBonusNumber, readWinningNumbers } from './utils';
-import Lotto from './Lotto';
-import BonusBall from './BonusBall';
+import { BonusBall } from '../models/index.js';
+import Lotto from '../Lotto.js';
+import InputController from './InputController.js';
+import { MESSAGE } from '../constants/Message.js';
+import OutputController from './OutputController.js';
 
 class DrawingMachine {
   #winningNumbers;
   #winningLotto;
   #bonusBall;
 
-  async getWinningNumbers() {
-    return await readWinningNumbers();
-  }
-
-  setWinningLotto(value) {
+  #setWinningLotto(value) {
     this.#winningLotto = new Lotto(value);
     this.#winningNumbers = value;
   }
@@ -19,29 +17,32 @@ class DrawingMachine {
   async drawWinningLotto() {
     while (!this.#winningLotto) {
       try {
-        const value = await this.getWinningNumbers();
-        this.setWinningLotto(value);
+        const value = await InputController.readWinningNumbers();
+        this.#setWinningLotto(value);
+        break;
       } catch (error) {
         this.#winningLotto = undefined;
+        OutputController.printErrorMessage(error);
       }
     }
   }
 
-  async getBonusNumber() {
-    return await readBonusNumber();
-  }
-
-  setBonusBall(number) {
+  #setBonusBall(number) {
     this.#bonusBall = new BonusBall(number, this.#winningNumbers);
   }
 
   async drawBonusBall() {
     while (!this.#bonusBall) {
       try {
-        const number = await this.getBonusNumber();
-        this.setBonusBall(number);
+        const number = await InputController.readNumber(
+          MESSAGE.bonusBallNumberQuery,
+        );
+        this.#setBonusBall(number);
+
+        break;
       } catch (error) {
         this.#bonusBall = undefined;
+        OutputController.printErrorMessage(error);
       }
     }
   }

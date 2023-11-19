@@ -1,6 +1,6 @@
-import Calculator from '../src/Calculator';
-import { CORRECT_NUMBER, WINNINGS_MONEY } from '../src/constant';
-import { makeExpectedWinningResult } from '../testUtils';
+import { Calculator } from '../src/models/index.js';
+import { CORRECT_NUMBER, WINNINGS_MONEY } from '../src/constants/index.js';
+import { makeExpectedWinningResult } from '../testUtils/index.js';
 
 describe('Calculator 클래스 테스트', () => {
   const PARAMETER_ARRAY = [
@@ -36,7 +36,8 @@ describe('Calculator 클래스 테스트', () => {
   test('당첨금 계산', () => {
     WINNING_RESULT_ARRAY.forEach((v, i) => {
       const winnings = calculator.calculateWinnings(v);
-      expect(winnings).toEqual(WINNINGS_ARRAY[i]);
+      const isEqual = winnings.join(',') === WINNINGS_ARRAY[i].join(',');
+      expect(isEqual).toBeTruthy();
     });
   });
 

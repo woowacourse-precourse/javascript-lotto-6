@@ -7,13 +7,14 @@ import {
   RANK,
   WINNINGS,
   WINNINGS_MONEY,
-} from './Rule';
+} from './Rule.js';
+
 import {
   ERROR_MESSAGE,
   MESSAGE,
   STATISTICS_MESSAGE,
   RANK_MESSAGE,
-} from './Message';
+} from './Message.js';
 
 export {
   BONUS_BALL_FORM,

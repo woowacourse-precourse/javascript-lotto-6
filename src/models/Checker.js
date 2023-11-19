@@ -1,5 +1,4 @@
-import { CORRECT_NUMBER } from './constant';
-import { getWinningResult } from './utils';
+import { CORRECT_NUMBER, RANK } from '../constants/Rule.js';
 
 class Checker {
   #winningLottoNumbers;
@@ -39,12 +38,25 @@ class Checker {
     return this.changeToRank(numberOfCorrect, bonus);
   }
 
+  #getLength = (array, value) => array.filter((v) => v === value).length;
+
+  /**
+   *
+   * @param {string[]} array :  에시 ) ["three", "three","four"]
+   * @returns
+   */
+  #getWinningResult = (array) => {
+    return RANK.map((v) => ({
+      rank: v,
+      number: this.#getLength(array, v),
+    }));
+  };
   // {rank: , number:}[] 반환
   calculateWinningResult() {
     const rankArray = this.#userLottos.map((v) =>
       this.compareLotto(v, this.#winningLottoNumbers, this.#bonusNumber),
     );
-    return getWinningResult(rankArray);
+    return this.#getWinningResult(rankArray);
   }
 }
 

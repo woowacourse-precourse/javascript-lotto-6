@@ -1,15 +1,16 @@
-import App from '../src/App';
-import BonusBall from '../src/BonusBall';
+import App from '../src/App.js';
+import { BonusBall } from '../src/models/index.js';
 import Lotto from '../src/Lotto';
-import { CORRECT_NUMBER, ERROR_MESSAGE } from '../src/constant';
-import { sortNumbers } from '../src/utils';
-import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils';
+import { CORRECT_NUMBER, ERROR_MESSAGE } from '../src/constants/index.js';
+import { sortNumbers } from '../src/utils/index.js';
+import { getLogSpy, mockQuestions, mockRandoms } from '../testUtils/index.js';
 
 describe('App 클래스 테스트', () => {
   let app;
   beforeEach(() => {
     app = new App();
   });
+
   test('로또 구매 후 구매 금액 만큼 로또 발행', async () => {
     const RANDOM_NUMBERS = [
       [1, 9, 8, 4, 5, 6],
@@ -23,7 +24,9 @@ describe('App 클래스 테스트', () => {
     expect(paymentAmount).toEqual(Number(MONEY));
 
     userLottos.forEach((v, i) => {
-      expect(v.getLottoNumbers()).toEqual(sortNumbers(RANDOM_NUMBERS[i]));
+      expect(v.getLottoNumbers().join(',')).toBe(
+        sortNumbers(RANDOM_NUMBERS[i]).join(','),
+      );
     });
   });
 
@@ -35,10 +38,9 @@ describe('App 클래스 테스트', () => {
 
     const { winningLotto, bonusBall } = await app.drawWinningLottoAndBonus();
 
-    expect(winningLotto.getLottoNumbers().join(',')).toBe(
-      sortNumbers(WINNING_NUMBERS.split(',')).join(','),
+    expect(winningLotto.getLottoNumbers()).toEqual(
+      sortNumbers(WINNING_NUMBERS.split(',').map((v) => Number(v))),
     );
-
     expect(bonusBall.getNumber()).toEqual(Number(BONUS_NUMBER));
   });
 

@@ -1,21 +1,16 @@
-import Calculator from "./Calculator";
-import Cashier from "./Cashier";
-import Checker from "./Checker";
-import DrawingMachine from "./DrawingMachine";
-import Printer from "./Printer";
-import User from "./User";
+import {Calculator,Checker} from './models/index.js'
+import { Cashier,DrawingMachine ,OutputController } from "./controllers/index.js";
 
 class App {
   paymentAmount;
   userLottos;
 
   async buyLottos(){
-    const user = new User();
-    const cashier = new Cashier(user);
+    const cashier = new Cashier();
     const paymentAmount = await cashier.getPayment();
     cashier.getNumberOfTickets(paymentAmount);
     const userLottos = cashier.issueLottos();
-    user.getLottos(userLottos);
+    OutputController.printPurchasedLottos(userLottos);
     return {paymentAmount:paymentAmount, userLottos:userLottos}
   }
 
@@ -24,7 +19,7 @@ class App {
 
     await drawingMachine.drawWinningLotto();
     await drawingMachine.drawBonusBall();
-
+    
     const {lotto,bonusBall} = drawingMachine.getWinningLottoAndBonusBall();
 
     return {
@@ -47,21 +42,16 @@ class App {
       rateOfReturn: rateOfReturn
     }
   }
-  printResult(winningResult, rateOfReturn){
-    const printer = new Printer();
-
-    printer.print(winningResult, rateOfReturn);
-  }
 
   async play() {
-
     const {paymentAmount, userLottos} = await this.buyLottos();
 
     const {winningLotto, bonusBall} = await this.drawWinningLottoAndBonus();
 
     const {winningResult, rateOfReturn} =this.checkLottos(winningLotto,bonusBall,userLottos,paymentAmount);
 
-    this.printResult(winningResult, rateOfReturn);
+    OutputController.printStatics(winningResult, rateOfReturn);
+
   }
 }
 

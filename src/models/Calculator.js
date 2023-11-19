@@ -1,5 +1,4 @@
-import { WINNINGS_MONEY } from './constant';
-
+import { WINNINGS_MONEY } from '../constants/Rule.js';
 class Calculator {
   calculateWinnings(winningResult) {
     return winningResult.map((v) => WINNINGS_MONEY[v.rank] * v.number);

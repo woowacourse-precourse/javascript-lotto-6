@@ -5,7 +5,7 @@ import {
   LOTTO_FORM,
   NUMBER_RANGE,
   WINNINGS,
-} from './Rule';
+} from './Rule.js';
 
 const MESSAGE = Object.freeze({
   paymentQuery: `구입금액을 입력해 주세요.(${LOTTO_FORM.price}원 이상, ${

@@ -1,8 +1,14 @@
-import { ERROR_MESSAGE, LOTTO_FORM } from './constant';
-import { sortNumbers, throwError, validateNumberRange } from './utils';
+import { ERROR_MESSAGE } from './constants/Message.js';
+import { LOTTO_FORM } from './constants/Rule.js';
+import { ErrorController } from './controllers/index.js';
+import { isInteger, sortNumbers, validateNumberRange } from './utils/index.js';
+
 class Lotto {
   #numbers; // number[]
-
+  /**
+   *
+   * @param {number[]} numbers
+   */
   constructor(numbers) {
     this.#isNumberArray(numbers);
     this.#validateNumbersLength(numbers);
@@ -10,19 +16,20 @@ class Lotto {
     this.#hasNoRepeatNumber(numbers);
     this.#setNumbers(numbers);
   }
+
   #setNumbers(numbers) {
     this.#numbers = sortNumbers(numbers);
   }
-  #isNumberArray(numbers) {
-    if (!Array.isArray(numbers)) throwError(ERROR_MESSAGE.isNotNumberArray);
 
-    if (!numbers.every((v) => typeof v === 'number' && !Number.isNaN(v)))
-      throwError(ERROR_MESSAGE.isNotNumberArray);
+  //정수인 숫자 배열인지 확인
+  #isNumberArray(numbers) {
+    if (!Array.isArray(numbers) || !numbers.every((v) => isInteger(v)))
+      ErrorController.throwError(ERROR_MESSAGE.isNotNumberArray);
   }
 
   #validateNumbersLength(numbers) {
     if (numbers.length !== LOTTO_FORM.length) {
-      throwError(ERROR_MESSAGE.sixNumbers);
+      ErrorController.throwError(ERROR_MESSAGE.sixNumbers);
     }
   }
 
@@ -32,7 +39,7 @@ class Lotto {
 
   #hasNoRepeatNumber(numbers) {
     if (new Set(numbers).size !== numbers.length)
-      throwError(ERROR_MESSAGE.duplicateNumber);
+      ErrorController.throwError(ERROR_MESSAGE.duplicateNumber);
   }
 
   getLottoNumbers() {

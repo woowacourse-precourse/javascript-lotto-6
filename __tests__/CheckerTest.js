@@ -1,8 +1,7 @@
-import BonusBall from '../src/BonusBall';
-import Checker from '../src/Checker';
-import Lotto from '../src/Lotto';
-import { CORRECT_NUMBER, RANK } from '../src/constant';
-import { makeLottos, makeExpectedWinningResult } from '../testUtils';
+import { BonusBall, Checker } from '../src/models/index.js';
+import Lotto from '../src/Lotto.js';
+import { CORRECT_NUMBER, RANK } from '../src/constants/index.js';
+import { makeLottos, makeExpectedWinningResult } from '../testUtils/index.js';
 
 describe('Checker 클래스 테스트', () => {
   const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
