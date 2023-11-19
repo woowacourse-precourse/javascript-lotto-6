@@ -8,12 +8,14 @@
 
 ### 실행 모습
 
-<img src="./readmeImages/lotto.png"alt="기능구현 모습" width="400px">
+<div>
+  <img src="./readmeImages/lotto.png"alt="기능구현 모습" width="400px"/>
+</div>
 
 ### 파일 구조
 
 <details>
-<summary> 🗂️ 파일 구조 보기</summary>
+<summary> 🗂️ 파일 구조 및 설명 보기</summary>
 <div markdown="1">
 
 ```
