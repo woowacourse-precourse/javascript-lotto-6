@@ -1,6 +1,6 @@
 import { NUMBER_RANGE, DELIMITER } from '../constants/Rule.js';
 import { ERROR_MESSAGE } from '../constants/Message.js';
-import { ErrorController } from '../controllers/index.js';
+import CustomError from '../models/CustomError.js';
 
 /**
  * 정수인지 판단
@@ -16,13 +16,12 @@ const isInteger = (number) => {
  */
 const validateNumberRange = (number) => {
   const { min, max } = NUMBER_RANGE;
-  if (number < min || number > max)
-    ErrorController.throwError(ERROR_MESSAGE.range);
+  if (number < min || number > max) throw new CustomError(ERROR_MESSAGE.range);
 };
 
 const hasNoDelimiter = (string) => {
   if (!string.includes(DELIMITER)) {
-    ErrorController.throwError(ERROR_MESSAGE.noDelimiter);
+    throw new CustomError(ERROR_MESSAGE.noDelimiter);
   }
 };
 

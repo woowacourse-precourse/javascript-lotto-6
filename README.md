@@ -27,7 +27,6 @@
  ┣ 📂controllers
  ┃ ┣ 📜Cashier.js :구매 금액 입력값을 받아 이를 Payment에 전달해 유효성 검사를 실행 후 구매 금액에 따른 로또 발행
  ┃ ┣ 📜DrawingMachine.js: 당첨번호,보너스 번호에 대한 입력값을 받아 Lotto,BonusBall에 전달해 유효성 검사 후 이를 반환
- ┃ ┣ 📜ErrorController.js : 오류를 생성하고 이를 throw 함
  ┃ ┣ 📜index.js
  ┃ ┣ 📜InputController.js : 입력에 대한 컨트롤 담당 (입력값 받아 이를 다른 형태로 변환 후 이를 반환)
  ┃ ┗ 📜OutputController.js : 메세지 출력에 대한 컨트롤 (데이터를 받아서 출력 메세지에 맞게 변환 후 이를 출력하도록 함)

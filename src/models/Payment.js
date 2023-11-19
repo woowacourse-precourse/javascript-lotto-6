@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE, LOTTO_FORM } from '../constants/index.js';
-import { ErrorController } from '../controllers/index.js';
 import { isInteger } from '../utils/index.js';
+import CustomError from './CustomError.js';
 
 class Payment {
   #money;
@@ -14,8 +14,7 @@ class Payment {
    * @param {number} money
    */
   #isNumber(money) {
-    if (!isInteger(money))
-      ErrorController.throwError(ERROR_MESSAGE.isNotNumber);
+    if (!isInteger(money)) throw new CustomError(ERROR_MESSAGE.isNotNumber);
   }
   /**
    *
@@ -23,7 +22,7 @@ class Payment {
    */
   #validatePayment(money) {
     if (money < LOTTO_FORM.price || money % LOTTO_FORM.price)
-      ErrorController.throwError(ERROR_MESSAGE.payment);
+      throw new CustomError(ERROR_MESSAGE.payment);
   }
 
   getMoney() {

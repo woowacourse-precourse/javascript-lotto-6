@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE } from './constants/Message.js';
 import { LOTTO_FORM } from './constants/Rule.js';
-import { ErrorController } from './controllers/index.js';
+import CustomError from './models/CustomError.js';
 import { isInteger, sortNumbers, validateNumberRange } from './utils/index.js';
 
 class Lotto {
@@ -24,12 +24,12 @@ class Lotto {
   //정수인 숫자 배열인지 확인
   #isNumberArray(numbers) {
     if (!Array.isArray(numbers) || !numbers.every((v) => isInteger(v)))
-      ErrorController.throwError(ERROR_MESSAGE.isNotNumberArray);
+      throw new CustomError(ERROR_MESSAGE.isNotNumberArray);
   }
 
   #validateNumbersLength(numbers) {
     if (numbers.length !== LOTTO_FORM.length) {
-      ErrorController.throwError(ERROR_MESSAGE.sixNumbers);
+      throw new CustomError(ERROR_MESSAGE.sixNumbers);
     }
   }
 
@@ -39,7 +39,7 @@ class Lotto {
 
   #hasNoRepeatNumber(numbers) {
     if (new Set(numbers).size !== numbers.length)
-      ErrorController.throwError(ERROR_MESSAGE.duplicateNumber);
+      throw new CustomError(ERROR_MESSAGE.duplicateNumber);
   }
 
   getLottoNumbers() {

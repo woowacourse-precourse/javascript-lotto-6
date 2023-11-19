@@ -1,7 +1,7 @@
 import Lotto from '../Lotto.js';
 import { ERROR_MESSAGE } from '../constants/Message.js';
-import { ErrorController } from '../controllers/index.js';
 import { isInteger, validateNumberRange } from '../utils/index.js';
+import CustomError from './CustomError.js';
 
 class BonusBall {
   #number;
@@ -17,20 +17,20 @@ class BonusBall {
 
   #isNumber(bonusNumber) {
     if (!isInteger(bonusNumber))
-      ErrorController.throwError(ERROR_MESSAGE.isNotNumber);
+      throw new CustomError(ERROR_MESSAGE.isNotNumber);
   }
 
   #isLotto(winningLottoNumbers) {
     try {
       new Lotto(winningLottoNumbers);
     } catch (error) {
-      ErrorController.throwError(error);
+      throw new CustomError(error);
     }
   }
 
   #isNotDuplicate(bonusNumber, winningLottoNumbers) {
     if (winningLottoNumbers.includes(bonusNumber))
-      ErrorController.throwError(ERROR_MESSAGE.duplicateBonusBall);
+      throw new CustomError(ERROR_MESSAGE.duplicateBonusBall);
   }
 
   getNumber() {
