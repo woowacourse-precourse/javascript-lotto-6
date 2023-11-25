@@ -16,6 +16,7 @@ const isInteger = (number) => {
  */
 const validateNumberRange = (number) => {
   const { min, max } = NUMBER_RANGE;
+
   if (number < min || number > max) throw new CustomError(ERROR_MESSAGE.range);
 };
 

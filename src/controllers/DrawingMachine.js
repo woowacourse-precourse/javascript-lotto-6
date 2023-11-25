@@ -5,15 +5,26 @@ import { MESSAGE } from '../constants/Message.js';
 import OutputController from './OutputController.js';
 
 class DrawingMachine {
+  /**
+   * @type {number[]|undefined};
+   */
   #winningNumbers;
+  /**
+   * @type {Lotto|undefined}
+   */
   #winningLotto;
+  /**
+   * @type {BonusBall|undefined}
+   */
   #bonusBall;
-
+  /**
+   *
+   * @param {number[]} value
+   */
   #setWinningLotto(value) {
     this.#winningLotto = new Lotto(value);
     this.#winningNumbers = value;
   }
-
   async drawWinningLotto() {
     while (!this.#winningLotto) {
       try {
@@ -26,11 +37,13 @@ class DrawingMachine {
       }
     }
   }
-
+  /**
+   *
+   * @param {number} number
+   */
   #setBonusBall(number) {
     this.#bonusBall = new BonusBall(number, this.#winningNumbers);
   }
-
   async drawBonusBall() {
     while (!this.#bonusBall) {
       try {
@@ -46,7 +59,6 @@ class DrawingMachine {
       }
     }
   }
-
   getWinningLottoAndBonusBall() {
     return {
       lotto: this.#winningLotto,

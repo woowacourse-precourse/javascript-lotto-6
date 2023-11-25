@@ -4,13 +4,22 @@ class Checker {
   #winningLottoNumbers;
   #bonusNumber;
   #userLottos;
-
+  /**
+   *
+   * @param {Lotto} winningLotto
+   * @param {BonusBall} bonusBall
+   * @param {Lotto[]} userLottos
+   */
   constructor(winningLotto, bonusBall, userLottos) {
     this.#winningLottoNumbers = winningLotto.getLottoNumbers();
     this.#bonusNumber = bonusBall.getNumber();
     this.#userLottos = userLottos;
   }
-
+  /**
+   * @param {number} number
+   * @param {number} bonus
+   * @returns  {"fifth"|"fourth"|"third"|"second"|"first"}
+   */
   changeToRank(number, bonus) {
     if (number < 3) return;
     switch (number) {
@@ -26,24 +35,33 @@ class Checker {
         break;
     }
   }
-
+  /**
+   *
+   * @param {Lotto} lotto
+   * @param {number[]} winningLottoNumbers
+   * @param {number} bonusNumber
+   */
   compareLotto(lotto, winningLottoNumbers, bonusNumber) {
     const lottoNumbers = lotto.getLottoNumbers();
     let numberOfCorrect = 0;
     let bonus = false;
+
     lottoNumbers.forEach((v) => {
       if (winningLottoNumbers.includes(v)) numberOfCorrect += 1;
       if (v === bonusNumber) bonus = true;
     });
+
     return this.changeToRank(numberOfCorrect, bonus);
   }
-
-  #getLength = (array, value) => array.filter((v) => v === value).length;
-
   /**
    *
+   * @param {*} array
+   * @param {*} value
+   * @returns {number}
+   */
+  #getLength = (array, value) => array.filter((v) => v === value).length;
+  /**
    * @param {string[]} array :  에시 ) ["three", "three","four"]
-   * @returns
    */
   #getWinningResult = (array) => {
     return RANK.map((v) => ({
@@ -51,11 +69,11 @@ class Checker {
       number: this.#getLength(array, v),
     }));
   };
-  // {rank: , number:}[] 반환
   calculateWinningResult() {
     const rankArray = this.#userLottos.map((v) =>
       this.compareLotto(v, this.#winningLottoNumbers, this.#bonusNumber),
     );
+
     return this.#getWinningResult(rankArray);
   }
 }

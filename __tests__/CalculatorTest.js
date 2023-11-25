@@ -29,13 +29,9 @@ describe('Calculator 클래스 테스트', () => {
     ],
     [0, 0, 0, 0, 0],
   ];
-  let calculator;
-  beforeEach(() => {
-    calculator = new Calculator();
-  });
   test('당첨금 계산', () => {
     WINNING_RESULT_ARRAY.forEach((v, i) => {
-      const winnings = calculator.calculateWinnings(v);
+      const winnings = Calculator.calculateWinnings(v);
       const isEqual = winnings.join(',') === WINNINGS_ARRAY[i].join(',');
       expect(isEqual).toBeTruthy();
     });
@@ -43,7 +39,7 @@ describe('Calculator 클래스 테스트', () => {
 
   test('총 당첨금 계산', () => {
     WINNING_RESULT_ARRAY.forEach((v, i) => {
-      const totalWinnings = calculator.getTotalWinnings(v);
+      const totalWinnings = Calculator.getTotalWinnings(v);
       const expectedTotalWinnings = WINNINGS_ARRAY[i].reduce(
         (a, c) => a + c,
         0,
@@ -55,7 +51,7 @@ describe('Calculator 클래스 테스트', () => {
     const NUMBERS = [12.235, 20.162];
     const RESULTS = [12.2, 20.2];
     NUMBERS.forEach((v, i) => {
-      expect(calculator.round(v)).toEqual(RESULTS[i]);
+      expect(Calculator.round(v)).toEqual(RESULTS[i]);
     });
   });
 
@@ -75,7 +71,7 @@ describe('Calculator 클래스 테스트', () => {
     ];
 
     TEST_ITEMS.forEach((v) => {
-      const rateOfReturn = calculator.calculateRateOfReturn(
+      const rateOfReturn = Calculator.calculateRateOfReturn(
         v.paymentAmount,
         v.winnings,
       );

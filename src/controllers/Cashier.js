@@ -10,6 +10,9 @@ class Cashier {
   #numberOfTickets = 0;
 
   async getPayment() {
+    /**
+     * @type {undefined|number}
+     */
     let paymentAmount;
     while (!paymentAmount) {
       try {
@@ -24,14 +27,12 @@ class Cashier {
     return paymentAmount;
   }
   /**
-   *
    * @param {number} paymentAmount
    */
   getNumberOfTickets(paymentAmount) {
     const number = paymentAmount / LOTTO_FORM.price;
     this.#numberOfTickets = number;
   }
-
   issueLottos() {
     return Array.from({ length: this.#numberOfTickets }).map(
       () => new Lotto(getLottoRandomNumbers()),

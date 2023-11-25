@@ -1,22 +1,11 @@
-import { changeStringToMoney } from './Money.js';
+export { changeStringToMoney } from './Money.js';
 
-import {
+export {
   getBonusBallNumber,
   getLottoRandomNumbers,
   getRandomNumbers,
 } from './RandomNumbers.js';
 
-import { sortNumbers } from './Sort.js';
+export { sortNumbers } from './Sort.js';
 
-import { validateNumberRange, hasNoDelimiter, isInteger } from './Validate.js';
-
-export {
-  changeStringToMoney,
-  getBonusBallNumber,
-  getLottoRandomNumbers,
-  getRandomNumbers,
-  hasNoDelimiter,
-  isInteger,
-  sortNumbers,
-  validateNumberRange,
-};
+export { validateNumberRange, hasNoDelimiter, isInteger } from './Validate.js';

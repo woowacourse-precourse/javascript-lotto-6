@@ -5,17 +5,21 @@ import { InputView } from '../view/index.js';
 import OutputController from './OutputController.js';
 
 const InputController = {
+  /**
+   *
+   * @returns {Promise<number[]>}
+   */
   async readWinningNumbers() {
     try {
       const value = await InputView.readInput(MESSAGE.winningNumbersQuery);
       hasNoDelimiter(value);
+
       return value.split(DELIMITER).map((v) => Number(v));
     } catch (error) {
       OutputController.printErrorMessage(error);
     }
   },
   /**
-   *
    * @param {string} query
    * @returns {Promise<number>} number
    */

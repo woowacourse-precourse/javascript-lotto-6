@@ -1,4 +1,4 @@
-import {
+export {
   BONUS_BALL_FORM,
   CORRECT_NUMBER,
   DELIMITER,
@@ -9,24 +9,9 @@ import {
   WINNINGS_MONEY,
 } from './Rule.js';
 
-import {
+export {
   ERROR_MESSAGE,
   MESSAGE,
   STATISTICS_MESSAGE,
   RANK_MESSAGE,
 } from './Message.js';
-
-export {
-  BONUS_BALL_FORM,
-  CORRECT_NUMBER,
-  DELIMITER,
-  ERROR_MESSAGE,
-  LOTTO_FORM,
-  NUMBER_RANGE,
-  MESSAGE,
-  RANK,
-  RANK_MESSAGE,
-  STATISTICS_MESSAGE,
-  WINNINGS,
-  WINNINGS_MONEY,
-};

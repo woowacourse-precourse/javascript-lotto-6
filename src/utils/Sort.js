@@ -1,7 +1,7 @@
 /**
  *
  * @param {number[]} array
- * @returns
+ * @returns {number[]}
  */
 const sortNumbers = (array) => {
   return array.sort((a, b) => a - b);
