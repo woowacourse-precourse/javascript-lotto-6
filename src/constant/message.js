@@ -6,3 +6,5 @@ export const MESSAGE = {
   winningStatistics: '당첨 통계',
   line: '---',
 };
+
+export const SEPARATOR = ',';
