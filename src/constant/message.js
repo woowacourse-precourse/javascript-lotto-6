@@ -28,4 +28,8 @@ export const ERROR = {
     '당첨 번호와 중복되는 번호가 입력되었습니다. 보너스 번호는 당첨 번호와 다른 숫자여야 합니다.',
 };
 
+export const REGEX = {
+  ThousandSeparator: /\B(?=(\d{3})+(?!\d))/g,
+};
+
 export const SEPARATOR = ',';

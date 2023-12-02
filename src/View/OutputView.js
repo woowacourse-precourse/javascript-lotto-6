@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from '../constant/message.js';
+import { MESSAGE, REGEX } from '../constant/message.js';
 import { RANK, RANK_FOR_PRINT, RANK_TITLE } from '../constant/constant.js';
 
 const OutputView = {
@@ -47,11 +47,15 @@ const OutputView = {
   },
 
   printProfitRate(profitRate) {
-    Console.print(MESSAGE.totalProfit(profitRate));
+    Console.print(MESSAGE.totalProfit(this.formatNumber(profitRate.toFixed(1))));
   },
 
   printError(message) {
     Console.print(message);
+  },
+
+  formatNumber(number) {
+    return String(number).replace(REGEX.ThousandSeparator, ',');
   },
 };
 
