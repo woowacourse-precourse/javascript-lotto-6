@@ -20,7 +20,7 @@ export const RANK = {
   third: {
     match: 5,
     bonus: false,
-    prize: 1_5000_000,
+    prize: 1_500_000,
   },
   fourth: {
     match: 4,

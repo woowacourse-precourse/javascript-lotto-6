@@ -35,6 +35,10 @@ class LottoBundle {
   getNumberList() {
     return Array.from(this.#lottoList, (lotto) => lotto.getNumbers());
   }
+
+  getQuantity() {
+    return this.#lottoList.length;
+  }
 }
 
 export default LottoBundle;

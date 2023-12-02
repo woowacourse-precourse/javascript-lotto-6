@@ -45,6 +45,10 @@ const OutputView = {
       ),
     );
   },
+
+  printProfitRate(profitRate) {
+    Console.print(MESSAGE.totalProfit(profitRate));
+  },
 };
 
 export default OutputView;

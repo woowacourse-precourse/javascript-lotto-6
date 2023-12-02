@@ -8,6 +8,7 @@ export const MESSAGE = {
   rankResult: (match, prize, count) => `${match}개 일치 (${prize}원) - ${count}개`,
   bonusRankResult: (match, prize, count) =>
     `${match}개 일치, 보너스 볼 일치 (${prize}원) - ${count}개`,
+  totalProfit: (profit) => `총 수익률은 ${profit}%입니다.`,
 };
 
 export const SEPARATOR = ',';

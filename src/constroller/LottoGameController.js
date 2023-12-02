@@ -20,6 +20,7 @@ class LottoGameController {
     const lottoStatistics = new LottoStatisticsManager(lottoBundle, winningNumbers);
     lottoStatistics.calculateRanks();
     OutputView.printRankCounts(lottoStatistics.getRanks());
+    OutputView.printProfitRate(lottoStatistics.getProfitRate());
   }
 
   async #getPurchaseQuantity() {
