@@ -13,6 +13,10 @@ class Lotto {
   getMatchingCounts(opponentLotto) {
     return 2 * LOTTO_NUMBERS.count - new Set([...this.#numbers, ...opponentLotto.#numbers]).size;
   }
+
+  hasNumber(number) {
+    return this.#numbers.includes(number);
+  }
 }
 
 export default Lotto;
