@@ -6,6 +6,7 @@ import WinningNumbers from '../model/WinningNumbers.js';
 import OutputView from '../View/OutputView.js';
 import LottoBundle from '../model/LottoBundle.js';
 import LottoStatisticsManager from '../model/LottoStatisticsManager.js';
+import Validator from '../validator/Validator.js';
 
 class LottoGameController {
   async startGame() {
@@ -25,6 +26,7 @@ class LottoGameController {
 
   async #getPurchaseQuantity() {
     const purchaseAmount = await InputView.readPurchaseAmount();
+    Validator.validatePurchaseAmount(purchaseAmount);
 
     return Number(purchaseAmount) / BASE_AMOUNT;
   }

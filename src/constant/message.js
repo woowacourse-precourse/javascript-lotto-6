@@ -1,3 +1,5 @@
+import { BASE_AMOUNT } from './constant.js';
+
 export const MESSAGE = {
   enterPurchaseAmount: '구입금액을 입력해 주세요.\n',
   enterWinningNumbers: '당첨 번호를 입력해 주세요.\n',
@@ -14,6 +16,9 @@ export const MESSAGE = {
 export const ERROR = {
   errorPrefix: '[ERROR]',
   isEmpty: '공백이 입력되었습니다. 다시 입력해주세요.',
+  isNotNumber: '숫자가 아닌 값이 입력되었습니다. 구매 금액은 숫자만 입력 가능합니다.',
+  isNotPositive: '양수가 아닌 값이 입력되었습니다. 구매 금액은 양수만 입력 가능합니다.',
+  isNotInUnit: `${BASE_AMOUNT} 단위가 아닌 값이 입력되었습니다. 구매 금액은 1000원 단위만 입력 가능합니다.`,
 };
 
 export const SEPARATOR = ',';
