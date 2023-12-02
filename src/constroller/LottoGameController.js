@@ -18,8 +18,14 @@ class LottoGameController {
 
     const winningLotto = await this.handleException(() => this.#getWinningLotto());
     const winningNumbers = await this.handleException(() => this.#getWinningNumber(winningLotto));
+
+    this.#generateStatisticsReport(lottoBundle, winningNumbers);
+  }
+
+  #generateStatisticsReport(lottoBundle, winningNumbers) {
     const lottoStatistics = new LottoStatisticsManager(lottoBundle, winningNumbers);
     lottoStatistics.calculateRanks();
+
     OutputView.printRankCounts(lottoStatistics.getRanks());
     OutputView.printProfitRate(lottoStatistics.getProfitRate());
   }
