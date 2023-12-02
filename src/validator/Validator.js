@@ -8,7 +8,7 @@ const Validator = {
   },
 
   validatePurchaseAmount(input) {
-    this.checkIsNumber(input);
+    this.checkIsInteger(input);
     this.checkIsPositive(input);
     this.checkIsInUnit(input);
   },
@@ -21,7 +21,7 @@ const Validator = {
   },
 
   validateBonusNumber(winningNumber, input) {
-    this.checkIsNumber(input);
+    this.checkIsInteger(input);
     this.checkIsInRange(input);
     this.checkHasSameNumber(winningNumber, input);
   },
@@ -32,8 +32,8 @@ const Validator = {
     }
   },
 
-  checkIsNumber(input) {
-    if (!this.isNumber(input)) {
+  checkIsInteger(input) {
+    if (!this.isInteger(input)) {
       throw new ValidationError(ERROR.isNotNumber);
     }
   },
@@ -58,7 +58,7 @@ const Validator = {
 
   checkHasNonNumeric(inputs) {
     inputs.forEach((input) => {
-      if (!this.isNumber(input)) {
+      if (!this.isInteger(input)) {
         throw new ValidationError(ERROR.hasNonNumeric);
       }
     });
@@ -90,7 +90,7 @@ const Validator = {
     }
   },
 
-  isNumber: (input) => !Number.isNaN(Number(input)),
+  isInteger: (input) => !Number.isNaN(Number(input)) && Number.isInteger(Number(input)),
   isInRange: (input) => Number(input) >= LOTTO_NUMBERS.min && Number(input) <= LOTTO_NUMBERS.max,
 };
 
