@@ -20,6 +20,12 @@ const Validator = {
     this.checkHasDuplicate(inputs);
   },
 
+  validateBonusNumber(winningNumber, input) {
+    this.checkIsNumber(input);
+    this.checkIsInRange(input);
+    this.checkHasSameNumber(winningNumber, input);
+  },
+
   checkIsEmpty(input) {
     if (input.trim() === '') {
       throw new ValidationError(ERROR.isEmpty);
@@ -69,6 +75,18 @@ const Validator = {
   checkHasDuplicate(inputs) {
     if (inputs.length !== new Set(inputs).size) {
       throw new ValidationError(ERROR.hasDuplicate);
+    }
+  },
+
+  checkIsInRange(input) {
+    if (!this.isInRange(input)) {
+      throw new ValidationError(ERROR.isNotInRange);
+    }
+  },
+
+  checkHasSameNumber(winningNumber, input) {
+    if (winningNumber.includes(input)) {
+      throw new ValidationError(ERROR.hasSameNumber);
     }
   },
 
