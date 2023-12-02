@@ -46,7 +46,7 @@ export const RANK_TITLE = {
   noWin: 'noWin',
 };
 
-const RANK_NAME = Object.keys(RANK);
+export const RANK_NAME = Object.keys(RANK);
 
 export const MATCH_TO_RANK = RANK_NAME.reduce((matchToRank, rank) => {
   matchToRank[RANK[rank].match] = RANK_TITLE[rank];
