@@ -1,18 +1,21 @@
 import InputView from '../view/InputView.js';
-import amountValidator from '../validator/amountValidator.js';
 import OutputView from '../view/OutputView.js';
-import AmountValidator from '../validator/amountValidator.js';
+import AmountValidator from '../validator/AmountValidator.js';
 import { NUMBERS } from '../constants/constants.js';
 import LottoMachine from '../model/LottoMachine.js';
+import Lotto from '../model/Lotto.js';
 
 class LottoController {
   #amount;
 
   #lottoWinningNumbers;
 
+  #userLottoNumber;
+
   async startLotto() {
     this.#amount = await this.getAmount();
     this.#lottoWinningNumbers = this.getLottoWinningNumbers(this.#amount);
+    this.#userLottoNumber = this.getUserLottoNumber();
   }
 
   async getAmount() {
@@ -39,6 +42,19 @@ class LottoController {
     );
 
     return lottoWinningNumbers;
+  }
+
+  async getUserLottoNumber() {
+    try {
+      const userLottoNumber = new Lotto(
+        await InputView.readLottoNumber(),
+      ).getNumbers();
+
+      return userLottoNumber;
+    } catch (error) {
+      OutputView.pritnError(error.message);
+      return this.getUserLottoNumber();
+    }
   }
 }
 
