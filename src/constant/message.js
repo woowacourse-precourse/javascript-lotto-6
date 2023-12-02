@@ -11,4 +11,8 @@ export const MESSAGE = {
   totalProfit: (profit) => `총 수익률은 ${profit}%입니다.`,
 };
 
+export const ERROR = {
+  errorPrefix: '[ERROR]',
+};
+
 export const SEPARATOR = ',';
