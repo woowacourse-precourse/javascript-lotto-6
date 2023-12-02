@@ -1,6 +1,6 @@
 import { ERROR } from '../constant/message.js';
 import ValidationError from './ValidationError.js';
-import { BASE_AMOUNT } from '../constant/constant.js';
+import { BASE_AMOUNT, LOTTO_NUMBERS } from '../constant/constant.js';
 
 const Validator = {
   validateUserInput(input) {
@@ -11,6 +11,13 @@ const Validator = {
     this.checkIsNumber(input);
     this.checkIsPositive(input);
     this.checkIsInUnit(input);
+  },
+
+  validateLotto(inputs) {
+    this.checkIsValidCount(inputs);
+    this.checkHasNonNumeric(inputs);
+    this.checkHasNotInRange(inputs);
+    this.checkHasDuplicate(inputs);
   },
 
   checkIsEmpty(input) {
@@ -37,7 +44,36 @@ const Validator = {
     }
   },
 
-  isNumber: (input) => Number.isNaN(Number(input)),
+  checkIsValidCount(inputs) {
+    if (inputs.length !== LOTTO_NUMBERS.count) {
+      throw new ValidationError(ERROR.invalidCount);
+    }
+  },
+
+  checkHasNonNumeric(inputs) {
+    inputs.forEach((input) => {
+      if (!this.isNumber(input)) {
+        throw new ValidationError(ERROR.hasNonNumeric);
+      }
+    });
+  },
+
+  checkHasNotInRange(inputs) {
+    inputs.forEach((input) => {
+      if (!this.isInRange(input)) {
+        throw new ValidationError(ERROR.hasNotInRange);
+      }
+    });
+  },
+
+  checkHasDuplicate(inputs) {
+    if (inputs.length !== new Set(inputs).size) {
+      throw new ValidationError(ERROR.hasDuplicate);
+    }
+  },
+
+  isNumber: (input) => !Number.isNaN(Number(input)),
+  isInRange: (input) => Number(input) >= LOTTO_NUMBERS.min && Number(input) <= LOTTO_NUMBERS.max,
 };
 
 export default Validator;

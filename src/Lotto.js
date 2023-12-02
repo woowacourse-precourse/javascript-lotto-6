@@ -1,4 +1,5 @@
 import { LOTTO_NUMBERS } from './constant/constant.js';
+import Validator from './validator/Validator.js';
 
 class Lotto {
   #numbers;
@@ -8,7 +9,9 @@ class Lotto {
     this.#numbers = this.#sortNumbers(numbers);
   }
 
-  #validate(numbers) {}
+  #validate(numbers) {
+    Validator.validateLotto(numbers);
+  }
 
   #sortNumbers(numbers) {
     return numbers.sort((first, second) => first - second);
