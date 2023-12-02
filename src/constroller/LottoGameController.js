@@ -3,12 +3,15 @@ import { BASE_AMOUNT } from '../constant/constant.js';
 import Lotto from '../Lotto.js';
 import { SEPARATOR } from '../constant/message.js';
 import WinningNumbers from '../model/WinningNumbers.js';
+import OutputView from '../View/OutputView.js';
 
 class LottoGameController {
   async startGame() {
-    const purchaseQuantity = this.#getPurchaseQuantity();
-    const winningLotto = this.#getWinningLotto();
-    const winningNumbers = this.#getWinningNumber();
+    const purchaseQuantity = await this.#getPurchaseQuantity();
+    OutputView.printPurchaseQuantity(purchaseQuantity);
+
+    const winningLotto = await this.#getWinningLotto();
+    const winningNumbers = await this.#getWinningNumber();
   }
 
   async #getPurchaseQuantity() {
