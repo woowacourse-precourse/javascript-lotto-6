@@ -31,7 +31,7 @@ class LottoValidator {
 
   static #checkIsNumber(userLottoNumbers) {
     userLottoNumbers.forEach(number => {
-      if (Number.isNaN(Number(number))) {
+      if (Number.isNaN(number)) {
         throw new CustomError(ERROR.notNumber);
       }
     });

@@ -10,7 +10,7 @@ class Lotto {
   }
 
   #makeArray(numbers) {
-    return numbers.split(',');
+    return numbers.split(',').map(number => Number(number));
   }
 
   #sortNumbers(numbers) {
