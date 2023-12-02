@@ -31,6 +31,10 @@ class LottoBundle {
     }
     return MATCH_TO_RANK[matchingCount];
   }
+
+  getNumberList() {
+    return Array.from(this.#lottoList, (lotto) => lotto.getNumbers());
+  }
 }
 
 export default LottoBundle;

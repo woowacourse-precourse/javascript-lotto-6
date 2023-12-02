@@ -50,6 +50,8 @@ export const RANK_TITLE = {
 
 export const RANK_NAME = Object.keys(RANK);
 
+export const RANK_FOR_PRINT = ['fifth', 'fourth', 'third', 'second', 'first'];
+
 export const MATCH_TO_RANK = RANK_NAME.reduce((matchToRank, rank) => {
   matchToRank[RANK[rank].match] = RANK_TITLE[rank];
   return matchToRank;

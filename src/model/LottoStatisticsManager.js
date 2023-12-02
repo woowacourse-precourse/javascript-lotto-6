@@ -31,6 +31,10 @@ class LottoStatisticsManager {
     });
   }
 
+  getRanks() {
+    return this.#ranks;
+  }
+
   getProfitRate() {
     const profit = this.getProfit();
 

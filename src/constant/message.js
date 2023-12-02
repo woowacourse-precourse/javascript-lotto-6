@@ -5,6 +5,9 @@ export const MESSAGE = {
   purchasedQuantity: (quantity) => `${quantity}개를 구매했습니다.`,
   winningStatistics: '당첨 통계',
   line: '---',
+  rankResult: (match, prize, count) => `${match}개 일치 (${prize}원) - ${count}개`,
+  bonusRankResult: (match, prize, count) =>
+    `${match}개 일치, 보너스 볼 일치 (${prize}원) - ${count}개`,
 };
 
 export const SEPARATOR = ',';

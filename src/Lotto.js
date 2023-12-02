@@ -14,6 +14,10 @@ class Lotto {
     return numbers.sort((first, second) => first - second);
   }
 
+  getNumbers() {
+    return [...this.#numbers];
+  }
+
   getMatchingCounts(opponentLotto) {
     return 2 * LOTTO_NUMBERS.count - new Set([...this.#numbers, ...opponentLotto.#numbers]).size;
   }
