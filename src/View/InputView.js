@@ -6,7 +6,7 @@ const InputView = {
     return await Console.readLineAsync(MESSAGE.enterPurchaseAmount);
   },
 
-  async readWinningNumbers() {
+  async readWinningLotto() {
     return await Console.readLineAsync(MESSAGE.enterWinningNumbers);
   },
 
