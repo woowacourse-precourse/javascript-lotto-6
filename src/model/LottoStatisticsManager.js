@@ -1,4 +1,4 @@
-import { RANK_NAME } from '../constant/Constant.js';
+import { BASE_AMOUNT, RANK, RANK_NAME } from '../constant/Constant.js';
 
 class LottoStatisticsManager {
   #lottoBundle;

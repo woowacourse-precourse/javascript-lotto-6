@@ -4,6 +4,8 @@ export const LOTTO_NUMBERS = Object.freeze({
   count: 6,
 });
 
+export const BASE_AMOUNT = 1000;
+
 export const RANK = {
   first: {
     match: 6,
