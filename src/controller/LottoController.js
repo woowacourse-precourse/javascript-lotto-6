@@ -12,10 +12,13 @@ class LottoController {
 
   #userLottoNumber;
 
+  #userBonusNumber;
+
   async startLotto() {
     this.#amount = await this.getAmount();
     this.#lottoWinningNumbers = this.getLottoWinningNumbers(this.#amount);
     this.#userLottoNumber = this.getUserLottoNumber();
+    this.#userBonusNumber = this.getUserBonusNumber(this.#userLottoNumber);
   }
 
   async getAmount() {
@@ -54,6 +57,16 @@ class LottoController {
     } catch (error) {
       OutputView.pritnError(error.message);
       return this.getUserLottoNumber();
+    }
+  }
+
+  async getUserBonusNumber(userLottoNumber) {
+    try {
+      const userBonusNumber = await InputView.readBonusNumber();
+      return userBonusNumber;
+    } catch (error) {
+      OutputView.pritnError(error.message);
+      return this.getUserBonusNumber();
     }
   }
 }

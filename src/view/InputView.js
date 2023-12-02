@@ -11,6 +11,11 @@ const InputView = {
     const userLottoNumber = Console.readLineAsync(MESSAGES.askLottoNumber);
     return userLottoNumber;
   },
+
+  async readBonusNumber(){
+    const userBonusNumber = Console.readLineAsync(MESSAGES.askBonusNumber);
+    return userBonusNumber
+  }
 };
 
 export default InputView;
