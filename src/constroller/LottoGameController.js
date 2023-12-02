@@ -10,18 +10,28 @@ import Validator from '../validator/Validator.js';
 
 class LottoGameController {
   async startGame() {
-    const purchaseQuantity = await this.#getPurchaseQuantity();
+    const purchaseQuantity = await this.handleException(() => this.#getPurchaseQuantity());
     OutputView.printPurchaseQuantity(purchaseQuantity);
 
     const lottoBundle = new LottoBundle(purchaseQuantity);
     OutputView.printLottoNumbers(lottoBundle.getNumberList());
 
-    const winningLotto = await this.#getWinningLotto();
-    const winningNumbers = await this.#getWinningNumber(winningLotto);
+    const winningLotto = await this.handleException(() => this.#getWinningLotto());
+    const winningNumbers = await this.handleException(() => this.#getWinningNumber(winningLotto));
     const lottoStatistics = new LottoStatisticsManager(lottoBundle, winningNumbers);
     lottoStatistics.calculateRanks();
     OutputView.printRankCounts(lottoStatistics.getRanks());
     OutputView.printProfitRate(lottoStatistics.getProfitRate());
+  }
+
+  async handleException(callback) {
+    while (true) {
+      try {
+        return await callback();
+      } catch (error) {
+        OutputView.printError(error.message);
+      }
+    }
   }
 
   async #getPurchaseQuantity() {
