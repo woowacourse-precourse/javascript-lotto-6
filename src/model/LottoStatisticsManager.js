@@ -1,4 +1,4 @@
-import { BASE_AMOUNT, RANK, RANK_NAME } from '../constant/Constant.js';
+import { BASE_AMOUNT, RANK, RANK_NAME } from '../constant/constant.js';
 
 class LottoStatisticsManager {
   #lottoBundle;
@@ -20,7 +20,7 @@ class LottoStatisticsManager {
     }, {});
   }
 
-  countRanks() {
+  calculateRanks() {
     const rankList = this.#lottoBundle.getRankList({
       winningLotto: this.#winningNumbers.getWinningLotto(),
       bonusNumber: this.#winningNumbers.getBonusNumber(),
@@ -29,6 +29,19 @@ class LottoStatisticsManager {
     rankList.forEach((rank) => {
       this.#ranks[rank] += 1;
     });
+  }
+
+  getProfitRate() {
+    const profit = this.getProfit();
+
+    return (profit / (this.#lottoBundle.length * BASE_AMOUNT)) * 100;
+  }
+
+  getProfit() {
+    return Object.entries(this.#ranks).reduce(
+      (profit, [key, count]) => profit + RANK[key].prize * count,
+      0,
+    );
   }
 }
 

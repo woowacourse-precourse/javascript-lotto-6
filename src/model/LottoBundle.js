@@ -1,6 +1,6 @@
 import lottoNumberGenerator from '../utils/lottoNumberGenerator.js';
 import Lotto from '../Lotto.js';
-import { MATCH_TO_RANK, RANK, RANK_TITLE } from '../constant/Constant.js';
+import { MATCH_TO_RANK, RANK, RANK_TITLE } from '../constant/constant.js';
 
 class LottoBundle {
   #lottoList;
