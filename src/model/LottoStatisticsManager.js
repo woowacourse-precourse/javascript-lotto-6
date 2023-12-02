@@ -38,7 +38,7 @@ class LottoStatisticsManager {
   getProfitRate() {
     const profit = this.getProfit();
 
-    return (profit / (this.#lottoBundle.getQuantity() * BASE_AMOUNT)) * 100;
+    return ((profit / (this.#lottoBundle.getQuantity() * BASE_AMOUNT)) * 100).toFixed(1);
   }
 
   getProfit() {
