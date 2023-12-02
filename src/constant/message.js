@@ -13,6 +13,7 @@ export const MESSAGE = {
 
 export const ERROR = {
   errorPrefix: '[ERROR]',
+  isEmpty: '공백이 입력되었습니다. 다시 입력해주세요.',
 };
 
 export const SEPARATOR = ',';

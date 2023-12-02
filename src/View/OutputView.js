@@ -49,6 +49,10 @@ const OutputView = {
   printProfitRate(profitRate) {
     Console.print(MESSAGE.totalProfit(profitRate));
   },
+
+  printError(message) {
+    Console.print(message);
+  },
 };
 
 export default OutputView;
