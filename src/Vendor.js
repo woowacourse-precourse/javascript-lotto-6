@@ -1,6 +1,7 @@
-import Computer from './Computer';
-import { LottoRule } from './constants/constants';
-import InputView from './views/InputView';
+import Computer from './Computer.js';
+import { LottoRule } from './constants/constants.js';
+import InputView from './views/InputView.js';
+import OutputView from './views/OutputView.js';
 
 export default class Vendor {
   async isssueTickets() {
@@ -10,6 +11,7 @@ export default class Vendor {
       const ticket = Computer.getRandomSixNumbers();
       issuedTickets.push(ticket);
     }
+    OutputView.printTickets(issuedTickets);
     return issuedTickets;
   }
 
