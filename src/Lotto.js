@@ -1,4 +1,5 @@
-import { LOTTO_RULE } from './constants/constants';
+import { LOTTO_RULE, PRIZE } from './constants/constants';
+import OutputView from './views/OutputView';
 
 class Lotto {
   #numbers;
@@ -25,7 +26,13 @@ class Lotto {
     });
   }
 
-  getResult() {}
+  getResult(tickets, bonusNumber) {
+    const result = this.#calculateWinningPrize(tickets, bonusNumber);
+    OutputView.printMatchedResult(result);
+    const profit = this.#calculateTotalEarning;
+    const profitabiltity = this.#calculateProfitability(tickets, profit);
+    OutputView.printProfitability(profitabiltity);
+  }
 
   #getInitializedResult() {
     return {
@@ -37,7 +44,7 @@ class Lotto {
     };
   }
 
-  #calculateResult(tickets, bonusNumber) {
+  #calculateWinningPrize(tickets, bonusNumber) {
     const result = this.#getInitializedResult();
     tickets.forEach((ticket) => {
       const matched = ticket.filter((number) => this.#numbers.includes(number));
@@ -49,6 +56,17 @@ class Lotto {
       if (matched.length === 6) result.six += 1;
     });
     return result;
+  }
+
+  #calculateTotalEarning(result) {
+    const { three, four, five, bonusFive, six } = result;
+    const total =
+      three * PRIZE.three +
+      four * PRIZE.four +
+      five * PRIZE.five +
+      bonusFive * PRIZE.bonusFive +
+      six * PRIZE.six;
+    return total;
   }
 
   #calculateProfitability(tickets, profits) {
