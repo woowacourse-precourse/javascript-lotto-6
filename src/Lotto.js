@@ -22,6 +22,32 @@ class Lotto {
       }
     });
   }
+
+  getResult() {}
+
+  #getInitializedResult() {
+    return {
+      three: 0,
+      four: 0,
+      five: 0,
+      bonusFive: 0,
+      six: 0,
+    };
+  }
+
+  #calculateResult(tickets, bonusNumber) {
+    const result = this.#getInitializedResult();
+    tickets.forEach((ticket) => {
+      const matched = ticket.filter((number) => this.#numbers.includes(number));
+      const isBonus = this.#numbers.includes(bonusNumber);
+      if (matched.length === 3) result.three += 1;
+      if (matched.length === 4) result.four += 1;
+      if (matched.length === 5 && !isBonus) result.five += 1;
+      if (matched.length === 5 && isBonus) result.bonusFive += 1;
+      if (matched.length === 6) result.six += 1;
+    });
+    return result;
+  }
 }
 
 export default Lotto;

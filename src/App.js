@@ -5,9 +5,10 @@ import InputView from './views/InputView.js';
 class App {
   async play() {
     const vendor = new Vendor();
-    await vendor.isssueTickets();
+    const tickets = await vendor.isssueTickets();
     const winningNumbers = await InputView.getWinningNumbers();
     const lotto = new Lotto(winningNumbers);
+    const bonusNumber = await InputView.getBonusNumber(winningNumbers);
   }
 }
 const app = new App();
