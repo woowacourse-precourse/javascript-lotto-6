@@ -3,14 +3,15 @@ import { Console } from '@woowacourse/mission-utils';
 const OutputView = {
   printTickets(tickets) {
     const quantity = tickets.length;
-    Console.print(`${quantity}개를 구매했습니다.`);
+    Console.print(`\n${quantity}개를 구매했습니다.`);
     tickets.forEach((ticket) => {
       Console.print(`[${ticket.join(', ')}]`);
     });
   },
   printMatchedResult(result) {
     const { three, four, five, bonusFive, six } = result;
-    Console.print(`당첨 통계
+    Console.print(`
+당첨 통계
 ---
 3개 일치 (5,000원) - ${three}개
 4개 일치 (50,000원) - ${four}개
@@ -22,7 +23,7 @@ const OutputView = {
     Console.print(`총 수익률은 ${profitabiltity}%입니다.`);
   },
   printErrors(error) {
-    Console.print(error);
+    Console.print(error.message);
   },
 };
 export default OutputView;

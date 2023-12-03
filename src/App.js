@@ -1,3 +1,4 @@
+import Host from './Host.js';
 import Lotto from './Lotto.js';
 import Vendor from './Vendor.js';
 import InputView from './views/InputView.js';
@@ -6,9 +7,8 @@ class App {
   async play() {
     const vendor = new Vendor();
     const tickets = await vendor.isssueTickets();
-    const winningNumbers = await InputView.getWinningNumbers();
-    const lotto = new Lotto(winningNumbers);
-    const bonusNumber = await InputView.getBonusNumber(winningNumbers);
+    const { winningNumbers, lotto } = await Host.enrollWinningNumbers();
+    const bonusNumber = await Host.enrollBonusNumber(winningNumbers);
     lotto.getResult(tickets, bonusNumber);
   }
 }
