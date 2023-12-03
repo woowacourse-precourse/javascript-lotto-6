@@ -9,6 +9,7 @@ class App {
     const winningNumbers = await InputView.getWinningNumbers();
     const lotto = new Lotto(winningNumbers);
     const bonusNumber = await InputView.getBonusNumber(winningNumbers);
+    lotto.getResult(tickets, bonusNumber);
   }
 }
 const app = new App();

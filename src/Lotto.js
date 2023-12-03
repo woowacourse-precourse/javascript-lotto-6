@@ -1,5 +1,5 @@
-import { LOTTO_RULE, PRIZE } from './constants/constants';
-import OutputView from './views/OutputView';
+import { LOTTO_RULE, PRIZE } from './constants/constants.js';
+import OutputView from './views/OutputView.js';
 
 class Lotto {
   #numbers;
@@ -29,7 +29,7 @@ class Lotto {
   getResult(tickets, bonusNumber) {
     const result = this.#calculateWinningPrize(tickets, bonusNumber);
     OutputView.printMatchedResult(result);
-    const profit = this.#calculateTotalEarning;
+    const profit = this.#calculateTotalEarning(result);
     const profitabiltity = this.#calculateProfitability(tickets, profit);
     OutputView.printProfitability(profitabiltity);
   }
