@@ -5,7 +5,7 @@ const OutputView = {
     const quantity = tickets.length;
     Console.print(`${quantity}개를 구매했습니다.`);
     tickets.forEach((ticket) => {
-      Console.print(ticket);
+      Console.print(`[${ticket.join(', ')}]`);
     });
   },
   printMatchedResult(result) {

@@ -12,6 +12,6 @@ class App {
     lotto.getResult(tickets, bonusNumber);
   }
 }
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 export default App;

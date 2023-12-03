@@ -9,6 +9,7 @@ export default class Vendor {
     const issuedTickets = [];
     for (let i = 0; i < tickets; i += 1) {
       const ticket = Computer.getRandomSixNumbers();
+      ticket.sort((a, b) => a - b);
       issuedTickets.push(ticket);
     }
     OutputView.printTickets(issuedTickets);
