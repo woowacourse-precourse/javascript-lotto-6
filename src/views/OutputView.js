@@ -21,5 +21,8 @@ const OutputView = {
   printProfitability(profitabiltity) {
     Console.print(`총 수익률은 ${profitabiltity}%입니다.`);
   },
+  printErrors(error) {
+    Console.print(error);
+  },
 };
 export default OutputView;
