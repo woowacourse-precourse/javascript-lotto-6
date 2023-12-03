@@ -1,3 +1,3 @@
-const LottoRule = Object.freeze({ ticketPrice: 1000 });
+const LOTTO_RULE = Object.freeze({ ticketPrice: 1000 });
 
-export { LottoRule };
+export { LOTTO_RULE };

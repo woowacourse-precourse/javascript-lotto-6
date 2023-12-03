@@ -1,3 +1,5 @@
+import { LOTTO_RULE } from './constants/constants';
+
 class Lotto {
   #numbers;
 
@@ -47,6 +49,12 @@ class Lotto {
       if (matched.length === 6) result.six += 1;
     });
     return result;
+  }
+
+  #calculateProfitability(tickets, profits) {
+    const profitabiltity =
+      (profits / (tickets.length * LOTTO_RULE.ticketPrice)) * 100;
+    return profitabiltity.toFixed(1);
   }
 }
 
