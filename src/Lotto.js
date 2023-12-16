@@ -1,18 +1,47 @@
+import { ERROR_MESSAGE } from './constants/Message.js';
+import { LOTTO_FORM } from './constants/Rule.js';
+import CustomError from './models/CustomError.js';
+import { isInteger, sortNumbers, validateNumberRange } from './utils/index.js';
+
 class Lotto {
+  /**
+   * @type {number[]|undefined}
+   */
   #numbers;
 
+  /**
+   * @param {number[]} numbers
+   */
   constructor(numbers) {
-    this.#validate(numbers);
-    this.#numbers = numbers;
+    this.#isNumberArray(numbers);
+    this.#validateNumbersLength(numbers);
+    this.#validateNumbersRange(numbers);
+    this.#hasNoRepeatNumber(numbers);
+    this.#setNumbers(numbers);
   }
 
-  #validate(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+  #setNumbers(numbers) {
+    this.#numbers = sortNumbers(numbers);
+  }
+  #isNumberArray(numbers) {
+    if (!Array.isArray(numbers) || !numbers.every((v) => isInteger(v)))
+      throw new CustomError(ERROR_MESSAGE.isNotNumberArray);
+  }
+  #validateNumbersLength(numbers) {
+    if (numbers.length !== LOTTO_FORM.length) {
+      throw new CustomError(ERROR_MESSAGE.sixNumbers);
     }
   }
-
-  // TODO: 추가 기능 구현
+  #validateNumbersRange(numbers) {
+    numbers.forEach((number) => validateNumberRange(number));
+  }
+  #hasNoRepeatNumber(numbers) {
+    if (new Set(numbers).size !== numbers.length)
+      throw new CustomError(ERROR_MESSAGE.duplicateNumber);
+  }
+  getLottoNumbers() {
+    return this.#numbers;
+  }
 }
 
 export default Lotto;
