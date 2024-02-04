@@ -9,11 +9,11 @@ class LottoPlayer {
     FIFTH: 0,
   };
 
-  constructor() {}
-
-  setSeed(input) {
-    this.#seed = input;
+  constructor(seed) {
+    this.#seed = seed;
   }
+
+  // 구매한 로또 개수는 seed 나누기 1000의 몫 출력하기
 
   setbuyLottoList(lottoList) {
     this.#buyLottoList = lottoList;
