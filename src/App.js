@@ -1,4 +1,4 @@
-import DongHangLottery from "./DongHangLottery/DongHangLottery";
+import DongHangLottery from "./DongHangLottery/DongHangLottery.js";
 
 class App {
   async play() {

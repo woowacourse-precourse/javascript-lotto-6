@@ -1,10 +1,10 @@
 import { Random } from "@woowacourse/mission-utils";
 
-class LottonNumberGenerator {
+class LottoTicketGenerator {
     makeLotto(){
         const pickLottoNumber = Random.pickUniqueNumbersInRange(1, 45, 6);
         return pickLottoNumber;
     }
 }
 
-export default LottonNumberGenerator;
+export default LottoTicketGenerator;
