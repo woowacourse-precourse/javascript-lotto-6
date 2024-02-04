@@ -1,9 +1,9 @@
-import DongHangLottery from "./DongHangLottery/DongHangLottery.js";
+import DongHangLottery from "./DongHangLottery/DongHangLottery";
 
 class App {
   async play() {
     const Lotto = new DongHangLottery();
-    await Lotto.play()
+    await Lotto.play();
   }
 }
 
