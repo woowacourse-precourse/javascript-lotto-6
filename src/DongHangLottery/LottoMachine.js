@@ -8,7 +8,11 @@ class LottoMachine {
     // true는 숫자로 1 false는 0
     const bonusNumberCount = Number(lottoNumber.includes(plusNumber));
 
-    console.log('check Lottonumber fnc:print lotto number check', bonusNumberCount, matchedNumbersCount);
+    console.log(
+      'check Lottonumber fnc:print lotto number check',
+      bonusNumberCount,
+      matchedNumbersCount,
+    );
 
     // 보너스 번호 없이 6
     if (matchedNumbersCount === 6) return 1;
