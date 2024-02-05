@@ -6,6 +6,7 @@ class LottoPlayer {
   #lottoCount;
   #buyLottoList = [];
   #recordWinningRankList;
+  #revinue = 0;
 
   constructor() {
     this.Validator = new Validator();
@@ -59,8 +60,28 @@ class LottoPlayer {
     6개 일치 (2,000,000,000원) - ${this.#recordWinningRankList.FIRST}개`);
   }
 
-  printRateOfReturn(){
-    
+  calculRateOfReturn() {
+    const keys = Object.keys(this.#recordWinningRankList); // ['name', 'weight', 'price', 'isFresh']
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i]; // 각각의 키
+      let winnings;
+      if (key === 'FIRST') winnings = 2000000000;
+      if (key === 'SECOND') winnings = 30000000;
+      if (key === 'THIRD') winnings = 1500000;
+      if (key === 'FOURTH') winnings = 50000;
+      if (key === 'FIFTH') winnings = 5000;
+
+      const value = this.#recordWinningRankList[key]; // 각각의 키에 해당하는 각각의 값
+
+      this.#revinue += winnings * value;
+    }
+  }
+
+  printRavenue() {
+    console.log("check revue",this.#revinue,this.#lottoCount)
+    const rateOfRevenue = (this.#revinue / (this.#lottoCount * 1000) ) * 100;
+    Console.print(`총 수익률은 ${rateOfRevenue.toFixed(1)}%입니다.`);
   }
 }
 

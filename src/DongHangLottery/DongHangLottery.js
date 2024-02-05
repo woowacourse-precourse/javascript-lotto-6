@@ -17,7 +17,8 @@ class DongHangLottery {
     const userLottoList = player.getUserLottoList();
     const winnigRecordResult = lottoMachine.checkLottoResult(userLottoList);
     player.setWinnigLottoResult(winnigRecordResult);
-    player.printWinnigReulst();
+    player.calculRateOfReturn();
+    player.printRavenue()
   }
 }
 
