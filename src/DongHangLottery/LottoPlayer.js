@@ -9,14 +9,21 @@ class LottoPlayer {
   #revinue = 0;
 
   constructor() {
-    this.Validator = new Validator();
+    this.validator = new Validator();
   }
 
   async setPurchaseAmount() {
     const input = await Console.readLineAsync('구매할 로또 금액을 입력하세요');
     const seed = Number(input);
-    if (this.Validator.isValidPurchaseAmount(seed))
-      this.#lottoCount = seed / 1000;
+
+    try{
+      if (!this.validator.isValidPurchaseAmount(seed)) return true
+    } catch (e){
+      Console.print('[ERROR]: 잘못된 구매 금액 형식입니다.');
+      await this.setPurchaseAmount();
+    }
+
+    this.#lottoCount = seed / 1000;
   }
 
   printUserPurchaseLottoAmount() {
@@ -69,7 +76,7 @@ class LottoPlayer {
   }
 
   calculRateOfReturn() {
-    const keys = Object.keys(this.#recordWinningRankList); // ['name', 'weight', 'price', 'isFresh']
+    const keys = Object.keys(this.#recordWinningRankList);
 
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i]; // 각각의 키
@@ -80,7 +87,7 @@ class LottoPlayer {
       if (key === 'FOURTH') winnings = 50000;
       if (key === 'FIFTH') winnings = 5000;
 
-      const value = this.#recordWinningRankList[key]; // 각각의 키에 해당하는 각각의 값
+      const value = this.#recordWinningRankList[key]; 
 
       this.#revinue += winnings * value;
     }
