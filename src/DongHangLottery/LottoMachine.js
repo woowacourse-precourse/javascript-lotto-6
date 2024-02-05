@@ -24,29 +24,6 @@ class LottoMachine {
   }
 
   checkLottoResult(lottoList) {
-    //   const matchedNumbersCount = lottoNumber.filter(item =>
-    //     this.#winningNumbers.includes(item),
-    //   ).length;
-    //   // true는 숫자로 1 false는 0
-    //   const bonusNumberCount = Number(lottoNumber.includes(this.#plusNumber));
-
-    //   // console.log(
-    //   //   'check Lottonumber fnc:print lotto number check',
-    //   //   bonusNumberCount,
-    //   //   matchedNumbersCount,
-    //   // );
-
-    //   // 보너스 번호 없이 6
-    //   if (matchedNumbersCount === 6) return 1;
-    //   // 보너스 포함 6개일때
-    //   else if (matchedNumbersCount + bonusNumberCount === 6) return 2;
-    //   // 보너스 포함 개수 등수 3등부터
-    //   else if (matchedNumbersCount + bonusNumberCount === 5) return 3;
-    //   else if (matchedNumbersCount + bonusNumberCount === 4) return 4;
-    //   else if (matchedNumbersCount + bonusNumberCount === 3) return 5;
-    //   else return 0;
-    // }
-
     const winningDetails = {
       FIRST: 0,
       SECOND: 0,
@@ -63,12 +40,6 @@ class LottoMachine {
       // true는 숫자로 1 false는 0
       const bonusNumberCount = Number(lotto.includes(this.#plusNumber));
 
-      // console.log(
-      //   'check lotto fnc:print lotto number check',
-      //   bonusNumberCount,
-      //   matchedNumbersCount,
-      // );
-
       // 보너스 번호 없이 6
       if (matchedNumbersCount === 6) winningDetails.FIRST += 1;
       // 보너스 포함 6개일때
@@ -83,9 +54,8 @@ class LottoMachine {
         winningDetails.FIFTH += 1;
       else return 0;
     });
-    return  winningDetails;
+    return winningDetails;
   }
-
 }
 
 export default LottoMachine;

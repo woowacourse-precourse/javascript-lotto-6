@@ -30,8 +30,6 @@ class LottoPlayer {
       const lotto = new LottoTicketGenerator();
       this.#buyLottoList.push(lotto.makeLotto());
     }
-    // console.log('구매한 로또 리스트', this.#buyLottoList);
-    // this.#buyLottoList.forEach(item => console.log(item.getLottoNumber()));
   }
 
   printUserLottoList() {
@@ -79,8 +77,8 @@ class LottoPlayer {
   }
 
   printRavenue() {
-    console.log("check revue",this.#revinue,this.#lottoCount)
-    const rateOfRevenue = (this.#revinue / (this.#lottoCount * 1000) ) * 100;
+    console.log('check revue', this.#revinue, this.#lottoCount);
+    const rateOfRevenue = (this.#revinue / (this.#lottoCount * 1000)) * 100;
     Console.print(`총 수익률은 ${rateOfRevenue.toFixed(1)}%입니다.`);
   }
 }

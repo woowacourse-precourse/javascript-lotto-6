@@ -48,7 +48,7 @@ class Validator {
   }
 
   isValidBonusNumberLegnth(bonusNumber) {
-    if (!((bonusNumber > 1) && (bonusNumber < 46))) return false;
+    if (!(bonusNumber > 1 && bonusNumber < 46)) return false;
     return true;
   }
 
