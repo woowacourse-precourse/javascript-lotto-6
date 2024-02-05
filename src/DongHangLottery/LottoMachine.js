@@ -1,21 +1,25 @@
 import { Console } from '@woowacourse/mission-utils';
+import Validator from './Validator.js';
 
 class LottoMachine {
   #winningNumbers;
   #plusNumber;
 
+  constructor() {
+    this.Validator = new Validator();
+  }
+
   async setWinningNumber() {
-    const winnigNumber =
-      await Console.readLineAsync('당첨 번호를 입력해 주세요.');
-    
-    return this.#winningNumbers = winnigNumber;
+    const userInput = await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+    const winnigNumber = userInput.split(',');
+    if (this.Validator.isValidWinningNumbers(winnigNumber))
+      this.#winningNumbers = winnigNumber;
   }
 
   async setPlusNumber() {
     const plusNumber =
       await Console.readLineAsync('보너스 번호를 입력해 주세요.');
-    
-    return this.#plusNumber = plusNumber;
+    if (this.Validator.isValidBonusNumbers(this.#winningNumbers,plusNumber)) this.#plusNumber = plusNumber;
   }
 
   checkLotto(lottoNumber) {
