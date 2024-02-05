@@ -4,7 +4,6 @@ import LottoMachine from './LottoMachine.js';
 
 class DongHangLottery {
   async play() {
-
     const player = new LottoPlayer();
     player.setPurchaseAmount();
 
