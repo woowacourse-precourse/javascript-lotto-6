@@ -1,4 +1,5 @@
 import LottoTicketGenerator from './LottoTicketGenerator.js';
+import { Console } from '@woowacourse/mission-utils';
 class LottoPlayer {
   #seed;
   #buyLottoList = [];
@@ -10,9 +11,10 @@ class LottoPlayer {
     FIFTH: 0,
   };
 
-  constructor(seed) {
-    this.#seed = seed;
-    this.userByLottoList();
+  async setSeed() {
+    const seed = await Console.readLineAsync('구매할 로또 금액을 입력하세요');
+    console.log("user input seed",seed)
+    return this.#seed = seed;
   }
 
   // 로또 발행 및 저장
@@ -26,7 +28,7 @@ class LottoPlayer {
     this.#buyLottoList.forEach(item => console.log(item.getLottoNumber()));
   }
 
-  getUserLottoList(){
+  getUserLottoList() {
     return this.#buyLottoList;
   }
 
