@@ -1,12 +1,22 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class LottoMachine {
+  #winningNumbers;
+  #plusNumber;
+
+  async setWinningNumber() {
+    const winnigNumber =
+      await Console.readLineAsync('당첨 번호를 입력해 주세요.');
+    
+    return this.#winningNumbers = winnigNumber;
+  }
+
   checkLotto(lottoNumber) {
-    const bingo = [1, 2, 3, 4, 5, 6];
-    const plusNumber = 9;
     const matchedNumbersCount = lottoNumber.filter(item =>
-      bingo.includes(item),
+      this.#winningNumbers.includes(item),
     ).length;
     // true는 숫자로 1 false는 0
-    const bonusNumberCount = Number(lottoNumber.includes(plusNumber));
+    const bonusNumberCount = Number(lottoNumber.includes(this.#plusNumber));
 
     console.log(
       'check Lottonumber fnc:print lotto number check',
