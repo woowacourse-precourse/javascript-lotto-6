@@ -22,6 +22,7 @@ class LottoMachine {
     else if (matchedNumbersCount + bonusNumberCount === 5) return 3;
     else if (matchedNumbersCount + bonusNumberCount === 4) return 4;
     else if (matchedNumbersCount + bonusNumberCount === 3) return 5;
+    else return 0;
   }
 }
 
