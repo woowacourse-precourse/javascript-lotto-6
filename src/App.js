@@ -1,4 +1,5 @@
 import DongHangLottery from './DongHangLottery/DongHangLottery.js';
+import LottoTicketGenerator from './DongHangLottery/LottoTicketGenerator.js';
 
 class App {
   async play() {
