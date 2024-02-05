@@ -6,7 +6,7 @@ class DongHangLottery {
   async play() {
 
     const player = new LottoPlayer();
-    player.setSeed();
+    player.setPurchaseAmount();
 
     // const lottoMachine = new LottoMachine();
     // const lotto = new LottoTicketGenerator();

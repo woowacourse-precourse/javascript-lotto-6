@@ -11,7 +11,7 @@ class LottoPlayer {
     FIFTH: 0,
   };
 
-  async setSeed() {
+  async setPurchaseAmount() {
     const seed = await Console.readLineAsync('구매할 로또 금액을 입력하세요');
     console.log("user input seed",seed)
     return this.#seed = seed;
