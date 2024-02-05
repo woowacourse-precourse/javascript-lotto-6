@@ -9,11 +9,15 @@ class DongHangLottery {
     await player.setPurchaseAmount();
     player.printUserPurchaseLottoAmount();
     player.userByLottoList();
-    player.getUserLottoList();
+    player.printUserLottoList();
     await lottoMachine.setWinningNumber();
     await lottoMachine.setPlusNumber();
 
-    // 사용자의 워하는 로또 구매 개수를 입력받아 유효한 입력일때 구매한 개수까지 출력하는 기능까지 완료
+    // 보유한 로또 검증
+    const userLottoList = player.getUserLottoList();
+    const winnigRecordResult = lottoMachine.checkLottoResult(userLottoList);
+    player.setWinnigLottoResult(winnigRecordResult);
+    player.printWinnigReulst();
   }
 }
 
