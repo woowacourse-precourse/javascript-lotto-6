@@ -26,6 +26,10 @@ class LottoPlayer {
     this.#buyLottoList.forEach(item => console.log(item.getLottoNumber()));
   }
 
+  getUserLottoList(){
+    return this.#buyLottoList;
+  }
+
   // 당첨 내역 관리
 }
 
