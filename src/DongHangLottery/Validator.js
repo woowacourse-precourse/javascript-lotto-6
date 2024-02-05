@@ -18,7 +18,7 @@ class Validator {
   }
 
   isValidWinningNumbers(lotto) {
-    console.log('lotto', lotto, lotto.length);
+    // console.log('lotto', lotto, lotto.length);
     if (!this.isValidWinningNumbersLength(lotto))
       throw new Error('[ERROR]: 올바르지 않은 로또 길이입니다.');
     lotto.forEach(item => {

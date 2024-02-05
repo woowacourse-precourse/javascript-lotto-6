@@ -34,7 +34,8 @@ class LottoPlayer {
 
   printUserLottoList() {
     this.#buyLottoList.forEach(lotto => {
-      Console.print(lotto.getLottoNumber());
+      const formattedNumbers = JSON.stringify(lotto.getLottoNumber());
+      Console.print(formattedNumbers.replace(/,/g, ', '));
     });
   }
 
@@ -48,14 +49,23 @@ class LottoPlayer {
   }
 
   printWinnigReulst() {
-    Console.print(`    
-    당첨 통계
-    ---
-    3개 일치 (5,000원) - ${this.#recordWinningRankList.FIFTH}개
-    4개 일치 (50,000원) - ${this.#recordWinningRankList.FOURTH}개
-    5개 일치 (1,500,000원) - ${this.#recordWinningRankList.THIRD}개
-    5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#recordWinningRankList.SECOND}개
-    6개 일치 (2,000,000,000원) - ${this.#recordWinningRankList.FIRST}개`);
+    Console.print(`당첨 통계`);
+    Console.print('---');
+    Console.print(
+      `3개 일치 (5,000원) - ${this.#recordWinningRankList.FIFTH}개`,
+    );
+    Console.print(
+      `4개 일치 (50,000원) - ${this.#recordWinningRankList.FOURTH}개`,
+    );
+    Console.print(
+      `5개 일치 (1,500,000원) - ${this.#recordWinningRankList.THIRD}개`,
+    );
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (30,000,000원) - ${this.#recordWinningRankList.SECOND}개`,
+    );
+    Console.print(
+      `6개 일치 (2,000,000,000원) - ${this.#recordWinningRankList.FIRST}개`,
+    );
   }
 
   calculRateOfReturn() {
@@ -77,7 +87,7 @@ class LottoPlayer {
   }
 
   printRavenue() {
-    console.log('check revue', this.#revinue, this.#lottoCount);
+    // console.log('check revue', this.#revinue, this.#lottoCount);
     const rateOfRevenue = (this.#revinue / (this.#lottoCount * 1000)) * 100;
     Console.print(`총 수익률은 ${rateOfRevenue.toFixed(1)}%입니다.`);
   }
