@@ -11,6 +11,13 @@ class LottoMachine {
     return this.#winningNumbers = winnigNumber;
   }
 
+  async setPlusNumber() {
+    const plusNumber =
+      await Console.readLineAsync('보너스 번호를 입력해 주세요.');
+    
+    return this.#plusNumber = plusNumber;
+  }
+
   checkLotto(lottoNumber) {
     const matchedNumbersCount = lottoNumber.filter(item =>
       this.#winningNumbers.includes(item),
