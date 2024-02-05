@@ -1,8 +1,9 @@
 import LottoTicketGenerator from './LottoTicketGenerator.js';
 import { Console } from '@woowacourse/mission-utils';
 import Validator from './Validator.js';
+
 class LottoPlayer {
-  #seed;
+  #lottoCount;
   #buyLottoList = [];
   #recordWinningRank = {
     FIRST: 0,
@@ -18,13 +19,17 @@ class LottoPlayer {
 
   async setPurchaseAmount() {
     const input = await Console.readLineAsync('구매할 로또 금액을 입력하세요');
-    const seed = Number(input)
-    if (this.Validator.isValidPurchaseAmount(seed)) return (this.#seed = seed);
+    const seed = Number(input);
+    if (this.Validator.isValidPurchaseAmount(seed)) this.#lottoCount = (seed / 1000);
+  }
+
+  printUserPurchaseLottoAmount() {
+    Console.print(`${this.#lottoCount}개를 구매했습니다.`);
   }
 
   // 로또 발행 및 저장
   userByLottoList() {
-    const lottoCount = this.#seed / 1000;
+    const lottoCount = this.#lottoCount;
     for (let i = 0; lottoCount > i; i++) {
       const lotto = new LottoTicketGenerator();
       this.#buyLottoList.push(lotto.makeLotto());
