@@ -34,12 +34,14 @@ class LottoPlayer {
       const lotto = new LottoTicketGenerator();
       this.#buyLottoList.push(lotto.makeLotto());
     }
-    console.log('구매한 로또 리스트', this.#buyLottoList);
-    this.#buyLottoList.forEach(item => console.log(item.getLottoNumber()));
+    // console.log('구매한 로또 리스트', this.#buyLottoList);
+    // this.#buyLottoList.forEach(item => console.log(item.getLottoNumber()));
   }
 
   getUserLottoList() {
-    return this.#buyLottoList;
+    this.#buyLottoList.forEach(lotto => {
+      Console.print(lotto.getLottoNumber())
+    })
   }
 
   // 당첨 내역 관리

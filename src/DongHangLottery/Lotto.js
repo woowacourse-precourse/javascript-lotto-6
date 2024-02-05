@@ -5,7 +5,6 @@ class Lotto {
 
   constructor(numbers) {
     this.#validate(numbers);
-    console.log("로또에 입력된 번호",numbers)
     this.#numbers = numbers;
   }
 

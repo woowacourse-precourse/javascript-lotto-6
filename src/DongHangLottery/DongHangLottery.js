@@ -8,6 +8,8 @@ class DongHangLottery {
     const lottoMachine = new LottoMachine();
     await player.setPurchaseAmount();
     player.printUserPurchaseLottoAmount();
+    player.userByLottoList();
+    player.getUserLottoList();
     await lottoMachine.setWinningNumber();
     await lottoMachine.setPlusNumber();
 

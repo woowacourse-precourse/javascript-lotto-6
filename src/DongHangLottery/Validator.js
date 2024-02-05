@@ -53,7 +53,7 @@ class Validator {
   }
 
   isDuplicateBonusNumber(winnigNumber, bonusNumber) {
-    console.log("chehck isDuplicateBonusNumber",winnigNumber,bonusNumber,typeof winnigNumber, typeof bonusNumber)
+    // console.log("chehck isDuplicateBonusNumber",winnigNumber,bonusNumber,typeof winnigNumber, typeof bonusNumber)
     if (winnigNumber.includes(bonusNumber) === true) return false;
     return true;
   }
