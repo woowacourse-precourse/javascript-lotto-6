@@ -1,11 +1,14 @@
-import { GameMessage } from './GameMessageManager/GameMessage.js';
+import {
+  LottoConstants,
+  ErrorMessage,
+} from './GameMessageManager/GameMessage.js';
 
 class Validator {
   isValidPurchaseAmount(money) {
     if (!this.isThousandWonUnit(money))
-      throw new Error(GameMessage.INVALID_INPUT_PRICE_UNIT);
+      throw new Error(ErrorMessage.INVALID_INPUT_PRICE_UNIT);
     if (!this.isNumber(money))
-      throw new Error(GameMessage.INVALID_INPUT_PRICE_TYPE);
+      throw new Error(ErrorMessage.INVALID_INPUT_PRICE_TYPE);
     return true;
   }
 
@@ -21,45 +24,59 @@ class Validator {
 
   isValidWinningNumbers(lotto) {
     if (!this.isValidWinningNumbersLength(lotto))
-      throw new Error(GameMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
+      throw new Error(ErrorMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
     lotto.forEach(item => {
       if (!this.isNumber(item))
-        throw new Error(GameMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
-      if (this.isValidScoprNumber(lotto)) throw new Error('[ERROR]');
+        throw new Error(ErrorMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
+      if (this.isValidScoprNumber(lotto))
+        throw new Error(ErrorMessage.INVALID_LOTTO_NUMBER_SCOPE);
     });
     if (!this.isDuplicateWiniingNumber(lotto))
-      throw new Error(GameMessage.DUPLICATED_LOTTO_NUMBER_ERROR);
+      throw new Error(ErrorMessage.DUPLICATED_LOTTO_NUMBER_ERROR);
 
     return true;
   }
 
   isValidWinningNumbersLength(winnerNumberArray) {
-    if (winnerNumberArray.length !== 6) return false;
+    if (winnerNumberArray.length !== LottoConstants.LOTTO_NUMBER_COUNT)
+      return false;
     return true;
   }
 
   isDuplicateWiniingNumber(input) {
-    if ([...new Set(input)].length !== 6) return false;
+    if ([...new Set(input)].length !== LottoConstants.LOTTO_NUMBER_COUNT)
+      return false;
     return true;
   }
 
   isValidScoprNumber(number) {
-    if (number < 46 && number > 1) return true;
+    if (
+      number < LottoConstants.MAX_LOTTO_NUMBER &&
+      number > LottoConstants.MIN_LOTTO_NUMBER
+    )
+      return true;
     return false;
   }
 
   isValidBonusNumbers(winnigNumber, bonusNumber) {
     if (!this.isValidBonusNumberLegnth(bonusNumber))
-      throw new Error(GameMessage.INVALID_INPUT_BONUS_LOTTO_LENGTH);
+      throw new Error(ErrorMessage.INVALID_INPUT_BONUS_LOTTO_LENGTH);
     if (!this.isNumber(bonusNumber))
-      throw new Error(GameMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
+      throw new Error(ErrorMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
     if (!this.isDuplicateBonusNumber(winnigNumber, bonusNumber))
-      throw new Error(GameMessage.DUPLICATED_LOTTO_NUMBER_ERROR);
-    if (!this.isValidScoprNumber(bonusNumber)) throw new Error('[ERROR]');
+      throw new Error(ErrorMessage.DUPLICATED_LOTTO_NUMBER_ERROR);
+    if (!this.isValidScoprNumber(bonusNumber))
+      throw new Error(ErrorMessage.INVALID_LOTTO_NUMBER_SCOPE);
   }
 
   isValidBonusNumberLegnth(bonusNumber) {
-    if (!(bonusNumber > 1 && bonusNumber < 46)) return false;
+    if (
+      !(
+        bonusNumber > LottoConstants.MIN_LOTTO_NUMBER &&
+        bonusNumber < LottoConstants.MAX_LOTTO_NUMBER
+      )
+    )
+      return false;
     return true;
   }
 

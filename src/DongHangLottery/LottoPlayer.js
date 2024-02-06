@@ -1,7 +1,7 @@
 import LottoTicketGenerator from './LottoTicketGenerator.js';
 import { Console } from '@woowacourse/mission-utils';
 import Validator from './Validator.js';
-import { GameMessage } from './GameMessageManager/GameMessage.js';
+import { GameMessage , WinningPrizesConstants, LottoConstants } from './GameMessageManager/GameMessage.js';
 
 class LottoPlayer {
   #lottoCount;
@@ -81,11 +81,11 @@ class LottoPlayer {
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i]; 
       let winnings;
-      if (key === GameMessage.FIRST) winnings = 2000000000;
-      if (key === GameMessage.SECOND) winnings = 30000000;
-      if (key === GameMessage.THIRD) winnings = 1500000;
-      if (key === GameMessage.FOURTH) winnings = 50000;
-      if (key === GameMessage.FIFTH) winnings = 5000;
+      if (key === GameMessage.FIRST) winnings = WinningPrizesConstants.FIRST;
+      if (key === GameMessage.SECOND) winnings = WinningPrizesConstants.SECOND;
+      if (key === GameMessage.THIRD) winnings = WinningPrizesConstants.THIRD;
+      if (key === GameMessage.FOURTH) winnings = WinningPrizesConstants.FOURTH;
+      if (key === GameMessage.FIFTH) winnings = WinningPrizesConstants.FIFTH;
 
       const value = this.#recordWinningRankList[key]; 
 
@@ -94,8 +94,7 @@ class LottoPlayer {
   }
 
   printRavenue() {
-    // console.log('check revue', this.#revinue, this.#lottoCount);
-    const rateOfRevenue = (this.#revinue / (this.#lottoCount * 1000)) * 100;
+    const rateOfRevenue = (this.#revinue / (this.#lottoCount * LottoConstants.THOUSAND_WON_UNIT)) * 100;
     Console.print(`총 수익률은 ${rateOfRevenue.toFixed(1)}%입니다.`);
   }
 }

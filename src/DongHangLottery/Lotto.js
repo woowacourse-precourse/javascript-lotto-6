@@ -1,4 +1,4 @@
-import { GameMessage } from './GameMessageManager/GameMessage.js';
+import { ErrorMessage } from './GameMessageManager/GameMessage.js';
 class Lotto {
   #numbers;
 
@@ -9,15 +9,16 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error(GameMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
+      throw new Error(ErrorMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
     }
 
     numbers.forEach(item => {
-      if (isNaN(item)) throw new Error('[ERROR]');
+      if (isNaN(item))
+        throw new Error(ErrorMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
     });
 
     if ([...new Set(numbers)].length !== 6)
-      throw new Error(GameMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
+      throw new Error(ErrorMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
   }
 
   getLottoNumber() {
