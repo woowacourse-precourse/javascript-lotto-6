@@ -32,23 +32,31 @@ class LottoMachine {
   checkLottoResult(lottoList) {
     lottoList.forEach(lottoObj => {
       const lotto = lottoObj.getLottoNumber();
-      const matchedNumbersCount = lotto.filter(item =>
-        this.#winningNumbers.includes(item),
-      ).length;
-      const bonusNumberCount = Number(lotto.includes(this.#plusNumber));
-      console.log('check lotto result', lotto);
-      if (matchedNumbersCount === 6) this.#winningDetailsCount.FIRST += 1;
-      else if (matchedNumbersCount + bonusNumberCount === 6)
-        this.#winningDetailsCount.SECOND += 1;
-      else if (matchedNumbersCount + bonusNumberCount === 5)
-        this.#winningDetailsCount.THIRD += 1;
-      else if (matchedNumbersCount + bonusNumberCount === 4)
-        this.#winningDetailsCount.FOURTH += 1;
-      else if (matchedNumbersCount + bonusNumberCount === 3)
-        this.#winningDetailsCount.FIFTH += 1;
-      else return 0;
+      const matchedNumbersCount = this.checkWinningNumbers(lotto);
+      const bonusNumberCount = this.checkBonusNumber(lotto);
+      this.updateWinningDetailsCount(matchedNumbersCount, bonusNumberCount);
     });
     return this.#winningDetailsCount;
+  }
+
+  checkWinningNumbers(lotto) {
+    return lotto.filter(item => this.#winningNumbers.includes(item)).length;
+  }
+
+  checkBonusNumber(lotto) {
+    return lotto.includes(this.#plusNumber) ? 1 : 0;
+  }
+
+  updateWinningDetailsCount(matchedNumbersCount, bonusNumberCount) {
+    if (matchedNumbersCount === 6) this.#winningDetailsCount.FIRST += 1;
+    else if (matchedNumbersCount + bonusNumberCount === 6)
+      this.#winningDetailsCount.SECOND += 1;
+    else if (matchedNumbersCount + bonusNumberCount === 5)
+      this.#winningDetailsCount.THIRD += 1;
+    else if (matchedNumbersCount + bonusNumberCount === 4)
+      this.#winningDetailsCount.FOURTH += 1;
+    else if (matchedNumbersCount + bonusNumberCount === 3)
+      this.#winningDetailsCount.FIFTH += 1;
   }
 }
 
