@@ -25,9 +25,11 @@ class Validator {
     lotto.forEach(item => {
       if (!this.isNumber(item))
         throw new Error(GameMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
+      if (this.isValidScoprNumber(lotto)) throw new Error('[ERROR]');
     });
     if (!this.isDuplicateWiniingNumber(lotto))
       throw new Error(GameMessage.DUPLICATED_LOTTO_NUMBER_ERROR);
+
     return true;
   }
 
@@ -40,6 +42,12 @@ class Validator {
     if ([...new Set(input)].length !== 6) return false;
     return true;
   }
+
+  isValidScoprNumber(number) {
+    if (number < 46 && number > 1) return true;
+    return false;
+  }
+
   isValidBonusNumbers(winnigNumber, bonusNumber) {
     if (!this.isValidBonusNumberLegnth(bonusNumber))
       throw new Error(GameMessage.INVALID_INPUT_BONUS_LOTTO_LENGTH);
@@ -47,6 +55,7 @@ class Validator {
       throw new Error(GameMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
     if (!this.isDuplicateBonusNumber(winnigNumber, bonusNumber))
       throw new Error(GameMessage.DUPLICATED_LOTTO_NUMBER_ERROR);
+    if (!this.isValidScoprNumber(bonusNumber)) throw new Error('[ERROR]');
   }
 
   isValidBonusNumberLegnth(bonusNumber) {
