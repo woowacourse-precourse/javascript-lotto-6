@@ -1,6 +1,5 @@
+import { GameMessage } from './GameMessageManager/GameMessage.js';
 class Lotto {
-  // number의 # prefix 변경 금지
-  // Lotto에 필드 추가 금지
   #numbers;
 
   constructor(numbers) {
@@ -10,7 +9,7 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(GameMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
     }
 
     numbers.forEach(item => {
@@ -18,10 +17,9 @@ class Lotto {
     });
 
     if ([...new Set(numbers)].length !== 6)
-      throw new Error('[ERROR] 로또 번호는 6개여야 합니다.');
+      throw new Error(GameMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
   }
 
-  // TODO: 추가 기능 구현
   getLottoNumber() {
     return this.#numbers;
   }

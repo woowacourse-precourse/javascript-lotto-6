@@ -37,15 +37,11 @@ class LottoMachine {
       const matchedNumbersCount = lotto.filter(item =>
         this.#winningNumbers.includes(item),
       ).length;
-      // true는 숫자로 1 false는 0
       const bonusNumberCount = Number(lotto.includes(this.#plusNumber));
-
-      // 보너스 번호 없이 6
+        console.log("check lotto result",lotto)
       if (matchedNumbersCount === 6) winningDetails.FIRST += 1;
-      // 보너스 포함 6개일때
       else if (matchedNumbersCount + bonusNumberCount === 6)
         winningDetails.SECOND += 1;
-      // 보너스 포함 개수 등수 3등부터
       else if (matchedNumbersCount + bonusNumberCount === 5)
         winningDetails.THIRD += 1;
       else if (matchedNumbersCount + bonusNumberCount === 4)

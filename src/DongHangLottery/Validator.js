@@ -1,12 +1,13 @@
+import { GameMessage } from './GameMessageManager/GameMessage.js';
+
 class Validator {
   isValidPurchaseAmount(money) {
     if (!this.isThousandWonUnit(money))
-    throw new Error('[ERROR]: 올바르지 않은 구매 요청 금액입니다.');
+      throw new Error(GameMessage.INVALID_INPUT_PRICE_UNIT);
     if (!this.isNumber(money))
-      throw new Error('[ERROR]: 구매 금액은 숫자여야 합니다.');
+      throw new Error(GameMessage.INVALID_INPUT_PRICE_TYPE);
     return true;
   }
-
 
   isThousandWonUnit(money) {
     if (money % 1000 === 0 && money !== 0) return true;
@@ -19,15 +20,14 @@ class Validator {
   }
 
   isValidWinningNumbers(lotto) {
-    // console.log('lotto', lotto, lotto.length);
     if (!this.isValidWinningNumbersLength(lotto))
-      throw new Error('[ERROR]: 올바르지 않은 로또 길이입니다.');
+      throw new Error(GameMessage.INVALID_INPUT_MAIN_LOTTO_LENGTH);
     lotto.forEach(item => {
       if (!this.isNumber(item))
-        throw new Error('[ERROR]: 로또 번호는 숫자여야 합니다.');
+        throw new Error(GameMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
     });
     if (!this.isDuplicateWiniingNumber(lotto))
-      throw new Error('[ERROR]: 로또 번호에 중복된 번호가 있습니다..');
+      throw new Error(GameMessage.DUPLICATED_LOTTO_NUMBER_ERROR);
     return true;
   }
 
@@ -42,10 +42,11 @@ class Validator {
   }
   isValidBonusNumbers(winnigNumber, bonusNumber) {
     if (!this.isValidBonusNumberLegnth(bonusNumber))
-      throw new Error('[ERROR]:');
-    if (!this.isNumber(bonusNumber)) throw new Error('[ERROR]:');
+      throw new Error(GameMessage.INVALID_INPUT_BONUS_LOTTO_LENGTH);
+    if (!this.isNumber(bonusNumber))
+      throw new Error(GameMessage.INVALID_INPUT_LOTTO_TYPE_ERROR);
     if (!this.isDuplicateBonusNumber(winnigNumber, bonusNumber))
-      throw new Error('[ERROR]:');
+      throw new Error(GameMessage.DUPLICATED_LOTTO_NUMBER_ERROR);
   }
 
   isValidBonusNumberLegnth(bonusNumber) {
@@ -54,7 +55,6 @@ class Validator {
   }
 
   isDuplicateBonusNumber(winnigNumber, bonusNumber) {
-    // console.log("chehck isDuplicateBonusNumber",winnigNumber,bonusNumber,typeof winnigNumber, typeof bonusNumber)
     if (winnigNumber.includes(bonusNumber) === true) return false;
     return true;
   }

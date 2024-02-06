@@ -1,4 +1,3 @@
-import LottoTicketGenerator from './LottoTicketGenerator.js';
 import LottoPlayer from './LottoPlayer.js';
 import LottoMachine from './LottoMachine.js';
 
