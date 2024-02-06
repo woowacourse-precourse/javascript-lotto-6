@@ -13,7 +13,7 @@ class Validator {
   }
 
   isThousandWonUnit(money) {
-    if (money % 1000 === 0 && money !== 0) return true;
+    if (money % LottoConstants.THOUSAND_WON_UNIT === 0 && money !== 0) return true;
     return false;
   }
 
