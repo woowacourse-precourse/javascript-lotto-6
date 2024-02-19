@@ -162,9 +162,9 @@ test('비동기 테스트3', () => {
 });
 ```
 
-## Prettier와 함수(매서드)길이
+## Eslint 와 함수(매서드)길이
 
-Prettier에서 "max-lines-per-function"를 이용해 함수의 최대 길이를 제한 할 수 있습니다.
+ Eslint 에서 "max-lines-per-function"를 이용해 함수의 최대 길이를 제한 할 수 있습니다.
 
 ```
 "max-lines-per-function": ["error", { "max": 15 }]
